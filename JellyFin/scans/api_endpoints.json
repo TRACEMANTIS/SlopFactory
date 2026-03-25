@@ -1,0 +1,3106 @@
+[
+  {
+    "method": "GET",
+    "path": "/Albums/{itemId}/InstantMix",
+    "summary": "Creates an instant playlist based on a given album.",
+    "tags": [
+      "InstantMix"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Albums/{itemId}/Similar",
+    "summary": "Gets similar items.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Artists",
+    "summary": "Gets all artists from a given item, folder, or the entire library.",
+    "tags": [
+      "Artists"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Artists/AlbumArtists",
+    "summary": "Gets all album artists from a given item, folder, or the entire library.",
+    "tags": [
+      "Artists"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Artists/InstantMix",
+    "summary": "Creates an instant playlist based on a given artist.",
+    "tags": [
+      "InstantMix"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Artists/{itemId}/InstantMix",
+    "summary": "Creates an instant playlist based on a given artist.",
+    "tags": [
+      "InstantMix"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Artists/{itemId}/Similar",
+    "summary": "Gets similar items.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Artists/{name}",
+    "summary": "Gets an artist by name.",
+    "tags": [
+      "Artists"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Artists/{name}/Images/{imageType}/{imageIndex}",
+    "summary": "Get artist image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Artists/{name}/Images/{imageType}/{imageIndex}",
+    "summary": "Get artist image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Audio/{itemId}/Lyrics",
+    "summary": "Gets an item's lyrics.",
+    "tags": [
+      "Lyrics"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Audio/{itemId}/Lyrics",
+    "summary": "Upload an external lyric file.",
+    "tags": [
+      "Lyrics"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Audio/{itemId}/Lyrics",
+    "summary": "Deletes an external lyric file.",
+    "tags": [
+      "Lyrics"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Audio/{itemId}/RemoteSearch/Lyrics",
+    "summary": "Search remote lyrics.",
+    "tags": [
+      "Lyrics"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Audio/{itemId}/RemoteSearch/Lyrics/{lyricId}",
+    "summary": "Downloads a remote lyric.",
+    "tags": [
+      "Lyrics"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Audio/{itemId}/hls/{segmentId}/stream.aac",
+    "summary": "Gets the specified audio segment for an audio item.",
+    "tags": [
+      "HlsSegment"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Audio/{itemId}/hls/{segmentId}/stream.mp3",
+    "summary": "Gets the specified audio segment for an audio item.",
+    "tags": [
+      "HlsSegment"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Audio/{itemId}/hls1/{playlistId}/{segmentId}.{container}",
+    "summary": "Gets a video stream using HTTP live streaming.",
+    "tags": [
+      "DynamicHls"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Audio/{itemId}/main.m3u8",
+    "summary": "Gets an audio stream using HTTP live streaming.",
+    "tags": [
+      "DynamicHls"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Audio/{itemId}/master.m3u8",
+    "summary": "Gets an audio hls playlist stream.",
+    "tags": [
+      "DynamicHls"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Audio/{itemId}/master.m3u8",
+    "summary": "Gets an audio hls playlist stream.",
+    "tags": [
+      "DynamicHls"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Audio/{itemId}/stream",
+    "summary": "Gets an audio stream.",
+    "tags": [
+      "Audio"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Audio/{itemId}/stream",
+    "summary": "Gets an audio stream.",
+    "tags": [
+      "Audio"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Audio/{itemId}/stream.{container}",
+    "summary": "Gets an audio stream.",
+    "tags": [
+      "Audio"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Audio/{itemId}/stream.{container}",
+    "summary": "Gets an audio stream.",
+    "tags": [
+      "Audio"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Audio/{itemId}/universal",
+    "summary": "Gets an audio stream.",
+    "tags": [
+      "UniversalAudio"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Audio/{itemId}/universal",
+    "summary": "Gets an audio stream.",
+    "tags": [
+      "UniversalAudio"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Auth/Keys",
+    "summary": "Get all keys.",
+    "tags": [
+      "ApiKey"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Auth/Keys",
+    "summary": "Create a new api key.",
+    "tags": [
+      "ApiKey"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Auth/Keys/{key}",
+    "summary": "Remove an api key.",
+    "tags": [
+      "ApiKey"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Auth/PasswordResetProviders",
+    "summary": "Get all password reset providers.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Auth/Providers",
+    "summary": "Get all auth providers.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Backup",
+    "summary": "Gets a list of all currently present backups in the backup directory.",
+    "tags": [
+      "Backup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Backup/Create",
+    "summary": "Creates a new Backup.",
+    "tags": [
+      "Backup"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Backup/Manifest",
+    "summary": "Gets the descriptor from an existing archive is present.",
+    "tags": [
+      "Backup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Backup/Restore",
+    "summary": "Restores to a backup by restarting the server and applying the backup.",
+    "tags": [
+      "Backup"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Branding/Configuration",
+    "summary": "Gets branding configuration.",
+    "tags": [
+      "Branding"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Branding/Css",
+    "summary": "Gets branding css.",
+    "tags": [
+      "Branding"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Branding/Css.css",
+    "summary": "Gets branding css.",
+    "tags": [
+      "Branding"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Branding/Splashscreen",
+    "summary": "Generates or gets the splashscreen.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Branding/Splashscreen",
+    "summary": "Uploads a custom splashscreen.\r\nThe body is expected to the image contents base64 encoded.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Branding/Splashscreen",
+    "summary": "Delete a custom splashscreen.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Channels",
+    "summary": "Gets available channels.",
+    "tags": [
+      "Channels"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Channels/Features",
+    "summary": "Get all channel features.",
+    "tags": [
+      "Channels"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Channels/Items/Latest",
+    "summary": "Gets latest channel items.",
+    "tags": [
+      "Channels"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Channels/{channelId}/Features",
+    "summary": "Get channel features.",
+    "tags": [
+      "Channels"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Channels/{channelId}/Items",
+    "summary": "Get channel items.",
+    "tags": [
+      "Channels"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/ClientLog/Document",
+    "summary": "Upload a document.",
+    "tags": [
+      "ClientLog"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Collections",
+    "summary": "Creates a new collection.",
+    "tags": [
+      "Collection"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Collections/{collectionId}/Items",
+    "summary": "Adds items to a collection.",
+    "tags": [
+      "Collection"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Collections/{collectionId}/Items",
+    "summary": "Removes items from a collection.",
+    "tags": [
+      "Collection"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Devices",
+    "summary": "Get Devices.",
+    "tags": [
+      "Devices"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Devices",
+    "summary": "Deletes a device.",
+    "tags": [
+      "Devices"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Devices/Info",
+    "summary": "Get info for a device.",
+    "tags": [
+      "Devices"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Devices/Options",
+    "summary": "Get options for a device.",
+    "tags": [
+      "Devices"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Devices/Options",
+    "summary": "Update device options.",
+    "tags": [
+      "Devices"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/DisplayPreferences/{displayPreferencesId}",
+    "summary": "Get Display Preferences.",
+    "tags": [
+      "DisplayPreferences"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/DisplayPreferences/{displayPreferencesId}",
+    "summary": "Update Display Preferences.",
+    "tags": [
+      "DisplayPreferences"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Environment/DefaultDirectoryBrowser",
+    "summary": "Get Default directory browser.",
+    "tags": [
+      "Environment"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Environment/DirectoryContents",
+    "summary": "Gets the contents of a given directory in the file system.",
+    "tags": [
+      "Environment"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Environment/Drives",
+    "summary": "Gets available drives from the server's file system.",
+    "tags": [
+      "Environment"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Environment/NetworkShares",
+    "summary": "Gets network paths.",
+    "tags": [
+      "Environment"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Environment/ParentPath",
+    "summary": "Gets the parent path of a given path.",
+    "tags": [
+      "Environment"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Environment/ValidatePath",
+    "summary": "Validates path.",
+    "tags": [
+      "Environment"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/FallbackFont/Fonts",
+    "summary": "Gets a list of available fallback font files.",
+    "tags": [
+      "Subtitle"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/FallbackFont/Fonts/{name}",
+    "summary": "Gets a fallback font file.",
+    "tags": [
+      "Subtitle"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Genres",
+    "summary": "Gets all genres from a given item, folder, or the entire library.",
+    "tags": [
+      "Genres"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Genres/{genreName}",
+    "summary": "Gets a genre, by name.",
+    "tags": [
+      "Genres"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Genres/{name}/Images/{imageType}",
+    "summary": "Get genre image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Genres/{name}/Images/{imageType}",
+    "summary": "Get genre image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Genres/{name}/Images/{imageType}/{imageIndex}",
+    "summary": "Get genre image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Genres/{name}/Images/{imageType}/{imageIndex}",
+    "summary": "Get genre image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/GetUtcTime",
+    "summary": "Gets the current UTC time.",
+    "tags": [
+      "TimeSync"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items",
+    "summary": "Gets items based on a query.",
+    "tags": [
+      "Items"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Items",
+    "summary": "Deletes items from the library and filesystem.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/Counts",
+    "summary": "Get item counts.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/Filters",
+    "summary": "Gets legacy query filters.",
+    "tags": [
+      "Filter"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/Filters2",
+    "summary": "Gets query filters.",
+    "tags": [
+      "Filter"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/Latest",
+    "summary": "Gets latest media.",
+    "tags": [
+      "UserLibrary"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/RemoteSearch/Apply/{itemId}",
+    "summary": "Applies search criteria to an item and refreshes metadata.",
+    "tags": [
+      "ItemLookup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/RemoteSearch/Book",
+    "summary": "Get book remote search.",
+    "tags": [
+      "ItemLookup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/RemoteSearch/BoxSet",
+    "summary": "Get box set remote search.",
+    "tags": [
+      "ItemLookup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/RemoteSearch/Movie",
+    "summary": "Get movie remote search.",
+    "tags": [
+      "ItemLookup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/RemoteSearch/MusicAlbum",
+    "summary": "Get music album remote search.",
+    "tags": [
+      "ItemLookup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/RemoteSearch/MusicArtist",
+    "summary": "Get music artist remote search.",
+    "tags": [
+      "ItemLookup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/RemoteSearch/MusicVideo",
+    "summary": "Get music video remote search.",
+    "tags": [
+      "ItemLookup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/RemoteSearch/Person",
+    "summary": "Get person remote search.",
+    "tags": [
+      "ItemLookup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/RemoteSearch/Series",
+    "summary": "Get series remote search.",
+    "tags": [
+      "ItemLookup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/RemoteSearch/Trailer",
+    "summary": "Get trailer remote search.",
+    "tags": [
+      "ItemLookup"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/Root",
+    "summary": "Gets the root folder from a user's library.",
+    "tags": [
+      "UserLibrary"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/Suggestions",
+    "summary": "Gets suggestions.",
+    "tags": [
+      "Suggestions"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/{itemId}",
+    "summary": "Updates an item.",
+    "tags": [
+      "ItemUpdate"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Items/{itemId}",
+    "summary": "Deletes an item from the library and filesystem.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}",
+    "summary": "Gets an item from a user's library.",
+    "tags": [
+      "UserLibrary"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/Ancestors",
+    "summary": "Gets all parents of an item.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/{itemId}/ContentType",
+    "summary": "Updates an item's content type.",
+    "tags": [
+      "ItemUpdate"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/CriticReviews",
+    "summary": "Gets critic review for an item.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/Download",
+    "summary": "Downloads item media.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/ExternalIdInfos",
+    "summary": "Get the item's external id info.",
+    "tags": [
+      "ItemLookup"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/File",
+    "summary": "Get the original file of an item.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/Images",
+    "summary": "Get item image infos.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Items/{itemId}/Images/{imageType}",
+    "summary": "Delete an item's image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/{itemId}/Images/{imageType}",
+    "summary": "Set item image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/Images/{imageType}",
+    "summary": "Gets the item's image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Items/{itemId}/Images/{imageType}",
+    "summary": "Gets the item's image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Items/{itemId}/Images/{imageType}/{imageIndex}",
+    "summary": "Delete an item's image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/{itemId}/Images/{imageType}/{imageIndex}",
+    "summary": "Set item image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/Images/{imageType}/{imageIndex}",
+    "summary": "Gets the item's image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Items/{itemId}/Images/{imageType}/{imageIndex}",
+    "summary": "Gets the item's image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/{itemId}/Images/{imageType}/{imageIndex}/Index",
+    "summary": "Updates the index for an item image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/Images/{imageType}/{imageIndex}/{tag}/{format}/{maxWidth}/{maxHeight}/{percentPlayed}/{unplayedCount}",
+    "summary": "Gets the item's image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Items/{itemId}/Images/{imageType}/{imageIndex}/{tag}/{format}/{maxWidth}/{maxHeight}/{percentPlayed}/{unplayedCount}",
+    "summary": "Gets the item's image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/InstantMix",
+    "summary": "Creates an instant playlist based on a given item.",
+    "tags": [
+      "InstantMix"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/Intros",
+    "summary": "Gets intros to play before the main media item plays.",
+    "tags": [
+      "UserLibrary"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/LocalTrailers",
+    "summary": "Gets local trailers for an item.",
+    "tags": [
+      "UserLibrary"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/MetadataEditor",
+    "summary": "Gets metadata editor info for an item.",
+    "tags": [
+      "ItemUpdate"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/PlaybackInfo",
+    "summary": "Gets live playback media info for an item.",
+    "tags": [
+      "MediaInfo"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/{itemId}/PlaybackInfo",
+    "summary": "Gets live playback media info for an item.",
+    "tags": [
+      "MediaInfo"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/{itemId}/Refresh",
+    "summary": "Refreshes metadata for an item.",
+    "tags": [
+      "ItemRefresh"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/RemoteImages",
+    "summary": "Gets available remote images for an item.",
+    "tags": [
+      "RemoteImage"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/{itemId}/RemoteImages/Download",
+    "summary": "Downloads a remote image for an item.",
+    "tags": [
+      "RemoteImage"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/RemoteImages/Providers",
+    "summary": "Gets available remote image providers for an item.",
+    "tags": [
+      "RemoteImage"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/RemoteSearch/Subtitles/{language}",
+    "summary": "Search remote subtitles.",
+    "tags": [
+      "Subtitle"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Items/{itemId}/RemoteSearch/Subtitles/{subtitleId}",
+    "summary": "Downloads a remote subtitle.",
+    "tags": [
+      "Subtitle"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/Similar",
+    "summary": "Gets similar items.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/SpecialFeatures",
+    "summary": "Gets special features for an item.",
+    "tags": [
+      "UserLibrary"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/ThemeMedia",
+    "summary": "Get theme songs and videos for an item.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/ThemeSongs",
+    "summary": "Get theme songs for an item.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Items/{itemId}/ThemeVideos",
+    "summary": "Get theme videos for an item.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Libraries/AvailableOptions",
+    "summary": "Gets the library options info.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Library/Media/Updated",
+    "summary": "Reports that new movies have been added by an external source.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Library/MediaFolders",
+    "summary": "Gets all user media folders.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Library/Movies/Added",
+    "summary": "Reports that new movies have been added by an external source.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Library/Movies/Updated",
+    "summary": "Reports that new movies have been added by an external source.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Library/PhysicalPaths",
+    "summary": "Gets a list of physical paths from virtual folders.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Library/Refresh",
+    "summary": "Starts a library scan.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Library/Series/Added",
+    "summary": "Reports that new episodes of a series have been added by an external source.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Library/Series/Updated",
+    "summary": "Reports that new episodes of a series have been added by an external source.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Library/VirtualFolders",
+    "summary": "Gets all virtual folders.",
+    "tags": [
+      "LibraryStructure"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Library/VirtualFolders",
+    "summary": "Adds a virtual folder.",
+    "tags": [
+      "LibraryStructure"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Library/VirtualFolders",
+    "summary": "Removes a virtual folder.",
+    "tags": [
+      "LibraryStructure"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Library/VirtualFolders/LibraryOptions",
+    "summary": "Update library options.",
+    "tags": [
+      "LibraryStructure"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Library/VirtualFolders/Name",
+    "summary": "Renames a virtual folder.",
+    "tags": [
+      "LibraryStructure"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Library/VirtualFolders/Paths",
+    "summary": "Add a media path to a library.",
+    "tags": [
+      "LibraryStructure"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Library/VirtualFolders/Paths",
+    "summary": "Remove a media path.",
+    "tags": [
+      "LibraryStructure"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Library/VirtualFolders/Paths/Update",
+    "summary": "Updates a media path.",
+    "tags": [
+      "LibraryStructure"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/LiveStreams/Close",
+    "summary": "Closes a media source.",
+    "tags": [
+      "MediaInfo"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/LiveStreams/Open",
+    "summary": "Opens a media source.",
+    "tags": [
+      "MediaInfo"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/ChannelMappingOptions",
+    "summary": "Get channel mapping options.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/LiveTv/ChannelMappings",
+    "summary": "Set channel mappings.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Channels",
+    "summary": "Gets available live tv channels.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Channels/{channelId}",
+    "summary": "Gets a live tv channel.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/GuideInfo",
+    "summary": "Get guide info.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Info",
+    "summary": "Gets available live tv services.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/LiveTv/ListingProviders",
+    "summary": "Adds a listings provider.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/LiveTv/ListingProviders",
+    "summary": "Delete listing provider.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/ListingProviders/Default",
+    "summary": "Gets default listings provider info.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/ListingProviders/Lineups",
+    "summary": "Gets available lineups.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/ListingProviders/SchedulesDirect/Countries",
+    "summary": "Gets available countries.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/LiveRecordings/{recordingId}/stream",
+    "summary": "Gets a live tv recording stream.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/LiveStreamFiles/{streamId}/stream.{container}",
+    "summary": "Gets a live tv channel stream.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Programs",
+    "summary": "Gets available live tv epgs.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/LiveTv/Programs",
+    "summary": "Gets available live tv epgs.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Programs/Recommended",
+    "summary": "Gets recommended live tv epgs.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Programs/{programId}",
+    "summary": "Gets a live tv program.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Recordings",
+    "summary": "Gets live tv recordings.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Recordings/Folders",
+    "summary": "Gets recording folders.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Recordings/Groups",
+    "summary": "Gets live tv recording groups.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Recordings/Groups/{groupId}",
+    "summary": "Get recording group.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Recordings/Series",
+    "summary": "Gets live tv recording series.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Recordings/{recordingId}",
+    "summary": "Gets a live tv recording.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/LiveTv/Recordings/{recordingId}",
+    "summary": "Deletes a live tv recording.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/SeriesTimers",
+    "summary": "Gets live tv series timers.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/LiveTv/SeriesTimers",
+    "summary": "Creates a live tv series timer.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/SeriesTimers/{timerId}",
+    "summary": "Gets a live tv series timer.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/LiveTv/SeriesTimers/{timerId}",
+    "summary": "Cancels a live tv series timer.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/LiveTv/SeriesTimers/{timerId}",
+    "summary": "Updates a live tv series timer.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Timers",
+    "summary": "Gets the live tv timers.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/LiveTv/Timers",
+    "summary": "Creates a live tv timer.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Timers/Defaults",
+    "summary": "Gets the default values for a new timer.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Timers/{timerId}",
+    "summary": "Gets a timer.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/LiveTv/Timers/{timerId}",
+    "summary": "Cancels a live tv timer.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/LiveTv/Timers/{timerId}",
+    "summary": "Updates a live tv timer.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/LiveTv/TunerHosts",
+    "summary": "Adds a tuner host.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/LiveTv/TunerHosts",
+    "summary": "Deletes a tuner host.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/TunerHosts/Types",
+    "summary": "Get tuner host types.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Tuners/Discover",
+    "summary": "Discover tuners.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/LiveTv/Tuners/Discvover",
+    "summary": "Discover tuners.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/LiveTv/Tuners/{tunerId}/Reset",
+    "summary": "Resets a tv tuner.",
+    "tags": [
+      "LiveTv"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Localization/Countries",
+    "summary": "Gets known countries.",
+    "tags": [
+      "Localization"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Localization/Cultures",
+    "summary": "Gets known cultures.",
+    "tags": [
+      "Localization"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Localization/Options",
+    "summary": "Gets localization options.",
+    "tags": [
+      "Localization"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Localization/ParentalRatings",
+    "summary": "Gets known parental ratings.",
+    "tags": [
+      "Localization"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/MediaSegments/{itemId}",
+    "summary": "Gets all media segments based on an itemId.",
+    "tags": [
+      "MediaSegments"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Movies/Recommendations",
+    "summary": "Gets movie recommendations.",
+    "tags": [
+      "Movies"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Movies/{itemId}/Similar",
+    "summary": "Gets similar items.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/MusicGenres",
+    "summary": "Gets all music genres from a given item, folder, or the entire library.",
+    "tags": [
+      "MusicGenres"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/MusicGenres/InstantMix",
+    "summary": "Creates an instant playlist based on a given genre.",
+    "tags": [
+      "InstantMix"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/MusicGenres/{genreName}",
+    "summary": "Gets a music genre, by name.",
+    "tags": [
+      "MusicGenres"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/MusicGenres/{name}/Images/{imageType}",
+    "summary": "Get music genre image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/MusicGenres/{name}/Images/{imageType}",
+    "summary": "Get music genre image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/MusicGenres/{name}/Images/{imageType}/{imageIndex}",
+    "summary": "Get music genre image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/MusicGenres/{name}/Images/{imageType}/{imageIndex}",
+    "summary": "Get music genre image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/MusicGenres/{name}/InstantMix",
+    "summary": "Creates an instant playlist based on a given genre.",
+    "tags": [
+      "InstantMix"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Packages",
+    "summary": "Gets available packages.",
+    "tags": [
+      "Package"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Packages/Installed/{name}",
+    "summary": "Installs a package.",
+    "tags": [
+      "Package"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Packages/Installing/{packageId}",
+    "summary": "Cancels a package installation.",
+    "tags": [
+      "Package"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Packages/{name}",
+    "summary": "Gets a package by name or assembly GUID.",
+    "tags": [
+      "Package"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Persons",
+    "summary": "Gets all persons.",
+    "tags": [
+      "Persons"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Persons/{name}",
+    "summary": "Get person by name.",
+    "tags": [
+      "Persons"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Persons/{name}/Images/{imageType}",
+    "summary": "Get person image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Persons/{name}/Images/{imageType}",
+    "summary": "Get person image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Persons/{name}/Images/{imageType}/{imageIndex}",
+    "summary": "Get person image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Persons/{name}/Images/{imageType}/{imageIndex}",
+    "summary": "Get person image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Playback/BitrateTest",
+    "summary": "Tests the network with a request with the size of the bitrate.",
+    "tags": [
+      "MediaInfo"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/PlayingItems/{itemId}",
+    "summary": "Reports that a session has begun playing an item.",
+    "tags": [
+      "Playstate"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/PlayingItems/{itemId}",
+    "summary": "Reports that a session has stopped playing an item.",
+    "tags": [
+      "Playstate"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/PlayingItems/{itemId}/Progress",
+    "summary": "Reports a session's playback progress.",
+    "tags": [
+      "Playstate"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Playlists",
+    "summary": "Creates a new playlist.",
+    "tags": [
+      "Playlists"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Playlists/{itemId}/InstantMix",
+    "summary": "Creates an instant playlist based on a given playlist.",
+    "tags": [
+      "InstantMix"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Playlists/{playlistId}",
+    "summary": "Updates a playlist.",
+    "tags": [
+      "Playlists"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Playlists/{playlistId}",
+    "summary": "Get a playlist.",
+    "tags": [
+      "Playlists"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Playlists/{playlistId}/Items",
+    "summary": "Adds items to a playlist.",
+    "tags": [
+      "Playlists"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Playlists/{playlistId}/Items",
+    "summary": "Removes items from a playlist.",
+    "tags": [
+      "Playlists"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Playlists/{playlistId}/Items",
+    "summary": "Gets the original items of a playlist.",
+    "tags": [
+      "Playlists"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Playlists/{playlistId}/Items/{itemId}/Move/{newIndex}",
+    "summary": "Moves a playlist item.",
+    "tags": [
+      "Playlists"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Playlists/{playlistId}/Users",
+    "summary": "Get a playlist's users.",
+    "tags": [
+      "Playlists"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Playlists/{playlistId}/Users/{userId}",
+    "summary": "Get a playlist user.",
+    "tags": [
+      "Playlists"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Playlists/{playlistId}/Users/{userId}",
+    "summary": "Modify a user of a playlist's users.",
+    "tags": [
+      "Playlists"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Playlists/{playlistId}/Users/{userId}",
+    "summary": "Remove a user from a playlist's users.",
+    "tags": [
+      "Playlists"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Plugins",
+    "summary": "Gets a list of currently installed plugins.",
+    "tags": [
+      "Plugins"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Plugins/{pluginId}",
+    "summary": "Uninstalls a plugin.",
+    "tags": [
+      "Plugins"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Plugins/{pluginId}/Configuration",
+    "summary": "Gets plugin configuration.",
+    "tags": [
+      "Plugins"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Plugins/{pluginId}/Configuration",
+    "summary": "Updates plugin configuration.",
+    "tags": [
+      "Plugins"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Plugins/{pluginId}/Manifest",
+    "summary": "Gets a plugin's manifest.",
+    "tags": [
+      "Plugins"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Plugins/{pluginId}/{version}",
+    "summary": "Uninstalls a plugin by version.",
+    "tags": [
+      "Plugins"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Plugins/{pluginId}/{version}/Disable",
+    "summary": "Disable a plugin.",
+    "tags": [
+      "Plugins"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Plugins/{pluginId}/{version}/Enable",
+    "summary": "Enables a disabled plugin.",
+    "tags": [
+      "Plugins"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Plugins/{pluginId}/{version}/Image",
+    "summary": "Gets a plugin's image.",
+    "tags": [
+      "Plugins"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Providers/Lyrics/{lyricId}",
+    "summary": "Gets the remote lyrics.",
+    "tags": [
+      "Lyrics"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Providers/Subtitles/Subtitles/{subtitleId}",
+    "summary": "Gets the remote subtitles.",
+    "tags": [
+      "Subtitle"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/QuickConnect/Authorize",
+    "summary": "Authorizes a pending quick connect request.",
+    "tags": [
+      "QuickConnect"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/QuickConnect/Connect",
+    "summary": "Attempts to retrieve authentication information.",
+    "tags": [
+      "QuickConnect"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/QuickConnect/Enabled",
+    "summary": "Gets the current quick connect state.",
+    "tags": [
+      "QuickConnect"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/QuickConnect/Initiate",
+    "summary": "Initiate a new quick connect request.",
+    "tags": [
+      "QuickConnect"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Repositories",
+    "summary": "Gets all package repositories.",
+    "tags": [
+      "Package"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Repositories",
+    "summary": "Sets the enabled and existing package repositories.",
+    "tags": [
+      "Package"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/ScheduledTasks",
+    "summary": "Get tasks.",
+    "tags": [
+      "ScheduledTasks"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/ScheduledTasks/Running/{taskId}",
+    "summary": "Start specified task.",
+    "tags": [
+      "ScheduledTasks"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/ScheduledTasks/Running/{taskId}",
+    "summary": "Stop specified task.",
+    "tags": [
+      "ScheduledTasks"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/ScheduledTasks/{taskId}",
+    "summary": "Get task by id.",
+    "tags": [
+      "ScheduledTasks"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/ScheduledTasks/{taskId}/Triggers",
+    "summary": "Update specified task triggers.",
+    "tags": [
+      "ScheduledTasks"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Search/Hints",
+    "summary": "Gets the search hint result.",
+    "tags": [
+      "Search"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Sessions",
+    "summary": "Gets a list of sessions.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/Capabilities",
+    "summary": "Updates capabilities for a device.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/Capabilities/Full",
+    "summary": "Updates capabilities for a device.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/Logout",
+    "summary": "Reports that a session has ended.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/Playing",
+    "summary": "Reports playback has started within a session.",
+    "tags": [
+      "Playstate"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/Playing/Ping",
+    "summary": "Pings a playback session.",
+    "tags": [
+      "Playstate"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/Playing/Progress",
+    "summary": "Reports playback progress within a session.",
+    "tags": [
+      "Playstate"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/Playing/Stopped",
+    "summary": "Reports playback has stopped within a session.",
+    "tags": [
+      "Playstate"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/Viewing",
+    "summary": "Reports that a session is viewing an item.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/{sessionId}/Command",
+    "summary": "Issues a full general command to a client.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/{sessionId}/Command/{command}",
+    "summary": "Issues a general command to a client.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/{sessionId}/Message",
+    "summary": "Issues a command to a client to display a message to the user.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/{sessionId}/Playing",
+    "summary": "Instructs a session to play an item.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/{sessionId}/Playing/{command}",
+    "summary": "Issues a playstate command to a client.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/{sessionId}/System/{command}",
+    "summary": "Issues a system command to a client.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/{sessionId}/User/{userId}",
+    "summary": "Adds an additional user to a session.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Sessions/{sessionId}/User/{userId}",
+    "summary": "Removes an additional user from a session.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Sessions/{sessionId}/Viewing",
+    "summary": "Instructs a session to browse to an item or view.",
+    "tags": [
+      "Session"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Shows/NextUp",
+    "summary": "Gets a list of next up episodes.",
+    "tags": [
+      "TvShows"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Shows/Upcoming",
+    "summary": "Gets a list of upcoming episodes.",
+    "tags": [
+      "TvShows"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Shows/{itemId}/Similar",
+    "summary": "Gets similar items.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Shows/{seriesId}/Episodes",
+    "summary": "Gets episodes for a tv season.",
+    "tags": [
+      "TvShows"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Shows/{seriesId}/Seasons",
+    "summary": "Gets seasons for a tv series.",
+    "tags": [
+      "TvShows"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Songs/{itemId}/InstantMix",
+    "summary": "Creates an instant playlist based on a given song.",
+    "tags": [
+      "InstantMix"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Startup/Complete",
+    "summary": "Completes the startup wizard.",
+    "tags": [
+      "Startup"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Startup/Configuration",
+    "summary": "Gets the initial startup wizard configuration.",
+    "tags": [
+      "Startup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Startup/Configuration",
+    "summary": "Sets the initial startup wizard configuration.",
+    "tags": [
+      "Startup"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Startup/FirstUser",
+    "summary": "Gets the first user.",
+    "tags": [
+      "Startup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Startup/RemoteAccess",
+    "summary": "Sets remote access and UPnP.",
+    "tags": [
+      "Startup"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Startup/User",
+    "summary": "Gets the first user.",
+    "tags": [
+      "Startup"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Startup/User",
+    "summary": "Sets the user name and password.",
+    "tags": [
+      "Startup"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Studios",
+    "summary": "Gets all studios from a given item, folder, or the entire library.",
+    "tags": [
+      "Studios"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Studios/{name}",
+    "summary": "Gets a studio by name.",
+    "tags": [
+      "Studios"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Studios/{name}/Images/{imageType}",
+    "summary": "Get studio image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Studios/{name}/Images/{imageType}",
+    "summary": "Get studio image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Studios/{name}/Images/{imageType}/{imageIndex}",
+    "summary": "Get studio image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Studios/{name}/Images/{imageType}/{imageIndex}",
+    "summary": "Get studio image by name.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/Buffering",
+    "summary": "Notify SyncPlay group that member is buffering.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/Join",
+    "summary": "Join an existing SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/Leave",
+    "summary": "Leave the joined SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/SyncPlay/List",
+    "summary": "Gets all SyncPlay groups.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/MovePlaylistItem",
+    "summary": "Request to move an item in the playlist in SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/New",
+    "summary": "Create a new SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/NextItem",
+    "summary": "Request next item in SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/Pause",
+    "summary": "Request pause in SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/Ping",
+    "summary": "Update session ping.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/PreviousItem",
+    "summary": "Request previous item in SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/Queue",
+    "summary": "Request to queue items to the playlist of a SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/Ready",
+    "summary": "Notify SyncPlay group that member is ready for playback.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/RemoveFromPlaylist",
+    "summary": "Request to remove items from the playlist in SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/Seek",
+    "summary": "Request seek in SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/SetIgnoreWait",
+    "summary": "Request SyncPlay group to ignore member during group-wait.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/SetNewQueue",
+    "summary": "Request to set new playlist in SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/SetPlaylistItem",
+    "summary": "Request to change playlist item in SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/SetRepeatMode",
+    "summary": "Request to set repeat mode in SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/SetShuffleMode",
+    "summary": "Request to set shuffle mode in SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/Stop",
+    "summary": "Request stop in SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/SyncPlay/Unpause",
+    "summary": "Request unpause in SyncPlay group.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/SyncPlay/{id}",
+    "summary": "Gets a SyncPlay group by id.",
+    "tags": [
+      "SyncPlay"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/System/ActivityLog/Entries",
+    "summary": "Gets activity log entries.",
+    "tags": [
+      "ActivityLog"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/System/Configuration",
+    "summary": "Gets application configuration.",
+    "tags": [
+      "Configuration"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/System/Configuration",
+    "summary": "Updates application configuration.",
+    "tags": [
+      "Configuration"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/System/Configuration/Branding",
+    "summary": "Updates branding configuration.",
+    "tags": [
+      "Configuration"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/System/Configuration/MetadataOptions/Default",
+    "summary": "Gets a default MetadataOptions object.",
+    "tags": [
+      "Configuration"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/System/Configuration/{key}",
+    "summary": "Gets a named configuration.",
+    "tags": [
+      "Configuration"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/System/Configuration/{key}",
+    "summary": "Updates named configuration.",
+    "tags": [
+      "Configuration"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/System/Endpoint",
+    "summary": "Gets information about the request endpoint.",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/System/Info",
+    "summary": "Gets information about the server.",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/System/Info/Public",
+    "summary": "Gets public information about the server.",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/System/Info/Storage",
+    "summary": "Gets information about the server.",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/System/Logs",
+    "summary": "Gets a list of available server log files.",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/System/Logs/Log",
+    "summary": "Gets a log file.",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/System/Ping",
+    "summary": "Pings the system.",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/System/Ping",
+    "summary": "Pings the system.",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/System/Restart",
+    "summary": "Restarts the application.",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/System/Shutdown",
+    "summary": "Shuts down the application.",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Tmdb/ClientConfiguration",
+    "summary": "Gets the TMDb image configuration options.",
+    "tags": [
+      "Tmdb"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Trailers",
+    "summary": "Finds movies and trailers similar to a given trailer.",
+    "tags": [
+      "Trailers"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Trailers/{itemId}/Similar",
+    "summary": "Gets similar items.",
+    "tags": [
+      "Library"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/UserFavoriteItems/{itemId}",
+    "summary": "Marks an item as a favorite.",
+    "tags": [
+      "UserLibrary"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/UserFavoriteItems/{itemId}",
+    "summary": "Unmarks item as a favorite.",
+    "tags": [
+      "UserLibrary"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/UserImage",
+    "summary": "Sets the user image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/UserImage",
+    "summary": "Delete the user's image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/UserImage",
+    "summary": "Get user profile image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/UserImage",
+    "summary": "Get user profile image.",
+    "tags": [
+      "Image"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/UserItems/Resume",
+    "summary": "Gets items based on a query.",
+    "tags": [
+      "Items"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/UserItems/{itemId}/Rating",
+    "summary": "Deletes a user's saved personal rating for an item.",
+    "tags": [
+      "UserLibrary"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/UserItems/{itemId}/Rating",
+    "summary": "Updates a user's rating for an item.",
+    "tags": [
+      "UserLibrary"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/UserItems/{itemId}/UserData",
+    "summary": "Get Item User Data.",
+    "tags": [
+      "Items"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/UserItems/{itemId}/UserData",
+    "summary": "Update Item User Data.",
+    "tags": [
+      "Items"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/UserPlayedItems/{itemId}",
+    "summary": "Marks an item as played for user.",
+    "tags": [
+      "Playstate"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/UserPlayedItems/{itemId}",
+    "summary": "Marks an item as unplayed for user.",
+    "tags": [
+      "Playstate"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/UserViews",
+    "summary": "Get user views.",
+    "tags": [
+      "UserViews"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/UserViews/GroupingOptions",
+    "summary": "Get user view grouping options.",
+    "tags": [
+      "UserViews"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Users",
+    "summary": "Gets a list of users.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Users",
+    "summary": "Updates a user.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Users/AuthenticateByName",
+    "summary": "Authenticates a user by name.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Users/AuthenticateWithQuickConnect",
+    "summary": "Authenticates a user with quick connect.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Users/Configuration",
+    "summary": "Updates a user configuration.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Users/ForgotPassword",
+    "summary": "Initiates the forgot password process for a local user.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Users/ForgotPassword/Pin",
+    "summary": "Redeems a forgot password pin.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Users/Me",
+    "summary": "Gets the user based on auth token.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Users/New",
+    "summary": "Creates a user.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Users/Password",
+    "summary": "Updates a user's password.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Users/Public",
+    "summary": "Gets a list of publicly visible users for display on a login screen.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Users/{userId}",
+    "summary": "Gets a user by Id.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Users/{userId}",
+    "summary": "Deletes a user.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Users/{userId}/Policy",
+    "summary": "Updates a user policy.",
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Videos/ActiveEncodings",
+    "summary": "Stops an active encoding.",
+    "tags": [
+      "HlsSegment"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Videos/MergeVersions",
+    "summary": "Merges videos into a single record.",
+    "tags": [
+      "Videos"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{itemId}/AdditionalParts",
+    "summary": "Gets additional parts for a video.",
+    "tags": [
+      "Videos"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Videos/{itemId}/AlternateSources",
+    "summary": "Removes alternate video sources.",
+    "tags": [
+      "Videos"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/Videos/{itemId}/Subtitles",
+    "summary": "Upload an external subtitle file.",
+    "tags": [
+      "Subtitle"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/Videos/{itemId}/Subtitles/{index}",
+    "summary": "Deletes an external subtitle file.",
+    "tags": [
+      "Subtitle"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{itemId}/Trickplay/{width}/tiles.m3u8",
+    "summary": "Gets an image tiles playlist for trickplay.",
+    "tags": [
+      "Trickplay"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{itemId}/Trickplay/{width}/{index}.jpg",
+    "summary": "Gets a trickplay tile image.",
+    "tags": [
+      "Trickplay"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{itemId}/hls/{playlistId}/stream.m3u8",
+    "summary": "Gets a hls video playlist.",
+    "tags": [
+      "HlsSegment"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{itemId}/hls/{playlistId}/{segmentId}.{segmentContainer}",
+    "summary": "Gets a hls video segment.",
+    "tags": [
+      "HlsSegment"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{itemId}/hls1/{playlistId}/{segmentId}.{container}",
+    "summary": "Gets a video stream using HTTP live streaming.",
+    "tags": [
+      "DynamicHls"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{itemId}/live.m3u8",
+    "summary": "Gets a hls live stream.",
+    "tags": [
+      "DynamicHls"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{itemId}/main.m3u8",
+    "summary": "Gets a video stream using HTTP live streaming.",
+    "tags": [
+      "DynamicHls"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{itemId}/master.m3u8",
+    "summary": "Gets a video hls playlist stream.",
+    "tags": [
+      "DynamicHls"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Videos/{itemId}/master.m3u8",
+    "summary": "Gets a video hls playlist stream.",
+    "tags": [
+      "DynamicHls"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{itemId}/stream",
+    "summary": "Gets a video stream.",
+    "tags": [
+      "Videos"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Videos/{itemId}/stream",
+    "summary": "Gets a video stream.",
+    "tags": [
+      "Videos"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{itemId}/stream.{container}",
+    "summary": "Gets a video stream.",
+    "tags": [
+      "Videos"
+    ]
+  },
+  {
+    "method": "HEAD",
+    "path": "/Videos/{itemId}/stream.{container}",
+    "summary": "Gets a video stream.",
+    "tags": [
+      "Videos"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{itemId}/{mediaSourceId}/Subtitles/{index}/subtitles.m3u8",
+    "summary": "Gets an HLS subtitle playlist.",
+    "tags": [
+      "Subtitle"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{routeItemId}/{routeMediaSourceId}/Subtitles/{routeIndex}/Stream.{routeFormat}",
+    "summary": "Gets subtitles in a specified format.",
+    "tags": [
+      "Subtitle"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{routeItemId}/{routeMediaSourceId}/Subtitles/{routeIndex}/{routeStartPositionTicks}/Stream.{routeFormat}",
+    "summary": "Gets subtitles in a specified format.",
+    "tags": [
+      "Subtitle"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Videos/{videoId}/{mediaSourceId}/Attachments/{index}",
+    "summary": "Get video attachment.",
+    "tags": [
+      "VideoAttachments"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Years",
+    "summary": "Get years.",
+    "tags": [
+      "Years"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/Years/{year}",
+    "summary": "Gets a year.",
+    "tags": [
+      "Years"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/web/ConfigurationPage",
+    "summary": "Gets a dashboard configuration page.",
+    "tags": [
+      "Dashboard"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/web/ConfigurationPages",
+    "summary": "Gets the configuration pages.",
+    "tags": [
+      "Dashboard"
+    ]
+  }
+]

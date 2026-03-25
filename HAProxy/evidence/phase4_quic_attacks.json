@@ -1,0 +1,3506 @@
+{
+  "phase": "Phase 4: QUIC Protocol-Level Attacks",
+  "target": "HAProxy v3.3.0 @ 127.0.0.1:4443 (QUIC-only), 127.0.0.1:8443 (QUIC+HTTPS)",
+  "timestamp": 1771457569.8309758,
+  "summary": {
+    "total_tests": 339,
+    "anomalies": 18,
+    "findings": 46
+  },
+  "findings": [
+    {
+      "id": 32,
+      "category": "Initial-Fuzz",
+      "name": "crash_check_post_initial_4443",
+      "result": "FINDING",
+      "details": "HAProxy alive after Initial fuzzing: False",
+      "timestamp": 1771457032.4962585,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 64,
+      "category": "Initial-Fuzz",
+      "name": "crash_check_post_initial_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after Initial fuzzing: False",
+      "timestamp": 1771457086.6233087,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 90,
+      "category": "Varint-Overflow",
+      "name": "crash_check_post_varint_4443",
+      "result": "FINDING",
+      "details": "HAProxy alive after varint tests: False",
+      "timestamp": 1771457138.7013345,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 116,
+      "category": "Varint-Overflow",
+      "name": "crash_check_post_varint_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after varint tests: False",
+      "timestamp": 1771457191.2083716,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 144,
+      "category": "Frame-Attack",
+      "name": "crash_check_post_frame_4443",
+      "result": "FINDING",
+      "details": "HAProxy alive after frame attacks: False",
+      "timestamp": 1771457247.3422945,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 172,
+      "category": "Frame-Attack",
+      "name": "crash_check_post_frame_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after frame attacks: False",
+      "timestamp": 1771457303.4582264,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 187,
+      "category": "TP-Fuzz",
+      "name": "rapid_cid_variation_4443",
+      "result": "FINDING",
+      "details": "20 rapid packets with random DCID lengths: alive=False",
+      "timestamp": 1771457334.0029483,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 190,
+      "category": "TP-Fuzz",
+      "name": "crash_check_post_tp_4443",
+      "result": "FINDING",
+      "details": "HAProxy alive after TP fuzzing: False",
+      "timestamp": 1771457340.0139463,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 205,
+      "category": "TP-Fuzz",
+      "name": "rapid_cid_variation_8443",
+      "result": "FINDING",
+      "details": "20 rapid packets with random DCID lengths: alive=False",
+      "timestamp": 1771457370.5592244,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 208,
+      "category": "TP-Fuzz",
+      "name": "crash_check_post_tp_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after TP fuzzing: False",
+      "timestamp": 1771457376.5662265,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 217,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_crash_check_4443",
+      "result": "FINDING",
+      "details": "HAProxy alive after CVE-2026-26081 tests: False",
+      "timestamp": 1771457394.5832305,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 218,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_single_2B_4443",
+      "result": "FINDING",
+      "details": "Truncated varint single_2B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457397.5831547,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 2.9999241828918457,
+        "trunc_hex": "40"
+      }
+    },
+    {
+      "id": 219,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_single_4B_4443",
+      "result": "FINDING",
+      "details": "Truncated varint single_4B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.01s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457400.5896506,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.006495952606201,
+        "trunc_hex": "8000"
+      }
+    },
+    {
+      "id": 220,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_single_8B_4443",
+      "result": "FINDING",
+      "details": "Truncated varint single_8B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.01s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457403.5961466,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.006495952606201,
+        "trunc_hex": "c00000"
+      }
+    },
+    {
+      "id": 221,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_chained_2B_4443",
+      "result": "FINDING",
+      "details": "Truncated varint chained_2B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457406.5986447,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.002498149871826,
+        "trunc_hex": "404040"
+      }
+    },
+    {
+      "id": 222,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_chained_mixed_4443",
+      "result": "FINDING",
+      "details": "Truncated varint chained_mixed: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457409.601143,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.002498149871826,
+        "trunc_hex": "c08040"
+      }
+    },
+    {
+      "id": 223,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_max_prefix_truncated_4443",
+      "result": "FINDING",
+      "details": "Truncated varint max_prefix_truncated: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457412.6036406,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.002497673034668,
+        "trunc_hex": "ffffff"
+      }
+    },
+    {
+      "id": 224,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_1of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 1/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.01s",
+      "timestamp": 1771457415.6101365,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.006495952606201
+      }
+    },
+    {
+      "id": 225,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_2of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 2/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.01s",
+      "timestamp": 1771457418.6166325,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.006495952606201
+      }
+    },
+    {
+      "id": 226,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_3of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 3/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457421.6151326,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 2.998500108718872
+      }
+    },
+    {
+      "id": 227,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_4of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 4/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457424.6176307,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.002498149871826
+      }
+    },
+    {
+      "id": 228,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_5of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 5/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457427.6201289,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.002498149871826
+      }
+    },
+    {
+      "id": 229,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_6of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 6/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457430.6226265,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.002497673034668
+      }
+    },
+    {
+      "id": 230,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_7of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 7/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457433.6211267,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 2.998500108718872
+      }
+    },
+    {
+      "id": 231,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_stress_50pkts_4443",
+      "result": "FINDING",
+      "details": "50 rapid truncated varint packets in 1.00s: alive=False",
+      "timestamp": 1771457436.6276226,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "stress_count": 50,
+        "elapsed": 1.0034980773925781
+      }
+    },
+    {
+      "id": 232,
+      "category": "CVE-Regression",
+      "name": "final_crash_check_4443",
+      "result": "FINDING",
+      "details": "HAProxy alive after all CVE regression tests: False",
+      "timestamp": 1771457438.6306207,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 241,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_crash_check_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after CVE-2026-26081 tests: False",
+      "timestamp": 1771457456.656251,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 242,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_single_2B_8443",
+      "result": "FINDING",
+      "details": "Truncated varint single_2B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457459.6577508,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.001499891281128,
+        "trunc_hex": "40"
+      }
+    },
+    {
+      "id": 243,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_single_4B_8443",
+      "result": "FINDING",
+      "details": "Truncated varint single_4B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457462.6592507,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.001499891281128,
+        "trunc_hex": "8000"
+      }
+    },
+    {
+      "id": 244,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_single_8B_8443",
+      "result": "FINDING",
+      "details": "Truncated varint single_8B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.01s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457465.664753,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.005502223968506,
+        "trunc_hex": "c00000"
+      }
+    },
+    {
+      "id": 245,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_chained_2B_8443",
+      "result": "FINDING",
+      "details": "Truncated varint chained_2B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457468.6662529,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.001499891281128,
+        "trunc_hex": "404040"
+      }
+    },
+    {
+      "id": 246,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_chained_mixed_8443",
+      "result": "FINDING",
+      "details": "Truncated varint chained_mixed: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.01s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457471.6717548,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.0055019855499268,
+        "trunc_hex": "c08040"
+      }
+    },
+    {
+      "id": 247,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_max_prefix_truncated_8443",
+      "result": "FINDING",
+      "details": "Truncated varint max_prefix_truncated: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457474.6732547,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.001499891281128,
+        "trunc_hex": "ffffff"
+      }
+    },
+    {
+      "id": 248,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_1of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 1/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.01s",
+      "timestamp": 1771457477.6867607,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.0135059356689453
+      }
+    },
+    {
+      "id": 249,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_2of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 2/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.01s",
+      "timestamp": 1771457480.6922626,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.0055019855499268
+      }
+    },
+    {
+      "id": 250,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_3of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 3/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457483.6897607,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 2.997498035430908
+      }
+    },
+    {
+      "id": 251,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_4of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 4/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.01s",
+      "timestamp": 1771457486.6952627,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.0055019855499268
+      }
+    },
+    {
+      "id": 252,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_5of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 5/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.01s",
+      "timestamp": 1771457489.7007647,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.0055019855499268
+      }
+    },
+    {
+      "id": 253,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_6of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 6/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457492.7022648,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.001500129699707
+      }
+    },
+    {
+      "id": 254,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_7of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 7/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457495.7037647,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.001499891281128
+      }
+    },
+    {
+      "id": 255,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_stress_50pkts_8443",
+      "result": "FINDING",
+      "details": "50 rapid truncated varint packets in 1.00s: alive=False",
+      "timestamp": 1771457498.701263,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "stress_count": 50,
+        "elapsed": 0.9964978694915771
+      }
+    },
+    {
+      "id": 256,
+      "category": "CVE-Regression",
+      "name": "final_crash_check_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after all CVE regression tests: False",
+      "timestamp": 1771457500.7062647,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 287,
+      "category": "Version-Attack",
+      "name": "crash_check_post_version_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after version attacks: False",
+      "timestamp": 1771457519.7460349,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 337,
+      "category": "Header-DeepDive",
+      "name": "crash_check_post_header_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after header deep-dive: False",
+      "timestamp": 1771457565.828806,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 338,
+      "category": "Summary",
+      "name": "final_alive_4443",
+      "result": "FINDING",
+      "details": "HAProxy QUIC-only (4443) alive after all tests: False",
+      "timestamp": 1771457567.827978,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 339,
+      "category": "Summary",
+      "name": "final_alive_8443",
+      "result": "FINDING",
+      "details": "HAProxy QUIC+HTTPS (8443) alive after all tests: False",
+      "timestamp": 1771457569.8309758,
+      "severity": "CRITICAL"
+    }
+  ],
+  "tests": [
+    {
+      "id": 1,
+      "category": "Initial-Fuzz",
+      "name": "baseline_4443",
+      "result": "ANOMALY",
+      "details": "Baseline Initial: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771456980.3622043
+    },
+    {
+      "id": 2,
+      "category": "Initial-Fuzz",
+      "name": "version_zero_4443",
+      "result": "SAFE",
+      "details": "Version=0 trigger: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771456982.3632042
+    },
+    {
+      "id": 3,
+      "category": "Initial-Fuzz",
+      "name": "version_GREASE_4443",
+      "result": "SAFE",
+      "details": "Version=GREASE: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771456982.3632042
+    },
+    {
+      "id": 4,
+      "category": "Initial-Fuzz",
+      "name": "version_0xDEADBEEF_4443",
+      "result": "SAFE",
+      "details": "Version=0xDEADBEEF: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771456982.3632042
+    },
+    {
+      "id": 5,
+      "category": "Initial-Fuzz",
+      "name": "version_0xFFFFFFFF_4443",
+      "result": "SAFE",
+      "details": "Version=0xFFFFFFFF: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771456982.3632042
+    },
+    {
+      "id": 6,
+      "category": "Initial-Fuzz",
+      "name": "version_0x00000002_4443",
+      "result": "SAFE",
+      "details": "Version=0x00000002: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771456982.3632042
+    },
+    {
+      "id": 7,
+      "category": "Initial-Fuzz",
+      "name": "token_len_zero_4443",
+      "result": "SAFE",
+      "details": "Token length=0: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771456984.3682063
+    },
+    {
+      "id": 8,
+      "category": "Initial-Fuzz",
+      "name": "token_len_huge_0x64_4443",
+      "result": "SAFE",
+      "details": "Token length=0x64, no token data: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771456986.4012225
+    },
+    {
+      "id": 9,
+      "category": "Initial-Fuzz",
+      "name": "token_len_huge_0x3E8_4443",
+      "result": "SAFE",
+      "details": "Token length=0x3E8, no token data: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771456988.4022224
+    },
+    {
+      "id": 10,
+      "category": "Initial-Fuzz",
+      "name": "token_len_huge_0x3FFF_4443",
+      "result": "SAFE",
+      "details": "Token length=0x3FFF, no token data: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771456990.4032226
+    },
+    {
+      "id": 11,
+      "category": "Initial-Fuzz",
+      "name": "token_len_huge_0x3FFFFFFF_4443",
+      "result": "SAFE",
+      "details": "Token length=0x3FFFFFFF, no token data: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771456992.4122267
+    },
+    {
+      "id": 12,
+      "category": "Initial-Fuzz",
+      "name": "token_overlong_zero_8byte_4443",
+      "result": "SAFE",
+      "details": "Overlong varint(0) for token length: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771456994.4132266
+    },
+    {
+      "id": 13,
+      "category": "Initial-Fuzz",
+      "name": "token_len_max_varint_4443",
+      "result": "SAFE",
+      "details": "Token length=2^62-1: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771456996.4182284
+    },
+    {
+      "id": 14,
+      "category": "Initial-Fuzz",
+      "name": "dcid_len_0_4443",
+      "result": "SAFE",
+      "details": "DCID length=0: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771456998.4192283
+    },
+    {
+      "id": 15,
+      "category": "Initial-Fuzz",
+      "name": "dcid_len_max20_4443",
+      "result": "SAFE",
+      "details": "DCID length=20 (max): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457000.4242303
+    },
+    {
+      "id": 16,
+      "category": "Initial-Fuzz",
+      "name": "dcid_len_21_overflow_4443",
+      "result": "SAFE",
+      "details": "DCID length=21 (>max): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457002.4252303
+    },
+    {
+      "id": 17,
+      "category": "Initial-Fuzz",
+      "name": "dcid_len_255_4443",
+      "result": "SAFE",
+      "details": "DCID length=255: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457004.4302323
+    },
+    {
+      "id": 18,
+      "category": "Initial-Fuzz",
+      "name": "scid_len_0_4443",
+      "result": "SAFE",
+      "details": "SCID length=0: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457006.4312325
+    },
+    {
+      "id": 19,
+      "category": "Initial-Fuzz",
+      "name": "scid_len_20_4443",
+      "result": "SAFE",
+      "details": "SCID length=20: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457008.4482403
+    },
+    {
+      "id": 20,
+      "category": "Initial-Fuzz",
+      "name": "scid_len_21_4443",
+      "result": "SAFE",
+      "details": "SCID length=21: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457010.4492402
+    },
+    {
+      "id": 21,
+      "category": "Initial-Fuzz",
+      "name": "scid_len_255_4443",
+      "result": "SAFE",
+      "details": "SCID length=255: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457012.4502406
+    },
+    {
+      "id": 22,
+      "category": "Initial-Fuzz",
+      "name": "fixed_bit_clear_4443",
+      "result": "SAFE",
+      "details": "Fixed bit=0 (0x80): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457014.4512405
+    },
+    {
+      "id": 23,
+      "category": "Initial-Fuzz",
+      "name": "wrong_pkt_type_handshake_4443",
+      "result": "SAFE",
+      "details": "Handshake type in Initial position: SHORT_HEADER - Short header response, 23 bytes",
+      "timestamp": 1771457014.4512405
+    },
+    {
+      "id": 24,
+      "category": "Initial-Fuzz",
+      "name": "pkt_num_len_1_4443",
+      "result": "SAFE",
+      "details": "Packet number length=1: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457016.4642465
+    },
+    {
+      "id": 25,
+      "category": "Initial-Fuzz",
+      "name": "pkt_num_len_2_4443",
+      "result": "SAFE",
+      "details": "Packet number length=2: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457018.4772522
+    },
+    {
+      "id": 26,
+      "category": "Initial-Fuzz",
+      "name": "pkt_num_len_3_4443",
+      "result": "SAFE",
+      "details": "Packet number length=3: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457020.4782526
+    },
+    {
+      "id": 27,
+      "category": "Initial-Fuzz",
+      "name": "pkt_num_len_4_4443",
+      "result": "SAFE",
+      "details": "Packet number length=4: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457022.4792526
+    },
+    {
+      "id": 28,
+      "category": "Initial-Fuzz",
+      "name": "short_datagram_29B_4443",
+      "result": "SAFE",
+      "details": "Short datagram (29 bytes, <1200): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457024.4802525
+    },
+    {
+      "id": 29,
+      "category": "Initial-Fuzz",
+      "name": "empty_datagram_4443",
+      "result": "SAFE",
+      "details": "Empty datagram: No UDP response (silent drop or crash)",
+      "timestamp": 1771457026.4812524
+    },
+    {
+      "id": 30,
+      "category": "Initial-Fuzz",
+      "name": "single_byte_datagram_4443",
+      "result": "SAFE",
+      "details": "Single byte (0xC0): No UDP response (silent drop or crash)",
+      "timestamp": 1771457028.4822526
+    },
+    {
+      "id": 31,
+      "category": "Initial-Fuzz",
+      "name": "all_zeros_1200B_4443",
+      "result": "SAFE",
+      "details": "All-zeros 1200B: No UDP response (silent drop or crash)",
+      "timestamp": 1771457030.4872546
+    },
+    {
+      "id": 32,
+      "category": "Initial-Fuzz",
+      "name": "crash_check_post_initial_4443",
+      "result": "FINDING",
+      "details": "HAProxy alive after Initial fuzzing: False",
+      "timestamp": 1771457032.4962585,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 33,
+      "category": "Initial-Fuzz",
+      "name": "baseline_8443",
+      "result": "ANOMALY",
+      "details": "Baseline Initial: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457034.4972584
+    },
+    {
+      "id": 34,
+      "category": "Initial-Fuzz",
+      "name": "version_zero_8443",
+      "result": "SAFE",
+      "details": "Version=0 trigger: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457036.4977655
+    },
+    {
+      "id": 35,
+      "category": "Initial-Fuzz",
+      "name": "version_GREASE_8443",
+      "result": "SAFE",
+      "details": "Version=GREASE: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457036.4977655
+    },
+    {
+      "id": 36,
+      "category": "Initial-Fuzz",
+      "name": "version_0xDEADBEEF_8443",
+      "result": "SAFE",
+      "details": "Version=0xDEADBEEF: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457036.4977655
+    },
+    {
+      "id": 37,
+      "category": "Initial-Fuzz",
+      "name": "version_0xFFFFFFFF_8443",
+      "result": "SAFE",
+      "details": "Version=0xFFFFFFFF: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457036.4977655
+    },
+    {
+      "id": 38,
+      "category": "Initial-Fuzz",
+      "name": "version_0x00000002_8443",
+      "result": "SAFE",
+      "details": "Version=0x00000002: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457036.4977655
+    },
+    {
+      "id": 39,
+      "category": "Initial-Fuzz",
+      "name": "token_len_zero_8443",
+      "result": "SAFE",
+      "details": "Token length=0: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457038.5047617
+    },
+    {
+      "id": 40,
+      "category": "Initial-Fuzz",
+      "name": "token_len_huge_0x64_8443",
+      "result": "SAFE",
+      "details": "Token length=0x64, no token data: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457040.5077596
+    },
+    {
+      "id": 41,
+      "category": "Initial-Fuzz",
+      "name": "token_len_huge_0x3E8_8443",
+      "result": "SAFE",
+      "details": "Token length=0x3E8, no token data: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457042.5067594
+    },
+    {
+      "id": 42,
+      "category": "Initial-Fuzz",
+      "name": "token_len_huge_0x3FFF_8443",
+      "result": "SAFE",
+      "details": "Token length=0x3FFF, no token data: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457044.5097575
+    },
+    {
+      "id": 43,
+      "category": "Initial-Fuzz",
+      "name": "token_len_huge_0x3FFFFFFF_8443",
+      "result": "SAFE",
+      "details": "Token length=0x3FFFFFFF, no token data: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457046.5127554
+    },
+    {
+      "id": 44,
+      "category": "Initial-Fuzz",
+      "name": "token_overlong_zero_8byte_8443",
+      "result": "SAFE",
+      "details": "Overlong varint(0) for token length: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457048.5157535
+    },
+    {
+      "id": 45,
+      "category": "Initial-Fuzz",
+      "name": "token_len_max_varint_8443",
+      "result": "SAFE",
+      "details": "Token length=2^62-1: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457050.5147536
+    },
+    {
+      "id": 46,
+      "category": "Initial-Fuzz",
+      "name": "dcid_len_0_8443",
+      "result": "SAFE",
+      "details": "DCID length=0: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457052.5177515
+    },
+    {
+      "id": 47,
+      "category": "Initial-Fuzz",
+      "name": "dcid_len_max20_8443",
+      "result": "SAFE",
+      "details": "DCID length=20 (max): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457054.5207496
+    },
+    {
+      "id": 48,
+      "category": "Initial-Fuzz",
+      "name": "dcid_len_21_overflow_8443",
+      "result": "SAFE",
+      "details": "DCID length=21 (>max): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457056.5277455
+    },
+    {
+      "id": 49,
+      "category": "Initial-Fuzz",
+      "name": "dcid_len_255_8443",
+      "result": "SAFE",
+      "details": "DCID length=255: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457058.5307436
+    },
+    {
+      "id": 50,
+      "category": "Initial-Fuzz",
+      "name": "scid_len_0_8443",
+      "result": "SAFE",
+      "details": "SCID length=0: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457060.5617275
+    },
+    {
+      "id": 51,
+      "category": "Initial-Fuzz",
+      "name": "scid_len_20_8443",
+      "result": "SAFE",
+      "details": "SCID length=20: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457062.5687234
+    },
+    {
+      "id": 52,
+      "category": "Initial-Fuzz",
+      "name": "scid_len_21_8443",
+      "result": "SAFE",
+      "details": "SCID length=21: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457064.5717216
+    },
+    {
+      "id": 53,
+      "category": "Initial-Fuzz",
+      "name": "scid_len_255_8443",
+      "result": "SAFE",
+      "details": "SCID length=255: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457066.5787175
+    },
+    {
+      "id": 54,
+      "category": "Initial-Fuzz",
+      "name": "fixed_bit_clear_8443",
+      "result": "SAFE",
+      "details": "Fixed bit=0 (0x80): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457068.5777175
+    },
+    {
+      "id": 55,
+      "category": "Initial-Fuzz",
+      "name": "wrong_pkt_type_handshake_8443",
+      "result": "SAFE",
+      "details": "Handshake type in Initial position: SHORT_HEADER - Short header response, 23 bytes",
+      "timestamp": 1771457068.5777175
+    },
+    {
+      "id": 56,
+      "category": "Initial-Fuzz",
+      "name": "pkt_num_len_1_8443",
+      "result": "SAFE",
+      "details": "Packet number length=1: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457070.5807154
+    },
+    {
+      "id": 57,
+      "category": "Initial-Fuzz",
+      "name": "pkt_num_len_2_8443",
+      "result": "SAFE",
+      "details": "Packet number length=2: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457072.5837135
+    },
+    {
+      "id": 58,
+      "category": "Initial-Fuzz",
+      "name": "pkt_num_len_3_8443",
+      "result": "SAFE",
+      "details": "Packet number length=3: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457074.5867116
+    },
+    {
+      "id": 59,
+      "category": "Initial-Fuzz",
+      "name": "pkt_num_len_4_8443",
+      "result": "SAFE",
+      "details": "Packet number length=4: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457076.5902946
+    },
+    {
+      "id": 60,
+      "category": "Initial-Fuzz",
+      "name": "short_datagram_29B_8443",
+      "result": "SAFE",
+      "details": "Short datagram (29 bytes, <1200): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457078.5912945
+    },
+    {
+      "id": 61,
+      "category": "Initial-Fuzz",
+      "name": "empty_datagram_8443",
+      "result": "SAFE",
+      "details": "Empty datagram: No UDP response (silent drop or crash)",
+      "timestamp": 1771457080.5922947
+    },
+    {
+      "id": 62,
+      "category": "Initial-Fuzz",
+      "name": "single_byte_datagram_8443",
+      "result": "SAFE",
+      "details": "Single byte (0xC0): No UDP response (silent drop or crash)",
+      "timestamp": 1771457082.6213086
+    },
+    {
+      "id": 63,
+      "category": "Initial-Fuzz",
+      "name": "all_zeros_1200B_8443",
+      "result": "SAFE",
+      "details": "All-zeros 1200B: No UDP response (silent drop or crash)",
+      "timestamp": 1771457084.6223085
+    },
+    {
+      "id": 64,
+      "category": "Initial-Fuzz",
+      "name": "crash_check_post_initial_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after Initial fuzzing: False",
+      "timestamp": 1771457086.6233087,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 65,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_0_in_2B_4443",
+      "result": "SAFE",
+      "details": "Overlong varint(0_in_2B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: 4000",
+      "timestamp": 1771457088.6243086
+    },
+    {
+      "id": 66,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_0_in_4B_4443",
+      "result": "SAFE",
+      "details": "Overlong varint(0_in_4B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: 80000000",
+      "timestamp": 1771457090.6213067
+    },
+    {
+      "id": 67,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_0_in_8B_4443",
+      "result": "SAFE",
+      "details": "Overlong varint(0_in_8B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: c000000000000000",
+      "timestamp": 1771457092.6263087
+    },
+    {
+      "id": 68,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_1_in_2B_4443",
+      "result": "ANOMALY",
+      "details": "Overlong varint(1_in_2B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: 4001",
+      "timestamp": 1771457094.6273086
+    },
+    {
+      "id": 69,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_1_in_4B_4443",
+      "result": "ANOMALY",
+      "details": "Overlong varint(1_in_4B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: 80000001",
+      "timestamp": 1771457096.6316836
+    },
+    {
+      "id": 70,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_1_in_8B_4443",
+      "result": "ANOMALY",
+      "details": "Overlong varint(1_in_8B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: c000000000000001",
+      "timestamp": 1771457098.6346817
+    },
+    {
+      "id": 71,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_63_in_2B_4443",
+      "result": "ANOMALY",
+      "details": "Overlong varint(63_in_2B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: 403f",
+      "timestamp": 1771457100.6376796
+    },
+    {
+      "id": 72,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_63_in_4B_4443",
+      "result": "ANOMALY",
+      "details": "Overlong varint(63_in_4B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: 8000003f",
+      "timestamp": 1771457102.6406777
+    },
+    {
+      "id": 73,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_63_in_8B_4443",
+      "result": "ANOMALY",
+      "details": "Overlong varint(63_in_8B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: c00000000000003f",
+      "timestamp": 1771457104.6436756
+    },
+    {
+      "id": 74,
+      "category": "Varint-Overflow",
+      "name": "length_field_max_varint_4443",
+      "result": "SAFE",
+      "details": "Length=2^62-1: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457106.6466737
+    },
+    {
+      "id": 75,
+      "category": "Varint-Overflow",
+      "name": "length_field_zero_4443",
+      "result": "SAFE",
+      "details": "Length=0: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457108.6656635
+    },
+    {
+      "id": 76,
+      "category": "Varint-Overflow",
+      "name": "length_mismatch_large_4443",
+      "result": "SAFE",
+      "details": "Length=5000, actual=10: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457110.6686616
+    },
+    {
+      "id": 77,
+      "category": "Varint-Overflow",
+      "name": "truncated_varint_2B_4443",
+      "result": "SAFE",
+      "details": "Truncated 2-byte varint (token_len): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457112.6716595
+    },
+    {
+      "id": 78,
+      "category": "Varint-Overflow",
+      "name": "truncated_varint_4B_4443",
+      "result": "SAFE",
+      "details": "Truncated 4-byte varint: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457114.6706595
+    },
+    {
+      "id": 79,
+      "category": "Varint-Overflow",
+      "name": "truncated_varint_8B_4443",
+      "result": "SAFE",
+      "details": "Truncated 8-byte varint: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457116.6736577
+    },
+    {
+      "id": 80,
+      "category": "Varint-Overflow",
+      "name": "boundary_1B_max_4443",
+      "result": "SAFE",
+      "details": "Token length=1B_max (63): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457118.6766555
+    },
+    {
+      "id": 81,
+      "category": "Varint-Overflow",
+      "name": "boundary_2B_min_4443",
+      "result": "SAFE",
+      "details": "Token length=2B_min (64): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457120.6796536
+    },
+    {
+      "id": 82,
+      "category": "Varint-Overflow",
+      "name": "boundary_2B_max_4443",
+      "result": "SAFE",
+      "details": "Token length=2B_max (16383): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457122.6826518
+    },
+    {
+      "id": 83,
+      "category": "Varint-Overflow",
+      "name": "boundary_4B_min_4443",
+      "result": "SAFE",
+      "details": "Token length=4B_min (16384): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457124.6856496
+    },
+    {
+      "id": 84,
+      "category": "Varint-Overflow",
+      "name": "boundary_4B_max_4443",
+      "result": "SAFE",
+      "details": "Token length=4B_max (1073741823): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457126.6886477
+    },
+    {
+      "id": 85,
+      "category": "Varint-Overflow",
+      "name": "boundary_8B_min_4443",
+      "result": "SAFE",
+      "details": "Token length=8B_min (1073741824): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457128.6916456
+    },
+    {
+      "id": 86,
+      "category": "Varint-Overflow",
+      "name": "allbits_1B_0x3F_4443",
+      "result": "SAFE",
+      "details": "Token len all-bits-set 1B_0x3F: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457130.6906455
+    },
+    {
+      "id": 87,
+      "category": "Varint-Overflow",
+      "name": "allbits_2B_0x7FFF_4443",
+      "result": "SAFE",
+      "details": "Token len all-bits-set 2B_0x7FFF: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457132.6936436
+    },
+    {
+      "id": 88,
+      "category": "Varint-Overflow",
+      "name": "allbits_4B_0xBFFFFFFF_4443",
+      "result": "SAFE",
+      "details": "Token len all-bits-set 4B_0xBFFFFFFF: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457134.6966414
+    },
+    {
+      "id": 89,
+      "category": "Varint-Overflow",
+      "name": "allbits_8B_max_4443",
+      "result": "SAFE",
+      "details": "Token len all-bits-set 8B_max: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457136.7003345
+    },
+    {
+      "id": 90,
+      "category": "Varint-Overflow",
+      "name": "crash_check_post_varint_4443",
+      "result": "FINDING",
+      "details": "HAProxy alive after varint tests: False",
+      "timestamp": 1771457138.7013345,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 91,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_0_in_2B_8443",
+      "result": "SAFE",
+      "details": "Overlong varint(0_in_2B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: 4000",
+      "timestamp": 1771457140.7063365
+    },
+    {
+      "id": 92,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_0_in_4B_8443",
+      "result": "SAFE",
+      "details": "Overlong varint(0_in_4B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: 80000000",
+      "timestamp": 1771457142.7073367
+    },
+    {
+      "id": 93,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_0_in_8B_8443",
+      "result": "SAFE",
+      "details": "Overlong varint(0_in_8B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: c000000000000000",
+      "timestamp": 1771457144.7083366
+    },
+    {
+      "id": 94,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_1_in_2B_8443",
+      "result": "ANOMALY",
+      "details": "Overlong varint(1_in_2B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: 4001",
+      "timestamp": 1771457146.7053344
+    },
+    {
+      "id": 95,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_1_in_4B_8443",
+      "result": "ANOMALY",
+      "details": "Overlong varint(1_in_4B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: 80000001",
+      "timestamp": 1771457148.7103364
+    },
+    {
+      "id": 96,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_1_in_8B_8443",
+      "result": "ANOMALY",
+      "details": "Overlong varint(1_in_8B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: c000000000000001",
+      "timestamp": 1771457150.7113366
+    },
+    {
+      "id": 97,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_63_in_2B_8443",
+      "result": "ANOMALY",
+      "details": "Overlong varint(63_in_2B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: 403f",
+      "timestamp": 1771457152.7123365
+    },
+    {
+      "id": 98,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_63_in_4B_8443",
+      "result": "ANOMALY",
+      "details": "Overlong varint(63_in_4B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: 8000003f",
+      "timestamp": 1771457154.7133365
+    },
+    {
+      "id": 99,
+      "category": "Varint-Overflow",
+      "name": "overlong_token_len_63_in_8B_8443",
+      "result": "ANOMALY",
+      "details": "Overlong varint(63_in_8B): NO_RESPONSE - No UDP response (silent drop or crash)\nVarint hex: c00000000000003f",
+      "timestamp": 1771457156.7143364
+    },
+    {
+      "id": 100,
+      "category": "Varint-Overflow",
+      "name": "length_field_max_varint_8443",
+      "result": "SAFE",
+      "details": "Length=2^62-1: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457159.1515546
+    },
+    {
+      "id": 101,
+      "category": "Varint-Overflow",
+      "name": "length_field_zero_8443",
+      "result": "SAFE",
+      "details": "Length=0: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457161.1525548
+    },
+    {
+      "id": 102,
+      "category": "Varint-Overflow",
+      "name": "length_mismatch_large_8443",
+      "result": "SAFE",
+      "details": "Length=5000, actual=10: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457163.1535547
+    },
+    {
+      "id": 103,
+      "category": "Varint-Overflow",
+      "name": "truncated_varint_2B_8443",
+      "result": "SAFE",
+      "details": "Truncated 2-byte varint (token_len): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457165.1545546
+    },
+    {
+      "id": 104,
+      "category": "Varint-Overflow",
+      "name": "truncated_varint_4B_8443",
+      "result": "SAFE",
+      "details": "Truncated 4-byte varint: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457167.1595566
+    },
+    {
+      "id": 105,
+      "category": "Varint-Overflow",
+      "name": "truncated_varint_8B_8443",
+      "result": "SAFE",
+      "details": "Truncated 8-byte varint: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457169.1605566
+    },
+    {
+      "id": 106,
+      "category": "Varint-Overflow",
+      "name": "boundary_1B_max_8443",
+      "result": "SAFE",
+      "details": "Token length=1B_max (63): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457171.1615567
+    },
+    {
+      "id": 107,
+      "category": "Varint-Overflow",
+      "name": "boundary_2B_min_8443",
+      "result": "SAFE",
+      "details": "Token length=2B_min (64): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457173.1625566
+    },
+    {
+      "id": 108,
+      "category": "Varint-Overflow",
+      "name": "boundary_2B_max_8443",
+      "result": "SAFE",
+      "details": "Token length=2B_max (16383): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457175.1755629
+    },
+    {
+      "id": 109,
+      "category": "Varint-Overflow",
+      "name": "boundary_4B_min_8443",
+      "result": "SAFE",
+      "details": "Token length=4B_min (16384): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457177.1793897
+    },
+    {
+      "id": 110,
+      "category": "Varint-Overflow",
+      "name": "boundary_4B_max_8443",
+      "result": "SAFE",
+      "details": "Token length=4B_max (1073741823): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457179.1823878
+    },
+    {
+      "id": 111,
+      "category": "Varint-Overflow",
+      "name": "boundary_8B_min_8443",
+      "result": "SAFE",
+      "details": "Token length=8B_min (1073741824): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457181.1853857
+    },
+    {
+      "id": 112,
+      "category": "Varint-Overflow",
+      "name": "allbits_1B_0x3F_8443",
+      "result": "SAFE",
+      "details": "Token len all-bits-set 1B_0x3F: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457183.1883838
+    },
+    {
+      "id": 113,
+      "category": "Varint-Overflow",
+      "name": "allbits_2B_0x7FFF_8443",
+      "result": "SAFE",
+      "details": "Token len all-bits-set 2B_0x7FFF: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457185.1993778
+    },
+    {
+      "id": 114,
+      "category": "Varint-Overflow",
+      "name": "allbits_4B_0xBFFFFFFF_8443",
+      "result": "SAFE",
+      "details": "Token len all-bits-set 4B_0xBFFFFFFF: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457187.2023757
+    },
+    {
+      "id": 115,
+      "category": "Varint-Overflow",
+      "name": "allbits_8B_max_8443",
+      "result": "SAFE",
+      "details": "Token len all-bits-set 8B_max: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457189.2053738
+    },
+    {
+      "id": 116,
+      "category": "Varint-Overflow",
+      "name": "crash_check_post_varint_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after varint tests: False",
+      "timestamp": 1771457191.2083716,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 117,
+      "category": "Frame-Attack",
+      "name": "crypto_offset_zero_4443",
+      "result": "SAFE",
+      "details": "CRYPTO frame offset=zero: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457193.2113698
+    },
+    {
+      "id": 118,
+      "category": "Frame-Attack",
+      "name": "crypto_offset_max_62bit_4443",
+      "result": "SAFE",
+      "details": "CRYPTO frame offset=max_62bit: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457195.2143676
+    },
+    {
+      "id": 119,
+      "category": "Frame-Attack",
+      "name": "crypto_offset_4B_max_4443",
+      "result": "SAFE",
+      "details": "CRYPTO frame offset=4B_max: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457197.2333577
+    },
+    {
+      "id": 120,
+      "category": "Frame-Attack",
+      "name": "crypto_offset_near_overflow_4443",
+      "result": "SAFE",
+      "details": "CRYPTO frame offset=near_overflow: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457199.2363555
+    },
+    {
+      "id": 121,
+      "category": "Frame-Attack",
+      "name": "stream_offset_overflow_offset_max_len_1_4443",
+      "result": "SAFE",
+      "details": "STREAM offset+len overflow (offset_max_len_1): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457201.2393537
+    },
+    {
+      "id": 122,
+      "category": "Frame-Attack",
+      "name": "stream_offset_overflow_offset_near_max_len_100_4443",
+      "result": "SAFE",
+      "details": "STREAM offset+len overflow (offset_near_max_len_100): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457203.2423515
+    },
+    {
+      "id": 123,
+      "category": "Frame-Attack",
+      "name": "stream_offset_overflow_offset_half_len_half_4443",
+      "result": "SAFE",
+      "details": "STREAM offset+len overflow (offset_half_len_half): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457205.2453496
+    },
+    {
+      "id": 124,
+      "category": "Frame-Attack",
+      "name": "stream_offset_overflow_offset_0_len_max_4443",
+      "result": "SAFE",
+      "details": "STREAM offset+len overflow (offset_0_len_max): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457207.2495954
+    },
+    {
+      "id": 125,
+      "category": "Frame-Attack",
+      "name": "ack_frame_normal_4443",
+      "result": "SAFE",
+      "details": "ACK frame normal: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457209.2585995
+    },
+    {
+      "id": 126,
+      "category": "Frame-Attack",
+      "name": "ack_frame_max_largest_ack_4443",
+      "result": "SAFE",
+      "details": "ACK frame max_largest_ack: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457211.2636013
+    },
+    {
+      "id": 127,
+      "category": "Frame-Attack",
+      "name": "ack_frame_max_range_count_4443",
+      "result": "SAFE",
+      "details": "ACK frame max_range_count: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457213.2686033
+    },
+    {
+      "id": 128,
+      "category": "Frame-Attack",
+      "name": "ack_frame_excessive_ranges_10_4443",
+      "result": "SAFE",
+      "details": "ACK frame excessive_ranges_10: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457215.2776074
+    },
+    {
+      "id": 129,
+      "category": "Frame-Attack",
+      "name": "ack_frame_overflow_gap_plus_2_4443",
+      "result": "SAFE",
+      "details": "ACK frame overflow_gap_plus_2: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457217.2786076
+    },
+    {
+      "id": 130,
+      "category": "Frame-Attack",
+      "name": "padding_only_payload_4443",
+      "result": "SAFE",
+      "details": "All-padding payload: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457219.2796075
+    },
+    {
+      "id": 131,
+      "category": "Frame-Attack",
+      "name": "padding_ping_mix_100_4443",
+      "result": "SAFE",
+      "details": "100x PADDING+PING: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457221.2806075
+    },
+    {
+      "id": 132,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_RESET_STREAM_4443",
+      "result": "SAFE",
+      "details": "Invalid frame type RESET_STREAM (0x04): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457223.2856095
+    },
+    {
+      "id": 133,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_STOP_SENDING_4443",
+      "result": "SAFE",
+      "details": "Invalid frame type STOP_SENDING (0x05): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457225.2866094
+    },
+    {
+      "id": 134,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_NEW_TOKEN_4443",
+      "result": "SAFE",
+      "details": "Invalid frame type NEW_TOKEN (0x07): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457227.2876096
+    },
+    {
+      "id": 135,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_STREAM_8_4443",
+      "result": "SAFE",
+      "details": "Invalid frame type STREAM_8 (0x08): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457229.2926116
+    },
+    {
+      "id": 136,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_MAX_DATA_4443",
+      "result": "SAFE",
+      "details": "Invalid frame type MAX_DATA (0x10): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457231.2936115
+    },
+    {
+      "id": 137,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_NEW_CONNECTION_ID_4443",
+      "result": "SAFE",
+      "details": "Invalid frame type NEW_CONNECTION_ID (0x18): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457233.3026156
+    },
+    {
+      "id": 138,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_HANDSHAKE_DONE_4443",
+      "result": "SAFE",
+      "details": "Invalid frame type HANDSHAKE_DONE (0x1E): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457235.3036156
+    },
+    {
+      "id": 139,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_unknown_0x20_4443",
+      "result": "SAFE",
+      "details": "Invalid frame type unknown_0x20 (0x20): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457237.3073146
+    },
+    {
+      "id": 140,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_unknown_0xFF_4443",
+      "result": "SAFE",
+      "details": "Invalid frame type unknown_0xFF (0xFF): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457239.3103125
+    },
+    {
+      "id": 141,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_unknown_0x1F_4443",
+      "result": "SAFE",
+      "details": "Invalid frame type unknown_0x1F (0x1F): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457241.3133104
+    },
+    {
+      "id": 142,
+      "category": "Frame-Attack",
+      "name": "connection_close_initial_4443",
+      "result": "SAFE",
+      "details": "CONNECTION_CLOSE in Initial: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457243.3163085
+    },
+    {
+      "id": 143,
+      "category": "Frame-Attack",
+      "name": "crypto_len_mismatch_4443",
+      "result": "SAFE",
+      "details": "CRYPTO length mismatch (claims 10000, has 10): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457245.3193066
+    },
+    {
+      "id": 144,
+      "category": "Frame-Attack",
+      "name": "crash_check_post_frame_4443",
+      "result": "FINDING",
+      "details": "HAProxy alive after frame attacks: False",
+      "timestamp": 1771457247.3422945,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 145,
+      "category": "Frame-Attack",
+      "name": "crypto_offset_zero_8443",
+      "result": "SAFE",
+      "details": "CRYPTO frame offset=zero: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457249.3452926
+    },
+    {
+      "id": 146,
+      "category": "Frame-Attack",
+      "name": "crypto_offset_max_62bit_8443",
+      "result": "SAFE",
+      "details": "CRYPTO frame offset=max_62bit: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457251.3482904
+    },
+    {
+      "id": 147,
+      "category": "Frame-Attack",
+      "name": "crypto_offset_4B_max_8443",
+      "result": "SAFE",
+      "details": "CRYPTO frame offset=4B_max: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457253.3512886
+    },
+    {
+      "id": 148,
+      "category": "Frame-Attack",
+      "name": "crypto_offset_near_overflow_8443",
+      "result": "SAFE",
+      "details": "CRYPTO frame offset=near_overflow: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457255.3622825
+    },
+    {
+      "id": 149,
+      "category": "Frame-Attack",
+      "name": "stream_offset_overflow_offset_max_len_1_8443",
+      "result": "SAFE",
+      "details": "STREAM offset+len overflow (offset_max_len_1): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457257.3652806
+    },
+    {
+      "id": 150,
+      "category": "Frame-Attack",
+      "name": "stream_offset_overflow_offset_near_max_len_100_8443",
+      "result": "SAFE",
+      "details": "STREAM offset+len overflow (offset_near_max_len_100): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457259.3682785
+    },
+    {
+      "id": 151,
+      "category": "Frame-Attack",
+      "name": "stream_offset_overflow_offset_half_len_half_8443",
+      "result": "SAFE",
+      "details": "STREAM offset+len overflow (offset_half_len_half): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457261.3712766
+    },
+    {
+      "id": 152,
+      "category": "Frame-Attack",
+      "name": "stream_offset_overflow_offset_0_len_max_8443",
+      "result": "SAFE",
+      "details": "STREAM offset+len overflow (offset_0_len_max): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457263.3742745
+    },
+    {
+      "id": 153,
+      "category": "Frame-Attack",
+      "name": "ack_frame_normal_8443",
+      "result": "SAFE",
+      "details": "ACK frame normal: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457265.3772726
+    },
+    {
+      "id": 154,
+      "category": "Frame-Attack",
+      "name": "ack_frame_max_largest_ack_8443",
+      "result": "SAFE",
+      "details": "ACK frame max_largest_ack: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457267.3776484
+    },
+    {
+      "id": 155,
+      "category": "Frame-Attack",
+      "name": "ack_frame_max_range_count_8443",
+      "result": "SAFE",
+      "details": "ACK frame max_range_count: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457269.3786483
+    },
+    {
+      "id": 156,
+      "category": "Frame-Attack",
+      "name": "ack_frame_excessive_ranges_10_8443",
+      "result": "SAFE",
+      "details": "ACK frame excessive_ranges_10: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457271.3836505
+    },
+    {
+      "id": 157,
+      "category": "Frame-Attack",
+      "name": "ack_frame_overflow_gap_plus_2_8443",
+      "result": "SAFE",
+      "details": "ACK frame overflow_gap_plus_2: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457273.3886526
+    },
+    {
+      "id": 158,
+      "category": "Frame-Attack",
+      "name": "padding_only_payload_8443",
+      "result": "SAFE",
+      "details": "All-padding payload: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457275.3896525
+    },
+    {
+      "id": 159,
+      "category": "Frame-Attack",
+      "name": "padding_ping_mix_100_8443",
+      "result": "SAFE",
+      "details": "100x PADDING+PING: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457277.3986566
+    },
+    {
+      "id": 160,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_RESET_STREAM_8443",
+      "result": "SAFE",
+      "details": "Invalid frame type RESET_STREAM (0x04): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457279.3996565
+    },
+    {
+      "id": 161,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_STOP_SENDING_8443",
+      "result": "SAFE",
+      "details": "Invalid frame type STOP_SENDING (0x05): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457281.4006565
+    },
+    {
+      "id": 162,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_NEW_TOKEN_8443",
+      "result": "SAFE",
+      "details": "Invalid frame type NEW_TOKEN (0x07): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457283.4016564
+    },
+    {
+      "id": 163,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_STREAM_8_8443",
+      "result": "SAFE",
+      "details": "Invalid frame type STREAM_8 (0x08): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457285.4026566
+    },
+    {
+      "id": 164,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_MAX_DATA_8443",
+      "result": "SAFE",
+      "details": "Invalid frame type MAX_DATA (0x10): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457287.4062567
+    },
+    {
+      "id": 165,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_NEW_CONNECTION_ID_8443",
+      "result": "SAFE",
+      "details": "Invalid frame type NEW_CONNECTION_ID (0x18): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457289.4092546
+    },
+    {
+      "id": 166,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_HANDSHAKE_DONE_8443",
+      "result": "SAFE",
+      "details": "Invalid frame type HANDSHAKE_DONE (0x1E): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457291.4122524
+    },
+    {
+      "id": 167,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_unknown_0x20_8443",
+      "result": "SAFE",
+      "details": "Invalid frame type unknown_0x20 (0x20): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457293.4152505
+    },
+    {
+      "id": 168,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_unknown_0xFF_8443",
+      "result": "SAFE",
+      "details": "Invalid frame type unknown_0xFF (0xFF): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457295.4182484
+    },
+    {
+      "id": 169,
+      "category": "Frame-Attack",
+      "name": "invalid_frame_type_unknown_0x1F_8443",
+      "result": "SAFE",
+      "details": "Invalid frame type unknown_0x1F (0x1F): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457297.4212465
+    },
+    {
+      "id": 170,
+      "category": "Frame-Attack",
+      "name": "connection_close_initial_8443",
+      "result": "SAFE",
+      "details": "CONNECTION_CLOSE in Initial: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457299.4522307
+    },
+    {
+      "id": 171,
+      "category": "Frame-Attack",
+      "name": "crypto_len_mismatch_8443",
+      "result": "SAFE",
+      "details": "CRYPTO length mismatch (claims 10000, has 10): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457301.4552283
+    },
+    {
+      "id": 172,
+      "category": "Frame-Attack",
+      "name": "crash_check_post_frame_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after frame attacks: False",
+      "timestamp": 1771457303.4582264,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 173,
+      "category": "TP-Fuzz",
+      "name": "dcid_exact_hap_cid_len_4443",
+      "result": "SAFE",
+      "details": "DCID length=QUIC_HAP_CID_LEN(8): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457305.4612246
+    },
+    {
+      "id": 174,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_1_4443",
+      "result": "SAFE",
+      "details": "DCID length=1: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457307.4616845
+    },
+    {
+      "id": 175,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_4_4443",
+      "result": "SAFE",
+      "details": "DCID length=4: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457309.4666865
+    },
+    {
+      "id": 176,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_7_4443",
+      "result": "SAFE",
+      "details": "DCID length=7: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457311.4676864
+    },
+    {
+      "id": 177,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_8_4443",
+      "result": "SAFE",
+      "details": "DCID length=8: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457313.4686863
+    },
+    {
+      "id": 178,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_9_4443",
+      "result": "SAFE",
+      "details": "DCID length=9: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457315.4816923
+    },
+    {
+      "id": 179,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_15_4443",
+      "result": "SAFE",
+      "details": "DCID length=15: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457317.4866943
+    },
+    {
+      "id": 180,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_19_4443",
+      "result": "SAFE",
+      "details": "DCID length=19: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457319.4916964
+    },
+    {
+      "id": 181,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_20_4443",
+      "result": "SAFE",
+      "details": "DCID length=20: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457321.4926963
+    },
+    {
+      "id": 182,
+      "category": "TP-Fuzz",
+      "name": "fake_retry_token_4443",
+      "result": "SAFE",
+      "details": "Fake retry token (format=0x00): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457323.4976983
+    },
+    {
+      "id": 183,
+      "category": "TP-Fuzz",
+      "name": "fake_new_token_4443",
+      "result": "SAFE",
+      "details": "Fake new token (format=0x01): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457325.4986985
+    },
+    {
+      "id": 184,
+      "category": "TP-Fuzz",
+      "name": "oversized_token_1000B_4443",
+      "result": "SAFE",
+      "details": "1000-byte token: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457327.4996984
+    },
+    {
+      "id": 185,
+      "category": "TP-Fuzz",
+      "name": "null_filled_token_4443",
+      "result": "SAFE",
+      "details": "All-null 50B token: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457329.5006983
+    },
+    {
+      "id": 186,
+      "category": "TP-Fuzz",
+      "name": "ff_filled_token_4443",
+      "result": "SAFE",
+      "details": "All-0xFF 50B token: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457331.5016983
+    },
+    {
+      "id": 187,
+      "category": "TP-Fuzz",
+      "name": "rapid_cid_variation_4443",
+      "result": "FINDING",
+      "details": "20 rapid packets with random DCID lengths: alive=False",
+      "timestamp": 1771457334.0029483,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 188,
+      "category": "TP-Fuzz",
+      "name": "coalesced_same_dcid_4443",
+      "result": "SAFE",
+      "details": "Coalesced Initials (same DCID): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457336.0079503
+    },
+    {
+      "id": 189,
+      "category": "TP-Fuzz",
+      "name": "coalesced_different_dcid_4443",
+      "result": "SAFE",
+      "details": "Coalesced Initials (different DCIDs): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457338.0109484
+    },
+    {
+      "id": 190,
+      "category": "TP-Fuzz",
+      "name": "crash_check_post_tp_4443",
+      "result": "FINDING",
+      "details": "HAProxy alive after TP fuzzing: False",
+      "timestamp": 1771457340.0139463,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 191,
+      "category": "TP-Fuzz",
+      "name": "dcid_exact_hap_cid_len_8443",
+      "result": "SAFE",
+      "details": "DCID length=QUIC_HAP_CID_LEN(8): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457342.0169444
+    },
+    {
+      "id": 192,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_1_8443",
+      "result": "SAFE",
+      "details": "DCID length=1: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457344.0239403
+    },
+    {
+      "id": 193,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_4_8443",
+      "result": "SAFE",
+      "details": "DCID length=4: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457346.0269384
+    },
+    {
+      "id": 194,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_7_8443",
+      "result": "SAFE",
+      "details": "DCID length=7: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457348.0299363
+    },
+    {
+      "id": 195,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_8_8443",
+      "result": "SAFE",
+      "details": "DCID length=8: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457350.0329344
+    },
+    {
+      "id": 196,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_9_8443",
+      "result": "SAFE",
+      "details": "DCID length=9: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457352.0319345
+    },
+    {
+      "id": 197,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_15_8443",
+      "result": "SAFE",
+      "details": "DCID length=15: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457354.0349324
+    },
+    {
+      "id": 198,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_19_8443",
+      "result": "SAFE",
+      "details": "DCID length=19: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457356.0339324
+    },
+    {
+      "id": 199,
+      "category": "TP-Fuzz",
+      "name": "dcid_len_probe_20_8443",
+      "result": "SAFE",
+      "details": "DCID length=20: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457358.0369306
+    },
+    {
+      "id": 200,
+      "category": "TP-Fuzz",
+      "name": "fake_retry_token_8443",
+      "result": "SAFE",
+      "details": "Fake retry token (format=0x00): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457360.0359304
+    },
+    {
+      "id": 201,
+      "category": "TP-Fuzz",
+      "name": "fake_new_token_8443",
+      "result": "SAFE",
+      "details": "Fake new token (format=0x01): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457362.0389283
+    },
+    {
+      "id": 202,
+      "category": "TP-Fuzz",
+      "name": "oversized_token_1000B_8443",
+      "result": "SAFE",
+      "details": "1000-byte token: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457364.0419264
+    },
+    {
+      "id": 203,
+      "category": "TP-Fuzz",
+      "name": "null_filled_token_8443",
+      "result": "SAFE",
+      "details": "All-null 50B token: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457366.0489702
+    },
+    {
+      "id": 204,
+      "category": "TP-Fuzz",
+      "name": "ff_filled_token_8443",
+      "result": "SAFE",
+      "details": "All-0xFF 50B token: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457368.0499704
+    },
+    {
+      "id": 205,
+      "category": "TP-Fuzz",
+      "name": "rapid_cid_variation_8443",
+      "result": "FINDING",
+      "details": "20 rapid packets with random DCID lengths: alive=False",
+      "timestamp": 1771457370.5592244,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 206,
+      "category": "TP-Fuzz",
+      "name": "coalesced_same_dcid_8443",
+      "result": "SAFE",
+      "details": "Coalesced Initials (same DCID): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457372.5602243
+    },
+    {
+      "id": 207,
+      "category": "TP-Fuzz",
+      "name": "coalesced_different_dcid_8443",
+      "result": "SAFE",
+      "details": "Coalesced Initials (different DCIDs): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457374.5652263
+    },
+    {
+      "id": 208,
+      "category": "TP-Fuzz",
+      "name": "crash_check_post_tp_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after TP fuzzing: False",
+      "timestamp": 1771457376.5662265,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 209,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_token_len_1_no_data_4443",
+      "result": "SAFE",
+      "details": "token_len=1, no token: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457378.5672264,
+      "raw_data": {
+        "cve": "CVE-2026-26081",
+        "vector": "token_len_underflow"
+      }
+    },
+    {
+      "id": 210,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_off_by_one_4443",
+      "result": "SAFE",
+      "details": "token_len=remaining+1 (off-by-one): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457380.5682263,
+      "raw_data": {
+        "cve": "CVE-2026-26081",
+        "vector": "off_by_one"
+      }
+    },
+    {
+      "id": 211,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_token_consumes_all_4443",
+      "result": "SAFE",
+      "details": "token_len=all remaining (1175): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457382.5692265,
+      "raw_data": {
+        "cve": "CVE-2026-26081",
+        "vector": "token_consumes_all"
+      }
+    },
+    {
+      "id": 212,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_uint16_max_4443",
+      "result": "SAFE",
+      "details": "token_len=uint16_max (65535): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457384.5702264,
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 213,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_uint32_wraparound_4443",
+      "result": "SAFE",
+      "details": "token_len=uint32_wraparound (1073741823): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457386.5752285,
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 214,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_small_underflow_5_4443",
+      "result": "SAFE",
+      "details": "token_len=small_underflow_5 (5): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457388.5762284,
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 215,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_small_underflow_255_4443",
+      "result": "SAFE",
+      "details": "token_len=small_underflow_255 (255): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457390.5772283,
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 216,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_near_max_4443",
+      "result": "SAFE",
+      "details": "token_len=near_max (1073741822): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457392.5782285,
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 217,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_crash_check_4443",
+      "result": "FINDING",
+      "details": "HAProxy alive after CVE-2026-26081 tests: False",
+      "timestamp": 1771457394.5832305,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 218,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_single_2B_4443",
+      "result": "FINDING",
+      "details": "Truncated varint single_2B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457397.5831547,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 2.9999241828918457,
+        "trunc_hex": "40"
+      }
+    },
+    {
+      "id": 219,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_single_4B_4443",
+      "result": "FINDING",
+      "details": "Truncated varint single_4B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.01s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457400.5896506,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.006495952606201,
+        "trunc_hex": "8000"
+      }
+    },
+    {
+      "id": 220,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_single_8B_4443",
+      "result": "FINDING",
+      "details": "Truncated varint single_8B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.01s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457403.5961466,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.006495952606201,
+        "trunc_hex": "c00000"
+      }
+    },
+    {
+      "id": 221,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_chained_2B_4443",
+      "result": "FINDING",
+      "details": "Truncated varint chained_2B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457406.5986447,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.002498149871826,
+        "trunc_hex": "404040"
+      }
+    },
+    {
+      "id": 222,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_chained_mixed_4443",
+      "result": "FINDING",
+      "details": "Truncated varint chained_mixed: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457409.601143,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.002498149871826,
+        "trunc_hex": "c08040"
+      }
+    },
+    {
+      "id": 223,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_max_prefix_truncated_4443",
+      "result": "FINDING",
+      "details": "Truncated varint max_prefix_truncated: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457412.6036406,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.002497673034668,
+        "trunc_hex": "ffffff"
+      }
+    },
+    {
+      "id": 224,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_1of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 1/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.01s",
+      "timestamp": 1771457415.6101365,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.006495952606201
+      }
+    },
+    {
+      "id": 225,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_2of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 2/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.01s",
+      "timestamp": 1771457418.6166325,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.006495952606201
+      }
+    },
+    {
+      "id": 226,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_3of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 3/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457421.6151326,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 2.998500108718872
+      }
+    },
+    {
+      "id": 227,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_4of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 4/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457424.6176307,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.002498149871826
+      }
+    },
+    {
+      "id": 228,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_5of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 5/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457427.6201289,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.002498149871826
+      }
+    },
+    {
+      "id": 229,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_6of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 6/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457430.6226265,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.002497673034668
+      }
+    },
+    {
+      "id": 230,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_7of8_4443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 7/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457433.6211267,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 2.998500108718872
+      }
+    },
+    {
+      "id": 231,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_stress_50pkts_4443",
+      "result": "FINDING",
+      "details": "50 rapid truncated varint packets in 1.00s: alive=False",
+      "timestamp": 1771457436.6276226,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "stress_count": 50,
+        "elapsed": 1.0034980773925781
+      }
+    },
+    {
+      "id": 232,
+      "category": "CVE-Regression",
+      "name": "final_crash_check_4443",
+      "result": "FINDING",
+      "details": "HAProxy alive after all CVE regression tests: False",
+      "timestamp": 1771457438.6306207,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 233,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_token_len_1_no_data_8443",
+      "result": "SAFE",
+      "details": "token_len=1, no token: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457440.6296208,
+      "raw_data": {
+        "cve": "CVE-2026-26081",
+        "vector": "token_len_underflow"
+      }
+    },
+    {
+      "id": 234,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_off_by_one_8443",
+      "result": "SAFE",
+      "details": "token_len=remaining+1 (off-by-one): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457442.6366167,
+      "raw_data": {
+        "cve": "CVE-2026-26081",
+        "vector": "off_by_one"
+      }
+    },
+    {
+      "id": 235,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_token_consumes_all_8443",
+      "result": "SAFE",
+      "details": "token_len=all remaining (1175): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457444.6396148,
+      "raw_data": {
+        "cve": "CVE-2026-26081",
+        "vector": "token_consumes_all"
+      }
+    },
+    {
+      "id": 236,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_uint16_max_8443",
+      "result": "SAFE",
+      "details": "token_len=uint16_max (65535): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457446.643247,
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 237,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_uint32_wraparound_8443",
+      "result": "SAFE",
+      "details": "token_len=uint32_wraparound (1073741823): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457448.648249,
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 238,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_small_underflow_5_8443",
+      "result": "SAFE",
+      "details": "token_len=small_underflow_5 (5): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457450.6492488,
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 239,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_small_underflow_255_8443",
+      "result": "SAFE",
+      "details": "token_len=small_underflow_255 (255): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457452.6502488,
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 240,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_near_max_8443",
+      "result": "SAFE",
+      "details": "token_len=near_max (1073741822): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457454.651249,
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 241,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26081_crash_check_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after CVE-2026-26081 tests: False",
+      "timestamp": 1771457456.656251,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26081"
+      }
+    },
+    {
+      "id": 242,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_single_2B_8443",
+      "result": "FINDING",
+      "details": "Truncated varint single_2B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457459.6577508,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.001499891281128,
+        "trunc_hex": "40"
+      }
+    },
+    {
+      "id": 243,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_single_4B_8443",
+      "result": "FINDING",
+      "details": "Truncated varint single_4B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457462.6592507,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.001499891281128,
+        "trunc_hex": "8000"
+      }
+    },
+    {
+      "id": 244,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_single_8B_8443",
+      "result": "FINDING",
+      "details": "Truncated varint single_8B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.01s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457465.664753,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.005502223968506,
+        "trunc_hex": "c00000"
+      }
+    },
+    {
+      "id": 245,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_chained_2B_8443",
+      "result": "FINDING",
+      "details": "Truncated varint chained_2B: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457468.6662529,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.001499891281128,
+        "trunc_hex": "404040"
+      }
+    },
+    {
+      "id": 246,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_chained_mixed_8443",
+      "result": "FINDING",
+      "details": "Truncated varint chained_mixed: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.01s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457471.6717548,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.0055019855499268,
+        "trunc_hex": "c08040"
+      }
+    },
+    {
+      "id": 247,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_max_prefix_truncated_8443",
+      "result": "FINDING",
+      "details": "Truncated varint max_prefix_truncated: NO_RESPONSE - No UDP response (silent drop or crash)\nResponse time: 3.00s (POSSIBLE INFINITE LOOP!)",
+      "timestamp": 1771457474.6732547,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.001499891281128,
+        "trunc_hex": "ffffff"
+      }
+    },
+    {
+      "id": 248,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_1of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 1/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.01s",
+      "timestamp": 1771457477.6867607,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.0135059356689453
+      }
+    },
+    {
+      "id": 249,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_2of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 2/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.01s",
+      "timestamp": 1771457480.6922626,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.0055019855499268
+      }
+    },
+    {
+      "id": 250,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_3of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 3/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457483.6897607,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 2.997498035430908
+      }
+    },
+    {
+      "id": 251,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_4of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 4/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.01s",
+      "timestamp": 1771457486.6952627,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.0055019855499268
+      }
+    },
+    {
+      "id": 252,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_5of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 5/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.01s",
+      "timestamp": 1771457489.7007647,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.0055019855499268
+      }
+    },
+    {
+      "id": 253,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_6of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 6/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457492.7022648,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.001500129699707
+      }
+    },
+    {
+      "id": 254,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_length_boundary_7of8_8443",
+      "result": "FINDING",
+      "details": "Length varint truncated at 7/8: NO_RESPONSE - No UDP response (silent drop or crash), 3.00s",
+      "timestamp": 1771457495.7037647,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "elapsed": 3.001499891281128
+      }
+    },
+    {
+      "id": 255,
+      "category": "CVE-Regression",
+      "name": "CVE-2026-26080_stress_50pkts_8443",
+      "result": "FINDING",
+      "details": "50 rapid truncated varint packets in 1.00s: alive=False",
+      "timestamp": 1771457498.701263,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "cve": "CVE-2026-26080",
+        "stress_count": 50,
+        "elapsed": 0.9964978694915771
+      }
+    },
+    {
+      "id": 256,
+      "category": "CVE-Regression",
+      "name": "final_crash_check_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after all CVE regression tests: False",
+      "timestamp": 1771457500.7062647,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 257,
+      "category": "FATAL",
+      "name": "Category 6: Flood & Resource Exhaustion",
+      "result": "ERROR",
+      "details": "float division by zero",
+      "timestamp": 1771457501.714769
+    },
+    {
+      "id": 258,
+      "category": "Version-Attack",
+      "name": "quic_v2_initial_4443",
+      "result": "SAFE",
+      "details": "QUIC v2 Initial: LONG_HEADER - Long header response, 85 bytes",
+      "timestamp": 1771457501.714769
+    },
+    {
+      "id": 259,
+      "category": "Version-Attack",
+      "name": "v1_pkt_type_Initial_4443",
+      "result": "SAFE",
+      "details": "v1 Initial (type=0): QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457501.714769
+    },
+    {
+      "id": 260,
+      "category": "Version-Attack",
+      "name": "v1_pkt_type_0-RTT_4443",
+      "result": "SAFE",
+      "details": "v1 0-RTT (type=1): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457503.7157688
+    },
+    {
+      "id": 261,
+      "category": "Version-Attack",
+      "name": "v1_pkt_type_Handshake_4443",
+      "result": "SAFE",
+      "details": "v1 Handshake (type=2): SHORT_HEADER - Short header response, 25 bytes",
+      "timestamp": 1771457503.7157688
+    },
+    {
+      "id": 262,
+      "category": "Version-Attack",
+      "name": "v1_pkt_type_Retry_4443",
+      "result": "SAFE",
+      "details": "v1 Retry (type=3): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457505.7167687
+    },
+    {
+      "id": 263,
+      "category": "Version-Attack",
+      "name": "greased_version_0x0A0A0A0A_4443",
+      "result": "SAFE",
+      "details": "GREASE version 0x0A0A0A0A: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457505.7207708
+    },
+    {
+      "id": 264,
+      "category": "Version-Attack",
+      "name": "greased_version_0x1A1A1A1A_4443",
+      "result": "SAFE",
+      "details": "GREASE version 0x1A1A1A1A: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457505.7207708
+    },
+    {
+      "id": 265,
+      "category": "Version-Attack",
+      "name": "greased_version_0x2A2A2A2A_4443",
+      "result": "SAFE",
+      "details": "GREASE version 0x2A2A2A2A: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457505.7207708
+    },
+    {
+      "id": 266,
+      "category": "Version-Attack",
+      "name": "greased_version_0x3A3A3A3A_4443",
+      "result": "SAFE",
+      "details": "GREASE version 0x3A3A3A3A: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457505.7207708
+    },
+    {
+      "id": 267,
+      "category": "Version-Attack",
+      "name": "greased_version_0x4A4A4A4A_4443",
+      "result": "SAFE",
+      "details": "GREASE version 0x4A4A4A4A: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457505.7207708
+    },
+    {
+      "id": 268,
+      "category": "Version-Attack",
+      "name": "greased_version_0x5A5A5A5A_4443",
+      "result": "SAFE",
+      "details": "GREASE version 0x5A5A5A5A: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457505.7207708
+    },
+    {
+      "id": 269,
+      "category": "Version-Attack",
+      "name": "greased_version_0xFAFAFAFA_4443",
+      "result": "SAFE",
+      "details": "GREASE version 0xFAFAFAFA: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457505.7207708
+    },
+    {
+      "id": 270,
+      "category": "Version-Attack",
+      "name": "http1_over_udp_4443",
+      "result": "ANOMALY",
+      "details": "HTTP/1.1 over UDP: SHORT_HEADER - Short header response, 34 bytes",
+      "timestamp": 1771457505.7207708,
+      "severity": "HIGH"
+    },
+    {
+      "id": 271,
+      "category": "Version-Attack",
+      "name": "dns_over_quic_port_4443",
+      "result": "SAFE",
+      "details": "DNS query on QUIC port: No UDP response (silent drop or crash)",
+      "timestamp": 1771457507.7240489
+    },
+    {
+      "id": 272,
+      "category": "Version-Attack",
+      "name": "crash_check_post_version_4443",
+      "result": "SAFE",
+      "details": "HAProxy alive after version attacks: True",
+      "timestamp": 1771457507.7240489
+    },
+    {
+      "id": 273,
+      "category": "Version-Attack",
+      "name": "quic_v2_initial_8443",
+      "result": "SAFE",
+      "details": "QUIC v2 Initial: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457509.727047
+    },
+    {
+      "id": 274,
+      "category": "Version-Attack",
+      "name": "v1_pkt_type_Initial_8443",
+      "result": "SAFE",
+      "details": "v1 Initial (type=0): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457511.7300448
+    },
+    {
+      "id": 275,
+      "category": "Version-Attack",
+      "name": "v1_pkt_type_0-RTT_8443",
+      "result": "SAFE",
+      "details": "v1 0-RTT (type=1): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457513.737041
+    },
+    {
+      "id": 276,
+      "category": "Version-Attack",
+      "name": "v1_pkt_type_Handshake_8443",
+      "result": "SAFE",
+      "details": "v1 Handshake (type=2): SHORT_HEADER - Short header response, 25 bytes",
+      "timestamp": 1771457513.737041
+    },
+    {
+      "id": 277,
+      "category": "Version-Attack",
+      "name": "v1_pkt_type_Retry_8443",
+      "result": "SAFE",
+      "details": "v1 Retry (type=3): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457515.7400389
+    },
+    {
+      "id": 278,
+      "category": "Version-Attack",
+      "name": "greased_version_0x0A0A0A0A_8443",
+      "result": "SAFE",
+      "details": "GREASE version 0x0A0A0A0A: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457515.7400389
+    },
+    {
+      "id": 279,
+      "category": "Version-Attack",
+      "name": "greased_version_0x1A1A1A1A_8443",
+      "result": "SAFE",
+      "details": "GREASE version 0x1A1A1A1A: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457515.7400389
+    },
+    {
+      "id": 280,
+      "category": "Version-Attack",
+      "name": "greased_version_0x2A2A2A2A_8443",
+      "result": "SAFE",
+      "details": "GREASE version 0x2A2A2A2A: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457515.7400389
+    },
+    {
+      "id": 281,
+      "category": "Version-Attack",
+      "name": "greased_version_0x3A3A3A3A_8443",
+      "result": "SAFE",
+      "details": "GREASE version 0x3A3A3A3A: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457515.7400389
+    },
+    {
+      "id": 282,
+      "category": "Version-Attack",
+      "name": "greased_version_0x4A4A4A4A_8443",
+      "result": "SAFE",
+      "details": "GREASE version 0x4A4A4A4A: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457515.7400389
+    },
+    {
+      "id": 283,
+      "category": "Version-Attack",
+      "name": "greased_version_0x5A5A5A5A_8443",
+      "result": "SAFE",
+      "details": "GREASE version 0x5A5A5A5A: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457515.7400389
+    },
+    {
+      "id": 284,
+      "category": "Version-Attack",
+      "name": "greased_version_0xFAFAFAFA_8443",
+      "result": "SAFE",
+      "details": "GREASE version 0xFAFAFAFA: VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457515.7400389
+    },
+    {
+      "id": 285,
+      "category": "Version-Attack",
+      "name": "http1_over_udp_8443",
+      "result": "ANOMALY",
+      "details": "HTTP/1.1 over UDP: SHORT_HEADER - Short header response, 34 bytes",
+      "timestamp": 1771457515.7400389,
+      "severity": "HIGH"
+    },
+    {
+      "id": 286,
+      "category": "Version-Attack",
+      "name": "dns_over_quic_port_8443",
+      "result": "SAFE",
+      "details": "DNS query on QUIC port: No UDP response (silent drop or crash)",
+      "timestamp": 1771457517.743037
+    },
+    {
+      "id": 287,
+      "category": "Version-Attack",
+      "name": "crash_check_post_version_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after version attacks: False",
+      "timestamp": 1771457519.7460349,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 288,
+      "category": "Header-DeepDive",
+      "name": "length_mismatch_length_0_payload_100_4443",
+      "result": "SAFE",
+      "details": "Length mismatch length_0_payload_100: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457519.7460349
+    },
+    {
+      "id": 289,
+      "category": "Header-DeepDive",
+      "name": "length_mismatch_length_1_payload_0_4443",
+      "result": "SAFE",
+      "details": "Length mismatch length_1_payload_0: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457519.7460349
+    },
+    {
+      "id": 290,
+      "category": "Header-DeepDive",
+      "name": "length_mismatch_length_100_payload_10_4443",
+      "result": "SAFE",
+      "details": "Length mismatch length_100_payload_10: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457519.7460349
+    },
+    {
+      "id": 291,
+      "category": "Header-DeepDive",
+      "name": "length_mismatch_length_10_payload_100_4443",
+      "result": "SAFE",
+      "details": "Length mismatch length_10_payload_100: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457519.7460349
+    },
+    {
+      "id": 292,
+      "category": "Header-DeepDive",
+      "name": "length_mismatch_length_16383_payload_5_4443",
+      "result": "SAFE",
+      "details": "Length mismatch length_16383_payload_5: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457521.753031
+    },
+    {
+      "id": 293,
+      "category": "Header-DeepDive",
+      "name": "length_mismatch_length_1_payload_1000_4443",
+      "result": "SAFE",
+      "details": "Length mismatch length_1_payload_1000: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457521.753031
+    },
+    {
+      "id": 294,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xCC_4443",
+      "result": "SAFE",
+      "details": "Byte0=0xCC: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457521.753031
+    },
+    {
+      "id": 295,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xCF_4443",
+      "result": "SAFE",
+      "details": "Byte0=0xCF: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457521.7570288
+    },
+    {
+      "id": 296,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xC4_4443",
+      "result": "SAFE",
+      "details": "Byte0=0xC4: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457521.7570288
+    },
+    {
+      "id": 297,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xC8_4443",
+      "result": "SAFE",
+      "details": "Byte0=0xC8: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457521.7570288
+    },
+    {
+      "id": 298,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xFC_4443",
+      "result": "SAFE",
+      "details": "Byte0=0xFC: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457523.760027
+    },
+    {
+      "id": 299,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xFF_4443",
+      "result": "SAFE",
+      "details": "Byte0=0xFF: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457525.7630248
+    },
+    {
+      "id": 300,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xC1_4443",
+      "result": "SAFE",
+      "details": "Byte0=0xC1: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457525.7630248
+    },
+    {
+      "id": 301,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xC2_4443",
+      "result": "SAFE",
+      "details": "Byte0=0xC2: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457525.7670228
+    },
+    {
+      "id": 302,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xC3_4443",
+      "result": "SAFE",
+      "details": "Byte0=0xC3: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457525.7670228
+    },
+    {
+      "id": 303,
+      "category": "Header-DeepDive",
+      "name": "short_header_unknown_conn_4443",
+      "result": "ANOMALY",
+      "details": "Short header (no connection): SHORT_HEADER - Short header response, 29 bytes",
+      "timestamp": 1771457525.7670228
+    },
+    {
+      "id": 304,
+      "category": "Header-DeepDive",
+      "name": "version_edge_v1_minus_1_4443",
+      "result": "SAFE",
+      "details": "Version v1_minus_1 (0x00000000): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457527.782015
+    },
+    {
+      "id": 305,
+      "category": "Header-DeepDive",
+      "name": "version_edge_v1_plus_1_4443",
+      "result": "SAFE",
+      "details": "Version v1_plus_1 (0x00000002): VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457527.782015
+    },
+    {
+      "id": 306,
+      "category": "Header-DeepDive",
+      "name": "version_edge_v2_minus_1_4443",
+      "result": "SAFE",
+      "details": "Version v2_minus_1 (0x6B3343CE): VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457527.782015
+    },
+    {
+      "id": 307,
+      "category": "Header-DeepDive",
+      "name": "version_edge_v2_plus_1_4443",
+      "result": "SAFE",
+      "details": "Version v2_plus_1 (0x6B3343D0): VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457527.782015
+    },
+    {
+      "id": 308,
+      "category": "Header-DeepDive",
+      "name": "version_edge_max_uint32_4443",
+      "result": "SAFE",
+      "details": "Version max_uint32 (0xFFFFFFFF): VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457527.782015
+    },
+    {
+      "id": 309,
+      "category": "Header-DeepDive",
+      "name": "version_edge_0x12345678_4443",
+      "result": "SAFE",
+      "details": "Version 0x12345678 (0x12345678): VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457527.782015
+    },
+    {
+      "id": 310,
+      "category": "Header-DeepDive",
+      "name": "coalesced_valid_plus_garbage_4443",
+      "result": "SAFE",
+      "details": "Valid Initial + garbage: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457527.782015
+    },
+    {
+      "id": 311,
+      "category": "Header-DeepDive",
+      "name": "coalesced_valid_overflow_length_4443",
+      "result": "SAFE",
+      "details": "Valid + overflow length: QUIC_Retry - QUIC Retry response, 85 bytes",
+      "timestamp": 1771457527.782015
+    },
+    {
+      "id": 312,
+      "category": "Header-DeepDive",
+      "name": "crash_check_post_header_4443",
+      "result": "SAFE",
+      "details": "HAProxy alive after header deep-dive: True",
+      "timestamp": 1771457527.782015
+    },
+    {
+      "id": 313,
+      "category": "Header-DeepDive",
+      "name": "length_mismatch_length_0_payload_100_8443",
+      "result": "SAFE",
+      "details": "Length mismatch length_0_payload_100: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457529.785013
+    },
+    {
+      "id": 314,
+      "category": "Header-DeepDive",
+      "name": "length_mismatch_length_1_payload_0_8443",
+      "result": "SAFE",
+      "details": "Length mismatch length_1_payload_0: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457531.7920089
+    },
+    {
+      "id": 315,
+      "category": "Header-DeepDive",
+      "name": "length_mismatch_length_100_payload_10_8443",
+      "result": "SAFE",
+      "details": "Length mismatch length_100_payload_10: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457533.791009
+    },
+    {
+      "id": 316,
+      "category": "Header-DeepDive",
+      "name": "length_mismatch_length_10_payload_100_8443",
+      "result": "SAFE",
+      "details": "Length mismatch length_10_payload_100: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457535.794007
+    },
+    {
+      "id": 317,
+      "category": "Header-DeepDive",
+      "name": "length_mismatch_length_16383_payload_5_8443",
+      "result": "SAFE",
+      "details": "Length mismatch length_16383_payload_5: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457537.7947958
+    },
+    {
+      "id": 318,
+      "category": "Header-DeepDive",
+      "name": "length_mismatch_length_1_payload_1000_8443",
+      "result": "SAFE",
+      "details": "Length mismatch length_1_payload_1000: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457539.7997978
+    },
+    {
+      "id": 319,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xCC_8443",
+      "result": "SAFE",
+      "details": "Byte0=0xCC: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457541.8007977
+    },
+    {
+      "id": 320,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xCF_8443",
+      "result": "SAFE",
+      "details": "Byte0=0xCF: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457543.7977958
+    },
+    {
+      "id": 321,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xC4_8443",
+      "result": "SAFE",
+      "details": "Byte0=0xC4: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457545.8068
+    },
+    {
+      "id": 322,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xC8_8443",
+      "result": "SAFE",
+      "details": "Byte0=0xC8: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457547.8077998
+    },
+    {
+      "id": 323,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xFC_8443",
+      "result": "SAFE",
+      "details": "Byte0=0xFC: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457549.8128018
+    },
+    {
+      "id": 324,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xFF_8443",
+      "result": "SAFE",
+      "details": "Byte0=0xFF: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457551.8097997
+    },
+    {
+      "id": 325,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xC1_8443",
+      "result": "SAFE",
+      "details": "Byte0=0xC1: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457553.8148017
+    },
+    {
+      "id": 326,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xC2_8443",
+      "result": "SAFE",
+      "details": "Byte0=0xC2: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457555.8158019
+    },
+    {
+      "id": 327,
+      "category": "Header-DeepDive",
+      "name": "byte0_0xC3_8443",
+      "result": "SAFE",
+      "details": "Byte0=0xC3: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457557.8168018
+    },
+    {
+      "id": 328,
+      "category": "Header-DeepDive",
+      "name": "short_header_unknown_conn_8443",
+      "result": "ANOMALY",
+      "details": "Short header (no connection): SHORT_HEADER - Short header response, 29 bytes",
+      "timestamp": 1771457557.8168018
+    },
+    {
+      "id": 329,
+      "category": "Header-DeepDive",
+      "name": "version_edge_v1_minus_1_8443",
+      "result": "SAFE",
+      "details": "Version v1_minus_1 (0x00000000): NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457559.8178017
+    },
+    {
+      "id": 330,
+      "category": "Header-DeepDive",
+      "name": "version_edge_v1_plus_1_8443",
+      "result": "SAFE",
+      "details": "Version v1_plus_1 (0x00000002): VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457559.8178017
+    },
+    {
+      "id": 331,
+      "category": "Header-DeepDive",
+      "name": "version_edge_v2_minus_1_8443",
+      "result": "SAFE",
+      "details": "Version v2_minus_1 (0x6B3343CE): VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457559.8178017
+    },
+    {
+      "id": 332,
+      "category": "Header-DeepDive",
+      "name": "version_edge_v2_plus_1_8443",
+      "result": "SAFE",
+      "details": "Version v2_plus_1 (0x6B3343D0): VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457559.8178017
+    },
+    {
+      "id": 333,
+      "category": "Header-DeepDive",
+      "name": "version_edge_max_uint32_8443",
+      "result": "SAFE",
+      "details": "Version max_uint32 (0xFFFFFFFF): VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457559.8178017
+    },
+    {
+      "id": 334,
+      "category": "Header-DeepDive",
+      "name": "version_edge_0x12345678_8443",
+      "result": "SAFE",
+      "details": "Version 0x12345678 (0x12345678): VERSION_NEGOTIATION - Version Negotiation packet, 35 bytes",
+      "timestamp": 1771457559.8178017
+    },
+    {
+      "id": 335,
+      "category": "Header-DeepDive",
+      "name": "coalesced_valid_plus_garbage_8443",
+      "result": "SAFE",
+      "details": "Valid Initial + garbage: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457561.8228037
+    },
+    {
+      "id": 336,
+      "category": "Header-DeepDive",
+      "name": "coalesced_valid_overflow_length_8443",
+      "result": "SAFE",
+      "details": "Valid + overflow length: NO_RESPONSE - No UDP response (silent drop or crash)",
+      "timestamp": 1771457563.823804
+    },
+    {
+      "id": 337,
+      "category": "Header-DeepDive",
+      "name": "crash_check_post_header_8443",
+      "result": "FINDING",
+      "details": "HAProxy alive after header deep-dive: False",
+      "timestamp": 1771457565.828806,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 338,
+      "category": "Summary",
+      "name": "final_alive_4443",
+      "result": "FINDING",
+      "details": "HAProxy QUIC-only (4443) alive after all tests: False",
+      "timestamp": 1771457567.827978,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": 339,
+      "category": "Summary",
+      "name": "final_alive_8443",
+      "result": "FINDING",
+      "details": "HAProxy QUIC+HTTPS (8443) alive after all tests: False",
+      "timestamp": 1771457569.8309758,
+      "severity": "CRITICAL"
+    }
+  ]
+}

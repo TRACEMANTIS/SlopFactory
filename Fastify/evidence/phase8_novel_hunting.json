@@ -1,0 +1,106 @@
+{
+  "phase": 8,
+  "title": "Novel Finding Deep-Dive",
+  "target": "Fastify v5.7.4 + fast-json-stringify v6.3.0",
+  "timestamp": "2026-02-18T20:45:58Z",
+  "tests": [
+    {
+      "id": 1,
+      "name": "DT-inject-basic",
+      "category": "datetime-injection",
+      "result": "confirmed"
+    },
+    {
+      "id": 2,
+      "name": "DT-inject-role-overwrite",
+      "category": "datetime-injection",
+      "result": "confirmed"
+    },
+    {
+      "id": 3,
+      "name": "DT-inject-arbitrary-props",
+      "category": "datetime-injection",
+      "result": "confirmed"
+    },
+    {
+      "id": 4,
+      "name": "DT-inject-double",
+      "category": "datetime-injection",
+      "result": "confirmed"
+    },
+    {
+      "id": 5,
+      "name": "DT-inject-escapes",
+      "category": "datetime-injection",
+      "result": "tested"
+    }
+  ],
+  "findings": [
+    {
+      "id": "P8-F01",
+      "severity": "HIGH",
+      "title": "fast-json-stringify: JSON injection via format:date-time string passthrough",
+      "component": "fast-json-stringify v6.3.0",
+      "location": "lib/serializer.js:65-89",
+      "description": "When a string (not Date object) is passed to a format:date-time/date/time schema field, the value is wrapped in double quotes with ZERO escaping. An attacker controlling the string value can inject arbitrary JSON structure. With first-value-wins parsers (PHP json_decode, some Java), duplicate key injection enables property overwrite (e.g., role escalation).",
+      "preconditions": [
+        "Route has response schema with format:date-time field",
+        "Handler returns string value (not Date object) for that field",
+        "Attacker can influence the string content"
+      ],
+      "impact": "Property injection, privilege escalation via role overwrite in downstream first-value-wins parsers (PHP, some Java). Malformed JSON in last-value-wins parsers.",
+      "cvss_estimate": "7.5",
+      "affected_versions": "fast-json-stringify <= 6.3.0 (current)",
+      "reproduction": {
+        "url": "http://127.0.0.1:3000/api/event?startDate=2026-01-01\",\"role\":\"admin\",\"x\":\"",
+        "raw_response": "{\"id\":1,\"title\":\"Test Event\",\"startDate\":\"2026-01-01T00:00:00Z\",\"role\":\"admin\",\"startDate\":\"x\",\"endDate\":\"2026-02-18T20:45:58.368Z\",\"role\":\"user\"}",
+        "injected_roles": [
+          "admin",
+          "user"
+        ]
+      }
+    },
+    {
+      "id": "P8-F02",
+      "severity": "MEDIUM",
+      "title": "CSRF via @fastify/formbody bypassing JSON body schema validation",
+      "description": "When @fastify/formbody is registered, application/x-www-form-urlencoded bodies are parsed into flat objects that pass JSON body schema validation. Since form-urlencoded is a CORS \"simple\" content-type, cross-origin form submissions can invoke schema-validated routes without CORS preflight.",
+      "preconditions": [
+        "@fastify/formbody plugin is registered",
+        "Route has JSON body schema validation",
+        "Application does not implement CSRF protection on the route"
+      ],
+      "impact": "Cross-site request forgery on routes that rely solely on JSON schema validation for input validation (bypasses CORS preflight)",
+      "disclosure_assessment": "In scope for Fastify VDP (analogous to CVE-2022-41919)"
+    },
+    {
+      "id": "P8-F03",
+      "severity": "MEDIUM",
+      "title": "fast-json-stringify: Empty schema {} leaks all nested data",
+      "component": "fast-json-stringify v6.3.0",
+      "location": "index.js:972-973",
+      "description": "Properties defined with empty schema {} (no type field) fall through to JSON.stringify(), serializing the entire value with all nested properties. Developers using {} as a catch-all for flexible APIs inadvertently disable schema filtering for that subtree, leaking sensitive data.",
+      "impact": "Information disclosure for properties with empty schemas. Passwords, SSNs, API keys, internal notes can be leaked.",
+      "disclosure_assessment": "Design issue in fast-json-stringify. May qualify as bug report since the developer intent (use schema filtering) is defeated."
+    },
+    {
+      "id": "P8-F04",
+      "severity": "MEDIUM",
+      "title": "Content-based body schema dispatch bypass",
+      "component": "fastify core v5.7.4",
+      "location": "lib/validation.js:161-171",
+      "description": "When a route uses per-content-type body schemas and a request arrives with a Content-Type that has a registered parser but no matching body schema, the body is parsed but NOT validated.",
+      "note": "Only affects routes using body.content schema syntax (uncommon). Standard body schemas are not affected."
+    }
+  ],
+  "anomalies": [],
+  "disclosure_assessment": {
+    "highest_priority": "P8-F01 (date-time JSON injection) - Novel, HIGH severity",
+    "second_priority": "P8-F02 (CSRF via formbody) - Related to CVE-2022-41919 pattern",
+    "documentation": "P8-F03 (empty schema) - Best as documentation/hardening issue",
+    "informational": "P8-F04 (CT dispatch) - Design limitation, informational"
+  },
+  "total_tests": 5,
+  "total_findings": 4,
+  "total_anomalies": 0
+}

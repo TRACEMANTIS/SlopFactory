@@ -1,0 +1,55 @@
+{
+  "phase": 9,
+  "title": "Dynamic Validation Results",
+  "date": "2026-03-06",
+
+  "[REDACTED-ID]_F003_sdp_overflow": {
+    "title": "SDP Serializer snprintf Accumulator Overflow",
+    "validation_tier": "Tier 1 -- Standalone ARM32 harness",
+    "harness": "scripts/test_og4_f003_sdp_overflow.c",
+    "compile_flags": "-mthumb -march=armv7-a -mfpu=vfpv3-d16 -mfloat-abi=hard -fno-stack-protector -z execstack -no-pie -static",
+    "execution": "qemu-arm ./test_og4_f003",
+    "result": "CONFIRMED -- SIGSEGV (signal 11)",
+    "key_output": [
+      "[iter   1] snprintf returned 24, offset now 27, remaining was 2047",
+      "[iter  84] snprintf returned 27, offset now 2052, remaining was 25",
+      "[iter 1094795586] snprintf returned 27, offset now 1094795612, remaining was 1094795585",
+      "qemu: uncaught target signal 11 (Segmentation fault) - core dumped"
+    ],
+    "analysis": {
+      "buffer_exhaustion": "At iteration 84, offset (2052) exceeded max_size (2050)",
+      "size_wrap": "remaining = 2050 - 2052 = -2, interpreted as unsigned ~4GB",
+      "unbounded_write": "snprintf wrote 27 bytes past buffer end each iteration",
+      "stack_corruption": "Loop counter variable corrupted (84 -> 1094795586), proving stack overwrite",
+      "crash": "SIGSEGV on function return -- corrupted saved lr loaded into PC"
+    },
+    "overflow_geometry": {
+      "buffer_start": "sp+0x2c (local variable, address logged as 0x40c34554)",
+      "buffer_size": 2052,
+      "iterations_to_overflow": 84,
+      "bytes_per_iteration": 24,
+      "total_bytes_at_overflow": 2052,
+      "saved_lr_offset_from_buffer": 2092,
+      "iterations_to_reach_lr": "~86 (2 more iterations past overflow point)"
+    },
+    "mitigations_absent": {
+      "stack_canary": false,
+      "nx": "DISABLED (GNU_STACK RWE)",
+      "pie": false,
+      "relro": false
+    }
+  },
+
+  "[REDACTED-ID]_F001_F002_question_brute": {
+    "title": "Pre-Auth Security Question Brute Force + Password Reset",
+    "validation_tier": "Static analysis confirmation",
+    "result": "CONFIRMED via static RE",
+    "evidence": {
+      "no_CheckWebSession": "Zero calls to CheckWebSession (0x4c1bd8) in entire CResetPwdHandler range (0x4c7400-0x4cad00)",
+      "no_rate_limiting": "No counter, timestamp, or lockout mechanism in checkQuestionAnswer handler (0x4c9318)",
+      "boolean_response": "Handler returns {checkResult:true/false} immediately",
+      "password_reset": "resetPwdByQuestion (0x4c8824) accepts user, answers, and new password without requiring current password"
+    },
+    "note": "Live validation requires HTTP port 80 access to a Rhea device with security questions configured. Test hosts only expose DVRIP port 37777."
+  }
+}

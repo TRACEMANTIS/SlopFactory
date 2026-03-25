@@ -1,0 +1,1126 @@
+{
+  "metadata": {
+    "script": "novel_api_deep.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 9,
+    "start_time": "2026-02-16T01:31:16.547725",
+    "end_time": "2026-02-16T01:31:33.015487",
+    "total_tests": 52,
+    "anomalies": 0,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "8m38s",
+    "router_log_count": 87,
+    "router_interesting_events": 5,
+    "final_health": {
+      "alive": true,
+      "uptime": "8m55s",
+      "cpu_load": "12",
+      "free_memory": "835305472",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "word_overflow",
+      "name": "Overflow: length_0x7F_max_1byte",
+      "description": "Send word with length_0x7F_max_1byte encoding",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:17.115441",
+      "details": {
+        "test": "length_0x7F_max_1byte",
+        "sent_hex": "7f41414141414141414141414141414141414141",
+        "response_hex": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "response_size": 22
+      }
+    },
+    {
+      "id": 2,
+      "category": "word_overflow",
+      "name": "Overflow: length_0x80_min_2byte",
+      "description": "Send word with length_0x80_min_2byte encoding",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:17.707145",
+      "details": {
+        "test": "length_0x80_min_2byte",
+        "sent_hex": "8080414141414141414141414141414141414141",
+        "response_hex": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "response_size": 22
+      }
+    },
+    {
+      "id": 3,
+      "category": "word_overflow",
+      "name": "Overflow: length_0x3FFF_max_2byte",
+      "description": "Send word with length_0x3FFF_max_2byte encoding",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:18.298849",
+      "details": {
+        "test": "length_0x3FFF_max_2byte",
+        "sent_hex": "bfff414141414141414141414141414141414141",
+        "response_hex": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "response_size": 36
+      }
+    },
+    {
+      "id": 4,
+      "category": "word_overflow",
+      "name": "Overflow: length_0xC0_min_3byte",
+      "description": "Send word with length_0xC0_min_3byte encoding",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:18.890553",
+      "details": {
+        "test": "length_0xC0_min_3byte",
+        "sent_hex": "c040004141414141414141414141414141414141",
+        "response_hex": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "response_size": 36
+      }
+    },
+    {
+      "id": 5,
+      "category": "word_overflow",
+      "name": "Overflow: length_0x7FFFFFFF",
+      "description": "Send length claiming 2GB word",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:19.490253",
+      "details": {
+        "test": "length_0x7FFFFFFF",
+        "sent_hex": "f07fffffff",
+        "response_hex": "",
+        "response_size": 0
+      }
+    },
+    {
+      "id": 6,
+      "category": "word_overflow",
+      "name": "Overflow: length_0x80000000",
+      "description": "Send length with sign bit set (negative in signed)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:20.089953",
+      "details": {
+        "test": "length_0x80000000",
+        "sent_hex": "f080000000",
+        "response_hex": "",
+        "response_size": 0
+      }
+    },
+    {
+      "id": 7,
+      "category": "word_overflow",
+      "name": "Overflow: length_0xFFFFFFFF",
+      "description": "Send length of 4GB (max u32)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:20.685655",
+      "details": {
+        "test": "length_0xFFFFFFFF",
+        "sent_hex": "f0ffffffff",
+        "response_hex": "",
+        "response_size": 0
+      }
+    },
+    {
+      "id": 8,
+      "category": "word_overflow",
+      "name": "Overflow: length_0x00000000_5byte",
+      "description": "5-byte encoding of zero length",
+      "result": "No response (timeout \u2014 server may be waiting for more data)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:26.302845",
+      "details": {
+        "test": "length_0x00000000_5byte"
+      }
+    },
+    {
+      "id": 9,
+      "category": "word_overflow",
+      "name": "Overflow: overlong_encoding_1",
+      "description": "2-byte encoding for length 1",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:26.910541",
+      "details": {
+        "test": "overlong_encoding_1",
+        "sent_hex": "80014100",
+        "response_hex": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "response_size": 22
+      }
+    },
+    {
+      "id": 10,
+      "category": "word_overflow",
+      "name": "Overflow: overlong_encoding_2",
+      "description": "3-byte encoding for length 1",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:27.518237",
+      "details": {
+        "test": "overlong_encoding_2",
+        "sent_hex": "c000014100",
+        "response_hex": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "response_size": 22
+      }
+    },
+    {
+      "id": 11,
+      "category": "word_overflow",
+      "name": "Auth overflow: post_auth_huge_word",
+      "description": "Send 100KB word after auth",
+      "result": "Response: None",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:28.149921",
+      "details": {
+        "test": "post_auth_huge_word",
+        "response": null
+      }
+    },
+    {
+      "id": 12,
+      "category": "word_overflow",
+      "name": "Auth overflow: post_auth_zero_term_flood",
+      "description": "Send 1000 zero-length words",
+      "result": "Response: None",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:31.652169",
+      "details": {
+        "test": "post_auth_zero_term_flood",
+        "response": null
+      }
+    },
+    {
+      "id": 13,
+      "category": "word_overflow",
+      "name": "Auth overflow: post_auth_nested_sentences",
+      "description": "Send malformed nested sentences",
+      "result": "Response: ['!trap', '=message=unknown parameter \\x16/system/resource/print\\x00']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "test": "post_auth_nested_sentences",
+        "response": [
+          "!trap",
+          "=message=unknown parameter \u0016/system/resource/print\u0000"
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "category": "tag_collision",
+      "name": "Auth for tag tests",
+      "description": "Authenticate to RouterOS API",
+      "result": "Login successful",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919"
+    },
+    {
+      "id": 15,
+      "category": "tag_collision",
+      "name": "Tag: tag_0",
+      "description": "Send command with Tag value zero",
+      "result": "Response: ['!re', '.tag=0', '=name=MikroTik'], tag_echoed=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "test": "tag_0",
+        "tag_value": "'0'",
+        "response": [
+          "!re",
+          ".tag=0",
+          "=name=MikroTik"
+        ],
+        "tag_echoed": true
+      }
+    },
+    {
+      "id": 16,
+      "category": "tag_collision",
+      "name": "Tag: tag_1",
+      "description": "Send command with Tag value one",
+      "result": "Response: ['!done', '.tag=0'], tag_echoed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "test": "tag_1",
+        "tag_value": "'1'",
+        "response": [
+          "!done",
+          ".tag=0"
+        ],
+        "tag_echoed": false
+      }
+    },
+    {
+      "id": 17,
+      "category": "tag_collision",
+      "name": "Tag: tag_negative_1",
+      "description": "Send command with Negative tag value",
+      "result": "Response: ['!re', '.tag=1', '=name=MikroTik'], tag_echoed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "test": "tag_negative_1",
+        "tag_value": "'-1'",
+        "response": [
+          "!re",
+          ".tag=1",
+          "=name=MikroTik"
+        ],
+        "tag_echoed": false
+      }
+    },
+    {
+      "id": 18,
+      "category": "tag_collision",
+      "name": "Tag: tag_max_int",
+      "description": "Send command with Max signed 32-bit integer",
+      "result": "Response: ['!done', '.tag=1'], tag_echoed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "test": "tag_max_int",
+        "tag_value": "'2147483647'",
+        "response": [
+          "!done",
+          ".tag=1"
+        ],
+        "tag_echoed": false
+      }
+    },
+    {
+      "id": 19,
+      "category": "tag_collision",
+      "name": "Tag: tag_max_uint",
+      "description": "Send command with Max unsigned 32-bit integer",
+      "result": "Response: ['!re', '.tag=-1', '=name=MikroTik'], tag_echoed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "test": "tag_max_uint",
+        "tag_value": "'4294967295'",
+        "response": [
+          "!re",
+          ".tag=-1",
+          "=name=MikroTik"
+        ],
+        "tag_echoed": false
+      }
+    },
+    {
+      "id": 20,
+      "category": "tag_collision",
+      "name": "Tag: tag_large",
+      "description": "Send command with Very large tag value",
+      "result": "Response: ['!done', '.tag=-1'], tag_echoed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "test": "tag_large",
+        "tag_value": "'99999999999999999'",
+        "response": [
+          "!done",
+          ".tag=-1"
+        ],
+        "tag_echoed": false
+      }
+    },
+    {
+      "id": 21,
+      "category": "tag_collision",
+      "name": "Tag: tag_string",
+      "description": "Send command with Non-numeric tag value",
+      "result": "Response: ['!re', '.tag=2147483647', '=name=MikroTik'], tag_echoed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "test": "tag_string",
+        "tag_value": "'hello'",
+        "response": [
+          "!re",
+          ".tag=2147483647",
+          "=name=MikroTik"
+        ],
+        "tag_echoed": false
+      }
+    },
+    {
+      "id": 22,
+      "category": "tag_collision",
+      "name": "Tag: tag_empty",
+      "description": "Send command with Empty tag value",
+      "result": "Response: ['!done', '.tag=2147483647'], tag_echoed=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "test": "tag_empty",
+        "tag_value": "''",
+        "response": [
+          "!done",
+          ".tag=2147483647"
+        ],
+        "tag_echoed": true
+      }
+    },
+    {
+      "id": 23,
+      "category": "tag_collision",
+      "name": "Tag: tag_special",
+      "description": "Send command with Special characters in tag",
+      "result": "Response: ['!re', '.tag=4294967295', '=name=MikroTik'], tag_echoed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "test": "tag_special",
+        "tag_value": "'<>&\"\\''",
+        "response": [
+          "!re",
+          ".tag=4294967295",
+          "=name=MikroTik"
+        ],
+        "tag_echoed": false
+      }
+    },
+    {
+      "id": 24,
+      "category": "tag_collision",
+      "name": "Tag: tag_null",
+      "description": "Send command with Null byte in tag",
+      "result": "Response: ['!done', '.tag=4294967295'], tag_echoed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "test": "tag_null",
+        "tag_value": "'\\x00'",
+        "response": [
+          "!done",
+          ".tag=4294967295"
+        ],
+        "tag_echoed": false
+      }
+    },
+    {
+      "id": 25,
+      "category": "tag_collision",
+      "name": "Duplicate tag (same connection)",
+      "description": "Send two commands with identical tag 'DUPE' on same connection",
+      "result": "Response 1: ['!re', '.tag=99999999999999999', '=name=MikroTik'], Response 2: ['!done', '.tag=99999999999999999']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "response_1": [
+          "!re",
+          ".tag=99999999999999999",
+          "=name=MikroTik"
+        ],
+        "response_2": [
+          "!done",
+          ".tag=99999999999999999"
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "category": "tag_collision",
+      "name": "Tag reuse after completion",
+      "description": "Reuse tag 'REUSE' for a second command after first completes",
+      "result": "Response 1: ['!re', '.tag=hello', '=name=MikroTik'], Response 2: ['!done', '.tag=hello']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "response_1": [
+          "!re",
+          ".tag=hello",
+          "=name=MikroTik"
+        ],
+        "response_2": [
+          "!done",
+          ".tag=hello"
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "category": "tag_collision",
+      "name": "Tag flooding (100 commands)",
+      "description": "Send 100 tagged commands rapidly on same connection",
+      "result": "Received 100 responses",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "commands_sent": 100,
+        "responses_received": 100
+      }
+    },
+    {
+      "id": 28,
+      "category": "concurrent_state",
+      "name": "Open 5 authenticated connections",
+      "description": "Open and authenticate 5 simultaneous API connections",
+      "result": "Authenticated: 5/5",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.151919",
+      "details": {
+        "total": 5,
+        "authenticated": 5
+      }
+    },
+    {
+      "id": 29,
+      "category": "concurrent_state",
+      "name": "Interleaved commands",
+      "description": "Send different commands on different connections simultaneously",
+      "result": "Completed 5 command/response cycles",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.655667",
+      "details": {
+        "results": [
+          {
+            "conn": 0,
+            "cmd": "/system/identity/print",
+            "response": [
+              "!re",
+              "=name=MikroTik"
+            ],
+            "response_words": 2
+          },
+          {
+            "conn": 1,
+            "cmd": "/system/resource/print",
+            "response": [
+              "!re",
+              "=uptime=8m54s",
+              "=version=7.20.8 (long-term)",
+              "=build-time=2026-01-30 09:17:54",
+              "=factory-software=7.1"
+            ],
+            "response_words": 18
+          },
+          {
+            "conn": 2,
+            "cmd": "/ip/address/print",
+            "response": [
+              "!re",
+              "=.id=*2",
+              "=address=[REDACTED-INTERNAL-IP]/32",
+              "=network=[REDACTED-INTERNAL-IP]",
+              "=interface=lo"
+            ],
+            "response_words": 10
+          },
+          {
+            "conn": 3,
+            "cmd": "/interface/print",
+            "response": [
+              "!re",
+              "=.id=*2",
+              "=name=ether1",
+              "=default-name=ether1",
+              "=type=ether"
+            ],
+            "response_words": 25
+          },
+          {
+            "conn": 4,
+            "cmd": "/log/print",
+            "response": [
+              "!re",
+              "=.id=*0",
+              "=time=2026-02-23 05:13:25",
+              "=topics=system,info",
+              "=message=router rebooted by api:admin@::/script:_novel_inj_var_inject/:execute:1"
+            ],
+            "response_words": 6
+          }
+        ]
+      }
+    },
+    {
+      "id": 30,
+      "category": "concurrent_state",
+      "name": "Partial sentence interference",
+      "description": "Send partial sentence on conn0, complete cmd on conn1, verify isolation",
+      "result": "Conn0 response: ['!done'], Conn1 response: ['!done']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.655667",
+      "details": {
+        "conn0_response": [
+          "!done"
+        ],
+        "conn1_response": [
+          "!done"
+        ],
+        "isolated": true
+      }
+    },
+    {
+      "id": 31,
+      "category": "concurrent_state",
+      "name": "Cross-connection state visibility",
+      "description": "Set identity on conn0, read on conn1",
+      "result": "Change visible on conn1: False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.655667",
+      "details": {
+        "set_response": [
+          "!re",
+          "=name=MikroTik"
+        ],
+        "get_response": [
+          "!re",
+          "=uptime=8m54s",
+          "=version=7.20.8 (long-term)",
+          "=build-time=2026-01-30 09:17:54",
+          "=factory-software=7.1",
+          "=free-memory=835416064",
+          "=total-memory=1073741824",
+          "=cpu=AMD",
+          "=cpu-count=1",
+          "=cpu-frequency=4391",
+          "=cpu-load=2",
+          "=free-hdd-space=72802304",
+          "=total-hdd-space=93564928",
+          "=write-sect-since-reboot=2368",
+          "=write-sect-total=2368",
+          "=architecture-name=x86_64",
+          "=board-name=CHR innotek GmbH VirtualBox",
+          "=platform=MikroTik"
+        ],
+        "cross_visible": false
+      }
+    },
+    {
+      "id": 32,
+      "category": "concurrent_state",
+      "name": "Race condition (simultaneous identity set)",
+      "description": "Two connections set identity to different values simultaneously",
+      "result": "Result: 'RaceB' (responses: [['!done'], ['!done']])",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.959515",
+      "details": {
+        "conn0_response": [
+          "!done"
+        ],
+        "conn1_response": [
+          "!done"
+        ],
+        "errors": [
+          null,
+          null
+        ],
+        "final_identity": "RaceB"
+      }
+    },
+    {
+      "id": 33,
+      "category": "cross_pivot",
+      "name": "API fetch SSRF: loopback_self",
+      "description": "Use /tool/fetch via API to access http://127.0.0.1/rest/system/resource",
+      "result": "Response: ['!re', '=status=connecting', '=.section=0']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.967511",
+      "details": {
+        "name": "loopback_self",
+        "url": "http://127.0.0.1/rest/system/resource",
+        "response": [
+          "!re",
+          "=status=connecting",
+          "=.section=0"
+        ],
+        "has_content": false
+      }
+    },
+    {
+      "id": 34,
+      "category": "cross_pivot",
+      "name": "API fetch SSRF: loopback_winbox",
+      "description": "Use /tool/fetch via API to access http://127.0.0.1:8291/",
+      "result": "Response: ['!re', '=status=requesting', '=.section=0']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.967511",
+      "details": {
+        "name": "loopback_winbox",
+        "url": "http://127.0.0.1:8291/",
+        "response": [
+          "!re",
+          "=status=requesting",
+          "=.section=0"
+        ],
+        "has_content": false
+      }
+    },
+    {
+      "id": 35,
+      "category": "cross_pivot",
+      "name": "API fetch SSRF: loopback_api",
+      "description": "Use /tool/fetch via API to access http://127.0.0.1:8728/",
+      "result": "Response: ['!re', '=status=requesting', '=.section=0']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.967511",
+      "details": {
+        "name": "loopback_api",
+        "url": "http://127.0.0.1:8728/",
+        "response": [
+          "!re",
+          "=status=requesting",
+          "=.section=0"
+        ],
+        "has_content": false
+      }
+    },
+    {
+      "id": 36,
+      "category": "cross_pivot",
+      "name": "API fetch SSRF: file_proto",
+      "description": "Use /tool/fetch via API to access file:///etc/passwd",
+      "result": "Response: ['!trap', '=message=failure: Conflicting modes provided in URI and parameter']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.967511",
+      "details": {
+        "name": "file_proto",
+        "url": "file:///etc/passwd",
+        "response": [
+          "!trap",
+          "=message=failure: Conflicting modes provided in URI and parameter"
+        ],
+        "has_content": false
+      }
+    },
+    {
+      "id": 37,
+      "category": "cross_pivot",
+      "name": "API fetch SSRF: file_userdat",
+      "description": "Use /tool/fetch via API to access file:///rw/store/user.dat",
+      "result": "Response: ['!done']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.967511",
+      "details": {
+        "name": "file_userdat",
+        "url": "file:///rw/store/user.dat",
+        "response": [
+          "!done"
+        ],
+        "has_content": false
+      }
+    },
+    {
+      "id": 38,
+      "category": "cross_pivot",
+      "name": "API fetch SSRF: metadata",
+      "description": "Use /tool/fetch via API to access http://[REDACTED-IP]/latest/meta-data/",
+      "result": "Response: ['!trap', '=message=failure: Conflicting modes provided in URI and parameter']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "name": "metadata",
+        "url": "http://[REDACTED-IP]/latest/meta-data/",
+        "response": [
+          "!trap",
+          "=message=failure: Conflicting modes provided in URI and parameter"
+        ],
+        "has_content": false
+      }
+    },
+    {
+      "id": 39,
+      "category": "cross_pivot",
+      "name": "API fetch SSRF: ipv6_loop",
+      "description": "Use /tool/fetch via API to access http://[::1]/",
+      "result": "Response: ['!done']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "name": "ipv6_loop",
+        "url": "http://[::1]/",
+        "response": [
+          "!done"
+        ],
+        "has_content": false
+      }
+    },
+    {
+      "id": 40,
+      "category": "cross_pivot",
+      "name": "API exec: /system/identity/print",
+      "description": "Execute Read system identity via API",
+      "result": "Response: 3 words",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "command": "/system/identity/print",
+        "description": "Read system identity",
+        "word_count": 3,
+        "preview": [
+          "!re",
+          "=name=MikroTik",
+          "!done"
+        ]
+      }
+    },
+    {
+      "id": 41,
+      "category": "cross_pivot",
+      "name": "API exec: /user/print",
+      "description": "Execute List users via API",
+      "result": "Response: 141 words",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "command": "/user/print",
+        "description": "List users",
+        "word_count": 141,
+        "preview": [
+          "!re",
+          "=.id=*1",
+          "=name=admin",
+          "=group=full",
+          "=inactivity-timeout=10m",
+          "=inactivity-policy=none",
+          "=address=",
+          "=last-logged-in=2026-02-23 05:22:15",
+          "=expired=false",
+          "=disabled=false",
+          "=comment=system default user",
+          "!re",
+          "=.id=*2",
+          "=name=testfull",
+          "=group=full",
+          "=inactivity-timeout=10m",
+          "=inactivity-policy=none",
+          "=address=",
+          "=last-logged-in=2026-02-23 00:05:27",
+          "=expired=false"
+        ]
+      }
+    },
+    {
+      "id": 42,
+      "category": "cross_pivot",
+      "name": "API exec: /file/print",
+      "description": "Execute List files via API",
+      "result": "Response: 49 words",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "command": "/file/print",
+        "description": "List files",
+        "word_count": 49,
+        "preview": [
+          "!re",
+          "=status=connecting",
+          "=.section=0",
+          "!re",
+          "=status=requesting",
+          "=.section=0",
+          "!re",
+          "=.id=*/1000FE210466696C65",
+          "=name=file",
+          "=type=file",
+          "=size=1280",
+          "=last-modified=2026-02-23 05:22:16",
+          "=contents=<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df160dad.css\">\n<script src=\"/assets/script-ae01587e2c4c.js\"></script>\n\n<div class=\"login\">\n<section>\n<div class=\"brand\"><img src=\"mikrotik_logo.svg\" alt=\"\"></div>\n<form class=\"form\" id=\"login\">\n<div id=\"error\" class=\"errorMessage\"></div>\n<div>\n  <label for=\"name\">Login</label>\n  <input id=\"name\" autocomplete=\"username\" type=\"text\" data-defaultuser=\"admin\">\n</div>\n<div>\n  <label for=\"password\">Password</label>\n  <input id=\"password\" type=\"password\">\n</div>\n<div>\n  <input class=\"btn btn-dark-green\" type=\"submit\" value=\"Login\">\n</div>\n</form>\n<ul class=\"dock\">\n  <li><span class=\"icon icon-Software\"></span><a href=\"https://mt.lv/apps\">Apps</a>\n  <li><span class=\"icon icon-Graph\"></span><a href=\"/graphs\">Graphs</a>\n  <li><span class=\"icon icon-Licence\"></span><a href=\"/license.txt\">License</a>\n  <li><span class=\"icon icon-Help\"></span><a href=\"https://help.mikrotik.com/docs/\">Help</a>\n</ul>\n<div class=\"credits\"><a href=\"https://mikrotik.com/\" target=\"_blank\">\u00a9 MikroTik</a></div>\n</section>\n</div>\n",
+          "!re",
+          "=.id=*/1000FE2105736B696E73",
+          "=name=skins",
+          "=type=directory",
+          "=last-modified=2026-02-16 02:42:13",
+          "!re",
+          "=.id=*/1000FE21195F6E6F76656C5F746573745F6261636B75702E6261636B7570"
+        ]
+      }
+    },
+    {
+      "id": 43,
+      "category": "cross_pivot",
+      "name": "API exec: /system/resource/print",
+      "description": "Execute Read system resources via API",
+      "result": "Response: 19 words",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "command": "/system/resource/print",
+        "description": "Read system resources",
+        "word_count": 19,
+        "preview": [
+          "!re",
+          "=uptime=8m55s",
+          "=version=7.20.8 (long-term)",
+          "=build-time=2026-01-30 09:17:54",
+          "=factory-software=7.1",
+          "=free-memory=835383296",
+          "=total-memory=1073741824",
+          "=cpu=AMD",
+          "=cpu-count=1",
+          "=cpu-frequency=4391",
+          "=cpu-load=2",
+          "=free-hdd-space=72802304",
+          "=total-hdd-space=93564928",
+          "=write-sect-since-reboot=2408",
+          "=write-sect-total=2408",
+          "=architecture-name=x86_64",
+          "=board-name=CHR innotek GmbH VirtualBox",
+          "=platform=MikroTik",
+          "!done"
+        ]
+      }
+    },
+    {
+      "id": 44,
+      "category": "cross_pivot",
+      "name": "API exec: /ip/service/print",
+      "description": "Execute List IP services via API",
+      "result": "Response: 202 words",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "command": "/ip/service/print",
+        "description": "List IP services",
+        "word_count": 202,
+        "preview": [
+          "!re",
+          "=.id=*1",
+          "=name=ftp",
+          "=port=21",
+          "=proto=tcp",
+          "=address=",
+          "=vrf=main",
+          "=max-sessions=20",
+          "=dynamic=false",
+          "=invalid=false",
+          "=disabled=false",
+          "!re",
+          "=.id=*4",
+          "=name=ssh",
+          "=port=22",
+          "=proto=tcp",
+          "=address=",
+          "=vrf=main",
+          "=max-sessions=20",
+          "=dynamic=false"
+        ]
+      }
+    },
+    {
+      "id": 45,
+      "category": "cross_pivot",
+      "name": "API exec: /system/package/print",
+      "description": "Execute List packages via API",
+      "result": "Response: 10 words",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "command": "/system/package/print",
+        "description": "List packages",
+        "word_count": 10,
+        "preview": [
+          "!re",
+          "=.id=*1",
+          "=name=routeros",
+          "=version=7.20.8",
+          "=build-time=2026-01-30 09:17:54",
+          "=scheduled=",
+          "=size=20054899",
+          "=available=false",
+          "=disabled=false",
+          "!done"
+        ]
+      }
+    },
+    {
+      "id": 46,
+      "category": "cross_pivot",
+      "name": "API exec: /system/history/print",
+      "description": "Execute Read command history via API",
+      "result": "Response: 521 words",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "command": "/system/history/print",
+        "description": "Read command history",
+        "word_count": 521,
+        "preview": [
+          "!re",
+          "=.id=*34",
+          "=redo=/system identity set name=MikroTik\r\n",
+          "=undo=/system identity set name=RaceB\r\n",
+          "=action=system identity changed",
+          "=by=admin",
+          "=policy=write",
+          "=time=2026-02-23 05:22:16",
+          "=trace=api:admin@::",
+          "=undoable=true",
+          "!re",
+          "=.id=*33",
+          "=redo=/system identity set name=RaceB\r\n",
+          "=undo=/system identity set name=RaceA\r\n",
+          "=action=system identity changed",
+          "=by=admin",
+          "=policy=write",
+          "=time=2026-02-23 05:22:16",
+          "=trace=api:admin@[REDACTED-INTERNAL-IP]",
+          "=undoable=true"
+        ]
+      }
+    },
+    {
+      "id": 47,
+      "category": "cross_pivot",
+      "name": "API exec: /log/print",
+      "description": "Execute Read system log via API",
+      "result": "Response: 499 words",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "command": "/log/print",
+        "description": "Read system log",
+        "word_count": 499,
+        "preview": [
+          "!re",
+          "=.id=*0",
+          "=time=2026-02-23 05:13:25",
+          "=topics=system,info",
+          "=message=router rebooted by api:admin@::/script:_novel_inj_var_inject/:execute:1",
+          "=extra-info=",
+          "!re",
+          "=.id=*1",
+          "=time=2026-02-23 05:13:25",
+          "=topics=interface,info",
+          "=message=lo link up",
+          "=extra-info=",
+          "!re",
+          "=.id=*2",
+          "=time=2026-02-23 05:13:28",
+          "=topics=interface,info",
+          "=message=ether1 link up (speed 1G, full duplex)",
+          "=extra-info=",
+          "!re",
+          "=.id=*3"
+        ]
+      }
+    },
+    {
+      "id": 48,
+      "category": "cross_pivot",
+      "name": "API exec: /ip/dns/print",
+      "description": "Execute Read DNS config via API",
+      "result": "Response: 21 words",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "command": "/ip/dns/print",
+        "description": "Read DNS config",
+        "word_count": 21,
+        "preview": [
+          "!re",
+          "=servers=[REDACTED-IP]",
+          "=dynamic-servers=[REDACTED-IP]",
+          "=use-doh-server=",
+          "=verify-doh-cert=false",
+          "=doh-max-server-connections=5",
+          "=doh-max-concurrent-queries=50",
+          "=doh-timeout=5s",
+          "=allow-remote-requests=false",
+          "=max-udp-packet-size=4096",
+          "=query-server-timeout=2s",
+          "=query-total-timeout=10s",
+          "=max-concurrent-queries=100",
+          "=max-concurrent-tcp-sessions=20",
+          "=cache-size=2048",
+          "=cache-max-ttl=1w",
+          "=address-list-extra-time=0s",
+          "=vrf=main",
+          "=mdns-repeat-ifaces=",
+          "=cache-used=43"
+        ]
+      }
+    },
+    {
+      "id": 49,
+      "category": "cross_pivot",
+      "name": "API exec: /certificate/print",
+      "description": "Execute List certificates via API",
+      "result": "Response: 35 words",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "command": "/certificate/print",
+        "description": "List certificates",
+        "word_count": 35,
+        "preview": [
+          "!re",
+          "=.id=*1",
+          "=name=test-cert",
+          "=digest-algorithm=sha256",
+          "=trusted=true",
+          "=common-name=mikrotik-test",
+          "=subject-alt-name=",
+          "=key-type=rsa",
+          "=key-size=2048",
+          "=key-usage=digital-signature,key-encipherment,data-encipherment,key-cert-sign,crl-sign,tls-server,tls-client",
+          "=days-valid=365",
+          "=invalid-before=2026-02-16 02:49:16",
+          "=invalid-after=2027-02-16 02:49:16",
+          "=serial-number=7E8ABE4C570C6B4C",
+          "=akid=",
+          "=skid=8062E1725A32F1888E1C1B5D603C86377778DDF5",
+          "=fingerprint=ee09552bc3712458998fafd0e7cd95c3bbb64877bca8cc9efa0d30aa53068e8c",
+          "=expires-after=51w21h27m",
+          "=private-key=true",
+          "=crl=false"
+        ]
+      }
+    },
+    {
+      "id": 50,
+      "category": "cross_pivot",
+      "name": "DNS cache dump via API",
+      "description": "Read DNS cache via API (information disclosure)",
+      "result": "Response: ['!empty']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "response": [
+          "!empty"
+        ]
+      }
+    },
+    {
+      "id": 51,
+      "category": "cross_pivot",
+      "name": "Script create+execute via API",
+      "description": "Create and execute a RouterOS script via API",
+      "result": "Create: ['!done'], Run: ['!done', '=ret=*A5']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "create_response": [
+          "!done"
+        ],
+        "run_response": [
+          "!done",
+          "=ret=*A5"
+        ]
+      }
+    },
+    {
+      "id": 52,
+      "category": "cross_pivot",
+      "name": "Config export via API",
+      "description": "Export full configuration via API",
+      "result": "Response words: 1, has_passwords: False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:31:32.975507",
+      "details": {
+        "response_preview": [
+          "!done"
+        ],
+        "has_passwords": false
+      }
+    }
+  ],
+  "findings": []
+}

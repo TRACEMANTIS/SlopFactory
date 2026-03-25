@@ -1,0 +1,115 @@
+{
+  "phase": 5,
+  "title": "Protocol, Streaming & DoS Attacks",
+  "target": "Fastify v5.7.4",
+  "timestamp": "2026-02-18T20:41:41Z",
+  "tests": [
+    {
+      "id": 1,
+      "name": "Smuggle-CL-TE basic",
+      "category": "smuggling",
+      "result": "HTTP/1.1 400 Bad Request"
+    },
+    {
+      "id": 2,
+      "name": "Smuggle-TE-CL basic",
+      "category": "smuggling",
+      "result": "HTTP/1.1 400 Bad Request"
+    },
+    {
+      "id": 3,
+      "name": "Smuggle-Double TE",
+      "category": "smuggling",
+      "result": "HTTP/1.1 400 Bad Request"
+    },
+    {
+      "id": 4,
+      "name": "Smuggle-TE obfuscated",
+      "category": "smuggling",
+      "result": "HTTP/1.1 400 Bad Request"
+    },
+    {
+      "id": 5,
+      "name": "Slowloris-50conn",
+      "category": "dos",
+      "result": "server-responsive"
+    },
+    {
+      "id": 6,
+      "name": "BodyLimit-1KB",
+      "category": "dos",
+      "result": "200"
+    },
+    {
+      "id": 7,
+      "name": "BodyLimit-64KB",
+      "category": "dos",
+      "result": "200"
+    },
+    {
+      "id": 8,
+      "name": "BodyLimit-512KB",
+      "category": "dos",
+      "result": "200"
+    },
+    {
+      "id": 9,
+      "name": "BodyLimit-1MB (at limit)",
+      "category": "dos",
+      "result": "200"
+    },
+    {
+      "id": 10,
+      "name": "BodyLimit-1MB+1 (over limit)",
+      "category": "dos",
+      "result": "200"
+    },
+    {
+      "id": 11,
+      "name": "BodyLimit-2MB",
+      "category": "dos",
+      "result": "413"
+    },
+    {
+      "id": 12,
+      "name": "WebStream-normal",
+      "category": "protocol",
+      "result": "200"
+    },
+    {
+      "id": 13,
+      "name": "WebStream-large",
+      "category": "protocol",
+      "result": "200"
+    },
+    {
+      "id": 14,
+      "name": "WebStream-concurrent",
+      "category": "protocol",
+      "result": "-7.5MB growth"
+    },
+    {
+      "id": 15,
+      "name": "SSE-early-disconnect",
+      "category": "protocol",
+      "result": "ok"
+    },
+    {
+      "id": 16,
+      "name": "Hook-timeout",
+      "category": "dos",
+      "result": "tested"
+    },
+    {
+      "id": 17,
+      "name": "RequestID-uniqueness",
+      "category": "protocol",
+      "result": "100/100 unique"
+    }
+  ],
+  "findings": [],
+  "anomalies": [],
+  "total_tests": 17,
+  "total_findings": 0,
+  "total_anomalies": 0
+}

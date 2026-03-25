@@ -1,0 +1,165 @@
+{
+  "phase": 5,
+  "title": "CResetPwdHandler and Security Question Pre-Auth Analysis",
+  "date": "2026-03-06",
+  "binary": "sonia (Rhea V2.622.18)",
+
+  "pre_auth_confirmation": {
+    "method": "Scanned 0x4c7400-0x4cad00 for BL instructions targeting CheckWebSession (0x4c1bd8)",
+    "result": "ZERO calls to CheckWebSession in entire CResetPwdHandler range",
+    "source": "Src/ResetPwdHandler.cpp",
+    "verdict": "CResetPwdHandler is PRE-AUTH by design (handles password reset for locked-out users)"
+  },
+
+  "rpc_dispatch_table": {
+    "location": "0x4caa80",
+    "methods": [
+      {"method": "DevInit.getStatus", "handler": "0x4c7740"},
+      {"method": "DevInit.account", "handler": "0x4c9b88", "frame": 356},
+      {"method": "PasswdFind.getDescript", "handler": "0x4c7a38"},
+      {"method": "Security.getEncryptInfo", "handler": "0x4c7f58"},
+      {"method": "PasswdFind.getContact", "handler": "0x4c7d50"},
+      {"method": "PasswdFind.setContact", "handler": "0x4c8608"},
+      {"method": "PasswdFind.resetPwdByQuestion", "handler": "0x4c8824", "frame": 412},
+      {"method": "PasswdFind.getSecretQuestion", "handler": "0x4c8be8"},
+      {"method": "PasswdFind.checkAuthCode", "handler": "0x4c90d0"},
+      {"method": "PasswdFind.resetPassword", "handler": "0x4c98c4"},
+      {"method": "PasswdFind.getBasicInfo", "handler": "0x4c738c"},
+      {"method": "PasswdFind.checkQuestionAnswer", "handler": "0x4c9318", "frame": 508},
+      {"method": "SecretQuestion.getAllQuestion", "handler": "0x4c816c"}
+    ]
+  },
+
+  "memory_safety_audit": {
+    "strncpy_calls": 10,
+    "strncpy_limits": ["0x7f (127)", "0x27 (39)", "0x1f (31)"],
+    "snprintf_calls": 3,
+    "snprintf_limits": ["128 bytes"],
+    "strcpy_calls": 0,
+    "sprintf_calls": 0,
+    "sscanf_calls": 0,
+    "system_calls": 0,
+    "popen_calls": 0,
+    "verdict": "All string operations are bounded. strncpy with explicit limits, snprintf with size parameter. Buffers pre-zeroed with memset. No exploitable stack overflow in handler code."
+  },
+
+  "findings": [
+    {
+      "id": "[REDACTED-ID]_F001",
+      "title": "Pre-Auth Security Question Brute Force (No Rate Limiting)",
+      "severity": "HIGH",
+      "type": "Authentication Bypass / Logic Flaw",
+      "pre_auth": true,
+      "handler_vma": "0x4c9318",
+      "method": "PasswdFind.checkQuestionAnswer",
+      "description": "The checkQuestionAnswer handler performs security question verification via a backend IPasswdFind interface (vtable[0x58/4]) without any rate limiting, lockout mechanism, or CAPTCHA. An attacker can send unlimited requests to brute-force security question answers for any user account.",
+      "json_parameters": ["user (username)", "question (array)", "answer (per-question answer)"],
+      "response": "{\"checkResult\":\"true\"} or {\"checkResult\":\"false\"}",
+      "backend_call": "0x4c9424 blx r6 (vtable[0x58/4])",
+      "timing_safety": "Comparison delegated to backend -- likely NOT timing-safe (standard strcmp pattern)",
+      "novelty_check": "NOVEL -- [REDACTED-ID]_F014 was checkAuthCode prediction, NOT security question brute force",
+      "impact": "Enumerate all security question answers for any account including admin",
+      "reproduction": {
+        "step_1": "Call DevInit.getStatus to check if SecretQuestion is configured",
+        "step_2": "Call PasswdFind.getSecretQuestion to retrieve configured questions",
+        "step_3": "Call PasswdFind.checkQuestionAnswer repeatedly with different answers",
+        "step_4": "No lockout -- continue until correct answer found"
+      }
+    },
+    {
+      "id": "[REDACTED-ID]_F002",
+      "title": "Pre-Auth Password Reset via Security Questions",
+      "severity": "HIGH",
+      "type": "Authentication Bypass",
+      "pre_auth": true,
+      "handler_vma": "0x4c8824",
+      "method": "PasswdFind.resetPwdByQuestion",
+      "description": "Once security question answers are known (via [REDACTED-ID]_F001), an attacker can reset any user's password without knowing the current password. The handler accepts user, question/answer array, new password, and password tip.",
+      "json_parameters": ["user (target username)", "question (array with answer fields)", "pwd (new password)", "tip (password hint)"],
+      "string_ops": [
+        "strncpy(answer_buf, answer, 0x7f) at 0x4c89c6",
+        "strncpy(question_buf, question, 0x7f) at 0x4c89fc",
+        "strncpy(user_buf, user, 0x27) at 0x4c8a4a",
+        "strncpy(tip_buf, tip, 0x1f) at 0x4c8a6c"
+      ],
+      "backend_call": "resetPwdByQuestionInfo via vtable",
+      "novelty_check": "NOVEL -- Rhea-exclusive method not present in Themis V2.620",
+      "impact": "Complete account takeover of any user including admin",
+      "attack_chain": "[REDACTED-ID]_F001 (brute force answers) -> [REDACTED-ID]_F002 (reset password) -> full device access"
+    },
+    {
+      "id": "[REDACTED-ID]_F003",
+      "title": "Pre-Auth Device Info Disclosure via getBasicInfo",
+      "severity": "MEDIUM",
+      "type": "Information Disclosure",
+      "pre_auth": true,
+      "handler_vma": "0x4c738c",
+      "method": "PasswdFind.getBasicInfo",
+      "description": "Returns device serial number and vendor without authentication.",
+      "format_string": "{\"sn\":\"%s\",\"vendor\":\"%s\"}",
+      "snprintf_at": "0x4c7512 (128-byte buffer -- safe)",
+      "novelty_check": "Similar to [REDACTED-ID]_F003 (magicBox.getSystemInfo) but different endpoint and data. Marginal novelty.",
+      "impact": "Leaks serial number for targeted attacks and checkAuthCode derivation"
+    },
+    {
+      "id": "[REDACTED-ID]_F004",
+      "title": "Pre-Auth Device Status Disclosure via getStatus",
+      "severity": "MEDIUM",
+      "type": "Information Disclosure",
+      "pre_auth": true,
+      "handler_vma": "0x4c7740",
+      "method": "DevInit.getStatus",
+      "fields": ["Init (device initialized?)", "Find (recovery methods available)", "SecretQuestion (questions configured?)", "Step (initialization step)"],
+      "impact": "Reveals device initialization state and attack surface (whether security questions are set, what recovery methods exist)",
+      "enables": "[REDACTED-ID]_F001 attack -- attacker knows whether to target security questions or auth codes"
+    },
+    {
+      "id": "[REDACTED-ID]_F005",
+      "title": "Pre-Auth Encryption Info and Public Key Disclosure",
+      "severity": "LOW",
+      "type": "Information Disclosure",
+      "pre_auth": true,
+      "handler_vma": "0x4c7f58",
+      "method": "Security.getEncryptInfo",
+      "fields": ["asymmetric (algorithm)", "pub (public key)", "params", "cipher"],
+      "impact": "Reveals encryption scheme for password reset flows, enabling proper payload construction"
+    },
+    {
+      "id": "[REDACTED-ID]_F006",
+      "title": "Pre-Auth Device Initialization Race Condition",
+      "severity": "HIGH (conditional -- factory-fresh/reset devices only)",
+      "type": "Authentication Bypass",
+      "pre_auth": true,
+      "handler_vma": "0x4c9b88",
+      "method": "DevInit.account",
+      "description": "On uninitialized devices, this handler allows setting the admin password and configuring security questions without any authentication. Backend may enforce one-time initialization constraint, but handler itself does not check.",
+      "json_parameters": ["name (admin)", "pwd", "CellPhone", "Mail", "Question (with Index+Answer)", "PasswdTip"],
+      "condition": "Device not yet initialized (factory fresh or after reset)",
+      "impact": "First network attacker to reach device after reset can claim admin credentials"
+    }
+  ],
+
+  "eliminated_surfaces": {
+    "console_runCmd": {
+      "handler": "0x16dd48",
+      "session_check": "0x16dc94 (validates session pointer at [r0+16])",
+      "verdict": "AUTHENTICATED -- session check present in all console handlers"
+    },
+    "autoSearchIP": {
+      "code_range": "0x296ff8-0x2eb500",
+      "unsafe_calls": {"memcpy": 16, "strncpy": 8, "sscanf": 1},
+      "bounds_checks": "cmp r7, #127 before memcpy; cmp.w r9, #512 before copy; cmp.w r0, #65536",
+      "verdict": "BOUNDED -- explicit size checks before all copy operations"
+    },
+    "mDNS_bonjour": {
+      "library": "Apple mDNSResponder (well-audited open-source)",
+      "wrapper": "CDHBonjourRunner (Src/Bonjour/DHBonjourRunner.cpp)",
+      "verdict": "LOW RISK -- Apple library, Dahua wrapper is service registration only"
+    },
+    "rtsp_over_http_auth": {
+      "config": "RtspSvrConfigRtspOverHttpAuthType (None-0, Basic-1, Digest-2, Alter-3)",
+      "default": "Could not determine statically -- set via runtime config",
+      "verdict": "INCONCLUSIVE -- needs runtime testing"
+    }
+  }
+}

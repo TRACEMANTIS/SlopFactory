@@ -1,0 +1,924 @@
+{
+  "phase": 2,
+  "title": "Content-Type & Schema Validation Attacks",
+  "target": "Fastify v5.7.4",
+  "timestamp": "2026-02-18T20:35:39Z",
+  "tests": [
+    {
+      "id": 1,
+      "name": "CT-EdgeCase-Standard JSON",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json",
+        "status": 200,
+        "response_preview": "{'id': 6290, 'username': 'testuser', 'email': 'test@example.com', 'role': 'user', 'created': '2026-02-18T20:35:39.882Z'}"
+      }
+    },
+    {
+      "id": 2,
+      "name": "CT-EdgeCase-JSON with charset",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json; charset=utf-8",
+        "status": 200,
+        "response_preview": "{'id': 2141, 'username': 'testuser', 'email': 'test@example.com', 'role': 'user', 'created': '2026-02-18T20:35:39.882Z'}"
+      }
+    },
+    {
+      "id": 3,
+      "name": "CT-EdgeCase-JSON uppercase",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "APPLICATION/JSON",
+        "status": 200,
+        "response_preview": "{'id': 3666, 'username': 'testuser', 'email': 'test@example.com', 'role': 'user', 'created': '2026-02-18T20:35:39.882Z'}"
+      }
+    },
+    {
+      "id": 4,
+      "name": "CT-EdgeCase-JSON mixed case",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "Application/Json",
+        "status": 200,
+        "response_preview": "{'id': 2410, 'username': 'testuser', 'email': 'test@example.com', 'role': 'user', 'created': '2026-02-18T20:35:39.894Z'}"
+      }
+    },
+    {
+      "id": 5,
+      "name": "CT-EdgeCase-JSON trailing space",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json ",
+        "status": 200,
+        "response_preview": "{'id': 1451, 'username': 'testuser', 'email': 'test@example.com', 'role': 'user', 'created': '2026-02-18T20:35:39.898Z'}"
+      }
+    },
+    {
+      "id": 6,
+      "name": "CT-EdgeCase-JSON trailing tab",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json\t",
+        "status": 200,
+        "response_preview": "{'id': 8124, 'username': 'testuser', 'email': 'test@example.com', 'role': 'user', 'created': '2026-02-18T20:35:39.898Z'}"
+      }
+    },
+    {
+      "id": 7,
+      "name": "CT-EdgeCase-JSON trailing semicolon",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json;",
+        "status": 200,
+        "response_preview": "{'id': 5208, 'username': 'testuser', 'email': 'test@example.com', 'role': 'user', 'created': '2026-02-18T20:35:39.898Z'}"
+      }
+    },
+    {
+      "id": 8,
+      "name": "CT-EdgeCase-JSON space-semicolon",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json ;",
+        "status": 200,
+        "response_preview": "{'id': 4542, 'username': 'testuser', 'email': 'test@example.com', 'role': 'user', 'created': '2026-02-18T20:35:39.902Z'}"
+      }
+    },
+    {
+      "id": 9,
+      "name": "CT-EdgeCase-JSON with parens",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json()",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 10,
+      "name": "CT-EdgeCase-JSON with comma suffix",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json,text/plain",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 11,
+      "name": "CT-EdgeCase-JSON with colon suffix",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json:evil",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 12,
+      "name": "CT-EdgeCase-JSON with bracket suffix",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json[0]",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 13,
+      "name": "CT-EdgeCase-JSON with brace suffix",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json{}",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 14,
+      "name": "CT-EdgeCase-JSON with at suffix",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json@evil",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 15,
+      "name": "CT-EdgeCase-JSON with quote suffix",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json\"evil",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 16,
+      "name": "CT-EdgeCase-Form-urlencoded (CSRF)",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/x-www-form-urlencoded",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 17,
+      "name": "CT-EdgeCase-Text plain (CSRF)",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "text/plain",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 18,
+      "name": "CT-EdgeCase-Multipart form",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "multipart/form-data; boundary=----test",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': 'body must be object'}"
+      }
+    },
+    {
+      "id": 19,
+      "name": "CT-EdgeCase-XML",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/xml",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 20,
+      "name": "CT-EdgeCase-YAML",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/yaml",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 21,
+      "name": "CT-EdgeCase-Catch-all octet",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/octet-stream",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 22,
+      "name": "CT-EdgeCase-Double CT comma",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "application/json, text/plain",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 23,
+      "name": "CT-EdgeCase-Double CT semicolon",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "text/plain; charset=application/json",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 24,
+      "name": "CT-EdgeCase-Empty content-type",
+      "category": "content-type",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "content_type": "",
+        "status": 400,
+        "response_preview": "{'statusCode': 400, 'code': 'FST_ERR_VALIDATION', 'error': 'Bad Request', 'message': \"body must have required property 'username'\"}"
+      }
+    },
+    {
+      "id": 25,
+      "name": "CSRF-form-to-users",
+      "category": "csrf",
+      "result": "finding",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "status": 200
+      }
+    },
+    {
+      "id": 26,
+      "name": "CSRF-form-to-json-only",
+      "category": "csrf",
+      "result": "finding",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "status": 200
+      }
+    },
+    {
+      "id": 27,
+      "name": "CSRF-form-to-coerce",
+      "category": "csrf",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "status": 200,
+        "response_preview": "{\"received\":{\"count\":42,\"active\":true,\"tags\":[\"a\",\"b\"]},\"types\":{\"count\":\"number\",\"active\":\"boolean\",\"tags\":\"object\"}}"
+      }
+    },
+    {
+      "id": 28,
+      "name": "CSRF-bracket-notation",
+      "category": "csrf",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "status": 200
+      }
+    },
+    {
+      "id": 29,
+      "name": "CSRF-form-proto-pollution",
+      "category": "csrf",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "status": 200
+      }
+    },
+    {
+      "id": 30,
+      "name": "Mismatch-textplain-json-body",
+      "category": "mismatch",
+      "result": "400",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "status": 400
+      }
+    },
+    {
+      "id": 31,
+      "name": "Mismatch-xml-ct-json-body",
+      "category": "mismatch",
+      "result": "400",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "status": 400
+      }
+    },
+    {
+      "id": 32,
+      "name": "Mismatch-yaml-to-json-schema",
+      "category": "mismatch",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "status": 200
+      }
+    },
+    {
+      "id": 33,
+      "name": "Mismatch-fakect-json-body",
+      "category": "mismatch",
+      "result": "400",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "status": 400
+      }
+    },
+    {
+      "id": 34,
+      "name": "Mismatch-form-flexible",
+      "category": "mismatch",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "status": 200
+      }
+    },
+    {
+      "id": 35,
+      "name": "Coercion-String as integer",
+      "category": "coercion",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": "42"
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 36,
+      "name": "Coercion-Float as integer",
+      "category": "coercion",
+      "result": "400",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": 3.14
+        },
+        "status": 400
+      }
+    },
+    {
+      "id": 37,
+      "name": "Coercion-Boolean string",
+      "category": "coercion",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "active": "true"
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 38,
+      "name": "Coercion-Null as string",
+      "category": "coercion",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": null
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 39,
+      "name": "Coercion-Array as object",
+      "category": "coercion",
+      "result": "400",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "nested": [
+            1,
+            2,
+            3
+          ]
+        },
+        "status": 400
+      }
+    },
+    {
+      "id": 40,
+      "name": "Coercion-Numeric string overflow",
+      "category": "coercion",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": "99999999999999999999"
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 41,
+      "name": "Coercion-Negative zero",
+      "category": "coercion",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": 0
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 42,
+      "name": "Coercion-NaN string",
+      "category": "coercion",
+      "result": "400",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": "NaN"
+        },
+        "status": 400
+      }
+    },
+    {
+      "id": 43,
+      "name": "Coercion-Infinity string",
+      "category": "coercion",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": "Infinity"
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 44,
+      "name": "Coercion-Hex string",
+      "category": "coercion",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": "0xFF"
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 45,
+      "name": "Coercion-Octal string",
+      "category": "coercion",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": "0o77"
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 46,
+      "name": "Coercion-Binary string",
+      "category": "coercion",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": "0b1010"
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 47,
+      "name": "Coercion-Scientific notation",
+      "category": "coercion",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": "1e10"
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 48,
+      "name": "Coercion-Empty string as int",
+      "category": "coercion",
+      "result": "400",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": ""
+        },
+        "status": 400
+      }
+    },
+    {
+      "id": 49,
+      "name": "Coercion-Whitespace as int",
+      "category": "coercion",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "payload": {
+          "count": "  "
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 50,
+      "name": "Coercion-extra-props",
+      "category": "coercion",
+      "result": "400",
+      "timestamp": "2026-02-18T20:35:39Z"
+    },
+    {
+      "id": 51,
+      "name": "Catchall-application/x-custom",
+      "category": "catchall",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "ct": "application/x-custom",
+        "status": 200
+      }
+    },
+    {
+      "id": 52,
+      "name": "Catchall-text/csv",
+      "category": "catchall",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "ct": "text/csv",
+        "status": 200
+      }
+    },
+    {
+      "id": 53,
+      "name": "Catchall-application/msgpack",
+      "category": "catchall",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "ct": "application/msgpack",
+        "status": 200
+      }
+    },
+    {
+      "id": 54,
+      "name": "Catchall-image/png",
+      "category": "catchall",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "ct": "image/png",
+        "status": 200
+      }
+    },
+    {
+      "id": 55,
+      "name": "Catchall-video/mp4",
+      "category": "catchall",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z",
+      "details": {
+        "ct": "video/mp4",
+        "status": 200
+      }
+    },
+    {
+      "id": 56,
+      "name": "Catchall-schema-bypass-users",
+      "category": "catchall",
+      "result": "400",
+      "timestamp": "2026-02-18T20:35:39Z"
+    },
+    {
+      "id": 57,
+      "name": "Serial-user-safe-filtering",
+      "category": "serialization",
+      "result": "pass",
+      "timestamp": "2026-02-18T20:35:39Z"
+    },
+    {
+      "id": 58,
+      "name": "Serial-nested-filtering",
+      "category": "serialization",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z"
+    },
+    {
+      "id": 59,
+      "name": "Serial-datetime-inject-2026-01-01\",\"role\":\"admin\",\"x\"",
+      "category": "serialization",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:39Z"
+    },
+    {
+      "id": 60,
+      "name": "Serial-datetime-inject-2026-01-01T00:00:00Z\",\"role\":\"",
+      "category": "serialization",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:40Z"
+    },
+    {
+      "id": 61,
+      "name": "Serial-datetime-inject-2026-01-01\\\",\"role\":\"admin\"}//",
+      "category": "serialization",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:40Z"
+    },
+    {
+      "id": 62,
+      "name": "Serial-empty-schema-leak",
+      "category": "serialization",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:40Z"
+    },
+    {
+      "id": 63,
+      "name": "Serial-small-array",
+      "category": "serialization",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:40Z"
+    },
+    {
+      "id": 64,
+      "name": "Serial-large-array",
+      "category": "serialization",
+      "result": "tested",
+      "timestamp": "2026-02-18T20:35:40Z"
+    },
+    {
+      "id": 65,
+      "name": "Serial-proto-in-response",
+      "category": "serialization",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:40Z"
+    },
+    {
+      "id": 66,
+      "name": "AdditionalProps-Extra isAdmin",
+      "category": "schema-bypass",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:40Z"
+    },
+    {
+      "id": 67,
+      "name": "AdditionalProps-Extra role override",
+      "category": "schema-bypass",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:40Z"
+    },
+    {
+      "id": 68,
+      "name": "AdditionalProps-Unicode key",
+      "category": "schema-bypass",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:40Z"
+    },
+    {
+      "id": 69,
+      "name": "AdditionalProps-Null byte key",
+      "category": "schema-bypass",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:40Z"
+    },
+    {
+      "id": 70,
+      "name": "AdditionalProps-Dot notation",
+      "category": "schema-bypass",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:40Z"
+    },
+    {
+      "id": 71,
+      "name": "AdditionalProps-Empty string key",
+      "category": "schema-bypass",
+      "result": "200",
+      "timestamp": "2026-02-18T20:35:40Z"
+    }
+  ],
+  "findings": [
+    {
+      "id": "P2-F01",
+      "severity": "MEDIUM",
+      "title": "CSRF: Form-urlencoded passes JSON schema on /api/users",
+      "description": "application/x-www-form-urlencoded body parsed by @fastify/formbody produces flat object that passes JSON schema validation. Since form-urlencoded is a CORS \"simple\" content-type, cross-origin form submissions can invoke this route without CORS preflight.",
+      "impact": "Cross-site request forgery on schema-validated JSON routes",
+      "cvss_estimate": "5.0",
+      "evidence": {
+        "request_ct": "application/x-www-form-urlencoded",
+        "status": 200,
+        "response": {
+          "id": 2483,
+          "username": "csrfuser",
+          "email": "csrf@evil.com",
+          "role": "admin",
+          "created": "2026-02-18T20:35:39.938Z"
+        }
+      }
+    },
+    {
+      "id": "P2-F02",
+      "severity": "MEDIUM",
+      "title": "CSRF: Form-urlencoded passes enum validation on /api/json-only",
+      "description": "application/x-www-form-urlencoded body with action=delete passes enum schema validation. Attacker can submit a cross-origin form to perform destructive actions.",
+      "evidence": {
+        "form_data": "action=delete&target=/etc/passwd",
+        "status": 200,
+        "response": {
+          "accepted": true,
+          "action": "delete",
+          "target": "/etc/passwd",
+          "contentType": "application/x-www-form-urlencoded"
+        }
+      }
+    },
+    {
+      "id": "P2-F03",
+      "severity": "HIGH",
+      "title": "Schema bypass: YAML body passes JSON schema on /api/json-only",
+      "description": "YAML Content-Type body parsed by custom parser produces object that passes JSON body schema validation. This bypasses the intent of schema validation (which was designed for JSON bodies only).",
+      "evidence": {
+        "status": 200,
+        "response": {
+          "accepted": true,
+          "action": "read",
+          "target": "test",
+          "contentType": "application/yaml"
+        }
+      }
+    },
+    {
+      "id": "P2-F05",
+      "severity": "MEDIUM",
+      "title": "fast-json-stringify: Empty schema {} leaks all nested data",
+      "description": "Properties with empty schema {} fall through to JSON.stringify(), serializing the entire value with all nested properties. Sensitive data like internal_notes, api_token, manager_email are leaked.",
+      "evidence": {
+        "preferences_leaked": {
+          "theme": "dark",
+          "internal_notes": "Employee SSN: 123-45-6789",
+          "api_token": "secret-api-token-xyz",
+          "manager_email": "manager@internal.corp"
+        },
+        "password_filtered": true
+      }
+    }
+  ],
+  "anomalies": [
+    {
+      "id": 1,
+      "name": "datetime-injection-malformed",
+      "details": {
+        "payload": "2026-01-01\\\",\"role\":\"admin\"}///",
+        "error": "Expecting ',' delimiter: line 1 column 57 (char 56)",
+        "raw_response": "{\"id\":1,\"title\":\"Test Event\",\"startDate\":\"2026-01-01\\\",\"role\":\"admin\"}///\",\"endDate\":\"2026-02-18T20:35:40.002Z\",\"role\":\"user\"}"
+      }
+    },
+    {
+      "id": 2,
+      "name": "addlprops-Extra isAdmin",
+      "details": {
+        "payload": {
+          "username": "test",
+          "email": "t@t.com",
+          "isAdmin": true
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 3,
+      "name": "addlprops-Extra role override",
+      "details": {
+        "payload": {
+          "username": "test",
+          "email": "t@t.com",
+          "role": "admin",
+          "role2": "superadmin"
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 4,
+      "name": "addlprops-Unicode key",
+      "details": {
+        "payload": {
+          "username": "test",
+          "email": "t@t.com",
+          "\u200bisAdmin": true
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 5,
+      "name": "addlprops-Null byte key",
+      "details": {
+        "payload": {
+          "username": "test",
+          "email": "t@t.com",
+          "is\u0000Admin": true
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 6,
+      "name": "addlprops-Dot notation",
+      "details": {
+        "payload": {
+          "username": "test",
+          "email": "t@t.com",
+          "nested.key": "value"
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 7,
+      "name": "addlprops-Empty string key",
+      "details": {
+        "payload": {
+          "username": "test",
+          "email": "t@t.com",
+          "": "value"
+        },
+        "status": 200
+      }
+    }
+  ],
+  "total_tests": 71,
+  "total_findings": 4,
+  "total_anomalies": 7
+}

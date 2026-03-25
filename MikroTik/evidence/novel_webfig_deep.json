@@ -1,0 +1,2810 @@
+{
+  "metadata": {
+    "script": "novel_webfig_deep.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 9,
+    "start_time": "2026-02-16T01:26:08.641755",
+    "end_time": "2026-02-16T01:26:27.664239",
+    "total_tests": 160,
+    "anomalies": 3,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "3m30s",
+    "router_log_count": 55,
+    "router_interesting_events": 5,
+    "final_health": {
+      "alive": true,
+      "uptime": "3m49s",
+      "cpu_load": "18",
+      "free_memory": "836329472",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "stored_xss",
+      "name": "Identity XSS: script_tag",
+      "description": "Set identity to 'script_tag' payload, check WebFig rendering",
+      "result": "Set OK, WebFig status=200, raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:09.157497",
+      "details": {
+        "payload": "<script>alert(1)</script>",
+        "set_status": 200,
+        "webfig_status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        },
+        "body_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p"
+      }
+    },
+    {
+      "id": 2,
+      "category": "stored_xss",
+      "name": "Identity XSS: img_onerror",
+      "description": "Set identity to 'img_onerror' payload, check WebFig rendering",
+      "result": "Set OK, WebFig status=200, raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:09.673239",
+      "details": {
+        "payload": "<img src=x onerror=alert(1)>",
+        "set_status": 200,
+        "webfig_status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        },
+        "body_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p"
+      }
+    },
+    {
+      "id": 3,
+      "category": "stored_xss",
+      "name": "Identity XSS: event_handler",
+      "description": "Set identity to 'event_handler' payload, check WebFig rendering",
+      "result": "Set OK, WebFig status=200, raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:10.180985",
+      "details": {
+        "payload": "\" onmouseover=\"alert(1)\" data-x=\"",
+        "set_status": 200,
+        "webfig_status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        },
+        "body_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p"
+      }
+    },
+    {
+      "id": 4,
+      "category": "stored_xss",
+      "name": "Identity XSS: svg_xss",
+      "description": "Set identity to 'svg_xss' payload, check WebFig rendering",
+      "result": "Set OK, WebFig status=200, raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:10.692729",
+      "details": {
+        "payload": "<svg onload=alert(1)>",
+        "set_status": 200,
+        "webfig_status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        },
+        "body_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p"
+      }
+    },
+    {
+      "id": 5,
+      "category": "stored_xss",
+      "name": "Identity XSS: javascript_uri",
+      "description": "Set identity to 'javascript_uri' payload, check WebFig rendering",
+      "result": "Set OK, WebFig status=200, raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:11.204473",
+      "details": {
+        "payload": "javascript:alert(1)",
+        "set_status": 200,
+        "webfig_status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        },
+        "body_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p"
+      }
+    },
+    {
+      "id": 6,
+      "category": "stored_xss",
+      "name": "Identity XSS: iframe_xss",
+      "description": "Set identity to 'iframe_xss' payload, check WebFig rendering",
+      "result": "Set OK, WebFig status=200, raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:11.708221",
+      "details": {
+        "payload": "<iframe src=\"javascript:alert(1)\">",
+        "set_status": 200,
+        "webfig_status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        },
+        "body_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p"
+      }
+    },
+    {
+      "id": 7,
+      "category": "stored_xss",
+      "name": "Identity XSS: body_onload",
+      "description": "Set identity to 'body_onload' payload, check WebFig rendering",
+      "result": "Set OK, WebFig status=200, raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:12.215967",
+      "details": {
+        "payload": "<body onload=alert(1)>",
+        "set_status": 200,
+        "webfig_status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        },
+        "body_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p"
+      }
+    },
+    {
+      "id": 8,
+      "category": "stored_xss",
+      "name": "Identity XSS: input_autofocus",
+      "description": "Set identity to 'input_autofocus' payload, check WebFig rendering",
+      "result": "Set OK, WebFig status=200, raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:12.735707",
+      "details": {
+        "payload": "<input autofocus onfocus=alert(1)>",
+        "set_status": 200,
+        "webfig_status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        },
+        "body_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p"
+      }
+    },
+    {
+      "id": 9,
+      "category": "stored_xss",
+      "name": "Identity XSS: marquee_xss",
+      "description": "Set identity to 'marquee_xss' payload, check WebFig rendering",
+      "result": "Set OK, WebFig status=200, raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:13.247451",
+      "details": {
+        "payload": "<marquee onstart=alert(1)>",
+        "set_status": 200,
+        "webfig_status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        },
+        "body_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p"
+      }
+    },
+    {
+      "id": 10,
+      "category": "stored_xss",
+      "name": "Identity XSS: details_xss",
+      "description": "Set identity to 'details_xss' payload, check WebFig rendering",
+      "result": "Set OK, WebFig status=200, raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:13.755197",
+      "details": {
+        "payload": "<details open ontoggle=alert(1)>",
+        "set_status": 200,
+        "webfig_status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        },
+        "body_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p"
+      }
+    },
+    {
+      "id": 11,
+      "category": "stored_xss",
+      "name": "Interface comment XSS: script_tag",
+      "description": "Set interface comment to 'script_tag' payload",
+      "result": "raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:14.071039",
+      "details": {
+        "payload": "<script>alert(1)</script>",
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 12,
+      "category": "stored_xss",
+      "name": "Interface comment XSS: img_onerror",
+      "description": "Set interface comment to 'img_onerror' payload",
+      "result": "raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:14.378885",
+      "details": {
+        "payload": "<img src=x onerror=alert(1)>",
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 13,
+      "category": "stored_xss",
+      "name": "Interface comment XSS: event_handler",
+      "description": "Set interface comment to 'event_handler' payload",
+      "result": "raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:14.694727",
+      "details": {
+        "payload": "\" onmouseover=\"alert(1)\" data-x=\"",
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 14,
+      "category": "stored_xss",
+      "name": "Interface comment XSS: svg_xss",
+      "description": "Set interface comment to 'svg_xss' payload",
+      "result": "raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:14.990579",
+      "details": {
+        "payload": "<svg onload=alert(1)>",
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 15,
+      "category": "stored_xss",
+      "name": "Interface comment XSS: javascript_uri",
+      "description": "Set interface comment to 'javascript_uri' payload",
+      "result": "raw=False, escaped=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:15.302423",
+      "details": {
+        "payload": "javascript:alert(1)",
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 16,
+      "category": "stored_xss",
+      "name": "Firewall comment XSS: script_tag",
+      "description": "Create firewall rule with XSS comment (script_tag)",
+      "result": "Rule created, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:15.618265",
+      "details": {
+        "payload": "<script>alert(1)</script>",
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 17,
+      "category": "stored_xss",
+      "name": "Firewall comment XSS: img_onerror",
+      "description": "Create firewall rule with XSS comment (img_onerror)",
+      "result": "Rule created, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:15.930109",
+      "details": {
+        "payload": "<img src=x onerror=alert(1)>",
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 18,
+      "category": "stored_xss",
+      "name": "Firewall comment XSS: event_handler",
+      "description": "Create firewall rule with XSS comment (event_handler)",
+      "result": "Rule created, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.237955",
+      "details": {
+        "payload": "\" onmouseover=\"alert(1)\" data-x=\"",
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 19,
+      "category": "stored_xss",
+      "name": "Firewall comment XSS: svg_xss",
+      "description": "Create firewall rule with XSS comment (svg_xss)",
+      "result": "Rule created, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.545801",
+      "details": {
+        "payload": "<svg onload=alert(1)>",
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 20,
+      "category": "stored_xss",
+      "name": "Firewall comment XSS: javascript_uri",
+      "description": "Create firewall rule with XSS comment (javascript_uri)",
+      "result": "Rule created, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.869639",
+      "details": {
+        "payload": "javascript:alert(1)",
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 21,
+      "category": "stored_xss",
+      "name": "SNMP contact XSS: script_tag",
+      "description": "Set SNMP SNMP contact to 'script_tag' payload",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.873637",
+      "details": {
+        "field": "contact",
+        "payload": "<script>alert(1)</script>",
+        "status": 200
+      }
+    },
+    {
+      "id": 22,
+      "category": "stored_xss",
+      "name": "SNMP contact XSS: img_onerror",
+      "description": "Set SNMP SNMP contact to 'img_onerror' payload",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.873637",
+      "details": {
+        "field": "contact",
+        "payload": "<img src=x onerror=alert(1)>",
+        "status": 200
+      }
+    },
+    {
+      "id": 23,
+      "category": "stored_xss",
+      "name": "SNMP contact XSS: event_handler",
+      "description": "Set SNMP SNMP contact to 'event_handler' payload",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.873637",
+      "details": {
+        "field": "contact",
+        "payload": "\" onmouseover=\"alert(1)\" data-x=\"",
+        "status": 200
+      }
+    },
+    {
+      "id": 24,
+      "category": "stored_xss",
+      "name": "SNMP location XSS: script_tag",
+      "description": "Set SNMP SNMP location to 'script_tag' payload",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.873637",
+      "details": {
+        "field": "location",
+        "payload": "<script>alert(1)</script>",
+        "status": 200
+      }
+    },
+    {
+      "id": 25,
+      "category": "stored_xss",
+      "name": "SNMP location XSS: img_onerror",
+      "description": "Set SNMP SNMP location to 'img_onerror' payload",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.873637",
+      "details": {
+        "field": "location",
+        "payload": "<img src=x onerror=alert(1)>",
+        "status": 200
+      }
+    },
+    {
+      "id": 26,
+      "category": "stored_xss",
+      "name": "SNMP location XSS: event_handler",
+      "description": "Set SNMP SNMP location to 'event_handler' payload",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.873637",
+      "details": {
+        "field": "location",
+        "payload": "\" onmouseover=\"alert(1)\" data-x=\"",
+        "status": 200
+      }
+    },
+    {
+      "id": 27,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?param={PAYLOAD} + script_tag",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.893627",
+      "details": {
+        "url": "/webfig/?param=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "xss_name": "script_tag",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 28,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?param={PAYLOAD} + img_onerror",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.897625",
+      "details": {
+        "url": "/webfig/?param=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "xss_name": "img_onerror",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 29,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?param={PAYLOAD} + svg_onload",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.897625",
+      "details": {
+        "url": "/webfig/?param=%3Csvg%20onload%3Dalert%281%29%3E",
+        "xss_name": "svg_onload",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 30,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?search={PAYLOAD} + script_tag",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.897625",
+      "details": {
+        "url": "/webfig/?search=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "xss_name": "script_tag",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 31,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?search={PAYLOAD} + img_onerror",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.953597",
+      "details": {
+        "url": "/webfig/?search=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "xss_name": "img_onerror",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 32,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?search={PAYLOAD} + svg_onload",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.953597",
+      "details": {
+        "url": "/webfig/?search=%3Csvg%20onload%3Dalert%281%29%3E",
+        "xss_name": "svg_onload",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 33,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?q={PAYLOAD} + script_tag",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:16.981583",
+      "details": {
+        "url": "/webfig/?q=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "xss_name": "script_tag",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 34,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?q={PAYLOAD} + img_onerror",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:17.265441",
+      "details": {
+        "url": "/webfig/?q=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "xss_name": "img_onerror",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 35,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?q={PAYLOAD} + svg_onload",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:17.405371",
+      "details": {
+        "url": "/webfig/?q=%3Csvg%20onload%3Dalert%281%29%3E",
+        "xss_name": "svg_onload",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 36,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?redirect={PAYLOAD} + script_tag",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:17.605271",
+      "details": {
+        "url": "/webfig/?redirect=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "xss_name": "script_tag",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 37,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?redirect={PAYLOAD} + img_onerror",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:17.857145",
+      "details": {
+        "url": "/webfig/?redirect=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "xss_name": "img_onerror",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 38,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?redirect={PAYLOAD} + svg_onload",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:18.037055",
+      "details": {
+        "url": "/webfig/?redirect=%3Csvg%20onload%3Dalert%281%29%3E",
+        "xss_name": "svg_onload",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 39,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?return={PAYLOAD} + script_tag",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:18.232957",
+      "details": {
+        "url": "/webfig/?return=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "xss_name": "script_tag",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 40,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?return={PAYLOAD} + img_onerror",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:18.352897",
+      "details": {
+        "url": "/webfig/?return=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "xss_name": "img_onerror",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 41,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?return={PAYLOAD} + svg_onload",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:18.592777",
+      "details": {
+        "url": "/webfig/?return=%3Csvg%20onload%3Dalert%281%29%3E",
+        "xss_name": "svg_onload",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 42,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?next={PAYLOAD} + script_tag",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:18.796675",
+      "details": {
+        "url": "/webfig/?next=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "xss_name": "script_tag",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 43,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?next={PAYLOAD} + img_onerror",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:18.916615",
+      "details": {
+        "url": "/webfig/?next=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "xss_name": "img_onerror",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 44,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?next={PAYLOAD} + svg_onload",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:19.152497",
+      "details": {
+        "url": "/webfig/?next=%3Csvg%20onload%3Dalert%281%29%3E",
+        "xss_name": "svg_onload",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 45,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?error={PAYLOAD} + script_tag",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:19.352397",
+      "details": {
+        "url": "/webfig/?error=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "xss_name": "script_tag",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 46,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?error={PAYLOAD} + img_onerror",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:19.472337",
+      "details": {
+        "url": "/webfig/?error=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "xss_name": "img_onerror",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 47,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?error={PAYLOAD} + svg_onload",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:19.736205",
+      "details": {
+        "url": "/webfig/?error=%3Csvg%20onload%3Dalert%281%29%3E",
+        "xss_name": "svg_onload",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 48,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?msg={PAYLOAD} + script_tag",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:19.864141",
+      "details": {
+        "url": "/webfig/?msg=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "xss_name": "script_tag",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 49,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?msg={PAYLOAD} + img_onerror",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:20.112017",
+      "details": {
+        "url": "/webfig/?msg=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "xss_name": "img_onerror",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 50,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?msg={PAYLOAD} + svg_onload",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:20.251947",
+      "details": {
+        "url": "/webfig/?msg=%3Csvg%20onload%3Dalert%281%29%3E",
+        "xss_name": "svg_onload",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 51,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?lang={PAYLOAD} + script_tag",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:20.475835",
+      "details": {
+        "url": "/webfig/?lang=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "xss_name": "script_tag",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 52,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?lang={PAYLOAD} + img_onerror",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:20.671737",
+      "details": {
+        "url": "/webfig/?lang=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "xss_name": "img_onerror",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 53,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?lang={PAYLOAD} + svg_onload",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:20.851647",
+      "details": {
+        "url": "/webfig/?lang=%3Csvg%20onload%3Dalert%281%29%3E",
+        "xss_name": "svg_onload",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 54,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?skin={PAYLOAD} + script_tag",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.051547",
+      "details": {
+        "url": "/webfig/?skin=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "xss_name": "script_tag",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 55,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?skin={PAYLOAD} + img_onerror",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.171487",
+      "details": {
+        "url": "/webfig/?skin=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "xss_name": "img_onerror",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 56,
+      "category": "reflected_xss",
+      "name": "Reflected: /webfig/?skin={PAYLOAD} + svg_onload",
+      "description": "Test reflected XSS via URL parameter",
+      "result": "HTTP 200, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.371387",
+      "details": {
+        "url": "/webfig/?skin=%3Csvg%20onload%3Dalert%281%29%3E",
+        "xss_name": "svg_onload",
+        "status": 200,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 57,
+      "category": "reflected_xss",
+      "name": "jsproxy reflected: script_tag",
+      "description": "Test reflected XSS via jsproxy",
+      "result": "HTTP 403, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.435355",
+      "details": {
+        "url": "/jsproxy?query=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "status": 403,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 58,
+      "category": "reflected_xss",
+      "name": "jsproxy reflected: img_onerror",
+      "description": "Test reflected XSS via jsproxy",
+      "result": "HTTP 403, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.435355",
+      "details": {
+        "url": "/jsproxy?query=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "status": 403,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 59,
+      "category": "reflected_xss",
+      "name": "jsproxy reflected: script_tag",
+      "description": "Test reflected XSS via jsproxy",
+      "result": "HTTP 403, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.451347",
+      "details": {
+        "url": "/jsproxy/?q=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "status": 403,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 60,
+      "category": "reflected_xss",
+      "name": "jsproxy reflected: img_onerror",
+      "description": "Test reflected XSS via jsproxy",
+      "result": "HTTP 403, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.455345",
+      "details": {
+        "url": "/jsproxy/?q=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "status": 403,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 61,
+      "category": "reflected_xss",
+      "name": "jsproxy reflected: script_tag",
+      "description": "Test reflected XSS via jsproxy",
+      "result": "HTTP 404, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.459343",
+      "details": {
+        "url": "/jsproxy/%3Cscript%3Ealert%281%29%3C/script%3E",
+        "status": 404,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 62,
+      "category": "reflected_xss",
+      "name": "jsproxy reflected: img_onerror",
+      "description": "Test reflected XSS via jsproxy",
+      "result": "HTTP 404, raw=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.459343",
+      "details": {
+        "url": "/jsproxy/%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "status": 404,
+        "xss_check": {
+          "raw_present": false,
+          "escaped_present": false,
+          "vulnerable": false
+        }
+      }
+    },
+    {
+      "id": 63,
+      "category": "reflected_xss",
+      "name": "Error page XSS: /nonexistent_<script>alert(1)</script>",
+      "description": "Test XSS reflection in error page",
+      "result": "HTTP 404, xss_reflected=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.463341",
+      "details": {
+        "path": "/nonexistent_<script>alert(1)</script>",
+        "status": 404,
+        "xss_reflected": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 64,
+      "category": "reflected_xss",
+      "name": "Error page XSS: /webfig/nonexistent?err=%3Cscript%3Ealert%281%29%3C/script%3",
+      "description": "Test XSS reflection in error page",
+      "result": "HTTP 404, xss_reflected=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.467339",
+      "details": {
+        "path": "/webfig/nonexistent?err=%3Cscript%3Ealert%281%29%3C/script%3E",
+        "status": 404,
+        "xss_reflected": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 65,
+      "category": "reflected_xss",
+      "name": "Error page XSS: /rest/nonexistent/%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%",
+      "description": "Test XSS reflection in error page",
+      "result": "HTTP 401, xss_reflected=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.483331",
+      "details": {
+        "path": "/rest/nonexistent/%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E",
+        "status": 401,
+        "xss_reflected": false,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}"
+      }
+    },
+    {
+      "id": 66,
+      "category": "dom_xss",
+      "name": "JS file enumeration",
+      "description": "Extract JavaScript file references from WebFig",
+      "result": "Found 2 JS files, 4 inline scripts",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.603271",
+      "details": {
+        "js_files": [
+          "curve255-541e54a862be.js",
+          "master-61ed6e5ae60d.js"
+        ],
+        "inline_script_count": 4,
+        "inline_sizes": [
+          74,
+          0,
+          79,
+          0
+        ]
+      }
+    },
+    {
+      "id": 67,
+      "category": "dom_xss",
+      "name": "Inline script sink analysis",
+      "description": "Search for DOM XSS sinks in inline JavaScript",
+      "result": "Found sinks: ['location.href_set']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.603271",
+      "details": {
+        "sinks_found": {
+          "location.href_set": 1
+        },
+        "total_sinks": 1
+      }
+    },
+    {
+      "id": 68,
+      "category": "dom_xss",
+      "name": "JS file sinks: curve255-541e54a862be.js",
+      "description": "Analyze curve255-541e54a862be.js for DOM XSS sinks",
+      "result": "Size=9157, sinks=[]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:21.743201",
+      "details": {
+        "file": "curve255-541e54a862be.js",
+        "size": 9157,
+        "sinks_found": {}
+      }
+    },
+    {
+      "id": 69,
+      "category": "dom_xss",
+      "name": "JS file sinks: master-61ed6e5ae60d.js",
+      "description": "Analyze master-61ed6e5ae60d.js for DOM XSS sinks",
+      "result": "Size=395111, sinks=['innerHTML', 'eval', 'location.hash', 'jQuery.append']",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:26:25.001571",
+      "details": {
+        "file": "master-61ed6e5ae60d.js",
+        "size": 395111,
+        "sinks_found": {
+          "innerHTML": 5,
+          "eval": 3,
+          "location.hash": 9,
+          "jQuery.append": 13
+        }
+      }
+    },
+    {
+      "id": 70,
+      "category": "dom_xss",
+      "name": "Hash payload: #<script>alert(1)</script>",
+      "description": "Test DOM XSS via location.hash",
+      "result": "Cannot verify DOM execution via automated request \u2014 requires browser-based testing",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.129507",
+      "details": {
+        "payload": "#<script>alert(1)</script>",
+        "note": "Location.hash not sent to server; manual browser testing required"
+      }
+    },
+    {
+      "id": 71,
+      "category": "dom_xss",
+      "name": "Hash payload: #<img src=x onerror=alert(1)>",
+      "description": "Test DOM XSS via location.hash",
+      "result": "Cannot verify DOM execution via automated request \u2014 requires browser-based testing",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.129507",
+      "details": {
+        "payload": "#<img src=x onerror=alert(1)>",
+        "note": "Location.hash not sent to server; manual browser testing required"
+      }
+    },
+    {
+      "id": 72,
+      "category": "dom_xss",
+      "name": "Hash payload: #javascript:alert(1)",
+      "description": "Test DOM XSS via location.hash",
+      "result": "Cannot verify DOM execution via automated request \u2014 requires browser-based testing",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.129507",
+      "details": {
+        "payload": "#javascript:alert(1)",
+        "note": "Location.hash not sent to server; manual browser testing required"
+      }
+    },
+    {
+      "id": 73,
+      "category": "dom_xss",
+      "name": "Hash payload: #';alert(1)//",
+      "description": "Test DOM XSS via location.hash",
+      "result": "Cannot verify DOM execution via automated request \u2014 requires browser-based testing",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.129507",
+      "details": {
+        "payload": "#';alert(1)//",
+        "note": "Location.hash not sent to server; manual browser testing required"
+      }
+    },
+    {
+      "id": 74,
+      "category": "dom_xss",
+      "name": "Security headers analysis",
+      "description": "Check for XSS-preventing security headers on WebFig",
+      "result": "Missing headers: ['Content-Security-Policy', 'X-Content-Type-Options', 'X-XSS-Protection', 'Referrer-Policy', 'Permissions-Policy']",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:26:25.129507",
+      "details": {
+        "headers": {
+          "Content-Security-Policy": "",
+          "X-Content-Type-Options": "",
+          "X-Frame-Options": "sameorigin",
+          "X-XSS-Protection": "",
+          "Referrer-Policy": "",
+          "Permissions-Policy": ""
+        },
+        "missing": [
+          "Content-Security-Policy",
+          "X-Content-Type-Options",
+          "X-XSS-Protection",
+          "Referrer-Policy",
+          "Permissions-Policy"
+        ]
+      }
+    },
+    {
+      "id": 75,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/../../etc/passwd",
+      "description": "Test path traversal: /webfig/../../etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.129507",
+      "details": {
+        "path": "/webfig/../../etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 76,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/../../../etc/passwd",
+      "description": "Test path traversal: /webfig/../../../etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.133505",
+      "details": {
+        "path": "/webfig/../../../etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 77,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/../../../../etc/passwd",
+      "description": "Test path traversal: /webfig/../../../../etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.137503",
+      "details": {
+        "path": "/webfig/../../../../etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 78,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/../../../rw/store/user.dat",
+      "description": "Test path traversal: /webfig/../../../rw/store/user.dat",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.137503",
+      "details": {
+        "path": "/webfig/../../../rw/store/user.dat",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 79,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/%2e%2e/%2e%2e/etc/passwd",
+      "description": "Test path traversal: /webfig/%2e%2e/%2e%2e/etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.141501",
+      "details": {
+        "path": "/webfig/%2e%2e/%2e%2e/etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 80,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/%2e%2e%2f%2e%2e%2f%2e%2e%2fetc/passwd",
+      "description": "Test path traversal: /webfig/%2e%2e%2f%2e%2e%2f%2e%2e%2fetc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.141501",
+      "details": {
+        "path": "/webfig/%2e%2e%2f%2e%2e%2f%2e%2e%2fetc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 81,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/..%2f..%2f..%2fetc/passwd",
+      "description": "Test path traversal: /webfig/..%2f..%2f..%2fetc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.145499",
+      "details": {
+        "path": "/webfig/..%2f..%2f..%2fetc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 82,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/%252e%252e/%252e%252e/etc/passwd",
+      "description": "Test path traversal: /webfig/%252e%252e/%252e%252e/etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.145499",
+      "details": {
+        "path": "/webfig/%252e%252e/%252e%252e/etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 83,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/..%252f..%252f..%252fetc/passwd",
+      "description": "Test path traversal: /webfig/..%252f..%252f..%252fetc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.149497",
+      "details": {
+        "path": "/webfig/..%252f..%252f..%252fetc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 84,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/../../etc/passwd%00.js",
+      "description": "Test path traversal: /webfig/../../etc/passwd%00.js",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.153495",
+      "details": {
+        "path": "/webfig/../../etc/passwd%00.js",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 85,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/../../etc/passwd%00.html",
+      "description": "Test path traversal: /webfig/../../etc/passwd%00.html",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.157493",
+      "details": {
+        "path": "/webfig/../../etc/passwd%00.html",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 86,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/../../etc/passwd\u0000.css",
+      "description": "Test path traversal: /webfig/../../etc/passwd\u0000.css",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.157493",
+      "details": {
+        "path": "/webfig/../../etc/passwd\u0000.css",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 87,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/%c0%ae%c0%ae/%c0%ae%c0%ae/etc/passwd",
+      "description": "Test path traversal: /webfig/%c0%ae%c0%ae/%c0%ae%c0%ae/etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.161491",
+      "details": {
+        "path": "/webfig/%c0%ae%c0%ae/%c0%ae%c0%ae/etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 88,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/..\\..\\..\\etc\\passwd",
+      "description": "Test path traversal: /webfig/..\\..\\..\\etc\\passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.161491",
+      "details": {
+        "path": "/webfig/..\\..\\..\\etc\\passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 89,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/..%5c..%5c..%5cetc%5cpasswd",
+      "description": "Test path traversal: /webfig/..%5c..%5c..%5cetc%5cpasswd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.165489",
+      "details": {
+        "path": "/webfig/..%5c..%5c..%5cetc%5cpasswd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 90,
+      "category": "path_traversal",
+      "name": "Traversal: /skins/../../../etc/passwd",
+      "description": "Test path traversal: /skins/../../../etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.165489",
+      "details": {
+        "path": "/skins/../../../etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 91,
+      "category": "path_traversal",
+      "name": "Traversal: /skins/%2e%2e/%2e%2e/etc/passwd",
+      "description": "Test path traversal: /skins/%2e%2e/%2e%2e/etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.169487",
+      "details": {
+        "path": "/skins/%2e%2e/%2e%2e/etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 92,
+      "category": "path_traversal",
+      "name": "Traversal: /skins/../../../rw/store/",
+      "description": "Test path traversal: /skins/../../../rw/store/",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.169487",
+      "details": {
+        "path": "/skins/../../../rw/store/",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 93,
+      "category": "path_traversal",
+      "name": "Traversal: /graphs/../../../etc/passwd",
+      "description": "Test path traversal: /graphs/../../../etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.173485",
+      "details": {
+        "path": "/graphs/../../../etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 94,
+      "category": "path_traversal",
+      "name": "Traversal: /graphs/%2e%2e/%2e%2e/etc/passwd",
+      "description": "Test path traversal: /graphs/%2e%2e/%2e%2e/etc/passwd",
+      "result": "HTTP 200, size=299, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.181481",
+      "details": {
+        "path": "/graphs/%2e%2e/%2e%2e/etc/passwd",
+        "status": 200,
+        "body_size": 299,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<link rel=icon href=/favicon.png>\n<link rel=icon href=/favicon.svg>\n<"
+      }
+    },
+    {
+      "id": 95,
+      "category": "path_traversal",
+      "name": "Traversal: /graphs/../rw/store/user.dat",
+      "description": "Test path traversal: /graphs/../rw/store/user.dat",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.181481",
+      "details": {
+        "path": "/graphs/../rw/store/user.dat",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 96,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/....//....//....//etc/passwd",
+      "description": "Test path traversal: /webfig/....//....//....//etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.185479",
+      "details": {
+        "path": "/webfig/....//....//....//etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 97,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/..;/..;/etc/passwd",
+      "description": "Test path traversal: /webfig/..;/..;/etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.185479",
+      "details": {
+        "path": "/webfig/..;/..;/etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 98,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/.%00./..%00./etc/passwd",
+      "description": "Test path traversal: /webfig/.%00./..%00./etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.189477",
+      "details": {
+        "path": "/webfig/.%00./..%00./etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 99,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/../nova/etc/",
+      "description": "Test path traversal: /webfig/../nova/etc/",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.189477",
+      "details": {
+        "path": "/webfig/../nova/etc/",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 100,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/../flash/nova/etc/passwd",
+      "description": "Test path traversal: /webfig/../flash/nova/etc/passwd",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.193475",
+      "details": {
+        "path": "/webfig/../flash/nova/etc/passwd",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 101,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/../rw/store/user.dat",
+      "description": "Test path traversal: /webfig/../rw/store/user.dat",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.193475",
+      "details": {
+        "path": "/webfig/../rw/store/user.dat",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 102,
+      "category": "path_traversal",
+      "name": "Traversal: /webfig/../rw/logs/",
+      "description": "Test path traversal: /webfig/../rw/logs/",
+      "result": "HTTP 404, size=99, sensitive=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.197473",
+      "details": {
+        "path": "/webfig/../rw/logs/",
+        "status": 404,
+        "body_size": 99,
+        "has_sensitive_content": false,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 103,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /debug",
+      "description": "Probe for /debug (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.197473",
+      "details": {
+        "path": "/debug",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 104,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /trace",
+      "description": "Probe for /trace (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.201471",
+      "details": {
+        "path": "/trace",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 105,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /status",
+      "description": "Probe for /status (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.205469",
+      "details": {
+        "path": "/status",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 106,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /health",
+      "description": "Probe for /health (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.205469",
+      "details": {
+        "path": "/health",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 107,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /info",
+      "description": "Probe for /info (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.209467",
+      "details": {
+        "path": "/info",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 108,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /metrics",
+      "description": "Probe for /metrics (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.213465",
+      "details": {
+        "path": "/metrics",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 109,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /env",
+      "description": "Probe for /env (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.213465",
+      "details": {
+        "path": "/env",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 110,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /actuator",
+      "description": "Probe for /actuator (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.217463",
+      "details": {
+        "path": "/actuator",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 111,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /actuator/health",
+      "description": "Probe for /actuator/health (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.217463",
+      "details": {
+        "path": "/actuator/health",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 112,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /actuator/env",
+      "description": "Probe for /actuator/env (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.221461",
+      "details": {
+        "path": "/actuator/env",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 113,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /actuator/info",
+      "description": "Probe for /actuator/info (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.225459",
+      "details": {
+        "path": "/actuator/info",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 114,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /swagger",
+      "description": "Probe for /swagger (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.225459",
+      "details": {
+        "path": "/swagger",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 115,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /swagger-ui",
+      "description": "Probe for /swagger-ui (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.233455",
+      "details": {
+        "path": "/swagger-ui",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 116,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /swagger.json",
+      "description": "Probe for /swagger.json (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.233455",
+      "details": {
+        "path": "/swagger.json",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 117,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /api-docs",
+      "description": "Probe for /api-docs (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.237453",
+      "details": {
+        "path": "/api-docs",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 118,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /openapi",
+      "description": "Probe for /openapi (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.237453",
+      "details": {
+        "path": "/openapi",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 119,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /openapi.json",
+      "description": "Probe for /openapi.json (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.241451",
+      "details": {
+        "path": "/openapi.json",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 120,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /.git/",
+      "description": "Probe for /.git/ (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.245449",
+      "details": {
+        "path": "/.git/",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 121,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /.git/config",
+      "description": "Probe for /.git/config (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.245449",
+      "details": {
+        "path": "/.git/config",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 122,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /.git/HEAD",
+      "description": "Probe for /.git/HEAD (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.265439",
+      "details": {
+        "path": "/.git/HEAD",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 123,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /.svn/",
+      "description": "Probe for /.svn/ (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.265439",
+      "details": {
+        "path": "/.svn/",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 124,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /.svn/entries",
+      "description": "Probe for /.svn/entries (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.265439",
+      "details": {
+        "path": "/.svn/entries",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 125,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /.env",
+      "description": "Probe for /.env (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.269437",
+      "details": {
+        "path": "/.env",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 126,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /.htaccess",
+      "description": "Probe for /.htaccess (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.281431",
+      "details": {
+        "path": "/.htaccess",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 127,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /.htpasswd",
+      "description": "Probe for /.htpasswd (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.285429",
+      "details": {
+        "path": "/.htpasswd",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 128,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /config.json",
+      "description": "Probe for /config.json (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.289427",
+      "details": {
+        "path": "/config.json",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 129,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /config.yaml",
+      "description": "Probe for /config.yaml (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.289427",
+      "details": {
+        "path": "/config.yaml",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 130,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /config.xml",
+      "description": "Probe for /config.xml (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.301421",
+      "details": {
+        "path": "/config.xml",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 131,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /robots.txt",
+      "description": "Probe for /robots.txt (with auth)",
+      "result": "HTTP 200, size=27",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.305419",
+      "details": {
+        "path": "/robots.txt",
+        "auth": "auth",
+        "status": 200,
+        "size": 27,
+        "content_type": "text/plain",
+        "body_preview": "User-agent: *\nDisallow: /\n\n"
+      }
+    },
+    {
+      "id": 132,
+      "category": "debug_endpoints",
+      "name": "Debug probe (noauth): /robots.txt",
+      "description": "Probe for /robots.txt (without auth)",
+      "result": "HTTP 200, size=27",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.309417",
+      "details": {
+        "path": "/robots.txt",
+        "auth": "noauth",
+        "status": 200,
+        "size": 27,
+        "content_type": "text/plain",
+        "body_preview": "User-agent: *\nDisallow: /\n\n"
+      }
+    },
+    {
+      "id": 133,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /sitemap.xml",
+      "description": "Probe for /sitemap.xml (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.325409",
+      "details": {
+        "path": "/sitemap.xml",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 134,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /crossdomain.xml",
+      "description": "Probe for /crossdomain.xml (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.325409",
+      "details": {
+        "path": "/crossdomain.xml",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 135,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /clientaccesspolicy.xml",
+      "description": "Probe for /clientaccesspolicy.xml (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.329407",
+      "details": {
+        "path": "/clientaccesspolicy.xml",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 136,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /winbox/",
+      "description": "Probe for /winbox/ (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.329407",
+      "details": {
+        "path": "/winbox/",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 137,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /winbox/index.html",
+      "description": "Probe for /winbox/index.html (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.341401",
+      "details": {
+        "path": "/winbox/index.html",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 138,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /webfig/mikrotik.ico",
+      "description": "Probe for /webfig/mikrotik.ico (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.345399",
+      "details": {
+        "path": "/webfig/mikrotik.ico",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 139,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /webfig/manifest.json",
+      "description": "Probe for /webfig/manifest.json (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.349397",
+      "details": {
+        "path": "/webfig/manifest.json",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 140,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /skins/",
+      "description": "Probe for /skins/ (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.349397",
+      "details": {
+        "path": "/skins/",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 141,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /graphs/",
+      "description": "Probe for /graphs/ (with auth)",
+      "result": "HTTP 200, size=230",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.361391",
+      "details": {
+        "path": "/graphs/",
+        "auth": "auth",
+        "status": 200,
+        "size": 230,
+        "content_type": "text/html",
+        "body_preview": "<!doctype html>\n<html lang=en>\n<link rel=icon href=/favicon.png>\n<link rel=icon href=/favicon.svg>\n<title>Graphing | MikroTik | RouterOS</title>\n<link rel=stylesheet href=/graph.css>\n\n<h1>Traffic and "
+      }
+    },
+    {
+      "id": 142,
+      "category": "debug_endpoints",
+      "name": "Debug probe (noauth): /graphs/",
+      "description": "Probe for /graphs/ (without auth)",
+      "result": "HTTP 200, size=230",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.365389",
+      "details": {
+        "path": "/graphs/",
+        "auth": "noauth",
+        "status": 200,
+        "size": 230,
+        "content_type": "text/html",
+        "body_preview": "<!doctype html>\n<html lang=en>\n<link rel=icon href=/favicon.png>\n<link rel=icon href=/favicon.svg>\n<title>Graphing | MikroTik | RouterOS</title>\n<link rel=stylesheet href=/graph.css>\n\n<h1>Traffic and "
+      }
+    },
+    {
+      "id": 143,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /jsproxy/config",
+      "description": "Probe for /jsproxy/config (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.365389",
+      "details": {
+        "path": "/jsproxy/config",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 144,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /up[REDACTED]",
+      "description": "Probe for /up[REDACTED] (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.385379",
+      "details": {
+        "path": "/up[REDACTED]",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 145,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /firmware",
+      "description": "Probe for /firmware (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.385379",
+      "details": {
+        "path": "/firmware",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 146,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /backup",
+      "description": "Probe for /backup (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.389377",
+      "details": {
+        "path": "/backup",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 147,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /system/backup",
+      "description": "Probe for /system/backup (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.401371",
+      "details": {
+        "path": "/system/backup",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 148,
+      "category": "debug_endpoints",
+      "name": "Debug probe (auth): /system/export",
+      "description": "Probe for /system/export (with auth)",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.405369",
+      "details": {
+        "path": "/system/export",
+        "auth": "auth",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 149,
+      "category": "debug_endpoints",
+      "name": "Discovery summary",
+      "description": "Summary of discovered hidden/debug endpoints",
+      "result": "Found 4 accessible endpoints",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.405369",
+      "details": {
+        "discovered": [
+          {
+            "path": "/robots.txt",
+            "status": 200,
+            "size": 27,
+            "auth": "auth",
+            "content_type": "text/plain"
+          },
+          {
+            "path": "/robots.txt",
+            "status": 200,
+            "size": 27,
+            "auth": "noauth",
+            "content_type": "text/plain"
+          },
+          {
+            "path": "/graphs/",
+            "status": 200,
+            "size": 230,
+            "auth": "auth",
+            "content_type": "text/html"
+          },
+          {
+            "path": "/graphs/",
+            "status": 200,
+            "size": 230,
+            "auth": "noauth",
+            "content_type": "text/html"
+          }
+        ]
+      }
+    },
+    {
+      "id": 150,
+      "category": "backup_access",
+      "name": "File listing",
+      "description": "List all files on router filesystem",
+      "result": "Found 6 files, 1 backup/config files",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.417363",
+      "details": {
+        "total_files": 6,
+        "backup_files": [
+          {
+            ".id": "*/1000FE21116C65616B65645F636F6E6669672E727363",
+            "last-modified": "2026-02-23 05:01:01",
+            "name": "leaked_config.rsc",
+            "size": "65923",
+            "type": "script"
+          }
+        ],
+        "all_files": [
+          "file",
+          "skins",
+          "user",
+          "leaked_config.rsc",
+          "dev",
+          "dev/null"
+        ]
+      }
+    },
+    {
+      "id": 151,
+      "category": "backup_access",
+      "name": "Create backup",
+      "description": "Create system backup via REST API",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:25.437353",
+      "details": {
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 152,
+      "category": "backup_access",
+      "name": "Backup file details",
+      "description": "Analyze created backup file",
+      "result": "File: _novel_test_backup.backup, Size: 131131",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:27.444349",
+      "details": {
+        "file": {
+          ".id": "*/1000FE21195F6E6F76656C5F746573745F6261636B75702E6261636B7570",
+          "last-modified": "2026-02-23 05:17:08",
+          "name": "_novel_test_backup.backup",
+          "size": "131131",
+          "type": "backup"
+        }
+      }
+    },
+    {
+      "id": 153,
+      "category": "backup_access",
+      "name": "Download backup: /webfig/backup/_novel_test_backup.backup",
+      "description": "Attempt to download backup via /webfig/backup/_novel_test_backup.backup",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:27.444349",
+      "details": {
+        "path": "/webfig/backup/_novel_test_backup.backup",
+        "status": 404,
+        "size": 99
+      }
+    },
+    {
+      "id": 154,
+      "category": "backup_access",
+      "name": "Download backup: /_novel_test_backup.backup",
+      "description": "Attempt to download backup via /_novel_test_backup.backup",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:27.448347",
+      "details": {
+        "path": "/_novel_test_backup.backup",
+        "status": 404,
+        "size": 99
+      }
+    },
+    {
+      "id": 155,
+      "category": "backup_access",
+      "name": "Download backup: /rest/file/_novel_test_backup.backup",
+      "description": "Attempt to download backup via /rest/file/_novel_test_backup.backup",
+      "result": "HTTP 200, size=177",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:27.448347",
+      "details": {
+        "path": "/rest/file/_novel_test_backup.backup",
+        "status": 200,
+        "size": 177
+      }
+    },
+    {
+      "id": 156,
+      "category": "backup_access",
+      "name": "Unauth backup: /webfig/backup/_novel_test_backup.backup",
+      "description": "Download backup without auth via /webfig/backup/_novel_test_backup.backup",
+      "result": "HTTP 404, accessible=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:27.452345",
+      "details": {
+        "path": "/webfig/backup/_novel_test_backup.backup",
+        "status": 404,
+        "accessible": false
+      }
+    },
+    {
+      "id": 157,
+      "category": "backup_access",
+      "name": "Unauth backup: /_novel_test_backup.backup",
+      "description": "Download backup without auth via /_novel_test_backup.backup",
+      "result": "HTTP 404, accessible=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:27.452345",
+      "details": {
+        "path": "/_novel_test_backup.backup",
+        "status": 404,
+        "accessible": false
+      }
+    },
+    {
+      "id": 158,
+      "category": "backup_access",
+      "name": "Unauth backup: /rest/file/_novel_test_backup.backup",
+      "description": "Download backup without auth via /rest/file/_novel_test_backup.backup",
+      "result": "HTTP 401, accessible=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:27.456343",
+      "details": {
+        "path": "/rest/file/_novel_test_backup.backup",
+        "status": 401,
+        "accessible": false
+      }
+    },
+    {
+      "id": 159,
+      "category": "backup_access",
+      "name": "Export config via REST",
+      "description": "Test /export endpoint via REST API",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:26:27.540301",
+      "details": {
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 160,
+      "category": "backup_access",
+      "name": "SSH export config",
+      "description": "Export configuration via SSH",
+      "result": "RC=0, size=64294, has_passwords=True",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:26:27.640251",
+      "details": {
+        "returncode": 0,
+        "output_size": 64294,
+        "has_passwords": true,
+        "output_preview": "# 2026-02-23 05:17:10 by RouterOS 7.20.8\n# system id = QKCm3jlSBfN\n#\n/interface ethernet\nset [ find default-name=ether1 ] disable-running-check=no\n/ip smb\nset enabled=yes\n/ip address\nadd address=[REDACTED-INTERNAL-IP] interface=lo network=[REDACTED-INTERNAL-IP]\n/ip dhcp-client\nadd interface=ether1\n/ip dns\nset servers=[REDACTED-IP]\n/ip firewall filter\nadd action=accept chain=input comment=csrf-test\nadd action=accept chain=input comment=csrf-test\nadd action=accept chain=input comment=\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "MEDIUM",
+      "title": "Missing Content-Security-Policy header on WebFig",
+      "description": "WebFig does not set CSP header. Missing headers: Content-Security-Policy, X-Content-Type-Options, X-XSS-Protection, Referrer-Policy, Permissions-Policy",
+      "timestamp": "2026-02-16T01:26:25.129507",
+      "cwe": "CWE-693"
+    },
+    {
+      "id": 2,
+      "severity": "MEDIUM",
+      "title": "Configuration export contains passwords",
+      "description": "SSH /export command outputs password fields in plaintext",
+      "timestamp": "2026-02-16T01:26:27.640251",
+      "cwe": "CWE-312"
+    }
+  ]
+}

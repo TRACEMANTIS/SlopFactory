@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "script": "webfig_http_fuzzer.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 7,
+    "start_time": "2026-02-16T00:49:44.746249",
+    "end_time": "2026-02-16T00:50:04.896169",
+    "total_tests": 10,
+    "anomalies": 6,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "48m45s",
+    "router_log_count": 22,
+    "router_interesting_events": 0,
+    "final_health": {
+      "alive": true,
+      "uptime": "49m5s",
+      "cpu_load": "0",
+      "free_memory": "837644288",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "supplementary",
+      "name": "raw_header_overflow_64KB",
+      "description": "Raw socket test: header_overflow_64KB",
+      "result": "Error: [Errno 104] Connection reset by peer",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:49:44.798223",
+      "details": {
+        "error": "[Errno 104] Connection reset by peer"
+      }
+    },
+    {
+      "id": 2,
+      "category": "supplementary",
+      "name": "raw_many_headers_500",
+      "description": "Raw socket test: many_headers_500",
+      "result": "Error: [Errno 104] Connection reset by peer",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:49:44.798223",
+      "details": {
+        "error": "[Errno 104] Connection reset by peer"
+      }
+    },
+    {
+      "id": 3,
+      "category": "supplementary",
+      "name": "raw_http_09_request",
+      "description": "Raw socket test: http_09_request",
+      "result": "HTTP 401, 302 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:49:44.798223",
+      "details": {
+        "http_status": 401,
+        "response_size": 302,
+        "response_preview": "HTTP/1.0 401 Unauthorized\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 38\r\nContent-Type: application/json\r\nDate: Fri, 20 Feb 2026 14:51:48 GMT\r\nExpires: Sat, 20 Feb 2027 14:51:48 GMT\r\nWWW-Authenticate: Basic\r\nX-Frame-Options: sameorigin\r\n\r\n{\"error\":401,\"message\":\"Unauthorized"
+      }
+    },
+    {
+      "id": 4,
+      "category": "supplementary",
+      "name": "raw_double_content_length",
+      "description": "Raw socket test: double_content_length",
+      "result": "0 bytes response",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:49:54.873183",
+      "details": {
+        "http_status": 0,
+        "response_size": 0,
+        "response_preview": ""
+      }
+    },
+    {
+      "id": 5,
+      "category": "supplementary",
+      "name": "raw_chunked_huge_size",
+      "description": "Raw socket test: chunked_huge_size",
+      "result": "HTTP 400, 302 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:49:54.877181",
+      "details": {
+        "http_status": 400,
+        "response_size": 302,
+        "response_preview": "HTTP/1.1 400 Bad Request\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 64\r\nContent-Type: application/json\r\nDate: Fri, 20 Feb 2026 14:51:58 GMT\r\nExpires: Sat, 20 Feb 2027 14:51:58 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n{\"detail\":\"no such command\",\"error\":400,\"message\":\"Bad Request"
+      }
+    },
+    {
+      "id": 6,
+      "category": "supplementary",
+      "name": "raw_smuggle_cl_te",
+      "description": "Raw socket test: smuggle_cl_te",
+      "result": "0 bytes response",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:50:04.888173",
+      "details": {
+        "http_status": 0,
+        "response_size": 0,
+        "response_preview": ""
+      }
+    },
+    {
+      "id": 7,
+      "category": "supplementary",
+      "name": "raw_binary_garbage",
+      "description": "Raw socket test: binary_garbage",
+      "result": "HTTP 503, 331 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:50:04.888173",
+      "details": {
+        "http_status": 503,
+        "response_size": 331,
+        "response_preview": "HTTP/1.0 503 Service Unavailable\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 109\r\nContent-Type: text/html\r\nDate: Fri, 20 Feb 2026 14:52:08 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>E"
+      }
+    },
+    {
+      "id": 8,
+      "category": "supplementary",
+      "name": "raw_empty_request",
+      "description": "Raw socket test: empty_request",
+      "result": "HTTP 400, 317 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:50:04.892171",
+      "details": {
+        "http_status": 400,
+        "response_size": 317,
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Fri, 20 Feb 2026 14:52:08 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : "
+      }
+    },
+    {
+      "id": 9,
+      "category": "supplementary",
+      "name": "raw_method_10KB",
+      "description": "Raw socket test: method_10KB",
+      "result": "Error: [Errno 104] Connection reset by peer",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:50:04.892171",
+      "details": {
+        "error": "[Errno 104] Connection reset by peer"
+      }
+    },
+    {
+      "id": 10,
+      "category": "supplementary",
+      "name": "raw_null_in_url",
+      "description": "Raw socket test: null_in_url",
+      "result": "HTTP 400, 336 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:50:04.896169",
+      "details": {
+        "http_status": 400,
+        "response_size": 336,
+        "response_preview": "HTTP/1.1 400 Bad Request\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 98\r\nContent-Type: application/json\r\nDate: Fri, 20 Feb 2026 14:52:08 GMT\r\nExpires: Sat, 20 Feb 2027 14:52:08 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n{\"detail\":\"no such command or directory (identity\\u0000evil)\","
+      }
+    }
+  ],
+  "findings": []
+}

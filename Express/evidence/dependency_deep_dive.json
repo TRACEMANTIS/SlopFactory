@@ -1,0 +1,802 @@
+{
+  "metadata": {
+    "phase": "4.2",
+    "name": "Dependency Deep Dive",
+    "timestamp": "2026-02-15T12:41:41.435252"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "qs_define_getter",
+      "version": "v5",
+      "data": {
+        "query": "__defineGetter__=test",
+        "parsed": "{'__defineGetter__': 'test'}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 2,
+      "test": "qs_define_setter",
+      "version": "v5",
+      "data": {
+        "query": "__defineSetter__=test",
+        "parsed": "{'__defineSetter__': 'test'}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 3,
+      "test": "qs_lookup_getter",
+      "version": "v5",
+      "data": {
+        "query": "__lookupGetter__=test",
+        "parsed": "{'__lookupGetter__': 'test'}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 4,
+      "test": "qs_proto_pollute_via_constructor",
+      "version": "v5",
+      "data": {
+        "query": "constructor.prototype.polluted=true",
+        "parsed": "{'constructor.prototype.polluted': 'true'}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 5,
+      "test": "qs_proto_bracket_mixed",
+      "version": "v5",
+      "data": {
+        "query": "a][__proto__][polluted]=true",
+        "parsed": "{'a][__proto__][polluted]': 'true'}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 6,
+      "test": "qs_numeric_proto",
+      "version": "v5",
+      "data": {
+        "query": "0[__proto__][polluted]=true",
+        "parsed": "{'0[__proto__][polluted]': 'true'}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 7,
+      "test": "qs_depth_default",
+      "version": "v5",
+      "data": {
+        "query": "a[b][c][d][e][f]=6deep",
+        "parsed": "{'a[b][c][d][e][f]': '6deep'}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 8,
+      "test": "qs_depth_exceed",
+      "version": "v5",
+      "data": {
+        "query": "a[b][c][d][e][f][g][h]=8deep",
+        "parsed": "{'a[b][c][d][e][f][g][h]': '8deep'}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 9,
+      "test": "qs_array_at_limit",
+      "version": "v5",
+      "data": {
+        "query": "a[0]=v&a[1]=v&a[2]=v&a[3]=v&a[4]=v&a[5]=v&a[6]=v&a[7]=v&a[8]=v&a[9]=v&a[10]=v&a[11]=v&a[12]=v&a[13]=v&a[14]=v&a[15]=v&a[16]=v&a[17]=v&a[18]=v&a[19]=v",
+        "parsed": "{'a[0]': 'v', 'a[1]': 'v', 'a[2]': 'v', 'a[3]': 'v', 'a[4]': 'v', 'a[5]': 'v', 'a[6]': 'v', 'a[7]': 'v', 'a[8]': 'v', 'a[9]': 'v', 'a[10]': 'v', 'a[11]': 'v', 'a[12]': 'v', 'a[13]': 'v', 'a[14]': 'v', 'a[15]': 'v', 'a[16]': 'v', 'a[17]': 'v', 'a[18]': 'v', 'a[19]': 'v'}",
+        "param_count": 20,
+        "status": 200
+      }
+    },
+    {
+      "id": 10,
+      "test": "qs_array_over_limit",
+      "version": "v5",
+      "data": {
+        "query": "a[0]=v&a[1]=v&a[2]=v&a[3]=v&a[4]=v&a[5]=v&a[6]=v&a[7]=v&a[8]=v&a[9]=v&a[10]=v&a[11]=v&a[12]=v&a[13]=v&a[14]=v&a[15]=v&a[16]=v&a[17]=v&a[18]=v&a[19]=v&a[20]=v&a[21]=v&a[22]=v&a[23]=v&a[24]=v",
+        "parsed": "{'a[0]': 'v', 'a[1]': 'v', 'a[2]': 'v', 'a[3]': 'v', 'a[4]': 'v', 'a[5]': 'v', 'a[6]': 'v', 'a[7]': 'v', 'a[8]': 'v', 'a[9]': 'v', 'a[10]': 'v', 'a[11]': 'v', 'a[12]': 'v', 'a[13]': 'v', 'a[14]': 'v', 'a[15]': 'v', 'a[16]': 'v', 'a[17]': 'v', 'a[18]': 'v', 'a[19]': 'v', 'a[20]': 'v', 'a[21]': 'v', '",
+        "param_count": 25,
+        "status": 200
+      }
+    },
+    {
+      "id": 11,
+      "test": "qs_param_limit",
+      "version": "v5",
+      "data": {
+        "query": "p0=v&p1=v&p2=v&p3=v&p4=v&p5=v&p6=v&p7=v&p8=v&p9=v&p10=v&p11=v&p12=v&p13=v&p14=v&p15=v&p16=v&p17=v&p18=v&p19=v&p20=v&p21=v&p22=v&p23=v&p24=v&p25=v&p26=v&p27=v&p28=v&p29=v&p30=v&p31=v&p32=v&p33=v&p34=v&",
+        "parsed": "{'p0': 'v', 'p1': 'v', 'p2': 'v', 'p3': 'v', 'p4': 'v', 'p5': 'v', 'p6': 'v', 'p7': 'v', 'p8': 'v', 'p9': 'v', 'p10': 'v', 'p11': 'v', 'p12': 'v', 'p13': 'v', 'p14': 'v', 'p15': 'v', 'p16': 'v', 'p17': 'v', 'p18': 'v', 'p19': 'v', 'p20': 'v', 'p21': 'v', 'p22': 'v', 'p23': 'v', 'p24': 'v', 'p25': 'v",
+        "param_count": 1000,
+        "status": 200
+      }
+    },
+    {
+      "id": 12,
+      "test": "qs_empty_key",
+      "version": "v5",
+      "data": {
+        "query": "=value",
+        "parsed": "{'': 'value'}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 13,
+      "test": "qs_empty_value",
+      "version": "v5",
+      "data": {
+        "query": "key=",
+        "parsed": "{'key': ''}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 14,
+      "test": "qs_no_equals",
+      "version": "v5",
+      "data": {
+        "query": "justkey",
+        "parsed": "{'justkey': ''}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 15,
+      "test": "qs_only_ampersand",
+      "version": "v5",
+      "data": {
+        "query": "&&&",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 200
+      }
+    },
+    {
+      "id": 16,
+      "test": "qs_encoded_equals",
+      "version": "v5",
+      "data": {
+        "query": "key%3Dvalue",
+        "parsed": "{'key=value': ''}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 17,
+      "test": "qs_unicode_key",
+      "version": "v5",
+      "data": {
+        "query": "\u00e9=accent",
+        "parsed": "{'\u00e9': 'accent'}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 18,
+      "test": "qs_utf8_value",
+      "version": "v5",
+      "data": {
+        "query": "key=\u00e9",
+        "parsed": "{'key': '\u00e9'}",
+        "param_count": 1,
+        "status": 200
+      }
+    },
+    {
+      "id": 19,
+      "test": "qs_define_getter",
+      "version": "v4",
+      "data": {
+        "query": "__defineGetter__=test",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 20,
+      "test": "qs_define_setter",
+      "version": "v4",
+      "data": {
+        "query": "__defineSetter__=test",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 21,
+      "test": "qs_lookup_getter",
+      "version": "v4",
+      "data": {
+        "query": "__lookupGetter__=test",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 22,
+      "test": "qs_proto_pollute_via_constructor",
+      "version": "v4",
+      "data": {
+        "query": "constructor.prototype.polluted=true",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 23,
+      "test": "qs_proto_bracket_mixed",
+      "version": "v4",
+      "data": {
+        "query": "a][__proto__][polluted]=true",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 24,
+      "test": "qs_numeric_proto",
+      "version": "v4",
+      "data": {
+        "query": "0[__proto__][polluted]=true",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 25,
+      "test": "qs_depth_default",
+      "version": "v4",
+      "data": {
+        "query": "a[b][c][d][e][f]=6deep",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 26,
+      "test": "qs_depth_exceed",
+      "version": "v4",
+      "data": {
+        "query": "a[b][c][d][e][f][g][h]=8deep",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 27,
+      "test": "qs_array_at_limit",
+      "version": "v4",
+      "data": {
+        "query": "a[0]=v&a[1]=v&a[2]=v&a[3]=v&a[4]=v&a[5]=v&a[6]=v&a[7]=v&a[8]=v&a[9]=v&a[10]=v&a[11]=v&a[12]=v&a[13]=v&a[14]=v&a[15]=v&a[16]=v&a[17]=v&a[18]=v&a[19]=v",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 28,
+      "test": "qs_array_over_limit",
+      "version": "v4",
+      "data": {
+        "query": "a[0]=v&a[1]=v&a[2]=v&a[3]=v&a[4]=v&a[5]=v&a[6]=v&a[7]=v&a[8]=v&a[9]=v&a[10]=v&a[11]=v&a[12]=v&a[13]=v&a[14]=v&a[15]=v&a[16]=v&a[17]=v&a[18]=v&a[19]=v&a[20]=v&a[21]=v&a[22]=v&a[23]=v&a[24]=v",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 29,
+      "test": "qs_param_limit",
+      "version": "v4",
+      "data": {
+        "query": "p0=v&p1=v&p2=v&p3=v&p4=v&p5=v&p6=v&p7=v&p8=v&p9=v&p10=v&p11=v&p12=v&p13=v&p14=v&p15=v&p16=v&p17=v&p18=v&p19=v&p20=v&p21=v&p22=v&p23=v&p24=v&p25=v&p26=v&p27=v&p28=v&p29=v&p30=v&p31=v&p32=v&p33=v&p34=v&",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 30,
+      "test": "qs_empty_key",
+      "version": "v4",
+      "data": {
+        "query": "=value",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 31,
+      "test": "qs_empty_value",
+      "version": "v4",
+      "data": {
+        "query": "key=",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 32,
+      "test": "qs_no_equals",
+      "version": "v4",
+      "data": {
+        "query": "justkey",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 33,
+      "test": "qs_only_ampersand",
+      "version": "v4",
+      "data": {
+        "query": "&&&",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 34,
+      "test": "qs_encoded_equals",
+      "version": "v4",
+      "data": {
+        "query": "key%3Dvalue",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 35,
+      "test": "qs_unicode_key",
+      "version": "v4",
+      "data": {
+        "query": "\u00e9=accent",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 36,
+      "test": "qs_utf8_value",
+      "version": "v4",
+      "data": {
+        "query": "key=\u00e9",
+        "parsed": "{}",
+        "param_count": 0,
+        "status": 500
+      }
+    },
+    {
+      "id": 37,
+      "test": "cookie_normal",
+      "version": "v5",
+      "data": {
+        "sent": "session=abc123",
+        "received": "session=abc123",
+        "status": 200,
+        "preserved": true
+      }
+    },
+    {
+      "id": 38,
+      "test": "cookie_spaces_in_value",
+      "version": "v5",
+      "data": {
+        "sent": "session=abc 123",
+        "received": "session=abc 123",
+        "status": 200,
+        "preserved": true
+      }
+    },
+    {
+      "id": 39,
+      "test": "cookie_semicolon_in_value",
+      "version": "v5",
+      "data": {
+        "sent": "session=abc;123",
+        "received": "session=abc;123",
+        "status": 200,
+        "preserved": true
+      }
+    },
+    {
+      "id": 40,
+      "test": "cookie_encoded_value",
+      "version": "v5",
+      "data": {
+        "sent": "session=abc%3B123",
+        "received": "session=abc%3B123",
+        "status": 200,
+        "preserved": true
+      }
+    },
+    {
+      "id": 41,
+      "test": "cookie_unicode_value",
+      "version": "v5",
+      "data": {
+        "sent": "session=\u00e9\u00e8\u00ea",
+        "received": "session=\u00e9\u00e8\u00ea",
+        "status": 200,
+        "preserved": true
+      }
+    },
+    {
+      "id": 42,
+      "test": "cookie_very_long",
+      "version": "v5",
+      "data": {
+        "sent": "session=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "received": "session=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "status": 200,
+        "preserved": true
+      }
+    },
+    {
+      "id": 43,
+      "test": "cookie_null_byte",
+      "version": "v5",
+      "data": {
+        "sent": "session=abc\u0000def",
+        "received": "",
+        "status": 400,
+        "preserved": false
+      }
+    },
+    {
+      "id": 44,
+      "test": "cookie_many_cookies",
+      "version": "v5",
+      "data": {
+        "sent": "c0=v0; c1=v1; c2=v2; c3=v3; c4=v4; c5=v5; c6=v6; c7=v7; c8=v8; c9=v9; c10=v10; c11=v11; c12=v12; c13=v13; c14=v14; c15=v15; c16=v16; c17=v17; c18=v18; c19=v19; c20=v20; c21=v21; c22=v22; c23=v23; c24=",
+        "received": "c0=v0; c1=v1; c2=v2; c3=v3; c4=v4; c5=v5; c6=v6; c7=v7; c8=v8; c9=v9; c10=v10; c11=v11; c12=v12; c13=v13; c14=v14; c15=v15; c16=v16; c17=v17; c18=v18; c19=v19; c20=v20; c21=v21; c22=v22; c23=v23; c24=",
+        "status": 200,
+        "preserved": true
+      }
+    },
+    {
+      "id": 45,
+      "test": "cookie_duplicate_name",
+      "version": "v5",
+      "data": {
+        "sent": "session=first; session=second",
+        "received": "session=first; session=second",
+        "status": 200,
+        "preserved": true
+      }
+    },
+    {
+      "id": 46,
+      "test": "cookie_empty_cookie",
+      "version": "v5",
+      "data": {
+        "sent": "",
+        "received": "",
+        "status": 200,
+        "preserved": true
+      }
+    },
+    {
+      "id": 47,
+      "test": "cookie_only_semicolons",
+      "version": "v5",
+      "data": {
+        "sent": ";;;",
+        "received": ";;;",
+        "status": 200,
+        "preserved": true
+      }
+    },
+    {
+      "id": 48,
+      "test": "cookie_normal",
+      "version": "v4",
+      "data": {
+        "sent": "session=abc123",
+        "received": "",
+        "status": 500,
+        "preserved": false
+      }
+    },
+    {
+      "id": 49,
+      "test": "cookie_spaces_in_value",
+      "version": "v4",
+      "data": {
+        "sent": "session=abc 123",
+        "received": "",
+        "status": 500,
+        "preserved": false
+      }
+    },
+    {
+      "id": 50,
+      "test": "cookie_semicolon_in_value",
+      "version": "v4",
+      "data": {
+        "sent": "session=abc;123",
+        "received": "",
+        "status": 500,
+        "preserved": false
+      }
+    },
+    {
+      "id": 51,
+      "test": "cookie_encoded_value",
+      "version": "v4",
+      "data": {
+        "sent": "session=abc%3B123",
+        "received": "",
+        "status": 500,
+        "preserved": false
+      }
+    },
+    {
+      "id": 52,
+      "test": "cookie_unicode_value",
+      "version": "v4",
+      "data": {
+        "sent": "session=\u00e9\u00e8\u00ea",
+        "received": "",
+        "status": 500,
+        "preserved": false
+      }
+    },
+    {
+      "id": 53,
+      "test": "cookie_very_long",
+      "version": "v4",
+      "data": {
+        "sent": "session=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "received": "",
+        "status": 500,
+        "preserved": false
+      }
+    },
+    {
+      "id": 54,
+      "test": "cookie_null_byte",
+      "version": "v4",
+      "data": {
+        "sent": "session=abc\u0000def",
+        "received": "",
+        "status": 400,
+        "preserved": false
+      }
+    },
+    {
+      "id": 55,
+      "test": "cookie_many_cookies",
+      "version": "v4",
+      "data": {
+        "sent": "c0=v0; c1=v1; c2=v2; c3=v3; c4=v4; c5=v5; c6=v6; c7=v7; c8=v8; c9=v9; c10=v10; c11=v11; c12=v12; c13=v13; c14=v14; c15=v15; c16=v16; c17=v17; c18=v18; c19=v19; c20=v20; c21=v21; c22=v22; c23=v23; c24=",
+        "received": "",
+        "status": 500,
+        "preserved": false
+      }
+    },
+    {
+      "id": 56,
+      "test": "cookie_duplicate_name",
+      "version": "v4",
+      "data": {
+        "sent": "session=first; session=second",
+        "received": "",
+        "status": 500,
+        "preserved": false
+      }
+    },
+    {
+      "id": 57,
+      "test": "cookie_empty_cookie",
+      "version": "v4",
+      "data": {
+        "sent": "",
+        "received": "",
+        "status": 500,
+        "preserved": true
+      }
+    },
+    {
+      "id": 58,
+      "test": "cookie_only_semicolons",
+      "version": "v4",
+      "data": {
+        "sent": ";;;",
+        "received": "",
+        "status": 500,
+        "preserved": false
+      }
+    },
+    {
+      "id": 59,
+      "test": "send_range_header",
+      "version": "v5",
+      "data": {
+        "path": "/static/.env",
+        "request_headers": {
+          "Range": "bytes=0-10"
+        },
+        "status": 206,
+        "content_range": "bytes 0-10/70",
+        "etag": "W/\"46-19c625388ea\"",
+        "content_encoding": ""
+      }
+    },
+    {
+      "id": 60,
+      "test": "send_invalid_range",
+      "version": "v5",
+      "data": {
+        "path": "/static/.env",
+        "request_headers": {
+          "Range": "bytes=9999-10000"
+        },
+        "status": 416,
+        "content_range": "bytes */70",
+        "etag": "W/\"46-19c625388ea\"",
+        "content_encoding": ""
+      }
+    },
+    {
+      "id": 61,
+      "test": "send_if_none_match",
+      "version": "v5",
+      "data": {
+        "path": "/static/.env",
+        "request_headers": {
+          "If-None-Match": "\"invalid-etag\""
+        },
+        "status": 200,
+        "content_range": "",
+        "etag": "W/\"46-19c625388ea\"",
+        "content_encoding": ""
+      }
+    },
+    {
+      "id": 62,
+      "test": "send_if_modified_since",
+      "version": "v5",
+      "data": {
+        "path": "/static/.env",
+        "request_headers": {
+          "If-Modified-Since": "Thu, 01 Jan 2099 00:00:00 GMT"
+        },
+        "status": 304,
+        "content_range": "",
+        "etag": "W/\"46-19c625388ea\"",
+        "content_encoding": ""
+      }
+    },
+    {
+      "id": 63,
+      "test": "send_accept_encoding_gzip",
+      "version": "v5",
+      "data": {
+        "path": "/static/.env",
+        "request_headers": {
+          "Accept-Encoding": "gzip, deflate"
+        },
+        "status": 200,
+        "content_range": "",
+        "etag": "W/\"46-19c625388ea\"",
+        "content_encoding": ""
+      }
+    },
+    {
+      "id": 64,
+      "test": "send_range_header",
+      "version": "v4",
+      "data": {
+        "path": "/static/.env",
+        "request_headers": {
+          "Range": "bytes=0-10"
+        },
+        "status": 500,
+        "content_range": "",
+        "etag": "",
+        "content_encoding": ""
+      }
+    },
+    {
+      "id": 65,
+      "test": "send_invalid_range",
+      "version": "v4",
+      "data": {
+        "path": "/static/.env",
+        "request_headers": {
+          "Range": "bytes=9999-10000"
+        },
+        "status": 500,
+        "content_range": "",
+        "etag": "",
+        "content_encoding": ""
+      }
+    },
+    {
+      "id": 66,
+      "test": "send_if_none_match",
+      "version": "v4",
+      "data": {
+        "path": "/static/.env",
+        "request_headers": {
+          "If-None-Match": "\"invalid-etag\""
+        },
+        "status": 500,
+        "content_range": "",
+        "etag": "",
+        "content_encoding": ""
+      }
+    },
+    {
+      "id": 67,
+      "test": "send_if_modified_since",
+      "version": "v4",
+      "data": {
+        "path": "/static/.env",
+        "request_headers": {
+          "If-Modified-Since": "Thu, 01 Jan 2099 00:00:00 GMT"
+        },
+        "status": 500,
+        "content_range": "",
+        "etag": "",
+        "content_encoding": ""
+      }
+    },
+    {
+      "id": 68,
+      "test": "send_accept_encoding_gzip",
+      "version": "v4",
+      "data": {
+        "path": "/static/.env",
+        "request_headers": {
+          "Accept-Encoding": "gzip, deflate"
+        },
+        "status": 500,
+        "content_range": "",
+        "etag": "",
+        "content_encoding": ""
+      }
+    }
+  ],
+  "findings": [],
+  "summary": {
+    "total_tests": 68,
+    "findings_count": 0
+  }
+}

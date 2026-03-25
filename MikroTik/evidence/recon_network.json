@@ -1,0 +1,2346 @@
+{
+  "metadata": {
+    "script": "recon_network.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 1,
+    "start_time": "2026-02-15T21:52:11.947019",
+    "end_time": "2026-02-15T22:03:49.098269",
+    "total_tests": 124,
+    "anomalies": 10
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "nmap",
+      "name": "TCP full port scan",
+      "description": "Full TCP connect scan with service detection and OS fingerprinting",
+      "result": "Found 9 open TCP ports",
+      "anomaly": false,
+      "timestamp": "2026-02-15T21:56:27.747054",
+      "details": {
+        "ports": {
+          "21": "ftp",
+          "22": "ssh",
+          "23": "telnet",
+          "80": "http",
+          "443": "ssl/https",
+          "2000": "bandwidth-test",
+          "8291": "unknown",
+          "8728": "routeros-api",
+          "8729": "ssl/routeros-api"
+        },
+        "xml_file": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/MikroTik/scans/nmap_tcp_full.xml"
+      }
+    },
+    {
+      "id": 2,
+      "category": "nmap",
+      "name": "UDP top-100 scan",
+      "description": "UDP service scan of top 100 ports",
+      "result": "Found 1 open UDP ports",
+      "anomaly": false,
+      "timestamp": "2026-02-15T21:58:11.954925",
+      "details": {
+        "ports": {
+          "161": "snmp"
+        },
+        "xml_file": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/MikroTik/scans/nmap_udp_top100.xml"
+      }
+    },
+    {
+      "id": 3,
+      "category": "nmap",
+      "name": "Vulnerability script scan",
+      "description": "nmap vuln scripts against all open TCP ports",
+      "result": "Found 3 CVE references, 4 VULNERABLE flags",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:02:40.884393",
+      "details": {
+        "cves": [
+          "CVE-2007-6750",
+          "CVE-2011-1002"
+        ],
+        "vulnerable_flags": [
+          "VULNERABLE:",
+          "State: LIKELY VULNERABLE",
+          "VULNERABLE:",
+          "State: VULNERABLE"
+        ],
+        "xml_file": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/MikroTik/scans/nmap_vuln.xml"
+      }
+    },
+    {
+      "id": 4,
+      "category": "webfig",
+      "name": "WebFig HTTP root response",
+      "description": "Analyze HTTP response headers from WebFig root",
+      "result": "Status 200, 7 headers, server=N/A",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.892389",
+      "details": {
+        "status_code": 200,
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "1280",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 03:05:26 GMT",
+          "Expires": "Tue, 16 Feb 2027 03:05:26 GMT",
+          "X-Frame-Options": "sameorigin"
+        },
+        "security_headers": {
+          "X-Frame-Options": "sameorigin",
+          "X-Content-Type-Options": null,
+          "Content-Security-Policy": null,
+          "Strict-Transport-Security": null,
+          "X-XSS-Protection": null,
+          "Referrer-Policy": null
+        },
+        "missing_security": [
+          "X-Content-Type-Options",
+          "Content-Security-Policy",
+          "Strict-Transport-Security",
+          "X-XSS-Protection",
+          "Referrer-Policy"
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "category": "webfig",
+      "name": "Missing security headers (HTTP)",
+      "description": "Security headers absent from HTTP response",
+      "result": "Missing: X-Content-Type-Options, Content-Security-Policy, Strict-Transport-Security, X-XSS-Protection, Referrer-Policy",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:02:40.892389",
+      "details": {
+        "missing": [
+          "X-Content-Type-Options",
+          "Content-Security-Policy",
+          "Strict-Transport-Security",
+          "X-XSS-Protection",
+          "Referrer-Policy"
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "category": "webfig",
+      "name": "WebFig HTTPS root response",
+      "description": "Analyze HTTPS response headers from WebFig root",
+      "result": "Status 200, 7 headers, server=N/A",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.944363",
+      "details": {
+        "status_code": 200,
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "1280",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 03:05:26 GMT",
+          "Expires": "Tue, 16 Feb 2027 03:05:26 GMT",
+          "X-Frame-Options": "sameorigin"
+        },
+        "security_headers": {
+          "X-Frame-Options": "sameorigin",
+          "X-Content-Type-Options": null,
+          "Content-Security-Policy": null,
+          "Strict-Transport-Security": null,
+          "X-XSS-Protection": null,
+          "Referrer-Policy": null
+        },
+        "missing_security": [
+          "X-Content-Type-Options",
+          "Content-Security-Policy",
+          "Strict-Transport-Security",
+          "X-XSS-Protection",
+          "Referrer-Policy"
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "category": "webfig",
+      "name": "Missing security headers (HTTPS)",
+      "description": "Security headers absent from HTTPS response",
+      "result": "Missing: X-Content-Type-Options, Content-Security-Policy, Strict-Transport-Security, X-XSS-Protection, Referrer-Policy",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:02:40.944363",
+      "details": {
+        "missing": [
+          "X-Content-Type-Options",
+          "Content-Security-Policy",
+          "Strict-Transport-Security",
+          "X-XSS-Protection",
+          "Referrer-Policy"
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "category": "webfig",
+      "name": "Path probe: /webfig/",
+      "description": "HTTP GET /webfig/ without auth",
+      "result": "Status 200, 22450 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.948361",
+      "details": {
+        "path": "/webfig/",
+        "status": 200,
+        "size": 22450,
+        "content_type": "text/html",
+        "redirect": ""
+      }
+    },
+    {
+      "id": 9,
+      "category": "webfig",
+      "name": "Path probe: /webfig/login",
+      "description": "HTTP GET /webfig/login without auth",
+      "result": "Status 404, 99 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.952359",
+      "details": {
+        "path": "/webfig/login",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "redirect": ""
+      }
+    },
+    {
+      "id": 10,
+      "category": "webfig",
+      "name": "Path probe: /graphs/",
+      "description": "HTTP GET /graphs/ without auth",
+      "result": "Status 200, 230 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.960355",
+      "details": {
+        "path": "/graphs/",
+        "status": 200,
+        "size": 230,
+        "content_type": "text/html",
+        "redirect": ""
+      }
+    },
+    {
+      "id": 11,
+      "category": "webfig",
+      "name": "Path probe: /winbox/",
+      "description": "HTTP GET /winbox/ without auth",
+      "result": "Status 404, 99 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.964353",
+      "details": {
+        "path": "/winbox/",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "redirect": ""
+      }
+    },
+    {
+      "id": 12,
+      "category": "webfig",
+      "name": "Path probe: /favicon.ico",
+      "description": "HTTP GET /favicon.ico without auth",
+      "result": "Status 404, 99 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.968351",
+      "details": {
+        "path": "/favicon.ico",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "redirect": ""
+      }
+    },
+    {
+      "id": 13,
+      "category": "webfig",
+      "name": "Path probe: /jsproxy/",
+      "description": "HTTP GET /jsproxy/ without auth",
+      "result": "Status 404, 99 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.972349",
+      "details": {
+        "path": "/jsproxy/",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "redirect": ""
+      }
+    },
+    {
+      "id": 14,
+      "category": "webfig",
+      "name": "Path probe: /rest/",
+      "description": "HTTP GET /rest/ without auth",
+      "result": "Status 401, 38 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.976347",
+      "details": {
+        "path": "/rest/",
+        "status": 401,
+        "size": 38,
+        "content_type": "application/json",
+        "redirect": ""
+      }
+    },
+    {
+      "id": 15,
+      "category": "webfig",
+      "name": "Path probe: /rest/system/resource",
+      "description": "HTTP GET /rest/system/resource without auth",
+      "result": "Status 401, 38 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.980345",
+      "details": {
+        "path": "/rest/system/resource",
+        "status": 401,
+        "size": 38,
+        "content_type": "application/json",
+        "redirect": ""
+      }
+    },
+    {
+      "id": 16,
+      "category": "webfig",
+      "name": "Path probe: /.well-known/",
+      "description": "HTTP GET /.well-known/ without auth",
+      "result": "Status 404, 99 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.984343",
+      "details": {
+        "path": "/.well-known/",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "redirect": ""
+      }
+    },
+    {
+      "id": 17,
+      "category": "webfig",
+      "name": "Path probe: /skins/",
+      "description": "HTTP GET /skins/ without auth",
+      "result": "Status 404, 99 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.984343",
+      "details": {
+        "path": "/skins/",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "redirect": ""
+      }
+    },
+    {
+      "id": 18,
+      "category": "webfig",
+      "name": "Path probe: /flash/",
+      "description": "HTTP GET /flash/ without auth",
+      "result": "Status 404, 99 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.988341",
+      "details": {
+        "path": "/flash/",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "redirect": ""
+      }
+    },
+    {
+      "id": 19,
+      "category": "webfig",
+      "name": "Path probe: /rw/",
+      "description": "HTTP GET /rw/ without auth",
+      "result": "Status 404, 99 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:40.992339",
+      "details": {
+        "path": "/rw/",
+        "status": 404,
+        "size": 99,
+        "content_type": "text/html",
+        "redirect": ""
+      }
+    },
+    {
+      "id": 20,
+      "category": "webfig",
+      "name": "WebFig JavaScript files",
+      "description": "Extract JavaScript file references from WebFig page",
+      "result": "Found 2 JS files",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.000335",
+      "details": {
+        "js_files": [
+          "curve255-541e54a862be.js",
+          "master-61ed6e5ae60d.js"
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "category": "webfig",
+      "name": "JS fetch: curve255-541e54a862be.js",
+      "description": "Fetch curve255-541e54a862be.js",
+      "result": "Error: HTTPConnectionPool(host='10.0.0.110curve255-541e54a862be.js', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(\"<urllib3.connection.HTTPConnection object at 0x7f8eedc33240>: Failed to resolve '10.0.0.110curve255-541e54a862be.js' ([Errno -2] Name or service not known)\"))",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.128271"
+    },
+    {
+      "id": 22,
+      "category": "webfig",
+      "name": "JS fetch: master-61ed6e5ae60d.js",
+      "description": "Fetch master-61ed6e5ae60d.js",
+      "result": "Error: HTTPConnectionPool(host='10.0.0.110master-61ed6e5ae60d.js', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(\"<urllib3.connection.HTTPConnection object at 0x7f8eedc33130>: Failed to resolve '10.0.0.110master-61ed6e5ae60d.js' ([Errno -2] Name or service not known)\"))",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.304183"
+    },
+    {
+      "id": 23,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/resource",
+      "description": "GET /system/resource with admin credentials",
+      "result": "Status 200, 441 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.312179",
+      "details": {
+        "path": "/system/resource",
+        "status": 200,
+        "size": 441
+      }
+    },
+    {
+      "id": 24,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/identity",
+      "description": "GET /system/identity with admin credentials",
+      "result": "Status 200, 19 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.316177",
+      "details": {
+        "path": "/system/identity",
+        "status": 200,
+        "size": 19
+      }
+    },
+    {
+      "id": 25,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/clock",
+      "description": "GET /system/clock with admin credentials",
+      "result": "Status 200, 138 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.320175",
+      "details": {
+        "path": "/system/clock",
+        "status": 200,
+        "size": 138
+      }
+    },
+    {
+      "id": 26,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/health",
+      "description": "GET /system/health with admin credentials",
+      "result": "Status 200, 51 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.324173",
+      "details": {
+        "path": "/system/health",
+        "status": 200,
+        "size": 51
+      }
+    },
+    {
+      "id": 27,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/history",
+      "description": "GET /system/history with admin credentials",
+      "result": "Status 200, 2316 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.336167",
+      "details": {
+        "path": "/system/history",
+        "status": 200,
+        "size": 2316
+      }
+    },
+    {
+      "id": 28,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/license",
+      "description": "GET /system/license with admin credentials",
+      "result": "Status 200, 42 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.340165",
+      "details": {
+        "path": "/system/license",
+        "status": 200,
+        "size": 42
+      }
+    },
+    {
+      "id": 29,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/logging",
+      "description": "GET /system/logging with admin credentials",
+      "result": "Status 200, 503 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.348161",
+      "details": {
+        "path": "/system/logging",
+        "status": 200,
+        "size": 503
+      }
+    },
+    {
+      "id": 30,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/note",
+      "description": "GET /system/note with admin credentials",
+      "result": "Status 200, 62 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.352159",
+      "details": {
+        "path": "/system/note",
+        "status": 200,
+        "size": 62
+      }
+    },
+    {
+      "id": 31,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/ntp/client",
+      "description": "GET /system/ntp/client with admin credentials",
+      "result": "Status 200, 98 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.356157",
+      "details": {
+        "path": "/system/ntp/client",
+        "status": 200,
+        "size": 98
+      }
+    },
+    {
+      "id": 32,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/package",
+      "description": "GET /system/package with admin credentials",
+      "result": "Status 200, 158 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.360155",
+      "details": {
+        "path": "/system/package",
+        "status": 200,
+        "size": 158
+      }
+    },
+    {
+      "id": 33,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/scheduler",
+      "description": "GET /system/scheduler with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.372149",
+      "details": {
+        "path": "/system/scheduler",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 34,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/script",
+      "description": "GET /system/script with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.380145",
+      "details": {
+        "path": "/system/script",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 35,
+      "category": "rest_api",
+      "name": "REST endpoint: /system/watchdog",
+      "description": "GET /system/watchdog with admin credentials",
+      "result": "Status 200, 150 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.384143",
+      "details": {
+        "path": "/system/watchdog",
+        "status": 200,
+        "size": 150
+      }
+    },
+    {
+      "id": 36,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/address",
+      "description": "GET /ip/address with admin credentials",
+      "result": "Status 200, 180 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.388141",
+      "details": {
+        "path": "/ip/address",
+        "status": 200,
+        "size": 180
+      }
+    },
+    {
+      "id": 37,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/arp",
+      "description": "GET /ip/arp with admin credentials",
+      "result": "Status 200, 220 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.396137",
+      "details": {
+        "path": "/ip/arp",
+        "status": 200,
+        "size": 220
+      }
+    },
+    {
+      "id": 38,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/dhcp-client",
+      "description": "GET /ip/dhcp-client with admin credentials",
+      "result": "Status 200, 479 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.400135",
+      "details": {
+        "path": "/ip/dhcp-client",
+        "status": 200,
+        "size": 479
+      }
+    },
+    {
+      "id": 39,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/dhcp-server",
+      "description": "GET /ip/dhcp-server with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.416127",
+      "details": {
+        "path": "/ip/dhcp-server",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 40,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/dns",
+      "description": "GET /ip/dns with admin credentials",
+      "result": "Status 200, 488 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.424123",
+      "details": {
+        "path": "/ip/dns",
+        "status": 200,
+        "size": 488
+      }
+    },
+    {
+      "id": 41,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/firewall/filter",
+      "description": "GET /ip/firewall/filter with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.428121",
+      "details": {
+        "path": "/ip/firewall/filter",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 42,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/firewall/nat",
+      "description": "GET /ip/firewall/nat with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.432119",
+      "details": {
+        "path": "/ip/firewall/nat",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 43,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/firewall/mangle",
+      "description": "GET /ip/firewall/mangle with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.440115",
+      "details": {
+        "path": "/ip/firewall/mangle",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 44,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/firewall/raw",
+      "description": "GET /ip/firewall/raw with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.448111",
+      "details": {
+        "path": "/ip/firewall/raw",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 45,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/neighbor",
+      "description": "GET /ip/neighbor with admin credentials",
+      "result": "Status 200, 205 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.452109",
+      "details": {
+        "path": "/ip/neighbor",
+        "status": 200,
+        "size": 205
+      }
+    },
+    {
+      "id": 46,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/pool",
+      "description": "GET /ip/pool with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.456107",
+      "details": {
+        "path": "/ip/pool",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 47,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/route",
+      "description": "GET /ip/route with admin credentials",
+      "result": "Status 200, 529 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.464103",
+      "details": {
+        "path": "/ip/route",
+        "status": 200,
+        "size": 529
+      }
+    },
+    {
+      "id": 48,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/service",
+      "description": "GET /ip/service with admin credentials",
+      "result": "Status 200, 2306 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.472099",
+      "details": {
+        "path": "/ip/service",
+        "status": 200,
+        "size": 2306
+      }
+    },
+    {
+      "id": 49,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/socks",
+      "description": "GET /ip/socks with admin credentials",
+      "result": "Status 200, 136 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.484093",
+      "details": {
+        "path": "/ip/socks",
+        "status": 200,
+        "size": 136
+      }
+    },
+    {
+      "id": 50,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/ssh",
+      "description": "GET /ip/ssh with admin credentials",
+      "result": "Status 200, 151 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.492089",
+      "details": {
+        "path": "/ip/ssh",
+        "status": 200,
+        "size": 151
+      }
+    },
+    {
+      "id": 51,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/traffic-flow",
+      "description": "GET /ip/traffic-flow with admin credentials",
+      "result": "Status 200, 190 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.504083",
+      "details": {
+        "path": "/ip/traffic-flow",
+        "status": 200,
+        "size": 190
+      }
+    },
+    {
+      "id": 52,
+      "category": "rest_api",
+      "name": "REST endpoint: /ip/upnp",
+      "description": "GET /ip/upnp with admin credentials",
+      "result": "Status 200, 87 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.512079",
+      "details": {
+        "path": "/ip/upnp",
+        "status": 200,
+        "size": 87
+      }
+    },
+    {
+      "id": 53,
+      "category": "rest_api",
+      "name": "REST endpoint: /interface",
+      "description": "GET /interface with admin credentials",
+      "result": "Status 200, 883 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.520075",
+      "details": {
+        "path": "/interface",
+        "status": 200,
+        "size": 883
+      }
+    },
+    {
+      "id": 54,
+      "category": "rest_api",
+      "name": "REST endpoint: /interface/ethernet",
+      "description": "GET /interface/ethernet with admin credentials",
+      "result": "Status 200, 725 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.524073",
+      "details": {
+        "path": "/interface/ethernet",
+        "status": 200,
+        "size": 725
+      }
+    },
+    {
+      "id": 55,
+      "category": "rest_api",
+      "name": "REST endpoint: /interface/bridge",
+      "description": "GET /interface/bridge with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.528071",
+      "details": {
+        "path": "/interface/bridge",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 56,
+      "category": "rest_api",
+      "name": "REST endpoint: /interface/vlan",
+      "description": "GET /interface/vlan with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.532069",
+      "details": {
+        "path": "/interface/vlan",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 57,
+      "category": "rest_api",
+      "name": "REST endpoint: /user",
+      "description": "GET /user with admin credentials",
+      "result": "Status 200, 788 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.544063",
+      "details": {
+        "path": "/user",
+        "status": 200,
+        "size": 788
+      }
+    },
+    {
+      "id": 58,
+      "category": "rest_api",
+      "name": "REST endpoint: /user/group",
+      "description": "GET /user/group with admin credentials",
+      "result": "Status 200, 490 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.552059",
+      "details": {
+        "path": "/user/group",
+        "status": 200,
+        "size": 490
+      }
+    },
+    {
+      "id": 59,
+      "category": "rest_api",
+      "name": "REST endpoint: /user/active",
+      "description": "GET /user/active with admin credentials",
+      "result": "Status 200, 338 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.556057",
+      "details": {
+        "path": "/user/active",
+        "status": 200,
+        "size": 338
+      }
+    },
+    {
+      "id": 60,
+      "category": "rest_api",
+      "name": "REST endpoint: /user/ssh-keys",
+      "description": "GET /user/ssh-keys with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.560055",
+      "details": {
+        "path": "/user/ssh-keys",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 61,
+      "category": "rest_api",
+      "name": "REST endpoint: /tool/e-mail",
+      "description": "GET /tool/e-mail with admin credentials",
+      "result": "Status 200, 92 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.576047",
+      "details": {
+        "path": "/tool/e-mail",
+        "status": 200,
+        "size": 92
+      }
+    },
+    {
+      "id": 62,
+      "category": "rest_api",
+      "name": "REST endpoint: /tool/graphing",
+      "description": "GET /tool/graphing with admin credentials",
+      "result": "Status 200, 43 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.588041",
+      "details": {
+        "path": "/tool/graphing",
+        "status": 200,
+        "size": 43
+      }
+    },
+    {
+      "id": 63,
+      "category": "rest_api",
+      "name": "REST endpoint: /tool/netwatch",
+      "description": "GET /tool/netwatch with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.596037",
+      "details": {
+        "path": "/tool/netwatch",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 64,
+      "category": "rest_api",
+      "name": "REST endpoint: /tool/sniffer",
+      "description": "GET /tool/sniffer with admin credentials",
+      "result": "Status 200, 762 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.616027",
+      "details": {
+        "path": "/tool/sniffer",
+        "status": 200,
+        "size": 762
+      }
+    },
+    {
+      "id": 65,
+      "category": "rest_api",
+      "name": "REST endpoint: /file",
+      "description": "GET /file with admin credentials",
+      "result": "Status 200, 106 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.636017",
+      "details": {
+        "path": "/file",
+        "status": 200,
+        "size": 106
+      }
+    },
+    {
+      "id": 66,
+      "category": "rest_api",
+      "name": "REST endpoint: /log",
+      "description": "GET /log with admin credentials",
+      "result": "Status 200, 9310 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.644013",
+      "details": {
+        "path": "/log",
+        "status": 200,
+        "size": 9310
+      }
+    },
+    {
+      "id": 67,
+      "category": "rest_api",
+      "name": "REST endpoint: /certificate",
+      "description": "GET /certificate with admin credentials",
+      "result": "Status 200, 659 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.648011",
+      "details": {
+        "path": "/certificate",
+        "status": 200,
+        "size": 659
+      }
+    },
+    {
+      "id": 68,
+      "category": "rest_api",
+      "name": "REST endpoint: /certificate/crl",
+      "description": "GET /certificate/crl with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.652009",
+      "details": {
+        "path": "/certificate/crl",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 69,
+      "category": "rest_api",
+      "name": "REST endpoint: /snmp",
+      "description": "GET /snmp with admin credentials",
+      "result": "Status 200, 221 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.656007",
+      "details": {
+        "path": "/snmp",
+        "status": 200,
+        "size": 221
+      }
+    },
+    {
+      "id": 70,
+      "category": "rest_api",
+      "name": "REST endpoint: /snmp/community",
+      "description": "GET /snmp/community with admin credentials",
+      "result": "Status 200, 261 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.660005",
+      "details": {
+        "path": "/snmp/community",
+        "status": 200,
+        "size": 261
+      }
+    },
+    {
+      "id": 71,
+      "category": "rest_api",
+      "name": "REST endpoint: /queue/simple",
+      "description": "GET /queue/simple with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.675997",
+      "details": {
+        "path": "/queue/simple",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 72,
+      "category": "rest_api",
+      "name": "REST endpoint: /queue/tree",
+      "description": "GET /queue/tree with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.679995",
+      "details": {
+        "path": "/queue/tree",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 73,
+      "category": "rest_api",
+      "name": "REST endpoint: /queue/type",
+      "description": "GET /queue/type with admin credentials",
+      "result": "Status 200, 1558 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.683993",
+      "details": {
+        "path": "/queue/type",
+        "status": 200,
+        "size": 1558
+      }
+    },
+    {
+      "id": 74,
+      "category": "rest_api",
+      "name": "REST endpoint: /ppp/profile",
+      "description": "GET /ppp/profile with admin credentials",
+      "result": "Status 200, 565 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.691989",
+      "details": {
+        "path": "/ppp/profile",
+        "status": 200,
+        "size": 565
+      }
+    },
+    {
+      "id": 75,
+      "category": "rest_api",
+      "name": "REST endpoint: /ppp/secret",
+      "description": "GET /ppp/secret with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.695987",
+      "details": {
+        "path": "/ppp/secret",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 76,
+      "category": "rest_api",
+      "name": "REST endpoint: /ppp/active",
+      "description": "GET /ppp/active with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.699985",
+      "details": {
+        "path": "/ppp/active",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 77,
+      "category": "rest_api",
+      "name": "REST endpoint: /disk",
+      "description": "GET /disk with admin credentials",
+      "result": "Status 200, 2 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.703983",
+      "details": {
+        "path": "/disk",
+        "status": 200,
+        "size": 2
+      }
+    },
+    {
+      "id": 78,
+      "category": "rest_api",
+      "name": "REST API endpoint map",
+      "description": "Comprehensive REST endpoint enumeration with admin credentials",
+      "result": "55 accessible, 0 denied, 13 not found",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.707981",
+      "details": {
+        "accessible_count": 55,
+        "denied_count": 0,
+        "not_found_count": 13,
+        "accessible_paths": [
+          "/system/resource",
+          "/system/identity",
+          "/system/clock",
+          "/system/health",
+          "/system/history",
+          "/system/license",
+          "/system/logging",
+          "/system/note",
+          "/system/ntp/client",
+          "/system/package",
+          "/system/scheduler",
+          "/system/script",
+          "/system/watchdog",
+          "/ip/address",
+          "/ip/arp",
+          "/ip/dhcp-client",
+          "/ip/dhcp-server",
+          "/ip/dns",
+          "/ip/firewall/filter",
+          "/ip/firewall/nat",
+          "/ip/firewall/mangle",
+          "/ip/firewall/raw",
+          "/ip/neighbor",
+          "/ip/pool",
+          "/ip/route",
+          "/ip/service",
+          "/ip/socks",
+          "/ip/ssh",
+          "/ip/traffic-flow",
+          "/ip/upnp",
+          "/interface",
+          "/interface/ethernet",
+          "/interface/bridge",
+          "/interface/vlan",
+          "/user",
+          "/user/group",
+          "/user/active",
+          "/user/ssh-keys",
+          "/tool/e-mail",
+          "/tool/graphing",
+          "/tool/netwatch",
+          "/tool/sniffer",
+          "/file",
+          "/log",
+          "/certificate",
+          "/certificate/crl",
+          "/snmp",
+          "/snmp/community",
+          "/queue/simple",
+          "/queue/tree",
+          "/queue/type",
+          "/ppp/profile",
+          "/ppp/secret",
+          "/ppp/active",
+          "/disk"
+        ],
+        "full_map": {
+          "/system/resource": {
+            "status": 200,
+            "size": 441,
+            "type": "application/json"
+          },
+          "/system/identity": {
+            "status": 200,
+            "size": 19,
+            "type": "application/json"
+          },
+          "/system/clock": {
+            "status": 200,
+            "size": 138,
+            "type": "application/json"
+          },
+          "/system/health": {
+            "status": 200,
+            "size": 51,
+            "type": "application/json"
+          },
+          "/system/history": {
+            "status": 200,
+            "size": 2316,
+            "type": "application/json"
+          },
+          "/system/license": {
+            "status": 200,
+            "size": 42,
+            "type": "application/json"
+          },
+          "/system/logging": {
+            "status": 200,
+            "size": 503,
+            "type": "application/json"
+          },
+          "/system/note": {
+            "status": 200,
+            "size": 62,
+            "type": "application/json"
+          },
+          "/system/ntp/client": {
+            "status": 200,
+            "size": 98,
+            "type": "application/json"
+          },
+          "/system/package": {
+            "status": 200,
+            "size": 158,
+            "type": "application/json"
+          },
+          "/system/routerboard": {
+            "status": 400,
+            "size": 91,
+            "type": "application/json"
+          },
+          "/system/scheduler": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/system/script": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/system/watchdog": {
+            "status": 200,
+            "size": 150,
+            "type": "application/json"
+          },
+          "/ip/address": {
+            "status": 200,
+            "size": 180,
+            "type": "application/json"
+          },
+          "/ip/arp": {
+            "status": 200,
+            "size": 220,
+            "type": "application/json"
+          },
+          "/ip/dhcp-client": {
+            "status": 200,
+            "size": 479,
+            "type": "application/json"
+          },
+          "/ip/dhcp-server": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/ip/dns": {
+            "status": 200,
+            "size": 488,
+            "type": "application/json"
+          },
+          "/ip/firewall/filter": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/ip/firewall/nat": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/ip/firewall/mangle": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/ip/firewall/raw": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/ip/neighbor": {
+            "status": 200,
+            "size": 205,
+            "type": "application/json"
+          },
+          "/ip/pool": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/ip/route": {
+            "status": 200,
+            "size": 529,
+            "type": "application/json"
+          },
+          "/ip/service": {
+            "status": 200,
+            "size": 2306,
+            "type": "application/json"
+          },
+          "/ip/socks": {
+            "status": 200,
+            "size": 136,
+            "type": "application/json"
+          },
+          "/ip/ssh": {
+            "status": 200,
+            "size": 151,
+            "type": "application/json"
+          },
+          "/ip/traffic-flow": {
+            "status": 200,
+            "size": 190,
+            "type": "application/json"
+          },
+          "/ip/upnp": {
+            "status": 200,
+            "size": 87,
+            "type": "application/json"
+          },
+          "/interface": {
+            "status": 200,
+            "size": 883,
+            "type": "application/json"
+          },
+          "/interface/ethernet": {
+            "status": 200,
+            "size": 725,
+            "type": "application/json"
+          },
+          "/interface/bridge": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/interface/vlan": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/interface/wireless": {
+            "status": 500,
+            "size": 47,
+            "type": "application/json"
+          },
+          "/user": {
+            "status": 200,
+            "size": 788,
+            "type": "application/json"
+          },
+          "/user/group": {
+            "status": 200,
+            "size": 490,
+            "type": "application/json"
+          },
+          "/user/active": {
+            "status": 200,
+            "size": 338,
+            "type": "application/json"
+          },
+          "/user/ssh-keys": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/tool/bandwidth-test": {
+            "status": 400,
+            "size": 64,
+            "type": "application/json"
+          },
+          "/tool/dns-update": {
+            "status": 400,
+            "size": 64,
+            "type": "application/json"
+          },
+          "/tool/e-mail": {
+            "status": 200,
+            "size": 92,
+            "type": "application/json"
+          },
+          "/tool/fetch": {
+            "status": 400,
+            "size": 64,
+            "type": "application/json"
+          },
+          "/tool/flood-ping": {
+            "status": 400,
+            "size": 64,
+            "type": "application/json"
+          },
+          "/tool/graphing": {
+            "status": 200,
+            "size": 43,
+            "type": "application/json"
+          },
+          "/tool/netwatch": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/tool/ping": {
+            "status": 400,
+            "size": 64,
+            "type": "application/json"
+          },
+          "/tool/profile": {
+            "status": 400,
+            "size": 64,
+            "type": "application/json"
+          },
+          "/tool/sniffer": {
+            "status": 200,
+            "size": 762,
+            "type": "application/json"
+          },
+          "/tool/torch": {
+            "status": 400,
+            "size": 64,
+            "type": "application/json"
+          },
+          "/tool/traceroute": {
+            "status": 400,
+            "size": 64,
+            "type": "application/json"
+          },
+          "/file": {
+            "status": 200,
+            "size": 106,
+            "type": "application/json"
+          },
+          "/log": {
+            "status": 200,
+            "size": 9310,
+            "type": "application/json"
+          },
+          "/certificate": {
+            "status": 200,
+            "size": 659,
+            "type": "application/json"
+          },
+          "/certificate/crl": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/snmp": {
+            "status": 200,
+            "size": 221,
+            "type": "application/json"
+          },
+          "/snmp/community": {
+            "status": 200,
+            "size": 261,
+            "type": "application/json"
+          },
+          "/routing/bgp": {
+            "status": 400,
+            "size": 64,
+            "type": "application/json"
+          },
+          "/routing/ospf": {
+            "status": 400,
+            "size": 64,
+            "type": "application/json"
+          },
+          "/routing/filter": {
+            "status": 400,
+            "size": 64,
+            "type": "application/json"
+          },
+          "/queue/simple": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/queue/tree": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/queue/type": {
+            "status": 200,
+            "size": 1558,
+            "type": "application/json"
+          },
+          "/ppp/profile": {
+            "status": 200,
+            "size": 565,
+            "type": "application/json"
+          },
+          "/ppp/secret": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/ppp/active": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/disk": {
+            "status": 200,
+            "size": 2,
+            "type": "application/json"
+          },
+          "/partitions": {
+            "status": 400,
+            "size": 90,
+            "type": "application/json"
+          }
+        }
+      }
+    },
+    {
+      "id": 79,
+      "category": "rest_api",
+      "name": "Unauthenticated REST endpoints",
+      "description": "REST endpoints accessible without credentials",
+      "result": "All endpoints require authentication",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.891889"
+    },
+    {
+      "id": 80,
+      "category": "banners",
+      "name": "Banner: FTP (21)",
+      "description": "TCP banner grab from FTP on port 21",
+      "result": "Banner (49 bytes): 220 MikroTik FTP server (MikroTik 7.20.8) ready\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.895887",
+      "details": {
+        "port": 21,
+        "service": "FTP",
+        "banner_raw": "323230204d696b726f54696b204654502073657276657220284d696b726f54696b20372e32302e38292072656164790d0a",
+        "banner_text": "220 MikroTik FTP server (MikroTik 7.20.8) ready\r\n",
+        "banner_size": 49
+      }
+    },
+    {
+      "id": 81,
+      "category": "banners",
+      "name": "Banner: SSH (22)",
+      "description": "TCP banner grab from SSH on port 22",
+      "result": "Banner (16 bytes): SSH-2.0-ROSSSH\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.899885",
+      "details": {
+        "port": 22,
+        "service": "SSH",
+        "banner_raw": "5353482d322e302d524f535353480d0a",
+        "banner_text": "SSH-2.0-ROSSSH\r\n",
+        "banner_size": 16
+      }
+    },
+    {
+      "id": 82,
+      "category": "banners",
+      "name": "Banner: Telnet (23)",
+      "description": "TCP banner grab from Telnet on port 23",
+      "result": "Banner (12 bytes): \ufffd\ufffd\u0018\ufffd\ufffd \ufffd\ufffd#\ufffd\ufffd'",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.903883",
+      "details": {
+        "port": 23,
+        "service": "Telnet",
+        "banner_raw": "fffd18fffd20fffd23fffd27",
+        "banner_text": "\ufffd\ufffd\u0018\ufffd\ufffd \ufffd\ufffd#\ufffd\ufffd'",
+        "banner_size": 12
+      }
+    },
+    {
+      "id": 83,
+      "category": "banners",
+      "name": "Banner: HTTP (80)",
+      "description": "TCP banner grab from HTTP on port 80",
+      "result": "Banner (224 bytes): HTTP/1.0 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 03:05:27 GMT\r\nExpires: Tue, 16 Feb 2027 03:05:27 GMT\r\nX-Frame",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.903883",
+      "details": {
+        "port": 80,
+        "service": "HTTP",
+        "banner_raw": "485454502f312e3020323030204f4b0d0a43616368652d436f6e74726f6c3a206d61782d6167653d33313533363030300d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20313238300d0a436f6e74656e742d54",
+        "banner_text": "HTTP/1.0 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 03:05:27 GMT\r\nExpires: Tue, 16 Feb 2027 03:05:27 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n",
+        "banner_size": 224
+      }
+    },
+    {
+      "id": 84,
+      "category": "banners",
+      "name": "Banner: HTTPS (443)",
+      "description": "TCP banner grab from HTTPS on port 443",
+      "result": "Banner: HTTP/1.0 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 03:05:27 GMT\r\nExpires: Tue, 16 Feb 2027 03:05:27 GMT\r\nX-Frame",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.955857",
+      "details": {
+        "port": 443,
+        "service": "HTTPS",
+        "banner": "HTTP/1.0 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 03:05:27 GMT\r\nExpires: Tue, 16 Feb 2027 03:05:27 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n",
+        "tls": true,
+        "cert_size": 791
+      }
+    },
+    {
+      "id": 85,
+      "category": "banners",
+      "name": "Banner: Bandwidth-test (2000)",
+      "description": "TCP banner grab from Bandwidth-test on port 2000",
+      "result": "Banner (4 bytes): \u0001\u0000\u0000\u0000",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:41.959855",
+      "details": {
+        "port": 2000,
+        "service": "Bandwidth-test",
+        "banner_raw": "01000000",
+        "banner_text": "\u0001\u0000\u0000\u0000",
+        "banner_size": 4
+      }
+    },
+    {
+      "id": 86,
+      "category": "banners",
+      "name": "Banner: Winbox (8291)",
+      "description": "TCP banner grab from Winbox on port 8291",
+      "result": "No banner (timeout - service may require client-speaks-first)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:46.989339",
+      "details": {
+        "port": 8291,
+        "service": "Winbox",
+        "result": "timeout"
+      }
+    },
+    {
+      "id": 87,
+      "category": "banners",
+      "name": "Banner: RouterOS API (8728)",
+      "description": "TCP banner grab from RouterOS API on port 8728",
+      "result": "No banner (timeout - service may require client-speaks-first)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:51.994835",
+      "details": {
+        "port": 8728,
+        "service": "RouterOS API",
+        "result": "timeout"
+      }
+    },
+    {
+      "id": 88,
+      "category": "banners",
+      "name": "Banner: RouterOS API-SSL (8729)",
+      "description": "TCP banner grab from RouterOS API-SSL on port 8729",
+      "result": "No banner (timeout - service may require client-speaks-first)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:57.252205",
+      "details": {
+        "port": 8729,
+        "service": "RouterOS API-SSL",
+        "result": "timeout"
+      }
+    },
+    {
+      "id": 89,
+      "category": "ftp",
+      "name": "FTP banner",
+      "description": "FTP service welcome banner",
+      "result": "Banner: 220 MikroTik FTP server (MikroTik 7.20.8) ready",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:02:57.256203",
+      "details": {
+        "banner": "220 MikroTik FTP server (MikroTik 7.20.8) ready"
+      }
+    },
+    {
+      "id": 90,
+      "category": "ftp",
+      "name": "FTP anonymous login",
+      "description": "Attempt anonymous FTP login",
+      "result": "Anonymous login rejected (expected)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:58.259701"
+    },
+    {
+      "id": 91,
+      "category": "ftp",
+      "name": "FTP SYST",
+      "description": "FTP SYST command response",
+      "result": "Response: 215 UNIX MikroTik 7.20.8",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:02:58.271695",
+      "details": {
+        "command": "SYST",
+        "response": "215 UNIX MikroTik 7.20.8"
+      }
+    },
+    {
+      "id": 92,
+      "category": "ftp",
+      "name": "FTP FEAT",
+      "description": "FTP FEAT command response",
+      "result": "Rejected: 500 'FEAT': command not understood",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:58.271695"
+    },
+    {
+      "id": 93,
+      "category": "ftp",
+      "name": "FTP HELP",
+      "description": "FTP HELP command response",
+      "result": "Rejected: 500 'HELP': command not understood",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:58.271695"
+    },
+    {
+      "id": 94,
+      "category": "ftp",
+      "name": "FTP directory listing",
+      "description": "Root directory listing via FTP",
+      "result": "Found 1 entries",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:58.323669",
+      "details": {
+        "files": [
+          "drwxrwx---   2 root     root         4096 Feb 16 02:42 skins"
+        ]
+      }
+    },
+    {
+      "id": 95,
+      "category": "ssh",
+      "name": "SSH banner",
+      "description": "SSH service identification banner",
+      "result": "Banner: SSH-2.0-ROSSSH",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:02:58.367647",
+      "details": {
+        "banner": "SSH-2.0-ROSSSH"
+      }
+    },
+    {
+      "id": 96,
+      "category": "ssh",
+      "name": "SSH algorithms",
+      "description": "Enumerate SSH key exchange, cipher, MAC algorithms",
+      "result": "Output length: 1012 chars",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:58.831415",
+      "details": {
+        "output": "Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-15 22:02 EST\nNmap scan report for [REDACTED-INTERNAL-IP]\nHost is up (0.00s latency).\n\nPORT   STATE SERVICE\n22/tcp open  ssh\n| ssh2-enum-algos: \n|   kex_algorithms: (6)\n|       curve25519-sha256\n|       diffie-hellman-group-exchange-sha256\n|       diffie-hellman-group-exchange-sha1\n|       diffie-hellman-group14-sha1\n|       diffie-hellman-group1-sha1\n|       ext-info-s\n|   server_host_key_algorithms: (2)\n|       rsa-sha2-256\n|       ssh-rsa\n|   encryption_algorithms: (10)\n|       aes128-gcm@openssh.com\n|       aes256-gcm@openssh.com\n|       aes128-ctr\n|       aes192-ctr\n|       aes256-ctr\n|       aes128-cbc\n|       aes192-cbc\n|       aes256-cbc\n|       3des-cbc\n|       none\n|   mac_algorithms: (4)\n|       hmac-sha2-256\n|       hmac-sha2-512\n|       hmac-sha1\n|       hmac-md5\n|   compression_algorithms: (1)\n|_      none\nMAC Address: 08:00:27:6F:D1:3D (PCS Systemtechnik/Oracle VirtualBox virtual NIC)\n\nNmap done: 1 IP address (1 host up) scanned in 0.40 seconds\n"
+      }
+    },
+    {
+      "id": 97,
+      "category": "ssh",
+      "name": "SSH auth methods",
+      "description": "Enumerate SSH authentication methods",
+      "result": "Output length: 396 chars",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:02:59.187237",
+      "details": {
+        "output": "Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-15 22:02 EST\nNmap scan report for [REDACTED-INTERNAL-IP]\nHost is up (0.00s latency).\n\nPORT   STATE SERVICE\n22/tcp open  ssh\n| ssh-auth-methods: \n|   Supported authentication methods: \n|     publickey\n|_    password\nMAC Address: 08:00:27:6F:D1:3D (PCS Systemtechnik/Oracle VirtualBox virtual NIC)\n\nNmap done: 1 IP address (1 host up) scanned in 0.32 seconds\n"
+      }
+    },
+    {
+      "id": 98,
+      "category": "telnet",
+      "name": "Telnet banner and negotiation",
+      "description": "Capture Telnet initial handshake and banner",
+      "result": "Received 12 bytes, 4 IAC sequences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:05.196231",
+      "details": {
+        "raw_hex": "fffd18fffd20fffd23fffd27",
+        "text": "\ufffd\ufffd\u0018\ufffd\ufffd \ufffd\ufffd#\ufffd\ufffd'",
+        "iac_count": 4,
+        "iac_sequences": [
+          {
+            "cmd": 253,
+            "option": 24
+          },
+          {
+            "cmd": 253,
+            "option": 32
+          },
+          {
+            "cmd": 253,
+            "option": 35
+          },
+          {
+            "cmd": 253,
+            "option": 39
+          }
+        ]
+      }
+    },
+    {
+      "id": 99,
+      "category": "snmp",
+      "name": "SNMP system MIB",
+      "description": "SNMP v2c walk of system MIB tree",
+      "result": "Found 7 OIDs",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:03:05.212223",
+      "details": {
+        "oids": [
+          "iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\"",
+          "iso.[REDACTED-IP].[REDACTED-IP] = OID: iso.[REDACTED-IP].1.14988.1",
+          "iso.[REDACTED-IP].[REDACTED-IP] = Timeticks: (124200) 0:20:42.00",
+          "iso.[REDACTED-IP].[REDACTED-IP] = \"\"",
+          "iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"MikroTik\"",
+          "iso.[REDACTED-IP].[REDACTED-IP] = \"\"",
+          "iso.[REDACTED-IP].[REDACTED-IP] = INTEGER: 78"
+        ]
+      }
+    },
+    {
+      "id": 100,
+      "category": "snmp",
+      "name": "SNMP interface MIB",
+      "description": "SNMP v2c walk of interface MIB tree",
+      "result": "Found 45 OIDs",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:05.272193",
+      "details": {
+        "oid_count": 45,
+        "sample": [
+          "iso.[REDACTED-IP].[REDACTED-IP] = INTEGER: 2",
+          "iso.[REDACTED-IP].[REDACTED-IP].1.1 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].1.2 = INTEGER: 2",
+          "iso.[REDACTED-IP].[REDACTED-IP].2.1 = STRING: \"lo\"",
+          "iso.[REDACTED-IP].[REDACTED-IP].2.2 = STRING: \"ether1\"",
+          "iso.[REDACTED-IP].[REDACTED-IP].3.1 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].3.2 = INTEGER: 6",
+          "iso.[REDACTED-IP].[REDACTED-IP].4.1 = INTEGER: 65536",
+          "iso.[REDACTED-IP].[REDACTED-IP].4.2 = INTEGER: 1500",
+          "iso.[REDACTED-IP].[REDACTED-IP].5.1 = Gauge32: 0"
+        ]
+      }
+    },
+    {
+      "id": 101,
+      "category": "snmp",
+      "name": "SNMP MikroTik enterprise OIDs",
+      "description": "SNMP walk of MikroTik enterprise MIB (OID [REDACTED-IP].4.1.14988)",
+      "result": "Found 212 MikroTik-specific OIDs",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:03:05.560049",
+      "details": {
+        "oid_count": 212,
+        "oids": [
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = Gauge32: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = Gauge32: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = Gauge32: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 4391",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = STRING: \"QKCm3jlSBfN\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = STRING: \"7.20.8\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = Gauge32: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = \"\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = STRING: \"2026-01-30 09:17:54\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = STRING: \"CHR innotek GmbH VirtualBox\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = STRING: \"CHR\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.2.1 = IpAddress: 0.0.0.0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.3.1 = Hex-STRING: 74 56 3C B5 77 9B ",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.4.1 = \"\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.5.1 = \"\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.6.1 = \"\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.7.1 = \"\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.8.1 = INTEGER: 2",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = \"\""
+        ]
+      }
+    },
+    {
+      "id": 102,
+      "category": "snmp",
+      "name": "SNMP community: public",
+      "description": "Test SNMP community string 'public'",
+      "result": "Community 'public' ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:05.584037",
+      "details": {
+        "community": "public",
+        "response": "iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\""
+      }
+    },
+    {
+      "id": 103,
+      "category": "snmp",
+      "name": "SNMP community: private",
+      "description": "Test SNMP community string 'private'",
+      "result": "Community 'private' rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:07.591033"
+    },
+    {
+      "id": 104,
+      "category": "snmp",
+      "name": "SNMP community: mikrotik",
+      "description": "Test SNMP community string 'mikrotik'",
+      "result": "Community 'mikrotik' rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:09.606025"
+    },
+    {
+      "id": 105,
+      "category": "snmp",
+      "name": "SNMP community: admin",
+      "description": "Test SNMP community string 'admin'",
+      "result": "Community 'admin' rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:11.617019"
+    },
+    {
+      "id": 106,
+      "category": "snmp",
+      "name": "SNMP community: router",
+      "description": "Test SNMP community string 'router'",
+      "result": "Community 'router' rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:13.628013"
+    },
+    {
+      "id": 107,
+      "category": "snmp",
+      "name": "SNMP community: community",
+      "description": "Test SNMP community string 'community'",
+      "result": "Community 'community' rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:15.643005"
+    },
+    {
+      "id": 108,
+      "category": "mndp",
+      "name": "MNDP broadcast capture",
+      "description": "Capture and decode MNDP neighbor discovery broadcasts",
+      "result": "Captured 1 MNDP packets",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:03:23.599025",
+      "details": {
+        "packet_count": 1,
+        "packets": [
+          {
+            "from": [
+              "[REDACTED-INTERNAL-IP]",
+              5678
+            ],
+            "size": 158,
+            "hex": "2a000000000100060800276fd13d000500084d696b726f54696b00070026372e32302e3820286c6f6e672d7465726d2920323032362d30312d33302030393a31373a3534000800084d696b726f54696b000a0004e6040000000b000b514b436d336a6c53",
+            "text": "*\u0000\u0000\u0000\u0000\u0001\u0000\u0006\b\u0000'o\ufffd=\u0000\u0005\u0000\bMikroTik\u0000\u0007\u0000&7.20.8 (long-term) 2026-01-30 09:17:54\u0000\b\u0000\bMikroTik\u0000\n\u0000\u0004\ufffd\u0004\u0000\u0000\u0000\u000b\u0000\u000bQKCm3jlSBfN\u0000\f\u0000\u0003CHR\u0000\u000e\u0000\u0001\u0001\u0000\u000f\u0000\u0010\ufffd\ufffd\u0000\u0000\u0000\u0000\u0000\u0000\n\u0000'\ufffd\ufffdo\ufffd=\u0000\u0010\u0000\u0006ether1\u0000\u0011\u0000\u0004\n\u0000\u0000n\u0000\u0012\u0000\u0001\u0000"
+          }
+        ],
+        "decoded_tlvs": [
+          {
+            "MAC Address": "08:00:27:6f:d1:3d",
+            "Identity": "MikroTik",
+            "Version": "7.20.8 (long-term) 2026-01-30 09:17:54",
+            "Platform": "MikroTik",
+            "Uptime": "1254",
+            "Software ID": "QKCm3jlS"
+          }
+        ]
+      }
+    },
+    {
+      "id": 109,
+      "category": "btest",
+      "name": "Bandwidth-test probe 1",
+      "description": "Send 4-byte probe to bandwidth-test service",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:24.094777",
+      "details": {
+        "probe_hex": "01000000",
+        "response_hex": "01000000",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 110,
+      "category": "btest",
+      "name": "Bandwidth-test probe 2",
+      "description": "Send 4-byte probe to bandwidth-test service",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:24.594527",
+      "details": {
+        "probe_hex": "00000000",
+        "response_hex": "01000000",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 111,
+      "category": "btest",
+      "name": "Bandwidth-test probe 3",
+      "description": "Send 1-byte probe to bandwidth-test service",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:25.094277",
+      "details": {
+        "probe_hex": "01",
+        "response_hex": "01000000",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 112,
+      "category": "winbox",
+      "name": "Winbox initial response",
+      "description": "Connect to Winbox and read initial data",
+      "result": "No data sent by server on connect (client-speaks-first)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:30.615515"
+    },
+    {
+      "id": 113,
+      "category": "winbox",
+      "name": "Winbox M2 probe 1",
+      "description": "Send M2 probe",
+      "result": "No response (timeout)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:34.125759"
+    },
+    {
+      "id": 114,
+      "category": "winbox",
+      "name": "Winbox M2 probe 2",
+      "description": "Send M2 probe",
+      "result": "No response (timeout)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:37.632005"
+    },
+    {
+      "id": 115,
+      "category": "winbox",
+      "name": "Winbox M2 probe 3",
+      "description": "Send M2 probe",
+      "result": "No response (timeout)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:41.146247"
+    },
+    {
+      "id": 116,
+      "category": "ros_api",
+      "name": "RouterOS API system info",
+      "description": "Query system resource via RouterOS API",
+      "result": "Version: 7.20.8 (long-term)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:41.158241",
+      "details": {
+        "system_info": {
+          "uptime": "21m18s",
+          "version": "7.20.8 (long-term)",
+          "build-time": "2026-01-30 09:17:54",
+          "factory-software": "7.1",
+          "free-memory": "839249920",
+          "total-memory": "1073741824",
+          "cpu": "AMD",
+          "cpu-count": "1",
+          "cpu-frequency": "4391",
+          "cpu-load": "0",
+          "free-hdd-space": "73256960",
+          "total-hdd-space": "93564928",
+          "write-sect-since-reboot": "1448",
+          "write-sect-total": "1448",
+          "architecture-name": "x86_64",
+          "board-name": "CHR innotek GmbH VirtualBox",
+          "platform": "MikroTik"
+        }
+      }
+    },
+    {
+      "id": 117,
+      "category": "ros_api",
+      "name": "RouterOS API user enumeration",
+      "description": "List users via RouterOS API",
+      "result": "Found 4 users",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:41.174233",
+      "details": {
+        "users": [
+          "admin",
+          "testfull",
+          "testread",
+          "testwrite"
+        ]
+      }
+    },
+    {
+      "id": 118,
+      "category": "ros_api",
+      "name": "RouterOS API interface list",
+      "description": "List interfaces via RouterOS API",
+      "result": "Found 2 interfaces",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:41.182229",
+      "details": {
+        "interfaces": [
+          {
+            "name": "ether1",
+            "type": "ether"
+          },
+          {
+            "name": "lo",
+            "type": "loopback"
+          }
+        ]
+      }
+    },
+    {
+      "id": 119,
+      "category": "ros_api",
+      "name": "RouterOS API package list",
+      "description": "List installed packages via RouterOS API",
+      "result": "Found 1 packages",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:41.186227",
+      "details": {
+        "packages": [
+          {
+            "name": "routeros",
+            "version": "7.20.8"
+          }
+        ]
+      }
+    },
+    {
+      "id": 120,
+      "category": "ros_api",
+      "name": "RouterOS API pre-auth /login",
+      "description": "Send /login command without credentials to RouterOS API",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:42.189725",
+      "details": {
+        "response_hex": "0521646f6e65253d7265743d303032623332643238333939653837353365353665633763623261363932303100",
+        "response_text": "\u0005!done%=ret=002b32d28399e8753e56ec7cb2a69201\u0000"
+      }
+    },
+    {
+      "id": 121,
+      "category": "tls",
+      "name": "TLS cipher audit: WebFig HTTPS (443)",
+      "description": "Enumerate TLS ciphers on WebFig HTTPS",
+      "result": "Scan complete",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:45.819909",
+      "details": {
+        "port": 443,
+        "output": "Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-15 22:03 EST\nNmap scan report for [REDACTED-INTERNAL-IP]\nHost is up (0.00s latency).\n\nPORT    STATE SERVICE\n443/tcp open  https\n| ssl-enum-ciphers: \n|   TLSv1.0: \n|     ciphers: \n|       TLS_DHE_RSA_WITH_AES_128_CBC_SHA (dh 2048) - A\n|       TLS_DHE_RSA_WITH_AES_256_CBC_SHA (dh 2048) - A\n|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A\n|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A\n|       TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A\n|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A\n|     compressors: \n|       NULL\n|     cipher preference: client\n|   TLSv1.1: \n|     ciphers: \n|       TLS_DHE_RSA_WITH_AES_128_CBC_SHA (dh 2048) - A\n|       TLS_DHE_RSA_WITH_AES_256_CBC_SHA (dh 2048) - A\n|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A\n|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A\n|       TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A\n|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A\n|     compressors: \n|       NULL\n|     cipher preference: client\n|   TLSv1.2: \n|     ciphers: \n|       TLS_DHE_RSA_WITH_AES_128_CBC_SHA (dh 2048) - A\n|       TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 (dh 2048) - A\n|       TLS_DHE_RSA_WITH_AES_256_CBC_SHA (dh 2048) - A\n|       TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 (dh 2048) - A\n|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (secp256r1) - A\n|       TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 (secp256r1) - A\n|       TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (secp256r1) - A\n|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp256r1) - A\n|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 (secp256r1) - A\n|       TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (secp256r1) - A\n|       TLS_RSA_WITH_AES_128_CBC_SHA (rsa 2048) - A\n|       TLS_RSA_WITH_AES_128_CBC_SHA256 (rsa 2048) - A\n|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A\n|       TLS_RSA_WITH_AES_256_GCM_SHA384 (rsa 2048) - A\n|     compressors: \n|       NULL\n|     cipher preference: client\n|_  least strength: A\nMAC Address: 08:00:27:6F:D1:3D (PCS Systemtechnik/Oracle VirtualBox virtual NIC)\n\nNmap done: 1 IP address (1 host up) scanned in 3.58 seconds\n",
+        "weak_findings": []
+      }
+    },
+    {
+      "id": 122,
+      "category": "tls",
+      "name": "TLS cipher audit: API-SSL (8729)",
+      "description": "Enumerate TLS ciphers on API-SSL",
+      "result": "Scan complete",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:48.322657",
+      "details": {
+        "port": 8729,
+        "output": "Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-15 22:03 EST\nNmap scan report for [REDACTED-INTERNAL-IP]\nHost is up (0.00s latency).\n\nPORT     STATE SERVICE\n8729/tcp open  unknown\n| ssl-enum-ciphers: \n|   TLSv1.0: \n|     ciphers: \n|       TLS_DH_anon_WITH_AES_128_CBC_SHA (dh 2048) - F\n|       TLS_DH_anon_WITH_AES_256_CBC_SHA (dh 2048) - F\n|       TLS_ECDH_anon_WITH_AES_128_CBC_SHA (secp256r1) - F\n|     compressors: \n|       NULL\n|     cipher preference: client\n|     warnings: \n|       Anonymous key exchange, score capped at F\n|       Forward Secrecy not supported by any cipher\n|   TLSv1.1: \n|     ciphers: \n|       TLS_DH_anon_WITH_AES_128_CBC_SHA (dh 2048) - F\n|       TLS_DH_anon_WITH_AES_256_CBC_SHA (dh 2048) - F\n|       TLS_ECDH_anon_WITH_AES_128_CBC_SHA (secp256r1) - F\n|     compressors: \n|       NULL\n|     cipher preference: client\n|     warnings: \n|       Anonymous key exchange, score capped at F\n|       Forward Secrecy not supported by any cipher\n|   TLSv1.2: \n|     ciphers: \n|       TLS_DH_anon_WITH_AES_128_CBC_SHA (dh 2048) - F\n|       TLS_DH_anon_WITH_AES_256_CBC_SHA (dh 2048) - F\n|       TLS_DH_anon_WITH_AES_256_CBC_SHA256 (dh 2048) - F\n|       TLS_ECDH_anon_WITH_AES_128_CBC_SHA (secp256r1) - F\n|     compressors: \n|       NULL\n|     cipher preference: client\n|     warnings: \n|       Anonymous key exchange, score capped at F\n|       Forward Secrecy not supported by any cipher\n|_  least strength: F\nMAC Address: 08:00:27:6F:D1:3D (PCS Systemtechnik/Oracle VirtualBox virtual NIC)\n\nNmap done: 1 IP address (1 host up) scanned in 2.44 seconds\n",
+        "weak_findings": []
+      }
+    },
+    {
+      "id": 123,
+      "category": "tls",
+      "name": "TLS certificate details",
+      "description": "Extract TLS certificate information from WebFig HTTPS",
+      "result": "Cert scan complete",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:03:49.078279",
+      "details": {
+        "output": "Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-15 22:03 EST\nNmap scan report for [REDACTED-INTERNAL-IP]\nHost is up (0.00s latency).\n\nPORT    STATE SERVICE\n443/tcp open  https\n| ssl-cert: Subject: commonName=mikrotik-test\n| Issuer: commonName=mikrotik-test\n| Public Key type: rsa\n| Public Key bits: 2048\n| Signature Algorithm: sha256WithRSAEncryption\n| Not valid before: 2026-02-16T02:49:16\n| Not valid after:  2027-02-16T02:49:16\n| MD5:   9b61:88fc:ce32:f46d:e6e8:2b29:719a:e56a\n|_SHA-1: 44d6:b649:e3a2:dacd:f90b:18f1:9930:5a4d:50d0:f358\nMAC Address: 08:00:27:6F:D1:3D (PCS Systemtechnik/Oracle VirtualBox virtual NIC)\n\nNmap done: 1 IP address (1 host up) scanned in 0.63 seconds\n"
+      }
+    },
+    {
+      "id": 124,
+      "category": "router_logs",
+      "name": "Router log pull (recon_network)",
+      "description": "Captured MikroTik router-side logs for evidence correlation",
+      "result": "56 entries, 7 interesting, uptime=21m26s",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:03:49.098269",
+      "details": {
+        "total_entries": 56,
+        "categories": {
+          "system,error,critical": 7,
+          "interface,info": 2,
+          "dhcp,info": 1,
+          "system,info,account": 37,
+          "system,info": 8,
+          "certificate,info": 1
+        },
+        "interesting_count": 7,
+        "interesting_entries": [
+          {
+            ".id": "*7",
+            "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+            "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+            "time": "2026-02-16 02:48:22",
+            "topics": "system,error,critical"
+          },
+          {
+            ".id": "*F",
+            "extra-info": "",
+            "message": "bandwidth-server changed by ssh-cmd:admin@[REDACTED-INTERNAL-IP] (/tool bandwidth-server set authenticate=no enabled=yes)",
+            "time": "2026-02-16 02:49:16",
+            "topics": "system,info"
+          },
+          {
+            ".id": "*2D",
+            "extra-info": "app=ftp duser=anonymous outcome=failure src=[REDACTED-INTERNAL-IP] ",
+            "message": "login failure for user anonymous from [REDACTED-INTERNAL-IP] via ftp",
+            "time": "2026-02-16 02:58:36",
+            "topics": "system,error,critical"
+          },
+          {
+            ".id": "*2E",
+            "extra-info": "app=ftp duser=anonymous outcome=failure src=[REDACTED-INTERNAL-IP] ",
+            "message": "login failure for user anonymous from [REDACTED-INTERNAL-IP] via ftp",
+            "time": "2026-02-16 02:58:36",
+            "topics": "system,error,critical"
+          },
+          {
+            ".id": "*2F",
+            "extra-info": "app=ftp duser=X:) outcome=failure ",
+            "message": "login failure for user X:) via ftp",
+            "time": "2026-02-16 03:01:33",
+            "topics": "system,error,critical"
+          },
+          {
+            ".id": "*32",
+            "extra-info": "app=ftp duser=anonymous outcome=failure src=[REDACTED-INTERNAL-IP] ",
+            "message": "login failure for user anonymous from [REDACTED-INTERNAL-IP] via ftp",
+            "time": "2026-02-16 03:05:42",
+            "topics": "system,error,critical"
+          },
+          {
+            ".id": "*35",
+            "extra-info": "app=ssh duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+            "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via ssh",
+            "time": "2026-02-16 03:06:26",
+            "topics": "system,error,critical"
+          }
+        ],
+        "log_file": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/MikroTik/evidence/router_logs_recon_network.json",
+        "uptime": "21m26s",
+        "cpu_load": "83",
+        "free_memory": "838959104"
+      }
+    }
+  ]
+}

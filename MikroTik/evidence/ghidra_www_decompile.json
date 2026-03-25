@@ -1,0 +1,663 @@
+{
+  "metadata": {
+    "script": "ghidra_www_decompile.py",
+    "track": "A",
+    "phase": "Ghidra Decompilation of www Critical Functions",
+    "start_time": "2026-02-16T14:58:46.184422",
+    "end_time": "2026-02-16T14:58:46.184422",
+    "total_tests": 25,
+    "anomalies": 5,
+    "findings_count": 1,
+    "total_decompiled": 10
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "ghidra_www",
+      "name": "www_decompile",
+      "description": "Ghidra decompilation of www targets",
+      "result": "FAILED - Ghidra did not produce output",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.970545"
+    },
+    {
+      "id": 2,
+      "category": "r2_fallback",
+      "name": "r2_decompile_0x0805c906",
+      "description": "r2 pseudocode for 0x0805c906",
+      "result": "Success: 32424 chars",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:46.870095"
+    },
+    {
+      "id": 3,
+      "category": "r2_fallback",
+      "name": "r2_decompile_0x08052666",
+      "description": "r2 pseudocode for 0x08052666",
+      "result": "Success: 42557 chars",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:47.581739"
+    },
+    {
+      "id": 4,
+      "category": "r2_fallback",
+      "name": "r2_decompile_0x0805e634",
+      "description": "r2 pseudocode for 0x0805e634",
+      "result": "Success: 29030 chars",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:48.237411"
+    },
+    {
+      "id": 5,
+      "category": "r2_fallback",
+      "name": "r2_decompile_0x0805c13c",
+      "description": "r2 pseudocode for 0x0805c13c",
+      "result": "Success: 1141 chars",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:48.929065"
+    },
+    {
+      "id": 6,
+      "category": "r2_fallback",
+      "name": "r2_decompile_0x08050864",
+      "description": "r2 pseudocode for 0x08050864",
+      "result": "Success: 27323 chars",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:49.552753"
+    },
+    {
+      "id": 7,
+      "category": "r2_fallback",
+      "name": "r2_decompile_0x08058646",
+      "description": "r2 pseudocode for 0x08058646",
+      "result": "Success: 31916 chars",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:50.176441"
+    },
+    {
+      "id": 8,
+      "category": "r2_fallback",
+      "name": "r2_decompile_0x08056984",
+      "description": "r2 pseudocode for 0x08056984",
+      "result": "Success: 48011 chars",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:50.820119"
+    },
+    {
+      "id": 9,
+      "category": "r2_fallback",
+      "name": "r2_decompile_0x0805be28",
+      "description": "r2 pseudocode for 0x0805be28",
+      "result": "Success: 3225 chars",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:50.976041"
+    },
+    {
+      "id": 10,
+      "category": "r2_fallback",
+      "name": "r2_decompile_0x08055618",
+      "description": "r2 pseudocode for 0x08055618",
+      "result": "Success: 5333 chars",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:51.959549"
+    },
+    {
+      "id": 11,
+      "category": "r2_fallback",
+      "name": "r2_decompile_0x0804f92a",
+      "description": "r2 pseudocode for 0x0804f92a",
+      "result": "Success: 15314 chars",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:52.131463"
+    },
+    {
+      "id": 12,
+      "category": "ghidra_www",
+      "name": "www_decompile_0x0805c906",
+      "description": "[P0] Decompiled fcn_0x0805c906 at 0x0805c906",
+      "result": "Success: 32424 chars, 1029 lines",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:52.131463",
+      "details": {
+        "priority": "P0",
+        "reason": "sprintf caller, receives read() data",
+        "size": 0,
+        "params": 0,
+        "locals": 0,
+        "dangerous_calls": []
+      }
+    },
+    {
+      "id": 13,
+      "category": "vuln_analysis",
+      "name": "www_vuln_0x0805c906_sprintf_stack_buffer",
+      "description": "Vulnerability pattern: sprintf_stack_buffer in fcn_0x0805c906",
+      "result": "[HIGH] sprintf with potentially stack-allocated buffer",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:52.131463",
+      "details": {
+        "pattern": "sprintf_stack_buffer",
+        "severity": "HIGH",
+        "cwe": "CWE-120",
+        "function": "fcn_0x0805c906",
+        "address": "0x0805c906",
+        "binary": "www",
+        "match": "sprintf(NULL,",
+        "line": 152,
+        "context": "         push (dword [pid])       \u001b[35m//  ...\u001b[0m\n         eax = dword [format]\n         eax += 4\n         push (eax)               \u001b[35m// const char *format\u001b[0m\n         push (esi)               \u001b[35m// char *s\u001b[0m\n\u001b[32m         sym.imp.sprintf () \u001b[0m \u001b[35m// int sprintf(NULL, \"\", -1)\u001b[0m\n         dword [esp] = edi\n\u001b[32m         sym.imp.string::freeptr__ () \u001b[0m \u001b[35m// string::freeptr()\u001b[0m\n\u001b[32m         ebx = pop ()             \u001b[0m \u001b[35m// \"[_j\"\u001b[0m\n\u001b[32m         edi = pop ()\u001b[0m\n        ",
+        "description": "sprintf with potentially stack-allocated buffer"
+      }
+    },
+    {
+      "id": 14,
+      "category": "ghidra_www",
+      "name": "www_decompile_0x08052666",
+      "description": "[P0] Decompiled fcn_0x08052666 at 0x08052666",
+      "result": "Success: 42557 chars, 923 lines",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:52.131463",
+      "details": {
+        "priority": "P0",
+        "reason": "sprintf caller, listen/startup",
+        "size": 0,
+        "params": 0,
+        "locals": 0,
+        "dangerous_calls": []
+      }
+    },
+    {
+      "id": 15,
+      "category": "ghidra_www",
+      "name": "www_decompile_0x0805e634",
+      "description": "[P1] Decompiled fcn_0x0805e634 at 0x0805e634",
+      "result": "Success: 29030 chars, 671 lines",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:52.131463",
+      "details": {
+        "priority": "P1",
+        "reason": "calls nv::base64Decode",
+        "size": 0,
+        "params": 0,
+        "locals": 0,
+        "dangerous_calls": []
+      }
+    },
+    {
+      "id": 16,
+      "category": "ghidra_www",
+      "name": "www_decompile_0x0805c13c",
+      "description": "[P1] Decompiled fcn_0x0805c13c at 0x0805c13c",
+      "result": "Success: 1141 chars, 36 lines",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:52.131463",
+      "details": {
+        "priority": "P1",
+        "reason": "largest function - HTTP/JSON giant",
+        "size": 0,
+        "params": 0,
+        "locals": 0,
+        "dangerous_calls": []
+      }
+    },
+    {
+      "id": 17,
+      "category": "ghidra_www",
+      "name": "www_decompile_0x08050864",
+      "description": "[P2] Decompiled fcn_0x08050864 at 0x08050864",
+      "result": "Success: 27323 chars, 606 lines",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:52.131463",
+      "details": {
+        "priority": "P2",
+        "reason": "calls Headers::parseHeaderLine",
+        "size": 0,
+        "params": 0,
+        "locals": 0,
+        "dangerous_calls": []
+      }
+    },
+    {
+      "id": 18,
+      "category": "ghidra_www",
+      "name": "www_decompile_0x08058646",
+      "description": "[P2] Decompiled fcn_0x08058646 at 0x08058646",
+      "result": "Success: 31916 chars, 748 lines",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:52.131463",
+      "details": {
+        "priority": "P2",
+        "reason": "entry point",
+        "size": 0,
+        "params": 0,
+        "locals": 0,
+        "dangerous_calls": []
+      }
+    },
+    {
+      "id": 19,
+      "category": "ghidra_www",
+      "name": "www_decompile_0x08056984",
+      "description": "[P2] Decompiled fcn_0x08056984 at 0x08056984",
+      "result": "Success: 48011 chars, 1031 lines",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:52.131463",
+      "details": {
+        "priority": "P2",
+        "reason": "CC=35 most complex branching",
+        "size": 0,
+        "params": 0,
+        "locals": 0,
+        "dangerous_calls": []
+      }
+    },
+    {
+      "id": 20,
+      "category": "ghidra_www",
+      "name": "www_decompile_0x0805be28",
+      "description": "[P3] Decompiled fcn_0x0805be28 at 0x0805be28",
+      "result": "Success: 3225 chars, 87 lines",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:52.131463",
+      "details": {
+        "priority": "P3",
+        "reason": "calls json::StreamParser::feed",
+        "size": 0,
+        "params": 0,
+        "locals": 0,
+        "dangerous_calls": []
+      }
+    },
+    {
+      "id": 21,
+      "category": "ghidra_www",
+      "name": "www_decompile_0x08055618",
+      "description": "[P3] Decompiled fcn_0x08055618 at 0x08055618",
+      "result": "Success: 5333 chars, 143 lines",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:52.131463",
+      "details": {
+        "priority": "P3",
+        "reason": "calls RC4::encrypt",
+        "size": 0,
+        "params": 0,
+        "locals": 0,
+        "dangerous_calls": []
+      }
+    },
+    {
+      "id": 22,
+      "category": "ghidra_www",
+      "name": "www_decompile_0x0804f92a",
+      "description": "[P3] Decompiled fcn_0x0804f92a at 0x0804f92a",
+      "result": "Success: 15314 chars, 344 lines",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:52.131463",
+      "details": {
+        "priority": "P3",
+        "reason": "handler function",
+        "size": 0,
+        "params": 0,
+        "locals": 0,
+        "dangerous_calls": []
+      }
+    },
+    {
+      "id": 23,
+      "category": "ghidra_libjson",
+      "name": "libjson_decompile",
+      "description": "Complete libjson.so decompilation",
+      "result": "FAILED - Ghidra did not produce output",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:11.893576"
+    },
+    {
+      "id": 24,
+      "category": "ghidra_libwww",
+      "name": "libwww_decompile",
+      "description": "libwww.so dangerous function decompilation",
+      "result": "FAILED - Ghidra did not produce output",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:24.667187"
+    },
+    {
+      "id": 25,
+      "category": "ghidra_libuhttp",
+      "name": "libuhttp_decompile",
+      "description": "libuhttp.so decompilation",
+      "result": "FAILED - Ghidra did not produce output",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:46.184422"
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "HIGH",
+      "title": "www: sprintf_stack_buffer in fcn_0x0805c906 at 0x0805c906",
+      "description": "sprintf with potentially stack-allocated buffer\n\nFunction: fcn_0x0805c906 (0x0805c906)\nMatch: sprintf(NULL,\nContext:\n         push (dword [pid])       \u001b[35m//  ...\u001b[0m\n         eax = dword [format]\n         eax += 4\n         push (eax)               \u001b[35m// const char *format\u001b[0m\n         push (esi)               \u001b[35m// char *s\u001b[0m\n\u001b[32m         sym.imp.sprintf () \u001b[0m \u001b[35m// int sprintf(NULL, \"\", -1)\u001b[0m\n         dword [esp] = edi\n\u001b[32m         sym.imp.string::freeptr__ () \u001b[0m \u001b[35m// string::freeptr()\u001b[0m\n\u001b[32m         ebx = pop ()             \u001b[0m \u001b[35m// \"[_j\"\u001b[0m\n\u001b[32m         edi = pop ()\u001b[0m\n        ",
+      "timestamp": "2026-02-16T14:57:52.131463",
+      "cwe": "CWE-120"
+    }
+  ],
+  "analysis": {
+    "www": {
+      "target_functions": {
+        "P0": [
+          [
+            "0x0805c906",
+            "fcn.0805c906",
+            3218,
+            "sprintf caller, receives read() data"
+          ],
+          [
+            "0x08052666",
+            "fcn.08052666",
+            2930,
+            "sprintf caller, listen/startup"
+          ]
+        ],
+        "P1": [
+          [
+            "0x0805e634",
+            "fcn.0805e634",
+            1976,
+            "calls nv::base64Decode"
+          ],
+          [
+            "0x0805c13c",
+            "fcn.0805c13c",
+            27921,
+            "largest function - HTTP/JSON giant"
+          ]
+        ],
+        "P2": [
+          [
+            "0x08050864",
+            "fcn.08050864",
+            1284,
+            "calls Headers::parseHeaderLine"
+          ],
+          [
+            "0x08058646",
+            "main",
+            2500,
+            "entry point"
+          ],
+          [
+            "0x08056984",
+            "fcn.08056984",
+            3081,
+            "CC=35 most complex branching"
+          ]
+        ],
+        "P3": [
+          [
+            "0x0805be28",
+            "fcn.0805be28",
+            500,
+            "calls json::StreamParser::feed"
+          ],
+          [
+            "0x08055618",
+            "fcn.08055618",
+            500,
+            "calls RC4::encrypt"
+          ],
+          [
+            "0x0804f92a",
+            "fcn.0804f92a",
+            793,
+            "handler function"
+          ]
+        ]
+      },
+      "decompiled_count": 10,
+      "vulnerability_analysis": [
+        {
+          "address": "0x0805c906",
+          "name": "fcn_0x0805c906",
+          "vulnerabilities": [
+            {
+              "pattern": "sprintf_stack_buffer",
+              "severity": "HIGH",
+              "cwe": "CWE-120",
+              "function": "fcn_0x0805c906",
+              "address": "0x0805c906",
+              "binary": "www",
+              "match": "sprintf(NULL,",
+              "line": 152,
+              "context": "         push (dword [pid])       \u001b[35m//  ...\u001b[0m\n         eax = dword [format]\n         eax += 4\n         push (eax)               \u001b[35m// const char *format\u001b[0m\n         push (esi)               \u001b[35m// char *s\u001b[0m\n\u001b[32m         sym.imp.sprintf () \u001b[0m \u001b[35m// int sprintf(NULL, \"\", -1)\u001b[0m\n         dword [esp] = edi\n\u001b[32m         sym.imp.string::freeptr__ () \u001b[0m \u001b[35m// string::freeptr()\u001b[0m\n\u001b[32m         ebx = pop ()             \u001b[0m \u001b[35m// \"[_j\"\u001b[0m\n\u001b[32m         edi = pop ()\u001b[0m\n        ",
+              "description": "sprintf with potentially stack-allocated buffer"
+            }
+          ],
+          "buffer_analysis": [],
+          "control_flow": {
+            "if_count": 0,
+            "while_count": 0,
+            "for_count": 0,
+            "switch_count": 0,
+            "return_count": 1,
+            "goto_count": 0,
+            "total_lines": 1029
+          }
+        },
+        {
+          "address": "0x08052666",
+          "name": "fcn_0x08052666",
+          "vulnerabilities": [],
+          "buffer_analysis": [],
+          "control_flow": {
+            "if_count": 0,
+            "while_count": 0,
+            "for_count": 0,
+            "switch_count": 0,
+            "return_count": 1,
+            "goto_count": 0,
+            "total_lines": 923
+          }
+        },
+        {
+          "address": "0x0805e634",
+          "name": "fcn_0x0805e634",
+          "vulnerabilities": [],
+          "buffer_analysis": [],
+          "control_flow": {
+            "if_count": 0,
+            "while_count": 0,
+            "for_count": 0,
+            "switch_count": 0,
+            "return_count": 1,
+            "goto_count": 0,
+            "total_lines": 671
+          }
+        },
+        {
+          "address": "0x0805c13c",
+          "name": "fcn_0x0805c13c",
+          "vulnerabilities": [],
+          "buffer_analysis": [],
+          "control_flow": {
+            "if_count": 0,
+            "while_count": 0,
+            "for_count": 0,
+            "switch_count": 0,
+            "return_count": 2,
+            "goto_count": 0,
+            "total_lines": 36
+          }
+        },
+        {
+          "address": "0x08050864",
+          "name": "fcn_0x08050864",
+          "vulnerabilities": [],
+          "buffer_analysis": [],
+          "control_flow": {
+            "if_count": 0,
+            "while_count": 0,
+            "for_count": 0,
+            "switch_count": 0,
+            "return_count": 2,
+            "goto_count": 0,
+            "total_lines": 606
+          }
+        },
+        {
+          "address": "0x08058646",
+          "name": "fcn_0x08058646",
+          "vulnerabilities": [],
+          "buffer_analysis": [],
+          "control_flow": {
+            "if_count": 0,
+            "while_count": 0,
+            "for_count": 0,
+            "switch_count": 0,
+            "return_count": 1,
+            "goto_count": 0,
+            "total_lines": 748
+          }
+        },
+        {
+          "address": "0x08056984",
+          "name": "fcn_0x08056984",
+          "vulnerabilities": [],
+          "buffer_analysis": [],
+          "control_flow": {
+            "if_count": 0,
+            "while_count": 0,
+            "for_count": 0,
+            "switch_count": 0,
+            "return_count": 1,
+            "goto_count": 0,
+            "total_lines": 1031
+          }
+        },
+        {
+          "address": "0x0805be28",
+          "name": "fcn_0x0805be28",
+          "vulnerabilities": [],
+          "buffer_analysis": [],
+          "control_flow": {
+            "if_count": 0,
+            "while_count": 0,
+            "for_count": 0,
+            "switch_count": 0,
+            "return_count": 1,
+            "goto_count": 0,
+            "total_lines": 87
+          }
+        },
+        {
+          "address": "0x08055618",
+          "name": "fcn_0x08055618",
+          "vulnerabilities": [],
+          "buffer_analysis": [],
+          "control_flow": {
+            "if_count": 0,
+            "while_count": 0,
+            "for_count": 0,
+            "switch_count": 0,
+            "return_count": 1,
+            "goto_count": 0,
+            "total_lines": 143
+          }
+        },
+        {
+          "address": "0x0804f92a",
+          "name": "fcn_0x0804f92a",
+          "vulnerabilities": [],
+          "buffer_analysis": [],
+          "control_flow": {
+            "if_count": 0,
+            "while_count": 0,
+            "for_count": 0,
+            "switch_count": 0,
+            "return_count": 2,
+            "goto_count": 0,
+            "total_lines": 344
+          }
+        }
+      ],
+      "data_flow": [],
+      "decompiled_excerpts": [
+        {
+          "address": "0x0805c906",
+          "name": "fcn_0x0805c906",
+          "c_code": "\u001b[35m// callconv: eax cdecl (stack);\u001b[0m\n\u001b[36mint \u001b[0mfcn.0805c906 (\u001b[36mint \u001b[0mstack) {\n    loc_\u001b[33m0x0805c906\u001b[0m:\n        // CALL XREF from entry.init0 @ \u001b[33m0x805c834\u001b[0m(x)\n        push (ebp)\n        ebp = esp\n        push (edi)\n        push (esi)\n        push (ebx)\n        esi = buf\n        esp -= \u001b[33m0x10b4\u001b[0m\n        dword [pid] = eax\n        ebx = var_1040h\n        push (\u001b[33m0x8064038\u001b[0m) // \"/\" // (pstr \u001b[33m0x08064038\u001b[0m) \"/\"\n        push (esi)\n\u001b[32m        sym.imp.string::string_char_const_ () \u001b[0m \u001b[35m// string::string(char const*)\u001b[0m\n        esp += \u001b[33m0xc\u001b[0m\n        push (1)\n        push (esi)\n        push (ebx)\n\u001b[32m        sym.imp.ostringstream::ostringstream_string_const__unsigned_int_ () \u001b[0m \u001b[35m// ostringstream::ostringstream(string const&, unsigned int)\u001b[0m\n        dword [esp] = esi\n\u001b[32m        sym.imp.string::freeptr__ () \u001b[0m \u001b[35m// string::freeptr()\u001b[0m\n\u001b[32m        eax = pop ()\u001b[0m\n\u001b[32m        edx = pop ()\u001b[0m\n        push (\u001b[33m0x70\u001b[0m)   \u001b[35m// 'p' // 112 // \"p\"\u001b[0m\n        push (ebx)\n\u001b[32m        sym.imp.operator___ostream__char_ () \u001b[0m \u001b[35m// operator<<(ostream&, char)\u001b[0m\n\u001b[32m        ecx = pop ()\u001b[0m\n\u001b[32m        edi = pop ()  \u001b[0m \u001b[35m// \"p\"\u001b[0m\n        push (\u001b[33m0x72\u001b[0m)   \u001b[35m// 'r'\u001b[0m\n        push (ebx)\n\u001b[32m        sym.imp.operator___ostream__char_ () \u001b[0m \u001b[35m// operator<<(ostream&, char)\u001b[0m\n    loc_\u001b[33m0x0805c957\u001b[0m:\n        // CODE XREF from fcn.0805c906 @ \u001b[33m0x805c9a2\u001b[0m(x)\n        esp += \u001b[33m0x10\u001b[0m\n        push (0)\n        push (0)\n        push (dword [pid]) \u001b[35m// pid_t pid\u001b[0m\n        push (\u001b[33m0x10\u001b[0m)   \u001b[35m// __ptrace_request request // ebp\u001b[0m\n        sym.imp.ptrace () // long ptrace(-1, \u001b[33m0x00000000\u001b[0m, -1, -1)\n        esp += \u001b[33m0x10\u001b[0m\n        eax++\n        \u001b[33mif \u001b[0m(v) \u001b[32mgoto \u001b[0mloc_\u001b[33m0x805c9a4\u001b[0m // likely\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0805c971\u001b[0m;\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0805c971\u001b[0m;\n        \u001b[36mreturn \u001b[0meax;\n    loc_\u001b[33m0x0805c971\u001b[0m:\n\u001b[3",
+          "dangerous_calls": []
+        },
+        {
+          "address": "0x08052666",
+          "name": "fcn_0x08052666",
+          "c_code": "\u001b[35m// callconv: eax cdecl (stack);\u001b[0m\nvoid fcn.08052666 (int32_t arg_8h) {\n    loc_\u001b[33m0x08052666\u001b[0m:\n        // CALL XREFS from fcn.08052666 @ +\u001b[33m0xc46\u001b[0m(x), +\u001b[33m0xe97\u001b[0m(x)\n        push (ebp)\n        ebp = esp\n        push (edi)\n        push (esi)\n        push (ebx)\n        esp -= \u001b[33m0xf0\u001b[0m\n        byte [edx + \u001b[33m0xa0\u001b[0m] = 1\n        ebx = dword [arg_8h]\n        dword [var_e0h] = ecx\n        push (0)\n        dword [var_d4h] = eax\n        push (\u001b[33m0xfe000a\u001b[0m)  \u001b[35m// '\\n' // u\"\\n\\xfe\"\u001b[0m\n        push (ebx)\n\u001b[32m        sym.imp.nv::IdTraits_nv::bool_id_::type_nv::message::get_nv::bool_id__nv::bool_id__nv::IdTraits_nv::bool_id_::set_type__const () \u001b[0m \u001b[35m// nv::IdTraits<nv::bool_id>::type nv::message::get<nv::bool_id>(nv::bool_id, nv::IdTraits<nv::bool_id>::set_type) const\u001b[0m\n        esp += \u001b[33m0xc\u001b[0m\n        byte [var_e1h] = al\n        push (\u001b[33m0x50\u001b[0m)   \u001b[35m// 'P' // 80 // \"P\"\u001b[0m\n        push (2)\n        push (ebx)\n\u001b[32m        sym.imp.nv::IdTraits_nv::u32_id_::type_nv::message::get_nv::u32_id__nv::u32_id__nv::IdTraits_nv::u32_id_::set_type__const () \u001b[0m \u001b[35m// nv::IdTraits<nv::u32_id>::type nv::message::get<nv::u32_id>(nv::u32_id, nv::IdTraits<nv::u32_id>::set_type) const\u001b[0m\n        esp += \u001b[33m0xc\u001b[0m    \u001b[35m// \"P\"\u001b[0m\n        dword [var_d0h] = eax\n        dword [var_b8h] = 0\n        dword [var_b4h] = 0\n        push (\u001b[33m0xffffffffffffffff\u001b[0m)\n        push (5)\n        push (ebx)\n\u001b[32m        sym.imp.nv::IdTraits_nv::u32_id_::type_nv::message::get_nv::u32_id__nv::u32_id__nv::IdTraits_nv::u32_id_::set_type__const () \u001b[0m \u001b[35m// nv::IdTraits<nv::u32_id>::type nv::message::get<nv::u32_id>(nv::u32_id, nv::IdTraits<nv::u32_id>::set_type) const\u001b[0m\n\u001b[32m        esi = pop ()\u001b[0m\n        dword [var_d8h] = eax\n\u001b[32m        edi = pop ()\u001b[0m\n        push (7)\n        push (ebx)\n\u001b[32m        sym.imp.nv::IdTraits_nv::u32_id_::type_nv::message::get_nv::u32_id__nv::u32_id__const () \u001b[0m \u001b[35m// nv::IdTraits<nv::u32_id>::type nv::messag",
+          "dangerous_calls": []
+        },
+        {
+          "address": "0x0805e634",
+          "name": "fcn_0x0805e634",
+          "c_code": "\u001b[35m// callconv: eax cdecl (stack);\u001b[0m\n\u001b[36mint \u001b[0mfcn.0805e634 (\u001b[36mint \u001b[0mstack) {\n    loc_\u001b[33m0x0805e634\u001b[0m:\n        // XREFS: CALL \u001b[33m0x0805f10d\u001b[0m  CALL \u001b[33m0x0805f6f9\u001b[0m  CALL \u001b[33m0x0805fb2f\u001b[0m\n        // XREFS: CALL \u001b[33m0x0805fe0b\u001b[0m  CALL \u001b[33m0x080614b0\u001b[0m  CALL \u001b[33m0x08061874\u001b[0m\n        // XREFS: CALL \u001b[33m0x08061d94\u001b[0m\n        push (ebp)\n        ebp = esp\n        push (edi)\n        push (esi)\n        push (ebx)\n        esp -= \u001b[33m0xac\u001b[0m\n        dword [var_a0h] = eax\n        eax = var_90h\n        dword [var_a8h] = edx\n        dword [var_ach] = ecx\n\u001b[32m        fcn.0805aa69 ()\u001b[0m\n        eax = dword [var_a0h]\n        eax += \u001b[33m0x10\u001b[0m\n        dword [var_a4h] = eax\n        eax = dword [var_a0h]\n        esi = dword [var_a4h]\n        eax = dword [eax + \u001b[33m0x10\u001b[0m]\n        ebx = eax\n        dword [var_b0h] = eax\n        ebx &= \u001b[33m0xfffffffc\u001b[0m\n    loc_\u001b[33m0x0805e686\u001b[0m:\n        // CODE XREFS from fcn.0805e634 @ \u001b[33m0x805e6a9\u001b[0m(x), \u001b[33m0x805e6ae\u001b[0m(x)\n        v = ebx & ebx\n        \u001b[33mif \u001b[0m(!v) \u001b[32mgoto \u001b[0mloc_\u001b[33m0x805e6b0\u001b[0m // likely\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0805e68a\u001b[0m;\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0805e68a\u001b[0m;\n        \u001b[36mreturn \u001b[0meax;\n    loc_\u001b[33m0x0805e68a\u001b[0m:\n        ecx = dword [var_a0h]\n        edx = var_90h\n        eax = dword [ecx + \u001b[33m0x20\u001b[0m]\n        eax += ebx\n\u001b[32m        fcn.08050a17 ()\u001b[0m\n        v = al & al\n        \u001b[33mif \u001b[0m(v) \u001b[32mgoto \u001b[0mloc_\u001b[33m0x805e6ab\u001b[0m // unlikely\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0805e6a4\u001b[0m;\n    loc_\u001b[33m0x0805e6ab\u001b[0m:\n        // CODE XREF from fcn.0805e634 @ \u001b[33m0x805e6a2\u001b[0m(x)\n        ebx = dword [ebx + 8]\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x805e686\u001b[0m\n         \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0805e686\u001b[0m\n    loc_\u001b[33m0x0805e6a4\u001b[0m:  \u001b[35m// orphan\u001b[0m\n         esi = ebx\n         ebx = dword [ebx + 4]\n         \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0805e686\u001b[0m\n    loc_\u001b[33m0x0805e6b0\u001b[0m:  \u001b[35m// orphan\u001b[0m\n         // CODE XREF from fcn.0805e634 @ \u001b[33m0x",
+          "dangerous_calls": []
+        },
+        {
+          "address": "0x0805c13c",
+          "name": "fcn_0x0805c13c",
+          "c_code": "\u001b[35m// callconv: eax cdecl (stack);\u001b[0m\n\u001b[36mint \u001b[0mfcn.0805c13c (\u001b[36mint \u001b[0mstack) {\n    loc_\u001b[33m0x0805543a\u001b[0m:\n        // CODE XREF from fcn.0805c13c @ \u001b[33m0x805c145\u001b[0m(x)\n        push (ebp)\n        ebp = esp\n        push (esi)\n        push (ebx)\n        esi = ecx\n        esp -= \u001b[33m0x10\u001b[0m\n        ebx = edx\n        ecx = dword [eax + 4]\n        edx = dword [eax]\n        dword [var_ch] = eax\n\u001b[32m        fcn.0805c1ae ()\u001b[0m\n        esp -= \u001b[33m0xc\u001b[0m\n        eax = dword [var_ch]\n        ecx = ebx\n        push (esi)    \u001b[35m// int32_t arg_8h\u001b[0m\n        edx = dword [eax]\n        fcn.0805c14c () // fcn.0805c14c(\u001b[33m0x0\u001b[0m)\n        esp += \u001b[33m0x10\u001b[0m\n        esp = var_8h\n\u001b[32m        ebx = pop ()\u001b[0m\n\u001b[32m        esi = pop ()\u001b[0m\n\u001b[32m        ebp = pop ()\u001b[0m\n        return\n        \u001b[36mreturn \u001b[0meax;\n    loc_\u001b[33m0x0805c140\u001b[0m:  \u001b[35m// orphan\u001b[0m\n         ecx = dword [edx + 4]\n         edx = dword [edx]\n         \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0805543a\u001b[0m\n    loc_\u001b[33m0x0805c14a\u001b[0m:  \u001b[35m// orphan\u001b[0m\n         // CODE XREF from fcn.0805c13c @ \u001b[33m0x805c13e\u001b[0m(x)\n         return\n        \u001b[36mreturn \u001b[0meax;\n}",
+          "dangerous_calls": []
+        },
+        {
+          "address": "0x08050864",
+          "name": "fcn_0x08050864",
+          "c_code": "\u001b[35m// callconv: eax cdecl (stack);\u001b[0m\n\u001b[36mint \u001b[0mfcn.08050864 (\u001b[36mint \u001b[0mstack) {\n    loc_\u001b[33m0x08050482\u001b[0m:\n        // CODE XREF from fcn.08050864 @ \u001b[33m0x805094c\u001b[0m(x)\n        // CODE XREF from fcn.08050864 @ +\u001b[33m0x191\u001b[0m(x)\n        push (ebp)\n        ebp = esp\n        push (edi)\n        push (esi)\n        push (ebx)\n        ebx = eax\n        esp -= \u001b[33m0x3c\u001b[0m\n    loc_\u001b[33m0x0805048d\u001b[0m:\n        // CODE XREF from fcn.08050864 @ \u001b[33m0x805050b\u001b[0m(x)\n        ecx = 0\n        eax = dword [ebx + \u001b[33m0x2c\u001b[0m]\n        edx = \u001b[33m0xa\u001b[0m\n \u001b[32m       fcn.0805c270 ()\u001b[0m\n        edi = eax\n        v = eax - \u001b[33m0xffffffff\u001b[0m\n        \u001b[33mif \u001b[0m(!v) \u001b[32mgoto \u001b[0mloc_\u001b[33m0x805085c\u001b[0m // unlikely\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x080504a7\u001b[0m;\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x080504a7\u001b[0m;\n        \u001b[36mreturn \u001b[0meax;\n    loc_\u001b[33m0x080504a7\u001b[0m:\n        eax = 0\n        v = edi & edi\n        \u001b[33mif \u001b[0m(!v) \u001b[32mgoto \u001b[0mloc_\u001b[33m0x80504bc\u001b[0m // likely\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x080504ad\u001b[0m;\n    loc_\u001b[33m0x080504bc\u001b[0m:\n        // CODE XREFS from fcn.08050864 @ \u001b[33m0x80504ab\u001b[0m(x), \u001b[33m0x80504b8\u001b[0m(x)\n        push (eax)\n        ecx = ebx + \u001b[33m0x2c\u001b[0m\n        push (0)\n        esi = s1\n        push (ecx)\n        dword [var_3ch] = ecx\n        push (esi)    // (pstr \u001b[33m0x00177fd4\u001b[0m) \"D\"\n\u001b[32m        sym.imp.string::substr_unsigned_int__unsigned_int__const () \u001b[0m \u001b[35m// string::substr(unsigned int, unsigned int) const\u001b[0m\n        edi++\n        push (eax)\n        push (eax)\n        push (edi)\n        push (0)\n        push (dword [var_3ch])\n\u001b[32m        sym.imp.string::erase_unsigned_int__unsigned_int_ () \u001b[0m \u001b[35m// string::erase(unsigned int, unsigned int)\u001b[0m\n        edx = dword [s1]\n        eax = dword [edx]\n        esp += \u001b[33m0x20\u001b[0m\n        eax += dword [ebx]\n        dword [ebx] = eax\n        v = eax - \u001b[33m0x200\u001b[0m // 512 \u001b[35m// \"U\\u050b\" // \"U\\u050b\"\u001b[0m\n        \u001b[33mif \u001b[0m(((unsigned) v) > 0) \u001b[32mgoto \u001b[0m\u001b[33m0x80505c0",
+          "dangerous_calls": []
+        },
+        {
+          "address": "0x08058646",
+          "name": "fcn_0x08058646",
+          "c_code": "\u001b[35m// callconv: eax cdecl (stack);\u001b[0m\n\u001b[36mint \u001b[0mmain (char **argv) {\n    loc_\u001b[33m0x08058646\u001b[0m:\n        // DATA XREF from entry0 @ \u001b[33m0x804e2e7\u001b[0m(r)\n        ecx = argv\n        esp &= \u001b[33m0xfffffff0\u001b[0m // ebp\n        push (dword [ecx - 4])\n        push (ebp)\n        ebp = esp\n        push (edi)\n        push (esi)\n        push (ebx)\n        ebx = var_5b0h\n        push (ecx)    // U(pstr \u001b[33m0x00178004\u001b[0m) \"8\\x03\"\n        esp -= \u001b[33m0x6b0\u001b[0m\n        push (0)\n        push (0)\n        push (0)\n        push (0)\n        push (0)\n        push (0)\n        push (0)\n        push (0)\n        push (0)\n        push (0)\n        push (0)\n        push (0)\n        push (0)\n        push (ebx)\n\u001b[32m        method.nv::Looper.Looper_unsigned_int__unsigned_int__unsigned_int__unsigned_int__unsigned_int__unsigned_int__unsigned_int__unsigned_int__unsigned_int__unsigned_int__unsigned_int__unsigned_int__unsigned_int_ () \u001b[0m \u001b[35m// nv::Looper::Looper(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int)\u001b[0m\n        esp += \u001b[33m0x40\u001b[0m   // (pstr \u001b[33m0x08063938\u001b[0m) \"/nova/etc/www\"\n\u001b[32m        fcn.080554df ()\u001b[0m\n        v = byte [eax] - \u001b[33m0xb6\u001b[0m\n        \u001b[33mif \u001b[0m(v) \u001b[32mgoto \u001b[0mloc_\u001b[33m0x805870a\u001b[0m // likely\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x08058690\u001b[0m;\n    loc_\u001b[33m0x0805870a\u001b[0m:\n        // CODE XREF from main @ \u001b[33m0x805868e\u001b[0m(x)\n        byte [0] = 0\n        ud2\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x080586e4\u001b[0m;\n        \u001b[36mreturn \u001b[0meax;\n    loc_\u001b[33m0x080586e4\u001b[0m:\n        // CODE XREF from main @ \u001b[33m0x80586f1\u001b[0m(x)\n        esp -= \u001b[33m0xc\u001b[0m\n        push (0)\n\u001b[32m        sym.imp.close () \u001b[0m \u001b[35m// int close(NULL)\u001b[0m\n        esp += \u001b[33m0x10\u001b[0m   \u001b[35m// ebp\u001b[0m\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x80586e4\u001b[0m\n         \u001b[32mgoto \u001b[0mloc_\u001b[33m0x080586e4\u001b[0m\n    loc_\u001b[33m0x080586f3\u001b[0m:  \u001b[35m// orphan\u001b[0m\n         // CODE X",
+          "dangerous_calls": []
+        },
+        {
+          "address": "0x08056984",
+          "name": "fcn_0x08056984",
+          "c_code": "\u001b[35m// callconv: eax cdecl (stack);\u001b[0m\nvoid fcn.08056984 (int32_t arg_8h) {\n    loc_\u001b[33m0x08056984\u001b[0m:\n        // CALL XREFS from fcn.0805758e @ \u001b[33m0x80575fb\u001b[0m(w), \u001b[33m0x8057649\u001b[0m(x)\n        // CALL XREFS from fcn.0805758e @ +\u001b[33m0x92f\u001b[0m(w), +\u001b[33m0x952\u001b[0m(x)\n        push (ebp)\n        ebp = esp\n        push (edi)\n        push (esi)\n        push (ebx)\n        ebx = path\n        esp -= \u001b[33m0x12c\u001b[0m\n        edx = ebx\n        edi = dword [arg_8h]\n        dword [path] = 0\n        dword [var_94h] = 0\n        eax = edi + \u001b[33m0xf0\u001b[0m\n \u001b[32m       fcn.0805215a ()\u001b[0m\n        eax = ebx\n\u001b[32m        fcn.08051eca ()\u001b[0m\n        edx = ebx\n        eax = edi + \u001b[33m0x140\u001b[0m\n        dword [path] = 0\n        dword [var_94h] = 0\n\u001b[32m        fcn.0805215a ()\u001b[0m\n        eax = ebx\n\u001b[32m        fcn.08051eca ()\u001b[0m\n        eax = edi + \u001b[33m0x180\u001b[0m\n        edx = \u001b[33m0x7d0\u001b[0m   \u001b[35m// 2000\u001b[0m\n\u001b[32m        fcn.08051efc ()\u001b[0m\n        eax = dword [edi + \u001b[33m0x17c\u001b[0m]\n        v = dword [edi + \u001b[33m0x178\u001b[0m] - eax\n        dword [edi + \u001b[33m0x170\u001b[0m] = 6\n        \u001b[33mif \u001b[0m(!v) \u001b[32mgoto \u001b[0mloc_\u001b[33m0x8056a18\u001b[0m // likely\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x08056a11\u001b[0m;\n    loc_\u001b[33m0x08056a18\u001b[0m:\n        // CODE XREF from fcn.08056984 @ \u001b[33m0x8056a0f\u001b[0m(x)\n        esp -= \u001b[33m0xc\u001b[0m\n        eax = var_110h\n        push (eax)\n\u001b[32m        sym.imp.string::string__ () \u001b[0m \u001b[35m// string::string()\u001b[0m\n        eax = edi + \u001b[33m0xfc\u001b[0m\n        esp += \u001b[33m0x10\u001b[0m\n        dword [var_124h] = eax\n        eax = dword [edi + \u001b[33m0x138\u001b[0m]\n        v = dword [eax] - 0\n        \u001b[33mif \u001b[0m(!v) \u001b[32mgoto \u001b[0mloc_\u001b[33m0x8056ac7\u001b[0m // unlikely\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x08056a45\u001b[0m;\n    loc_\u001b[33m0x08056ac7\u001b[0m:\n        // CODE XREF from fcn.08056984 @ \u001b[33m0x8056a3f\u001b[0m(x)\n        eax = dword [edi + \u001b[33m0x134\u001b[0m]\n        v = dword [eax] - 0\n        \u001b[33mif \u001b[0m(!v) \u001b[32mgoto \u001b[0mloc_\u001b[33m0x8056b98\u001b[0m // unlikely\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x08056ad6\u001b[0m;\n ",
+          "dangerous_calls": []
+        },
+        {
+          "address": "0x0805be28",
+          "name": "fcn_0x0805be28",
+          "c_code": "\u001b[35m// callconv: eax cdecl (stack);\u001b[0m\n\u001b[36mint \u001b[0mfcn.0805be28 (\u001b[36mint \u001b[0mstack) {\n    loc_\u001b[33m0x0805be28\u001b[0m:\n        // CALL XREFS from fcn.0806022a @ +\u001b[33m0x171c\u001b[0m(x), +\u001b[33m0x1b2e\u001b[0m(x)\n        push (ebp)\n        ebp = esp\n        push (edi)\n        push (esi)\n        esi = eax\n        push (ebx)\n        ebx = var_28h\n        esp -= \u001b[33m0x28\u001b[0m\n        edi = edx\n        push (ebx)    // (pstr \u001b[33m0x00177fd4\u001b[0m) \"D\"\n\u001b[32m        fcn.0804d760 ()\u001b[0m\n        ecx = dword [esi]\n        esp += \u001b[33m0xc\u001b[0m\n        esi = 0\n        edx = dword [ecx]\n        eax = ecx + 4\n        push (edx)\n        push (eax)\n        push (ebx)    // (pstr \u001b[33m0x00177fd4\u001b[0m) \"D\"\n\u001b[32m        sym.imp.json::StreamParser::feed_string_view_ () \u001b[0m \u001b[35m// json::StreamParser::feed(string_view)\u001b[0m\n        eax = pop ()  // (pstr \u001b[33m0x00177fd4\u001b[0m) \"D\"\n        eax = var_20h\n\u001b[32m        edx = pop ()\u001b[0m\n        dword [var_20h] = 0\n        push (eax)\n        dword [var_1ch] = 0\n        push (ebx)    // U(pstr \u001b[33m0x00177fd4\u001b[0m) \"D8\"\n\u001b[32m        sym.imp.json::StreamParser::read_json::Object_ () \u001b[0m \u001b[35m// json::StreamParser::read(json::Object&)\u001b[0m\n        esp += \u001b[33m0x10\u001b[0m\n        eax--\n        \u001b[33mif \u001b[0m(v) \u001b[32mgoto \u001b[0mloc_\u001b[33m0x805beb1\u001b[0m // likely\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0805be72\u001b[0m;\n    loc_\u001b[33m0x0805beb1\u001b[0m:\n        // CODE XREFS from fcn.0805be28 @ \u001b[33m0x805be70\u001b[0m(x), \u001b[33m0x805be76\u001b[0m(x)\n        eax = var_1ch\n\u001b[32m        fcn.08059c54 ()\u001b[0m\n        esp -= \u001b[33m0xc\u001b[0m\n        push (ebx)\n\u001b[32m        sym.imp.json::StreamParser::StreamParser__ () \u001b[0m \u001b[35m// json::StreamParser::~StreamParser()\u001b[0m\n        esp = var_ch\n        eax = esi\n\u001b[32m        ebx = pop ()\u001b[0m\n\u001b[32m        esi = pop ()\u001b[0m\n\u001b[32m        edi = pop ()  \u001b[0m \u001b[35m// ebp\u001b[0m\n\u001b[32m        ebp = pop ()\u001b[0m\n        return\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0805be78\u001b[0m;\n        \u001b[36mreturn \u001b[0meax;\n    loc_\u001b[33m0x0805be78\u001b[0m:\n        eax = dword [var_1ch]\n        esi = dword ",
+          "dangerous_calls": []
+        },
+        {
+          "address": "0x08055618",
+          "name": "fcn_0x08055618",
+          "c_code": "\u001b[35m// callconv: eax cdecl (stack);\u001b[0m\n\u001b[36mint \u001b[0mfcn.08055618 (\u001b[36mint \u001b[0mstack) {\n    loc_\u001b[33m0x08055618\u001b[0m:\n        // CALL XREF from fcn.08055ac0 @ +\u001b[33m0xad1\u001b[0m(x)\n        // CALL XREF from fcn.0805758e @ +\u001b[33m0xf4c\u001b[0m(x)\n        // CALL XREF from void map_node_destr<string, json::Object>(tree_node_base*) @ +\u001b[33m0x240\u001b[0m(x) \u001b[35m// sym.void_map_node_destr_string__json::Object__tree_node_base_\u001b[0m\n        // CALL XREF from fcn.0805c906 @ +\u001b[33m0xd2e\u001b[0m(x)\n        push (ebp)\n        ebp = esp\n        push (edi)\n        push (esi)\n        edi = edx\n        push (ebx)\n        esi = 0\n        esp -= \u001b[33m0x2c\u001b[0m\n        dword [var_2ch] = ecx\n        ecx = dword [ecx]\n        ebx = eax\n        edx = dword [ecx]\n    loc_\u001b[33m0x0805562e\u001b[0m:\n        // CODE XREF from fcn.08055618 @ \u001b[33m0x8055653\u001b[0m(x)\n        v = ecx - edx\n        \u001b[33mif \u001b[0m(!v) \u001b[32mgoto \u001b[0mloc_\u001b[33m0x8055655\u001b[0m // likely\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x08055632\u001b[0m;\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x08055632\u001b[0m;\n        \u001b[36mreturn \u001b[0meax;\n    loc_\u001b[33m0x08055632\u001b[0m:\n        esp -= \u001b[33m0xc\u001b[0m\n        eax = edx + 8\n        dword [var_34h] = ecx\n        dword [var_30h] = edx\n        push (eax)\n\u001b[32m        sym.imp.nv::message::max_length___const () \u001b[0m \u001b[35m// nv::message::max_length() const\u001b[0m\n        edx = dword [var_30h]\n        esp += \u001b[33m0x10\u001b[0m\n        esi = esi + eax + 4\n        ecx = dword [var_34h]\n        edx = dword [edx]\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x805562e\u001b[0m\n         \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0805562e\u001b[0m\n    loc_\u001b[33m0x08055655\u001b[0m:  \u001b[35m// orphan\u001b[0m\n         // CODE XREF from fcn.08055618 @ \u001b[33m0x8055630\u001b[0m(x)\n         esp -= \u001b[33m0xc\u001b[0m\n         push (ebx)\n\u001b[32m         sym.imp.string::string__ () \u001b[0m \u001b[35m// string::string()\u001b[0m\n\u001b[32m         eax = pop ()\u001b[0m\n         eax = esi + \u001b[33m0x10\u001b[0m\n \u001b[32m        edx = pop ()\u001b[0m\n         esi += 8\n         push (eax)\n         push (ebx)\n\u001b[32m         sym.imp.string::reserve_unsigned_int_ () \u001b[0m \u001b[35",
+          "dangerous_calls": []
+        },
+        {
+          "address": "0x0804f92a",
+          "name": "fcn_0x0804f92a",
+          "c_code": "\u001b[35m// callconv: eax cdecl (stack);\u001b[0m\n\u001b[36mint \u001b[0mfcn.0804f92a (\u001b[36mint \u001b[0mstack) {\n    loc_\u001b[33m0x0804f92a\u001b[0m:\n        // CALL XREF from fcn.0804ff4d @ +\u001b[33m0x124\u001b[0m(x)\n        // CALL XREFS from fcn.0805482e @ +\u001b[33m0x4d7\u001b[0m(x), +\u001b[33m0x694\u001b[0m(x)\n        // CALL XREF from fcn.08055ac0 @ +\u001b[33m0x578\u001b[0m(x)\n        push (ebp)\n        ebp = esp\n        push (edi)\n        push (esi)\n        push (ebx)\n        ebx = eax\n        esp -= \u001b[33m0x4c\u001b[0m\n        dword [var_3ch] = edx\n        eax = dword [edx]\n        dword [var_34h] = eax\n        edx = dword [eax]\n        v = edx - \u001b[33m0xf\u001b[0m\n        \u001b[33mif \u001b[0m(((unsigned) v) <= 0) \u001b[32mgoto \u001b[0m\u001b[33m0x804fc39\u001b[0m // likely\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0804f948\u001b[0m;\n    loc_\u001b[33m0x0804fc39\u001b[0m:\n        // CODE XREFS from fcn.0804f92a @ \u001b[33m0x804f942\u001b[0m(x), \u001b[33m0x804fb43\u001b[0m(x)\n        eax = 0\n    loc_\u001b[33m0x0804fc3b\u001b[0m:\n        // CODE XREFS from fcn.0804f92a @ \u001b[33m0x804f959\u001b[0m(x), \u001b[33m0x804fc37\u001b[0m(x)\n        esp = var_ch\n\u001b[32m        ebx = pop ()\u001b[0m\n\u001b[32m        esi = pop ()\u001b[0m\n\u001b[32m        edi = pop ()  \u001b[0m \u001b[35m// ebp // ebp\u001b[0m\n\u001b[32m        ebp = pop ()\u001b[0m\n        return\n        \u001b[32mgoto \u001b[0mloc_\u001b[33m0x0804f95f\u001b[0m;\n        \u001b[36mreturn \u001b[0meax;\n    loc_\u001b[33m0x0804f95f\u001b[0m:\n        push (eax)\n        edx -= 8\n        push (0)\n        push (edx)\n        push (esi)\n\u001b[32m        sym.imp.string::resize_unsigned_int__char_ () \u001b[0m \u001b[35m// string::resize(unsigned int, char)\u001b[0m\n        eax = dword [esi]\n        dword [var_40h] = eax\n        eax = dword [eax]\n        dword [var_44h] = eax\n        eax = dword [var_3ch]\n        eax = dword [eax]\n        dword [var_4ch] = eax\n        eax = dword [var_34h]\n        eax = dword [eax + 8]\n\u001b[32m        fcn.0804f927 ()\u001b[0m\n        edx = dword [ebx + \u001b[33m0x138\u001b[0m]\n        ecx = eax\n        eax = dword [var_44h]\n        eax += ecx\n        esp += \u001b[33m0x10\u001b[0m\n        dword [var_38h] = eax\n        eax = dword [ebx + \u001b[33m0x15c\u001b[0m]\n        eax -= dword [ebx",
+          "dangerous_calls": []
+        }
+      ]
+    },
+    "libjson": {
+      "decompiled_count": 0,
+      "vulnerability_analysis": [],
+      "parser_analysis": []
+    },
+    "libwww": {
+      "decompiled_count": 0,
+      "vulnerability_analysis": [],
+      "dangerous_call_map": {}
+    },
+    "libuhttp": {
+      "decompiled_count": 0,
+      "gets_analysis": [],
+      "vulnerability_analysis": []
+    },
+    "cross_library": {
+      "chains": []
+    }
+  }
+}

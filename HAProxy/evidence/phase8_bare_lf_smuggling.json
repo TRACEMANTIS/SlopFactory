@@ -1,0 +1,461 @@
+{
+  "phase": "Phase 8: Bare LF Request Smuggling Exploitation",
+  "target": "HAProxy v3.3.0",
+  "timestamp": 1771458646.7525954,
+  "summary": {
+    "total_tests": 13,
+    "anomalies": 4,
+    "findings": 8
+  },
+  "findings": [
+    {
+      "id": 2,
+      "category": "CL-TE-Desync",
+      "name": "basic_smuggle",
+      "result": "FINDING",
+      "details": "Responses: 2, Smuggled path visible: False\nResponse data (652 bytes): HTTP/1.0 200 OK\r\nserver: BaseHTTP/0.6 Python/3.13.7\r\ndate: Wed, 18 Feb 2026 23:49:59 GMT\r\ncontent-type: application/json\r\ncontent-length: 476\r\nx-backend-server: echo-server\r\n\r\n{\n  \"method\": \"POST\",\n  \"path\": \"/\",\n  \"http_version\": \"HTTP/1.1\",\n  \"headers\": {\n    \"host\": \"127.0.0.1:8180\",\n    \"x-foo\": \"bar\",\n    \"transfer-encoding\": \"chunked\",\n    \"x-forwarded-proto\": \"http\",\n    \"x-real-ip\": \"127.0.0.1\",\n    \"x-frontend\": \"http\",\n    \"x-lua-processed\": \"true\",\n    \"x-lua-method\": \"POST\",\n    \"x-l",
+      "timestamp": 1771458600.6996334,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "response_count": 2,
+        "has_smuggled": false,
+        "raw_response": "HTTP/1.0 200 OK\r\nserver: BaseHTTP/0.6 Python/3.13.7\r\ndate: Wed, 18 Feb 2026 23:49:59 GMT\r\ncontent-type: application/json\r\ncontent-length: 476\r\nx-backend-server: echo-server\r\n\r\n{\n  \"method\": \"POST\",\n  \"path\": \"/\",\n  \"http_version\": \"HTTP/1.1\",\n  \"headers\": {\n    \"host\": \"127.0.0.1:8180\",\n    \"x-foo\": \"bar\",\n    \"transfer-encoding\": \"chunked\",\n    \"x-forwarded-proto\": \"http\",\n    \"x-real-ip\": \"127.0.0.1\",\n    \"x-frontend\": \"http\",\n    \"x-lua-processed\": \"true\",\n    \"x-lua-method\": \"POST\",\n    \"x-lua-path\": \"/\",\n    \"x-lua-ua-echo\": \"\"\n  },\n  \"body\": \"\",\n  \"body_length\": 0,\n  \"client_address\": \"127.0.0.1:60446\",\n  \"timestamp\": 1771458599.6961355\n}"
+      }
+    },
+    {
+      "id": 3,
+      "category": "BareLF-Parse",
+      "name": "header_splitting",
+      "result": "FINDING",
+      "details": "HAProxy splits bare LF into separate headers: True\nX-Split present: True\nX-After-LF present: True\nX-End present: True\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-before\": \"yes\",\n  \"x-split\": \"value1\",\n  \"x-after-lf\": \"value2\",\n  \"x-end\": \"done\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/haproxy-parse-test\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458605.7011316,
+      "severity": "HIGH",
+      "raw_data": {
+        "header_keys": [
+          "host",
+          "x-before",
+          "x-split",
+          "x-after-lf",
+          "x-end",
+          "x-forwarded-proto",
+          "x-real-ip",
+          "x-frontend",
+          "x-lua-processed",
+          "x-lua-method",
+          "x-lua-path",
+          "x-lua-ua-echo"
+        ],
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-before": "yes",
+          "x-split": "value1",
+          "x-after-lf": "value2",
+          "x-end": "done",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/haproxy-parse-test",
+          "x-lua-ua-echo": ""
+        },
+        "splits_on_bare_lf": true
+      }
+    },
+    {
+      "id": 5,
+      "category": "Critical-Inject",
+      "name": "inject_te",
+      "result": "FINDING",
+      "details": "TE injection: INJECTED!\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-attack\": \"X-Foo: bar\",\n  \"transfer-encoding\": \"chunked\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/inject_te\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458610.7106256,
+      "severity": "HIGH",
+      "raw_data": {
+        "injected_key": "transfer-encoding",
+        "injected_present": true,
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-attack": "X-Foo: bar",
+          "transfer-encoding": "chunked",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/inject_te",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 7,
+      "category": "Critical-Inject",
+      "name": "inject_auth",
+      "result": "FINDING",
+      "details": "Auth injection: INJECTED!\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-attack\": \"X-Foo: bar\",\n  \"authorization\": \"Basic YWRtaW46YWRtaW4=\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/inject_auth\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458620.7216175,
+      "severity": "HIGH",
+      "raw_data": {
+        "injected_key": "authorization",
+        "injected_present": true,
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-attack": "X-Foo: bar",
+          "authorization": "Basic YWRtaW46YWRtaW4=",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/inject_auth",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 8,
+      "category": "Critical-Inject",
+      "name": "inject_cookie",
+      "result": "FINDING",
+      "details": "Cookie injection: INJECTED!\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-attack\": \"X-Foo: bar\",\n  \"cookie\": \"session=stolen\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/inject_cookie\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458625.7271135,
+      "severity": "HIGH",
+      "raw_data": {
+        "injected_key": "cookie",
+        "injected_present": true,
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-attack": "X-Foo: bar",
+          "cookie": "session=stolen",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/inject_cookie",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 9,
+      "category": "Critical-Inject",
+      "name": "inject_x_forwarded",
+      "result": "FINDING",
+      "details": "XFF spoofing: INJECTED!\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-attack\": \"X-Foo: bar\",\n  \"x-forwarded-for\": \"[REDACTED-IP]\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/inject_x_forwarded\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458630.7326095,
+      "severity": "HIGH",
+      "raw_data": {
+        "injected_key": "x-forwarded-for",
+        "injected_present": true,
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-attack": "X-Foo: bar",
+          "x-forwarded-for": "[REDACTED-IP]",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/inject_x_forwarded",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 10,
+      "category": "Critical-Inject",
+      "name": "inject_x_real_ip",
+      "result": "FINDING",
+      "details": "X-Real-IP spoofing: INJECTED!\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-attack\": \"X-Foo: bar\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/inject_x_real_ip\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458635.7421036,
+      "severity": "HIGH",
+      "raw_data": {
+        "injected_key": "x-real-ip",
+        "injected_present": true,
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-attack": "X-Foo: bar",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/inject_x_real_ip",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 11,
+      "category": "Critical-Inject",
+      "name": "inject_up[REDACTED]",
+      "result": "FINDING",
+      "details": "Up[REDACTED] injection: INJECTED!\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-attack\": \"X-Foo: bar\",\n  \"up[REDACTED]\": \"websocket\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/inject_up[REDACTED]\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458640.7475994,
+      "severity": "HIGH",
+      "raw_data": {
+        "injected_key": "up[REDACTED]",
+        "injected_present": true,
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-attack": "X-Foo: bar",
+          "up[REDACTED]": "websocket",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/inject_up[REDACTED]",
+          "x-lua-ua-echo": ""
+        }
+      }
+    }
+  ],
+  "tests": [
+    {
+      "id": 1,
+      "category": "Smuggle-Confirm",
+      "name": "post_te_inject",
+      "result": "ERROR",
+      "details": "HTTP 400: Expecting value: line 1 column 1 (char 0)",
+      "timestamp": 1771458599.6961355
+    },
+    {
+      "id": 2,
+      "category": "CL-TE-Desync",
+      "name": "basic_smuggle",
+      "result": "FINDING",
+      "details": "Responses: 2, Smuggled path visible: False\nResponse data (652 bytes): HTTP/1.0 200 OK\r\nserver: BaseHTTP/0.6 Python/3.13.7\r\ndate: Wed, 18 Feb 2026 23:49:59 GMT\r\ncontent-type: application/json\r\ncontent-length: 476\r\nx-backend-server: echo-server\r\n\r\n{\n  \"method\": \"POST\",\n  \"path\": \"/\",\n  \"http_version\": \"HTTP/1.1\",\n  \"headers\": {\n    \"host\": \"127.0.0.1:8180\",\n    \"x-foo\": \"bar\",\n    \"transfer-encoding\": \"chunked\",\n    \"x-forwarded-proto\": \"http\",\n    \"x-real-ip\": \"127.0.0.1\",\n    \"x-frontend\": \"http\",\n    \"x-lua-processed\": \"true\",\n    \"x-lua-method\": \"POST\",\n    \"x-l",
+      "timestamp": 1771458600.6996334,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "response_count": 2,
+        "has_smuggled": false,
+        "raw_response": "HTTP/1.0 200 OK\r\nserver: BaseHTTP/0.6 Python/3.13.7\r\ndate: Wed, 18 Feb 2026 23:49:59 GMT\r\ncontent-type: application/json\r\ncontent-length: 476\r\nx-backend-server: echo-server\r\n\r\n{\n  \"method\": \"POST\",\n  \"path\": \"/\",\n  \"http_version\": \"HTTP/1.1\",\n  \"headers\": {\n    \"host\": \"127.0.0.1:8180\",\n    \"x-foo\": \"bar\",\n    \"transfer-encoding\": \"chunked\",\n    \"x-forwarded-proto\": \"http\",\n    \"x-real-ip\": \"127.0.0.1\",\n    \"x-frontend\": \"http\",\n    \"x-lua-processed\": \"true\",\n    \"x-lua-method\": \"POST\",\n    \"x-lua-path\": \"/\",\n    \"x-lua-ua-echo\": \"\"\n  },\n  \"body\": \"\",\n  \"body_length\": 0,\n  \"client_address\": \"127.0.0.1:60446\",\n  \"timestamp\": 1771458599.6961355\n}"
+      }
+    },
+    {
+      "id": 3,
+      "category": "BareLF-Parse",
+      "name": "header_splitting",
+      "result": "FINDING",
+      "details": "HAProxy splits bare LF into separate headers: True\nX-Split present: True\nX-After-LF present: True\nX-End present: True\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-before\": \"yes\",\n  \"x-split\": \"value1\",\n  \"x-after-lf\": \"value2\",\n  \"x-end\": \"done\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/haproxy-parse-test\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458605.7011316,
+      "severity": "HIGH",
+      "raw_data": {
+        "header_keys": [
+          "host",
+          "x-before",
+          "x-split",
+          "x-after-lf",
+          "x-end",
+          "x-forwarded-proto",
+          "x-real-ip",
+          "x-frontend",
+          "x-lua-processed",
+          "x-lua-method",
+          "x-lua-path",
+          "x-lua-ua-echo"
+        ],
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-before": "yes",
+          "x-split": "value1",
+          "x-after-lf": "value2",
+          "x-end": "done",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/haproxy-parse-test",
+          "x-lua-ua-echo": ""
+        },
+        "splits_on_bare_lf": true
+      }
+    },
+    {
+      "id": 4,
+      "category": "Critical-Inject",
+      "name": "inject_host",
+      "result": "ANOMALY",
+      "details": "HTTP 400",
+      "timestamp": 1771458605.7051294
+    },
+    {
+      "id": 5,
+      "category": "Critical-Inject",
+      "name": "inject_te",
+      "result": "FINDING",
+      "details": "TE injection: INJECTED!\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-attack\": \"X-Foo: bar\",\n  \"transfer-encoding\": \"chunked\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/inject_te\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458610.7106256,
+      "severity": "HIGH",
+      "raw_data": {
+        "injected_key": "transfer-encoding",
+        "injected_present": true,
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-attack": "X-Foo: bar",
+          "transfer-encoding": "chunked",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/inject_te",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 6,
+      "category": "Critical-Inject",
+      "name": "inject_cl",
+      "result": "ANOMALY",
+      "details": "HTTP 0",
+      "timestamp": 1771458615.7121234
+    },
+    {
+      "id": 7,
+      "category": "Critical-Inject",
+      "name": "inject_auth",
+      "result": "FINDING",
+      "details": "Auth injection: INJECTED!\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-attack\": \"X-Foo: bar\",\n  \"authorization\": \"Basic YWRtaW46YWRtaW4=\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/inject_auth\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458620.7216175,
+      "severity": "HIGH",
+      "raw_data": {
+        "injected_key": "authorization",
+        "injected_present": true,
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-attack": "X-Foo: bar",
+          "authorization": "Basic YWRtaW46YWRtaW4=",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/inject_auth",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 8,
+      "category": "Critical-Inject",
+      "name": "inject_cookie",
+      "result": "FINDING",
+      "details": "Cookie injection: INJECTED!\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-attack\": \"X-Foo: bar\",\n  \"cookie\": \"session=stolen\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/inject_cookie\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458625.7271135,
+      "severity": "HIGH",
+      "raw_data": {
+        "injected_key": "cookie",
+        "injected_present": true,
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-attack": "X-Foo: bar",
+          "cookie": "session=stolen",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/inject_cookie",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 9,
+      "category": "Critical-Inject",
+      "name": "inject_x_forwarded",
+      "result": "FINDING",
+      "details": "XFF spoofing: INJECTED!\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-attack\": \"X-Foo: bar\",\n  \"x-forwarded-for\": \"[REDACTED-IP]\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/inject_x_forwarded\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458630.7326095,
+      "severity": "HIGH",
+      "raw_data": {
+        "injected_key": "x-forwarded-for",
+        "injected_present": true,
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-attack": "X-Foo: bar",
+          "x-forwarded-for": "[REDACTED-IP]",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/inject_x_forwarded",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 10,
+      "category": "Critical-Inject",
+      "name": "inject_x_real_ip",
+      "result": "FINDING",
+      "details": "X-Real-IP spoofing: INJECTED!\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-attack\": \"X-Foo: bar\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/inject_x_real_ip\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458635.7421036,
+      "severity": "HIGH",
+      "raw_data": {
+        "injected_key": "x-real-ip",
+        "injected_present": true,
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-attack": "X-Foo: bar",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/inject_x_real_ip",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 11,
+      "category": "Critical-Inject",
+      "name": "inject_up[REDACTED]",
+      "result": "FINDING",
+      "details": "Up[REDACTED] injection: INJECTED!\nBackend headers: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-attack\": \"X-Foo: bar\",\n  \"up[REDACTED]\": \"websocket\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/inject_up[REDACTED]\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458640.7475994,
+      "severity": "HIGH",
+      "raw_data": {
+        "injected_key": "up[REDACTED]",
+        "injected_present": true,
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-attack": "X-Foo: bar",
+          "up[REDACTED]": "websocket",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/inject_up[REDACTED]",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 12,
+      "category": "CL-Overflow",
+      "name": "int64_max_post",
+      "result": "ANOMALY",
+      "details": "POST with CL=INT64_MAX: HTTP 502\nHAProxy forwarded (502 from backend)",
+      "timestamp": 1771458643.7500975,
+      "severity": "LOW"
+    },
+    {
+      "id": 13,
+      "category": "CL-Overflow",
+      "name": "int64_overflow",
+      "result": "ANOMALY",
+      "details": "CL=INT64_MAX+1: HTTP 502",
+      "timestamp": 1771458646.7525954
+    }
+  ]
+}

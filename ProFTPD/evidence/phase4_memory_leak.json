@@ -1,0 +1,55 @@
+{
+  "test": "memory_leak_monitoring",
+  "date": "2026-02-14T13:29:48.785940",
+  "measurements": {
+    "baseline": {
+      "pid": 210591,
+      "VmPeak": 28392,
+      "VmSize": 28392,
+      "VmRSS": 4700,
+      "VmData": 2192,
+      "VmStk": 132
+    },
+    "after_50_normal_sessions": {
+      "pid": 210591,
+      "VmPeak": 28392,
+      "VmSize": 28392,
+      "VmRSS": 4700,
+      "VmData": 2192,
+      "VmStk": 132
+    },
+    "after_30_modcopy_sessions": {
+      "pid": 210591,
+      "VmPeak": 28392,
+      "VmSize": 28392,
+      "VmRSS": 4700,
+      "VmData": 2192,
+      "VmStk": 132
+    },
+    "after_20_e2big_sessions": {
+      "pid": 210591,
+      "VmPeak": 28392,
+      "VmSize": 28392,
+      "VmRSS": 4700,
+      "VmData": 2192,
+      "VmStk": 132
+    },
+    "after_recovery_50_normal": {
+      "pid": 210591,
+      "VmPeak": 28392,
+      "VmSize": 28392,
+      "VmRSS": 4700,
+      "VmData": 2192,
+      "VmStk": 132
+    }
+  },
+  "analysis": {
+    "baseline_vmrss_kb": 4700,
+    "final_vmrss_kb": 4700,
+    "total_delta_kb": 0,
+    "max_growth_kb": 0,
+    "monotonic_increase": false,
+    "leak_detected": false,
+    "note": "Memory monitored on master process only. Child processes (per-connection) are forked and their memory is separate. Master VmRSS growth indicates leak in code running in master context (e.g., signal handlers, shared structs)."
+  }
+}

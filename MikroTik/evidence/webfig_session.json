@@ -1,0 +1,2709 @@
+{
+  "metadata": {
+    "script": "attack_webfig_session.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 2,
+    "start_time": "2026-02-15T22:07:33.949787",
+    "end_time": "2026-02-15T22:08:01.543983",
+    "total_tests": 190,
+    "anomalies": 74,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "25m11s",
+    "router_log_count": 8,
+    "router_interesting_events": 0,
+    "final_health": {
+      "alive": true,
+      "uptime": "20s",
+      "cpu_load": "1",
+      "free_memory": "845213696",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "csrf",
+      "name": "csrf_token_check_identity",
+      "description": "Check for CSRF token on /rest/system/identity",
+      "result": "No CSRF token",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:33.949787",
+      "details": {
+        "endpoint": "/rest/system/identity",
+        "token_found": false,
+        "response_headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "19",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 03:10:19 GMT",
+          "Expires": "Tue, 16 Feb 2027 03:10:19 GMT",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "category": "csrf",
+      "name": "csrf_token_check_address",
+      "description": "Check for CSRF token on /rest/ip/address",
+      "result": "No CSRF token",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:33.949787",
+      "details": {
+        "endpoint": "/rest/ip/address",
+        "token_found": false,
+        "response_headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "180",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 03:10:19 GMT",
+          "Expires": "Tue, 16 Feb 2027 03:10:19 GMT",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "category": "csrf",
+      "name": "csrf_token_check_user",
+      "description": "Check for CSRF token on /rest/user",
+      "result": "No CSRF token",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:33.949787",
+      "details": {
+        "endpoint": "/rest/user",
+        "token_found": false,
+        "response_headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "788",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 03:10:19 GMT",
+          "Expires": "Tue, 16 Feb 2027 03:10:19 GMT",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "category": "csrf",
+      "name": "csrf_token_check_filter",
+      "description": "Check for CSRF token on /rest/ip/firewall/filter",
+      "result": "No CSRF token",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:33.949787",
+      "details": {
+        "endpoint": "/rest/ip/firewall/filter",
+        "token_found": false,
+        "response_headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "2",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 03:10:19 GMT",
+          "Expires": "Tue, 16 Feb 2027 03:10:19 GMT",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "category": "csrf",
+      "name": "csrf_token_check_scheduler",
+      "description": "Check for CSRF token on /rest/system/scheduler",
+      "result": "No CSRF token",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:33.949787",
+      "details": {
+        "endpoint": "/rest/system/scheduler",
+        "token_found": false,
+        "response_headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "2",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 03:10:19 GMT",
+          "Expires": "Tue, 16 Feb 2027 03:10:19 GMT",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "category": "csrf",
+      "name": "cross_origin_post_ip_address_add",
+      "description": "Cross-origin POST to /rest/ip/address/add with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:33.949787",
+      "details": {
+        "path": "/rest/ip/address/add",
+        "status": 200,
+        "response_snippet": "{\"ret\":\"*2\"}",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 7,
+      "category": "csrf",
+      "name": "no_csrf_token_ip_address_add",
+      "description": "POST to /rest/ip/address/add with no CSRF token",
+      "result": "HTTP 400 - REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:33.949787",
+      "details": {
+        "path": "/rest/ip/address/add",
+        "status": 400,
+        "response_snippet": "{\"detail\":\"failure: already have such address\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 8,
+      "category": "csrf",
+      "name": "cross_origin_post_user_add",
+      "description": "Cross-origin POST to /rest/user/add with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:33.949787",
+      "details": {
+        "path": "/rest/user/add",
+        "status": 200,
+        "response_snippet": "{\"ret\":\"*5\"}",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 9,
+      "category": "csrf",
+      "name": "no_csrf_token_user_add",
+      "description": "POST to /rest/user/add with no CSRF token",
+      "result": "HTTP 400 - REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:33.949787",
+      "details": {
+        "path": "/rest/user/add",
+        "status": 400,
+        "response_snippet": "{\"detail\":\"failure: user with the same name already exists\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 10,
+      "category": "csrf",
+      "name": "cross_origin_post_system_identity_set",
+      "description": "Cross-origin POST to /rest/system/identity/set with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:33.949787",
+      "details": {
+        "path": "/rest/system/identity/set",
+        "status": 200,
+        "response_snippet": "[]",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 11,
+      "category": "csrf",
+      "name": "no_csrf_token_system_identity_set",
+      "description": "POST to /rest/system/identity/set with no CSRF token",
+      "result": "HTTP 200 - ACCEPTED",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:34.073725",
+      "details": {
+        "path": "/rest/system/identity/set",
+        "status": 200,
+        "response_snippet": "[]"
+      }
+    },
+    {
+      "id": 12,
+      "category": "csrf",
+      "name": "cross_origin_post_ip_firewall_filter_add",
+      "description": "Cross-origin POST to /rest/ip/firewall/filter/add with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:34.225649",
+      "details": {
+        "path": "/rest/ip/firewall/filter/add",
+        "status": 200,
+        "response_snippet": "{\"ret\":\"*1\"}",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 13,
+      "category": "csrf",
+      "name": "no_csrf_token_ip_firewall_filter_add",
+      "description": "POST to /rest/ip/firewall/filter/add with no CSRF token",
+      "result": "HTTP 200 - ACCEPTED",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:34.225649",
+      "details": {
+        "path": "/rest/ip/firewall/filter/add",
+        "status": 200,
+        "response_snippet": "{\"ret\":\"*2\"}"
+      }
+    },
+    {
+      "id": 14,
+      "category": "csrf",
+      "name": "cross_origin_post_system_scheduler_add",
+      "description": "Cross-origin POST to /rest/system/scheduler/add with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:34.225649",
+      "details": {
+        "path": "/rest/system/scheduler/add",
+        "status": 200,
+        "response_snippet": "{\"ret\":\"*0\"}",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 15,
+      "category": "csrf",
+      "name": "no_csrf_token_system_scheduler_add",
+      "description": "POST to /rest/system/scheduler/add with no CSRF token",
+      "result": "HTTP 400 - REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:34.225649",
+      "details": {
+        "path": "/rest/system/scheduler/add",
+        "status": 400,
+        "response_snippet": "{\"detail\":\"failure: item with this name already exists\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 16,
+      "category": "csrf",
+      "name": "cross_origin_post_system_script_add",
+      "description": "Cross-origin POST to /rest/system/script/add with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:34.225649",
+      "details": {
+        "path": "/rest/system/script/add",
+        "status": 200,
+        "response_snippet": "{\"ret\":\"*1\"}",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 17,
+      "category": "csrf",
+      "name": "no_csrf_token_system_script_add",
+      "description": "POST to /rest/system/script/add with no CSRF token",
+      "result": "HTTP 400 - REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:34.225649",
+      "details": {
+        "path": "/rest/system/script/add",
+        "status": 400,
+        "response_snippet": "{\"detail\":\"failure: item with such name already exists\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 18,
+      "category": "csrf",
+      "name": "cross_origin_post_tool_fetch",
+      "description": "Cross-origin POST to /rest/tool/fetch with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:35.313105",
+      "details": {
+        "path": "/rest/tool/fetch",
+        "status": 200,
+        "response_snippet": "[{\".section\":\"0\",\"status\":\"connecting\"},{\".section\":\"1\",\"downloaded\":\"1\",\"duration\":\"1s\",\"status\":\"finished\",\"total\":\"1\"}]",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 19,
+      "category": "csrf",
+      "name": "no_csrf_token_tool_fetch",
+      "description": "POST to /rest/tool/fetch with no CSRF token",
+      "result": "HTTP 200 - ACCEPTED",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.320601",
+      "details": {
+        "path": "/rest/tool/fetch",
+        "status": 200,
+        "response_snippet": "[{\".section\":\"0\",\"status\":\"requesting\"},{\".section\":\"1\",\"downloaded\":\"1\",\"duration\":\"1s\",\"status\":\"finished\",\"total\":\"1\"}]"
+      }
+    },
+    {
+      "id": 20,
+      "category": "csrf",
+      "name": "cross_origin_post_ip_service_set",
+      "description": "Cross-origin POST to /rest/ip/service/set with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.332595",
+      "details": {
+        "path": "/rest/ip/service/set",
+        "status": 200,
+        "response_snippet": "[]",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 21,
+      "category": "csrf",
+      "name": "no_csrf_token_ip_service_set",
+      "description": "POST to /rest/ip/service/set with no CSRF token",
+      "result": "HTTP 200 - ACCEPTED",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.336593",
+      "details": {
+        "path": "/rest/ip/service/set",
+        "status": 200,
+        "response_snippet": "[]"
+      }
+    },
+    {
+      "id": 22,
+      "category": "csrf",
+      "name": "cross_origin_post_snmp_set",
+      "description": "Cross-origin POST to /rest/snmp/set with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.340591",
+      "details": {
+        "path": "/rest/snmp/set",
+        "status": 200,
+        "response_snippet": "[]",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 23,
+      "category": "csrf",
+      "name": "no_csrf_token_snmp_set",
+      "description": "POST to /rest/snmp/set with no CSRF token",
+      "result": "HTTP 200 - ACCEPTED",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.344589",
+      "details": {
+        "path": "/rest/snmp/set",
+        "status": 200,
+        "response_snippet": "[]"
+      }
+    },
+    {
+      "id": 24,
+      "category": "csrf",
+      "name": "cross_origin_post_ip_dns_set",
+      "description": "Cross-origin POST to /rest/ip/dns/set with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.352585",
+      "details": {
+        "path": "/rest/ip/dns/set",
+        "status": 200,
+        "response_snippet": "[]",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 25,
+      "category": "csrf",
+      "name": "no_csrf_token_ip_dns_set",
+      "description": "POST to /rest/ip/dns/set with no CSRF token",
+      "result": "HTTP 200 - ACCEPTED",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.360581",
+      "details": {
+        "path": "/rest/ip/dns/set",
+        "status": 200,
+        "response_snippet": "[]"
+      }
+    },
+    {
+      "id": 26,
+      "category": "csrf",
+      "name": "cross_origin_post_interface_set",
+      "description": "Cross-origin POST to /rest/interface/set with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.364579",
+      "details": {
+        "path": "/rest/interface/set",
+        "status": 200,
+        "response_snippet": "[]",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 27,
+      "category": "csrf",
+      "name": "no_csrf_token_interface_set",
+      "description": "POST to /rest/interface/set with no CSRF token",
+      "result": "HTTP 200 - ACCEPTED",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.372575",
+      "details": {
+        "path": "/rest/interface/set",
+        "status": 200,
+        "response_snippet": "[]"
+      }
+    },
+    {
+      "id": 28,
+      "category": "csrf",
+      "name": "cross_origin_post_ip_route_add",
+      "description": "Cross-origin POST to /rest/ip/route/add with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.380571",
+      "details": {
+        "path": "/rest/ip/route/add",
+        "status": 200,
+        "response_snippet": "{\"ret\":\"*80000002\"}",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 29,
+      "category": "csrf",
+      "name": "no_csrf_token_ip_route_add",
+      "description": "POST to /rest/ip/route/add with no CSRF token",
+      "result": "HTTP 200 - ACCEPTED",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.388567",
+      "details": {
+        "path": "/rest/ip/route/add",
+        "status": 200,
+        "response_snippet": "{\"ret\":\"*80000003\"}"
+      }
+    },
+    {
+      "id": 30,
+      "category": "csrf",
+      "name": "cross_origin_post_certificate_add",
+      "description": "Cross-origin POST to /rest/certificate/add with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.392565",
+      "details": {
+        "path": "/rest/certificate/add",
+        "status": 200,
+        "response_snippet": "{\"ret\":\"*2\"}",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 31,
+      "category": "csrf",
+      "name": "no_csrf_token_certificate_add",
+      "description": "POST to /rest/certificate/add with no CSRF token",
+      "result": "HTTP 400 - REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:36.396563",
+      "details": {
+        "path": "/rest/certificate/add",
+        "status": 400,
+        "response_snippet": "{\"detail\":\"failure: Name exists, please choose another!\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 32,
+      "category": "csrf",
+      "name": "cross_origin_post_system_reboot",
+      "description": "Cross-origin POST to /rest/system/reboot with evil Referer/Origin",
+      "result": "HTTP 200 - ACCEPTED (no origin check)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:36.404559",
+      "details": {
+        "path": "/rest/system/reboot",
+        "status": 200,
+        "response_snippet": "[]",
+        "cross_origin_rejected": false
+      }
+    },
+    {
+      "id": 33,
+      "category": "csrf",
+      "name": "no_csrf_token_system_reboot",
+      "description": "POST to /rest/system/reboot with no CSRF token",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:36.460531"
+    },
+    {
+      "id": 34,
+      "category": "csrf",
+      "name": "cross_origin_post_file_remove",
+      "description": "Cross-origin POST to /rest/file/remove",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:36.464529"
+    },
+    {
+      "id": 35,
+      "category": "csrf",
+      "name": "no_csrf_token_file_remove",
+      "description": "POST to /rest/file/remove with no CSRF token",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:36.468527"
+    },
+    {
+      "id": 36,
+      "category": "csrf",
+      "name": "get_for_write_system_identity_set",
+      "description": "GET for write to /rest/system/identity/set",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:36.468527"
+    },
+    {
+      "id": 37,
+      "category": "csrf",
+      "name": "get_for_write_ip_dns_set",
+      "description": "GET for write to /rest/ip/dns/set",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:36.468527"
+    },
+    {
+      "id": 38,
+      "category": "csrf",
+      "name": "get_for_write_snmp_set",
+      "description": "GET for write to /rest/snmp/set",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:36.472525"
+    },
+    {
+      "id": 39,
+      "category": "csrf",
+      "name": "wrong_csrf_token_system_identity_set",
+      "description": "POST to /rest/system/identity/set with invalid CSRF token",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:36.472525"
+    },
+    {
+      "id": 40,
+      "category": "csrf",
+      "name": "wrong_csrf_token_ip_dns_set",
+      "description": "POST to /rest/ip/dns/set with invalid CSRF token",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:36.472525"
+    },
+    {
+      "id": 41,
+      "category": "csrf",
+      "name": "wrong_csrf_token_snmp_set",
+      "description": "POST to /rest/snmp/set with invalid CSRF token",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:36.476523"
+    },
+    {
+      "id": 42,
+      "category": "cookie_session",
+      "name": "cookie_extract_webfig_main_(http)",
+      "description": "Extract cookies from WebFig main (HTTP)",
+      "result": "0 cookies found",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:52.828343",
+      "details": {
+        "cookies": [],
+        "set_cookie_raw": [],
+        "status_code": 200
+      }
+    },
+    {
+      "id": 43,
+      "category": "cookie_session",
+      "name": "cookie_extract_rest_api_(http)",
+      "description": "Extract cookies from REST API (HTTP)",
+      "result": "0 cookies found",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:52.832341",
+      "details": {
+        "cookies": [],
+        "set_cookie_raw": [],
+        "status_code": 200
+      }
+    },
+    {
+      "id": 44,
+      "category": "cookie_session",
+      "name": "cookie_extract_webfig_main_(https)",
+      "description": "Extract cookies from WebFig main (HTTPS)",
+      "result": "0 cookies found",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:52.892311",
+      "details": {
+        "cookies": [],
+        "set_cookie_raw": [],
+        "status_code": 200
+      }
+    },
+    {
+      "id": 45,
+      "category": "cookie_session",
+      "name": "cookie_extract_rest_api_(https)",
+      "description": "Extract cookies from REST API (HTTPS)",
+      "result": "0 cookies found",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:52.952281",
+      "details": {
+        "cookies": [],
+        "set_cookie_raw": [],
+        "status_code": 200
+      }
+    },
+    {
+      "id": 46,
+      "category": "cookie_session",
+      "name": "session_over_http",
+      "description": "Session cookies transmitted over unencrypted HTTP",
+      "result": "No cookies set over HTTP",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:52.952281"
+    },
+    {
+      "id": 47,
+      "category": "cookie_session",
+      "name": "session_in_url",
+      "description": "Check for session ID in URL parameters",
+      "result": "No session in URL",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:52.952281",
+      "details": {
+        "location_header": "",
+        "final_url": "http://[REDACTED-INTERNAL-IP]/webfig/"
+      }
+    },
+    {
+      "id": 48,
+      "category": "cookie_session",
+      "name": "http_vs_https_cookies",
+      "description": "Compare cookies set over HTTP vs HTTPS",
+      "result": "HTTP: none, HTTPS: none",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:52.952281",
+      "details": {
+        "http_cookies": [],
+        "https_cookies": []
+      }
+    },
+    {
+      "id": 49,
+      "category": "security_headers",
+      "name": "hdr_content_security_policy_http_root",
+      "description": "Content-Security-Policy on HTTP root (CSP)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.048233",
+      "details": {
+        "header": "Content-Security-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 50,
+      "category": "security_headers",
+      "name": "hdr_x_frame_options_http_root",
+      "description": "X-Frame-Options on HTTP root (Clickjacking protection)",
+      "result": "sameorigin",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.048233",
+      "details": {
+        "header": "X-Frame-Options",
+        "value": "sameorigin",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 51,
+      "category": "security_headers",
+      "name": "hdr_x_content_type_options_http_root",
+      "description": "X-Content-Type-Options on HTTP root (MIME sniffing protection)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.048233",
+      "details": {
+        "header": "X-Content-Type-Options",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/",
+        "expected": "nosniff"
+      }
+    },
+    {
+      "id": 52,
+      "category": "security_headers",
+      "name": "hdr_strict_transport_security_http_root",
+      "description": "Strict-Transport-Security on HTTP root (HSTS)",
+      "result": "NOT PRESENT",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.048233",
+      "details": {
+        "header": "Strict-Transport-Security",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 53,
+      "category": "security_headers",
+      "name": "hdr_x_xss_protection_http_root",
+      "description": "X-XSS-Protection on HTTP root (XSS filter)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.048233",
+      "details": {
+        "header": "X-XSS-Protection",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 54,
+      "category": "security_headers",
+      "name": "hdr_referrer_policy_http_root",
+      "description": "Referrer-Policy on HTTP root (Referrer leak prevention)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.048233",
+      "details": {
+        "header": "Referrer-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 55,
+      "category": "security_headers",
+      "name": "hdr_permissions_policy_http_root",
+      "description": "Permissions-Policy on HTTP root (Feature restrictions)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.048233",
+      "details": {
+        "header": "Permissions-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 56,
+      "category": "security_headers",
+      "name": "hdr_cache_control_http_root",
+      "description": "Cache-Control on HTTP root (Cache directive)",
+      "result": "max-age=31536000",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.048233",
+      "details": {
+        "header": "Cache-Control",
+        "value": "max-age=31536000",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 57,
+      "category": "security_headers",
+      "name": "hdr_x_permitted_cross_domain_policies_http_root",
+      "description": "X-Permitted-Cross-Domain-Policies on HTTP root (Flash/Acrobat cross-domain)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.048233",
+      "details": {
+        "header": "X-Permitted-Cross-Domain-Policies",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 58,
+      "category": "security_headers",
+      "name": "hdr_content_security_policy_webfig_(http)",
+      "description": "Content-Security-Policy on WebFig (HTTP) (CSP)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.056229",
+      "details": {
+        "header": "Content-Security-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 59,
+      "category": "security_headers",
+      "name": "hdr_x_frame_options_webfig_(http)",
+      "description": "X-Frame-Options on WebFig (HTTP) (Clickjacking protection)",
+      "result": "sameorigin",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.056229",
+      "details": {
+        "header": "X-Frame-Options",
+        "value": "sameorigin",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 60,
+      "category": "security_headers",
+      "name": "hdr_x_content_type_options_webfig_(http)",
+      "description": "X-Content-Type-Options on WebFig (HTTP) (MIME sniffing protection)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.056229",
+      "details": {
+        "header": "X-Content-Type-Options",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "nosniff"
+      }
+    },
+    {
+      "id": 61,
+      "category": "security_headers",
+      "name": "hdr_strict_transport_security_webfig_(http)",
+      "description": "Strict-Transport-Security on WebFig (HTTP) (HSTS)",
+      "result": "NOT PRESENT",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.056229",
+      "details": {
+        "header": "Strict-Transport-Security",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 62,
+      "category": "security_headers",
+      "name": "hdr_x_xss_protection_webfig_(http)",
+      "description": "X-XSS-Protection on WebFig (HTTP) (XSS filter)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.056229",
+      "details": {
+        "header": "X-XSS-Protection",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 63,
+      "category": "security_headers",
+      "name": "hdr_referrer_policy_webfig_(http)",
+      "description": "Referrer-Policy on WebFig (HTTP) (Referrer leak prevention)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.056229",
+      "details": {
+        "header": "Referrer-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 64,
+      "category": "security_headers",
+      "name": "hdr_permissions_policy_webfig_(http)",
+      "description": "Permissions-Policy on WebFig (HTTP) (Feature restrictions)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.056229",
+      "details": {
+        "header": "Permissions-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 65,
+      "category": "security_headers",
+      "name": "hdr_cache_control_webfig_(http)",
+      "description": "Cache-Control on WebFig (HTTP) (Cache directive)",
+      "result": "no-store",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.056229",
+      "details": {
+        "header": "Cache-Control",
+        "value": "no-store",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 66,
+      "category": "security_headers",
+      "name": "hdr_x_permitted_cross_domain_policies_webfig_(http)",
+      "description": "X-Permitted-Cross-Domain-Policies on WebFig (HTTP) (Flash/Acrobat cross-domain)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.056229",
+      "details": {
+        "header": "X-Permitted-Cross-Domain-Policies",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 67,
+      "category": "security_headers",
+      "name": "hdr_content_security_policy_rest_api_(http)",
+      "description": "Content-Security-Policy on REST API (HTTP) (CSP)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.060227",
+      "details": {
+        "header": "Content-Security-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 68,
+      "category": "security_headers",
+      "name": "hdr_x_frame_options_rest_api_(http)",
+      "description": "X-Frame-Options on REST API (HTTP) (Clickjacking protection)",
+      "result": "sameorigin",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.060227",
+      "details": {
+        "header": "X-Frame-Options",
+        "value": "sameorigin",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 69,
+      "category": "security_headers",
+      "name": "hdr_x_content_type_options_rest_api_(http)",
+      "description": "X-Content-Type-Options on REST API (HTTP) (MIME sniffing protection)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.060227",
+      "details": {
+        "header": "X-Content-Type-Options",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "nosniff"
+      }
+    },
+    {
+      "id": 70,
+      "category": "security_headers",
+      "name": "hdr_strict_transport_security_rest_api_(http)",
+      "description": "Strict-Transport-Security on REST API (HTTP) (HSTS)",
+      "result": "NOT PRESENT",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.060227",
+      "details": {
+        "header": "Strict-Transport-Security",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 71,
+      "category": "security_headers",
+      "name": "hdr_x_xss_protection_rest_api_(http)",
+      "description": "X-XSS-Protection on REST API (HTTP) (XSS filter)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.060227",
+      "details": {
+        "header": "X-XSS-Protection",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 72,
+      "category": "security_headers",
+      "name": "hdr_referrer_policy_rest_api_(http)",
+      "description": "Referrer-Policy on REST API (HTTP) (Referrer leak prevention)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.060227",
+      "details": {
+        "header": "Referrer-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 73,
+      "category": "security_headers",
+      "name": "hdr_permissions_policy_rest_api_(http)",
+      "description": "Permissions-Policy on REST API (HTTP) (Feature restrictions)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.060227",
+      "details": {
+        "header": "Permissions-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 74,
+      "category": "security_headers",
+      "name": "hdr_cache_control_rest_api_(http)",
+      "description": "Cache-Control on REST API (HTTP) (Cache directive)",
+      "result": "max-age=31536000",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.060227",
+      "details": {
+        "header": "Cache-Control",
+        "value": "max-age=31536000",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 75,
+      "category": "security_headers",
+      "name": "hdr_x_permitted_cross_domain_policies_rest_api_(http)",
+      "description": "X-Permitted-Cross-Domain-Policies on REST API (HTTP) (Flash/Acrobat cross-domain)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.060227",
+      "details": {
+        "header": "X-Permitted-Cross-Domain-Policies",
+        "value": "NOT PRESENT",
+        "endpoint": "http://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 76,
+      "category": "security_headers",
+      "name": "hdr_content_security_policy_webfig_(https)",
+      "description": "Content-Security-Policy on WebFig (HTTPS) (CSP)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.116199",
+      "details": {
+        "header": "Content-Security-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 77,
+      "category": "security_headers",
+      "name": "hdr_x_frame_options_webfig_(https)",
+      "description": "X-Frame-Options on WebFig (HTTPS) (Clickjacking protection)",
+      "result": "sameorigin",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.116199",
+      "details": {
+        "header": "X-Frame-Options",
+        "value": "sameorigin",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 78,
+      "category": "security_headers",
+      "name": "hdr_x_content_type_options_webfig_(https)",
+      "description": "X-Content-Type-Options on WebFig (HTTPS) (MIME sniffing protection)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.116199",
+      "details": {
+        "header": "X-Content-Type-Options",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "nosniff"
+      }
+    },
+    {
+      "id": 79,
+      "category": "security_headers",
+      "name": "hdr_strict_transport_security_webfig_(https)",
+      "description": "Strict-Transport-Security on WebFig (HTTPS) (HSTS)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.116199",
+      "details": {
+        "header": "Strict-Transport-Security",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 80,
+      "category": "security_headers",
+      "name": "hdr_x_xss_protection_webfig_(https)",
+      "description": "X-XSS-Protection on WebFig (HTTPS) (XSS filter)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.116199",
+      "details": {
+        "header": "X-XSS-Protection",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 81,
+      "category": "security_headers",
+      "name": "hdr_referrer_policy_webfig_(https)",
+      "description": "Referrer-Policy on WebFig (HTTPS) (Referrer leak prevention)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.116199",
+      "details": {
+        "header": "Referrer-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 82,
+      "category": "security_headers",
+      "name": "hdr_permissions_policy_webfig_(https)",
+      "description": "Permissions-Policy on WebFig (HTTPS) (Feature restrictions)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.116199",
+      "details": {
+        "header": "Permissions-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 83,
+      "category": "security_headers",
+      "name": "hdr_cache_control_webfig_(https)",
+      "description": "Cache-Control on WebFig (HTTPS) (Cache directive)",
+      "result": "no-store",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.116199",
+      "details": {
+        "header": "Cache-Control",
+        "value": "no-store",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 84,
+      "category": "security_headers",
+      "name": "hdr_x_permitted_cross_domain_policies_webfig_(https)",
+      "description": "X-Permitted-Cross-Domain-Policies on WebFig (HTTPS) (Flash/Acrobat cross-domain)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.116199",
+      "details": {
+        "header": "X-Permitted-Cross-Domain-Policies",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/webfig/",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 85,
+      "category": "security_headers",
+      "name": "hdr_content_security_policy_rest_api_(https)",
+      "description": "Content-Security-Policy on REST API (HTTPS) (CSP)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.176169",
+      "details": {
+        "header": "Content-Security-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 86,
+      "category": "security_headers",
+      "name": "hdr_x_frame_options_rest_api_(https)",
+      "description": "X-Frame-Options on REST API (HTTPS) (Clickjacking protection)",
+      "result": "sameorigin",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.176169",
+      "details": {
+        "header": "X-Frame-Options",
+        "value": "sameorigin",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 87,
+      "category": "security_headers",
+      "name": "hdr_x_content_type_options_rest_api_(https)",
+      "description": "X-Content-Type-Options on REST API (HTTPS) (MIME sniffing protection)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.176169",
+      "details": {
+        "header": "X-Content-Type-Options",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "nosniff"
+      }
+    },
+    {
+      "id": 88,
+      "category": "security_headers",
+      "name": "hdr_strict_transport_security_rest_api_(https)",
+      "description": "Strict-Transport-Security on REST API (HTTPS) (HSTS)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.176169",
+      "details": {
+        "header": "Strict-Transport-Security",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 89,
+      "category": "security_headers",
+      "name": "hdr_x_xss_protection_rest_api_(https)",
+      "description": "X-XSS-Protection on REST API (HTTPS) (XSS filter)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.176169",
+      "details": {
+        "header": "X-XSS-Protection",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 90,
+      "category": "security_headers",
+      "name": "hdr_referrer_policy_rest_api_(https)",
+      "description": "Referrer-Policy on REST API (HTTPS) (Referrer leak prevention)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.176169",
+      "details": {
+        "header": "Referrer-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 91,
+      "category": "security_headers",
+      "name": "hdr_permissions_policy_rest_api_(https)",
+      "description": "Permissions-Policy on REST API (HTTPS) (Feature restrictions)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.176169",
+      "details": {
+        "header": "Permissions-Policy",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 92,
+      "category": "security_headers",
+      "name": "hdr_cache_control_rest_api_(https)",
+      "description": "Cache-Control on REST API (HTTPS) (Cache directive)",
+      "result": "max-age=31536000",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.176169",
+      "details": {
+        "header": "Cache-Control",
+        "value": "max-age=31536000",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 93,
+      "category": "security_headers",
+      "name": "hdr_x_permitted_cross_domain_policies_rest_api_(https)",
+      "description": "X-Permitted-Cross-Domain-Policies on REST API (HTTPS) (Flash/Acrobat cross-domain)",
+      "result": "NOT PRESENT",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:53.176169",
+      "details": {
+        "header": "X-Permitted-Cross-Domain-Policies",
+        "value": "NOT PRESENT",
+        "endpoint": "https://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "expected": "missing"
+      }
+    },
+    {
+      "id": 94,
+      "category": "clickjacking",
+      "name": "xfo_root_page_(http)",
+      "description": "X-Frame-Options on Root page (HTTP)",
+      "result": "sameorigin",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.312101",
+      "details": {
+        "x_frame_options": "sameorigin",
+        "csp_frame_ancestors": "",
+        "frameable": false
+      }
+    },
+    {
+      "id": 95,
+      "category": "clickjacking",
+      "name": "frame_ancestors_root_page_(http)",
+      "description": "CSP frame-ancestors on Root page (HTTP)",
+      "result": "NOT SET",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.312101"
+    },
+    {
+      "id": 96,
+      "category": "clickjacking",
+      "name": "xfo_webfig_main_(http)",
+      "description": "X-Frame-Options on WebFig main (HTTP)",
+      "result": "sameorigin",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.320097",
+      "details": {
+        "x_frame_options": "sameorigin",
+        "csp_frame_ancestors": "",
+        "frameable": false
+      }
+    },
+    {
+      "id": 97,
+      "category": "clickjacking",
+      "name": "frame_ancestors_webfig_main_(http)",
+      "description": "CSP frame-ancestors on WebFig main (HTTP)",
+      "result": "NOT SET",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.320097"
+    },
+    {
+      "id": 98,
+      "category": "clickjacking",
+      "name": "xfo_webfig_main_(https)",
+      "description": "X-Frame-Options on WebFig main (HTTPS)",
+      "result": "sameorigin",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.376069",
+      "details": {
+        "x_frame_options": "sameorigin",
+        "csp_frame_ancestors": "",
+        "frameable": false
+      }
+    },
+    {
+      "id": 99,
+      "category": "clickjacking",
+      "name": "frame_ancestors_webfig_main_(https)",
+      "description": "CSP frame-ancestors on WebFig main (HTTPS)",
+      "result": "NOT SET",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.376069"
+    },
+    {
+      "id": 100,
+      "category": "clickjacking",
+      "name": "xfo_webfig_login_(http)",
+      "description": "X-Frame-Options on WebFig login (HTTP)",
+      "result": "sameorigin",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.476019",
+      "details": {
+        "x_frame_options": "sameorigin",
+        "csp_frame_ancestors": "",
+        "frameable": false
+      }
+    },
+    {
+      "id": 101,
+      "category": "clickjacking",
+      "name": "frame_ancestors_webfig_login_(http)",
+      "description": "CSP frame-ancestors on WebFig login (HTTP)",
+      "result": "NOT SET",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.476019"
+    },
+    {
+      "id": 102,
+      "category": "clickjacking",
+      "name": "xfo_rest_endpoint_(http)",
+      "description": "X-Frame-Options on REST endpoint (HTTP)",
+      "result": "sameorigin",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.559977",
+      "details": {
+        "x_frame_options": "sameorigin",
+        "csp_frame_ancestors": "",
+        "frameable": false
+      }
+    },
+    {
+      "id": 103,
+      "category": "clickjacking",
+      "name": "frame_ancestors_rest_endpoint_(http)",
+      "description": "CSP frame-ancestors on REST endpoint (HTTP)",
+      "result": "NOT SET",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.559977"
+    },
+    {
+      "id": 104,
+      "category": "clickjacking",
+      "name": "xfo_rest_endpoint_(https)",
+      "description": "X-Frame-Options on REST endpoint (HTTPS)",
+      "result": "sameorigin",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.619947",
+      "details": {
+        "x_frame_options": "sameorigin",
+        "csp_frame_ancestors": "",
+        "frameable": false
+      }
+    },
+    {
+      "id": 105,
+      "category": "clickjacking",
+      "name": "frame_ancestors_rest_endpoint_(https)",
+      "description": "CSP frame-ancestors on REST endpoint (HTTPS)",
+      "result": "NOT SET",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.619947"
+    },
+    {
+      "id": 106,
+      "category": "clickjacking",
+      "name": "iframe_embedding_assessment",
+      "description": "Overall iframe embedding assessment based on header analysis",
+      "result": "0 pages lack framing protection: none",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.619947",
+      "details": {
+        "frameable_pages": [],
+        "total_checked": 6
+      }
+    },
+    {
+      "id": 107,
+      "category": "js_security",
+      "name": "fetch_webfig_page",
+      "description": "Fetch WebFig main page",
+      "result": "HTTP 200, 22450 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.703905",
+      "details": {
+        "status": 200,
+        "size": 22450
+      }
+    },
+    {
+      "id": 108,
+      "category": "js_security",
+      "name": "js_file_enum",
+      "description": "Enumerate JavaScript files referenced by WebFig",
+      "result": "2 external JS files, 4 inline scripts",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:53.707903",
+      "details": {
+        "js_files": [
+          "master-61ed6e5ae60d.js",
+          "curve255-541e54a862be.js"
+        ],
+        "inline_script_count": 4,
+        "inline_script_sizes": [
+          74,
+          0,
+          79,
+          0
+        ]
+      }
+    },
+    {
+      "id": 109,
+      "category": "js_security",
+      "name": "js_content_type_master-61ed6e5ae60d.js",
+      "description": "Content-Type for master-61ed6e5ae60d.js",
+      "result": "application/x-javascript",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.294109",
+      "details": {
+        "file": "master-61ed6e5ae60d.js",
+        "content_type": "application/x-javascript"
+      }
+    },
+    {
+      "id": 110,
+      "category": "js_security",
+      "name": "js_content_type_curve255-541e54a862be.js",
+      "description": "Content-Type for curve255-541e54a862be.js",
+      "result": "application/x-javascript",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.326093",
+      "details": {
+        "file": "curve255-541e54a862be.js",
+        "content_type": "application/x-javascript"
+      }
+    },
+    {
+      "id": 111,
+      "category": "js_security",
+      "name": "dangerous_eval()",
+      "description": "Search for eval() in JavaScript",
+      "result": "3 occurrences found",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.326093",
+      "details": {
+        "count": 3,
+        "sample_contexts": [
+          "sp);}catch(e){if(verifyJSON(resp)){skin=eval('('+resp+')');}} if(!skin||typeof(skin)!",
+          "});});} function processList(list){list=eval(`([${list}{}])`);let gums=[];for(let gum",
+          "it response.text();sysmap=sysmap.concat(eval(`(${map})`));} show(get(\"page\"));timer(("
+        ]
+      }
+    },
+    {
+      "id": 112,
+      "category": "js_security",
+      "name": "dangerous_innerhtml",
+      "description": "Search for innerHTML in JavaScript",
+      "result": "5 occurrences found",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.326093",
+      "details": {
+        "count": 5,
+        "sample_contexts": [
+          "er) return;this.buf.clearAll();this.term.innerHTML='';};Terminal.prototype.ignoreKeyEvent=f",
+          "ight-1);this.wrapPending=false;this.term.innerHTML=\"\";this.buf.resize(this.screenHeight);fo",
+          "fer:this.mainBuffer;if(enable){this.term.innerHTML='';this.altBuffer.resize(this.screenHeig",
+          "eturn;if(this.attrs.progress)this.status.innerHTML=this.attrs.progress;this.doit.doit(ok=>{",
+          "n)}`);dom.getByClass(link,\"search-link\").innerHTML=this.markText(row.str,terms);list.append"
+        ]
+      }
+    },
+    {
+      "id": 113,
+      "category": "js_security",
+      "name": "dangerous_document.write()",
+      "description": "Search for document.write() in JavaScript",
+      "result": "0 occurrences found",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.326093",
+      "details": {
+        "count": 0,
+        "sample_contexts": []
+      }
+    },
+    {
+      "id": 114,
+      "category": "js_security",
+      "name": "dangerous_settimeout_string",
+      "description": "Search for setTimeout_string in JavaScript",
+      "result": "0 occurrences found",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.326093",
+      "details": {
+        "count": 0,
+        "sample_contexts": []
+      }
+    },
+    {
+      "id": 115,
+      "category": "js_security",
+      "name": "dangerous_setinterval_string",
+      "description": "Search for setInterval_string in JavaScript",
+      "result": "0 occurrences found",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.326093",
+      "details": {
+        "count": 0,
+        "sample_contexts": []
+      }
+    },
+    {
+      "id": 116,
+      "category": "js_security",
+      "name": "dangerous_function_constructor",
+      "description": "Search for Function_constructor in JavaScript",
+      "result": "0 occurrences found",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.326093",
+      "details": {
+        "count": 0,
+        "sample_contexts": []
+      }
+    },
+    {
+      "id": 117,
+      "category": "js_security",
+      "name": "dangerous_outerhtml",
+      "description": "Search for outerHTML in JavaScript",
+      "result": "0 occurrences found",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.326093",
+      "details": {
+        "count": 0,
+        "sample_contexts": []
+      }
+    },
+    {
+      "id": 118,
+      "category": "js_security",
+      "name": "dangerous_insertadjacenthtml",
+      "description": "Search for insertAdjacentHTML in JavaScript",
+      "result": "0 occurrences found",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.326093",
+      "details": {
+        "count": 0,
+        "sample_contexts": []
+      }
+    },
+    {
+      "id": 119,
+      "category": "js_security",
+      "name": "secret_hardcoded_password",
+      "description": "Search for hardcoded_password in JavaScript",
+      "result": "0 potential matches",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.326093",
+      "details": {
+        "count": 0,
+        "samples": []
+      }
+    },
+    {
+      "id": 120,
+      "category": "js_security",
+      "name": "secret_hardcoded_api_key",
+      "description": "Search for hardcoded_api_key in JavaScript",
+      "result": "0 potential matches",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.366073",
+      "details": {
+        "count": 0,
+        "samples": []
+      }
+    },
+    {
+      "id": 121,
+      "category": "js_security",
+      "name": "secret_hardcoded_token",
+      "description": "Search for hardcoded_token in JavaScript",
+      "result": "0 potential matches",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.386063",
+      "details": {
+        "count": 0,
+        "samples": []
+      }
+    },
+    {
+      "id": 122,
+      "category": "js_security",
+      "name": "secret_hardcoded_secret",
+      "description": "Search for hardcoded_secret in JavaScript",
+      "result": "0 potential matches",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.406053",
+      "details": {
+        "count": 0,
+        "samples": []
+      }
+    },
+    {
+      "id": 123,
+      "category": "js_security",
+      "name": "secret_base64_blob",
+      "description": "Search for base64_blob in JavaScript",
+      "result": "1 potential matches",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.410051",
+      "details": {
+        "count": 1,
+        "samples": [
+          "\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\""
+        ]
+      }
+    },
+    {
+      "id": 124,
+      "category": "js_security",
+      "name": "dom_xss_location.hash",
+      "description": "DOM XSS sink: location.hash",
+      "result": "9 occurrences",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.410051",
+      "details": {
+        "count": 9,
+        "sample_contexts": [
+          "}`;});sel.selectedIndex=-1;sel.onchange=e=>window.location.hash=e.target.selectedOptions[0].value;sel.tabIndex=-1",
+          ");const noTables=isTablessContainer(type)||window.location.hash===\"#Quick_Set\";get(\"control-buttons\")?.replaceWit",
+          "ghlightMenuItem(cont);if(sname===\"WebFig\"){window.location.hash=currentURL=normalize(cont.title);} var old=curren"
+        ]
+      }
+    },
+    {
+      "id": 125,
+      "category": "js_security",
+      "name": "dom_xss_location.search",
+      "description": "DOM XSS sink: location.search",
+      "result": "0 occurrences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.414049",
+      "details": {
+        "count": 0,
+        "sample_contexts": []
+      }
+    },
+    {
+      "id": 126,
+      "category": "js_security",
+      "name": "dom_xss_location.href_assign",
+      "description": "DOM XSS sink: location.href_assign",
+      "result": "1 occurrences",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.414049",
+      "details": {
+        "count": 1,
+        "sample_contexts": [
+          ");}    if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";      function expandForm() {document."
+        ]
+      }
+    },
+    {
+      "id": 127,
+      "category": "js_security",
+      "name": "dom_xss_document.referrer",
+      "description": "DOM XSS sink: document.referrer",
+      "result": "0 occurrences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.414049",
+      "details": {
+        "count": 0,
+        "sample_contexts": []
+      }
+    },
+    {
+      "id": 128,
+      "category": "js_security",
+      "name": "dom_xss_window.name",
+      "description": "DOM XSS sink: window.name",
+      "result": "5 occurrences",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.414049",
+      "details": {
+        "count": 5,
+        "sample_contexts": [
+          "ror){window.sessionStorage.setItem(\"error\",error);window.name=`error=${error}`;}else{window.name=\"\";} window.lo",
+          "\"error\",error);window.name=`error=${error}`;}else{window.name=\"\";} window.localStorage.removeItem(\"token\");wind",
+          "password);window.sessionStorage.clear();} else if(window.name){const[method,loginData]=window.name.split(/=(.*)"
+        ]
+      }
+    },
+    {
+      "id": 129,
+      "category": "js_security",
+      "name": "dom_xss_postMessage_handler",
+      "description": "DOM XSS sink: postMessage_handler",
+      "result": "0 occurrences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.418047",
+      "details": {
+        "count": 0,
+        "sample_contexts": []
+      }
+    },
+    {
+      "id": 130,
+      "category": "js_security",
+      "name": "dom_xss_document.cookie_read",
+      "description": "DOM XSS sink: document.cookie_read",
+      "result": "0 occurrences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.418047",
+      "details": {
+        "count": 0,
+        "sample_contexts": []
+      }
+    },
+    {
+      "id": 131,
+      "category": "js_security",
+      "name": "dom_xss_document.domain",
+      "description": "DOM XSS sink: document.domain",
+      "result": "0 occurrences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.418047",
+      "details": {
+        "count": 0,
+        "sample_contexts": []
+      }
+    },
+    {
+      "id": 132,
+      "category": "js_security",
+      "name": "insecure_randomness",
+      "description": "Math.random() usage (insecure for cryptographic purposes)",
+      "result": "1 total uses, 1 in security-relevant context",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.418047",
+      "details": {
+        "total_count": 1,
+        "security_contexts": [
+          "(attrs.randomdef){val=[];val.push(0x2);for(let i=1;i<6;++i){val.push(Math.floor(Math.random()*256));}}else{var d=attrs.def||0;val=[d,d,d,d,d,d];}} return macaddr2string(val)"
+        ]
+      }
+    },
+    {
+      "id": 133,
+      "category": "js_security",
+      "name": "storage_localStorage_set",
+      "description": "Client-side storage: localStorage_set",
+      "result": "1 occurrences",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.418047",
+      "details": {
+        "count": 1,
+        "contexts": [
+          ".b26;sysres.rosmode=userdata.m28;window.localStorage.setItem(\"token\",userdata.s2d);if(!token)pwdAuth=true;if(!hasFeature("
+        ]
+      }
+    },
+    {
+      "id": 134,
+      "category": "js_security",
+      "name": "storage_localStorage_get",
+      "description": "Client-side storage: localStorage_get",
+      "result": "3 occurrences",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.418047",
+      "details": {
+        "count": 3,
+        "contexts": [
+          "w.onstorage=e=>{console.log();if(window.localStorage.getItem(\"token\")==null)logout();} function disconnect(error){debug(\"",
+          "u1||0;initSession();});},()=>{if(window.localStorage.getItem(\"token\")){window.localStorage.removeItem(\"token\");logout();}",
+          "function autoLogin(){const token=window.localStorage.getItem(\"token\");if(token){doAuth(null,null,token);return;} const us"
+        ]
+      }
+    },
+    {
+      "id": 135,
+      "category": "js_security",
+      "name": "storage_localStorage_direct",
+      "description": "Client-side storage: localStorage_direct",
+      "result": "2 occurrences",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.422045",
+      "details": {
+        "count": 2,
+        "contexts": [
+          "fs[namespace||\"\"][key]=value;try{window.localStorage[\"preferences\"]=JSON.stringify(this.prefs);}catch{window.loca",
+          "tore(){try{this.prefs=JSON.parse(window.localStorage[\"preferences\"]||\"{}\");}catch{window.localStorage.removeItem("
+        ]
+      }
+    },
+    {
+      "id": 136,
+      "category": "js_security",
+      "name": "storage_sessionStorage_set",
+      "description": "Client-side storage: sessionStorage_set",
+      "result": "1 occurrences",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.422045",
+      "details": {
+        "count": 1,
+        "contexts": [
+          "function logout(error){if(error){window.sessionStorage.setItem(\"error\",error);window.name=`error=${error}`;}else{window.nam"
+        ]
+      }
+    },
+    {
+      "id": 137,
+      "category": "js_security",
+      "name": "storage_sessionStorage_get",
+      "description": "Client-side storage: sessionStorage_get",
+      "result": "3 occurrences",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.422045",
+      "details": {
+        "count": 3,
+        "contexts": [
+          "t.getElementById(\"itemList\"));if(window.sessionStorage.getItem(\"ItemPaneWide\")){document.body.classList.add(\"serve-formTogg",
+          ",null,token);return;} const user=window.sessionStorage.getItem(\"name\");const password=window.sessionStorage.getItem(\"passwo",
+          "e.getItem(\"name\");const password=window.sessionStorage.getItem(\"password\");if(user!=undefined&&password!=undefined){doAuth("
+        ]
+      }
+    },
+    {
+      "id": 138,
+      "category": "js_security",
+      "name": "storage_sessionStorage_direct",
+      "description": "Client-side storage: sessionStorage_direct",
+      "result": "0 occurrences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.426043",
+      "details": {
+        "count": 0,
+        "contexts": []
+      }
+    },
+    {
+      "id": 139,
+      "category": "js_security",
+      "name": "sourcemap_master-61ed6e5ae60d.js",
+      "description": "Source map for master-61ed6e5ae60d.js",
+      "result": "Not found (good)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.430041",
+      "details": {
+        "map_url": "http://[REDACTED-INTERNAL-IP]/webfig/master-61ed6e5ae60d.js.map"
+      }
+    },
+    {
+      "id": 140,
+      "category": "js_security",
+      "name": "sourcemap_curve255-541e54a862be.js",
+      "description": "Source map for curve255-541e54a862be.js",
+      "result": "Not found (good)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.434039",
+      "details": {
+        "map_url": "http://[REDACTED-INTERNAL-IP]/webfig/curve255-541e54a862be.js.map"
+      }
+    },
+    {
+      "id": 141,
+      "category": "js_security",
+      "name": "sourcemap_references",
+      "description": "sourceMappingURL references in JavaScript files",
+      "result": "0 references found",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.438037",
+      "details": {
+        "references": []
+      }
+    },
+    {
+      "id": 142,
+      "category": "js_security",
+      "name": "debug_endpoint_webfig_debug",
+      "description": "Debug endpoint: /webfig/debug",
+      "result": "HTTP N/A (not accessible)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.442035"
+    },
+    {
+      "id": 143,
+      "category": "js_security",
+      "name": "debug_endpoint_webfig_test",
+      "description": "Debug endpoint: /webfig/test",
+      "result": "HTTP N/A (not accessible)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.450031"
+    },
+    {
+      "id": 144,
+      "category": "js_security",
+      "name": "debug_endpoint_webfig_dev",
+      "description": "Debug endpoint: /webfig/dev",
+      "result": "HTTP N/A (not accessible)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.458027"
+    },
+    {
+      "id": 145,
+      "category": "js_security",
+      "name": "debug_endpoint_debug",
+      "description": "Debug endpoint: /debug",
+      "result": "HTTP N/A (not accessible)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.462025"
+    },
+    {
+      "id": 146,
+      "category": "js_security",
+      "name": "debug_endpoint_test",
+      "description": "Debug endpoint: /test",
+      "result": "HTTP N/A (not accessible)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.466023"
+    },
+    {
+      "id": 147,
+      "category": "js_security",
+      "name": "debug_endpoint_dev",
+      "description": "Debug endpoint: /dev",
+      "result": "HTTP N/A (not accessible)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.470021"
+    },
+    {
+      "id": 148,
+      "category": "js_security",
+      "name": "debug_endpoint_console",
+      "description": "Debug endpoint: /console",
+      "result": "HTTP N/A (not accessible)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.478017"
+    },
+    {
+      "id": 149,
+      "category": "js_security",
+      "name": "debug_endpoint_webfig_console",
+      "description": "Debug endpoint: /webfig/console",
+      "result": "HTTP N/A (not accessible)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.486013"
+    },
+    {
+      "id": 150,
+      "category": "js_security",
+      "name": "debug_endpoint_status",
+      "description": "Debug endpoint: /status",
+      "result": "HTTP N/A (not accessible)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.490011"
+    },
+    {
+      "id": 151,
+      "category": "js_security",
+      "name": "debug_endpoint_server-status",
+      "description": "Debug endpoint: /server-status",
+      "result": "HTTP N/A (not accessible)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.494009"
+    },
+    {
+      "id": 152,
+      "category": "js_security",
+      "name": "debug_endpoint_debug",
+      "description": "Debug endpoint: /_debug",
+      "result": "HTTP N/A (not accessible)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.502005"
+    },
+    {
+      "id": 153,
+      "category": "js_security",
+      "name": "debug_endpoint_profiler",
+      "description": "Debug endpoint: /_profiler",
+      "result": "HTTP N/A (not accessible)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.506003"
+    },
+    {
+      "id": 154,
+      "category": "js_security",
+      "name": "debug_code_debug_flag",
+      "description": "Debug code pattern: debug_flag",
+      "result": "0 occurrences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.510001",
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "id": 155,
+      "category": "js_security",
+      "name": "debug_code_console.log",
+      "description": "Debug code pattern: console.log",
+      "result": "1 occurrences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.510001",
+      "details": {
+        "count": 1
+      }
+    },
+    {
+      "id": 156,
+      "category": "js_security",
+      "name": "debug_code_console.debug",
+      "description": "Debug code pattern: console.debug",
+      "result": "0 occurrences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.510001",
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "id": 157,
+      "category": "js_security",
+      "name": "debug_code_alert_call",
+      "description": "Debug code pattern: alert_call",
+      "result": "0 occurrences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.521995",
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "id": 158,
+      "category": "js_security",
+      "name": "debug_code_debugger_stmt",
+      "description": "Debug code pattern: debugger_stmt",
+      "result": "0 occurrences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.533989",
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "id": 159,
+      "category": "cache_poisoning",
+      "name": "cache_baseline_webfig_main",
+      "description": "Baseline caching headers for WebFig main",
+      "result": "Cache-Control: no-store",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.549981",
+      "details": {
+        "Cache-Control": "no-store",
+        "Vary": "NOT SET",
+        "ETag": "NOT SET",
+        "Pragma": "no-cache",
+        "Expires": "0",
+        "Age": "NOT SET"
+      }
+    },
+    {
+      "id": 160,
+      "category": "cache_poisoning",
+      "name": "cache_baseline_rest_api",
+      "description": "Baseline caching headers for REST API",
+      "result": "Cache-Control: max-age=31536000",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.553979",
+      "details": {
+        "Cache-Control": "max-age=31536000",
+        "Vary": "NOT SET",
+        "ETag": "NOT SET",
+        "Pragma": "NOT SET",
+        "Expires": "Tue, 16 Feb 2027 22:20:16 GMT",
+        "Age": "NOT SET"
+      }
+    },
+    {
+      "id": 161,
+      "category": "cache_poisoning",
+      "name": "cache_baseline_root_page",
+      "description": "Baseline caching headers for Root page",
+      "result": "Cache-Control: max-age=31536000",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.557977",
+      "details": {
+        "Cache-Control": "max-age=31536000",
+        "Vary": "NOT SET",
+        "ETag": "NOT SET",
+        "Pragma": "NOT SET",
+        "Expires": "Tue, 16 Feb 2027 22:20:16 GMT",
+        "Age": "NOT SET"
+      }
+    },
+    {
+      "id": 162,
+      "category": "cache_poisoning",
+      "name": "host_header_external_host",
+      "description": "Request with Host: External host",
+      "result": "HTTP/1.1 200 OK - Host not reflected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.565973",
+      "details": {
+        "evil_host": "evil.com",
+        "status_line": "HTTP/1.1 200 OK",
+        "host_reflected": false,
+        "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:16 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta cha"
+      }
+    },
+    {
+      "id": 163,
+      "category": "cache_poisoning",
+      "name": "host_header_crlf_in_host",
+      "description": "Request with Host: CRLF in Host",
+      "result": "HTTP/1.1 200 OK - Host not reflected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:57.745883",
+      "details": {
+        "evil_host": "[REDACTED-INTERNAL-IP]",
+        "status_line": "HTTP/1.1 200 OK",
+        "host_reflected": false,
+        "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:16 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta cha"
+      }
+    },
+    {
+      "id": 164,
+      "category": "cache_poisoning",
+      "name": "host_header_empty_host",
+      "description": "Request with Host: Empty Host",
+      "result": "HTTP/1.1 200 OK - Host reflected",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:57.925793",
+      "details": {
+        "evil_host": "",
+        "status_line": "HTTP/1.1 200 OK",
+        "host_reflected": true,
+        "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:16 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta cha"
+      }
+    },
+    {
+      "id": 165,
+      "category": "cache_poisoning",
+      "name": "host_header_wrong_port_in_host",
+      "description": "Request with Host: Wrong port in Host",
+      "result": "HTTP/1.1 200 OK - Host not reflected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:58.065723",
+      "details": {
+        "evil_host": "[REDACTED-INTERNAL-IP]:9999",
+        "status_line": "HTTP/1.1 200 OK",
+        "host_reflected": false,
+        "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:16 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta cha"
+      }
+    },
+    {
+      "id": 166,
+      "category": "cache_poisoning",
+      "name": "host_header_localhost_as_host",
+      "description": "Request with Host: Localhost as Host",
+      "result": "HTTP/1.1 200 OK - Host not reflected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:58.285613",
+      "details": {
+        "evil_host": "localhost",
+        "status_line": "HTTP/1.1 200 OK",
+        "host_reflected": false,
+        "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:16 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta cha"
+      }
+    },
+    {
+      "id": 167,
+      "category": "cache_poisoning",
+      "name": "host_header_loopback_as_host",
+      "description": "Request with Host: Loopback as Host",
+      "result": "HTTP/1.1 200 OK - Host not reflected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:58.485513",
+      "details": {
+        "evil_host": "127.0.0.1",
+        "status_line": "HTTP/1.1 200 OK",
+        "host_reflected": false,
+        "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:17 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta cha"
+      }
+    },
+    {
+      "id": 168,
+      "category": "cache_poisoning",
+      "name": "fwd_header_x-forwarded-host_evil.com",
+      "description": "X-Forwarded-Host: evil.com",
+      "result": "HTTP 200 - Value not reflected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:58.625443",
+      "details": {
+        "header": "X-Forwarded-Host",
+        "value": "evil.com",
+        "reflected": false,
+        "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" re"
+      }
+    },
+    {
+      "id": 169,
+      "category": "cache_poisoning",
+      "name": "fwd_header_x-forwarded-host_evil.com",
+      "description": "X-Forwarded-Host: evil.com",
+      "result": "HTTP 200 - Value not reflected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:58.865323",
+      "details": {
+        "header": "X-Forwarded-Host",
+        "value": "evil.com",
+        "reflected": false,
+        "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" re"
+      }
+    },
+    {
+      "id": 170,
+      "category": "cache_poisoning",
+      "name": "fwd_header_x-host_evil.com",
+      "description": "X-Host: evil.com",
+      "result": "HTTP 200 - Value not reflected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:58.985263",
+      "details": {
+        "header": "X-Host",
+        "value": "evil.com",
+        "reflected": false,
+        "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" re"
+      }
+    },
+    {
+      "id": 171,
+      "category": "cache_poisoning",
+      "name": "fwd_header_x-forwarded-server_evil.com",
+      "description": "X-Forwarded-Server: evil.com",
+      "result": "HTTP 200 - Value not reflected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:59.225143",
+      "details": {
+        "header": "X-Forwarded-Server",
+        "value": "evil.com",
+        "reflected": false,
+        "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" re"
+      }
+    },
+    {
+      "id": 172,
+      "category": "cache_poisoning",
+      "name": "fwd_header_x-original-url__admin",
+      "description": "X-Original-URL: /admin",
+      "result": "HTTP 200 - Value not reflected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:59.413049",
+      "details": {
+        "header": "X-Original-URL",
+        "value": "/admin",
+        "reflected": false,
+        "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" re"
+      }
+    },
+    {
+      "id": 173,
+      "category": "cache_poisoning",
+      "name": "fwd_header_x-rewrite-url__admin",
+      "description": "X-Rewrite-URL: /admin",
+      "result": "HTTP 200 - Value not reflected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:59.612949",
+      "details": {
+        "header": "X-Rewrite-URL",
+        "value": "/admin",
+        "reflected": false,
+        "response_snippet": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" re"
+      }
+    },
+    {
+      "id": 174,
+      "category": "cache_poisoning",
+      "name": "multiple_host_headers",
+      "description": "Request with duplicate Host headers (real + evil)",
+      "result": "HTTP/1.1 200 OK",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:59.624943",
+      "details": {
+        "status_line": "HTTP/1.1 200 OK",
+        "response_snippet": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:18 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<head>\n<meta cha"
+      }
+    },
+    {
+      "id": 175,
+      "category": "cache_poisoning",
+      "name": "error_cacheable_404_page",
+      "description": "Error page cacheability: 404 page",
+      "result": "Cache-Control: no-store (not cacheable)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:59.816847",
+      "details": {
+        "status_code": 404,
+        "cache_control": "no-store",
+        "cacheable": false
+      }
+    },
+    {
+      "id": 176,
+      "category": "cache_poisoning",
+      "name": "error_cacheable_rest_404",
+      "description": "Error page cacheability: REST 404",
+      "result": "Cache-Control: max-age=31536000 (cacheable)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:59.816847",
+      "details": {
+        "status_code": 401,
+        "cache_control": "max-age=31536000",
+        "cacheable": true
+      }
+    },
+    {
+      "id": 177,
+      "category": "crlf",
+      "name": "path_crlf_url-encoded_crlf_in_path",
+      "description": "CRLF in URL path: URL-encoded CRLF in path",
+      "result": "HTTP/1.1 404 Not Found - Header not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:59.824843",
+      "details": {
+        "payload": "/webfig/%0d%0aX-CRLF-Injected:%20true",
+        "status": "HTTP/1.1 404 Not Found",
+        "header_injected": false,
+        "cookie_injected": false,
+        "response_headers": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:18 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 178,
+      "category": "crlf",
+      "name": "path_crlf_cookie_injection_via_path_crlf",
+      "description": "CRLF in URL path: Cookie injection via path CRLF",
+      "result": "HTTP/1.1 404 Not Found - Header not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:59.828841",
+      "details": {
+        "payload": "/webfig/%0d%0aSet-Cookie:%20injected=1",
+        "status": "HTTP/1.1 404 Not Found",
+        "header_injected": false,
+        "cookie_injected": false,
+        "response_headers": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:18 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 179,
+      "category": "crlf",
+      "name": "path_crlf_lf-only_in_path",
+      "description": "CRLF in URL path: LF-only in path",
+      "result": "HTTP/1.1 404 Not Found - Header not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:59.840835",
+      "details": {
+        "payload": "/webfig/%0aX-CRLF-Injected:%20true",
+        "status": "HTTP/1.1 404 Not Found",
+        "header_injected": false,
+        "cookie_injected": false,
+        "response_headers": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:18 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 180,
+      "category": "crlf",
+      "name": "path_crlf_cr-only_in_path",
+      "description": "CRLF in URL path: CR-only in path",
+      "result": "HTTP/1.1 404 Not Found - Header not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:59.844833",
+      "details": {
+        "payload": "/webfig/%0dX-CRLF-Injected:%20true",
+        "status": "HTTP/1.1 404 Not Found",
+        "header_injected": false,
+        "cookie_injected": false,
+        "response_headers": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:18 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 181,
+      "category": "crlf",
+      "name": "path_crlf_raw_crlf_in_path",
+      "description": "CRLF in URL path: Raw CRLF in path",
+      "result": "HTTP/1.0 200 OK - Header not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:59.984763",
+      "details": {
+        "payload": "/webfig/\r\nX-CRLF-Injected: true",
+        "status": "HTTP/1.0 200 OK",
+        "header_injected": false,
+        "cookie_injected": false,
+        "response_headers": "HTTP/1.0 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:18 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 182,
+      "category": "crlf",
+      "name": "query_crlf_crlf_in_query_param",
+      "description": "CRLF in query: CRLF in query param",
+      "result": "HTTP/1.1 200 OK - not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:00.200655",
+      "details": {
+        "payload": "/webfig/?param=%0d%0aX-CRLF-Injected:%20true",
+        "status": "HTTP/1.1 200 OK",
+        "header_injected": false,
+        "location_injected": false,
+        "response_headers": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:18 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 183,
+      "category": "crlf",
+      "name": "query_crlf_redirect_injection_via_query",
+      "description": "CRLF in query: Redirect injection via query",
+      "result": "HTTP/1.1 200 OK - not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:00.384563",
+      "details": {
+        "payload": "/webfig/?redirect=%0d%0aLocation:%20http://evil.com",
+        "status": "HTTP/1.1 200 OK",
+        "header_injected": false,
+        "location_injected": false,
+        "response_headers": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:19 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 184,
+      "category": "crlf",
+      "name": "query_crlf_crlf_in_rest_query",
+      "description": "CRLF in query: CRLF in REST query",
+      "result": "HTTP/1.1 401 Unauthorized - not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:00.408551",
+      "details": {
+        "payload": "/rest/system/resource?param=%0d%0aX-Test:%20injected",
+        "status": "HTTP/1.1 401 Unauthorized",
+        "header_injected": false,
+        "location_injected": false,
+        "response_headers": "HTTP/1.1 401 Unauthorized\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 38\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 22:20:19 GMT\r\nExpires: Tue, 16 Feb 2027 22:20:19 GMT\r\nWWW-Authenticate: Basic\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 185,
+      "category": "crlf",
+      "name": "header_crlf_crlf_in_x-forwarded-for",
+      "description": "CRLF in header: CRLF in X-Forwarded-For",
+      "result": "HTTP/1.1 200 OK - not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:00.520495",
+      "details": {
+        "header_name": "X-Forwarded-For",
+        "header_injected": false,
+        "response_headers": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:19 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 186,
+      "category": "crlf",
+      "name": "header_crlf_crlf_in_user-agent",
+      "description": "CRLF in header: CRLF in User-Agent",
+      "result": "HTTP/1.1 200 OK - not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:00.760375",
+      "details": {
+        "header_name": "User-Agent",
+        "header_injected": false,
+        "response_headers": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:19 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 187,
+      "category": "crlf",
+      "name": "header_crlf_crlf_in_referer",
+      "description": "CRLF in header: CRLF in Referer",
+      "result": "HTTP/1.1 200 OK - not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:00.964273",
+      "details": {
+        "header_name": "Referer",
+        "header_injected": false,
+        "response_headers": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:19 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 188,
+      "category": "crlf",
+      "name": "header_crlf_crlf_in_accept-language",
+      "description": "CRLF in header: CRLF in Accept-Language",
+      "result": "HTTP/1.1 200 OK - not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:01.140185",
+      "details": {
+        "header_name": "Accept-Language",
+        "header_injected": false,
+        "response_headers": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:19 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 189,
+      "category": "crlf",
+      "name": "cookie_crlf_crlf_in_cookie_value_(url-encoded)",
+      "description": "CRLF in cookie: CRLF in cookie value (URL-encoded)",
+      "result": "HTTP/1.1 200 OK - not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:01.340085",
+      "details": {
+        "cookie_injected": false,
+        "response_headers": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:19 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    },
+    {
+      "id": 190,
+      "category": "crlf",
+      "name": "cookie_crlf_crlf_in_cookie_value_(raw)",
+      "description": "CRLF in cookie: CRLF in cookie value (raw)",
+      "result": "HTTP/1.1 200 OK - not injected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:01.460025",
+      "details": {
+        "cookie_injected": false,
+        "response_headers": "HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 22450\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 22:20:20 GMT\r\nExpires: 0\r\nLast-Modified: Fri, 30 Jan 2026 09:21:23 GMT\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "MEDIUM",
+      "title": "No CSRF protection on REST API",
+      "description": "The MikroTik REST API does not use CSRF tokens for state-changing operations. Since it uses HTTP Basic Auth, browsers automatically attach credentials on cross-origin requests unless CORS is restrictive.",
+      "timestamp": "2026-02-15T22:07:33.949787",
+      "evidence_refs": [
+        "csrf_token_check_*"
+      ],
+      "cwe": "CWE-352"
+    },
+    {
+      "id": 2,
+      "severity": "MEDIUM",
+      "title": "Missing critical security headers",
+      "description": "The following security headers are missing across all checked endpoints: Content-Security-Policy, Strict-Transport-Security, X-Content-Type-Options. This leaves the web interface vulnerable to clickjacking, MIME sniffing, and other client-side attacks.",
+      "timestamp": "2026-02-15T22:07:53.176169",
+      "evidence_refs": [
+        "hdr_*"
+      ],
+      "cwe": "CWE-693"
+    },
+    {
+      "id": 3,
+      "severity": "INFO",
+      "title": "DOM-based XSS sinks present in WebFig JavaScript",
+      "description": "The following DOM XSS sinks were found in WebFig's client-side JavaScript: location.hash, location.href_assign, window.name. Manual review recommended to determine exploitability.",
+      "timestamp": "2026-02-15T22:07:57.418047",
+      "evidence_refs": [
+        "dom_xss_*"
+      ],
+      "cwe": "CWE-79"
+    }
+  ]
+}

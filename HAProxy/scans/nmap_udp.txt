@@ -1,0 +1,9 @@
+# Nmap 7.95 scan initiated Wed Feb 18 17:50:26 2026 as: /usr/lib/nmap/nmap -sU -p 4443,8443 -oN /home/[REDACTED]/Desktop/[REDACTED-PATH]/HAProxy/scans/nmap_udp.txt 127.0.0.1
+Nmap scan report for localhost (127.0.0.1)
+Host is up.
+
+PORT     STATE         SERVICE
+4443/udp open|filtered pharos
+8443/udp open|filtered pcsync-https
+
+# Nmap done at Wed Feb 18 17:50:30 2026 -- 1 IP address (1 host up) scanned in 3.23 seconds

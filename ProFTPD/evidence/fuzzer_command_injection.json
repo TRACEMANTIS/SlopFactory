@@ -1,0 +1,957 @@
+{
+  "fuzzer": "command_injection",
+  "target": "ProFTPD 1.3.9 at 127.0.0.1:21",
+  "start_time": "2026-02-14T12:20:08.282241",
+  "test_cases": [
+    {
+      "id": 1,
+      "category": "injection_USER",
+      "command": "USER 'test\\r\\nSITE CPFR /etc/passwd'",
+      "response": "331 Password required for test\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 2,
+      "category": "injection_USER",
+      "command": "USER 'test\\r\\nDELE /etc/passwd'",
+      "response": "331 Password required for test\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 3,
+      "category": "injection_USER",
+      "command": "USER 'test\\r\\nSITE CHMOD 777 /etc/shadow'",
+      "response": "331 Password required for test\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 4,
+      "category": "injection_USER",
+      "command": "USER 'test\\nSITE CPFR /etc/passwd'",
+      "response": "331 Password required for test\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 5,
+      "category": "injection_USER",
+      "command": "USER 'test\\r\\nUSER root'",
+      "response": "331 Password required for test\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 6,
+      "category": "injection_USER",
+      "command": "USER 'test\\x00SITE CPFR /etc/passwd'",
+      "response": "331 Password required for test\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 7,
+      "category": "injection_USER",
+      "command": "USER 'test\\x00'",
+      "response": "331 Password required for test\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 8,
+      "category": "injection_USER",
+      "command": "USER '\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'",
+      "response": "500 USER: command requires a parameter\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 9,
+      "category": "injection_USER",
+      "command": "USER '; id'",
+      "response": "331 Password required for ;\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 10,
+      "category": "injection_USER",
+      "command": "USER '| id'",
+      "response": "331 Password required for |\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 11,
+      "category": "injection_USER",
+      "command": "USER '$(id)'",
+      "response": "331 Password required for $(id)\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 12,
+      "category": "injection_USER",
+      "command": "USER '`id`'",
+      "response": "331 Password required for `id`\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 13,
+      "category": "injection_USER",
+      "command": "USER '; cat /etc/passwd'",
+      "response": "331 Password required for ;\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 14,
+      "category": "injection_USER",
+      "command": "USER '| cat /etc/passwd'",
+      "response": "331 Password required for |\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 15,
+      "category": "injection_USER",
+      "command": "USER '$(cat /etc/passwd)'",
+      "response": "331 Password required for $(cat\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 16,
+      "category": "injection_USER",
+      "command": "USER '`cat /etc/passwd`'",
+      "response": "331 Password required for `cat\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 17,
+      "category": "injection_USER",
+      "command": "USER '/etc/passwd\\r\\n'",
+      "response": "331 Password required for /etc/passwd\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 18,
+      "category": "injection_USER",
+      "command": "USER 'test; rm -rf /tmp/*'",
+      "response": "331 Password required for test;\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 19,
+      "category": "injection_USER",
+      "command": "USER 'test && id'",
+      "response": "331 Password required for test\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 20,
+      "category": "injection_USER",
+      "command": "USER 'test || id'",
+      "response": "331 Password required for test\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 21,
+      "category": "injection_CWD",
+      "command": "CWD 'test\\r\\nSITE CPFR /etc/passwd'",
+      "response": "250 CWD command successful\r\n |EXTRA| 350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 22,
+      "category": "injection_CWD",
+      "command": "CWD 'test\\r\\nDELE /etc/passwd'",
+      "response": "250 CWD command successful\r\n |EXTRA| 550 /etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 23,
+      "category": "injection_CWD",
+      "command": "CWD 'test\\r\\nSITE CHMOD 777 /etc/shadow'",
+      "response": "250 CWD command successful\r\n |EXTRA| 550 CHMOD 777 /etc/shadow: Operation not permitted\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 24,
+      "category": "injection_CWD",
+      "command": "CWD 'test\\nSITE CPFR /etc/passwd'",
+      "response": "550 test\nSITE CPFR /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 25,
+      "category": "injection_CWD",
+      "command": "CWD 'test\\r\\nUSER root'",
+      "response": "250 CWD command successful\r\n501 Reauthentication not supported\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 26,
+      "category": "injection_CWD",
+      "command": "CWD 'test\\x00SITE CPFR /etc/passwd'",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 27,
+      "category": "injection_CWD",
+      "command": "CWD 'test\\x00'",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 28,
+      "category": "injection_CWD",
+      "command": "CWD '\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'",
+      "response": "501 Invalid number of parameters\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 29,
+      "category": "injection_CWD",
+      "command": "CWD '; id'",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 30,
+      "category": "injection_CWD",
+      "command": "CWD '| id'",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 31,
+      "category": "injection_CWD",
+      "command": "CWD '$(id)'",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 32,
+      "category": "injection_CWD",
+      "command": "CWD '`id`'",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 33,
+      "category": "injection_CWD",
+      "command": "CWD '; cat /etc/passwd'",
+      "response": "550 ; cat /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 34,
+      "category": "injection_CWD",
+      "command": "CWD '| cat /etc/passwd'",
+      "response": "550 | cat /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 35,
+      "category": "injection_CWD",
+      "command": "CWD '$(cat /etc/passwd)'",
+      "response": "550 $(cat /etc/passwd): No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 36,
+      "category": "injection_CWD",
+      "command": "CWD '`cat /etc/passwd`'",
+      "response": "550 `cat /etc/passwd`: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 37,
+      "category": "injection_CWD",
+      "command": "CWD '/etc/passwd\\r\\n'",
+      "response": "550 /etc/passwd: Not a directory\r\n500 Invalid command: try being more creative\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 38,
+      "category": "injection_CWD",
+      "command": "CWD 'test; rm -rf /tmp/*'",
+      "response": "550 test; rm -rf /tmp/*: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 39,
+      "category": "injection_CWD",
+      "command": "CWD 'test && id'",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 40,
+      "category": "injection_CWD",
+      "command": "CWD 'test || id'",
+      "response": "250 CWD command successful\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 41,
+      "category": "injection_MKD",
+      "command": "MKD 'test\\r\\nSITE CPFR /etc/passwd'",
+      "response": "257 \"/home/ftptest/test\" - Directory successfully created\r\n |EXTRA| 350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 42,
+      "category": "injection_MKD",
+      "command": "MKD 'test\\r\\nDELE /etc/passwd'",
+      "response": "257 \"/home/ftptest/test\" - Directory successfully created\r\n |EXTRA| 550 /etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 43,
+      "category": "injection_MKD",
+      "command": "MKD 'test\\r\\nSITE CHMOD 777 /etc/shadow'",
+      "response": "257 \"/home/ftptest/test\" - Directory successfully created\r\n550 CHMOD 777 /etc/shadow: Operation not permitted\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 44,
+      "category": "injection_MKD",
+      "command": "MKD 'test\\nSITE CPFR /etc/passwd'",
+      "response": "550 test\nSITE CPFR /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 45,
+      "category": "injection_MKD",
+      "command": "MKD 'test\\r\\nUSER root'",
+      "response": "257 \"/home/ftptest/test\" - Directory successfully created\r\n |EXTRA| 501 Reauthentication not supported\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 46,
+      "category": "injection_MKD",
+      "command": "MKD 'test\\x00SITE CPFR /etc/passwd'",
+      "response": "257 \"/home/ftptest/test\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 47,
+      "category": "injection_MKD",
+      "command": "MKD 'test\\x00'",
+      "response": "257 \"/home/ftptest/test\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 48,
+      "category": "injection_MKD",
+      "command": "MKD '\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'",
+      "response": "501 Invalid number of parameters\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 49,
+      "category": "injection_MKD",
+      "command": "MKD '; id'",
+      "response": "257 \"/home/ftptest/; id\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 50,
+      "category": "injection_MKD",
+      "command": "MKD '| id'",
+      "response": "257 \"/home/ftptest/| id\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 51,
+      "category": "injection_MKD",
+      "command": "MKD '$(id)'",
+      "response": "257 \"/home/ftptest/$(id)\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 52,
+      "category": "injection_MKD",
+      "command": "MKD '`id`'",
+      "response": "257 \"/home/ftptest/`id`\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 53,
+      "category": "injection_MKD",
+      "command": "MKD '; cat /etc/passwd'",
+      "response": "550 ; cat /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 54,
+      "category": "injection_MKD",
+      "command": "MKD '| cat /etc/passwd'",
+      "response": "550 | cat /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 55,
+      "category": "injection_MKD",
+      "command": "MKD '$(cat /etc/passwd)'",
+      "response": "550 $(cat /etc/passwd): No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 56,
+      "category": "injection_MKD",
+      "command": "MKD '`cat /etc/passwd`'",
+      "response": "550 `cat /etc/passwd`: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 57,
+      "category": "injection_MKD",
+      "command": "MKD 'test; rm -rf /tmp/*'",
+      "response": "550 test; rm -rf /tmp/*: Invalid directory name\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 58,
+      "category": "injection_MKD",
+      "command": "MKD 'test && id'",
+      "response": "257 \"/home/ftptest/test && id\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 59,
+      "category": "injection_MKD",
+      "command": "MKD 'test || id'",
+      "response": "257 \"/home/ftptest/test || id\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 60,
+      "category": "injection_RNFR",
+      "command": "RNFR 'test\\r\\nSITE CPFR /etc/passwd'",
+      "response": "350 File or directory exists, ready for destination name\r\n |EXTRA| 501 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 61,
+      "category": "injection_RNFR",
+      "command": "RNFR 'test\\r\\nDELE /etc/passwd'",
+      "response": "350 File or directory exists, ready for destination name\r\n501 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 62,
+      "category": "injection_RNFR",
+      "command": "RNFR 'test\\r\\nSITE CHMOD 777 /etc/shadow'",
+      "response": "350 File or directory exists, ready for destination name\r\n501 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 63,
+      "category": "injection_RNFR",
+      "command": "RNFR 'test\\nSITE CPFR /etc/passwd'",
+      "response": "550 test\nSITE CPFR /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 64,
+      "category": "injection_RNFR",
+      "command": "RNFR 'test\\r\\nUSER root'",
+      "response": "350 File or directory exists, ready for destination name\r\n |EXTRA| 501 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 65,
+      "category": "injection_RNFR",
+      "command": "RNFR 'test\\x00SITE CPFR /etc/passwd'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 66,
+      "category": "injection_RNFR",
+      "command": "RNFR 'test\\x00'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 67,
+      "category": "injection_RNFR",
+      "command": "RNFR '\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'",
+      "response": "501 Invalid number of parameters\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 68,
+      "category": "injection_RNFR",
+      "command": "RNFR '; id'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 69,
+      "category": "injection_RNFR",
+      "command": "RNFR '| id'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 70,
+      "category": "injection_RNFR",
+      "command": "RNFR '$(id)'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 71,
+      "category": "injection_RNFR",
+      "command": "RNFR '`id`'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 72,
+      "category": "injection_RNFR",
+      "command": "RNFR '; cat /etc/passwd'",
+      "response": "550 ; cat /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 73,
+      "category": "injection_RNFR",
+      "command": "RNFR '| cat /etc/passwd'",
+      "response": "550 | cat /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 74,
+      "category": "injection_RNFR",
+      "command": "RNFR '$(cat /etc/passwd)'",
+      "response": "550 $(cat /etc/passwd): No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 75,
+      "category": "injection_RNFR",
+      "command": "RNFR '`cat /etc/passwd`'",
+      "response": "550 `cat /etc/passwd`: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 76,
+      "category": "injection_RNFR",
+      "command": "RNFR '/etc/passwd\\r\\n'",
+      "response": "350 File or directory exists, ready for destination name\r\n500 Invalid command: try being more creative\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 77,
+      "category": "injection_RNFR",
+      "command": "RNFR 'test; rm -rf /tmp/*'",
+      "response": "550 test; rm -rf /tmp/*: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 78,
+      "category": "injection_RNFR",
+      "command": "RNFR 'test && id'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 79,
+      "category": "injection_RNFR",
+      "command": "RNFR 'test || id'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 80,
+      "category": "injection_STAT",
+      "command": "STAT 'test\\r\\nSITE CPFR /etc/passwd'",
+      "response": "212-Status of test:\r\n drwxr-xr-x   2 ftptest  ftptest      4096 Feb 14 17:15 .\r\n drwx------  21 ftptest  ftptest      4096 Feb 14 17:17 ..\r\n212 End of status\r\n |EXTRA| 350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 81,
+      "category": "injection_STAT",
+      "command": "STAT 'test\\r\\nDELE /etc/passwd'",
+      "response": "212-Status of test:\r\n drwxr-xr-x   2 ftptest  ftptest      4096 Feb 14 17:15 .\r\n drwx------  21 ftptest  ftptest      4096 Feb 14 17:17 ..\r\n212 End of status\r\n |EXTRA| 550 /etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 82,
+      "category": "injection_STAT",
+      "command": "STAT 'test\\r\\nSITE CHMOD 777 /etc/shadow'",
+      "response": "212-Status of test:\r\n drwxr-xr-x   2 ftptest  ftptest      4096 Feb 14 17:15 .\r\n drwx------  21 ftptest  ftptest      4096 Feb 14 17:17 ..\r\n212 End of status\r\n |EXTRA| 550 CHMOD 777 /etc/shadow: Operation not permitted\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 83,
+      "category": "injection_STAT",
+      "command": "STAT 'test\\nSITE CPFR /etc/passwd'",
+      "response": "450 test\nSITE CPFR /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 84,
+      "category": "injection_STAT",
+      "command": "STAT 'test\\r\\nUSER root'",
+      "response": "212-Status of test:\r\n drwxr-xr-x   2 ftptest  ftptest      4096 Feb 14 17:15 .\r\n drwx------  21 ftptest  ftptest      4096 Feb 14 17:17 ..\r\n212 End of status\r\n |EXTRA| 501 Reauthentication not supported\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 85,
+      "category": "injection_STAT",
+      "command": "STAT 'test\\x00SITE CPFR /etc/passwd'",
+      "response": "212-Status of test:\r\n drwxr-xr-x   2 ftptest  ftptest      4096 Feb 14 17:15 .\r\n drwx------  21 ftptest  ftptest      4096 Feb 14 17:17 ..\r\n212 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 86,
+      "category": "injection_STAT",
+      "command": "STAT 'test\\x00'",
+      "response": "212-Status of test:\r\n drwxr-xr-x   2 ftptest  ftptest      4096 Feb 14 17:15 .\r\n drwx------  21 ftptest  ftptest      4096 Feb 14 17:17 ..\r\n212 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 87,
+      "category": "injection_STAT",
+      "command": "STAT '\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'",
+      "response": "211-Status of 'Debian'\r\n Connected from localhost (127.0.0.1)\r\n Logged in as ftptest\r\n TYPE: ASCII, STRUcture: File, Mode: Stream\r\n No data connection\r\n211 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 88,
+      "category": "injection_STAT",
+      "command": "STAT '; id'",
+      "response": "212-Status of ; id:\r\n drwxr-xr-x   2 ftptest  ftptest      4096 Feb 14 17:15 .\r\n drwx------  21 ftptest  ftptest      4096 Feb 14 17:17 ..\r\n212 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 89,
+      "category": "injection_STAT",
+      "command": "STAT '| id'",
+      "response": "212-Status of | id:\r\n drwxr-xr-x   2 ftptest  ftptest      4096 Feb 14 17:15 .\r\n drwx------  21 ftptest  ftptest      4096 Feb 14 17:17 ..\r\n212 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 90,
+      "category": "injection_STAT",
+      "command": "STAT '$(id)'",
+      "response": "212-Status of $(id):\r\n drwxr-xr-x   2 ftptest  ftptest      4096 Feb 14 17:15 .\r\n drwx------  21 ftptest  ftptest      4096 Feb 14 17:17 ..\r\n212 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 91,
+      "category": "injection_STAT",
+      "command": "STAT '`id`'",
+      "response": "212-Status of `id`:\r\n drwxr-xr-x   2 ftptest  ftptest      4096 Feb 14 17:15 .\r\n drwx------  21 ftptest  ftptest      4096 Feb 14 17:17 ..\r\n212 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 92,
+      "category": "injection_STAT",
+      "command": "STAT '; cat /etc/passwd'",
+      "response": "450 ; cat /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 93,
+      "category": "injection_STAT",
+      "command": "STAT '| cat /etc/passwd'",
+      "response": "450 | cat /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 94,
+      "category": "injection_STAT",
+      "command": "STAT '`cat /etc/passwd`'",
+      "response": "450 `cat /etc/passwd`: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 95,
+      "category": "injection_STAT",
+      "command": "STAT '/etc/passwd\\r\\n'",
+      "response": "213-Status of /etc/passwd:\r\n -rw-r--r--   1 root     root         3474 Feb 14 01:21 /etc/passwd\r\n213 End of status\r\n500 Invalid command: try being more creative\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 96,
+      "category": "injection_STAT",
+      "command": "STAT 'test; rm -rf /tmp/*'",
+      "response": "450 test; rm -rf /tmp/*: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 97,
+      "category": "injection_STAT",
+      "command": "STAT 'test && id'",
+      "response": "212-Status of test && id:\r\n drwxr-xr-x   2 ftptest  ftptest      4096 Feb 14 17:15 .\r\n drwx------  21 ftptest  ftptest      4096 Feb 14 17:17 ..\r\n212 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 98,
+      "category": "injection_STAT",
+      "command": "STAT 'test || id'",
+      "response": "212-Status of test || id:\r\n drwxr-xr-x   2 ftptest  ftptest      4096 Feb 14 17:17 .\r\n drwx------  21 ftptest  ftptest      4096 Feb 14 17:17 ..\r\n212 End of status\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 99,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR 'test\\r\\nSITE CPFR /etc/passwd'",
+      "response": "350 File or directory exists, ready for destination name\r\n |EXTRA| 350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 100,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR 'test\\r\\nDELE /etc/passwd'",
+      "response": "350 File or directory exists, ready for destination name\r\n |EXTRA| 550 /etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 101,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR 'test\\r\\nSITE CHMOD 777 /etc/shadow'",
+      "response": "350 File or directory exists, ready for destination name\r\n |EXTRA| 550 CHMOD 777 /etc/shadow: Operation not permitted\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 102,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR 'test\\nSITE CPFR /etc/passwd'",
+      "response": "550 /home/ftptest/test SITE CPFR /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 103,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR 'test\\r\\nUSER root'",
+      "response": "350 File or directory exists, ready for destination name\r\n |EXTRA| 501 Reauthentication not supported\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 104,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR 'test\\x00SITE CPFR /etc/passwd'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 105,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR 'test\\x00'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 106,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR '\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'",
+      "response": "500 'SITE CPFR' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 107,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR '; id'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 108,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR '| id'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 109,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR '$(id)'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 110,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR '`id`'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 111,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR '; cat /etc/passwd'",
+      "response": "550 /home/ftptest/; cat /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 112,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR '| cat /etc/passwd'",
+      "response": "550 /home/ftptest/| cat /etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 113,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR '$(cat /etc/passwd)'",
+      "response": "550 /home/ftptest/$(cat /etc/passwd): No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 114,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR '`cat /etc/passwd`'",
+      "response": "550 /home/ftptest/`cat /etc/passwd`: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 115,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR '/etc/passwd\\r\\n'",
+      "response": "350 File or directory exists, ready for destination name\r\n500 Invalid command: try being more creative\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 116,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR 'test; rm -rf /tmp/*'",
+      "response": "550 /home/ftptest/test; rm -rf /tmp/*: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 117,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR 'test && id'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 118,
+      "category": "injection_SITE_CPFR",
+      "command": "SITE CPFR 'test || id'",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "OK"
+    }
+  ],
+  "crashes": [],
+  "anomalies": [],
+  "total_tests": 118,
+  "total_crashes": 0,
+  "total_anomalies": 0,
+  "end_time": "2026-02-14T12:33:34.244539"
+}

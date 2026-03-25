@@ -1,0 +1,4265 @@
+{
+  "metadata": {
+    "script": "re_ftpd_static.py",
+    "phase": "Track B: ftpd Deep Static RE",
+    "target_binary": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/MikroTik/source/squashfs-root/nova/bin/ftpd",
+    "binary_size": 34376,
+    "start_time": "2026-02-16T14:57:44.699181",
+    "end_time": "2026-02-16T14:58:32.619209",
+    "elapsed_seconds": 47.920028,
+    "total_tests": 117,
+    "anomalies": 44,
+    "findings_count": 5
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "metadata",
+      "name": "ftpd_binary_info",
+      "description": "Binary metadata for ftpd",
+      "result": "arch=x86, bits=32, nx=False, canary=False, pic=False, relro=partial",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:44.743159",
+      "details": {
+        "arch": "x86",
+        "bits": 32,
+        "endian": "little",
+        "os": "linux",
+        "type": null,
+        "machine": "Intel 80386",
+        "stripped": true,
+        "static": false,
+        "nx": false,
+        "canary": false,
+        "pic": false,
+        "relro": "partial"
+      }
+    },
+    {
+      "id": 2,
+      "category": "metadata",
+      "name": "ftpd_no_nx",
+      "description": "NX (No-eXecute) protection check",
+      "result": "NX DISABLED \u2014 stack/heap shellcode execution possible",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:44.743159"
+    },
+    {
+      "id": 3,
+      "category": "metadata",
+      "name": "ftpd_no_canary",
+      "description": "Stack canary protection check",
+      "result": "CANARY DISABLED \u2014 stack buffer overflows directly overwrite return address",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:44.743159"
+    },
+    {
+      "id": 4,
+      "category": "metadata",
+      "name": "ftpd_no_pie",
+      "description": "PIE (Position Independent Executable) check",
+      "result": "PIE DISABLED \u2014 fixed addresses enable reliable ROP/ret2libc",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:44.743159"
+    },
+    {
+      "id": 5,
+      "category": "metadata",
+      "name": "ftpd_stripped",
+      "description": "Binary stripping check",
+      "result": "Stripped=True \u2014 symbols removed, complicating RE",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:44.743159"
+    },
+    {
+      "id": 6,
+      "category": "metadata",
+      "name": "ftpd_sections",
+      "description": "ELF sections in ftpd",
+      "result": "24 sections found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:44.823119",
+      "details": {
+        "section_names": [
+          "",
+          ".interp",
+          ".note.gnu.property",
+          ".hash",
+          ".gnu.hash",
+          ".dynsym",
+          ".dynstr",
+          ".rel.dyn",
+          ".rel.plt",
+          ".init",
+          ".plt",
+          ".text",
+          ".fini",
+          ".rodata",
+          ".eh_frame",
+          ".init_array",
+          ".ctors",
+          ".dtors",
+          ".data.rel.ro",
+          ".dynamic",
+          ".got.plt",
+          ".data",
+          ".bss",
+          ".shstrtab"
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "category": "metadata",
+      "name": "ftpd_text_size",
+      "description": ".text section size",
+      "result": ".text = 18233 bytes (17.8 KB)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:44.823119"
+    },
+    {
+      "id": 8,
+      "category": "metadata",
+      "name": "ftpd_stack_perm",
+      "description": "Stack segment permissions (GNU_STACK)",
+      "result": "GNU_STACK perm=-rwx \u2014 EXECUTABLE STACK",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:44.907077"
+    },
+    {
+      "id": 9,
+      "category": "functions",
+      "name": "ftpd_function_count",
+      "description": "Total functions in ftpd",
+      "result": "139 functions found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:45.098981",
+      "details": {
+        "size_distribution": {
+          "tiny(<32)": 114,
+          "small(32-128)": 14,
+          "medium(128-512)": 7,
+          "large(512-2048)": 3,
+          "huge(>2048)": 1
+        }
+      }
+    },
+    {
+      "id": 10,
+      "category": "functions",
+      "name": "ftpd_large_func_fcn.0804bcf0",
+      "description": "Large function: fcn.0804bcf0",
+      "result": "size=2058 bytes, cc=38, nbbs=73, nargs=1",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 11,
+      "category": "functions",
+      "name": "ftpd_large_func_entry.init0",
+      "description": "Large function: entry.init0",
+      "result": "size=1879 bytes, cc=1, nbbs=1, nargs=0",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 12,
+      "category": "functions",
+      "name": "ftpd_large_func_main",
+      "description": "Large function: main",
+      "result": "size=1778 bytes, cc=27, nbbs=53, nargs=1",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 13,
+      "category": "functions",
+      "name": "ftpd_large_func_fcn.0804b334",
+      "description": "Large function: fcn.0804b334",
+      "result": "size=703 bytes, cc=16, nbbs=29, nargs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 14,
+      "category": "functions",
+      "name": "ftpd_large_func_fcn.0804aae2",
+      "description": "Large function: fcn.0804aae2",
+      "result": "size=410 bytes, cc=10, nbbs=19, nargs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 15,
+      "category": "functions",
+      "name": "ftpd_large_func_fcn.0804a850",
+      "description": "Large function: fcn.0804a850",
+      "result": "size=253 bytes, cc=5, nbbs=7, nargs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 16,
+      "category": "functions",
+      "name": "ftpd_large_func_fcn.0804b6d0",
+      "description": "Large function: fcn.0804b6d0",
+      "result": "size=241 bytes, cc=3, nbbs=7, nargs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 17,
+      "category": "functions",
+      "name": "ftpd_large_func_fcn.0804af4c",
+      "description": "Large function: fcn.0804af4c",
+      "result": "size=192 bytes, cc=4, nbbs=5, nargs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 18,
+      "category": "functions",
+      "name": "ftpd_large_func_fcn.0804adc0",
+      "description": "Large function: fcn.0804adc0",
+      "result": "size=171 bytes, cc=6, nbbs=9, nargs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 19,
+      "category": "functions",
+      "name": "ftpd_large_func_fcn.0804ad07",
+      "description": "Large function: fcn.0804ad07",
+      "result": "size=150 bytes, cc=5, nbbs=12, nargs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 20,
+      "category": "functions",
+      "name": "ftpd_complex_func_fcn.0804bcf0",
+      "description": "High-complexity function: fcn.0804bcf0",
+      "result": "cyclomatic_complexity=38, size=2058, nbbs=73",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 21,
+      "category": "functions",
+      "name": "ftpd_complex_func_main",
+      "description": "High-complexity function: main",
+      "result": "cyclomatic_complexity=27, size=1778, nbbs=53",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 22,
+      "category": "functions",
+      "name": "ftpd_complex_func_fcn.0804b334",
+      "description": "High-complexity function: fcn.0804b334",
+      "result": "cyclomatic_complexity=16, size=703, nbbs=29",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 23,
+      "category": "functions",
+      "name": "ftpd_complex_func_fcn.0804a88e",
+      "description": "High-complexity function: fcn.0804a88e",
+      "result": "cyclomatic_complexity=14, size=107, nbbs=22",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.122969"
+    },
+    {
+      "id": 24,
+      "category": "imports",
+      "name": "ftpd_unsafe_import_sscanf",
+      "description": "Unsafe function imported: sscanf",
+      "result": "sscanf at PLT 0x804a0b0",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.158951"
+    },
+    {
+      "id": 25,
+      "category": "imports",
+      "name": "ftpd_unsafe_import_snprintf",
+      "description": "Unsafe function imported: snprintf",
+      "result": "snprintf at PLT 0x804a100",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.158951"
+    },
+    {
+      "id": 26,
+      "category": "imports",
+      "name": "ftpd_unsafe_import_getsockname",
+      "description": "Unsafe function imported: getsockname",
+      "result": "getsockname at PLT 0x804a2b0",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.158951"
+    },
+    {
+      "id": 27,
+      "category": "imports",
+      "name": "ftpd_unsafe_import_strncpy",
+      "description": "Unsafe function imported: strncpy",
+      "result": "strncpy at PLT 0x804a300",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.158951"
+    },
+    {
+      "id": 28,
+      "category": "imports",
+      "name": "ftpd_import_summary",
+      "description": "Import/export summary for ftpd",
+      "result": "111 imports, 6 exports, 4 unsafe imports, 0 C++ symbols demangled",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:45.206927"
+    },
+    {
+      "id": 29,
+      "category": "imports",
+      "name": "ftpd_sscanf_import",
+      "description": "sscanf import \u2014 format string + overflow risk",
+      "result": "sscanf at PLT 0x804a0b0 \u2014 if format specifiers lack width limits (e.g., %s instead of %255s), stack buffer overflow is trivial",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.206927"
+    },
+    {
+      "id": 30,
+      "category": "imports",
+      "name": "ftpd_strncpy_import",
+      "description": "strncpy import \u2014 off-by-one null termination risk",
+      "result": "strncpy at PLT 0x804a300 \u2014 strncpy does NOT null-terminate if src >= n, enabling read overflow",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:45.206927"
+    },
+    {
+      "id": 31,
+      "category": "xref",
+      "name": "ftpd_xref_summary",
+      "description": "Unsafe call site cross-reference summary",
+      "result": "0 total unsafe function call sites found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:46.170445"
+    },
+    {
+      "id": 32,
+      "category": "strings",
+      "name": "ftpd_string_count",
+      "description": "String analysis for ftpd",
+      "result": "144 strings extracted, 176 categorized, 5 interesting",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:46.218421",
+      "details": {
+        "ftp_commands": 28,
+        "ftp_response_codes": 48,
+        "error_messages": 30,
+        "file_paths": 2,
+        "format_strings": 2,
+        "sensitive_filenames": 5,
+        "network_related": 23,
+        "auth_related": 13,
+        "transfer_related": 21,
+        "debug_strings": 4
+      }
+    },
+    {
+      "id": 33,
+      "category": "strings",
+      "name": "ftpd_ftp_commands",
+      "description": "FTP command strings found",
+      "result": "28 FTP commands: ['QUIT', 'USER', 'TYPE', 'MODE', 'STRU', 'NOOP', 'PORT', 'EPRT', 'LIST', 'NLST', 'RETR', 'STOR', 'DELE', 'CDUP', 'REIN', 'SYST', 'ABOR', 'RNFR', 'RNTO', 'PASV', 'EPSV', 'REST', 'SIZE', 'STAT', 'XMKD', 'XPWD', 'XRMD', 'XCUP']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:46.218421",
+      "details": {
+        "commands": [
+          "QUIT",
+          "USER",
+          "TYPE",
+          "MODE",
+          "STRU",
+          "NOOP",
+          "PORT",
+          "EPRT",
+          "LIST",
+          "NLST",
+          "RETR",
+          "STOR",
+          "DELE",
+          "CDUP",
+          "REIN",
+          "SYST",
+          "ABOR",
+          "RNFR",
+          "RNTO",
+          "PASV",
+          "EPSV",
+          "REST",
+          "SIZE",
+          "STAT",
+          "XMKD",
+          "XPWD",
+          "XRMD",
+          "XCUP"
+        ]
+      }
+    },
+    {
+      "id": 34,
+      "category": "strings",
+      "name": "ftpd_missing_commands",
+      "description": "FTP commands NOT found in binary strings",
+      "result": "Missing: ['PASS'] \u2014 may be handled differently or unsupported",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:46.218421"
+    },
+    {
+      "id": 35,
+      "category": "strings",
+      "name": "ftpd_response_codes",
+      "description": "FTP response code strings",
+      "result": "48 response strings found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:46.218421",
+      "details": {
+        "samples": [
+          "221 Closing",
+          "504 Bad USER command",
+          "331 Password required for",
+          "504 Command not implemented",
+          "230 User",
+          "530 Login incorrect",
+          "200 Command okay",
+          "215 UNIX",
+          "200 Abort okay",
+          "421 No Transfer Timeout (",
+          "530 Please login with USER and PASS",
+          "504 Bad TYPE command",
+          "200 Type set to",
+          "504 Parameter not implemented",
+          "504 Bad MODE command"
+        ]
+      }
+    },
+    {
+      "id": 36,
+      "category": "strings",
+      "name": "ftpd_dangerous_format_strings",
+      "description": "Format strings with unbounded %s",
+      "result": "1 format strings use %s without width limit \u2014 if used with sscanf/sprintf, buffer overflow is trivial",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:46.218421",
+      "details": {
+        "samples": [
+          "%crw%crw%c--- %3d root     root     %8llu %s %2u %2.2u:%2.2u"
+        ]
+      }
+    },
+    {
+      "id": 37,
+      "category": "strings",
+      "name": "ftpd_sensitive_filenames",
+      "description": "Sensitive filename patterns",
+      "result": "5 sensitive file patterns: ['.AUTO.RSC', '/import', '.log', '.AUTO.NPK', '/nova/etc/logo']",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:46.218421"
+    },
+    {
+      "id": 38,
+      "category": "strings",
+      "name": "ftpd_auto_files",
+      "description": "Auto-execute file references (.AUTO.RSC, .AUTO.NPK)",
+      "result": "3 auto-execute file references found \u2014 FTP uploads of .AUTO.RSC trigger automatic script execution",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:46.218421",
+      "details": {
+        "files": [
+          ".AUTO.RSC",
+          "ftp-auto-run:",
+          ".AUTO.NPK"
+        ]
+      }
+    },
+    {
+      "id": 39,
+      "category": "critical_funcs",
+      "name": "ftpd_found_isSensitiveFile",
+      "description": "Critical function search: isSensitiveFile",
+      "result": "FOUND as sym.imp.isSensitiveFile_string_const_ at 0x804a610, size=6, cc=1, nbbs=1",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:46.422319"
+    },
+    {
+      "id": 40,
+      "category": "critical_funcs",
+      "name": "ftpd_disasm_isSensitiveFile",
+      "description": "Disassembly of isSensitiveFile (sym.imp.isSensitiveFile_string_const_)",
+      "result": "1 instructions, 0 calls, 0 stack allocations, 0 comparisons",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:46.706177",
+      "details": {
+        "calls": [],
+        "stack": [],
+        "cmps": []
+      }
+    },
+    {
+      "id": 41,
+      "category": "critical_funcs",
+      "name": "ftpd_callers_isSensitiveFile",
+      "description": "Callers of isSensitiveFile",
+      "result": "6 callers: ['?', '?', '?', '?', '?']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:46.858101",
+      "details": {
+        "callers": [
+          {
+            "from": "0x804c739",
+            "fcn": "",
+            "type": "CALL"
+          },
+          {
+            "from": "0x804ce5e",
+            "fcn": "",
+            "type": "CALL"
+          },
+          {
+            "from": "0x804d3ab",
+            "fcn": "",
+            "type": "CALL"
+          },
+          {
+            "from": "0x804dab7",
+            "fcn": "",
+            "type": "CALL"
+          },
+          {
+            "from": "0x804daec",
+            "fcn": "",
+            "type": "CALL"
+          },
+          {
+            "from": "0x804dbc0",
+            "fcn": "",
+            "type": "CALL"
+          }
+        ]
+      }
+    },
+    {
+      "id": 42,
+      "category": "critical_funcs",
+      "name": "ftpd_found_shortenPath",
+      "description": "Critical function search: shortenPath",
+      "result": "FOUND as sym.imp.shortenPath_string_const_ at 0x804a110, size=6, cc=1, nbbs=1",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:46.858101"
+    },
+    {
+      "id": 43,
+      "category": "critical_funcs",
+      "name": "ftpd_disasm_shortenPath",
+      "description": "Disassembly of shortenPath (sym.imp.shortenPath_string_const_)",
+      "result": "1 instructions, 0 calls, 0 stack allocations, 0 comparisons",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:47.065997",
+      "details": {
+        "calls": [],
+        "stack": [],
+        "cmps": []
+      }
+    },
+    {
+      "id": 44,
+      "category": "critical_funcs",
+      "name": "ftpd_callers_shortenPath",
+      "description": "Callers of shortenPath",
+      "result": "2 callers: ['?', '?']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:47.249905",
+      "details": {
+        "callers": [
+          {
+            "from": "0x804d7cf",
+            "fcn": "",
+            "type": "CALL"
+          },
+          {
+            "from": "0x804d81c",
+            "fcn": "",
+            "type": "CALL"
+          }
+        ]
+      }
+    },
+    {
+      "id": 45,
+      "category": "critical_funcs",
+      "name": "ftpd_found_tokenize",
+      "description": "Critical function search: tokenize",
+      "result": "FOUND as sym.imp.tokenize_string_const__char_ at 0x804a150, size=6, cc=1, nbbs=1",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:47.249905"
+    },
+    {
+      "id": 46,
+      "category": "critical_funcs",
+      "name": "ftpd_disasm_tokenize",
+      "description": "Disassembly of tokenize (sym.imp.tokenize_string_const__char_)",
+      "result": "1 instructions, 0 calls, 0 stack allocations, 0 comparisons",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:47.389835",
+      "details": {
+        "calls": [],
+        "stack": [],
+        "cmps": []
+      }
+    },
+    {
+      "id": 47,
+      "category": "critical_funcs",
+      "name": "ftpd_callers_tokenize",
+      "description": "Callers of tokenize",
+      "result": "1 callers: ['?']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:47.429815",
+      "details": {
+        "callers": [
+          {
+            "from": "0x804bbd5",
+            "fcn": "",
+            "type": "CALL"
+          }
+        ]
+      }
+    },
+    {
+      "id": 48,
+      "category": "critical_funcs",
+      "name": "ftpd_found_lookupUserFile",
+      "description": "Critical function search: lookupUserFile",
+      "result": "FOUND as sym.imp.lookupUserFile_string_const_ at 0x804a460, size=6, cc=1, nbbs=1",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:47.429815"
+    },
+    {
+      "id": 49,
+      "category": "critical_funcs",
+      "name": "ftpd_disasm_lookupUserFile",
+      "description": "Disassembly of lookupUserFile (sym.imp.lookupUserFile_string_const_)",
+      "result": "1 instructions, 0 calls, 0 stack allocations, 0 comparisons",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:47.737661",
+      "details": {
+        "calls": [],
+        "stack": [],
+        "cmps": []
+      }
+    },
+    {
+      "id": 50,
+      "category": "critical_funcs",
+      "name": "ftpd_callers_lookupUserFile",
+      "description": "Callers of lookupUserFile",
+      "result": "1 callers: ['fcn.0804aa8e']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:47.901579",
+      "details": {
+        "callers": [
+          {
+            "from": "0x804aaae",
+            "fcn": "fcn.0804aa8e",
+            "type": "CALL"
+          }
+        ]
+      }
+    },
+    {
+      "id": 51,
+      "category": "critical_funcs",
+      "name": "ftpd_found_findFile",
+      "description": "Critical function search: findFile",
+      "result": "FOUND as sym.imp.nv::findFile_string_const__bool_ at 0x804a1c0, size=6, cc=1, nbbs=1",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:47.901579"
+    },
+    {
+      "id": 52,
+      "category": "critical_funcs",
+      "name": "ftpd_disasm_findFile",
+      "description": "Disassembly of findFile (sym.imp.nv::findFile_string_const__bool_)",
+      "result": "1 instructions, 0 calls, 0 stack allocations, 0 comparisons",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:48.061499",
+      "details": {
+        "calls": [],
+        "stack": [],
+        "cmps": []
+      }
+    },
+    {
+      "id": 53,
+      "category": "critical_funcs",
+      "name": "ftpd_callers_findFile",
+      "description": "Callers of findFile",
+      "result": "1 callers: ['main']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:48.217421",
+      "details": {
+        "callers": [
+          {
+            "from": "0x804e197",
+            "fcn": "main",
+            "type": "CALL"
+          }
+        ]
+      }
+    },
+    {
+      "id": 54,
+      "category": "critical_funcs",
+      "name": "ftpd_isSensitiveFile_patterns",
+      "description": "isSensitiveFile blocked patterns",
+      "result": "Found 0 pattern references in disassembly: []",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:57:48.373343",
+      "details": {
+        "patterns": [],
+        "raw_string_refs": [],
+        "bypass_vectors": [
+          "Case manipulation (if comparisons are case-sensitive)",
+          "Path encoding (URL-encoded characters)",
+          "Trailing dots/spaces (Windows-style)",
+          "Unicode normalization bypass",
+          "Null byte injection in path components",
+          "Symlink to sensitive file (if not resolved before check)"
+        ]
+      }
+    },
+    {
+      "id": 55,
+      "category": "critical_funcs",
+      "name": "ftpd_isSensitiveFile_comparison",
+      "description": "isSensitiveFile comparison type",
+      "result": "Comparison: UNKNOWN, toupper=False, tolower=False, strcmp=False, strcasecmp=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:48.373343"
+    },
+    {
+      "id": 56,
+      "category": "critical_funcs",
+      "name": "ftpd_critical_summary",
+      "description": "Critical function search summary",
+      "result": "Found 5/5 critical functions, missing: []",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:48.373343",
+      "details": {
+        "found_names": [
+          "sym.imp.isSensitiveFile_string_const_",
+          "sym.imp.shortenPath_string_const_",
+          "sym.imp.tokenize_string_const__char_",
+          "sym.imp.lookupUserFile_string_const_",
+          "sym.imp.nv::findFile_string_const__bool_"
+        ]
+      }
+    },
+    {
+      "id": 57,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_QUIT",
+      "description": "FTP command QUIT \u2014 no xrefs found",
+      "result": "String at 0x000079c6 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:48.765147"
+    },
+    {
+      "id": 58,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_USER",
+      "description": "FTP command USER \u2014 no xrefs found",
+      "result": "String at 0x000079cb but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:49.108975"
+    },
+    {
+      "id": 59,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_PASS",
+      "description": "FTP command PASS \u2014 no xrefs found",
+      "result": "String at 0x000072ce but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:49.452803"
+    },
+    {
+      "id": 60,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_TYPE",
+      "description": "FTP command TYPE \u2014 no xrefs found",
+      "result": "String at 0x000079d0 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:49.804627"
+    },
+    {
+      "id": 61,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_MODE",
+      "description": "FTP command MODE \u2014 no xrefs found",
+      "result": "String at 0x000079d5 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:50.188435"
+    },
+    {
+      "id": 62,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_STRU",
+      "description": "FTP command STRU \u2014 no xrefs found",
+      "result": "String at 0x000079da but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:50.428315"
+    },
+    {
+      "id": 63,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_NOOP",
+      "description": "FTP command NOOP \u2014 no xrefs found",
+      "result": "String at 0x000079df but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:50.972043"
+    },
+    {
+      "id": 64,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_PORT",
+      "description": "FTP command PORT \u2014 no xrefs found",
+      "result": "String at 0x000079e4 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:50.976041"
+    },
+    {
+      "id": 65,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_EPRT",
+      "description": "FTP command EPRT \u2014 no xrefs found",
+      "result": "String at 0x000079e9 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:50.976041"
+    },
+    {
+      "id": 66,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_LIST",
+      "description": "FTP command LIST \u2014 no xrefs found",
+      "result": "String at 0x000079ee but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:52.783137"
+    },
+    {
+      "id": 67,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_NLST",
+      "description": "FTP command NLST \u2014 no xrefs found",
+      "result": "String at 0x000079f3 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:53.011023"
+    },
+    {
+      "id": 68,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_RETR",
+      "description": "FTP command RETR \u2014 no xrefs found",
+      "result": "String at 0x000079f8 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:53.450803"
+    },
+    {
+      "id": 69,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_STOR",
+      "description": "FTP command STOR \u2014 no xrefs found",
+      "result": "String at 0x000079fd but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:55.209923"
+    },
+    {
+      "id": 70,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_DELE",
+      "description": "FTP command DELE \u2014 no xrefs found",
+      "result": "String at 0x00007a02 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:55.561747"
+    },
+    {
+      "id": 71,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_CDUP",
+      "description": "FTP command CDUP \u2014 no xrefs found",
+      "result": "String at 0x00007a0b but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:56.145455"
+    },
+    {
+      "id": 72,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_REIN",
+      "description": "FTP command REIN \u2014 no xrefs found",
+      "result": "String at 0x00007a10 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:56.609223"
+    },
+    {
+      "id": 73,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_SYST",
+      "description": "FTP command SYST \u2014 no xrefs found",
+      "result": "String at 0x00007a15 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:57.192931"
+    },
+    {
+      "id": 74,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_ABOR",
+      "description": "FTP command ABOR \u2014 no xrefs found",
+      "result": "String at 0x00007a1a but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:57.724665"
+    },
+    {
+      "id": 75,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_RNFR",
+      "description": "FTP command RNFR \u2014 no xrefs found",
+      "result": "String at 0x00007a1f but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:58.064495"
+    },
+    {
+      "id": 76,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_RNTO",
+      "description": "FTP command RNTO \u2014 no xrefs found",
+      "result": "String at 0x00007a24 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:58.352351"
+    },
+    {
+      "id": 77,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_PASV",
+      "description": "FTP command PASV \u2014 no xrefs found",
+      "result": "String at 0x00007a29 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:59.203925"
+    },
+    {
+      "id": 78,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_EPSV",
+      "description": "FTP command EPSV \u2014 no xrefs found",
+      "result": "String at 0x00007a2e but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:57:59.247903"
+    },
+    {
+      "id": 79,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_REST",
+      "description": "FTP command REST \u2014 no xrefs found",
+      "result": "String at 0x00007a33 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:00.483285"
+    },
+    {
+      "id": 80,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_SIZE",
+      "description": "FTP command SIZE \u2014 no xrefs found",
+      "result": "String at 0x00007a38 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:00.903075"
+    },
+    {
+      "id": 81,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_STAT",
+      "description": "FTP command STAT \u2014 no xrefs found",
+      "result": "String at 0x00007a3d but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:00.951051"
+    },
+    {
+      "id": 82,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_XMKD",
+      "description": "FTP command XMKD \u2014 no xrefs found",
+      "result": "String at 0x00007a42 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:00.951051"
+    },
+    {
+      "id": 83,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_XPWD",
+      "description": "FTP command XPWD \u2014 no xrefs found",
+      "result": "String at 0x00007a47 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:05.980535"
+    },
+    {
+      "id": 84,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_XRMD",
+      "description": "FTP command XRMD \u2014 no xrefs found",
+      "result": "String at 0x00007a4c but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:06.332359"
+    },
+    {
+      "id": 85,
+      "category": "dispatch",
+      "name": "ftpd_cmd_noxref_XCUP",
+      "description": "FTP command XCUP \u2014 no xrefs found",
+      "result": "String at 0x00007a51 but no code references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:10.842102"
+    },
+    {
+      "id": 86,
+      "category": "dispatch",
+      "name": "ftpd_file_command_handlers",
+      "description": "File-operation FTP commands (path traversal targets)",
+      "result": "0 file-operation commands with handlers: []",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:10.842102"
+    },
+    {
+      "id": 87,
+      "category": "ghidra",
+      "name": "ftpd_ghidra_prereqs_ok",
+      "description": "Ghidra prerequisites verified",
+      "result": "analyzeHeadless=True, project=True, script=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:10.842102"
+    },
+    {
+      "id": 88,
+      "category": "ghidra",
+      "name": "ftpd_ghidra_targets",
+      "description": "Ghidra decompilation target addresses",
+      "result": "5 functions queued for decompilation",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:10.842102",
+      "details": {
+        "addresses": {
+          "0x804a110": "shortenPath",
+          "0x804a150": "tokenize",
+          "0x804a1c0": "findFile",
+          "0x804a460": "lookupUserFile",
+          "0x804a610": "isSensitiveFile"
+        }
+      }
+    },
+    {
+      "id": 89,
+      "category": "ghidra",
+      "name": "ftpd_ghidra_run_failed",
+      "description": "Ghidra headless execution",
+      "result": "Failed with return code 1: openjdk version \"21.0.10\" 2026-01-20\nOpenJDK Runtime Environment (build 21.0.10+7-Debian-1)\nOpenJDK 64-Bit Server VM (build 21.0.10+7-Debian-1, mixed mode)\n",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:20.361341"
+    },
+    {
+      "id": 90,
+      "category": "data_flow",
+      "name": "ftpd_network_inputs",
+      "description": "Network input call sites",
+      "result": "0 network input references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:21.548747",
+      "details": {
+        "inputs": []
+      }
+    },
+    {
+      "id": 91,
+      "category": "data_flow",
+      "name": "ftpd_file_operations",
+      "description": "File operation call sites (sinks)",
+      "result": "0 file operation references found",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:24.775133",
+      "details": {
+        "operations": []
+      }
+    },
+    {
+      "id": 92,
+      "category": "data_flow",
+      "name": "ftpd_splice_usage",
+      "description": "splice() system call (zero-copy data transfer)",
+      "result": "ftpd uses splice() for data transfer \u2014 efficient but may bypass in-process data inspection/filtering",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:27.341849"
+    },
+    {
+      "id": 93,
+      "category": "rop",
+      "name": "ftpd_rop_survey",
+      "description": "ROP gadget survey",
+      "result": "926 total gadgets, 10 useful patterns across 2 categories",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:27.685677"
+    },
+    {
+      "id": 94,
+      "category": "rop",
+      "name": "ftpd_rop_stack_exchange",
+      "description": "ROP gadget category: stack exchange",
+      "result": "7 gadgets (sample: 0x0804a8ec                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:27.685677"
+    },
+    {
+      "id": 95,
+      "category": "rop",
+      "name": "ftpd_rop_call_register",
+      "description": "ROP gadget category: call register",
+      "result": "3 gadgets (sample: 0x0804a900               ffd2\u001b[38;2;19;161;14m  call\u001b[38;2;58;150;221m edx\u001b[0m\u001b[)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:27.685677"
+    },
+    {
+      "id": 96,
+      "category": "rop",
+      "name": "ftpd_rop_rich",
+      "description": "ROP gadget availability",
+      "result": "Rich ROP surface: 926 gadgets. Combined with no NX, attacker has BOTH direct shellcode AND ROP options.",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:27.685677"
+    },
+    {
+      "id": 97,
+      "category": "got_plt",
+      "name": "ftpd_got_summary",
+      "description": "GOT/PLT entries",
+      "result": "115 relocation entries, 11 interesting GOT targets",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:27.685677",
+      "details": {
+        "interesting": [
+          {
+            "name": "opendir",
+            "got_addr": "0x805100c"
+          },
+          {
+            "name": "write",
+            "got_addr": "0x8051024"
+          },
+          {
+            "name": "snprintf",
+            "got_addr": "0x8051040"
+          },
+          {
+            "name": "readdir",
+            "got_addr": "0x8051050"
+          },
+          {
+            "name": "malloc",
+            "got_addr": "0x8051068"
+          },
+          {
+            "name": "__cxa_atexit",
+            "got_addr": "0x8051084"
+          },
+          {
+            "name": "closedir",
+            "got_addr": "0x8051088"
+          },
+          {
+            "name": "open",
+            "got_addr": "0x8051098"
+          },
+          {
+            "name": "_ZN6string7freeptrEv",
+            "got_addr": "0x80510c8"
+          },
+          {
+            "name": "close",
+            "got_addr": "0x80510f4"
+          },
+          {
+            "name": "read",
+            "got_addr": "0x8051108"
+          }
+        ]
+      }
+    },
+    {
+      "id": 98,
+      "category": "got_plt",
+      "name": "ftpd_got_targets",
+      "description": "Interesting GOT entries (exploitation targets)",
+      "result": "Writable GOT entries for: opendir, write, snprintf, readdir, malloc, __cxa_atexit, closedir, open, _ZN6string7freeptrEv, close, read",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:27.685677"
+    },
+    {
+      "id": 99,
+      "category": "got_plt",
+      "name": "ftpd_got_writability",
+      "description": "GOT overwrite viability",
+      "result": "No full RELRO + writable GOT = format string \u2192 GOT overwrite \u2192 RCE. Overwrite system() GOT entry to redirect execution.",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:27.685677"
+    },
+    {
+      "id": 100,
+      "category": "cve_analysis",
+      "name": "ftpd_dotdot_search",
+      "description": "Path traversal string (..) search",
+      "result": "Found '..' references in binary \u2014 checking for sanitization",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:27.685677"
+    },
+    {
+      "id": 101,
+      "category": "cve_analysis",
+      "name": "ftpd_path_strings",
+      "description": "Path-related strings in ftpd",
+      "result": "Found path-related strings",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:27.685677",
+      "details": {
+        "preview": "75  0x0000761f 0x0804f61f 8   9    .rodata ascii /import\n109 0x0000792f 0x0804f92f 14  15   .rodata ascii /nova/etc/logo\n"
+      }
+    },
+    {
+      "id": 102,
+      "category": "cve_analysis",
+      "name": "ftpd_shortenPath_analysis",
+      "description": "shortenPath function analysis (CVE-2019-3943 fix)",
+      "result": "dotdot_check=False, slash_check=False, rfind=False, substr=False, erase=False",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:28.153443",
+      "details": {
+        "has_dotdot_check": false,
+        "has_slash_check": false,
+        "has_rfind": false,
+        "has_substr": false,
+        "has_erase": false,
+        "disasm_preview": "            \u001b[38;2;197;15;31m\u001b[38;2;197;15;31m; CALL XREFS from fcn.0804bcf0 @ \u001b[38;2;197;15;31m+0x1adf(x)\u001b[38;2;197;15;31m, +0x1b2c(x)\u001b[38;2;197;15;31m\u001b[0m\n\u001b[38;2;58;150;221m\u250c\u001b[0m 6: \u001b[38;2;197;15;31msym.imp.shortenPath_string_const_\u001b[0m ();\n\u001b[38;2;58;150;221m\u2514\u001b[0m           \u001b[38;2;19;161;14m0x0804a110\u001b[0m      \u001b[38;2;197;15;31mff\u001b[38;2;193;156;0m25\u001b[38;2;193;156;0m44\u001b[38;2;58;150;221m10\u001b[38;2;58;150;221m05\u001b[38;2;58;150;221m08\u001b[0m   \u001b[38;2;19;161;14mjmp dword\u001b[38;2;58;150;221m \u001b[0m[\u001b[38;2;58;150;221mreloc.shortenPath_string_const_\u001b[0m]\u001b[38;2;58;150;221m\u001b[0m\u001b[0m\u001b[38;2;197;15;31m \u001b[38;2;197;15;31m; 0x8051044\u001b[0m \u001b[38;2;204;204;204m; shortenPath(string const&)\u001b[0m\n"
+      }
+    },
+    {
+      "id": 103,
+      "category": "cve_analysis",
+      "name": "ftpd_chroot_check",
+      "description": "chroot/realpath usage check",
+      "result": "chroot_strings=False, realpath_import=False",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:28.153443"
+    },
+    {
+      "id": 104,
+      "category": "cve_analysis",
+      "name": "ftpd_no_chroot",
+      "description": "No chroot detected in ftpd",
+      "result": "ftpd does not appear to use chroot() \u2014 path validation relies on application-level checks (shortenPath/isSensitiveFile) rather than OS-level isolation. This means any bypass of the path validation logic directly exposes the full filesystem.",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:28.153443"
+    },
+    {
+      "id": 105,
+      "category": "cve_analysis",
+      "name": "ftpd_path_prefix_check",
+      "description": "Path prefix enforcement strings",
+      "result": "flash_refs=False, home_refs=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:28.153443",
+      "details": {
+        "flash": "",
+        "home": ""
+      }
+    },
+    {
+      "id": 106,
+      "category": "dispatch_deep",
+      "name": "ftpd_command_string_addresses",
+      "description": "FTP command string addresses in .rodata",
+      "result": "Found addresses for 29/29 commands",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:28.633203",
+      "details": {
+        "USER": "0x000079cb",
+        "PASS": "0x000072ce",
+        "TYPE": "0x000079d0",
+        "MODE": "0x000079d5",
+        "STRU": "0x000079da",
+        "PORT": "0x000079e4",
+        "EPRT": "0x000079e9",
+        "CDUP": "0x00007a0b",
+        "RNTO": "0x00007a24",
+        "EPSV": "0x00007a2e",
+        "QUIT": "0x000079c6",
+        "NOOP": "0x000079df",
+        "LIST": "0x000079ee",
+        "NLST": "0x000079f3",
+        "RETR": "0x000079f8",
+        "STOR": "0x000079fd",
+        "DELE": "0x00007a02",
+        "REIN": "0x00007a10",
+        "SYST": "0x00007a15",
+        "ABOR": "0x00007a1a",
+        "RNFR": "0x00007a1f",
+        "PASV": "0x00007a29",
+        "REST": "0x00007a33",
+        "SIZE": "0x00007a38",
+        "STAT": "0x00007a3d",
+        "XMKD": "0x00007a42",
+        "XPWD": "0x00007a47",
+        "XRMD": "0x00007a4c",
+        "XCUP": "0x00007a51"
+      }
+    },
+    {
+      "id": 107,
+      "category": "dispatch_deep",
+      "name": "ftpd_command_table_layout",
+      "description": "Command string table layout analysis",
+      "result": "Average spacing: 68.7 bytes, range: 0x72ce - 0x7a51, contiguous=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:28.633203",
+      "details": {
+        "min_gap": 5,
+        "max_gap": 1784,
+        "avg_gap": 68.67857142857143
+      }
+    },
+    {
+      "id": 108,
+      "category": "libraries",
+      "name": "ftpd_lib_libumsg.so_info",
+      "description": "Library: libumsg.so",
+      "result": "nx=False, canary=False, pic=True, relro=partial",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:28.633203"
+    },
+    {
+      "id": 109,
+      "category": "libraries",
+      "name": "ftpd_lib_libumsg.so_functions",
+      "description": "Functions in libumsg.so",
+      "result": "2004 functions",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:30.796121"
+    },
+    {
+      "id": 110,
+      "category": "libraries",
+      "name": "ftpd_lib_libumsg.so_unsafe",
+      "description": "Unsafe imports in libumsg.so",
+      "result": "15 unsafe: ['execve', 'sscanf', 'snprintf', 'memmove', 'strcpy', 'fscanf', 'getsockname', 'strncpy', 'fgets', 'regexec']",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:30.928055"
+    },
+    {
+      "id": 111,
+      "category": "libraries",
+      "name": "ftpd_lib_libuc++.so_info",
+      "description": "Library: libuc++.so",
+      "result": "nx=False, canary=False, pic=True, relro=partial",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:30.928055"
+    },
+    {
+      "id": 112,
+      "category": "libraries",
+      "name": "ftpd_lib_libuc++.so_functions",
+      "description": "Functions in libuc++.so",
+      "result": "451 functions",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:31.363837"
+    },
+    {
+      "id": 113,
+      "category": "libraries",
+      "name": "ftpd_lib_libuc++.so_unsafe",
+      "description": "Unsafe imports in libuc++.so",
+      "result": "3 unsafe: ['memmove', 'snprintf', 'sprintf']",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:31.363837"
+    },
+    {
+      "id": 114,
+      "category": "libraries",
+      "name": "ftpd_lib_libc.so_info",
+      "description": "Library: libc.so",
+      "result": "nx=False, canary=True, pic=True, relro=partial",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:58:31.507765"
+    },
+    {
+      "id": 115,
+      "category": "libraries",
+      "name": "ftpd_lib_libc.so_functions",
+      "description": "Functions in libc.so",
+      "result": "1023 functions",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:32.543247"
+    },
+    {
+      "id": 116,
+      "category": "summary",
+      "name": "ftpd_attack_surface_overview",
+      "description": "Attack surface summary",
+      "result": "Total unsafe call sites: 0 (sscanf: 0, strncpy: 0, snprintf: 0, sprintf: 0)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:32.619209"
+    },
+    {
+      "id": 117,
+      "category": "summary",
+      "name": "ftpd_priority_targets",
+      "description": "Priority targets for dynamic testing",
+      "result": "1 targets identified",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:58:32.619209",
+      "details": {
+        "targets": [
+          {
+            "target": "sym.imp.isSensitiveFile_string_const_",
+            "reason": "Sensitive file filter \u2014 bypass enables access to system config, user credentials, etc.",
+            "severity": "MEDIUM"
+          }
+        ]
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "HIGH",
+      "title": "ftpd: All memory protections disabled (no NX, no canary, no PIE)",
+      "description": "The ftpd binary (34KB, ELF32 i386) has zero exploit mitigations. Any buffer overflow can: (1) inject and execute shellcode on the stack, (2) overwrite the return address without canary detection, (3) use fixed addresses for ROP gadgets. RELRO=partial.",
+      "timestamp": "2026-02-16T14:57:44.743159",
+      "evidence_refs": [
+        "re_ftpd_static.json#metadata"
+      ],
+      "cwe": "CWE-693"
+    },
+    {
+      "id": 2,
+      "severity": "CRITICAL",
+      "title": "ftpd: Executable stack (GNU_STACK rwx)",
+      "description": "The ftpd binary has an executable stack segment. Any stack buffer overflow enables direct shellcode injection and execution without ROP.",
+      "timestamp": "2026-02-16T14:57:44.907077",
+      "cwe": "CWE-119"
+    },
+    {
+      "id": 3,
+      "severity": "MEDIUM",
+      "title": "ftpd: 4 unsafe function imports",
+      "description": "Binary imports 4 known-unsafe C functions: snprintf, sscanf, getsockname, strncpy. With no NX, no canary, no PIE \u2014 any overflow via these is directly exploitable.",
+      "timestamp": "2026-02-16T14:57:45.206927",
+      "evidence_refs": [
+        "re_ftpd_static.json#imports"
+      ],
+      "cwe": "CWE-120"
+    },
+    {
+      "id": 4,
+      "severity": "MEDIUM",
+      "title": "ftpd: Auto-execute file handling (.AUTO.RSC, .AUTO.NPK)",
+      "description": "The ftpd binary references .AUTO.RSC and .AUTO.NPK files. Uploading a file ending in .AUTO.RSC via FTP may trigger automatic RouterOS script import (/import command visible in strings). This is a persistence vector if FTP write access is obtained.",
+      "timestamp": "2026-02-16T14:57:46.218421",
+      "evidence_refs": [
+        "re_ftpd_static.json#strings"
+      ],
+      "cwe": "CWE-434"
+    },
+    {
+      "id": 5,
+      "severity": "HIGH",
+      "title": "ftpd: shortenPath may not check for '..' (path traversal)",
+      "description": "The shortenPath function does not appear to contain explicit '..' checks in its disassembly. If this is the path sanitization function for CVE-2019-3943, the fix may be incomplete or the check is elsewhere.",
+      "timestamp": "2026-02-16T14:58:28.153443",
+      "evidence_refs": [
+        "re_ftpd_static.json#cve_analysis"
+      ],
+      "cwe": "CWE-22"
+    }
+  ],
+  "analysis": {
+    "binary_metadata": {
+      "info": {
+        "arch": "x86",
+        "bits": 32,
+        "endian": "little",
+        "os": "linux",
+        "type": null,
+        "machine": "Intel 80386",
+        "stripped": true,
+        "static": false,
+        "nx": false,
+        "canary": false,
+        "pic": false,
+        "relro": "partial"
+      },
+      "sections": [
+        {
+          "name": "",
+          "size": 0,
+          "vsize": 0,
+          "paddr": "0x0",
+          "vaddr": "0x0",
+          "perm": "----"
+        },
+        {
+          "name": ".interp",
+          "size": 13,
+          "vsize": 13,
+          "paddr": "0x194",
+          "vaddr": "0x8048194",
+          "perm": "-r--"
+        },
+        {
+          "name": ".note.gnu.property",
+          "size": 40,
+          "vsize": 40,
+          "paddr": "0x1a4",
+          "vaddr": "0x80481a4",
+          "perm": "-r--"
+        },
+        {
+          "name": ".hash",
+          "size": 868,
+          "vsize": 868,
+          "paddr": "0x1cc",
+          "vaddr": "0x80481cc",
+          "perm": "-r--"
+        },
+        {
+          "name": ".gnu.hash",
+          "size": 64,
+          "vsize": 64,
+          "paddr": "0x530",
+          "vaddr": "0x8048530",
+          "perm": "-r--"
+        },
+        {
+          "name": ".dynsym",
+          "size": 1888,
+          "vsize": 1888,
+          "paddr": "0x570",
+          "vaddr": "0x8048570",
+          "perm": "-r--"
+        },
+        {
+          "name": ".dynstr",
+          "size": 2278,
+          "vsize": 2278,
+          "paddr": "0xcd0",
+          "vaddr": "0x8048cd0",
+          "perm": "-r--"
+        },
+        {
+          "name": ".rel.dyn",
+          "size": 32,
+          "vsize": 32,
+          "paddr": "0x15b8",
+          "vaddr": "0x80495b8",
+          "perm": "-r--"
+        },
+        {
+          "name": ".rel.plt",
+          "size": 888,
+          "vsize": 888,
+          "paddr": "0x15d8",
+          "vaddr": "0x80495d8",
+          "perm": "-r--"
+        },
+        {
+          "name": ".init",
+          "size": 17,
+          "vsize": 17,
+          "paddr": "0x2000",
+          "vaddr": "0x804a000",
+          "perm": "-r-x"
+        },
+        {
+          "name": ".plt",
+          "size": 1792,
+          "vsize": 1792,
+          "paddr": "0x2020",
+          "vaddr": "0x804a020",
+          "perm": "-r-x"
+        },
+        {
+          "name": ".text",
+          "size": 18233,
+          "vsize": 18233,
+          "paddr": "0x2720",
+          "vaddr": "0x804a720",
+          "perm": "-r-x"
+        },
+        {
+          "name": ".fini",
+          "size": 12,
+          "vsize": 12,
+          "paddr": "0x6e59",
+          "vaddr": "0x804ee59",
+          "perm": "-r-x"
+        },
+        {
+          "name": ".rodata",
+          "size": 2646,
+          "vsize": 2646,
+          "paddr": "0x7000",
+          "vaddr": "0x804f000",
+          "perm": "-r--"
+        },
+        {
+          "name": ".eh_frame",
+          "size": 4,
+          "vsize": 4,
+          "paddr": "0x7a58",
+          "vaddr": "0x804fa58",
+          "perm": "-r--"
+        },
+        {
+          "name": ".init_array",
+          "size": 4,
+          "vsize": 4,
+          "paddr": "0x7f04",
+          "vaddr": "0x8050f04",
+          "perm": "-rw-"
+        },
+        {
+          "name": ".ctors",
+          "size": 8,
+          "vsize": 8,
+          "paddr": "0x7f08",
+          "vaddr": "0x8050f08",
+          "perm": "-rw-"
+        },
+        {
+          "name": ".dtors",
+          "size": 8,
+          "vsize": 8,
+          "paddr": "0x7f10",
+          "vaddr": "0x8050f10",
+          "perm": "-rw-"
+        },
+        {
+          "name": ".data.rel.ro",
+          "size": 16,
+          "vsize": 16,
+          "paddr": "0x7f18",
+          "vaddr": "0x8050f18",
+          "perm": "-rw-"
+        },
+        {
+          "name": ".dynamic",
+          "size": 216,
+          "vsize": 216,
+          "paddr": "0x7f28",
+          "vaddr": "0x8050f28",
+          "perm": "-rw-"
+        },
+        {
+          "name": ".got.plt",
+          "size": 456,
+          "vsize": 456,
+          "paddr": "0x8000",
+          "vaddr": "0x8051000",
+          "perm": "-rw-"
+        },
+        {
+          "name": ".data",
+          "size": 4,
+          "vsize": 4,
+          "paddr": "0x81c8",
+          "vaddr": "0x80511c8",
+          "perm": "-rw-"
+        },
+        {
+          "name": ".bss",
+          "size": 0,
+          "vsize": 820,
+          "paddr": "0x81cc",
+          "vaddr": "0x80511e0",
+          "perm": "-rw-"
+        },
+        {
+          "name": ".shstrtab",
+          "size": 186,
+          "vsize": 186,
+          "paddr": "0x81cc",
+          "vaddr": "0x0",
+          "perm": "----"
+        }
+      ],
+      "segments": [
+        {
+          "name": "PHDR",
+          "size": 352,
+          "vaddr": "0x8048034",
+          "perm": "-r--"
+        },
+        {
+          "name": "INTERP",
+          "size": 13,
+          "vaddr": "0x8048194",
+          "perm": "-r--"
+        },
+        {
+          "name": "LOAD0",
+          "size": 6480,
+          "vaddr": "0x8048000",
+          "perm": "-r--"
+        },
+        {
+          "name": "LOAD1",
+          "size": 20069,
+          "vaddr": "0x804a000",
+          "perm": "-r-x"
+        },
+        {
+          "name": "LOAD2",
+          "size": 2652,
+          "vaddr": "0x804f000",
+          "perm": "-r--"
+        },
+        {
+          "name": "LOAD3",
+          "size": 712,
+          "vaddr": "0x8050f04",
+          "perm": "-rw-"
+        },
+        {
+          "name": "DYNAMIC",
+          "size": 216,
+          "vaddr": "0x8050f28",
+          "perm": "-rw-"
+        },
+        {
+          "name": "NOTE",
+          "size": 40,
+          "vaddr": "0x80481a4",
+          "perm": "-r--"
+        },
+        {
+          "name": "GNU_PROPERTY",
+          "size": 40,
+          "vaddr": "0x80481a4",
+          "perm": "-r--"
+        },
+        {
+          "name": "GNU_STACK",
+          "size": 0,
+          "vaddr": "0x0",
+          "perm": "-rwx"
+        },
+        {
+          "name": "GNU_RELRO",
+          "size": 252,
+          "vaddr": "0x8050f04",
+          "perm": "-r--"
+        },
+        {
+          "name": "ehdr",
+          "size": 52,
+          "vaddr": "0x8048000",
+          "perm": "-rw-"
+        }
+      ]
+    },
+    "function_stats": {
+      "total_functions": 139,
+      "size_distribution": {
+        "tiny(<32)": 114,
+        "small(32-128)": 14,
+        "medium(128-512)": 7,
+        "large(512-2048)": 3,
+        "huge(>2048)": 1
+      },
+      "largest_functions": [
+        {
+          "name": "fcn.0804bcf0",
+          "offset": "0x804bcf0",
+          "size": 2058,
+          "nargs": 1,
+          "nbbs": 73,
+          "cc": 38
+        },
+        {
+          "name": "entry.init0",
+          "offset": "0x804e6d9",
+          "size": 1879,
+          "nargs": 0,
+          "nbbs": 1,
+          "cc": 1
+        },
+        {
+          "name": "main",
+          "offset": "0x804dfe7",
+          "size": 1778,
+          "nargs": 1,
+          "nbbs": 53,
+          "cc": 27
+        },
+        {
+          "name": "fcn.0804b334",
+          "offset": "0x804b334",
+          "size": 703,
+          "nargs": 0,
+          "nbbs": 29,
+          "cc": 16
+        },
+        {
+          "name": "fcn.0804aae2",
+          "offset": "0x804aae2",
+          "size": 410,
+          "nargs": 0,
+          "nbbs": 19,
+          "cc": 10
+        },
+        {
+          "name": "fcn.0804a850",
+          "offset": "0x804a850",
+          "size": 253,
+          "nargs": 0,
+          "nbbs": 7,
+          "cc": 5
+        },
+        {
+          "name": "fcn.0804b6d0",
+          "offset": "0x804b6d0",
+          "size": 241,
+          "nargs": 0,
+          "nbbs": 7,
+          "cc": 3
+        },
+        {
+          "name": "fcn.0804af4c",
+          "offset": "0x804af4c",
+          "size": 192,
+          "nargs": 0,
+          "nbbs": 5,
+          "cc": 4
+        },
+        {
+          "name": "fcn.0804adc0",
+          "offset": "0x804adc0",
+          "size": 171,
+          "nargs": 0,
+          "nbbs": 9,
+          "cc": 6
+        },
+        {
+          "name": "fcn.0804ad07",
+          "offset": "0x804ad07",
+          "size": 150,
+          "nargs": 0,
+          "nbbs": 12,
+          "cc": 5
+        },
+        {
+          "name": "fcn.0804ac7c",
+          "offset": "0x804ac7c",
+          "size": 139,
+          "nargs": 0,
+          "nbbs": 12,
+          "cc": 5
+        },
+        {
+          "name": "fcn.0804a7d0",
+          "offset": "0x804a7d0",
+          "size": 113,
+          "nargs": 0,
+          "nbbs": 8,
+          "cc": 6
+        },
+        {
+          "name": "fcn.0804a88e",
+          "offset": "0x804a88e",
+          "size": 107,
+          "nargs": 0,
+          "nbbs": 22,
+          "cc": 14
+        },
+        {
+          "name": "fcn.0804a9e0",
+          "offset": "0x804a9e0",
+          "size": 102,
+          "nargs": 0,
+          "nbbs": 7,
+          "cc": 3
+        },
+        {
+          "name": "fcn.0804ae6c",
+          "offset": "0x804ae6c",
+          "size": 91,
+          "nargs": 0,
+          "nbbs": 6,
+          "cc": 4
+        },
+        {
+          "name": "fcn.0804aa8e",
+          "offset": "0x804aa8e",
+          "size": 83,
+          "nargs": 0,
+          "nbbs": 1,
+          "cc": 1
+        },
+        {
+          "name": "fcn.0804aa46",
+          "offset": "0x804aa46",
+          "size": 72,
+          "nargs": 0,
+          "nbbs": 4,
+          "cc": 2
+        },
+        {
+          "name": "fcn.0804aec8",
+          "offset": "0x804aec8",
+          "size": 71,
+          "nargs": 0,
+          "nbbs": 4,
+          "cc": 2
+        },
+        {
+          "name": "fcn.0804a998",
+          "offset": "0x804a998",
+          "size": 71,
+          "nargs": 0,
+          "nbbs": 4,
+          "cc": 2
+        },
+        {
+          "name": "fcn.0804a750",
+          "offset": "0x804a750",
+          "size": 49,
+          "nargs": 0,
+          "nbbs": 4,
+          "cc": 4
+        }
+      ],
+      "most_complex": [
+        {
+          "name": "fcn.0804bcf0",
+          "offset": "0x804bcf0",
+          "size": 2058,
+          "nargs": 1,
+          "nbbs": 73,
+          "cc": 38
+        },
+        {
+          "name": "main",
+          "offset": "0x804dfe7",
+          "size": 1778,
+          "nargs": 1,
+          "nbbs": 53,
+          "cc": 27
+        },
+        {
+          "name": "fcn.0804b334",
+          "offset": "0x804b334",
+          "size": 703,
+          "nargs": 0,
+          "nbbs": 29,
+          "cc": 16
+        },
+        {
+          "name": "fcn.0804a88e",
+          "offset": "0x804a88e",
+          "size": 107,
+          "nargs": 0,
+          "nbbs": 22,
+          "cc": 14
+        },
+        {
+          "name": "fcn.0804aae2",
+          "offset": "0x804aae2",
+          "size": 410,
+          "nargs": 0,
+          "nbbs": 19,
+          "cc": 10
+        },
+        {
+          "name": "fcn.0804adc0",
+          "offset": "0x804adc0",
+          "size": 171,
+          "nargs": 0,
+          "nbbs": 9,
+          "cc": 6
+        },
+        {
+          "name": "fcn.0804a7d0",
+          "offset": "0x804a7d0",
+          "size": 113,
+          "nargs": 0,
+          "nbbs": 8,
+          "cc": 6
+        },
+        {
+          "name": "fcn.0804a850",
+          "offset": "0x804a850",
+          "size": 253,
+          "nargs": 0,
+          "nbbs": 7,
+          "cc": 5
+        },
+        {
+          "name": "fcn.0804ac7c",
+          "offset": "0x804ac7c",
+          "size": 139,
+          "nargs": 0,
+          "nbbs": 12,
+          "cc": 5
+        },
+        {
+          "name": "fcn.0804ad07",
+          "offset": "0x804ad07",
+          "size": 150,
+          "nargs": 0,
+          "nbbs": 12,
+          "cc": 5
+        },
+        {
+          "name": "fcn.0804ee30",
+          "offset": "0x804ee30",
+          "size": 41,
+          "nargs": 0,
+          "nbbs": 5,
+          "cc": 4
+        },
+        {
+          "name": "fcn.0804a750",
+          "offset": "0x804a750",
+          "size": 49,
+          "nargs": 0,
+          "nbbs": 4,
+          "cc": 4
+        },
+        {
+          "name": "fcn.0804af4c",
+          "offset": "0x804af4c",
+          "size": 192,
+          "nargs": 0,
+          "nbbs": 5,
+          "cc": 4
+        },
+        {
+          "name": "fcn.0804ae6c",
+          "offset": "0x804ae6c",
+          "size": 91,
+          "nargs": 0,
+          "nbbs": 6,
+          "cc": 4
+        },
+        {
+          "name": "fcn.0804a9e0",
+          "offset": "0x804a9e0",
+          "size": 102,
+          "nargs": 0,
+          "nbbs": 7,
+          "cc": 3
+        },
+        {
+          "name": "fcn.0804b7c2",
+          "offset": "0x804b7c2",
+          "size": 47,
+          "nargs": 0,
+          "nbbs": 3,
+          "cc": 3
+        },
+        {
+          "name": "fcn.0804b6d0",
+          "offset": "0x804b6d0",
+          "size": 241,
+          "nargs": 0,
+          "nbbs": 7,
+          "cc": 3
+        },
+        {
+          "name": "fcn.0804aec8",
+          "offset": "0x804aec8",
+          "size": 71,
+          "nargs": 0,
+          "nbbs": 4,
+          "cc": 2
+        },
+        {
+          "name": "fcn.0804a998",
+          "offset": "0x804a998",
+          "size": 71,
+          "nargs": 0,
+          "nbbs": 4,
+          "cc": 2
+        },
+        {
+          "name": "fcn.0804aa46",
+          "offset": "0x804aa46",
+          "size": 72,
+          "nargs": 0,
+          "nbbs": 4,
+          "cc": 2
+        }
+      ],
+      "most_basic_blocks": [
+        {
+          "name": "fcn.0804bcf0",
+          "offset": "0x804bcf0",
+          "size": 2058,
+          "nargs": 1,
+          "nbbs": 73,
+          "cc": 38
+        },
+        {
+          "name": "main",
+          "offset": "0x804dfe7",
+          "size": 1778,
+          "nargs": 1,
+          "nbbs": 53,
+          "cc": 27
+        },
+        {
+          "name": "fcn.0804b334",
+          "offset": "0x804b334",
+          "size": 703,
+          "nargs": 0,
+          "nbbs": 29,
+          "cc": 16
+        },
+        {
+          "name": "fcn.0804a88e",
+          "offset": "0x804a88e",
+          "size": 107,
+          "nargs": 0,
+          "nbbs": 22,
+          "cc": 14
+        },
+        {
+          "name": "fcn.0804aae2",
+          "offset": "0x804aae2",
+          "size": 410,
+          "nargs": 0,
+          "nbbs": 19,
+          "cc": 10
+        },
+        {
+          "name": "fcn.0804ac7c",
+          "offset": "0x804ac7c",
+          "size": 139,
+          "nargs": 0,
+          "nbbs": 12,
+          "cc": 5
+        },
+        {
+          "name": "fcn.0804ad07",
+          "offset": "0x804ad07",
+          "size": 150,
+          "nargs": 0,
+          "nbbs": 12,
+          "cc": 5
+        },
+        {
+          "name": "fcn.0804adc0",
+          "offset": "0x804adc0",
+          "size": 171,
+          "nargs": 0,
+          "nbbs": 9,
+          "cc": 6
+        },
+        {
+          "name": "fcn.0804a7d0",
+          "offset": "0x804a7d0",
+          "size": 113,
+          "nargs": 0,
+          "nbbs": 8,
+          "cc": 6
+        },
+        {
+          "name": "fcn.0804a850",
+          "offset": "0x804a850",
+          "size": 253,
+          "nargs": 0,
+          "nbbs": 7,
+          "cc": 5
+        },
+        {
+          "name": "fcn.0804a9e0",
+          "offset": "0x804a9e0",
+          "size": 102,
+          "nargs": 0,
+          "nbbs": 7,
+          "cc": 3
+        },
+        {
+          "name": "fcn.0804b6d0",
+          "offset": "0x804b6d0",
+          "size": 241,
+          "nargs": 0,
+          "nbbs": 7,
+          "cc": 3
+        },
+        {
+          "name": "fcn.0804ae6c",
+          "offset": "0x804ae6c",
+          "size": 91,
+          "nargs": 0,
+          "nbbs": 6,
+          "cc": 4
+        },
+        {
+          "name": "fcn.0804ee30",
+          "offset": "0x804ee30",
+          "size": 41,
+          "nargs": 0,
+          "nbbs": 5,
+          "cc": 4
+        },
+        {
+          "name": "fcn.0804af4c",
+          "offset": "0x804af4c",
+          "size": 192,
+          "nargs": 0,
+          "nbbs": 5,
+          "cc": 4
+        },
+        {
+          "name": "fcn.0804a750",
+          "offset": "0x804a750",
+          "size": 49,
+          "nargs": 0,
+          "nbbs": 4,
+          "cc": 4
+        },
+        {
+          "name": "fcn.0804aec8",
+          "offset": "0x804aec8",
+          "size": 71,
+          "nargs": 0,
+          "nbbs": 4,
+          "cc": 2
+        },
+        {
+          "name": "fcn.0804a998",
+          "offset": "0x804a998",
+          "size": 71,
+          "nargs": 0,
+          "nbbs": 4,
+          "cc": 2
+        },
+        {
+          "name": "fcn.0804aa46",
+          "offset": "0x804aa46",
+          "size": 72,
+          "nargs": 0,
+          "nbbs": 4,
+          "cc": 2
+        },
+        {
+          "name": "fcn.0804b7c2",
+          "offset": "0x804b7c2",
+          "size": 47,
+          "nargs": 0,
+          "nbbs": 3,
+          "cc": 3
+        }
+      ]
+    },
+    "imports": {
+      "total": 111,
+      "unsafe_imports": [
+        {
+          "name": "sscanf",
+          "type": "FUNC",
+          "bind": "GLOBAL",
+          "plt": "0x804a0b0",
+          "demangled": "sscanf"
+        },
+        {
+          "name": "snprintf",
+          "type": "FUNC",
+          "bind": "GLOBAL",
+          "plt": "0x804a100",
+          "demangled": "snprintf"
+        },
+        {
+          "name": "getsockname",
+          "type": "FUNC",
+          "bind": "GLOBAL",
+          "plt": "0x804a2b0",
+          "demangled": "getsockname"
+        },
+        {
+          "name": "strncpy",
+          "type": "FUNC",
+          "bind": "GLOBAL",
+          "plt": "0x804a300",
+          "demangled": "strncpy"
+        }
+      ],
+      "demangled": []
+    },
+    "xref_call_sites": [],
+    "xref_callers_summary": {},
+    "string_categories": {
+      "ftp_commands": 28,
+      "ftp_response_codes": 48,
+      "error_messages": 30,
+      "file_paths": 2,
+      "format_strings": 2,
+      "sensitive_filenames": 5,
+      "network_related": 23,
+      "auth_related": 13,
+      "transfer_related": 21,
+      "debug_strings": 4
+    },
+    "string_category_details": {
+      "ftp_commands": [
+        {
+          "value": "QUIT",
+          "vaddr": "0x804f9c6",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "USER",
+          "vaddr": "0x804f9cb",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "TYPE",
+          "vaddr": "0x804f9d0",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "MODE",
+          "vaddr": "0x804f9d5",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "STRU",
+          "vaddr": "0x804f9da",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "NOOP",
+          "vaddr": "0x804f9df",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "PORT",
+          "vaddr": "0x804f9e4",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "EPRT",
+          "vaddr": "0x804f9e9",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "LIST",
+          "vaddr": "0x804f9ee",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "NLST",
+          "vaddr": "0x804f9f3",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "RETR",
+          "vaddr": "0x804f9f8",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "STOR",
+          "vaddr": "0x804f9fd",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "DELE",
+          "vaddr": "0x804fa02",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "CDUP",
+          "vaddr": "0x804fa0b",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "REIN",
+          "vaddr": "0x804fa10",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "SYST",
+          "vaddr": "0x804fa15",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "ABOR",
+          "vaddr": "0x804fa1a",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "RNFR",
+          "vaddr": "0x804fa1f",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "RNTO",
+          "vaddr": "0x804fa24",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "PASV",
+          "vaddr": "0x804fa29",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "EPSV",
+          "vaddr": "0x804fa2e",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "REST",
+          "vaddr": "0x804fa33",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "SIZE",
+          "vaddr": "0x804fa38",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "STAT",
+          "vaddr": "0x804fa3d",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "XMKD",
+          "vaddr": "0x804fa42",
+          "length": 4,
+          "section": ".rodata"
+        }
+      ],
+      "ftp_response_codes": [
+        {
+          "value": "221 Closing",
+          "vaddr": "0x804f0c2",
+          "length": 11,
+          "section": ".rodata"
+        },
+        {
+          "value": "504 Bad USER command",
+          "vaddr": "0x804f0ce",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "331 Password required for",
+          "vaddr": "0x804f0e3",
+          "length": 26,
+          "section": ".rodata"
+        },
+        {
+          "value": "504 Command not implemented",
+          "vaddr": "0x804f108",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": "230 User",
+          "vaddr": "0x804f124",
+          "length": 9,
+          "section": ".rodata"
+        },
+        {
+          "value": "530 Login incorrect",
+          "vaddr": "0x804f14b",
+          "length": 19,
+          "section": ".rodata"
+        },
+        {
+          "value": "200 Command okay",
+          "vaddr": "0x804f15f",
+          "length": 16,
+          "section": ".rodata"
+        },
+        {
+          "value": "215 UNIX",
+          "vaddr": "0x804f256",
+          "length": 9,
+          "section": ".rodata"
+        },
+        {
+          "value": "200 Abort okay",
+          "vaddr": "0x804f260",
+          "length": 14,
+          "section": ".rodata"
+        },
+        {
+          "value": "421 No Transfer Timeout (",
+          "vaddr": "0x804f26f",
+          "length": 25,
+          "section": ".rodata"
+        },
+        {
+          "value": "530 Please login with USER and PASS",
+          "vaddr": "0x804f2ce",
+          "length": 35,
+          "section": ".rodata"
+        },
+        {
+          "value": "504 Bad TYPE command",
+          "vaddr": "0x804f2f2",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "200 Type set to",
+          "vaddr": "0x804f307",
+          "length": 16,
+          "section": ".rodata"
+        },
+        {
+          "value": "504 Parameter not implemented",
+          "vaddr": "0x804f318",
+          "length": 29,
+          "section": ".rodata"
+        },
+        {
+          "value": "504 Bad MODE command",
+          "vaddr": "0x804f336",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "504 Bad STRU command",
+          "vaddr": "0x804f34b",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "500 Bad PORT command",
+          "vaddr": "0x804f379",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "200 PORT command successful",
+          "vaddr": "0x804f38e",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": "500 Bad EPRT command",
+          "vaddr": "0x804f3c1",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "522 Unknown network protocol",
+          "vaddr": "0x804f3d6",
+          "length": 28,
+          "section": ".rodata"
+        },
+        {
+          "value": "200 EPRT command successful",
+          "vaddr": "0x804f3f3",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": "425 Can't build data connection",
+          "vaddr": "0x804f44c",
+          "length": 31,
+          "section": ".rodata"
+        },
+        {
+          "value": "226 Transfer complete",
+          "vaddr": "0x804f4ad",
+          "length": 21,
+          "section": ".rodata"
+        },
+        {
+          "value": "150 Opening data connection",
+          "vaddr": "0x804f4c3",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": "211 End of status",
+          "vaddr": "0x804f55b",
+          "length": 17,
+          "section": ".rodata"
+        }
+      ],
+      "error_messages": [
+        {
+          "value": "failed to shutdown write:",
+          "vaddr": "0x804f009",
+          "length": 26,
+          "section": ".rodata"
+        },
+        {
+          "value": "finwait read failed:",
+          "vaddr": "0x804f042",
+          "length": 21,
+          "section": ".rodata"
+        },
+        {
+          "value": "write failed:",
+          "vaddr": "0x804f058",
+          "length": 14,
+          "section": ".rodata"
+        },
+        {
+          "value": "write failed (wrote 0 bytes)",
+          "vaddr": "0x804f067",
+          "length": 28,
+          "section": ".rodata"
+        },
+        {
+          "value": "splice failed:",
+          "vaddr": "0x804f084",
+          "length": 15,
+          "section": ".rodata"
+        },
+        {
+          "value": "splice failed (wrote 0 bytes)",
+          "vaddr": "0x804f094",
+          "length": 29,
+          "section": ".rodata"
+        },
+        {
+          "value": "logout failed:",
+          "vaddr": "0x804f0b2",
+          "length": 15,
+          "section": ".rodata"
+        },
+        {
+          "value": "504 Bad USER command",
+          "vaddr": "0x804f0ce",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "failed to login:",
+          "vaddr": "0x804f139",
+          "length": 17,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd: open_data failed: addr==0",
+          "vaddr": "0x804f198",
+          "length": 31,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd open_data: socket failed:",
+          "vaddr": "0x804f1b8",
+          "length": 31,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd open_data: connect failed:",
+          "vaddr": "0x804f1d8",
+          "length": 32,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd open_data: bind failed:",
+          "vaddr": "0x804f1f9",
+          "length": 29,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd open_data: setsockopt failed:",
+          "vaddr": "0x804f217",
+          "length": 35,
+          "section": ".rodata"
+        },
+        {
+          "value": "200 Abort okay",
+          "vaddr": "0x804f260",
+          "length": 14,
+          "section": ".rodata"
+        },
+        {
+          "value": "select returned error, quiting",
+          "vaddr": "0x804f2af",
+          "length": 30,
+          "section": ".rodata"
+        },
+        {
+          "value": "504 Bad TYPE command",
+          "vaddr": "0x804f2f2",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "504 Bad MODE command",
+          "vaddr": "0x804f336",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "504 Bad STRU command",
+          "vaddr": "0x804f34b",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "500 Bad PORT command",
+          "vaddr": "0x804f379",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "500 Bad EPRT command",
+          "vaddr": "0x804f3c1",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": ": Permission denied",
+          "vaddr": "0x804f414",
+          "length": 19,
+          "section": ".rodata"
+        },
+        {
+          "value": "425 Can't build data connection",
+          "vaddr": "0x804f44c",
+          "length": 31,
+          "section": ".rodata"
+        },
+        {
+          "value": "451 Requested action aborted:",
+          "vaddr": "0x804f57c",
+          "length": 30,
+          "section": ".rodata"
+        },
+        {
+          "value": "425 Can't open data connection",
+          "vaddr": "0x804f59b",
+          "length": 30,
+          "section": ".rodata"
+        }
+      ],
+      "file_paths": [
+        {
+          "value": "/import",
+          "vaddr": "0x804f61f",
+          "length": 8,
+          "section": ".rodata"
+        },
+        {
+          "value": "/nova/etc/logo",
+          "vaddr": "0x804f92f",
+          "length": 14,
+          "section": ".rodata"
+        }
+      ],
+      "format_strings": [
+        {
+          "value": "%crw%crw%c--- %3d root     root     %8llu %s %2u %2.2u:%2.2u",
+          "vaddr": "0x804f46f",
+          "length": 61,
+          "section": ".rodata"
+        },
+        {
+          "value": "%llu",
+          "vaddr": "0x804f8a5",
+          "length": 4,
+          "section": ".rodata"
+        }
+      ],
+      "sensitive_filenames": [
+        {
+          "value": ".AUTO.RSC",
+          "vaddr": "0x804f615",
+          "length": 9,
+          "section": ".rodata"
+        },
+        {
+          "value": "/import",
+          "vaddr": "0x804f61f",
+          "length": 8,
+          "section": ".rodata"
+        },
+        {
+          "value": ".log",
+          "vaddr": "0x804f628",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": ".AUTO.NPK",
+          "vaddr": "0x804f63d",
+          "length": 9,
+          "section": ".rodata"
+        },
+        {
+          "value": "/nova/etc/logo",
+          "vaddr": "0x804f92f",
+          "length": 14,
+          "section": ".rodata"
+        }
+      ],
+      "network_related": [
+        {
+          "value": "ftpd: open_data, passive=",
+          "vaddr": "0x804f170",
+          "length": 25,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd open_data: socket failed:",
+          "vaddr": "0x804f1b8",
+          "length": 31,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd open_data: connect failed:",
+          "vaddr": "0x804f1d8",
+          "length": 32,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd open_data: bind failed:",
+          "vaddr": "0x804f1f9",
+          "length": 29,
+          "section": ".rodata"
+        },
+        {
+          "value": " seconds): closing control connection",
+          "vaddr": "0x804f289",
+          "length": 37,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd: rcvd PORT cmd: '",
+          "vaddr": "0x804f362",
+          "length": 22,
+          "section": ".rodata"
+        },
+        {
+          "value": "500 Bad PORT command",
+          "vaddr": "0x804f379",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "200 PORT command successful",
+          "vaddr": "0x804f38e",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd: rcvd EPRT cmd: '",
+          "vaddr": "0x804f3aa",
+          "length": 22,
+          "section": ".rodata"
+        },
+        {
+          "value": "500 Bad EPRT command",
+          "vaddr": "0x804f3c1",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "200 EPRT command successful",
+          "vaddr": "0x804f3f3",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": "425 Can't build data connection",
+          "vaddr": "0x804f44c",
+          "length": 31,
+          "section": ".rodata"
+        },
+        {
+          "value": "150 Opening data connection",
+          "vaddr": "0x804f4c3",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": "No data connection",
+          "vaddr": "0x804f538",
+          "length": 18,
+          "section": ".rodata"
+        },
+        {
+          "value": "425 Can't open data connection",
+          "vaddr": "0x804f59b",
+          "length": 30,
+          "section": ".rodata"
+        },
+        {
+          "value": " mode data connection for '",
+          "vaddr": "0x804f5c7",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": " mode data connection for",
+          "vaddr": "0x804f66a",
+          "length": 26,
+          "section": ".rodata"
+        },
+        {
+          "value": "227 Entering Passive Mode (",
+          "vaddr": "0x804f827",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": "500 Bad EPSV command",
+          "vaddr": "0x804f848",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "229 Entering Extended Passive Mode (|||",
+          "vaddr": "0x804f87a",
+          "length": 39,
+          "section": ".rodata"
+        },
+        {
+          "value": "421 Service not available, closing control connection.",
+          "vaddr": "0x804f8f8",
+          "length": 54,
+          "section": ".rodata"
+        },
+        {
+          "value": "EPRT",
+          "vaddr": "0x804f9e9",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "EPSV",
+          "vaddr": "0x804fa2e",
+          "length": 4,
+          "section": ".rodata"
+        }
+      ],
+      "auth_related": [
+        {
+          "value": "504 Bad USER command",
+          "vaddr": "0x804f0ce",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "331 Password required for",
+          "vaddr": "0x804f0e3",
+          "length": 26,
+          "section": ".rodata"
+        },
+        {
+          "value": "anonymous",
+          "vaddr": "0x804f0fe",
+          "length": 9,
+          "section": ".rodata"
+        },
+        {
+          "value": "230 User",
+          "vaddr": "0x804f124",
+          "length": 9,
+          "section": ".rodata"
+        },
+        {
+          "value": " logged in",
+          "vaddr": "0x804f12e",
+          "length": 10,
+          "section": ".rodata"
+        },
+        {
+          "value": "failed to login:",
+          "vaddr": "0x804f139",
+          "length": 17,
+          "section": ".rodata"
+        },
+        {
+          "value": "530 Login incorrect",
+          "vaddr": "0x804f14b",
+          "length": 19,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd: open_data, passive=",
+          "vaddr": "0x804f170",
+          "length": 25,
+          "section": ".rodata"
+        },
+        {
+          "value": "530 Please login with USER and PASS",
+          "vaddr": "0x804f2ce",
+          "length": 35,
+          "section": ".rodata"
+        },
+        {
+          "value": "Logged in as",
+          "vaddr": "0x804f4fb",
+          "length": 13,
+          "section": ".rodata"
+        },
+        {
+          "value": "227 Entering Passive Mode (",
+          "vaddr": "0x804f827",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": "229 Entering Extended Passive Mode (|||",
+          "vaddr": "0x804f87a",
+          "length": 39,
+          "section": ".rodata"
+        },
+        {
+          "value": "USER",
+          "vaddr": "0x804f9cb",
+          "length": 4,
+          "section": ".rodata"
+        }
+      ],
+      "transfer_related": [
+        {
+          "value": "421 No Transfer Timeout (",
+          "vaddr": "0x804f26f",
+          "length": 25,
+          "section": ".rodata"
+        },
+        {
+          "value": "504 Bad MODE command",
+          "vaddr": "0x804f336",
+          "length": 20,
+          "section": ".rodata"
+        },
+        {
+          "value": "425 Can't build data connection",
+          "vaddr": "0x804f44c",
+          "length": 31,
+          "section": ".rodata"
+        },
+        {
+          "value": "226 Transfer complete",
+          "vaddr": "0x804f4ad",
+          "length": 21,
+          "section": ".rodata"
+        },
+        {
+          "value": "150 Opening data connection",
+          "vaddr": "0x804f4c3",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": "ASCII",
+          "vaddr": "0x804f4df",
+          "length": 5,
+          "section": ".rodata"
+        },
+        {
+          "value": "Image",
+          "vaddr": "0x804f4e5",
+          "length": 5,
+          "section": ".rodata"
+        },
+        {
+          "value": "transfer MODE: Stream",
+          "vaddr": "0x804f522",
+          "length": 21,
+          "section": ".rodata"
+        },
+        {
+          "value": "No data connection",
+          "vaddr": "0x804f538",
+          "length": 18,
+          "section": ".rodata"
+        },
+        {
+          "value": "BINARY",
+          "vaddr": "0x804f56d",
+          "length": 6,
+          "section": ".rodata"
+        },
+        {
+          "value": "425 Can't open data connection",
+          "vaddr": "0x804f59b",
+          "length": 30,
+          "section": ".rodata"
+        },
+        {
+          "value": " mode data connection for '",
+          "vaddr": "0x804f5c7",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": " transfer complete",
+          "vaddr": "0x804f602",
+          "length": 18,
+          "section": ".rodata"
+        },
+        {
+          "value": " mode data connection for",
+          "vaddr": "0x804f66a",
+          "length": 26,
+          "section": ".rodata"
+        },
+        {
+          "value": ": Can not size in ASCII mode",
+          "vaddr": "0x804f7c4",
+          "length": 28,
+          "section": ".rodata"
+        },
+        {
+          "value": "227 Entering Passive Mode (",
+          "vaddr": "0x804f827",
+          "length": 27,
+          "section": ".rodata"
+        },
+        {
+          "value": "229 Entering Extended Passive Mode (|||",
+          "vaddr": "0x804f87a",
+          "length": 39,
+          "section": ".rodata"
+        },
+        {
+          "value": ". Send STORE or RETRIEVE to initiate transfer",
+          "vaddr": "0x804f8bd",
+          "length": 45,
+          "section": ".rodata"
+        },
+        {
+          "value": "MODE",
+          "vaddr": "0x804f9d5",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "RETR",
+          "vaddr": "0x804f9f8",
+          "length": 4,
+          "section": ".rodata"
+        },
+        {
+          "value": "STOR",
+          "vaddr": "0x804f9fd",
+          "length": 4,
+          "section": ".rodata"
+        }
+      ],
+      "debug_strings": [
+        {
+          "value": "ftpd: open_data, passive=",
+          "vaddr": "0x804f170",
+          "length": 25,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd: open_data failed: addr==0",
+          "vaddr": "0x804f198",
+          "length": 31,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd: rcvd PORT cmd: '",
+          "vaddr": "0x804f362",
+          "length": 22,
+          "section": ".rodata"
+        },
+        {
+          "value": "ftpd: rcvd EPRT cmd: '",
+          "vaddr": "0x804f3aa",
+          "length": 22,
+          "section": ".rodata"
+        }
+      ]
+    },
+    "interesting_strings": [
+      {
+        "value": ".AUTO.RSC",
+        "vaddr": "0x804f615",
+        "length": 9,
+        "section": ".rodata",
+        "reason": "Sensitive filename pattern"
+      },
+      {
+        "value": "/import",
+        "vaddr": "0x804f61f",
+        "length": 8,
+        "section": ".rodata",
+        "reason": "Sensitive filename pattern"
+      },
+      {
+        "value": ".log",
+        "vaddr": "0x804f628",
+        "length": 4,
+        "section": ".rodata",
+        "reason": "Sensitive filename pattern"
+      },
+      {
+        "value": ".AUTO.NPK",
+        "vaddr": "0x804f63d",
+        "length": 9,
+        "section": ".rodata",
+        "reason": "Sensitive filename pattern"
+      },
+      {
+        "value": "/nova/etc/logo",
+        "vaddr": "0x804f92f",
+        "length": 14,
+        "section": ".rodata",
+        "reason": "Sensitive filename pattern"
+      }
+    ],
+    "critical_functions": {
+      "found": [
+        {
+          "search_name": "isSensitiveFile",
+          "actual_name": "sym.imp.isSensitiveFile_string_const_",
+          "offset": "0x804a610",
+          "size": 6,
+          "nbbs": 1,
+          "cc": 1,
+          "nargs": 0
+        },
+        {
+          "search_name": "shortenPath",
+          "actual_name": "sym.imp.shortenPath_string_const_",
+          "offset": "0x804a110",
+          "size": 6,
+          "nbbs": 1,
+          "cc": 1,
+          "nargs": 0
+        },
+        {
+          "search_name": "tokenize",
+          "actual_name": "sym.imp.tokenize_string_const__char_",
+          "offset": "0x804a150",
+          "size": 6,
+          "nbbs": 1,
+          "cc": 1,
+          "nargs": 0
+        },
+        {
+          "search_name": "lookupUserFile",
+          "actual_name": "sym.imp.lookupUserFile_string_const_",
+          "offset": "0x804a460",
+          "size": 6,
+          "nbbs": 1,
+          "cc": 1,
+          "nargs": 0
+        },
+        {
+          "search_name": "findFile",
+          "actual_name": "sym.imp.nv::findFile_string_const__bool_",
+          "offset": "0x804a1c0",
+          "size": 6,
+          "nbbs": 1,
+          "cc": 1,
+          "nargs": 0
+        }
+      ],
+      "not_found": [],
+      "disassembly": {
+        "sym.imp.isSensitiveFile_string_const_": {
+          "instruction_count": 1,
+          "calls": [],
+          "stack_vars": [],
+          "string_refs": [],
+          "cmp_instructions": []
+        },
+        "sym.imp.shortenPath_string_const_": {
+          "instruction_count": 1,
+          "calls": [],
+          "stack_vars": [],
+          "string_refs": [],
+          "cmp_instructions": []
+        },
+        "sym.imp.tokenize_string_const__char_": {
+          "instruction_count": 1,
+          "calls": [],
+          "stack_vars": [],
+          "string_refs": [],
+          "cmp_instructions": []
+        },
+        "sym.imp.lookupUserFile_string_const_": {
+          "instruction_count": 1,
+          "calls": [],
+          "stack_vars": [],
+          "string_refs": [],
+          "cmp_instructions": []
+        },
+        "sym.imp.nv::findFile_string_const__bool_": {
+          "instruction_count": 1,
+          "calls": [],
+          "stack_vars": [],
+          "string_refs": [],
+          "cmp_instructions": []
+        }
+      },
+      "call_graphs": {
+        "sym.imp.isSensitiveFile_string_const_": {
+          "callers": [
+            {
+              "from": "0x804c739",
+              "fcn": "",
+              "type": "CALL"
+            },
+            {
+              "from": "0x804ce5e",
+              "fcn": "",
+              "type": "CALL"
+            },
+            {
+              "from": "0x804d3ab",
+              "fcn": "",
+              "type": "CALL"
+            },
+            {
+              "from": "0x804dab7",
+              "fcn": "",
+              "type": "CALL"
+            },
+            {
+              "from": "0x804daec",
+              "fcn": "",
+              "type": "CALL"
+            },
+            {
+              "from": "0x804dbc0",
+              "fcn": "",
+              "type": "CALL"
+            }
+          ]
+        },
+        "sym.imp.shortenPath_string_const_": {
+          "callers": [
+            {
+              "from": "0x804d7cf",
+              "fcn": "",
+              "type": "CALL"
+            },
+            {
+              "from": "0x804d81c",
+              "fcn": "",
+              "type": "CALL"
+            }
+          ]
+        },
+        "sym.imp.tokenize_string_const__char_": {
+          "callers": [
+            {
+              "from": "0x804bbd5",
+              "fcn": "",
+              "type": "CALL"
+            }
+          ]
+        },
+        "sym.imp.lookupUserFile_string_const_": {
+          "callers": [
+            {
+              "from": "0x804aaae",
+              "fcn": "fcn.0804aa8e",
+              "type": "CALL"
+            }
+          ]
+        },
+        "sym.imp.nv::findFile_string_const__bool_": {
+          "callers": [
+            {
+              "from": "0x804e197",
+              "fcn": "main",
+              "type": "CALL"
+            }
+          ]
+        }
+      }
+    },
+    "command_dispatch": {
+      "table": [],
+      "dispatch_function": null,
+      "handler_map": {}
+    },
+    "ghidra_decompilation": {
+      "decompiled_count": 0,
+      "errors": []
+    },
+    "data_flow": {
+      "network_inputs": [],
+      "file_operations": []
+    },
+    "rop_gadgets": {
+      "gadget_count": 926,
+      "useful_gadgets": [
+        {
+          "gadget": "0x0804a8ec                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,\u001b[38;2;58;150;221m eax\u001b[0m\u001b[0m",
+          "category": "stack exchange"
+        },
+        {
+          "gadget": "0x0804a8ec                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,\u001b[38;2;58;150;221m eax\u001b[0m\u001b[0m",
+          "category": "stack exchange"
+        },
+        {
+          "gadget": "0x0804a900               ffd2\u001b[38;2;19;161;14m  call\u001b[38;2;58;150;221m edx\u001b[0m\u001b[0m",
+          "category": "call register"
+        },
+        {
+          "gadget": "0x0804a900               ffd2\u001b[38;2;19;161;14m  call\u001b[38;2;58;150;221m edx\u001b[0m\u001b[0m",
+          "category": "call register"
+        },
+        {
+          "gadget": "0x0804b58f                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,\u001b[38;2;58;150;221m eax\u001b[0m\u001b[0m",
+          "category": "stack exchange"
+        },
+        {
+          "gadget": "0x0804b83f                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,\u001b[38;2;58;150;221m eax\u001b[0m\u001b[0m",
+          "category": "stack exchange"
+        },
+        {
+          "gadget": "0x0804b87c             ff5989\u001b[38;2;19;161;14m  call \u001b[0m[\u001b[38;2;58;150;221mecx \u001b[0m-\u001b[38;2;58;150;221m\u001b[38;2;58;150;221",
+          "category": "call register"
+        },
+        {
+          "gadget": "0x0804c240                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,\u001b[38;2;58;150;221m eax\u001b[0m\u001b[0m",
+          "category": "stack exchange"
+        },
+        {
+          "gadget": "0x0804c243                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,\u001b[38;2;58;150;221m eax\u001b[0m\u001b[0m",
+          "category": "stack exchange"
+        },
+        {
+          "gadget": "0x0804e370                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,\u001b[38;2;58;150;221m eax\u001b[0m\u001b[0m",
+          "category": "stack exchange"
+        }
+      ],
+      "by_category": {
+        "stack exchange": [
+          "0x0804a8ec                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,\u001b[38;2;58;150;221m eax\u001b[0m\u001b[0m",
+          "0x0804a8ec                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,\u001b[38;2;58;150;221m eax\u001b[0m\u001b[0m",
+          "0x0804b58f                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,\u001b[38;2;58;150;221m eax\u001b[0m\u001b[0m",
+          "0x0804b83f                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,\u001b[38;2;58;150;221m eax\u001b[0m\u001b[0m",
+          "0x0804c240                 94\u001b[38;2;58;150;221m  xchg\u001b[38;2;58;150;221m esp\u001b[0m,\u001b[38;2;58;150;221m eax\u001b[0m\u001b[0m"
+        ],
+        "call register": [
+          "0x0804a900               ffd2\u001b[38;2;19;161;14m  call\u001b[38;2;58;150;221m edx\u001b[0m\u001b[0m",
+          "0x0804a900               ffd2\u001b[38;2;19;161;14m  call\u001b[38;2;58;150;221m edx\u001b[0m\u001b[0m",
+          "0x0804b87c             ff5989\u001b[38;2;19;161;14m  call \u001b[0m[\u001b[38;2;58;150;221mecx \u001b[0m-\u001b[38;2;58;150;221m\u001b[38;2;58;150;221"
+        ]
+      }
+    },
+    "got_plt": {
+      "relocs": [
+        {
+          "name": "in6addr_any",
+          "vaddr": "0x8050f18",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "opendir",
+          "vaddr": "0x805100c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv7message13insert_vectorENS_12u32_array_idEjj",
+          "vaddr": "0x8051010",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "listen",
+          "vaddr": "0x8051014",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6string6assignEPKc",
+          "vaddr": "0x8051018",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "remove",
+          "vaddr": "0x805101c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "connect",
+          "vaddr": "0x8051020",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "write",
+          "vaddr": "0x8051024",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6string6insertEjPKc",
+          "vaddr": "0x8051028",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "sscanf",
+          "vaddr": "0x805102c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_Z12getOSVersionv",
+          "vaddr": "0x8051030",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6string6appendEPKc",
+          "vaddr": "0x8051034",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv7message13insert_vectorENS_12u32_array_idEj",
+          "vaddr": "0x8051038",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "pipe",
+          "vaddr": "0x805103c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "snprintf",
+          "vaddr": "0x8051040",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_Z11shortenPathRK6string",
+          "vaddr": "0x8051044",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "lseek",
+          "vaddr": "0x8051048",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZNK6string7compareEPKc",
+          "vaddr": "0x805104c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "readdir",
+          "vaddr": "0x8051050",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_Z8tokenizeRK6stringc",
+          "vaddr": "0x8051054",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_Z19__str_find_first_ofPKcjS0_jj",
+          "vaddr": "0x8051058",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6stringC1EPKcS1_",
+          "vaddr": "0x805105c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6stringC1EOS_",
+          "vaddr": "0x8051060",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv6LooperC1Ejjjjjjjjjjjjj",
+          "vaddr": "0x8051064",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "malloc",
+          "vaddr": "0x8051068",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZNK7IPAddr63strEb",
+          "vaddr": "0x805106c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv8findFileERK6stringb",
+          "vaddr": "0x8051070",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv7Handler11exchangeCmdERNS_7messageEjj",
+          "vaddr": "0x8051074",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZNK7IPAddr612initSockaddrEP12sockaddr_in6j",
+          "vaddr": "0x8051078",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_Z10__str_findPKcjcj",
+          "vaddr": "0x805107c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "fstat",
+          "vaddr": "0x8051080",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "__cxa_atexit",
+          "vaddr": "0x8051084",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "closedir",
+          "vaddr": "0x8051088",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv7message6insertINS_6u32_idEEERS0_T_NS_8IdTraitsIS4_E8set_typeE",
+          "vaddr": "0x805108c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv7messageD1Ev",
+          "vaddr": "0x8051090",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "sleep",
+          "vaddr": "0x8051094",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "open",
+          "vaddr": "0x8051098",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv7message6insertINS_8addr6_idEEERS0_T_NS_8IdTraitsIS4_E8set_typeE",
+          "vaddr": "0x805109c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "rename",
+          "vaddr": "0x80510a0",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZNK6string7compareE11string_view",
+          "vaddr": "0x80510a4",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN11vector_base10insert_rawEPcjjPFvPvS1_E",
+          "vaddr": "0x80510a8",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "getsockname",
+          "vaddr": "0x80510ac",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "bind",
+          "vaddr": "0x80510b0",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "poll",
+          "vaddr": "0x80510b4",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN7IPAddr6aSERK8sockaddr",
+          "vaddr": "0x80510b8",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "__libc_start_main",
+          "vaddr": "0x80510bc",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "strncpy",
+          "vaddr": "0x80510c0",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_Z10__str_findPKcjS0_jj",
+          "vaddr": "0x80510c4",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6string7freeptrEv",
+          "vaddr": "0x80510c8",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN7IPAddr67setIPv4Ej",
+          "vaddr": "0x80510cc",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN11vector_base9erase_rawEPcS0_jPFvPvS1_E",
+          "vaddr": "0x80510d0",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN7IPAddr67fromStrEPKcjb",
+          "vaddr": "0x80510d4",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv6Looper11getTimezoneEv",
+          "vaddr": "0x80510d8",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6stringaSEOS_",
+          "vaddr": "0x80510dc",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6IPAddr7fromStrEPKcj",
+          "vaddr": "0x80510e0",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6string6assignERKS_",
+          "vaddr": "0x80510e4",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv9getLooperEv",
+          "vaddr": "0x80510e8",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "strtoul",
+          "vaddr": "0x80510ec",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "socket",
+          "vaddr": "0x80510f0",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "close",
+          "vaddr": "0x80510f4",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "gmtime",
+          "vaddr": "0x80510f8",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6stringC1EPKc",
+          "vaddr": "0x80510fc",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6stringC1Ev",
+          "vaddr": "0x8051100",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZlsR7ostreamPKc",
+          "vaddr": "0x8051104",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "read",
+          "vaddr": "0x8051108",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "gethostname",
+          "vaddr": "0x805110c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "rmdir",
+          "vaddr": "0x8051110",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZlsR7ostreamc",
+          "vaddr": "0x8051114",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_Z14lookupUserFileRK6string",
+          "vaddr": "0x8051118",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZlsR7ostreami",
+          "vaddr": "0x805111c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZlsR7ostreamj",
+          "vaddr": "0x8051120",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv7message6insertINS_15string_array_idEEERS0_T_NS_8IdTraitsIS4_E8set_typeE",
+          "vaddr": "0x8051124",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZlsR7ostreamb",
+          "vaddr": "0x8051128",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_Z23__str_find_first_not_ofPKcjS0_jj",
+          "vaddr": "0x805112c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "__errno_location",
+          "vaddr": "0x8051130",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "setsockopt",
+          "vaddr": "0x8051134",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6string6appendERKS_",
+          "vaddr": "0x8051138",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "mkdir",
+          "vaddr": "0x805113c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZNK2nv7message3getINS_6u32_idEEENS_8IdTraitsIT_E4typeES4_",
+          "vaddr": "0x8051140",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "fcntl",
+          "vaddr": "0x8051144",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6stringC1ERKS_",
+          "vaddr": "0x8051148",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZlsR7ostreamx",
+          "vaddr": "0x805114c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv7isErrorERKNS_7messageEPjP6string",
+          "vaddr": "0x8051150",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "getpeername",
+          "vaddr": "0x8051154",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "ftruncate",
+          "vaddr": "0x8051158",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "tolower",
+          "vaddr": "0x805115c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN3ios4setfEjj",
+          "vaddr": "0x8051160",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_Z11__str_rfindPKcjcj",
+          "vaddr": "0x8051164",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZlsR7ostream11string_view",
+          "vaddr": "0x8051168",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZNK7IPAddr65emptyEv",
+          "vaddr": "0x805116c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6string9push_backEc",
+          "vaddr": "0x8051170",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "toupper",
+          "vaddr": "0x8051174",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "stat",
+          "vaddr": "0x8051178",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "accept",
+          "vaddr": "0x805117c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN7istream7getlineEPcjc",
+          "vaddr": "0x8051180",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_Z15isSensitiveFileRK6string",
+          "vaddr": "0x8051184",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "splice",
+          "vaddr": "0x8051188",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN7ostream5flushEv",
+          "vaddr": "0x805118c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "strerror",
+          "vaddr": "0x8051190",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv7message6insertINS_9string_idEEERS0_T_NS_8IdTraitsIS4_E8set_typeE",
+          "vaddr": "0x8051194",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "select",
+          "vaddr": "0x8051198",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_Z4endlR7ostream",
+          "vaddr": "0x805119c",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv8getErrorERKNS_7messageE",
+          "vaddr": "0x80511a0",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6string5eraseEjj",
+          "vaddr": "0x80511a4",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN6stringC1EPKcj",
+          "vaddr": "0x80511a8",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "strlen",
+          "vaddr": "0x80511ac",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "shutdown",
+          "vaddr": "0x80511b0",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "strtol",
+          "vaddr": "0x80511b4",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZNK6string6substrEjj",
+          "vaddr": "0x80511b8",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN2nv7messageC1Ev",
+          "vaddr": "0x80511bc",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZN11vector_baseD2Ev",
+          "vaddr": "0x80511c0",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "_ZNK7IPAddr66isIPv4Ev",
+          "vaddr": "0x80511c4",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "cerr",
+          "vaddr": "0x80511e0",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "cin",
+          "vaddr": "0x8051220",
+          "type": "SET_32",
+          "is_ifunc": false
+        },
+        {
+          "name": "cout",
+          "vaddr": "0x8051260",
+          "type": "SET_32",
+          "is_ifunc": false
+        }
+      ],
+      "interesting_got": [
+        {
+          "name": "opendir",
+          "got_addr": "0x805100c"
+        },
+        {
+          "name": "write",
+          "got_addr": "0x8051024"
+        },
+        {
+          "name": "snprintf",
+          "got_addr": "0x8051040"
+        },
+        {
+          "name": "readdir",
+          "got_addr": "0x8051050"
+        },
+        {
+          "name": "malloc",
+          "got_addr": "0x8051068"
+        },
+        {
+          "name": "__cxa_atexit",
+          "got_addr": "0x8051084"
+        },
+        {
+          "name": "closedir",
+          "got_addr": "0x8051088"
+        },
+        {
+          "name": "open",
+          "got_addr": "0x8051098"
+        },
+        {
+          "name": "_ZN6string7freeptrEv",
+          "got_addr": "0x80510c8"
+        },
+        {
+          "name": "close",
+          "got_addr": "0x80510f4"
+        },
+        {
+          "name": "read",
+          "got_addr": "0x8051108"
+        }
+      ]
+    },
+    "cve_2019_3943": {
+      "path_traversal_indicators": [],
+      "path_sanitization": []
+    },
+    "linked_libraries": {
+      "libumsg.so": {
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/MikroTik/source/squashfs-root/lib/libumsg.so",
+        "exists": true
+      },
+      "libuc++.so": {
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/MikroTik/source/squashfs-root/lib/libuc++.so",
+        "exists": true
+      },
+      "libc.so": {
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/MikroTik/source/squashfs-root/lib/libc.so",
+        "exists": true
+      }
+    },
+    "attack_surface": {
+      "priority_targets": [
+        {
+          "target": "sym.imp.isSensitiveFile_string_const_",
+          "reason": "Sensitive file filter \u2014 bypass enables access to system config, user credentials, etc.",
+          "severity": "MEDIUM"
+        }
+      ],
+      "overflow_candidates": {
+        "sscanf_calls": 0,
+        "strncpy_calls": 0,
+        "snprintf_calls": 0,
+        "sprintf_calls": 0,
+        "total_unsafe_calls": 0
+      },
+      "path_traversal_surface": [],
+      "sensitive_file_bypass": [],
+      "auto_exec_vectors": []
+    }
+  }
+}

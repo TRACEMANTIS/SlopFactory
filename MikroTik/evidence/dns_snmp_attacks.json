@@ -1,0 +1,1104 @@
+{
+  "metadata": {
+    "script": "attack_dns_snmp.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 6,
+    "start_time": "2026-02-16T00:08:17.356521",
+    "end_time": "2026-02-16T00:09:16.047161",
+    "total_tests": 65,
+    "anomalies": 11,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "7m16s",
+    "router_log_count": 6,
+    "router_interesting_events": 0,
+    "final_health": {
+      "alive": true,
+      "uptime": "8m15s",
+      "cpu_load": "0",
+      "free_memory": "838021120",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "dns",
+      "name": "DNS service check",
+      "description": "Test if DNS resolver/server is active on port 53",
+      "result": "DNS not responding on UDP 53 (disabled or filtered)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:20.363017"
+    },
+    {
+      "id": 2,
+      "category": "dns",
+      "name": "DNS configuration (REST)",
+      "description": "Query DNS configuration via REST API",
+      "result": "DNS config: {'address-list-extra-time': '0s', 'allow-remote-requests': 'false', 'cache-max-ttl': '1w', 'cache-size': '2048', 'cache-used': '44', 'doh-max-concurrent-queries': '50', 'doh-max-server-connections': '5', 'doh-timeout': '5s', 'dynamic-servers': '[REDACTED-IP]', 'max-concurrent-queries': '100', 'max-concurrent-tcp-sessions': '20', 'max-udp-packet-size': '4096', 'mdns-repeat-ifaces': '', 'query-server-timeout': '2s', 'query-total-timeout': '10s', 'servers': '[REDACTED-IP]', 'use-doh-server': '', 'verify-doh-cert': 'false', 'vrf': 'main'}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:20.363017",
+      "details": {
+        "config": {
+          "address-list-extra-time": "0s",
+          "allow-remote-requests": "false",
+          "cache-max-ttl": "1w",
+          "cache-size": "2048",
+          "cache-used": "44",
+          "doh-max-concurrent-queries": "50",
+          "doh-max-server-connections": "5",
+          "doh-timeout": "5s",
+          "dynamic-servers": "[REDACTED-IP]",
+          "max-concurrent-queries": "100",
+          "max-concurrent-tcp-sessions": "20",
+          "max-udp-packet-size": "4096",
+          "mdns-repeat-ifaces": "",
+          "query-server-timeout": "2s",
+          "query-total-timeout": "10s",
+          "servers": "[REDACTED-IP]",
+          "use-doh-server": "",
+          "verify-doh-cert": "false",
+          "vrf": "main"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "category": "dns",
+      "name": "DNS tests skipped",
+      "description": "DNS service not enabled \u2014 skipping DNS attack tests",
+      "result": "SKIPPED: DNS not active on target",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:20.363017",
+      "details": {
+        "reason": "DNS service not responding and/or not enabled"
+      }
+    },
+    {
+      "id": 4,
+      "category": "snmp",
+      "name": "SNMP service detection",
+      "description": "Detect SNMP service on UDP 161",
+      "result": "SNMP active (response: 55 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:20.363017",
+      "details": {
+        "response_size": 55,
+        "response_hex": "303502010104067075626c6963a22802046902df9e020100020100301a301806082b06010201010100040c526f757465724f5320434852"
+      }
+    },
+    {
+      "id": 5,
+      "category": "snmp",
+      "name": "SNMP configuration (REST)",
+      "description": "Query SNMP configuration via REST API",
+      "result": "SNMP config: {'contact': '', 'enabled': 'true', 'engine-id': '80003a8c04', 'engine-id-suffix': '', 'location': '', 'src-address': '::', 'trap-community': 'public', 'trap-generators': 'temp-exception', 'trap-target': '', 'trap-version': '1', 'vrf': 'main'}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:20.367015",
+      "details": {
+        "config": {
+          "contact": "",
+          "enabled": "true",
+          "engine-id": "80003a8c04",
+          "engine-id-suffix": "",
+          "location": "",
+          "src-address": "::",
+          "trap-community": "public",
+          "trap-generators": "temp-exception",
+          "trap-target": "",
+          "trap-version": "1",
+          "vrf": "main"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "category": "snmp",
+      "name": "Community: 'public'",
+      "description": "Test SNMP community string 'public'",
+      "result": "ACCEPTED: iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\"",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:20.371013",
+      "details": {
+        "community": "public",
+        "response": "iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\""
+      }
+    },
+    {
+      "id": 7,
+      "category": "snmp",
+      "name": "Community: 'private'",
+      "description": "Test SNMP community string 'private'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:22.382007",
+      "details": {
+        "community": "private"
+      }
+    },
+    {
+      "id": 8,
+      "category": "snmp",
+      "name": "Community: 'mikrotik'",
+      "description": "Test SNMP community string 'mikrotik'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:24.385005",
+      "details": {
+        "community": "mikrotik"
+      }
+    },
+    {
+      "id": 9,
+      "category": "snmp",
+      "name": "Community: 'admin'",
+      "description": "Test SNMP community string 'admin'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:26.392001",
+      "details": {
+        "community": "admin"
+      }
+    },
+    {
+      "id": 10,
+      "category": "snmp",
+      "name": "Community: 'router'",
+      "description": "Test SNMP community string 'router'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:28.398997",
+      "details": {
+        "community": "router"
+      }
+    },
+    {
+      "id": 11,
+      "category": "snmp",
+      "name": "Community: 'community'",
+      "description": "Test SNMP community string 'community'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:30.405993",
+      "details": {
+        "community": "community"
+      }
+    },
+    {
+      "id": 12,
+      "category": "snmp",
+      "name": "Community: 'test'",
+      "description": "Test SNMP community string 'test'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:32.416987",
+      "details": {
+        "community": "test"
+      }
+    },
+    {
+      "id": 13,
+      "category": "snmp",
+      "name": "Community: 'snmp'",
+      "description": "Test SNMP community string 'snmp'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:34.423983",
+      "details": {
+        "community": "snmp"
+      }
+    },
+    {
+      "id": 14,
+      "category": "snmp",
+      "name": "Community: 'default'",
+      "description": "Test SNMP community string 'default'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:36.430979",
+      "details": {
+        "community": "default"
+      }
+    },
+    {
+      "id": 15,
+      "category": "snmp",
+      "name": "Community: 'monitor'",
+      "description": "Test SNMP community string 'monitor'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:38.437975",
+      "details": {
+        "community": "monitor"
+      }
+    },
+    {
+      "id": 16,
+      "category": "snmp",
+      "name": "Community: 'write'",
+      "description": "Test SNMP community string 'write'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:40.732827",
+      "details": {
+        "community": "write"
+      }
+    },
+    {
+      "id": 17,
+      "category": "snmp",
+      "name": "Community: 'secret'",
+      "description": "Test SNMP community string 'secret'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:42.971707",
+      "details": {
+        "community": "secret"
+      }
+    },
+    {
+      "id": 18,
+      "category": "snmp",
+      "name": "Community: 'management'",
+      "description": "Test SNMP community string 'management'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:44.978703",
+      "details": {
+        "community": "management"
+      }
+    },
+    {
+      "id": 19,
+      "category": "snmp",
+      "name": "Community: 'system'",
+      "description": "Test SNMP community string 'system'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:47.025679",
+      "details": {
+        "community": "system"
+      }
+    },
+    {
+      "id": 20,
+      "category": "snmp",
+      "name": "Community: 'network'",
+      "description": "Test SNMP community string 'network'",
+      "result": "Rejected or no response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.036673",
+      "details": {
+        "community": "network"
+      }
+    },
+    {
+      "id": 21,
+      "category": "snmp",
+      "name": "SNMP v1 support",
+      "description": "Test SNMP v1 protocol support",
+      "result": "Supported: iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\"",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:08:49.040671",
+      "details": {
+        "version": "v1",
+        "response": "iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\""
+      }
+    },
+    {
+      "id": 22,
+      "category": "snmp",
+      "name": "SNMP v2c support",
+      "description": "Test SNMP v2c protocol support",
+      "result": "Supported: iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\"",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.052665",
+      "details": {
+        "version": "v2c",
+        "response": "iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\""
+      }
+    },
+    {
+      "id": 23,
+      "category": "snmp",
+      "name": "SNMPv3 support",
+      "description": "Test SNMPv3 noAuthNoPriv with user 'admin'",
+      "result": "Not available: snmpget: Unknown user name",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.060661",
+      "details": {
+        "version": "v3",
+        "output": "snmpget: Unknown user name"
+      }
+    },
+    {
+      "id": 24,
+      "category": "snmp",
+      "name": "Full MIB walk (1.3)",
+      "description": "Walk entire SNMP MIB tree from 1.3",
+      "result": "Retrieved 788 OIDs",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:08:49.580401",
+      "details": {
+        "oid_count": 788,
+        "sample": [
+          "iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\"",
+          "iso.[REDACTED-IP].[REDACTED-IP] = OID: iso.[REDACTED-IP].1.14988.1",
+          "iso.[REDACTED-IP].[REDACTED-IP] = Timeticks: (46800) 0:07:48.00",
+          "iso.[REDACTED-IP].[REDACTED-IP] = \"\"",
+          "iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"MikroTik\"",
+          "iso.[REDACTED-IP].[REDACTED-IP] = \"\"",
+          "iso.[REDACTED-IP].[REDACTED-IP] = INTEGER: 78",
+          "iso.[REDACTED-IP].[REDACTED-IP] = INTEGER: 2",
+          "iso.[REDACTED-IP].[REDACTED-IP].1.1 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].1.2 = INTEGER: 2",
+          "iso.[REDACTED-IP].[REDACTED-IP].2.1 = STRING: \"lo\"",
+          "iso.[REDACTED-IP].[REDACTED-IP].2.2 = STRING: \"ether1\"",
+          "iso.[REDACTED-IP].[REDACTED-IP].3.1 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].3.2 = INTEGER: 6",
+          "iso.[REDACTED-IP].[REDACTED-IP].4.1 = INTEGER: 65536",
+          "iso.[REDACTED-IP].[REDACTED-IP].4.2 = INTEGER: 1500",
+          "iso.[REDACTED-IP].[REDACTED-IP].5.1 = Gauge32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].5.2 = Gauge32: 1000000000",
+          "iso.[REDACTED-IP].[REDACTED-IP].6.1 = Hex-STRING: 00 00 00 00 00 00 ",
+          "iso.[REDACTED-IP].[REDACTED-IP].6.2 = Hex-STRING: 08 00 27 6F D1 3D ",
+          "iso.[REDACTED-IP].[REDACTED-IP].7.1 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].7.2 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].8.1 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].8.2 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].9.1 = Timeticks: (380) 0:00:03.80",
+          "iso.[REDACTED-IP].[REDACTED-IP].9.2 = Timeticks: (722) 0:00:07.22",
+          "iso.[REDACTED-IP].[REDACTED-IP].10.1 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].10.2 = Counter32: 745547",
+          "iso.[REDACTED-IP].[REDACTED-IP].11.1 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].11.2 = Counter32: 7485",
+          "iso.[REDACTED-IP].[REDACTED-IP].12.1 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].12.2 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].13.1 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].13.2 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].14.1 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].14.2 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].15.1 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].15.2 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].16.1 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].16.2 = Counter32: 346417",
+          "iso.[REDACTED-IP].[REDACTED-IP].17.1 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].17.2 = Counter32: 2901",
+          "iso.[REDACTED-IP].[REDACTED-IP].18.1 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].18.2 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].19.1 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].19.2 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].20.1 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].20.2 = Counter32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].21.1 = Gauge32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].21.2 = Gauge32: 0"
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "category": "snmp",
+      "name": "MikroTik enterprise MIB walk",
+      "description": "Walk MikroTik-specific enterprise OIDs ([REDACTED-IP].4.1.14988)",
+      "result": "Retrieved 398 MikroTik OIDs",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:08:49.792295",
+      "details": {
+        "oid_count": 398,
+        "oids": [
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = Gauge32: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = Gauge32: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = Gauge32: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 4391",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = STRING: \"QKCm3jlSBfN\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = STRING: \"7.20.8\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = Gauge32: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = INTEGER: 0",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = \"\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = STRING: \"2026-01-30 09:17:54\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = STRING: \"CHR innotek GmbH VirtualBox\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].0 = STRING: \"CHR\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.2.1 = STRING: \"csrftest\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.2.22 = STRING: \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.2.23 = STRING: \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.2.24 = STRING: \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.2.25 = STRING: \"%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.2.26 = STRING: \"%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.2.27 = STRING: \"%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n\"",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.2.28 = Hex-STRING: 00 ",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.2.29 = Hex-STRING: 41 00 42 ",
+          "iso.[REDACTED-IP].1.14988.[REDACTED-IP].1.2.30 = Hex-STRING: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+          "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 "
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "category": "snmp",
+      "name": "SNMP sysDescr",
+      "description": "Query sysDescr ([REDACTED-IP].[REDACTED-IP].0)",
+      "result": "Value: iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\"",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.796293",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "name": "sysDescr",
+        "value": "iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\""
+      }
+    },
+    {
+      "id": 27,
+      "category": "snmp",
+      "name": "SNMP sysObjectID",
+      "description": "Query sysObjectID ([REDACTED-IP].[REDACTED-IP].0)",
+      "result": "Value: iso.[REDACTED-IP].[REDACTED-IP] = OID: iso.[REDACTED-IP].1.14988.1",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.800291",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "name": "sysObjectID",
+        "value": "iso.[REDACTED-IP].[REDACTED-IP] = OID: iso.[REDACTED-IP].1.14988.1"
+      }
+    },
+    {
+      "id": 28,
+      "category": "snmp",
+      "name": "SNMP sysUpTime",
+      "description": "Query sysUpTime ([REDACTED-IP].[REDACTED-IP].0)",
+      "result": "Value: iso.[REDACTED-IP].[REDACTED-IP] = Timeticks: (46900) 0:07:49.00",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.808287",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "name": "sysUpTime",
+        "value": "iso.[REDACTED-IP].[REDACTED-IP] = Timeticks: (46900) 0:07:49.00"
+      }
+    },
+    {
+      "id": 29,
+      "category": "snmp",
+      "name": "SNMP sysContact",
+      "description": "Query sysContact ([REDACTED-IP].[REDACTED-IP].0)",
+      "result": "Value: iso.[REDACTED-IP].[REDACTED-IP] = \"\"",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.812285",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "name": "sysContact",
+        "value": "iso.[REDACTED-IP].[REDACTED-IP] = \"\""
+      }
+    },
+    {
+      "id": 30,
+      "category": "snmp",
+      "name": "SNMP sysName",
+      "description": "Query sysName ([REDACTED-IP].[REDACTED-IP].0)",
+      "result": "Value: iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"MikroTik\"",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.816283",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "name": "sysName",
+        "value": "iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"MikroTik\""
+      }
+    },
+    {
+      "id": 31,
+      "category": "snmp",
+      "name": "SNMP sysLocation",
+      "description": "Query sysLocation ([REDACTED-IP].[REDACTED-IP].0)",
+      "result": "Value: iso.[REDACTED-IP].[REDACTED-IP] = \"\"",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.824279",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "name": "sysLocation",
+        "value": "iso.[REDACTED-IP].[REDACTED-IP] = \"\""
+      }
+    },
+    {
+      "id": 32,
+      "category": "snmp",
+      "name": "SNMP sysServices",
+      "description": "Query sysServices ([REDACTED-IP].[REDACTED-IP].0)",
+      "result": "Value: iso.[REDACTED-IP].[REDACTED-IP] = INTEGER: 78",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.828277",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "name": "sysServices",
+        "value": "iso.[REDACTED-IP].[REDACTED-IP] = INTEGER: 78"
+      }
+    },
+    {
+      "id": 33,
+      "category": "snmp",
+      "name": "SNMP walk: interfaces",
+      "description": "Walk SNMP subtree for interfaces ([REDACTED-IP].2.1.2)",
+      "result": "Retrieved 45 entries",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:08:49.868257",
+      "details": {
+        "oid_tree": "[REDACTED-IP].2.1.2",
+        "name": "interfaces",
+        "entry_count": 45,
+        "sample": [
+          "iso.[REDACTED-IP].[REDACTED-IP] = INTEGER: 2",
+          "iso.[REDACTED-IP].[REDACTED-IP].1.1 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].1.2 = INTEGER: 2",
+          "iso.[REDACTED-IP].[REDACTED-IP].2.1 = STRING: \"lo\"",
+          "iso.[REDACTED-IP].[REDACTED-IP].2.2 = STRING: \"ether1\"",
+          "iso.[REDACTED-IP].[REDACTED-IP].3.1 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].3.2 = INTEGER: 6",
+          "iso.[REDACTED-IP].[REDACTED-IP].4.1 = INTEGER: 65536",
+          "iso.[REDACTED-IP].[REDACTED-IP].4.2 = INTEGER: 1500",
+          "iso.[REDACTED-IP].[REDACTED-IP].5.1 = Gauge32: 0",
+          "iso.[REDACTED-IP].[REDACTED-IP].5.2 = Gauge32: 1000000000",
+          "iso.[REDACTED-IP].[REDACTED-IP].6.1 = Hex-STRING: 00 00 00 00 00 00 ",
+          "iso.[REDACTED-IP].[REDACTED-IP].6.2 = Hex-STRING: 08 00 27 6F D1 3D ",
+          "iso.[REDACTED-IP].[REDACTED-IP].7.1 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].7.2 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].8.1 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].8.2 = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].9.1 = Timeticks: (380) 0:00:03.80",
+          "iso.[REDACTED-IP].[REDACTED-IP].9.2 = Timeticks: (722) 0:00:07.22",
+          "iso.[REDACTED-IP].[REDACTED-IP].10.1 = Counter32: 0"
+        ]
+      }
+    },
+    {
+      "id": 34,
+      "category": "snmp",
+      "name": "SNMP walk: ip_addresses",
+      "description": "Walk SNMP subtree for ip_addresses ([REDACTED-IP].[REDACTED-IP])",
+      "result": "Retrieved 10 entries",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:08:49.880251",
+      "details": {
+        "oid_tree": "[REDACTED-IP].[REDACTED-IP]",
+        "name": "ip_addresses",
+        "entry_count": 10,
+        "sample": [
+          "iso.[REDACTED-IP].[REDACTED-IP].1.[REDACTED-INTERNAL-IP] = IpAddress: [REDACTED-INTERNAL-IP]",
+          "iso.[REDACTED-IP].[REDACTED-IP].1.[REDACTED-INTERNAL-IP] = IpAddress: [REDACTED-INTERNAL-IP]",
+          "iso.[REDACTED-IP].[REDACTED-IP].2.[REDACTED-INTERNAL-IP] = INTEGER: 2",
+          "iso.[REDACTED-IP].[REDACTED-IP].2.[REDACTED-INTERNAL-IP] = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].3.[REDACTED-INTERNAL-IP] = IpAddress: 255.255.255.0",
+          "iso.[REDACTED-IP].[REDACTED-IP].3.[REDACTED-INTERNAL-IP] = IpAddress: 255.255.255.255",
+          "iso.[REDACTED-IP].[REDACTED-IP].4.[REDACTED-INTERNAL-IP] = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].4.[REDACTED-INTERNAL-IP] = INTEGER: 1",
+          "iso.[REDACTED-IP].[REDACTED-IP].5.[REDACTED-INTERNAL-IP] = INTEGER: 65535",
+          "iso.[REDACTED-IP].[REDACTED-IP].5.[REDACTED-INTERNAL-IP] = INTEGER: 65535"
+        ]
+      }
+    },
+    {
+      "id": 35,
+      "category": "snmp",
+      "name": "SNMP walk: ip_routes",
+      "description": "Walk SNMP subtree for ip_routes ([REDACTED-IP].[REDACTED-IP])",
+      "result": "Retrieved 1 entries",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:08:49.884249",
+      "details": {
+        "oid_tree": "[REDACTED-IP].[REDACTED-IP]",
+        "name": "ip_routes",
+        "entry_count": 1,
+        "sample": [
+          "iso.[REDACTED-IP].1.4.21 = No Such Object available on this agent at this OID"
+        ]
+      }
+    },
+    {
+      "id": 36,
+      "category": "snmp",
+      "name": "SNMP walk: arp_table",
+      "description": "Walk SNMP subtree for arp_table ([REDACTED-IP].[REDACTED-IP])",
+      "result": "Retrieved 4 entries",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:08:49.892245",
+      "details": {
+        "oid_tree": "[REDACTED-IP].[REDACTED-IP]",
+        "name": "arp_table",
+        "entry_count": 4,
+        "sample": [
+          "iso.[REDACTED-IP].[REDACTED-IP].1.2.[REDACTED-INTERNAL-IP] = INTEGER: 2",
+          "iso.[REDACTED-IP].[REDACTED-IP].2.2.[REDACTED-INTERNAL-IP] = Hex-STRING: 08 00 27 6D 41 B2 ",
+          "iso.[REDACTED-IP].[REDACTED-IP].3.2.[REDACTED-INTERNAL-IP] = IpAddress: [REDACTED-INTERNAL-IP]",
+          "iso.[REDACTED-IP].[REDACTED-IP].4.2.[REDACTED-INTERNAL-IP] = INTEGER: 3"
+        ]
+      }
+    },
+    {
+      "id": 37,
+      "category": "snmp",
+      "name": "SNMP walk: mac_addresses",
+      "description": "Walk SNMP subtree for mac_addresses ([REDACTED-IP].[REDACTED-IP].1.6)",
+      "result": "Retrieved 2 entries",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:08:49.900241",
+      "details": {
+        "oid_tree": "[REDACTED-IP].[REDACTED-IP].1.6",
+        "name": "mac_addresses",
+        "entry_count": 2,
+        "sample": [
+          "iso.[REDACTED-IP].[REDACTED-IP].6.1 = Hex-STRING: 00 00 00 00 00 00 ",
+          "iso.[REDACTED-IP].[REDACTED-IP].6.2 = Hex-STRING: 08 00 27 6F D1 3D"
+        ]
+      }
+    },
+    {
+      "id": 38,
+      "category": "snmp",
+      "name": "SNMP SET sysContact (comm=public)",
+      "description": "Attempt SNMP SET on sysContact with community 'public'",
+      "result": "Write rejected: Error in packet.\nReason: (readOnly) The two parties used do not have access to use the specified SNMP PDU.",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.920231",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "community": "public",
+        "value": "SNMP_WRITE_TEST",
+        "write_success": false
+      }
+    },
+    {
+      "id": 39,
+      "category": "snmp",
+      "name": "SNMP SET sysLocation (comm=public)",
+      "description": "Attempt SNMP SET on sysLocation with community 'public'",
+      "result": "Write rejected: Error in packet.\nReason: (readOnly) The two parties used do not have access to use the specified SNMP PDU.",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.924229",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "community": "public",
+        "value": "SNMP_WRITE_TEST_LOC",
+        "write_success": false
+      }
+    },
+    {
+      "id": 40,
+      "category": "snmp",
+      "name": "SNMP SET sysName (comm=public)",
+      "description": "Attempt SNMP SET on sysName with community 'public'",
+      "result": "Write rejected: Error in packet.\nReason: (readOnly) The two parties used do not have access to use the specified SNMP PDU.",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:49.928227",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "community": "public",
+        "value": "SNMP_WRITE_TEST_NAME",
+        "write_success": false
+      }
+    },
+    {
+      "id": 41,
+      "category": "snmp",
+      "name": "SNMP SET sysContact (comm=private)",
+      "description": "Attempt SNMP SET on sysContact with community 'private'",
+      "result": "Write rejected: Timeout: No Response from [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:51.939221",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "community": "private",
+        "value": "SNMP_WRITE_TEST",
+        "write_success": false
+      }
+    },
+    {
+      "id": 42,
+      "category": "snmp",
+      "name": "SNMP SET sysLocation (comm=private)",
+      "description": "Attempt SNMP SET on sysLocation with community 'private'",
+      "result": "Write rejected: Timeout: No Response from [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:53.946217",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "community": "private",
+        "value": "SNMP_WRITE_TEST_LOC",
+        "write_success": false
+      }
+    },
+    {
+      "id": 43,
+      "category": "snmp",
+      "name": "SNMP SET sysName (comm=private)",
+      "description": "Attempt SNMP SET on sysName with community 'private'",
+      "result": "Write rejected: Timeout: No Response from [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:55.953213",
+      "details": {
+        "oid": "[REDACTED-IP].[REDACTED-IP].0",
+        "community": "private",
+        "value": "SNMP_WRITE_TEST_NAME",
+        "write_success": false
+      }
+    },
+    {
+      "id": 44,
+      "category": "snmp",
+      "name": "SNMPv3 user: admin",
+      "description": "Test SNMPv3 username 'admin' (noAuthNoPriv)",
+      "result": "Not found: snmpget: Unknown user name",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:55.957211",
+      "details": {
+        "username": "admin",
+        "possibly_valid": false,
+        "output": "snmpget: Unknown user name"
+      }
+    },
+    {
+      "id": 45,
+      "category": "snmp",
+      "name": "SNMPv3 user: root",
+      "description": "Test SNMPv3 username 'root' (noAuthNoPriv)",
+      "result": "Not found: snmpget: Unknown user name",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:55.965207",
+      "details": {
+        "username": "root",
+        "possibly_valid": false,
+        "output": "snmpget: Unknown user name"
+      }
+    },
+    {
+      "id": 46,
+      "category": "snmp",
+      "name": "SNMPv3 user: snmp",
+      "description": "Test SNMPv3 username 'snmp' (noAuthNoPriv)",
+      "result": "Not found: snmpget: Unknown user name",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:55.969205",
+      "details": {
+        "username": "snmp",
+        "possibly_valid": false,
+        "output": "snmpget: Unknown user name"
+      }
+    },
+    {
+      "id": 47,
+      "category": "snmp",
+      "name": "SNMPv3 user: monitor",
+      "description": "Test SNMPv3 username 'monitor' (noAuthNoPriv)",
+      "result": "Not found: snmpget: Unknown user name",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:55.977201",
+      "details": {
+        "username": "monitor",
+        "possibly_valid": false,
+        "output": "snmpget: Unknown user name"
+      }
+    },
+    {
+      "id": 48,
+      "category": "snmp",
+      "name": "SNMPv3 user: mikrotik",
+      "description": "Test SNMPv3 username 'mikrotik' (noAuthNoPriv)",
+      "result": "Not found: snmpget: Unknown user name",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:55.981199",
+      "details": {
+        "username": "mikrotik",
+        "possibly_valid": false,
+        "output": "snmpget: Unknown user name"
+      }
+    },
+    {
+      "id": 49,
+      "category": "snmp",
+      "name": "SNMPv3 user: routeros",
+      "description": "Test SNMPv3 username 'routeros' (noAuthNoPriv)",
+      "result": "Not found: snmpget: Unknown user name",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:55.989195",
+      "details": {
+        "username": "routeros",
+        "possibly_valid": false,
+        "output": "snmpget: Unknown user name"
+      }
+    },
+    {
+      "id": 50,
+      "category": "snmp",
+      "name": "SNMPv3 user: public",
+      "description": "Test SNMPv3 username 'public' (noAuthNoPriv)",
+      "result": "Possible valid user: iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\"",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:08:55.993193",
+      "details": {
+        "username": "public",
+        "possibly_valid": true,
+        "output": "iso.[REDACTED-IP].[REDACTED-IP] = STRING: \"RouterOS CHR\""
+      }
+    },
+    {
+      "id": 51,
+      "category": "snmp",
+      "name": "SNMPv3 user: manager",
+      "description": "Test SNMPv3 username 'manager' (noAuthNoPriv)",
+      "result": "Not found: snmpget: Unknown user name",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:55.997191",
+      "details": {
+        "username": "manager",
+        "possibly_valid": false,
+        "output": "snmpget: Unknown user name"
+      }
+    },
+    {
+      "id": 52,
+      "category": "snmp",
+      "name": "SNMPv3 user: operator",
+      "description": "Test SNMPv3 username 'operator' (noAuthNoPriv)",
+      "result": "Not found: snmpget: Unknown user name",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:56.005187",
+      "details": {
+        "username": "operator",
+        "possibly_valid": false,
+        "output": "snmpget: Unknown user name"
+      }
+    },
+    {
+      "id": 53,
+      "category": "snmp",
+      "name": "GetBulk amplification (max-rep=10)",
+      "description": "SNMP GetBulk with max-repetitions=10",
+      "result": "Query: 41B, Response: 211B, Factor: 5.1x",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:56.009185",
+      "details": {
+        "query_size": 41,
+        "response_size": 211,
+        "max_repetitions": 10,
+        "amplification_factor": 5.15
+      }
+    },
+    {
+      "id": 54,
+      "category": "snmp",
+      "name": "GetBulk amplification (max-rep=25)",
+      "description": "SNMP GetBulk with max-repetitions=25",
+      "result": "Query: 41B, Response: 492B, Factor: 12.0x",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:08:56.009185",
+      "details": {
+        "query_size": 41,
+        "response_size": 492,
+        "max_repetitions": 25,
+        "amplification_factor": 12.0
+      }
+    },
+    {
+      "id": 55,
+      "category": "snmp",
+      "name": "GetBulk amplification (max-rep=50)",
+      "description": "SNMP GetBulk with max-repetitions=50",
+      "result": "Query: 41B, Response: 924B, Factor: 22.5x",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:08:56.009185",
+      "details": {
+        "query_size": 41,
+        "response_size": 924,
+        "max_repetitions": 50,
+        "amplification_factor": 22.54
+      }
+    },
+    {
+      "id": 56,
+      "category": "snmp",
+      "name": "Malformed SNMP: Zero-length",
+      "description": "Send malformed SNMP packet: Zero-length",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:08:58.016181",
+      "details": {
+        "packet_size": 0,
+        "packet_hex": "",
+        "response_size": 0
+      }
+    },
+    {
+      "id": 57,
+      "category": "snmp",
+      "name": "Malformed SNMP: Single byte",
+      "description": "Send malformed SNMP packet: Single byte",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:09:00.019179",
+      "details": {
+        "packet_size": 1,
+        "packet_hex": "30",
+        "response_size": 0
+      }
+    },
+    {
+      "id": 58,
+      "category": "snmp",
+      "name": "Malformed SNMP: Truncated BER",
+      "description": "Send malformed SNMP packet: Truncated BER",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:09:02.022177",
+      "details": {
+        "packet_size": 4,
+        "packet_hex": "3082ffff",
+        "response_size": 0
+      }
+    },
+    {
+      "id": 59,
+      "category": "snmp",
+      "name": "Malformed SNMP: Invalid ASN.1 tag",
+      "description": "Send malformed SNMP packet: Invalid ASN.1 tag",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:09:04.025175",
+      "details": {
+        "packet_size": 5,
+        "packet_hex": "ff05000000",
+        "response_size": 0
+      }
+    },
+    {
+      "id": 60,
+      "category": "snmp",
+      "name": "Malformed SNMP: Oversized community",
+      "description": "Send malformed SNMP packet: Oversized community",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:09:06.028173",
+      "details": {
+        "packet_size": 266,
+        "packet_hex": "30820100020101048200ff4141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 0
+      }
+    },
+    {
+      "id": 61,
+      "category": "snmp",
+      "name": "Malformed SNMP: Null community",
+      "description": "Send malformed SNMP packet: Null community",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:09:08.031171",
+      "details": {
+        "packet_size": 20,
+        "packet_hex": "30100201010400a0090201010201000201003000",
+        "response_size": 0
+      }
+    },
+    {
+      "id": 62,
+      "category": "snmp",
+      "name": "Malformed SNMP: Max version number",
+      "description": "Send malformed SNMP packet: Max version number",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:09:10.034169",
+      "details": {
+        "packet_size": 18,
+        "packet_hex": "30100201ff04067075626c6963a003020101",
+        "response_size": 0
+      }
+    },
+    {
+      "id": 63,
+      "category": "snmp",
+      "name": "Malformed SNMP: Random garbage (128B)",
+      "description": "Send malformed SNMP packet: Random garbage (128B)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:09:12.037167",
+      "details": {
+        "packet_size": 128,
+        "packet_hex": "aed0b91ef1e6b23c3796c2d854b8667c4a66ade1b02577f9cb7798068842335612f71959d6fb261e44e1c231b7544fd9d4b778dd506b2265c31ee64021eac5096da8cde97e61702dda2bf82bc216367982f3fd64e0fe34af51e70e2c1d78a07832bcac2b",
+        "response_size": 0
+      }
+    },
+    {
+      "id": 64,
+      "category": "snmp",
+      "name": "Malformed SNMP: All 0xFF (64B)",
+      "description": "Send malformed SNMP packet: All 0xFF (64B)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:09:14.040165",
+      "details": {
+        "packet_size": 64,
+        "packet_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "response_size": 0
+      }
+    },
+    {
+      "id": 65,
+      "category": "snmp",
+      "name": "Malformed SNMP: BER length overflow",
+      "description": "Send malformed SNMP packet: BER length overflow",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:09:16.043163",
+      "details": {
+        "packet_size": 106,
+        "packet_hex": "3084ffffffff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "response_size": 0
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "LOW",
+      "title": "SNMPv1 enabled",
+      "description": "SNMPv1 is active \u2014 no encryption, community strings in cleartext",
+      "timestamp": "2026-02-16T00:08:49.040671",
+      "cwe": "CWE-319"
+    },
+    {
+      "id": 2,
+      "severity": "MEDIUM",
+      "title": "SNMP extensive information disclosure",
+      "description": "Full MIB walk returned 788 OIDs, exposing detailed system, interface, and routing information",
+      "timestamp": "2026-02-16T00:08:49.580401",
+      "cwe": "CWE-200"
+    },
+    {
+      "id": 3,
+      "severity": "MEDIUM",
+      "title": "SNMP amplification factor 23x",
+      "description": "GetBulk with max-repetitions=50 yields 23x amplification",
+      "timestamp": "2026-02-16T00:08:56.009185",
+      "cwe": "CWE-406"
+    }
+  ]
+}

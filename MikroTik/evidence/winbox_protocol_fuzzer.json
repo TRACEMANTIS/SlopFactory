@@ -1,0 +1,2385 @@
+{
+  "metadata": {
+    "script": "winbox_protocol_fuzzer.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 7,
+    "start_time": "2026-02-15T23:47:13.564733",
+    "end_time": "2026-02-16T00:00:31.449591",
+    "total_tests": 158,
+    "anomalies": 155,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "28m46s",
+    "router_log_count": 75,
+    "router_interesting_events": 31,
+    "final_health": {
+      "alive": true,
+      "uptime": "42m5s",
+      "cpu_load": "0",
+      "free_memory": "840876032",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "frame_header",
+      "name": "frame_size_zero",
+      "description": "M2 frame with length=0 (empty frame)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:47:18.882073",
+      "details": {
+        "payload_size": 2,
+        "payload_hex": "0000",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 2,
+      "category": "frame_header",
+      "name": "frame_size_1",
+      "description": "M2 frame with length=1 (single zero byte body)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:47:24.183421",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "000100",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 3,
+      "category": "frame_header",
+      "name": "frame_size_2",
+      "description": "M2 frame with length=2",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:47:29.484769",
+      "details": {
+        "payload_size": 4,
+        "payload_hex": "00020000",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 4,
+      "category": "frame_header",
+      "name": "frame_size_65535",
+      "description": "M2 frame claiming length=65535 with short body",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:47:34.786117",
+      "details": {
+        "payload_size": 18,
+        "payload_hex": "ffff08ff00010000000208ff000300000007",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 5,
+      "category": "frame_header",
+      "name": "frame_size_exact",
+      "description": "M2 frame with correct length",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:47:40.087465",
+      "details": {
+        "payload_size": 18,
+        "payload_hex": "001008ff00010000000208ff000300000007",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 6,
+      "category": "frame_header",
+      "name": "size_mismatch_100_10",
+      "description": "Frame says 100 bytes but only 10 sent",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:47:45.388813",
+      "details": {
+        "payload_size": 12,
+        "payload_hex": "006408ff00010000000208ff",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 7,
+      "category": "frame_header",
+      "name": "size_mismatch_10_1000",
+      "description": "Frame says 10 bytes but 1000+ sent",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:47:50.690161",
+      "details": {
+        "payload_size": 1018,
+        "payload_hex": "000a08ff00010000000208ff00030000000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 8,
+      "category": "frame_header",
+      "name": "size_mismatch_5_100",
+      "description": "Frame says 5 but 100 bytes sent",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:47:55.991509",
+      "details": {
+        "payload_size": 102,
+        "payload_hex": "00050000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 9,
+      "category": "frame_header",
+      "name": "three_frames_backtoback",
+      "description": "Three valid M2 frames sent consecutively",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:47:56.287361",
+      "details": {
+        "payload_size": 102,
+        "payload_hex": "002008ff00010000000208ff00030000000708ff00070000000108ff000600000000002008ff00010000000208ff00030000000708ff00070000000108ff000600000000002008ff00010000000208ff00030000000708ff00070000000108ff00060000",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 10,
+      "category": "frame_header",
+      "name": "20_frames_rapid",
+      "description": "20 valid M2 frames in one send",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:47:56.591209",
+      "details": {
+        "payload_size": 680,
+        "payload_hex": "002008ff00010000000208ff00030000000708ff00070000000108ff000600000000002008ff00010000000208ff00030000000708ff00070000000108ff000600000000002008ff00010000000208ff00030000000708ff00070000000108ff00060000",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 11,
+      "category": "frame_header",
+      "name": "fragmented_frame",
+      "description": "Send first half of frame, wait 1s, send rest",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:47:58.094457",
+      "details": {
+        "first_half": 17,
+        "total": 34,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 12,
+      "category": "frame_header",
+      "name": "length_only_no_body",
+      "description": "Send only 2-byte length prefix (100) with no body",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:48:05.102951",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 13,
+      "category": "frame_header",
+      "name": "single_byte",
+      "description": "Send single byte (incomplete 2-byte length prefix)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:48:10.416293",
+      "details": {
+        "payload_size": 1,
+        "payload_hex": "00",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 14,
+      "category": "frame_header",
+      "name": "three_bytes",
+      "description": "Three bytes: length=1 + single 0xFF body",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:48:15.717641",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "0001ff",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 15,
+      "category": "frame_header",
+      "name": "large_frame_60KB",
+      "description": "M2 frame with 60KB of random body",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:48:16.013493",
+      "details": {
+        "payload_size": 60002,
+        "payload_hex": "ea60fdb1a879dd5b940aa90f462c8b26d4fbee7691712af3e3d45be29120260e231cf6b711e0f196dcf60b2e90a8c7925af8ece8bc087991e440a46ba250b9548da82bff509649122a18becf4a55f06d27924f9d539080bd85d6e49de329ab5e037a209b",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 16,
+      "category": "frame_header",
+      "name": "little_endian_length",
+      "description": "Frame with little-endian length (wrong byte order)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:48:21.318839",
+      "details": {
+        "payload_size": 18,
+        "payload_hex": "100008ff00010000000208ff000300000007",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 17,
+      "category": "frame_header",
+      "name": "all_zeros_20",
+      "description": "20 zero bytes (could be interpreted as length=0 + more zeros)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:48:26.620187",
+      "details": {
+        "payload_size": 20,
+        "payload_hex": "0000000000000000000000000000000000000000",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 18,
+      "category": "frame_header",
+      "name": "all_ff_20",
+      "description": "20 0xFF bytes (max-length frame + garbage)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:48:31.921535",
+      "details": {
+        "payload_size": 20,
+        "payload_hex": "ffffffffffffffffffffffffffffffffffffffff",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 19,
+      "category": "frame_header",
+      "name": "http_on_winbox",
+      "description": "HTTP GET request to Winbox port (protocol confusion)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:48:37.222883",
+      "details": {
+        "payload_size": 36,
+        "payload_hex": "474554202f20485454502f312e310d0a486f73743a2031302e302e302e3131300d0a0d0a",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 20,
+      "category": "frame_header",
+      "name": "api_on_winbox",
+      "description": "RouterOS API /login sentence to Winbox port",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:48:42.528229",
+      "details": {
+        "payload_size": 8,
+        "payload_hex": "062f6c6f67696e00",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 21,
+      "category": "frame_header",
+      "name": "truncated_kv_start",
+      "description": "Frame body is just a type byte (0x08) with no key_id or value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:48:47.829577",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "000108",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 22,
+      "category": "frame_header",
+      "name": "nested_frame",
+      "description": "M2 frame wrapping another complete M2 frame",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:48:48.125429",
+      "details": {
+        "payload_size": 36,
+        "payload_hex": "0022002008ff00010000000208ff00030000000708ff00070000000108ff000600000000",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 23,
+      "category": "frame_header",
+      "name": "zero_length_frame_only",
+      "description": "Frame with length=0 and no body bytes",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:48:53.430775",
+      "details": {
+        "payload_size": 2,
+        "payload_hex": "0000",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 24,
+      "category": "frame_header",
+      "name": "abrupt_close_partial",
+      "description": "Send partial frame then close connection",
+      "result": "Connection closed mid-frame",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:48:53.926527"
+    },
+    {
+      "id": 25,
+      "category": "key_type",
+      "name": "type_0x00",
+      "description": "KV with type byte 0x00 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:48:59.239869",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 26,
+      "category": "key_type",
+      "name": "type_0x01",
+      "description": "KV with type byte 0x01 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:49:04.641167",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080100000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 27,
+      "category": "key_type",
+      "name": "type_0x02",
+      "description": "KV with type byte 0x02 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:49:09.950511",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080200000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 28,
+      "category": "key_type",
+      "name": "type_0x03",
+      "description": "KV with type byte 0x03 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:49:15.255857",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080300000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 29,
+      "category": "key_type",
+      "name": "type_0x04",
+      "description": "KV with type byte 0x04 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:49:20.569199",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080400000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 30,
+      "category": "key_type",
+      "name": "type_0x05",
+      "description": "KV with type byte 0x05 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:49:25.874545",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080500000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 31,
+      "category": "key_type",
+      "name": "type_0x06",
+      "description": "KV with type byte 0x06 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:49:31.179891",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080600000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 32,
+      "category": "key_type",
+      "name": "type_0x07",
+      "description": "KV with type byte 0x07 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:49:36.485237",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080700000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 33,
+      "category": "key_type",
+      "name": "type_0x08",
+      "description": "KV with type byte 0x08 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:49:41.790583",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080800000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 34,
+      "category": "key_type",
+      "name": "type_0x09",
+      "description": "KV with type byte 0x09 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:49:47.107923",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080900000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 35,
+      "category": "key_type",
+      "name": "type_0x0A",
+      "description": "KV with type byte 0x0A and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:49:52.413269",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080a00000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 36,
+      "category": "key_type",
+      "name": "type_0x0F",
+      "description": "KV with type byte 0x0F and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:49:57.746601",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080f00000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 37,
+      "category": "key_type",
+      "name": "type_0x10",
+      "description": "KV with type byte 0x10 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:50:03.063941",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00081000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 38,
+      "category": "key_type",
+      "name": "type_0x11",
+      "description": "KV with type byte 0x11 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:50:08.373285",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00081100000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 39,
+      "category": "key_type",
+      "name": "type_0x17",
+      "description": "KV with type byte 0x17 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:50:13.686627",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00081700000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 40,
+      "category": "key_type",
+      "name": "type_0x18",
+      "description": "KV with type byte 0x18 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:50:18.999969",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00081800000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 41,
+      "category": "key_type",
+      "name": "type_0x19",
+      "description": "KV with type byte 0x19 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:50:24.309313",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00081900000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 42,
+      "category": "key_type",
+      "name": "type_0x1F",
+      "description": "KV with type byte 0x1F and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:50:29.618657",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00081f00000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 43,
+      "category": "key_type",
+      "name": "type_0x20",
+      "description": "KV with type byte 0x20 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:50:34.928001",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00082000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 44,
+      "category": "key_type",
+      "name": "type_0x21",
+      "description": "KV with type byte 0x21 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:50:40.241343",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00082100000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 45,
+      "category": "key_type",
+      "name": "type_0x28",
+      "description": "KV with type byte 0x28 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:50:45.546689",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00082800000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 46,
+      "category": "key_type",
+      "name": "type_0x30",
+      "description": "KV with type byte 0x30 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:50:50.852035",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00083000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 47,
+      "category": "key_type",
+      "name": "type_0x40",
+      "description": "KV with type byte 0x40 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:50:56.161379",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00084000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 48,
+      "category": "key_type",
+      "name": "type_0x50",
+      "description": "KV with type byte 0x50 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:51:01.466725",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00085000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 49,
+      "category": "key_type",
+      "name": "type_0x60",
+      "description": "KV with type byte 0x60 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:51:06.772071",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00086000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 50,
+      "category": "key_type",
+      "name": "type_0x70",
+      "description": "KV with type byte 0x70 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:51:12.077417",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00087000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 51,
+      "category": "key_type",
+      "name": "type_0x80",
+      "description": "KV with type byte 0x80 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:51:17.378765",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00088000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 52,
+      "category": "key_type",
+      "name": "type_0x81",
+      "description": "KV with type byte 0x81 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:51:22.680113",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00088100000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 53,
+      "category": "key_type",
+      "name": "type_0x88",
+      "description": "KV with type byte 0x88 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:51:27.981461",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00088800000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 54,
+      "category": "key_type",
+      "name": "type_0x90",
+      "description": "KV with type byte 0x90 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:51:33.286807",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00089000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 55,
+      "category": "key_type",
+      "name": "type_0xA0",
+      "description": "KV with type byte 0xA0 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:51:38.588155",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "0008a000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 56,
+      "category": "key_type",
+      "name": "type_0xB0",
+      "description": "KV with type byte 0xB0 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:51:43.889503",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "0008b000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 57,
+      "category": "key_type",
+      "name": "type_0xC0",
+      "description": "KV with type byte 0xC0 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:51:49.194849",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "0008c000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 58,
+      "category": "key_type",
+      "name": "type_0xD0",
+      "description": "KV with type byte 0xD0 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:51:54.500195",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "0008d000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 59,
+      "category": "key_type",
+      "name": "type_0xE0",
+      "description": "KV with type byte 0xE0 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:51:59.801543",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "0008e000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 60,
+      "category": "key_type",
+      "name": "type_0xF0",
+      "description": "KV with type byte 0xF0 and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:52:05.098893",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "0008f000000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 61,
+      "category": "key_type",
+      "name": "type_0xFE",
+      "description": "KV with type byte 0xFE and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:52:10.400241",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "0008fe00000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 62,
+      "category": "key_type",
+      "name": "type_0xFF",
+      "description": "KV with type byte 0xFF and dummy u32 value",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:52:15.701589",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "0008ff00000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 63,
+      "category": "key_type",
+      "name": "type_0x01_no_key",
+      "description": "Type byte 0x01 alone (no key_id, no value)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:52:21.002937",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "000101",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 64,
+      "category": "key_type",
+      "name": "type_0x08_no_key",
+      "description": "Type byte 0x08 alone (no key_id, no value)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:52:26.360257",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "000108",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 65,
+      "category": "key_type",
+      "name": "type_0x10_no_key",
+      "description": "Type byte 0x10 alone (no key_id, no value)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:52:31.673599",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "000110",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 66,
+      "category": "key_type",
+      "name": "type_0x18_no_key",
+      "description": "Type byte 0x18 alone (no key_id, no value)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:52:36.986941",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "000118",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 67,
+      "category": "key_id",
+      "name": "keyid_id_000000",
+      "description": "U32 KV with key_id=0x000000",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:52:42.300283",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080800000041414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 68,
+      "category": "key_id",
+      "name": "keyid_id_000001",
+      "description": "U32 KV with key_id=0x000001",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:52:47.609627",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080800000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 69,
+      "category": "key_id",
+      "name": "keyid_id_000002",
+      "description": "U32 KV with key_id=0x000002",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:52:52.918971",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080800000241414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 70,
+      "category": "key_id",
+      "name": "keyid_id_000010",
+      "description": "U32 KV with key_id=0x000010",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:52:58.228315",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080800001041414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 71,
+      "category": "key_id",
+      "name": "keyid_id_000100",
+      "description": "U32 KV with key_id=0x000100",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:53:03.533661",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080800010041414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 72,
+      "category": "key_id",
+      "name": "keyid_id_001000",
+      "description": "U32 KV with key_id=0x001000",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:53:08.843005",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080800100041414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 73,
+      "category": "key_id",
+      "name": "keyid_id_010000",
+      "description": "U32 KV with key_id=0x010000",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:53:14.148351",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080801000041414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 74,
+      "category": "key_id",
+      "name": "keyid_id_100000",
+      "description": "U32 KV with key_id=0x100000",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:53:19.457695",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080810000041414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 75,
+      "category": "key_id",
+      "name": "keyid_id_7FFFFF",
+      "description": "U32 KV with key_id=0x7FFFFF",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:53:24.771037",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "0008087fffff41414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 76,
+      "category": "key_id",
+      "name": "keyid_id_800000",
+      "description": "U32 KV with key_id=0x800000",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:53:30.076383",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00080880000041414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 77,
+      "category": "key_id",
+      "name": "keyid_id_FEFFFF",
+      "description": "U32 KV with key_id=0xFEFFFF",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:53:35.385727",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "000808feffff41414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 78,
+      "category": "key_id",
+      "name": "keyid_id_FF0000",
+      "description": "U32 KV with key_id=0xFF0000",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:53:40.699069",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "000808ff000041414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 79,
+      "category": "key_id",
+      "name": "keyid_id_SYS_TO",
+      "description": "U32 KV with key_id=0xFF0001",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:53:46.000417",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "000808ff000141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 80,
+      "category": "key_id",
+      "name": "keyid_id_SYS_FROM",
+      "description": "U32 KV with key_id=0xFF0002",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:53:51.309761",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "000808ff000241414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 81,
+      "category": "key_id",
+      "name": "keyid_id_SYS_CMD",
+      "description": "U32 KV with key_id=0xFF0003",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:53:56.619105",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "000808ff000341414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 82,
+      "category": "key_id",
+      "name": "keyid_id_SYS_TYPE",
+      "description": "U32 KV with key_id=0xFF0005",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:54:01.928449",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "000808ff000541414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 83,
+      "category": "key_id",
+      "name": "keyid_id_SYS_TAG",
+      "description": "U32 KV with key_id=0xFF0006",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:54:07.237793",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "000808ff000641414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 84,
+      "category": "key_id",
+      "name": "keyid_id_SYS_REQ_ID",
+      "description": "U32 KV with key_id=0xFF0007",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:54:12.551135",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "000808ff000741414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 85,
+      "category": "key_id",
+      "name": "keyid_id_FFFF00",
+      "description": "U32 KV with key_id=0xFFFF00",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:54:17.860479",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "000808ffff0041414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 86,
+      "category": "key_id",
+      "name": "keyid_id_FFFFFF",
+      "description": "U32 KV with key_id=0xFFFFFF",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:54:23.169823",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "000808ffffff41414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 87,
+      "category": "value_fuzz",
+      "name": "string_len_0",
+      "description": "String KV with length=0 (empty string)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:54:28.483165",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "000810ff000100000000",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 88,
+      "category": "routing",
+      "name": "sys_to_0",
+      "description": "Request with SYS_TO=0 (0x0)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:54:33.796507",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000008ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 89,
+      "category": "routing",
+      "name": "sys_to_1",
+      "description": "Request with SYS_TO=1 (0x1)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:54:39.197805",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000108ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 90,
+      "category": "routing",
+      "name": "sys_to_2",
+      "description": "Request with SYS_TO=2 (0x2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:54:44.511147",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 91,
+      "category": "routing",
+      "name": "sys_to_3",
+      "description": "Request with SYS_TO=3 (0x3)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:54:49.816493",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000308ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 92,
+      "category": "routing",
+      "name": "sys_to_4",
+      "description": "Request with SYS_TO=4 (0x4)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:54:55.117841",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000408ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 93,
+      "category": "routing",
+      "name": "sys_to_5",
+      "description": "Request with SYS_TO=5 (0x5)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:55:00.427185",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000508ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 94,
+      "category": "routing",
+      "name": "sys_to_6",
+      "description": "Request with SYS_TO=6 (0x6)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:55:05.744525",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000608ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 95,
+      "category": "routing",
+      "name": "sys_to_7",
+      "description": "Request with SYS_TO=7 (0x7)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:55:11.053869",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000708ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 96,
+      "category": "routing",
+      "name": "sys_to_8",
+      "description": "Request with SYS_TO=8 (0x8)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:55:16.355217",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000808ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 97,
+      "category": "routing",
+      "name": "sys_to_9",
+      "description": "Request with SYS_TO=9 (0x9)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:55:21.656565",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000908ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 98,
+      "category": "routing",
+      "name": "sys_to_10",
+      "description": "Request with SYS_TO=10 (0xA)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:55:26.957913",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000a08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 99,
+      "category": "routing",
+      "name": "sys_to_11",
+      "description": "Request with SYS_TO=11 (0xB)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:55:32.259261",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000b08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 100,
+      "category": "routing",
+      "name": "sys_to_12",
+      "description": "Request with SYS_TO=12 (0xC)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:55:37.560609",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000c08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 101,
+      "category": "routing",
+      "name": "sys_to_13",
+      "description": "Request with SYS_TO=13 (0xD)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:55:43.917429",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000d08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 102,
+      "category": "routing",
+      "name": "sys_to_14",
+      "description": "Request with SYS_TO=14 (0xE)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:55:49.226773",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000e08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 103,
+      "category": "routing",
+      "name": "sys_to_15",
+      "description": "Request with SYS_TO=15 (0xF)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:55:54.532119",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000f08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 104,
+      "category": "routing",
+      "name": "sys_to_16",
+      "description": "Request with SYS_TO=16 (0x10)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:55:59.845461",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000001008ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 105,
+      "category": "routing",
+      "name": "sys_to_17",
+      "description": "Request with SYS_TO=17 (0x11)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:56:05.146809",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000001108ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 106,
+      "category": "routing",
+      "name": "sys_to_18",
+      "description": "Request with SYS_TO=18 (0x12)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:56:10.448157",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000001208ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 107,
+      "category": "routing",
+      "name": "sys_to_19",
+      "description": "Request with SYS_TO=19 (0x13)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:56:15.749505",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000001308ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 108,
+      "category": "routing",
+      "name": "sys_to_20",
+      "description": "Request with SYS_TO=20 (0x14)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:56:21.054851",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000001408ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 109,
+      "category": "routing",
+      "name": "sys_to_21",
+      "description": "Request with SYS_TO=21 (0x15)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:56:26.364195",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000001508ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 110,
+      "category": "routing",
+      "name": "sys_to_22",
+      "description": "Request with SYS_TO=22 (0x16)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:56:31.673539",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000001608ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 111,
+      "category": "routing",
+      "name": "sys_to_23",
+      "description": "Request with SYS_TO=23 (0x17)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:56:36.982883",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000001708ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 112,
+      "category": "routing",
+      "name": "sys_to_24",
+      "description": "Request with SYS_TO=24 (0x18)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:56:42.292227",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000001808ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 113,
+      "category": "routing",
+      "name": "sys_to_50",
+      "description": "Request with SYS_TO=50 (0x32)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:56:47.593575",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000003208ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 114,
+      "category": "routing",
+      "name": "sys_to_100",
+      "description": "Request with SYS_TO=100 (0x64)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:56:52.902919",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000006408ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 115,
+      "category": "routing",
+      "name": "sys_to_127",
+      "description": "Request with SYS_TO=127 (0x7F)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:56:58.212263",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000007f08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 116,
+      "category": "routing",
+      "name": "sys_to_128",
+      "description": "Request with SYS_TO=128 (0x80)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:57:03.517609",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000008008ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 117,
+      "category": "routing",
+      "name": "sys_to_200",
+      "description": "Request with SYS_TO=200 (0xC8)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:57:08.830951",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff0001000000c808ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 118,
+      "category": "routing",
+      "name": "sys_to_255",
+      "description": "Request with SYS_TO=255 (0xFF)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:57:14.132299",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff0001000000ff08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 119,
+      "category": "routing",
+      "name": "sys_to_256",
+      "description": "Request with SYS_TO=256 (0x100)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:57:19.445641",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000010008ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 120,
+      "category": "routing",
+      "name": "sys_to_1000",
+      "description": "Request with SYS_TO=1000 (0x3E8)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:57:24.754985",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff0001000003e808ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 121,
+      "category": "routing",
+      "name": "sys_to_65535",
+      "description": "Request with SYS_TO=65535 (0xFFFF)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:57:30.064329",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000ffff08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 122,
+      "category": "routing",
+      "name": "sys_to_0x00FFFFFF",
+      "description": "Request with SYS_TO=16777215 (0xFFFFFF)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:57:35.373673",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff000100ffffff08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 123,
+      "category": "routing",
+      "name": "sys_to_0xFFFFFFFF",
+      "description": "Request with SYS_TO=4294967295 (0xFFFFFFFF)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:57:40.687015",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff0001ffffffff08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 124,
+      "category": "routing",
+      "name": "sys_cmd_0",
+      "description": "Request with SYS_CMD=0 (SYS_TO=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:57:46.000357",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff00030000000008ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 125,
+      "category": "routing",
+      "name": "sys_cmd_1",
+      "description": "Request with SYS_CMD=1 (SYS_TO=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:57:51.309701",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff00030000000108ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 126,
+      "category": "routing",
+      "name": "sys_cmd_2",
+      "description": "Request with SYS_CMD=2 (SYS_TO=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:57:56.615047",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff00030000000208ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 127,
+      "category": "routing",
+      "name": "sys_cmd_3",
+      "description": "Request with SYS_CMD=3 (SYS_TO=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:01.916395",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff00030000000308ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 128,
+      "category": "routing",
+      "name": "sys_cmd_4",
+      "description": "Request with SYS_CMD=4 (SYS_TO=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:02.212247",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff00030000000408ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 129,
+      "category": "routing",
+      "name": "sys_cmd_5",
+      "description": "Request with SYS_CMD=5 (SYS_TO=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:07.513595",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff00030000000508ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 130,
+      "category": "routing",
+      "name": "sys_cmd_6",
+      "description": "Request with SYS_CMD=6 (SYS_TO=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:07.817443",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff00030000000608ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 131,
+      "category": "routing",
+      "name": "sys_cmd_7",
+      "description": "Request with SYS_CMD=7 (SYS_TO=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:13.118791",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 132,
+      "category": "routing",
+      "name": "sys_cmd_8",
+      "description": "Request with SYS_CMD=8 (SYS_TO=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:18.420139",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff00030000000808ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 133,
+      "category": "routing",
+      "name": "sys_cmd_255",
+      "description": "Request with SYS_CMD=255 (SYS_TO=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:23.721487",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff0003000000ff08ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 134,
+      "category": "routing",
+      "name": "sys_cmd_65535",
+      "description": "Request with SYS_CMD=65535 (SYS_TO=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:29.038827",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff00030000ffff08ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 135,
+      "category": "routing",
+      "name": "sys_cmd_4294967295",
+      "description": "Request with SYS_CMD=4294967295 (SYS_TO=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:34.348171",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "001808ff00010000000208ff0003ffffffff08ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 136,
+      "category": "routing",
+      "name": "sys_from_0x0",
+      "description": "Request with SYS_FROM=0x0",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:39.657515",
+      "details": {
+        "payload_size": 34,
+        "payload_hex": "002008ff00010000000208ff00020000000008ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 137,
+      "category": "routing",
+      "name": "sys_from_0x1",
+      "description": "Request with SYS_FROM=0x1",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:44.966859",
+      "details": {
+        "payload_size": 34,
+        "payload_hex": "002008ff00010000000208ff00020000000108ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 138,
+      "category": "routing",
+      "name": "sys_from_0x2",
+      "description": "Request with SYS_FROM=0x2",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:50.280201",
+      "details": {
+        "payload_size": 34,
+        "payload_hex": "002008ff00010000000208ff00020000000208ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 139,
+      "category": "routing",
+      "name": "sys_from_0xFF",
+      "description": "Request with SYS_FROM=0xFF",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:58:55.589545",
+      "details": {
+        "payload_size": 34,
+        "payload_hex": "002008ff00010000000208ff0002000000ff08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 140,
+      "category": "routing",
+      "name": "sys_from_0xFFFF",
+      "description": "Request with SYS_FROM=0xFFFF",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:00.898889",
+      "details": {
+        "payload_size": 34,
+        "payload_hex": "002008ff00010000000208ff00020000ffff08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 141,
+      "category": "routing",
+      "name": "sys_from_0xFFFFFFFF",
+      "description": "Request with SYS_FROM=0xFFFFFFFF",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:06.204235",
+      "details": {
+        "payload_size": 34,
+        "payload_hex": "002008ff00010000000208ff0002ffffffff08ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 142,
+      "category": "routing",
+      "name": "no_sys_to",
+      "description": "Request without SYS_TO (missing routing)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:11.513579",
+      "details": {
+        "payload_size": 18,
+        "payload_hex": "001008ff00030000000708ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 143,
+      "category": "routing",
+      "name": "no_sys_cmd",
+      "description": "Request without SYS_CMD",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:16.822923",
+      "details": {
+        "payload_size": 18,
+        "payload_hex": "001008ff00010000000208ff000700000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 144,
+      "category": "combination",
+      "name": "50_kvs_u32",
+      "description": "Frame with 50 u32 KV pairs",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:17.122773",
+      "details": {
+        "payload_size": 402,
+        "payload_hex": "01900800000000000000080000010000006408000002000000c8080000030000012c080000040000019008000005000001f4080000060000025808000007000002bc080000080000032008000009000003840800000a000003e80800000b0000044c0800",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 145,
+      "category": "combination",
+      "name": "100_kvs_string",
+      "description": "Frame with 100 string KV pairs",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:22.432117",
+      "details": {
+        "payload_size": 1592,
+        "payload_hex": "0636100000000000000776616c75655f30100000010000000776616c75655f31100000020000000776616c75655f32100000030000000776616c75655f33100000040000000776616c75655f34100000050000000776616c75655f351000000600000007",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 146,
+      "category": "combination",
+      "name": "20_duplicate_sys_to",
+      "description": "Frame with 20 duplicate SYS_TO keys (different values)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:27.741461",
+      "details": {
+        "payload_size": 162,
+        "payload_hex": "00a008ff00010000003208ff0001000000e308ff00010000000908ff00010000002208ff0001000000f808ff00010000009708ff00010000006008ff0001000000c108ff00010000007608ff00010000002c08ff0001000000a408ff00010000001a08ff",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 147,
+      "category": "combination",
+      "name": "mixed_types_same_key",
+      "description": "Same key_id with u32, string, bool, and u64 types",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:33.054803",
+      "details": {
+        "payload_size": 40,
+        "payload_hex": "0026080000010000002a100000010000000568656c6c6f0100000101090000010000000000003039",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 148,
+      "category": "combination",
+      "name": "interleaved_valid_garbage",
+      "description": "Interleaved valid KVs and random garbage bytes",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:38.360149",
+      "details": {
+        "payload_size": 322,
+        "payload_hex": "014008ff0001000000023ed3590aa613d09408ff000300000007fe000001ffffffff08ff000100000002b2359bfbcd35de3a08ff000300000007fe000001ffffffff08ff000100000002f86129672e7b0fa108ff000300000007fe000001ffffffff08ff",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 149,
+      "category": "combination",
+      "name": "200_bools",
+      "description": "Frame with 200 identical bool KV pairs",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:43.673491",
+      "details": {
+        "payload_size": 1002,
+        "payload_hex": "03e80100000101010000010101000001010100000101010000010101000001010100000101010000010101000001010100000101010000010101000001010100000101010000010101000001010100000101010000010101000001010100000101010000",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 150,
+      "category": "combination",
+      "name": "string_path_traversal",
+      "description": "String KV containing path traversal",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:48.978837",
+      "details": {
+        "payload_size": 45,
+        "payload_hex": "002b08ff00010000000208ff00030000000710000001000000132e2e2f2e2e2f2e2e2f6574632f706173737764",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 151,
+      "category": "combination",
+      "name": "string_cmd_injection",
+      "description": "String KV containing command injection attempt",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:54.288181",
+      "details": {
+        "payload_size": 42,
+        "payload_hex": "002808ff00010000000208ff00030000000710000001000000103b202f73797374656d2f7265626f6f74",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 152,
+      "category": "combination",
+      "name": "max_complexity",
+      "description": "Frame with all system KVs + 30 extra string attributes",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:59:59.597525",
+      "details": {
+        "payload_size": 4090,
+        "payload_hex": "0ff808ff00010000000208ff00020000000008ff00030000000708ff00050000000008ff00060000000008ff0007000000011000010000000078746573745f76616c75655f30746573745f76616c75655f30746573745f76616c75655f30746573745f76",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 153,
+      "category": "combination",
+      "name": "alternating_sizes",
+      "description": "10 alternating small and large frames",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:04.906869",
+      "details": {
+        "payload_size": 5100,
+        "payload_hex": "000808ff00010000000203f010000001000003e84141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 154,
+      "category": "combination",
+      "name": "all_types_once",
+      "description": "Frame containing one KV of every known type",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:10.216213",
+      "details": {
+        "payload_size": 74,
+        "payload_hex": "00480100000101080000020000002a090000030000000000bc614e100000040000000b746573745f737472696e6720000005000000040001020318000006000000080800000100000001",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 155,
+      "category": "combination",
+      "name": "all_zeros_body",
+      "description": "Frame with 40 zero bytes as body (ambiguous parsing)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:15.525557",
+      "details": {
+        "payload_size": 42,
+        "payload_hex": "002800000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 156,
+      "category": "combination",
+      "name": "rapid_20_handlers",
+      "description": "20 frames targeting handlers 0-19 in sequence",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:20.834901",
+      "details": {
+        "payload_size": 360,
+        "payload_hex": "001008ff00010000000008ff000300000007001008ff00010000000108ff000300000007001008ff00010000000208ff000300000007001008ff00010000000308ff000300000007001008ff00010000000408ff000300000007001008ff000100000005",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 157,
+      "category": "combination",
+      "name": "huge_string_32KB",
+      "description": "Frame with a single 32KB string KV",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:26.136249",
+      "details": {
+        "payload_size": 32778,
+        "payload_hex": "80081000000100008000585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    },
+    {
+      "id": 158,
+      "category": "combination",
+      "name": "deadbeef_frame",
+      "description": "Frame with 0xDEADBEEF CAFEBABE as body",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:31.445593",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "0008deadbeefcafebabe",
+        "response_size": 0,
+        "response_preview": "(empty)"
+      }
+    }
+  ],
+  "findings": []
+}

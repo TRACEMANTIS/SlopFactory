@@ -1,0 +1,244 @@
+{
+  "metadata": {
+    "assessment": "CrestronFW2x Crestron FW 2.x",
+    "firmware": "DMPS3 AirMedia PufVersion 1.5010.00023",
+    "script": "cf4_ssh_scp_test",
+    "description": "SSH and SCP vulnerability testing on authorized Crestron FW 2.x fleet",
+    "start_time": "2026-03-04T02:46:40.863009+00:00"
+  },
+  "end_time": "2026-03-04T02:52:47.804263+00:00",
+  "summary": {
+    "total_tests": 14,
+    "total_findings": 2,
+    "total_anomalies": 0,
+    "findings_by_severity": {
+      "INFO": 1,
+      "HIGH": 1
+    }
+  },
+  "tests": [
+    {
+      "id": "SSH_BANNER_[REDACTED-IP]",
+      "description": "SSH banner grab on [REDACTED-IP]:22",
+      "timestamp": "2026-03-04T02:52:22.575655+00:00",
+      "request": {
+        "host": "[REDACTED-IP]",
+        "port": 22,
+        "action": "TCP connect + recv banner"
+      },
+      "response": {
+        "banner": "SSH-2.0-OpenSSH_7.8",
+        "is_crestron_sshd": false
+      },
+      "result": "UNEXPECTED: SSH-2.0-OpenSSH_7.8"
+    },
+    {
+      "id": "SSH_AUTH_[REDACTED-IP]",
+      "description": "SSH auth test admin:admin on [REDACTED-IP]",
+      "timestamp": "2026-03-04T02:52:23.932333+00:00",
+      "request": {
+        "host": "[REDACTED-IP]",
+        "username": "admin",
+        "password": "admin"
+      },
+      "response": {
+        "auth_result": "AUTH_FAILED"
+      },
+      "result": "AUTH_FAILED"
+    },
+    {
+      "id": "SSH_EMPTY_PASS_[REDACTED-IP]",
+      "description": "SSH empty password test (admin:'') on [REDACTED-IP]",
+      "timestamp": "2026-03-04T02:52:25.313023+00:00",
+      "request": {
+        "host": "[REDACTED-IP]",
+        "username": "admin",
+        "password": "(empty)"
+      },
+      "response": {
+        "auth_result": "AUTH_FAILED"
+      },
+      "result": "AUTH_FAILED"
+    },
+    {
+      "id": "SSH_ROOT_ADMIN_[REDACTED-IP]",
+      "description": "SSH root:admin login test on [REDACTED-IP]",
+      "timestamp": "2026-03-04T02:52:26.657695+00:00",
+      "request": {
+        "host": "[REDACTED-IP]",
+        "username": "root",
+        "password": "admin"
+      },
+      "response": {
+        "auth_result": "AUTH_FAILED"
+      },
+      "result": "AUTH_FAILED"
+    },
+    {
+      "id": "SSH_ROOT_EMPTY_[REDACTED-IP]",
+      "description": "SSH root empty password test on [REDACTED-IP]",
+      "timestamp": "2026-03-04T02:52:28.082407+00:00",
+      "request": {
+        "host": "[REDACTED-IP]",
+        "username": "root",
+        "password": "(empty)"
+      },
+      "response": {
+        "auth_result": "AUTH_FAILED"
+      },
+      "result": "AUTH_FAILED"
+    },
+    {
+      "id": "SCP_ARGINJECT_[REDACTED-IP]_SKIPPED",
+      "description": "SCP argument injection skipped on [REDACTED-IP] \u2014 SSH auth failed",
+      "timestamp": "2026-03-04T02:52:29.082907+00:00",
+      "request": {
+        "host": "[REDACTED-IP]"
+      },
+      "response": {
+        "reason": "Cannot test SCP without SSH authentication"
+      },
+      "result": "SKIPPED"
+    },
+    {
+      "id": "CTP_CONSOLE_[REDACTED-IP]",
+      "description": "CTP console connection (port 41795) on [REDACTED-IP]",
+      "timestamp": "2026-03-04T02:52:35.085907+00:00",
+      "request": {
+        "host": "[REDACTED-IP]",
+        "port": 41795
+      },
+      "response": {
+        "error": "Connection timed out"
+      },
+      "result": "CTP_TIMEOUT"
+    },
+    {
+      "id": "SSH_BANNER_[REDACTED-IP]",
+      "description": "SSH banner grab on [REDACTED-IP]:22",
+      "timestamp": "2026-03-04T02:52:36.442585+00:00",
+      "request": {
+        "host": "[REDACTED-IP]",
+        "port": 22,
+        "action": "TCP connect + recv banner"
+      },
+      "response": {
+        "banner": "SSH-2.0-CrestronSSH",
+        "is_crestron_sshd": true
+      },
+      "result": "CRESTRON_SSHD_CONFIRMED"
+    },
+    {
+      "id": "SSH_AUTH_[REDACTED-IP]",
+      "description": "SSH auth test admin:admin on [REDACTED-IP]",
+      "timestamp": "2026-03-04T02:52:38.235481+00:00",
+      "request": {
+        "host": "[REDACTED-IP]",
+        "username": "admin",
+        "password": "admin"
+      },
+      "response": {
+        "auth_result": "AUTH_FAILED"
+      },
+      "result": "AUTH_FAILED"
+    },
+    {
+      "id": "SSH_EMPTY_PASS_[REDACTED-IP]",
+      "description": "SSH empty password test (admin:'') on [REDACTED-IP]",
+      "timestamp": "2026-03-04T02:52:39.960343+00:00",
+      "request": {
+        "host": "[REDACTED-IP]",
+        "username": "admin",
+        "password": "(empty)"
+      },
+      "response": {
+        "auth_result": "AUTH_FAILED"
+      },
+      "result": "AUTH_FAILED"
+    },
+    {
+      "id": "SSH_ROOT_ADMIN_[REDACTED-IP]",
+      "description": "SSH root:admin login test on [REDACTED-IP]",
+      "timestamp": "2026-03-04T02:52:41.577151+00:00",
+      "request": {
+        "host": "[REDACTED-IP]",
+        "username": "root",
+        "password": "admin"
+      },
+      "response": {
+        "auth_result": "AUTH_FAILED"
+      },
+      "result": "AUTH_FAILED"
+    },
+    {
+      "id": "SSH_ROOT_EMPTY_[REDACTED-IP]",
+      "description": "SSH root empty password test on [REDACTED-IP]",
+      "timestamp": "2026-03-04T02:52:43.125925+00:00",
+      "request": {
+        "host": "[REDACTED-IP]",
+        "username": "root",
+        "password": "(empty)"
+      },
+      "response": {
+        "auth_result": "AUTH_FAILED"
+      },
+      "result": "AUTH_FAILED"
+    },
+    {
+      "id": "SCP_ARGINJECT_[REDACTED-IP]_SKIPPED",
+      "description": "SCP argument injection skipped on [REDACTED-IP] \u2014 SSH auth failed",
+      "timestamp": "2026-03-04T02:52:44.222473+00:00",
+      "request": {
+        "host": "[REDACTED-IP]"
+      },
+      "response": {
+        "reason": "Cannot test SCP without SSH authentication"
+      },
+      "result": "SKIPPED"
+    },
+    {
+      "id": "CTP_CONSOLE_[REDACTED-IP]",
+      "description": "CTP console connection (port 41795) on [REDACTED-IP]",
+      "timestamp": "2026-03-04T02:52:46.779751+00:00",
+      "request": {
+        "host": "[REDACTED-IP]",
+        "port": 41795,
+        "command": "VER"
+      },
+      "response": {
+        "banner": "The server has exceeded Max Connections.\r\n",
+        "ver_response": "",
+        "banner_hex": "5468652073657276657220686173206578636565646564204d617820436f6e6e"
+      },
+      "result": "CTP_CONNECTED"
+    }
+  ],
+  "findings": [
+    {
+      "id": "[REDACTED-ID]_SSH-BANNER-[REDACTED-IP]",
+      "severity": "INFO",
+      "title": "Crestron custom SSH daemon identified on [REDACTED-IP]",
+      "details": {
+        "banner": "SSH-2.0-CrestronSSH",
+        "note": "Custom Dropbear SSH with sshShell.sh handler",
+        "implication": "Non-standard SSH implementation may have custom vulnerabilities"
+      },
+      "evidence": {},
+      "timestamp": "2026-03-04T02:52:36.442585+00:00"
+    },
+    {
+      "id": "[REDACTED-ID]_CTP-UNAUTH-[REDACTED-IP]",
+      "severity": "HIGH",
+      "title": "Unauthenticated CTP console access on [REDACTED-IP]:41795",
+      "details": {
+        "banner": "The server has exceeded Max Connections.\r\n",
+        "ver_response": "",
+        "note": "CTP console accepts connections without authentication",
+        "impact": "Device enumeration, configuration changes, potential command injection"
+      },
+      "evidence": {},
+      "timestamp": "2026-03-04T02:52:46.779751+00:00"
+    }
+  ],
+  "anomalies": []
+}

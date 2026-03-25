@@ -1,0 +1,164 @@
+{
+  "metadata": {
+    "script": "generate_report.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 10,
+    "start_time": "2026-02-16T01:55:26.894189",
+    "end_time": "2026-02-16T01:55:26.926173",
+    "total_tests": 6,
+    "anomalies": 0,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "32m49s",
+    "router_log_count": 99,
+    "router_interesting_events": 5,
+    "final_health": {
+      "alive": true,
+      "uptime": "32m49s",
+      "cpu_load": "0",
+      "free_memory": "837517312",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "loading",
+      "name": "evidence_files",
+      "description": "Load evidence JSON files",
+      "result": "Loaded 48 files",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:55:26.918177",
+      "details": {
+        "files": [
+          "bandwidth_test_attacks.json",
+          "binary_checksec.json",
+          "cve_regression.json",
+          "discovery_attacks.json",
+          "dns_snmp_attacks.json",
+          "dos_resilience.json",
+          "multi_service_fuzzer.json",
+          "novel_api_deep.json",
+          "novel_rest_deep.json",
+          "novel_webfig_deep.json",
+          "novel_winbox_deep.json",
+          "recon_network.json",
+          "rest_api_attacks.json",
+          "rest_json_fuzzer.json",
+          "ros_api_attacks.json",
+          "ros_api_boofuzz.json",
+          "ros_api_fuzzer.json",
+          "router_logs_bandwidth_test_attacks.json",
+          "router_logs_cve_regression.json",
+          "router_logs_discovery_attacks.json",
+          "router_logs_dns_snmp_attacks.json",
+          "router_logs_dos_resilience.json",
+          "router_logs_multi_service_fuzzer.json",
+          "router_logs_novel_api_deep.json",
+          "router_logs_novel_rest_deep.json",
+          "router_logs_novel_webfig_deep.json",
+          "router_logs_novel_winbox_deep.json",
+          "router_logs_recon_network.json",
+          "router_logs_rest_api_attacks.json",
+          "router_logs_rest_json_fuzzer.json",
+          "router_logs_ros_api_attacks.json",
+          "router_logs_ros_api_boofuzz.json",
+          "router_logs_ros_api_fuzzer.json",
+          "router_logs_ssh_ftp_telnet_attacks.json",
+          "router_logs_static_analysis.json",
+          "router_logs_webfig_auth.json",
+          "router_logs_webfig_http_fuzzer.json",
+          "router_logs_webfig_session.json",
+          "router_logs_winbox_attacks.json",
+          "router_logs_winbox_protocol_fuzzer.json",
+          "router_monitor_alerts.json",
+          "ssh_ftp_telnet_attacks.json",
+          "static_analysis.json",
+          "webfig_auth.json",
+          "webfig_http_fuzzer.json",
+          "webfig_session.json",
+          "winbox_attacks.json",
+          "winbox_protocol_fuzzer.json"
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "category": "loading",
+      "name": "router_logs",
+      "description": "Load router log files",
+      "result": "Loaded 23 log files",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:55:26.922175"
+    },
+    {
+      "id": 3,
+      "category": "aggregation",
+      "name": "metrics",
+      "description": "Aggregate assessment metrics",
+      "result": "3541 tests, 42 findings",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:55:26.922175",
+      "details": {
+        "total_tests": 3541,
+        "total_anomalies": 649,
+        "total_findings": 42,
+        "findings_by_severity": {
+          "CRITICAL": 11,
+          "MEDIUM": 16,
+          "LOW": 6,
+          "HIGH": 8,
+          "INFO": 1
+        },
+        "scripts_count": 25,
+        "crashes": 0
+      }
+    },
+    {
+      "id": 4,
+      "category": "analysis",
+      "name": "router_logs",
+      "description": "Analyze router-side logs",
+      "result": "1762 entries, 476 interesting",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:55:26.922175",
+      "details": {
+        "total_entries": 1762,
+        "total_interesting": 476,
+        "categories": {
+          "system,info": 745,
+          "interface,info": 44,
+          "dhcp,info": 22,
+          "system,info,account": 402,
+          "system,error,critical": 463,
+          "fetch,info": 18,
+          "fetch,error": 10,
+          "certificate,info": 2
+        }
+      }
+    },
+    {
+      "id": 5,
+      "category": "generation",
+      "name": "report_file",
+      "description": "Generate markdown report",
+      "result": "Written to /home/[REDACTED]/Desktop/[REDACTED-PATH]/MikroTik/[REDACTED]_MikroTik_Security_Assessment.md",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:55:26.922175",
+      "details": {
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/MikroTik/[REDACTED]_MikroTik_Security_Assessment.md",
+        "size_bytes": 45172,
+        "line_count": 1247
+      }
+    },
+    {
+      "id": 6,
+      "category": "validation",
+      "name": "report_structure",
+      "description": "Validate report has all required sections",
+      "result": "All 12 sections present",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:55:26.926173"
+    }
+  ],
+  "findings": []
+}

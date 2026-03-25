@@ -1,0 +1,2364 @@
+{
+  "metadata": {
+    "script": "ros_api_fuzzer.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 4,
+    "start_time": "2026-02-15T23:20:00.617615",
+    "end_time": "2026-02-15T23:22:50.248757",
+    "total_tests": 173,
+    "anomalies": 30,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "1m33s",
+    "crash_count": 0,
+    "router_log_count": 59,
+    "router_interesting_events": 31,
+    "final_health": {
+      "alive": true,
+      "uptime": "4m22s",
+      "cpu_load": "7",
+      "free_memory": "842084352",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "preflight",
+      "name": "router_alive",
+      "description": "Pre-flight connectivity check",
+      "result": "OK \u2014 version 7.20.8 (long-term), uptime 1m33s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:00.625611"
+    },
+    {
+      "id": 2,
+      "category": "preflight",
+      "name": "api_port_open",
+      "description": "API port connectivity check",
+      "result": "OK \u2014 port 8728 accepting connections",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:00.625611"
+    },
+    {
+      "id": 3,
+      "category": "preflight",
+      "name": "api_login",
+      "description": "API authentication check",
+      "result": "FAILED \u2014 login rejected: [['!trap', '=message=invalid user name or password (6)']]",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:20:00.733557"
+    },
+    {
+      "id": 4,
+      "category": "length_boundary",
+      "name": "tier1_boundary_len0",
+      "description": "Word of exactly 0 bytes (tier 1/2 boundary)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.743051",
+      "details": {
+        "length": 0,
+        "response": "[]",
+        "payload_hex": "0000"
+      }
+    },
+    {
+      "id": 5,
+      "category": "length_boundary",
+      "name": "tier1_boundary_len1",
+      "description": "Word of exactly 1 bytes (tier 1/2 boundary)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.747049",
+      "details": {
+        "length": 1,
+        "response": "[['!fatal', 'not logged in']]",
+        "payload_hex": "014100"
+      }
+    },
+    {
+      "id": 6,
+      "category": "length_boundary",
+      "name": "tier1_boundary_len126",
+      "description": "Word of exactly 126 bytes (tier 1/2 boundary)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.747049",
+      "details": {
+        "length": 126,
+        "response": "[['!fatal', 'not logged in']]",
+        "payload_hex": "7e41414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414100"
+      }
+    },
+    {
+      "id": 7,
+      "category": "length_boundary",
+      "name": "tier1_boundary_len127",
+      "description": "Word of exactly 127 bytes (tier 1/2 boundary)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.751047",
+      "details": {
+        "length": 127,
+        "response": "[['!fatal', 'not logged in']]",
+        "payload_hex": "7f4141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414100"
+      }
+    },
+    {
+      "id": 8,
+      "category": "length_boundary",
+      "name": "tier1_boundary_len128",
+      "description": "Word of exactly 128 bytes (tier 1/2 boundary)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.751047",
+      "details": {
+        "length": 128,
+        "response": "[['!fatal', 'not logged in']]",
+        "payload_hex": "8080414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414100"
+      }
+    },
+    {
+      "id": 9,
+      "category": "length_boundary",
+      "name": "tier1_boundary_len129",
+      "description": "Word of exactly 129 bytes (tier 1/2 boundary)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.755045",
+      "details": {
+        "length": 129,
+        "response": "[['!fatal', 'not logged in']]",
+        "payload_hex": "808141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414100"
+      }
+    },
+    {
+      "id": 10,
+      "category": "length_boundary",
+      "name": "tier1_boundary_len255",
+      "description": "Word of exactly 255 bytes (tier 1/2 boundary)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.755045",
+      "details": {
+        "length": 255,
+        "response": "[['!fatal', 'not logged in']]",
+        "payload_hex": "80ff41414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414100"
+      }
+    },
+    {
+      "id": 11,
+      "category": "length_boundary",
+      "name": "tier2_boundary_len16382",
+      "description": "Word of exactly 16382 bytes (tier 2/3 boundary)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.759043",
+      "details": {
+        "length": 16382,
+        "response_count": 1
+      }
+    },
+    {
+      "id": 12,
+      "category": "length_boundary",
+      "name": "tier2_boundary_len16383",
+      "description": "Word of exactly 16383 bytes (tier 2/3 boundary)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.759043",
+      "details": {
+        "length": 16383,
+        "response_count": 1
+      }
+    },
+    {
+      "id": 13,
+      "category": "length_boundary",
+      "name": "tier2_boundary_len16384",
+      "description": "Word of exactly 16384 bytes (tier 2/3 boundary)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.763041",
+      "details": {
+        "length": 16384,
+        "response_count": 1
+      }
+    },
+    {
+      "id": 14,
+      "category": "length_boundary",
+      "name": "tier2_boundary_len16385",
+      "description": "Word of exactly 16385 bytes (tier 2/3 boundary)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.767039",
+      "details": {
+        "length": 16385,
+        "response_count": 1
+      }
+    },
+    {
+      "id": 15,
+      "category": "length_boundary",
+      "name": "tier3_announced2097151_actual100",
+      "description": "Announce 2097151 bytes, send only 100",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.767039",
+      "details": {
+        "announced": 2097151,
+        "actual": 100,
+        "header_hex": "dfffff",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 16,
+      "category": "length_boundary",
+      "name": "tier3_announced2097152_actual100",
+      "description": "Announce 2097152 bytes, send only 100",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.771037",
+      "details": {
+        "announced": 2097152,
+        "actual": 100,
+        "header_hex": "e0200000",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 17,
+      "category": "length_boundary",
+      "name": "tier3_announced2097151_actual50",
+      "description": "Announce 2097151 bytes, send only 50",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.771037",
+      "details": {
+        "announced": 2097151,
+        "actual": 50,
+        "header_hex": "dfffff",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 18,
+      "category": "length_boundary",
+      "name": "tier4_huge_announce_0xffffffe",
+      "description": "Announce 268435454 bytes (256 MB), send 16",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.771037",
+      "details": {
+        "announced_hex": "0xffffffe",
+        "header_hex": "effffffe",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 19,
+      "category": "length_boundary",
+      "name": "tier4_huge_announce_0xfffffff",
+      "description": "Announce 268435455 bytes (256 MB), send 16",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.775035",
+      "details": {
+        "announced_hex": "0xfffffff",
+        "header_hex": "efffffff",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 20,
+      "category": "length_boundary",
+      "name": "tier4_huge_announce_0x10000000",
+      "description": "Announce 268435456 bytes (256 MB), send 16",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.775035",
+      "details": {
+        "announced_hex": "0x10000000",
+        "header_hex": "f010000000",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 21,
+      "category": "length_boundary",
+      "name": "tier4_huge_announce_0xffffffff",
+      "description": "Announce 4294967295 bytes (4096 MB), send 16",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:05.779033",
+      "details": {
+        "announced_hex": "0xffffffff",
+        "header_hex": "f0ffffffff",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 22,
+      "category": "length_boundary",
+      "name": "zero_len_with_trailing_data",
+      "description": "Zero-length word (terminator) followed by raw data",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:10.784529",
+      "details": {
+        "payload_hex": "004545454545454545454500",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 23,
+      "category": "length_boundary",
+      "name": "len1_no_data",
+      "description": "Length byte says 1, but no data follows (EOF)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:15.790025",
+      "details": {
+        "payload_hex": "01",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 24,
+      "category": "length_boundary",
+      "name": "auth_boundary_attr_len127",
+      "description": "Authenticated command with 127-byte attribute word",
+      "result": "login failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:20:15.897971"
+    },
+    {
+      "id": 25,
+      "category": "length_boundary",
+      "name": "auth_boundary_attr_len128",
+      "description": "Authenticated command with 128-byte attribute word",
+      "result": "login failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:20:16.001919"
+    },
+    {
+      "id": 26,
+      "category": "length_boundary",
+      "name": "auth_boundary_attr_len16383",
+      "description": "Authenticated command with 16383-byte attribute word",
+      "result": "login failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:20:16.105867"
+    },
+    {
+      "id": 27,
+      "category": "length_boundary",
+      "name": "auth_boundary_attr_len16384",
+      "description": "Authenticated command with 16384-byte attribute word",
+      "result": "login failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:20:16.209815"
+    },
+    {
+      "id": 28,
+      "category": "length_boundary",
+      "name": "tier_toggle_0",
+      "description": "Alternating tier1 (127B) and tier2 (128B) words x5",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.209815",
+      "details": {
+        "payload_size": 645,
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 29,
+      "category": "length_boundary",
+      "name": "tier_toggle_1",
+      "description": "Alternating tier1 (127B) and tier2 (128B) words x5",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.209815",
+      "details": {
+        "payload_size": 645,
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 30,
+      "category": "length_boundary",
+      "name": "tier_toggle_2",
+      "description": "Alternating tier1 (127B) and tier2 (128B) words x5",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.213813",
+      "details": {
+        "payload_size": 645,
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 31,
+      "category": "length_boundary",
+      "name": "tier_toggle_3",
+      "description": "Alternating tier1 (127B) and tier2 (128B) words x5",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.213813",
+      "details": {
+        "payload_size": 645,
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 32,
+      "category": "length_boundary",
+      "name": "tier_toggle_4",
+      "description": "Alternating tier1 (127B) and tier2 (128B) words x5",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.217811",
+      "details": {
+        "payload_size": 645,
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 33,
+      "category": "length_boundary",
+      "name": "tier_toggle_5",
+      "description": "Alternating tier1 (127B) and tier2 (128B) words x5",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.217811",
+      "details": {
+        "payload_size": 645,
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 34,
+      "category": "length_boundary",
+      "name": "tier_toggle_6",
+      "description": "Alternating tier1 (127B) and tier2 (128B) words x5",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.225807",
+      "details": {
+        "payload_size": 645,
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 35,
+      "category": "length_boundary",
+      "name": "tier_toggle_7",
+      "description": "Alternating tier1 (127B) and tier2 (128B) words x5",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.225807",
+      "details": {
+        "payload_size": 645,
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 36,
+      "category": "length_boundary",
+      "name": "tier_toggle_8",
+      "description": "Alternating tier1 (127B) and tier2 (128B) words x5",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.225807",
+      "details": {
+        "payload_size": 645,
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 37,
+      "category": "length_boundary",
+      "name": "tier_toggle_9",
+      "description": "Alternating tier1 (127B) and tier2 (128B) words x5",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.225807",
+      "details": {
+        "payload_size": 645,
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 38,
+      "category": "length_boundary",
+      "name": "max_tier1_command",
+      "description": "127-byte command word (max single-byte encoding)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.225807",
+      "details": {
+        "cmd_len": 127,
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 39,
+      "category": "length_boundary",
+      "name": "exact_tier2_0x80",
+      "description": "Word of 128 bytes (tier 2 range, hex 0x80)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.225807",
+      "details": {
+        "word_len": 128,
+        "encoded_header_hex": "80805a5a5a"
+      }
+    },
+    {
+      "id": 40,
+      "category": "length_boundary",
+      "name": "exact_tier2_0x81",
+      "description": "Word of 129 bytes (tier 2 range, hex 0x81)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.225807",
+      "details": {
+        "word_len": 129,
+        "encoded_header_hex": "80815a5a5a"
+      }
+    },
+    {
+      "id": 41,
+      "category": "length_boundary",
+      "name": "exact_tier2_0xff",
+      "description": "Word of 255 bytes (tier 2 range, hex 0xff)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.225807",
+      "details": {
+        "word_len": 255,
+        "encoded_header_hex": "80ff5a5a5a"
+      }
+    },
+    {
+      "id": 42,
+      "category": "length_boundary",
+      "name": "exact_tier2_0x100",
+      "description": "Word of 256 bytes (tier 2 range, hex 0x100)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.225807",
+      "details": {
+        "word_len": 256,
+        "encoded_header_hex": "81005a5a5a"
+      }
+    },
+    {
+      "id": 43,
+      "category": "length_boundary",
+      "name": "exact_tier2_0x3ffe",
+      "description": "Word of 16382 bytes (tier 2 range, hex 0x3ffe)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.225807",
+      "details": {
+        "word_len": 16382,
+        "encoded_header_hex": "bffe5a5a5a"
+      }
+    },
+    {
+      "id": 44,
+      "category": "length_boundary",
+      "name": "exact_tier2_0x3fff",
+      "description": "Word of 16383 bytes (tier 2 range, hex 0x3fff)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.249795",
+      "details": {
+        "word_len": 16383,
+        "encoded_header_hex": "bfff5a5a5a"
+      }
+    },
+    {
+      "id": 45,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xf1",
+      "description": "Reserved length prefix byte 0xf1",
+      "result": "connected",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:20:16.253793",
+      "details": {
+        "prefix": "0xf1",
+        "response": "[['!fatal', 'too many commands before login']]",
+        "payload_hex": "f10000000000000000"
+      }
+    },
+    {
+      "id": 46,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xf2",
+      "description": "Reserved length prefix byte 0xf2",
+      "result": "connected",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:20:16.253793",
+      "details": {
+        "prefix": "0xf2",
+        "response": "[['!fatal', 'too many commands before login']]",
+        "payload_hex": "f20000000000000000"
+      }
+    },
+    {
+      "id": 47,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xf3",
+      "description": "Reserved length prefix byte 0xf3",
+      "result": "connected",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:20:16.257791",
+      "details": {
+        "prefix": "0xf3",
+        "response": "[['!fatal', 'too many commands before login']]",
+        "payload_hex": "f30000000000000000"
+      }
+    },
+    {
+      "id": 48,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xf4",
+      "description": "Reserved length prefix byte 0xf4",
+      "result": "connected",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:20:16.257791",
+      "details": {
+        "prefix": "0xf4",
+        "response": "[['!fatal', 'too many commands before login']]",
+        "payload_hex": "f40000000000000000"
+      }
+    },
+    {
+      "id": 49,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xf5",
+      "description": "Reserved length prefix byte 0xf5",
+      "result": "connected",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:20:16.261789",
+      "details": {
+        "prefix": "0xf5",
+        "response": "[['!fatal', 'too many commands before login']]",
+        "payload_hex": "f50000000000000000"
+      }
+    },
+    {
+      "id": 50,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xf6",
+      "description": "Reserved length prefix byte 0xf6",
+      "result": "connected",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:20:16.261789",
+      "details": {
+        "prefix": "0xf6",
+        "response": "[['!fatal', 'too many commands before login']]",
+        "payload_hex": "f60000000000000000"
+      }
+    },
+    {
+      "id": 51,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xf7",
+      "description": "Reserved length prefix byte 0xf7",
+      "result": "connected",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:20:16.265787",
+      "details": {
+        "prefix": "0xf7",
+        "response": "[['!fatal', 'too many commands before login']]",
+        "payload_hex": "f70000000000000000"
+      }
+    },
+    {
+      "id": 52,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xf8",
+      "description": "Reserved length prefix byte 0xf8",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.265787",
+      "details": {
+        "prefix": "0xf8",
+        "response": "[]",
+        "payload_hex": "f80000000000000000"
+      }
+    },
+    {
+      "id": 53,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xf9",
+      "description": "Reserved length prefix byte 0xf9",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.269785",
+      "details": {
+        "prefix": "0xf9",
+        "response": "[]",
+        "payload_hex": "f90000000000000000"
+      }
+    },
+    {
+      "id": 54,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xfa",
+      "description": "Reserved length prefix byte 0xfa",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.273783",
+      "details": {
+        "prefix": "0xfa",
+        "response": "[]",
+        "payload_hex": "fa0000000000000000"
+      }
+    },
+    {
+      "id": 55,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xfb",
+      "description": "Reserved length prefix byte 0xfb",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.273783",
+      "details": {
+        "prefix": "0xfb",
+        "response": "[]",
+        "payload_hex": "fb0000000000000000"
+      }
+    },
+    {
+      "id": 56,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xfc",
+      "description": "Reserved length prefix byte 0xfc",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.277781",
+      "details": {
+        "prefix": "0xfc",
+        "response": "[]",
+        "payload_hex": "fc0000000000000000"
+      }
+    },
+    {
+      "id": 57,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xfd",
+      "description": "Reserved length prefix byte 0xfd",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.277781",
+      "details": {
+        "prefix": "0xfd",
+        "response": "[]",
+        "payload_hex": "fd0000000000000000"
+      }
+    },
+    {
+      "id": 58,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xfe",
+      "description": "Reserved length prefix byte 0xfe",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.277781",
+      "details": {
+        "prefix": "0xfe",
+        "response": "[]",
+        "payload_hex": "fe0000000000000000"
+      }
+    },
+    {
+      "id": 59,
+      "category": "malformed_length",
+      "name": "reserved_prefix_0xff",
+      "description": "Reserved length prefix byte 0xff",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:16.281779",
+      "details": {
+        "prefix": "0xff",
+        "response": "[]",
+        "payload_hex": "ff0000000000000000"
+      }
+    },
+    {
+      "id": 60,
+      "category": "malformed_length",
+      "name": "truncated_0x80_no_second",
+      "description": "Truncated length encoding: 0x80_no_second",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:21.283277",
+      "details": {
+        "payload_hex": "80",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 61,
+      "category": "malformed_length",
+      "name": "truncated_0xC0_one_byte",
+      "description": "Truncated length encoding: 0xC0_one_byte",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:26.288773",
+      "details": {
+        "payload_hex": "c001",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 62,
+      "category": "malformed_length",
+      "name": "truncated_0xC0_no_extra",
+      "description": "Truncated length encoding: 0xC0_no_extra",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:31.302265",
+      "details": {
+        "payload_hex": "c0",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 63,
+      "category": "malformed_length",
+      "name": "truncated_0xE0_two_bytes",
+      "description": "Truncated length encoding: 0xE0_two_bytes",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:36.307761",
+      "details": {
+        "payload_hex": "e00102",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 64,
+      "category": "malformed_length",
+      "name": "truncated_0xE0_one_byte",
+      "description": "Truncated length encoding: 0xE0_one_byte",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:45.603111",
+      "details": {
+        "payload_hex": "e001",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 65,
+      "category": "malformed_length",
+      "name": "truncated_0xE0_no_extra",
+      "description": "Truncated length encoding: 0xE0_no_extra",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:50.608607",
+      "details": {
+        "payload_hex": "e0",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 66,
+      "category": "malformed_length",
+      "name": "truncated_0xF0_three_bytes",
+      "description": "Truncated length encoding: 0xF0_three_bytes",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:20:55.614103",
+      "details": {
+        "payload_hex": "f0010203",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 67,
+      "category": "malformed_length",
+      "name": "truncated_0xF0_two_bytes",
+      "description": "Truncated length encoding: 0xF0_two_bytes",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:00.615601",
+      "details": {
+        "payload_hex": "f00102",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 68,
+      "category": "malformed_length",
+      "name": "truncated_0xF0_one_byte",
+      "description": "Truncated length encoding: 0xF0_one_byte",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:05.621097",
+      "details": {
+        "payload_hex": "f001",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 69,
+      "category": "malformed_length",
+      "name": "truncated_0xF0_no_extra",
+      "description": "Truncated length encoding: 0xF0_no_extra",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:10.622595",
+      "details": {
+        "payload_hex": "f0",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 70,
+      "category": "malformed_length",
+      "name": "all_ff_1bytes",
+      "description": "1 bytes of 0xFF as length prefix",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:10.622595",
+      "details": {
+        "payload_hex": "ff",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 71,
+      "category": "malformed_length",
+      "name": "all_ff_2bytes",
+      "description": "2 bytes of 0xFF as length prefix",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:10.626593",
+      "details": {
+        "payload_hex": "ffff",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 72,
+      "category": "malformed_length",
+      "name": "all_ff_4bytes",
+      "description": "4 bytes of 0xFF as length prefix",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:10.626593",
+      "details": {
+        "payload_hex": "ffffffff",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 73,
+      "category": "malformed_length",
+      "name": "all_ff_5bytes",
+      "description": "5 bytes of 0xFF as length prefix",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:10.630591",
+      "details": {
+        "payload_hex": "ffffffffff",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 74,
+      "category": "malformed_length",
+      "name": "all_ff_8bytes",
+      "description": "8 bytes of 0xFF as length prefix",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:10.634589",
+      "details": {
+        "payload_hex": "ffffffffffffffff",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 75,
+      "category": "malformed_length",
+      "name": "f0_4gb_length",
+      "description": "0xF0 prefix announcing 4GB word, send 16 bytes",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:10.634589",
+      "details": {
+        "payload_hex": "f0ffffffff58585858585858585858585858585858",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 76,
+      "category": "malformed_length",
+      "name": "max_tier_tier2_max",
+      "description": "Maximum value length encoding: tier2_max",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:15.640085",
+      "details": {
+        "header_hex": "bfff",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 77,
+      "category": "malformed_length",
+      "name": "max_tier_tier3_max",
+      "description": "Maximum value length encoding: tier3_max",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:15.644083",
+      "details": {
+        "header_hex": "dfffff",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 78,
+      "category": "malformed_length",
+      "name": "max_tier_tier4_max",
+      "description": "Maximum value length encoding: tier4_max",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:15.644083",
+      "details": {
+        "header_hex": "efffffff",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 79,
+      "category": "malformed_length",
+      "name": "max_tier_tier5_max",
+      "description": "Maximum value length encoding: tier5_max",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:15.644083",
+      "details": {
+        "header_hex": "f0fffffffe",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 80,
+      "category": "malformed_length",
+      "name": "multibyte_zero_2byte_zero",
+      "description": "Multi-byte encoding of zero length: 2byte_zero",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:20.649579",
+      "details": {
+        "header_hex": "8000",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 81,
+      "category": "malformed_length",
+      "name": "multibyte_zero_3byte_zero",
+      "description": "Multi-byte encoding of zero length: 3byte_zero",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:25.651077",
+      "details": {
+        "header_hex": "c00000",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 82,
+      "category": "malformed_length",
+      "name": "multibyte_zero_4byte_zero",
+      "description": "Multi-byte encoding of zero length: 4byte_zero",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:31.895953",
+      "details": {
+        "header_hex": "e0000000",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 83,
+      "category": "malformed_length",
+      "name": "multibyte_zero_5byte_zero",
+      "description": "Multi-byte encoding of zero length: 5byte_zero",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:36.901449",
+      "details": {
+        "header_hex": "f000000000",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 84,
+      "category": "sentence_structure",
+      "name": "empty_sentence",
+      "description": "Sentence with 0 words (just terminator byte 0x00)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:41.906945",
+      "details": {
+        "payload_hex": "00",
+        "response": "[]"
+      }
+    },
+    {
+      "id": 85,
+      "category": "sentence_structure",
+      "name": "1000_short_words",
+      "description": "Sentence with 1000 short words",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:41.906945",
+      "details": {
+        "word_count": 1000,
+        "payload_size": 4891,
+        "response": "[['!fatal', 'too much input before login']]"
+      }
+    },
+    {
+      "id": 86,
+      "category": "sentence_structure",
+      "name": "no_terminator",
+      "description": "20 words with no sentence terminator",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.912441",
+      "details": {
+        "payload_size": 460,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 87,
+      "category": "sentence_structure",
+      "name": "20_terminators",
+      "description": "20 consecutive sentence terminators (0x00 bytes)",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.916439",
+      "details": {
+        "payload_hex": "0000000000000000000000000000000000000000",
+        "response": "[['!fatal', 'too many commands before login']]"
+      }
+    },
+    {
+      "id": 88,
+      "category": "sentence_structure",
+      "name": "null_in_word_pos0",
+      "description": "Word with embedded null byte at position 0",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.916439",
+      "details": {
+        "word_len": 21,
+        "null_pos": 0,
+        "payload_hex": "1500424242424242424242424242424242424242424200"
+      }
+    },
+    {
+      "id": 89,
+      "category": "sentence_structure",
+      "name": "null_in_word_pos5",
+      "description": "Word with embedded null byte at position 5",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.920437",
+      "details": {
+        "word_len": 21,
+        "null_pos": 5,
+        "payload_hex": "1541414141410042424242424242424242424242424200"
+      }
+    },
+    {
+      "id": 90,
+      "category": "sentence_structure",
+      "name": "null_in_word_pos10",
+      "description": "Word with embedded null byte at position 10",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.920437",
+      "details": {
+        "word_len": 21,
+        "null_pos": 10,
+        "payload_hex": "1541414141414141414141004242424242424242424200"
+      }
+    },
+    {
+      "id": 91,
+      "category": "sentence_structure",
+      "name": "100kb_sentence",
+      "description": "100KB sentence with 8048 small words",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.940427",
+      "details": {
+        "word_count": 8048,
+        "payload_size": 102405,
+        "response": "[['!fatal', 'too much input before login']]"
+      }
+    },
+    {
+      "id": 92,
+      "category": "sentence_structure",
+      "name": "interleaved_valid_empty",
+      "description": "50 alternating valid commands and empty sentences",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.944425",
+      "details": {
+        "payload_size": 625,
+        "response_count": 1
+      }
+    },
+    {
+      "id": 93,
+      "category": "sentence_structure",
+      "name": "200_rapid_sentences",
+      "description": "200 valid sentences sent in a single burst",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.944425",
+      "details": {
+        "payload_size": 4800,
+        "response_count": 1
+      }
+    },
+    {
+      "id": 94,
+      "category": "sentence_structure",
+      "name": "special_backslashes",
+      "description": "Sentence with word of 100 backslashes",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.952421",
+      "details": {
+        "content_type": "backslashes",
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 95,
+      "category": "sentence_structure",
+      "name": "special_newlines",
+      "description": "Sentence with word of 100 newlines",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.952421",
+      "details": {
+        "content_type": "newlines",
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 96,
+      "category": "sentence_structure",
+      "name": "special_carriage_returns",
+      "description": "Sentence with word of 100 carriage_returns",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.956419",
+      "details": {
+        "content_type": "carriage_returns",
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 97,
+      "category": "sentence_structure",
+      "name": "special_tabs",
+      "description": "Sentence with word of 100 tabs",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.956419",
+      "details": {
+        "content_type": "tabs",
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 98,
+      "category": "sentence_structure",
+      "name": "special_mixed_whitespace",
+      "description": "Sentence with word of 100 mixed_whitespace",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.960417",
+      "details": {
+        "content_type": "mixed_whitespace",
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 99,
+      "category": "sentence_structure",
+      "name": "special_equals_signs",
+      "description": "Sentence with word of 100 equals_signs",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.960417",
+      "details": {
+        "content_type": "equals_signs",
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 100,
+      "category": "sentence_structure",
+      "name": "special_forward_slashes",
+      "description": "Sentence with word of 100 forward_slashes",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.964415",
+      "details": {
+        "content_type": "forward_slashes",
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 101,
+      "category": "sentence_structure",
+      "name": "binary_word_0_255",
+      "description": "Word containing all byte values 0x00-0xFF",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.964415",
+      "details": {
+        "word_len": 256,
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 102,
+      "category": "sentence_structure",
+      "name": "single_null_word",
+      "description": "Word of length 1 containing only 0x00",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:46.964415",
+      "details": {
+        "payload_hex": "010000",
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 103,
+      "category": "preauth_injection",
+      "name": "random_bytes_1",
+      "description": "Send 1 random bytes pre-auth",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:51.969911",
+      "details": {
+        "size": 1,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 104,
+      "category": "preauth_injection",
+      "name": "random_bytes_16",
+      "description": "Send 16 random bytes pre-auth",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:21:56.979405",
+      "details": {
+        "size": 16,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 105,
+      "category": "preauth_injection",
+      "name": "random_bytes_256",
+      "description": "Send 256 random bytes pre-auth",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:01.988899",
+      "details": {
+        "size": 256,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 106,
+      "category": "preauth_injection",
+      "name": "random_bytes_1024",
+      "description": "Send 1024 random bytes pre-auth",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:01.992897",
+      "details": {
+        "size": 1024,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 107,
+      "category": "preauth_injection",
+      "name": "random_bytes_4096",
+      "description": "Send 4096 random bytes pre-auth",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:01.996895",
+      "details": {
+        "size": 4096,
+        "response": "[['!fatal', 'too much input before login']]"
+      }
+    },
+    {
+      "id": 108,
+      "category": "preauth_injection",
+      "name": "http_request",
+      "description": "Send HTTP GET request to API binary port",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:06.998393",
+      "details": {
+        "response": "[]"
+      }
+    },
+    {
+      "id": 109,
+      "category": "preauth_injection",
+      "name": "m2_winbox_frame",
+      "description": "Send Winbox M2 protocol frame to API port",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:12.003889",
+      "details": {
+        "response": "[]"
+      }
+    },
+    {
+      "id": 110,
+      "category": "preauth_injection",
+      "name": "tls_clienthello",
+      "description": "Send TLS ClientHello to plaintext API port",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:17.009385",
+      "details": {
+        "response": "[]"
+      }
+    },
+    {
+      "id": 111,
+      "category": "preauth_injection",
+      "name": "ssh_banner",
+      "description": "Send SSH version banner to API port",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:22.010883",
+      "details": {
+        "response": "[]"
+      }
+    },
+    {
+      "id": 112,
+      "category": "preauth_injection",
+      "name": "ftp_command",
+      "description": "Send FTP USER command to API port",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:27.016379",
+      "details": {
+        "response": "[]"
+      }
+    },
+    {
+      "id": 113,
+      "category": "preauth_injection",
+      "name": "partial_login_garbage_0",
+      "description": "Send /login, get challenge, send 64B garbage",
+      "result": "challenge: 1 sentences, after garbage: 0 sentences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:32.113829",
+      "details": {
+        "challenge_response": "[['!done', '=ret=881f740d6e8996e340af1f5afe2a3248']]",
+        "garbage_response": "[]",
+        "garbage_size": 64
+      }
+    },
+    {
+      "id": 114,
+      "category": "preauth_injection",
+      "name": "partial_login_garbage_1",
+      "description": "Send /login, get challenge, send 96B garbage",
+      "result": "challenge: 1 sentences, after garbage: 0 sentences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:37.223273",
+      "details": {
+        "challenge_response": "[['!done', '=ret=ec5d79ca25e6763afca8e9adddce183d']]",
+        "garbage_response": "[]",
+        "garbage_size": 96
+      }
+    },
+    {
+      "id": 115,
+      "category": "preauth_injection",
+      "name": "partial_login_garbage_2",
+      "description": "Send /login, get challenge, send 128B garbage",
+      "result": "challenge: 1 sentences, after garbage: 0 sentences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:37.327221",
+      "details": {
+        "challenge_response": "[['!done', '=ret=06b1a19ffa074bdeb6dc1c4ab61fc33b']]",
+        "garbage_response": "[]",
+        "garbage_size": 128
+      }
+    },
+    {
+      "id": 116,
+      "category": "preauth_injection",
+      "name": "partial_login_garbage_3",
+      "description": "Send /login, get challenge, send 160B garbage",
+      "result": "challenge: 1 sentences, after garbage: 0 sentences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:42.428669",
+      "details": {
+        "challenge_response": "[['!done', '=ret=7128a10c795b874e1ec535eb93b9ebe9']]",
+        "garbage_response": "[]",
+        "garbage_size": 160
+      }
+    },
+    {
+      "id": 117,
+      "category": "preauth_injection",
+      "name": "partial_login_garbage_4",
+      "description": "Send /login, get challenge, send 192B garbage",
+      "result": "challenge: 1 sentences, after garbage: 0 sentences",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:47.530117",
+      "details": {
+        "challenge_response": "[['!done', '=ret=fd589a9c8cc71f497c2def561e3d79b0']]",
+        "garbage_response": "[]",
+        "garbage_size": 192
+      }
+    },
+    {
+      "id": 118,
+      "category": "preauth_injection",
+      "name": "interleave_valid_invalid_0",
+      "description": "Interleaved valid API sentences and random bytes",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:47.630067",
+      "details": {
+        "payload_size": 96,
+        "response": "[['!done', '=ret=28ab846961a0bdf5fda69e395f48ef3c']]"
+      }
+    },
+    {
+      "id": 119,
+      "category": "preauth_injection",
+      "name": "interleave_valid_invalid_1",
+      "description": "Interleaved valid API sentences and random bytes",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:47.734015",
+      "details": {
+        "payload_size": 96,
+        "response": "[['!done', '=ret=b793e5321a1c0e074aa1602a180fd24f']]"
+      }
+    },
+    {
+      "id": 120,
+      "category": "preauth_injection",
+      "name": "interleave_valid_invalid_2",
+      "description": "Interleaved valid API sentences and random bytes",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:47.837963",
+      "details": {
+        "payload_size": 96,
+        "response": "[['!done', '=ret=9d4259314ecc97c96bccb3d2a21e53fb']]"
+      }
+    },
+    {
+      "id": 121,
+      "category": "preauth_injection",
+      "name": "interleave_valid_invalid_3",
+      "description": "Interleaved valid API sentences and random bytes",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:47.841961",
+      "details": {
+        "payload_size": 96,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 122,
+      "category": "preauth_injection",
+      "name": "interleave_valid_invalid_4",
+      "description": "Interleaved valid API sentences and random bytes",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:47.841961",
+      "details": {
+        "payload_size": 96,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 123,
+      "category": "preauth_injection",
+      "name": "api_http_api_confusion",
+      "description": "API sentence, then HTTP request, then API sentence",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:47.957903",
+      "details": {
+        "payload_size": 59,
+        "response": "[['!done', '=ret=24a03807fd9b43900ff92749000a98f3']]"
+      }
+    },
+    {
+      "id": 124,
+      "category": "preauth_injection",
+      "name": "64kb_random_burst",
+      "description": "64KB of random bytes as first data",
+      "result": "connected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:47.961901",
+      "details": {
+        "response": "[['!fatal', 'too much input before login']]"
+      }
+    },
+    {
+      "id": 125,
+      "category": "preauth_injection",
+      "name": "byte_at_a_time_login",
+      "description": "Send /login one byte at a time (100ms between bytes)",
+      "result": "response: [['!done', '=ret=ac8bd48e1f069f378abf9508efccd86f']]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.801481",
+      "details": {
+        "sentence_len": 8,
+        "response": "[['!done', '=ret=ac8bd48e1f069f378abf9508efccd86f']]"
+      }
+    },
+    {
+      "id": 126,
+      "category": "auth_edge_cases",
+      "name": "login_extra_5_attrs",
+      "description": "/login with 5 extra attribute words",
+      "result": "login succeeded, resp: [['!done']]",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:48.805479",
+      "details": {
+        "extra_count": 5,
+        "login_success": true,
+        "response": "[['!done']]"
+      }
+    },
+    {
+      "id": 127,
+      "category": "auth_edge_cases",
+      "name": "login_extra_10_attrs",
+      "description": "/login with 10 extra attribute words",
+      "result": "login succeeded, resp: [['!done']]",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:48.805479",
+      "details": {
+        "extra_count": 10,
+        "login_success": true,
+        "response": "[['!done']]"
+      }
+    },
+    {
+      "id": 128,
+      "category": "auth_edge_cases",
+      "name": "login_extra_20_attrs",
+      "description": "/login with 20 extra attribute words",
+      "result": "login succeeded, resp: [['!done']]",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:48.809477",
+      "details": {
+        "extra_count": 20,
+        "login_success": true,
+        "response": "[['!done']]"
+      }
+    },
+    {
+      "id": 129,
+      "category": "auth_edge_cases",
+      "name": "login_extra_50_attrs",
+      "description": "/login with 50 extra attribute words",
+      "result": "login succeeded, resp: [['!done']]",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:48.813475",
+      "details": {
+        "extra_count": 50,
+        "login_success": true,
+        "response": "[['!done']]"
+      }
+    },
+    {
+      "id": 130,
+      "category": "auth_edge_cases",
+      "name": "cred_empty_name",
+      "description": "Login with empty_name",
+      "result": "login failed, resp: [['!trap', '=message=invalid user name or password (6)']]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.813475",
+      "details": {
+        "words": [
+          "/login",
+          "=name=",
+          "=password=TestPass123"
+        ],
+        "login_success": false
+      }
+    },
+    {
+      "id": 131,
+      "category": "auth_edge_cases",
+      "name": "cred_empty_pass",
+      "description": "Login with empty_pass",
+      "result": "login failed, resp: [['!trap', '=message=invalid user name or password (6)']]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.817473",
+      "details": {
+        "words": [
+          "/login",
+          "=name=admin",
+          "=password="
+        ],
+        "login_success": false
+      }
+    },
+    {
+      "id": 132,
+      "category": "auth_edge_cases",
+      "name": "cred_both_empty",
+      "description": "Login with both_empty",
+      "result": "login failed, resp: [['!trap', '=message=invalid user name or password (6)']]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.821471",
+      "details": {
+        "words": [
+          "/login",
+          "=name=",
+          "=password="
+        ],
+        "login_success": false
+      }
+    },
+    {
+      "id": 133,
+      "category": "auth_edge_cases",
+      "name": "cred_no_value_name",
+      "description": "Login with no_value_name",
+      "result": "login failed, resp: [['!trap', '=message=invalid user name or password (6)']]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.821471",
+      "details": {
+        "words": [
+          "/login",
+          "=name",
+          "=password=TestPass123"
+        ],
+        "login_success": false
+      }
+    },
+    {
+      "id": 134,
+      "category": "auth_edge_cases",
+      "name": "cred_no_value_pass",
+      "description": "Login with no_value_pass",
+      "result": "login failed, resp: [['!trap', '=message=invalid user name or password (6)']]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.829467",
+      "details": {
+        "words": [
+          "/login",
+          "=name=admin",
+          "=password"
+        ],
+        "login_success": false
+      }
+    },
+    {
+      "id": 135,
+      "category": "auth_edge_cases",
+      "name": "cred_no_equals_name",
+      "description": "Login with no_equals_name",
+      "result": "login failed, resp: [['!trap', '=message=missing =name=']]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.829467",
+      "details": {
+        "words": [
+          "/login",
+          "name=admin",
+          "=password=TestPass123"
+        ],
+        "login_success": false
+      }
+    },
+    {
+      "id": 136,
+      "category": "auth_edge_cases",
+      "name": "username_null_middle",
+      "description": "Login with injected username: null_middle",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.829467",
+      "details": {
+        "username_type": "null_middle",
+        "login_success": false,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 137,
+      "category": "auth_edge_cases",
+      "name": "username_null_end",
+      "description": "Login with injected username: null_end",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.833465",
+      "details": {
+        "username_type": "null_end",
+        "login_success": false,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 138,
+      "category": "auth_edge_cases",
+      "name": "username_newline",
+      "description": "Login with injected username: newline",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.833465",
+      "details": {
+        "username_type": "newline",
+        "login_success": false,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 139,
+      "category": "auth_edge_cases",
+      "name": "username_carriage_return",
+      "description": "Login with injected username: carriage_return",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.837463",
+      "details": {
+        "username_type": "carriage_return",
+        "login_success": false,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 140,
+      "category": "auth_edge_cases",
+      "name": "username_tab",
+      "description": "Login with injected username: tab",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.837463",
+      "details": {
+        "username_type": "tab",
+        "login_success": false,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 141,
+      "category": "auth_edge_cases",
+      "name": "username_backspace",
+      "description": "Login with injected username: backspace",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.841461",
+      "details": {
+        "username_type": "backspace",
+        "login_success": false,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 142,
+      "category": "auth_edge_cases",
+      "name": "username_utf8_homoglyph",
+      "description": "Login with injected username: utf8_homoglyph",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.841461",
+      "details": {
+        "username_type": "utf8_homoglyph",
+        "login_success": false,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 143,
+      "category": "auth_edge_cases",
+      "name": "username_utf8_rtl",
+      "description": "Login with injected username: utf8_rtl",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.841461",
+      "details": {
+        "username_type": "utf8_rtl",
+        "login_success": false,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 144,
+      "category": "auth_edge_cases",
+      "name": "username_long_name",
+      "description": "Login with injected username: long_name",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.845459",
+      "details": {
+        "username_type": "long_name",
+        "login_success": false,
+        "response": "[['!fatal', 'too much input before login']]"
+      }
+    },
+    {
+      "id": 145,
+      "category": "auth_edge_cases",
+      "name": "username_sql_inject",
+      "description": "Login with injected username: sql_inject",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.849457",
+      "details": {
+        "username_type": "sql_inject",
+        "login_success": false,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 146,
+      "category": "auth_edge_cases",
+      "name": "username_cmd_inject",
+      "description": "Login with injected username: cmd_inject",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.849457",
+      "details": {
+        "username_type": "cmd_inject",
+        "login_success": false,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 147,
+      "category": "auth_edge_cases",
+      "name": "username_path_traverse",
+      "description": "Login with injected username: path_traverse",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:48.853455",
+      "details": {
+        "username_type": "path_traverse",
+        "login_success": false,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 148,
+      "category": "auth_edge_cases",
+      "name": "malformed_attr_no_prefix",
+      "description": "Login with no_prefix attribute format",
+      "result": "login succeeded",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:48.957403",
+      "details": {
+        "words": [
+          "/login",
+          "name=admin",
+          "password=TestPass123"
+        ],
+        "login_success": true,
+        "response": "[['!done', '=ret=81e758addaaf2c5eec2997b01c7d1869']]"
+      }
+    },
+    {
+      "id": 149,
+      "category": "auth_edge_cases",
+      "name": "malformed_attr_double_prefix",
+      "description": "Login with double_prefix attribute format",
+      "result": "login succeeded",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:49.057353",
+      "details": {
+        "words": [
+          "/login",
+          "==name=admin",
+          "==password=TestPass123"
+        ],
+        "login_success": true,
+        "response": "[['!done', '=ret=4625bc8e09219d7de0a4a4c402ce5b37']]"
+      }
+    },
+    {
+      "id": 150,
+      "category": "auth_edge_cases",
+      "name": "malformed_attr_dot_prefix",
+      "description": "Login with dot_prefix attribute format",
+      "result": "login succeeded",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:49.161301",
+      "details": {
+        "words": [
+          "/login",
+          ".name=admin",
+          ".password=TestPass123"
+        ],
+        "login_success": true,
+        "response": "[['!done', '=ret=c72a767e58bc363805da92b2a52336ff']]"
+      }
+    },
+    {
+      "id": 151,
+      "category": "auth_edge_cases",
+      "name": "malformed_attr_hash_prefix",
+      "description": "Login with hash_prefix attribute format",
+      "result": "login succeeded",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:49.265249",
+      "details": {
+        "words": [
+          "/login",
+          "#name=admin",
+          "#password=TestPass123"
+        ],
+        "login_success": true,
+        "response": "[['!done', '=ret=0540d9028b93537bdf5957b4d3aa0635']]"
+      }
+    },
+    {
+      "id": 152,
+      "category": "auth_edge_cases",
+      "name": "malformed_attr_query_attr",
+      "description": "Login with query_attr attribute format",
+      "result": "login succeeded",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:49.365199",
+      "details": {
+        "words": [
+          "/login",
+          "?name=admin",
+          "?password=TestPass123"
+        ],
+        "login_success": true,
+        "response": "[['!done', '=ret=9c1004944db893b7f2fe7b5686b20276']]"
+      }
+    },
+    {
+      "id": 153,
+      "category": "auth_edge_cases",
+      "name": "dup_attr_same_user",
+      "description": "Login with duplicate attributes: same_user",
+      "result": "login succeeded",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:49.369197",
+      "details": {
+        "words": [
+          "/login",
+          "=name=admin",
+          "=name=admin",
+          "=password=TestPass123"
+        ],
+        "login_success": true,
+        "response": "[['!done']]"
+      }
+    },
+    {
+      "id": 154,
+      "category": "auth_edge_cases",
+      "name": "dup_attr_diff_user",
+      "description": "Login with duplicate attributes: diff_user",
+      "result": "login succeeded",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:49.377193",
+      "details": {
+        "words": [
+          "/login",
+          "=name=nonexistent",
+          "=name=admin",
+          "=password=TestPass123"
+        ],
+        "login_success": true,
+        "response": "[['!done']]"
+      }
+    },
+    {
+      "id": 155,
+      "category": "auth_edge_cases",
+      "name": "dup_attr_diff_user_rev",
+      "description": "Login with duplicate attributes: diff_user_rev",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:49.381191",
+      "details": {
+        "words": [
+          "/login",
+          "=name=admin",
+          "=name=nonexistent",
+          "=password=TestPass123"
+        ],
+        "login_success": false,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 156,
+      "category": "auth_edge_cases",
+      "name": "dup_attr_dup_password",
+      "description": "Login with duplicate attributes: dup_password",
+      "result": "login succeeded",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:49.381191",
+      "details": {
+        "words": [
+          "/login",
+          "=name=admin",
+          "=password=wrong",
+          "=password=TestPass123"
+        ],
+        "login_success": true,
+        "response": "[['!done']]"
+      }
+    },
+    {
+      "id": 157,
+      "category": "auth_edge_cases",
+      "name": "double_login",
+      "description": "Login successfully, then login again on same connection",
+      "result": "first: fail, second: ok",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:49.489137",
+      "details": {
+        "first_login": false,
+        "second_login": true,
+        "first_resp": "[['!trap', '=message=invalid user name or password (6)']]",
+        "second_resp": "[['!done', '=ret=86f42a4a973efb25af5403c1d871b82a']]"
+      }
+    },
+    {
+      "id": 158,
+      "category": "auth_edge_cases",
+      "name": "login_then_immediate_cmd",
+      "description": "Send login + command in single TCP write (no wait)",
+      "result": "responses: 1, got identity: False",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:49.493135",
+      "details": {
+        "response_count": 1,
+        "got_identity": false,
+        "responses": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 159,
+      "category": "auth_edge_cases",
+      "name": "long_password_256",
+      "description": "Login with 256-byte password",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:49.497133",
+      "details": {
+        "password_length": 256,
+        "response": "[['!trap', '=message=invalid user name or password (6)']]"
+      }
+    },
+    {
+      "id": 160,
+      "category": "auth_edge_cases",
+      "name": "long_password_1024",
+      "description": "Login with 1024-byte password",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:49.497133",
+      "details": {
+        "password_length": 1024,
+        "response": "[['!fatal', 'too much input before login']]"
+      }
+    },
+    {
+      "id": 161,
+      "category": "auth_edge_cases",
+      "name": "long_password_4096",
+      "description": "Login with 4096-byte password",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:49.501131",
+      "details": {
+        "password_length": 4096,
+        "response": "[['!fatal', 'too much input before login']]"
+      }
+    },
+    {
+      "id": 162,
+      "category": "auth_edge_cases",
+      "name": "long_password_16384",
+      "description": "Login with 16384-byte password",
+      "result": "login failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:49.501131",
+      "details": {
+        "password_length": 16384,
+        "response": "[['!fatal', 'too much input before login']]"
+      }
+    },
+    {
+      "id": 163,
+      "category": "auth_edge_cases",
+      "name": "cmd_login_with_tag",
+      "description": "Login variation: with_tag",
+      "result": "response: [['!done', '.tag=mytag']]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:49.505129",
+      "details": {
+        "words": [
+          "/login",
+          "=name=admin",
+          "=password=TestPass123",
+          ".tag=mytag"
+        ],
+        "response": "[['!done', '.tag=mytag']]"
+      }
+    },
+    {
+      "id": 164,
+      "category": "auth_edge_cases",
+      "name": "cmd_login_with_proplist",
+      "description": "Login variation: with_proplist",
+      "result": "response: [['!done']]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:49.513125",
+      "details": {
+        "words": [
+          "/login",
+          "=name=admin",
+          "=password=TestPass123",
+          ".proplist=.id"
+        ],
+        "response": "[['!done']]"
+      }
+    },
+    {
+      "id": 165,
+      "category": "auth_edge_cases",
+      "name": "cmd_login_cancel_tag",
+      "description": "Login variation: cancel_tag",
+      "result": "response: [['!fatal', 'not logged in']]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:49.513125",
+      "details": {
+        "words": [
+          "/cancel",
+          "=tag=12345"
+        ],
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 166,
+      "category": "auth_edge_cases",
+      "name": "cmd_login_login_as_command_path",
+      "description": "Login variation: login_as_command_path",
+      "result": "response: [['!fatal', 'not logged in']]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:22:49.517123",
+      "details": {
+        "words": [
+          "/user/login",
+          "=name=admin",
+          "=password=TestPass123"
+        ],
+        "response": "[['!fatal', 'not logged in']]"
+      }
+    },
+    {
+      "id": 167,
+      "category": "auth_edge_cases",
+      "name": "postauth_malformed_empty_command",
+      "description": "Post-auth malformed command: empty_command",
+      "result": "login failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:49.621071"
+    },
+    {
+      "id": 168,
+      "category": "auth_edge_cases",
+      "name": "postauth_malformed_just_slash",
+      "description": "Post-auth malformed command: just_slash",
+      "result": "login failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:49.721021"
+    },
+    {
+      "id": 169,
+      "category": "auth_edge_cases",
+      "name": "postauth_malformed_double_slash",
+      "description": "Post-auth malformed command: double_slash",
+      "result": "login failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:49.828967"
+    },
+    {
+      "id": 170,
+      "category": "auth_edge_cases",
+      "name": "postauth_malformed_triple_dots",
+      "description": "Post-auth malformed command: triple_dots",
+      "result": "login failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:49.928917"
+    },
+    {
+      "id": 171,
+      "category": "auth_edge_cases",
+      "name": "postauth_malformed_null_command",
+      "description": "Post-auth malformed command: null_command",
+      "result": "login failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:50.036863"
+    },
+    {
+      "id": 172,
+      "category": "auth_edge_cases",
+      "name": "postauth_malformed_very_long_path",
+      "description": "Post-auth malformed command: very_long_path",
+      "result": "login failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:50.140811"
+    },
+    {
+      "id": 173,
+      "category": "auth_edge_cases",
+      "name": "postauth_malformed_print_with_garbage_filter",
+      "description": "Post-auth malformed command: print_with_garbage_filter",
+      "result": "login failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:22:50.244759"
+    }
+  ],
+  "findings": []
+}

@@ -1,0 +1,267 @@
+{
+  "metadata": {
+    "collector": "phase9_pristine_manualinput",
+    "phase": "phase9",
+    "started": "2026-03-03T06:52:58.442408",
+    "target": "Zabbix 7.0.23 LTS",
+    "target_url": "http://localhost:9080",
+    "completed": "2026-03-03T06:53:10.056213",
+    "test_count": 30,
+    "finding_count": 1,
+    "anomaly_count": 0
+  },
+  "findings": [
+    {
+      "id": "PRISTINE-MANUALINPUT-RCE",
+      "severity": "HIGH",
+      "title": "Command Injection via MANUALINPUT Unanchored Regex Bypass",
+      "details": "PRISTINE VALIDATION: 3 rounds, 12 injections confirmed.\n\nVulnerability: The {MANUALINPUT} macro in Zabbix script execution allows command injection when the manualinput_validator regex is not anchored with ^...$.\n\nRoot Cause:\n  1. validate_manualinput() in src/libs/zbxtrapper/nodecommand.c uses zbx_regexp_match_full() which calls pcre2_match() for PARTIAL matching\n  2. An unanchored regex like [a-zA-Z0-9]+ matches 'abc$(id)' because 'abc' satisfies the partial match\n  3. substitute_macro() performs raw string replacement without shell escaping\n  4. Commands execute via execl('/bin/sh', 'sh', '-c', command)\n\nImpact:\n  - Any user with script.execute permission can inject arbitrary OS commands\n  - Commands execute as the 'zabbix' user on the server/agent/proxy\n  - Can read server configuration (database credentials)\n  - Can access monitored infrastructure from the server\n\nTested version: Zabbix 7.0.23\nExecution context: uid=1997(zabbix) gid=1995(zabbix)",
+      "evidence": "[\n  {\n    \"round\": 1,\n    \"tests\": [\n      {\n        \"payload\": \"test123\",\n        \"description\": \"Clean baseline\",\n        \"regex_type\": \"UNANCHORED\",\n        \"expected\": \"ACCEPT\",\n        \"actual\": \"ACCEPT\",\n        \"matched\": true,\n        \"output\": \"OUTPUT_test123_END\\n\"\n      },\n      {\n        \"payload\": \"test123\",\n        \"description\": \"Clean baseline\",\n        \"regex_type\": \"ANCHORED\",\n        \"expected\": \"ACCEPT\",\n        \"actual\": \"ACCEPT\",\n        \"matched\": true,\n        \"output\": \"OUTPUT_test123_END\\n\"\n      },\n      {\n        \"payload\": \"abc$(pwd)\",\n        \"description\": \"Command substitution $(pwd)\",\n        \"regex_type\": \"UNANCHORED\",\n        \"expected\": \"INJECT\",\n        \"actual\": \"INJECT\",\n        \"matched\": true,\n        \"output\": \"OUTPUT_abc/var/lib/zabbix_END\\n\"\n      },\n      {\n        \"payload\": \"abc$(pwd)\",\n        \"description\": \"Command substitution $(pwd)\",\n        \"regex_type\": \"ANCHORED\",\n        \"expected\": \"REJECT\",\n        \"actual\": \"REJECT\",\n        \"matched\": true,\n        \"output\": \"Provided script user input failed validation.\"\n      },\n      {\n        \"payload\": \"abc$(id)\",\n        \"description\": \"Command substitution $(id)\",\n        \"regex_type\": \"UNANCHORED\",\n        \"expected\": \"INJECT\",\n        \"actual\": \"INJECT\",\n        \"matched\": true,\n        \"output\": \"OUTPUT_abcuid=1997(zabbix) gid=1995(zabbix) groups=1995(zabbix),20(dialout)_END\\n\"\n      },\n      {\n        \"payload\": \"abc$(id)\",\n        \"description\": \"Command substitution $(id)\",\n        \"regex_type\": \"ANCHORED\",\n        \"expected\": \"REJECT\",\n        \"actual\": \"REJECT\",\n        \"matched\": true,\n        \"output\": \"Provided script user input failed validation.\"\n      },\n      {\n        \"payload\": \"abc`pwd`\",\n        \"description\": \"Backtick substitution\",\n        \"regex_type\": \"UNANCHORED\",\n        \"expected\": \"INJECT\",\n        \"actual\": \"INJECT\",\n        \"matched\": true,\n        \"output\": \"OUTPUT_abc/var/lib/zabbix_END\\n\"\n      },\n      {\n        \"payload\": \"abc`pwd`",
+      "remediation": "1. Shell-escape the MANUALINPUT value before substitution: wrap in single quotes and escape internal single quotes.\n2. Enforce anchored regex: automatically prepend ^ and append $ to the validator regex, or use PCRE2_ANCHORED + PCRE2_ENDANCHORED flags.\n3. Add a character blocklist for MANUALINPUT values: reject $, `, \\, and other shell metacharacters before regex validation.\n4. Use environment variable passing instead of string interpolation: set MANUALINPUT as an env var and reference $MANUALINPUT in the command.",
+      "timestamp": "2026-03-03T06:53:09.992181"
+    }
+  ],
+  "anomalies": [],
+  "tests": [
+    {
+      "id": "PRISTINE-R1-UNANCHORED-Clean_baseline",
+      "description": "Round 1: UNANCHORED Clean baseline",
+      "request": "script.execute manualinput='test123'",
+      "response": "Expected: ACCEPT, Actual: ACCEPT, Output: OUTPUT_test123_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:52:58.750562"
+    },
+    {
+      "id": "PRISTINE-R1-ANCHORED-Clean_baseline",
+      "description": "Round 1: ANCHORED Clean baseline",
+      "request": "script.execute manualinput='test123'",
+      "response": "Expected: ACCEPT, Actual: ACCEPT, Output: OUTPUT_test123_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:52:59.106741"
+    },
+    {
+      "id": "PRISTINE-R1-UNANCHORED-Command_substitution",
+      "description": "Round 1: UNANCHORED Command substitution $(pwd)",
+      "request": "script.execute manualinput='abc$(pwd)'",
+      "response": "Expected: INJECT, Actual: INJECT, Output: OUTPUT_abc/var/lib/zabbix_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:52:59.478927"
+    },
+    {
+      "id": "PRISTINE-R1-ANCHORED-Command_substitution",
+      "description": "Round 1: ANCHORED Command substitution $(pwd)",
+      "request": "script.execute manualinput='abc$(pwd)'",
+      "response": "Expected: REJECT, Actual: REJECT, Output: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:52:59.827101"
+    },
+    {
+      "id": "PRISTINE-R1-UNANCHORED-Command_substitution",
+      "description": "Round 1: UNANCHORED Command substitution $(id)",
+      "request": "script.execute manualinput='abc$(id)'",
+      "response": "Expected: INJECT, Actual: INJECT, Output: OUTPUT_abcuid=1997(zabbix) gid=1995(zabbix) groups=1995(zabb",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:00.203289"
+    },
+    {
+      "id": "PRISTINE-R1-ANCHORED-Command_substitution",
+      "description": "Round 1: ANCHORED Command substitution $(id)",
+      "request": "script.execute manualinput='abc$(id)'",
+      "response": "Expected: REJECT, Actual: REJECT, Output: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:00.551463"
+    },
+    {
+      "id": "PRISTINE-R1-UNANCHORED-Backtick_substitutio",
+      "description": "Round 1: UNANCHORED Backtick substitution",
+      "request": "script.execute manualinput='abc`pwd`'",
+      "response": "Expected: INJECT, Actual: INJECT, Output: OUTPUT_abc/var/lib/zabbix_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:00.923649"
+    },
+    {
+      "id": "PRISTINE-R1-ANCHORED-Backtick_substitutio",
+      "description": "Round 1: ANCHORED Backtick substitution",
+      "request": "script.execute manualinput='abc`pwd`'",
+      "response": "Expected: REJECT, Actual: REJECT, Output: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:01.287831"
+    },
+    {
+      "id": "PRISTINE-R1-UNANCHORED-Variable_expansion",
+      "description": "Round 1: UNANCHORED Variable expansion",
+      "request": "script.execute manualinput='abc${PATH}'",
+      "response": "Expected: INJECT, Actual: INJECT, Output: OUTPUT_abc/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:01.680027"
+    },
+    {
+      "id": "PRISTINE-R1-ANCHORED-Variable_expansion",
+      "description": "Round 1: ANCHORED Variable expansion",
+      "request": "script.execute manualinput='abc${PATH}'",
+      "response": "Expected: REJECT, Actual: REJECT, Output: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:02.064219"
+    },
+    {
+      "id": "PRISTINE-R2-UNANCHORED-Clean_baseline",
+      "description": "Round 2: UNANCHORED Clean baseline",
+      "request": "script.execute manualinput='test123'",
+      "response": "Expected: ACCEPT, Actual: ACCEPT, Output: OUTPUT_test123_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:02.676525"
+    },
+    {
+      "id": "PRISTINE-R2-ANCHORED-Clean_baseline",
+      "description": "Round 2: ANCHORED Clean baseline",
+      "request": "script.execute manualinput='test123'",
+      "response": "Expected: ACCEPT, Actual: ACCEPT, Output: OUTPUT_test123_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:03.044709"
+    },
+    {
+      "id": "PRISTINE-R2-UNANCHORED-Command_substitution",
+      "description": "Round 2: UNANCHORED Command substitution $(pwd)",
+      "request": "script.execute manualinput='abc$(pwd)'",
+      "response": "Expected: INJECT, Actual: INJECT, Output: OUTPUT_abc/var/lib/zabbix_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:03.404889"
+    },
+    {
+      "id": "PRISTINE-R2-ANCHORED-Command_substitution",
+      "description": "Round 2: ANCHORED Command substitution $(pwd)",
+      "request": "script.execute manualinput='abc$(pwd)'",
+      "response": "Expected: REJECT, Actual: REJECT, Output: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:03.749061"
+    },
+    {
+      "id": "PRISTINE-R2-UNANCHORED-Command_substitution",
+      "description": "Round 2: UNANCHORED Command substitution $(id)",
+      "request": "script.execute manualinput='abc$(id)'",
+      "response": "Expected: INJECT, Actual: INJECT, Output: OUTPUT_abcuid=1997(zabbix) gid=1995(zabbix) groups=1995(zabb",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:04.109241"
+    },
+    {
+      "id": "PRISTINE-R2-ANCHORED-Command_substitution",
+      "description": "Round 2: ANCHORED Command substitution $(id)",
+      "request": "script.execute manualinput='abc$(id)'",
+      "response": "Expected: REJECT, Actual: REJECT, Output: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:04.457415"
+    },
+    {
+      "id": "PRISTINE-R2-UNANCHORED-Backtick_substitutio",
+      "description": "Round 2: UNANCHORED Backtick substitution",
+      "request": "script.execute manualinput='abc`pwd`'",
+      "response": "Expected: INJECT, Actual: INJECT, Output: OUTPUT_abc/var/lib/zabbix_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:04.829601"
+    },
+    {
+      "id": "PRISTINE-R2-ANCHORED-Backtick_substitutio",
+      "description": "Round 2: ANCHORED Backtick substitution",
+      "request": "script.execute manualinput='abc`pwd`'",
+      "response": "Expected: REJECT, Actual: REJECT, Output: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:05.173773"
+    },
+    {
+      "id": "PRISTINE-R2-UNANCHORED-Variable_expansion",
+      "description": "Round 2: UNANCHORED Variable expansion",
+      "request": "script.execute manualinput='abc${PATH}'",
+      "response": "Expected: INJECT, Actual: INJECT, Output: OUTPUT_abc/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:05.525949"
+    },
+    {
+      "id": "PRISTINE-R2-ANCHORED-Variable_expansion",
+      "description": "Round 2: ANCHORED Variable expansion",
+      "request": "script.execute manualinput='abc${PATH}'",
+      "response": "Expected: REJECT, Actual: REJECT, Output: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:05.882127"
+    },
+    {
+      "id": "PRISTINE-R3-UNANCHORED-Clean_baseline",
+      "description": "Round 3: UNANCHORED Clean baseline",
+      "request": "script.execute manualinput='test123'",
+      "response": "Expected: ACCEPT, Actual: ACCEPT, Output: OUTPUT_test123_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:06.342357"
+    },
+    {
+      "id": "PRISTINE-R3-ANCHORED-Clean_baseline",
+      "description": "Round 3: ANCHORED Clean baseline",
+      "request": "script.execute manualinput='test123'",
+      "response": "Expected: ACCEPT, Actual: ACCEPT, Output: OUTPUT_test123_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:06.718545"
+    },
+    {
+      "id": "PRISTINE-R3-UNANCHORED-Command_substitution",
+      "description": "Round 3: UNANCHORED Command substitution $(pwd)",
+      "request": "script.execute manualinput='abc$(pwd)'",
+      "response": "Expected: INJECT, Actual: INJECT, Output: OUTPUT_abc/var/lib/zabbix_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:07.090731"
+    },
+    {
+      "id": "PRISTINE-R3-ANCHORED-Command_substitution",
+      "description": "Round 3: ANCHORED Command substitution $(pwd)",
+      "request": "script.execute manualinput='abc$(pwd)'",
+      "response": "Expected: REJECT, Actual: REJECT, Output: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:07.450911"
+    },
+    {
+      "id": "PRISTINE-R3-UNANCHORED-Command_substitution",
+      "description": "Round 3: UNANCHORED Command substitution $(id)",
+      "request": "script.execute manualinput='abc$(id)'",
+      "response": "Expected: INJECT, Actual: INJECT, Output: OUTPUT_abcuid=1997(zabbix) gid=1995(zabbix) groups=1995(zabb",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:07.815093"
+    },
+    {
+      "id": "PRISTINE-R3-ANCHORED-Command_substitution",
+      "description": "Round 3: ANCHORED Command substitution $(id)",
+      "request": "script.execute manualinput='abc$(id)'",
+      "response": "Expected: REJECT, Actual: REJECT, Output: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:08.183277"
+    },
+    {
+      "id": "PRISTINE-R3-UNANCHORED-Backtick_substitutio",
+      "description": "Round 3: UNANCHORED Backtick substitution",
+      "request": "script.execute manualinput='abc`pwd`'",
+      "response": "Expected: INJECT, Actual: INJECT, Output: OUTPUT_abc/var/lib/zabbix_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:08.555463"
+    },
+    {
+      "id": "PRISTINE-R3-ANCHORED-Backtick_substitutio",
+      "description": "Round 3: ANCHORED Backtick substitution",
+      "request": "script.execute manualinput='abc`pwd`'",
+      "response": "Expected: REJECT, Actual: REJECT, Output: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:08.915643"
+    },
+    {
+      "id": "PRISTINE-R3-UNANCHORED-Variable_expansion",
+      "description": "Round 3: UNANCHORED Variable expansion",
+      "request": "script.execute manualinput='abc${PATH}'",
+      "response": "Expected: INJECT, Actual: INJECT, Output: OUTPUT_abc/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:09.287829"
+    },
+    {
+      "id": "PRISTINE-R3-ANCHORED-Variable_expansion",
+      "description": "Round 3: ANCHORED Variable expansion",
+      "request": "script.execute manualinput='abc${PATH}'",
+      "response": "Expected: REJECT, Actual: REJECT, Output: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:53:09.640005"
+    }
+  ]
+}

@@ -1,0 +1,1553 @@
+{
+  "metadata": {
+    "script": "multi_service_fuzzer.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 7,
+    "start_time": "2026-02-16T01:00:02.333299",
+    "end_time": "2026-02-16T01:03:15.040899",
+    "total_tests": 118,
+    "anomalies": 0,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "59m3s",
+    "router_log_count": 29,
+    "router_interesting_events": 1,
+    "final_health": {
+      "alive": true,
+      "uptime": "1h2m15s",
+      "cpu_load": "0",
+      "free_memory": "837660672",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "btest",
+      "name": "random_binary_100B",
+      "description": "Send 100B random binary to btest",
+      "result": "Sent 100 bytes, got 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:02.637147",
+      "details": {
+        "payload_size": 100,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 2,
+      "category": "btest",
+      "name": "random_binary_1KB",
+      "description": "Send 1KB random binary to btest",
+      "result": "Sent 1024 bytes, got 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:02.940995",
+      "details": {
+        "payload_size": 1024,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 3,
+      "category": "btest",
+      "name": "random_binary_10KB",
+      "description": "Send 10KB random binary to btest",
+      "result": "Sent 10240 bytes, got 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:03.244843",
+      "details": {
+        "payload_size": 10240,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 4,
+      "category": "btest",
+      "name": "random_binary_64KB",
+      "description": "Send 64KB random binary to btest",
+      "result": "Sent 65536 bytes, got 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:03.548691",
+      "details": {
+        "payload_size": 65536,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 5,
+      "category": "btest",
+      "name": "oversized_128KB",
+      "description": "Send 128KB to btest",
+      "result": "Error: [Errno 104] Connection reset by peer",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:03.552689",
+      "details": {
+        "error": "[Errno 104] Connection reset by peer"
+      }
+    },
+    {
+      "id": 6,
+      "category": "btest",
+      "name": "partial_write",
+      "description": "Send bytes one at a time then burst",
+      "result": "Partial write OK, response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:05.023953",
+      "details": {
+        "response_size": 4
+      }
+    },
+    {
+      "id": 7,
+      "category": "btest",
+      "name": "rapid_connect_50",
+      "description": "50 rapid TCP connect/disconnect to btest",
+      "result": "50 rapid connects: 50 ok, 0 fail in 0.06s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:05.079925",
+      "details": {
+        "success": 50,
+        "fail": 0,
+        "elapsed": 0.06,
+        "anomaly": false
+      }
+    },
+    {
+      "id": 8,
+      "category": "btest",
+      "name": "all_zeros_1KB",
+      "description": "Send 1KB of zero bytes to btest",
+      "result": "Sent 1000 zeros, got 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:05.383773",
+      "details": {
+        "response_size": 4
+      }
+    },
+    {
+      "id": 9,
+      "category": "btest",
+      "name": "all_ff_1KB",
+      "description": "Send 1KB of 0xFF bytes to btest",
+      "result": "Sent 1000 0xFF bytes, got 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:05.687621",
+      "details": {
+        "response_size": 4
+      }
+    },
+    {
+      "id": 10,
+      "category": "btest",
+      "name": "format_strings",
+      "description": "Send format string specifiers to btest",
+      "result": "Format strings sent, got 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:05.991469",
+      "details": {
+        "response_size": 4
+      }
+    },
+    {
+      "id": 11,
+      "category": "btest",
+      "name": "boundary_max_u32",
+      "description": "Send repeated max_u32 (0xFFFFFFFF) to btest",
+      "result": "Sent max_u32, got 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:06.295317",
+      "details": {
+        "response_size": 4,
+        "value": 4294967295
+      }
+    },
+    {
+      "id": 12,
+      "category": "btest",
+      "name": "boundary_max_i32",
+      "description": "Send repeated max_i32 (0x7FFFFFFF) to btest",
+      "result": "Sent max_i32, got 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:06.599165",
+      "details": {
+        "response_size": 4,
+        "value": 2147483647
+      }
+    },
+    {
+      "id": 13,
+      "category": "btest",
+      "name": "boundary_min_i32_neg",
+      "description": "Send repeated min_i32_neg (0x80000000) to btest",
+      "result": "Sent min_i32_neg, got 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:06.903013",
+      "details": {
+        "response_size": 4,
+        "value": 2147483648
+      }
+    },
+    {
+      "id": 14,
+      "category": "btest",
+      "name": "boundary_zero",
+      "description": "Send repeated zero (0x00000000) to btest",
+      "result": "Sent zero, got 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:07.206861",
+      "details": {
+        "response_size": 4,
+        "value": 0
+      }
+    },
+    {
+      "id": 15,
+      "category": "btest",
+      "name": "http_on_btest",
+      "description": "Send HTTP request to btest port (protocol confusion)",
+      "result": "HTTP on btest: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:07.514707",
+      "details": {
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 16,
+      "category": "btest",
+      "name": "concurrent_20",
+      "description": "Open 20 concurrent btest connections and send data",
+      "result": "2/20 connections alive after send",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:07.530699",
+      "details": {
+        "opened": 20,
+        "alive_after": 2
+      }
+    },
+    {
+      "id": 17,
+      "category": "btest",
+      "name": "proto_version_0x00",
+      "description": "Send protocol version byte 0x00 to btest",
+      "result": "Version 0x00: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:07.834547",
+      "details": {
+        "version": 0,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 18,
+      "category": "btest",
+      "name": "proto_version_0x01",
+      "description": "Send protocol version byte 0x01 to btest",
+      "result": "Version 0x01: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:08.138395",
+      "details": {
+        "version": 1,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 19,
+      "category": "btest",
+      "name": "proto_version_0x02",
+      "description": "Send protocol version byte 0x02 to btest",
+      "result": "Version 0x02: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:08.442243",
+      "details": {
+        "version": 2,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 20,
+      "category": "btest",
+      "name": "proto_version_0x03",
+      "description": "Send protocol version byte 0x03 to btest",
+      "result": "Version 0x03: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:08.746091",
+      "details": {
+        "version": 3,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 21,
+      "category": "btest",
+      "name": "proto_version_0xFF",
+      "description": "Send protocol version byte 0xFF to btest",
+      "result": "Version 0xFF: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:09.053937",
+      "details": {
+        "version": 255,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 22,
+      "category": "btest",
+      "name": "abrupt_rst",
+      "description": "Send data then TCP RST via SO_LINGER(0)",
+      "result": "RST sent after data",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:09.053937",
+      "details": {
+        "method": "SO_LINGER_RST"
+      }
+    },
+    {
+      "id": 23,
+      "category": "mndp",
+      "name": "normal_tlv",
+      "description": "Send normal MNDP TLV packet",
+      "result": "Normal MNDP: 0 bytes response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:12.056435",
+      "details": {
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 24,
+      "category": "mndp",
+      "name": "oversized_tlv_1KB",
+      "description": "MNDP TLV with 1KB value",
+      "result": "Oversized TLV (1KB): 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:15.058933",
+      "details": {
+        "tlv_value_size": 1024,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 25,
+      "category": "mndp",
+      "name": "oversized_tlv_10KB",
+      "description": "MNDP TLV with 10KB value",
+      "result": "Oversized TLV (10KB): 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:18.061432",
+      "details": {
+        "tlv_value_size": 10240,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 26,
+      "category": "mndp",
+      "name": "oversized_tlv_60KB",
+      "description": "MNDP TLV with 60KB value",
+      "result": "Oversized TLV (60KB): 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:21.063930",
+      "details": {
+        "tlv_value_size": 60000,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 27,
+      "category": "mndp",
+      "name": "invalid_type_0x0000",
+      "description": "MNDP TLV with type=0x0000",
+      "result": "Type 0x0000: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:24.062430",
+      "details": {
+        "tlv_type": 0,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 28,
+      "category": "mndp",
+      "name": "invalid_type_0x0002",
+      "description": "MNDP TLV with type=0x0002",
+      "result": "Type 0x0002: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:28.927996",
+      "details": {
+        "tlv_type": 2,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 29,
+      "category": "mndp",
+      "name": "invalid_type_0x0003",
+      "description": "MNDP TLV with type=0x0003",
+      "result": "Type 0x0003: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:31.934492",
+      "details": {
+        "tlv_type": 3,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 30,
+      "category": "mndp",
+      "name": "invalid_type_0x00FF",
+      "description": "MNDP TLV with type=0x00FF",
+      "result": "Type 0x00FF: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:34.936990",
+      "details": {
+        "tlv_type": 255,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 31,
+      "category": "mndp",
+      "name": "invalid_type_0x0100",
+      "description": "MNDP TLV with type=0x0100",
+      "result": "Type 0x0100: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:37.943486",
+      "details": {
+        "tlv_type": 256,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 32,
+      "category": "mndp",
+      "name": "invalid_type_0x7FFF",
+      "description": "MNDP TLV with type=0x7FFF",
+      "result": "Type 0x7FFF: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:40.945984",
+      "details": {
+        "tlv_type": 32767,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 33,
+      "category": "mndp",
+      "name": "invalid_type_0xFFFF",
+      "description": "MNDP TLV with type=0xFFFF",
+      "result": "Type 0xFFFF: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:43.948482",
+      "details": {
+        "tlv_type": 65535,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 34,
+      "category": "mndp",
+      "name": "zero_length_tlv",
+      "description": "MNDP TLV with length=0",
+      "result": "Zero-length TLV: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:46.950981",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 35,
+      "category": "mndp",
+      "name": "length_mismatch",
+      "description": "MNDP TLV claiming 1000 bytes but only 5 sent",
+      "result": "Length mismatch TLV: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:49.953479",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 36,
+      "category": "mndp",
+      "name": "multi_tlv_20",
+      "description": "MNDP packet with 20 TLV entries",
+      "result": "Multi-TLV (20): 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:52.975967",
+      "details": {
+        "tlv_count": 20,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 37,
+      "category": "mndp",
+      "name": "random_binary_100B",
+      "description": "Send 100 random bytes to MNDP port",
+      "result": "Random 100B: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:55.978465",
+      "details": {
+        "payload_size": 100,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 38,
+      "category": "mndp",
+      "name": "random_binary_1000B",
+      "description": "Send 1000 random bytes to MNDP port",
+      "result": "Random 1000B: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:00:58.980963",
+      "details": {
+        "payload_size": 1000,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 39,
+      "category": "mndp",
+      "name": "random_binary_10000B",
+      "description": "Send 10000 random bytes to MNDP port",
+      "result": "Random 10000B: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:01.983461",
+      "details": {
+        "payload_size": 10000,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 40,
+      "category": "mndp",
+      "name": "all_zeros",
+      "description": "Send 100 zero bytes to MNDP port",
+      "result": "All-zeros: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:04.993955",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 41,
+      "category": "mndp",
+      "name": "format_strings",
+      "description": "MNDP TLV with format string specifiers",
+      "result": "Format strings in TLV: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:07.996453",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 42,
+      "category": "mndp",
+      "name": "null_bytes_in_value",
+      "description": "MNDP TLV with null bytes in value",
+      "result": "Null bytes in TLV: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:10.994953",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 43,
+      "category": "ftp",
+      "name": "long_user_1KB",
+      "description": "FTP USER command with 1KB argument",
+      "result": "Long USER (1KB): 331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:11.310795",
+      "details": {
+        "command_size": 1024,
+        "banner": "220 MikroTik FTP server (MikroTik 7.20.8) ready\r\n",
+        "response": "331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "response_size": 1046
+      }
+    },
+    {
+      "id": 44,
+      "category": "ftp",
+      "name": "long_user_10KB",
+      "description": "FTP USER command with 10KB argument",
+      "result": "Long USER (10KB): 331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:11.618641",
+      "details": {
+        "command_size": 10240,
+        "banner": "220 MikroTik FTP server (MikroTik 7.20.8) ready\r\n",
+        "response": "331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "response_size": 4096
+      }
+    },
+    {
+      "id": 45,
+      "category": "ftp",
+      "name": "invalid_verb_AAAA",
+      "description": "FTP invalid verb: AAAA",
+      "result": "Verb 'AAAA': 500 'AAAA': command not understood\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:11.922489",
+      "details": {
+        "verb": "AAAA",
+        "response": "500 'AAAA': command not understood\r\n"
+      }
+    },
+    {
+      "id": 46,
+      "category": "ftp",
+      "name": "invalid_verb_ZZZZ",
+      "description": "FTP invalid verb: ZZZZ",
+      "result": "Verb 'ZZZZ': 500 'ZZZZ': command not understood\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:12.226337",
+      "details": {
+        "verb": "ZZZZ",
+        "response": "500 'ZZZZ': command not understood\r\n"
+      }
+    },
+    {
+      "id": 47,
+      "category": "ftp",
+      "name": "invalid_verb_123456",
+      "description": "FTP invalid verb: 123456",
+      "result": "Verb '123456': 500 '123456': command not understood\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:12.534183",
+      "details": {
+        "verb": "123456",
+        "response": "500 '123456': command not understood\r\n"
+      }
+    },
+    {
+      "id": 48,
+      "category": "ftp",
+      "name": "invalid_verb_",
+      "description": "FTP invalid verb: ",
+      "result": "Verb '': 500 '': command not understood\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:12.838031",
+      "details": {
+        "verb": "",
+        "response": "500 '': command not understood\r\n"
+      }
+    },
+    {
+      "id": 49,
+      "category": "ftp",
+      "name": "invalid_verb_AAAAAAAAAA",
+      "description": "FTP invalid verb: AAAAAAAAAA",
+      "result": "Verb 'AAAAAAAAAAAAAAAAAAAA': 500 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:13.141879",
+      "details": {
+        "verb": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "response": "500 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA': command not understood\r\n"
+      }
+    },
+    {
+      "id": 50,
+      "category": "ftp",
+      "name": "invalid_verb_GET",
+      "description": "FTP invalid verb: GET",
+      "result": "Verb 'GET': 500 'GET': command not understood\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:13.445727",
+      "details": {
+        "verb": "GET",
+        "response": "500 'GET': command not understood\r\n"
+      }
+    },
+    {
+      "id": 51,
+      "category": "ftp",
+      "name": "invalid_verb_POST",
+      "description": "FTP invalid verb: POST",
+      "result": "Verb 'POST': 500 'POST': command not understood\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:13.745577",
+      "details": {
+        "verb": "POST",
+        "response": "500 'POST': command not understood\r\n"
+      }
+    },
+    {
+      "id": 52,
+      "category": "ftp",
+      "name": "invalid_verb_null\u0001\u0002",
+      "description": "FTP invalid verb: null\u0001\u0002",
+      "result": "Verb '\u0000\u0001\u0002': 500 '': command not understood\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:14.049425",
+      "details": {
+        "verb": "\u0000\u0001\u0002",
+        "response": "500 '': command not understood\r\n"
+      }
+    },
+    {
+      "id": 53,
+      "category": "ftp",
+      "name": "invalid_verb_USERnullevil",
+      "description": "FTP invalid verb: USERnullevil",
+      "result": "Verb 'USER\u0000evil': 504 Bad USER command\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:14.345277",
+      "details": {
+        "verb": "USER\u0000evil",
+        "response": "504 Bad USER command\r\n"
+      }
+    },
+    {
+      "id": 54,
+      "category": "ftp",
+      "name": "crlf_injection",
+      "description": "CRLF injection in FTP USER argument",
+      "result": "CRLF injection: 331 Password required for admin\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:14.645127",
+      "details": {
+        "response": "331 Password required for admin\r\n"
+      }
+    },
+    {
+      "id": 55,
+      "category": "ftp",
+      "name": "format_string_USER",
+      "description": "Format strings in FTP USER",
+      "result": "Format string USER: 331 Password required for %s%s%s%n%n\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:14.956971",
+      "details": {
+        "command": "USER %s%s%s%n%n",
+        "response": "331 Password required for %s%s%s%n%n\r\n"
+      }
+    },
+    {
+      "id": 56,
+      "category": "ftp",
+      "name": "format_string_PASS",
+      "description": "Format strings in FTP PASS",
+      "result": "Format string PASS: 504 Command not implemented\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:15.260819",
+      "details": {
+        "command": "PASS %n%n%n%x%x",
+        "response": "504 Command not implemented\r\n"
+      }
+    },
+    {
+      "id": 57,
+      "category": "ftp",
+      "name": "format_string_CWD",
+      "description": "Format strings in FTP CWD",
+      "result": "Format string CWD: 530 Please login with USER and PASS\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:15.556671",
+      "details": {
+        "command": "CWD %s%s%s%n%n%n",
+        "response": "530 Please login with USER and PASS\r\n"
+      }
+    },
+    {
+      "id": 58,
+      "category": "ftp",
+      "name": "format_string_RETR",
+      "description": "Format strings in FTP RETR",
+      "result": "Format string RETR: 530 Please login with USER and PASS\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:15.856521",
+      "details": {
+        "command": "RETR %x%x%x%x%x",
+        "response": "530 Please login with USER and PASS\r\n"
+      }
+    },
+    {
+      "id": 59,
+      "category": "ftp",
+      "name": "format_string_STOR",
+      "description": "Format strings in FTP STOR",
+      "result": "Format string STOR: 530 Please login with USER and PASS\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:16.156371",
+      "details": {
+        "command": "STOR %n%n%n%n",
+        "response": "530 Please login with USER and PASS\r\n"
+      }
+    },
+    {
+      "id": 60,
+      "category": "ftp",
+      "name": "cwd_traversal",
+      "description": "FTP CWD path traversal (../../../etc)",
+      "result": "CWD traversal: 553 ../../../etc: Permission denied\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:16.460219",
+      "details": {
+        "response": "553 ../../../etc: Permission denied\r\n"
+      }
+    },
+    {
+      "id": 61,
+      "category": "ftp",
+      "name": "binary_command",
+      "description": "Send 500 bytes of random binary as FTP command",
+      "result": "Binary FTP cmd: 493 bytes response",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:16.772063",
+      "details": {
+        "response_size": 493
+      }
+    },
+    {
+      "id": 62,
+      "category": "ftp",
+      "name": "long_password_10KB",
+      "description": "FTP PASS with 10KB password",
+      "result": "Long PASS: 530 Login incorrect\r\n500 '': command not understood\r\n500 '': command not underst",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:17.783557",
+      "details": {
+        "password_length": 10000,
+        "response": "530 Login incorrect\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not und"
+      }
+    },
+    {
+      "id": 63,
+      "category": "ftp",
+      "name": "rapid_connect_30",
+      "description": "30 rapid FTP connect/QUIT cycles",
+      "result": "30 rapid FTP: 30 ok, 0 fail",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:17.875511",
+      "details": {
+        "success": 30,
+        "fail": 0,
+        "anomaly": false
+      }
+    },
+    {
+      "id": 64,
+      "category": "dns",
+      "name": "normal_a_query",
+      "description": "Normal DNS A query for router.local",
+      "result": "Normal A query: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:20.886005",
+      "details": {
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 65,
+      "category": "dns",
+      "name": "oversized_name_255",
+      "description": "DNS query with 255-byte name",
+      "result": "Oversized name (255): 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:23.884505",
+      "details": {
+        "name_size": 255,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 66,
+      "category": "dns",
+      "name": "oversized_name_1000",
+      "description": "DNS query with 1000-byte name",
+      "result": "Oversized name (1000): 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:26.887003",
+      "details": {
+        "name_size": 1000,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 67,
+      "category": "dns",
+      "name": "oversized_name_4000",
+      "description": "DNS query with 4000-byte name",
+      "result": "Oversized name (4000): 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:29.889501",
+      "details": {
+        "name_size": 4000,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 68,
+      "category": "dns",
+      "name": "opcode_1",
+      "description": "DNS query with opcode=1",
+      "result": "Opcode 1: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:32.895997",
+      "details": {
+        "opcode": 1,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 69,
+      "category": "dns",
+      "name": "opcode_2",
+      "description": "DNS query with opcode=2",
+      "result": "Opcode 2: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:35.902493",
+      "details": {
+        "opcode": 2,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 70,
+      "category": "dns",
+      "name": "opcode_3",
+      "description": "DNS query with opcode=3",
+      "result": "Opcode 3: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:38.904991",
+      "details": {
+        "opcode": 3,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 71,
+      "category": "dns",
+      "name": "opcode_4",
+      "description": "DNS query with opcode=4",
+      "result": "Opcode 4: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:41.911487",
+      "details": {
+        "opcode": 4,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 72,
+      "category": "dns",
+      "name": "opcode_5",
+      "description": "DNS query with opcode=5",
+      "result": "Opcode 5: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:44.913985",
+      "details": {
+        "opcode": 5,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 73,
+      "category": "dns",
+      "name": "opcode_15",
+      "description": "DNS query with opcode=15",
+      "result": "Opcode 15: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:47.916483",
+      "details": {
+        "opcode": 15,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 74,
+      "category": "dns",
+      "name": "compression_loop",
+      "description": "DNS query with label compression pointer loop",
+      "result": "Compression loop: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:50.918981",
+      "details": {
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 75,
+      "category": "dns",
+      "name": "mutual_compression_loop",
+      "description": "DNS query with mutual label compression loop",
+      "result": "Mutual loop: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:53.921479",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 76,
+      "category": "dns",
+      "name": "edns0_large_payload",
+      "description": "DNS query with EDNS0 OPT advertising 65535 UDP payload",
+      "result": "EDNS0 64KB: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:56.923977",
+      "details": {
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 77,
+      "category": "dns",
+      "name": "truncated_header_only",
+      "description": "DNS packet with header but no question section",
+      "result": "Truncated (header only): 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:01:59.926475",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 78,
+      "category": "dns",
+      "name": "random_binary_512B",
+      "description": "Send 512 random bytes to DNS port",
+      "result": "Random 512B: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:02.928973",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 79,
+      "category": "dns",
+      "name": "qdcount_65535",
+      "description": "DNS query claiming 65535 questions with only 1 provided",
+      "result": "QDCOUNT=65535: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:05.931471",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 80,
+      "category": "dns",
+      "name": "null_in_name",
+      "description": "DNS query with null byte in name",
+      "result": "Null in name: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:08.933969",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 81,
+      "category": "dns",
+      "name": "axfr_query",
+      "description": "DNS AXFR (zone transfer) query",
+      "result": "AXFR query: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:11.940465",
+      "details": {
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 82,
+      "category": "dns",
+      "name": "any_query",
+      "description": "DNS ANY query for router.local",
+      "result": "ANY query: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:14.942963",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 83,
+      "category": "snmp",
+      "name": "normal_get",
+      "description": "Normal SNMPv1 GET sysDescr with 'public' community",
+      "result": "Normal GET: 52 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:14.942963",
+      "details": {
+        "response_size": 52,
+        "response_hex": "303202010004067075626c6963a225020101020100020100301a301806082b06010201010100040c526f757465724f5320434852"
+      }
+    },
+    {
+      "id": 84,
+      "category": "snmp",
+      "name": "community_256B",
+      "description": "SNMP GET with 256B community string",
+      "result": "Community 256B: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:17.949459",
+      "details": {
+        "community_size": 256,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 85,
+      "category": "snmp",
+      "name": "community_1KB",
+      "description": "SNMP GET with 1KB community string",
+      "result": "Community 1KB: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:20.947959",
+      "details": {
+        "community_size": 1024,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 86,
+      "category": "snmp",
+      "name": "community_10KB",
+      "description": "SNMP GET with 10KB community string",
+      "result": "Community 10KB: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:23.950457",
+      "details": {
+        "community_size": 10240,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 87,
+      "category": "snmp",
+      "name": "pdu_type_0xA1",
+      "description": "SNMP with PDU type 0xA1",
+      "result": "PDU 0xA1: 48 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:23.950457",
+      "details": {
+        "pdu_type": 161,
+        "response_size": 48
+      }
+    },
+    {
+      "id": 88,
+      "category": "snmp",
+      "name": "pdu_type_0xA2",
+      "description": "SNMP with PDU type 0xA2",
+      "result": "PDU 0xA2: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:26.952955",
+      "details": {
+        "pdu_type": 162,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 89,
+      "category": "snmp",
+      "name": "pdu_type_0xA3",
+      "description": "SNMP with PDU type 0xA3",
+      "result": "PDU 0xA3: 40 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:26.952955",
+      "details": {
+        "pdu_type": 163,
+        "response_size": 40
+      }
+    },
+    {
+      "id": 90,
+      "category": "snmp",
+      "name": "pdu_type_0xA4",
+      "description": "SNMP with PDU type 0xA4",
+      "result": "PDU 0xA4: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:29.955453",
+      "details": {
+        "pdu_type": 164,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 91,
+      "category": "snmp",
+      "name": "pdu_type_0xA5",
+      "description": "SNMP with PDU type 0xA5",
+      "result": "PDU 0xA5: 30 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:29.959451",
+      "details": {
+        "pdu_type": 165,
+        "response_size": 30
+      }
+    },
+    {
+      "id": 92,
+      "category": "snmp",
+      "name": "pdu_type_0xA6",
+      "description": "SNMP with PDU type 0xA6",
+      "result": "PDU 0xA6: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:34.916971",
+      "details": {
+        "pdu_type": 166,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 93,
+      "category": "snmp",
+      "name": "pdu_type_0xA7",
+      "description": "SNMP with PDU type 0xA7",
+      "result": "PDU 0xA7: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:37.923467",
+      "details": {
+        "pdu_type": 167,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 94,
+      "category": "snmp",
+      "name": "pdu_type_0xA8",
+      "description": "SNMP with PDU type 0xA8",
+      "result": "PDU 0xA8: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:40.925965",
+      "details": {
+        "pdu_type": 168,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 95,
+      "category": "snmp",
+      "name": "pdu_type_0xFF",
+      "description": "SNMP with PDU type 0xFF",
+      "result": "PDU 0xFF: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:43.928463",
+      "details": {
+        "pdu_type": 255,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 96,
+      "category": "snmp",
+      "name": "getbulk_extreme",
+      "description": "SNMP GetBulk with max-repetitions=10000",
+      "result": "GetBulk max-rep=10000: 26 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:43.928463",
+      "details": {
+        "response_size": 26
+      }
+    },
+    {
+      "id": 97,
+      "category": "snmp",
+      "name": "malformed_asn1_length",
+      "description": "SNMP with ASN.1 length mismatch (claims 1000, sends 10)",
+      "result": "Malformed ASN.1: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:46.930961",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 98,
+      "category": "snmp",
+      "name": "random_binary",
+      "description": "Send 500 random bytes to SNMP port",
+      "result": "Random 500B: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:49.933459",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 99,
+      "category": "snmp",
+      "name": "format_string_community",
+      "description": "SNMP GET with format strings as community",
+      "result": "Format string community: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:52.939955",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 100,
+      "category": "snmp",
+      "name": "version_3",
+      "description": "SNMP GET with version=3 (wrong message format)",
+      "result": "SNMPv3: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:55.942453",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 101,
+      "category": "snmp",
+      "name": "nested_asn1_50",
+      "description": "50 levels of nested ASN.1 SEQUENCE",
+      "result": "50-deep nested SEQUENCE: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:58.944951",
+      "details": {
+        "response_size": 0,
+        "nesting_depth": 50
+      }
+    },
+    {
+      "id": 102,
+      "category": "snmp",
+      "name": "many_oids_50",
+      "description": "SNMP GET with 50 OIDs in one request",
+      "result": "50 OIDs in one GET: 764 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:58.948949",
+      "details": {
+        "oid_count": 50,
+        "response_size": 764
+      }
+    },
+    {
+      "id": 103,
+      "category": "telnet",
+      "name": "long_line_1KB",
+      "description": "Send 1KB single line to telnet",
+      "result": "Long line (1KB): 1026 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:02:59.960443",
+      "details": {
+        "line_size": 1024,
+        "response_size": 1026,
+        "initial_size": 12
+      }
+    },
+    {
+      "id": 104,
+      "category": "telnet",
+      "name": "long_line_10KB",
+      "description": "Send 10KB single line to telnet",
+      "result": "Long line (10KB): 4096 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:00.967939",
+      "details": {
+        "line_size": 10240,
+        "response_size": 4096,
+        "initial_size": 12
+      }
+    },
+    {
+      "id": 105,
+      "category": "telnet",
+      "name": "long_line_64KB",
+      "description": "Send 64KB single line to telnet",
+      "result": "Long line (64KB): 4096 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:01.975435",
+      "details": {
+        "line_size": 65536,
+        "response_size": 4096,
+        "initial_size": 12
+      }
+    },
+    {
+      "id": 106,
+      "category": "telnet",
+      "name": "binary_data",
+      "description": "Send 500 random binary bytes to telnet",
+      "result": "Binary data: 749 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:02.982931",
+      "details": {
+        "response_size": 749
+      }
+    },
+    {
+      "id": 107,
+      "category": "telnet",
+      "name": "iac_flood",
+      "description": "Send 1000 IAC negotiation sequences",
+      "result": "IAC flood (1000 seqs): 1606 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:03.982431",
+      "details": {
+        "iac_sequences": 1000,
+        "response_size": 1606
+      }
+    },
+    {
+      "id": 108,
+      "category": "telnet",
+      "name": "malformed_iac",
+      "description": "Malformed IAC sequences (0xFF + non-command bytes)",
+      "result": "Malformed IAC: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:04.989927",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 109,
+      "category": "telnet",
+      "name": "subneg_overflow_10KB",
+      "description": "Telnet subnegotiation with 10KB data",
+      "result": "Subneg overflow: 42 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:05.981431",
+      "details": {
+        "subneg_size": 10000,
+        "response_size": 42
+      }
+    },
+    {
+      "id": 110,
+      "category": "telnet",
+      "name": "rapid_negotiation",
+      "description": "200 rapid WILL/DO ECHO negotiations",
+      "result": "Rapid negotiation: 6 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:06.992925",
+      "details": {
+        "response_size": 6
+      }
+    },
+    {
+      "id": 111,
+      "category": "telnet",
+      "name": "format_strings",
+      "description": "Send format string specifiers to telnet",
+      "result": "Format strings: 602 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:08.004419",
+      "details": {
+        "response_size": 602
+      }
+    },
+    {
+      "id": 112,
+      "category": "telnet",
+      "name": "null_bytes_1000",
+      "description": "Send 1000 null bytes to telnet",
+      "result": "1000 nulls: 2000 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:08.995923",
+      "details": {
+        "response_size": 2000
+      }
+    },
+    {
+      "id": 113,
+      "category": "telnet",
+      "name": "long_username_10KB",
+      "description": "Send 10KB username to telnet login",
+      "result": "Long username: 4096 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:09.987427",
+      "details": {
+        "username_len": 10000,
+        "response_size": 4096
+      }
+    },
+    {
+      "id": 114,
+      "category": "telnet",
+      "name": "rapid_connect_30",
+      "description": "30 rapid telnet connect/disconnect cycles",
+      "result": "30 rapid: 30 ok, 0 fail",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:11.030905",
+      "details": {
+        "success": 30,
+        "fail": 0,
+        "anomaly": false
+      }
+    },
+    {
+      "id": 115,
+      "category": "telnet",
+      "name": "break_sequences",
+      "description": "Send CTRL-C, BREAK, arrow keys, CTRL-D",
+      "result": "Break sequences: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:12.026407",
+      "details": {
+        "response_size": 0
+      }
+    },
+    {
+      "id": 116,
+      "category": "telnet",
+      "name": "escape_sequences",
+      "description": "Send terminal escape sequences (title, clear, color)",
+      "result": "Escape sequences: 40 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:13.025907",
+      "details": {
+        "response_size": 40
+      }
+    },
+    {
+      "id": 117,
+      "category": "telnet",
+      "name": "http_on_telnet",
+      "description": "Send HTTP request to telnet port (protocol confusion)",
+      "result": "HTTP on telnet: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:14.033403",
+      "details": {
+        "response_size": 36,
+        "response_text": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\n\r\n"
+      }
+    },
+    {
+      "id": 118,
+      "category": "telnet",
+      "name": "rapid_100_lines",
+      "description": "Send 100 lines rapidly to telnet",
+      "result": "100 rapid lines: 1190 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:03:15.040899",
+      "details": {
+        "line_count": 100,
+        "response_size": 1190
+      }
+    }
+  ],
+  "findings": []
+}

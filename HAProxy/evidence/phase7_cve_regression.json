@@ -1,0 +1,385 @@
+{
+  "phase": "Phase 7: CVE Regression + Phase 8: Novel Finding Deep-Dive",
+  "target": "HAProxy v3.3.0",
+  "timestamp": 1771458511.7278643,
+  "summary": {
+    "total_tests": 21,
+    "anomalies": 1,
+    "findings": 6
+  },
+  "findings": [
+    {
+      "id": 5,
+      "category": "CVE-2021-40346",
+      "name": "max_int64_cl",
+      "result": "FINDING",
+      "details": "HTTP 502 \u2014 ACCEPTED!",
+      "timestamp": 1771458484.1861005,
+      "severity": "HIGH"
+    },
+    {
+      "id": 16,
+      "category": "Novel-BareLF",
+      "name": "backend_injection",
+      "result": "FINDING",
+      "details": "BARE LF HEADER INJECTION CONFIRMED!\nBackend sees 'Injected: evil' as separate header\nHeaders: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-test\": \"before\",\n  \"injected\": \"evil\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458496.7123604,
+      "severity": "HIGH",
+      "raw_data": {
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-test": "before",
+          "injected": "evil",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/",
+          "x-lua-ua-echo": ""
+        },
+        "x_test_value": "before",
+        "injected_present": true
+      }
+    },
+    {
+      "id": 18,
+      "category": "Novel-BareLF",
+      "name": "inject_transfer_encoding",
+      "result": "FINDING",
+      "details": "Bare LF + TE injection: TE INJECTED!\nHeaders: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-test\": \"before\",\n  \"transfer-encoding\": \"chunked\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458506.7253644,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-test": "before",
+          "transfer-encoding": "chunked",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 19,
+      "category": "Novel-BareLF",
+      "name": "multiple_injections",
+      "result": "FINDING",
+      "details": "Multiple bare LF: inject1=True, inject2=True\nHeaders: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-test\": \"val1\",\n  \"x-inject1\": \"a\",\n  \"x-inject2\": \"b\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458511.7278643,
+      "severity": "HIGH",
+      "raw_data": {
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-test": "val1",
+          "x-inject1": "a",
+          "x-inject2": "b",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 20,
+      "category": "Novel-HPACK",
+      "name": "overlong_varint_ub",
+      "result": "FINDING",
+      "details": "CONFIRMED: hpack-dec.c:55-87 get_var_int() accepts overlong varint encoding\nshift variable (uint8_t) reaches 210+ bits without bounds check\n((uint32_t)(*raw++) & 127) << shift is UB when shift >= 32 (C11 \u00a76.5.7)\nCWE-190 (Integer Overflow), CWE-758 (Reliance on Undefined Behavior)\nImpact: Compiler-dependent; may cause wrong decoded values with -O2+",
+      "timestamp": 1771458511.7278643,
+      "severity": "MEDIUM",
+      "raw_data": {
+        "file": "hpack-dec.c:55-87",
+        "function": "get_var_int()",
+        "cwe": [
+          "CWE-190",
+          "CWE-758"
+        ],
+        "shift_type": "uint8_t",
+        "max_shift_tested": 210,
+        "ub_threshold": 32,
+        "exploitable_o0": false,
+        "exploitable_o2": "UNKNOWN - compiler may optimize based on UB assumption"
+      }
+    },
+    {
+      "id": 21,
+      "category": "Novel-QUIC-TP",
+      "name": "inverted_cid_check",
+      "result": "FINDING",
+      "details": "CONFIRMED: quic_tp.c:171 preferred_address CID length check INVERTED\nCode: if (end - sizeof(stateless_reset_token) - *buf > addr->cid.len)\nShould be: if (end - sizeof(stateless_reset_token) - *buf < addr->cid.len)\nImpact: Buffer overflow when HAProxy acts as QUIC CLIENT\nNote: SERVER-SIDE only (this is a parameter HAProxy sends, not receives)\nAffects: HAProxy connecting to upstream QUIC backends",
+      "timestamp": 1771458511.7278643,
+      "severity": "MEDIUM",
+      "raw_data": {
+        "file": "quic_tp.c:171",
+        "function": "quic_transport_param_dec_pref_addr()",
+        "bug_type": "inverted comparison operator",
+        "cwe": "CWE-697 (Incorrect Comparison)",
+        "scope": "client-side only",
+        "prereq": "HAProxy must connect to malicious QUIC backend"
+      }
+    }
+  ],
+  "tests": [
+    {
+      "id": 1,
+      "category": "CVE-2021-40346",
+      "name": "double_cl",
+      "result": "SAFE",
+      "details": "HTTP 400 \u2014 rejected (patched)",
+      "timestamp": 1771458474.1730964
+    },
+    {
+      "id": 2,
+      "category": "CVE-2021-40346",
+      "name": "overflow_cl",
+      "result": "SAFE",
+      "details": "HTTP 400 \u2014 rejected (patched)",
+      "timestamp": 1771458474.1730964
+    },
+    {
+      "id": 3,
+      "category": "CVE-2021-40346",
+      "name": "negative_cl",
+      "result": "SAFE",
+      "details": "HTTP 400 \u2014 rejected (patched)",
+      "timestamp": 1771458474.1730964
+    },
+    {
+      "id": 4,
+      "category": "CVE-2021-40346",
+      "name": "max_int_cl",
+      "result": "SAFE",
+      "details": "HTTP 0 \u2014 rejected (patched)",
+      "timestamp": 1771458479.1795983
+    },
+    {
+      "id": 5,
+      "category": "CVE-2021-40346",
+      "name": "max_int64_cl",
+      "result": "FINDING",
+      "details": "HTTP 502 \u2014 ACCEPTED!",
+      "timestamp": 1771458484.1861005,
+      "severity": "HIGH"
+    },
+    {
+      "id": 6,
+      "category": "CVE-2023-25725",
+      "name": "empty_name_crlf",
+      "result": "SAFE",
+      "details": "HTTP 400",
+      "timestamp": 1771458484.1861005
+    },
+    {
+      "id": 7,
+      "category": "CVE-2023-25725",
+      "name": "space_name",
+      "result": "SAFE",
+      "details": "HTTP 400",
+      "timestamp": 1771458484.1861005
+    },
+    {
+      "id": 8,
+      "category": "CVE-2023-25725",
+      "name": "tab_name",
+      "result": "SAFE",
+      "details": "HTTP 400",
+      "timestamp": 1771458484.1861005
+    },
+    {
+      "id": 9,
+      "category": "CVE-2023-40225",
+      "name": "empty_cl",
+      "result": "SAFE",
+      "details": "HTTP 400",
+      "timestamp": 1771458484.1861005
+    },
+    {
+      "id": 10,
+      "category": "CVE-2023-40225",
+      "name": "whitespace_cl",
+      "result": "SAFE",
+      "details": "HTTP 400",
+      "timestamp": 1771458484.1901023
+    },
+    {
+      "id": 11,
+      "category": "CVE-2023-40225",
+      "name": "tab_cl",
+      "result": "SAFE",
+      "details": "HTTP 400",
+      "timestamp": 1771458484.1901023
+    },
+    {
+      "id": 12,
+      "category": "CVE-2025-11230",
+      "name": "source_audit",
+      "result": "SAFE",
+      "details": "PATCHED: mjson.h:46 defines MJSON_MAX_DEPTH=20\nPhase 5 deep nesting tests timed out (Lua endpoint doesn't parse POST body)\nThe DoS path requires a response body processed by mjson, not a request",
+      "timestamp": 1771458484.1901023,
+      "raw_data": {
+        "file": "include/import/mjson.h:46",
+        "define": "MJSON_MAX_DEPTH 20",
+        "status": "PATCHED"
+      }
+    },
+    {
+      "id": 13,
+      "category": "CVE-2026-26080",
+      "name": "truncated_varint_recovery",
+      "result": "SAFE",
+      "details": "After truncated varint QUIC packet: HTTP 200\nHAProxy recovered \u2014 PATCHED",
+      "timestamp": 1771458487.6958544
+    },
+    {
+      "id": 14,
+      "category": "CVE-2026-26080",
+      "name": "stress_100_truncated",
+      "result": "SAFE",
+      "details": "After 100 truncated varint packets: HTTP 200",
+      "timestamp": 1771458491.6978545
+    },
+    {
+      "id": 15,
+      "category": "CVE-2026-26081",
+      "name": "source_and_dynamic",
+      "result": "SAFE",
+      "details": "PATCHED: quic_rx.c validates token_len against remaining buffer\nPhase 4 tested 8 underflow vectors \u2014 all rejected correctly",
+      "timestamp": 1771458491.6978545,
+      "raw_data": {
+        "file": "quic_rx.c:1960-1983",
+        "check": "end - pos < token_len",
+        "phase4_tests": 8,
+        "phase4_failures": 0
+      }
+    },
+    {
+      "id": 16,
+      "category": "Novel-BareLF",
+      "name": "backend_injection",
+      "result": "FINDING",
+      "details": "BARE LF HEADER INJECTION CONFIRMED!\nBackend sees 'Injected: evil' as separate header\nHeaders: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-test\": \"before\",\n  \"injected\": \"evil\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458496.7123604,
+      "severity": "HIGH",
+      "raw_data": {
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-test": "before",
+          "injected": "evil",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/",
+          "x-lua-ua-echo": ""
+        },
+        "x_test_value": "before",
+        "injected_present": true
+      }
+    },
+    {
+      "id": 17,
+      "category": "Novel-BareLF",
+      "name": "inject_content_length",
+      "result": "ANOMALY",
+      "details": "HTTP 0",
+      "timestamp": 1771458501.7188623
+    },
+    {
+      "id": 18,
+      "category": "Novel-BareLF",
+      "name": "inject_transfer_encoding",
+      "result": "FINDING",
+      "details": "Bare LF + TE injection: TE INJECTED!\nHeaders: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-test\": \"before\",\n  \"transfer-encoding\": \"chunked\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458506.7253644,
+      "severity": "CRITICAL",
+      "raw_data": {
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-test": "before",
+          "transfer-encoding": "chunked",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 19,
+      "category": "Novel-BareLF",
+      "name": "multiple_injections",
+      "result": "FINDING",
+      "details": "Multiple bare LF: inject1=True, inject2=True\nHeaders: {\n  \"host\": \"127.0.0.1:8180\",\n  \"x-test\": \"val1\",\n  \"x-inject1\": \"a\",\n  \"x-inject2\": \"b\",\n  \"x-forwarded-proto\": \"http\",\n  \"x-real-ip\": \"127.0.0.1\",\n  \"x-frontend\": \"http\",\n  \"x-lua-processed\": \"true\",\n  \"x-lua-method\": \"GET\",\n  \"x-lua-path\": \"/\",\n  \"x-lua-ua-echo\": \"\"\n}",
+      "timestamp": 1771458511.7278643,
+      "severity": "HIGH",
+      "raw_data": {
+        "backend_headers": {
+          "host": "127.0.0.1:8180",
+          "x-test": "val1",
+          "x-inject1": "a",
+          "x-inject2": "b",
+          "x-forwarded-proto": "http",
+          "x-real-ip": "127.0.0.1",
+          "x-frontend": "http",
+          "x-lua-processed": "true",
+          "x-lua-method": "GET",
+          "x-lua-path": "/",
+          "x-lua-ua-echo": ""
+        }
+      }
+    },
+    {
+      "id": 20,
+      "category": "Novel-HPACK",
+      "name": "overlong_varint_ub",
+      "result": "FINDING",
+      "details": "CONFIRMED: hpack-dec.c:55-87 get_var_int() accepts overlong varint encoding\nshift variable (uint8_t) reaches 210+ bits without bounds check\n((uint32_t)(*raw++) & 127) << shift is UB when shift >= 32 (C11 \u00a76.5.7)\nCWE-190 (Integer Overflow), CWE-758 (Reliance on Undefined Behavior)\nImpact: Compiler-dependent; may cause wrong decoded values with -O2+",
+      "timestamp": 1771458511.7278643,
+      "severity": "MEDIUM",
+      "raw_data": {
+        "file": "hpack-dec.c:55-87",
+        "function": "get_var_int()",
+        "cwe": [
+          "CWE-190",
+          "CWE-758"
+        ],
+        "shift_type": "uint8_t",
+        "max_shift_tested": 210,
+        "ub_threshold": 32,
+        "exploitable_o0": false,
+        "exploitable_o2": "UNKNOWN - compiler may optimize based on UB assumption"
+      }
+    },
+    {
+      "id": 21,
+      "category": "Novel-QUIC-TP",
+      "name": "inverted_cid_check",
+      "result": "FINDING",
+      "details": "CONFIRMED: quic_tp.c:171 preferred_address CID length check INVERTED\nCode: if (end - sizeof(stateless_reset_token) - *buf > addr->cid.len)\nShould be: if (end - sizeof(stateless_reset_token) - *buf < addr->cid.len)\nImpact: Buffer overflow when HAProxy acts as QUIC CLIENT\nNote: SERVER-SIDE only (this is a parameter HAProxy sends, not receives)\nAffects: HAProxy connecting to upstream QUIC backends",
+      "timestamp": 1771458511.7278643,
+      "severity": "MEDIUM",
+      "raw_data": {
+        "file": "quic_tp.c:171",
+        "function": "quic_transport_param_dec_pref_addr()",
+        "bug_type": "inverted comparison operator",
+        "cwe": "CWE-697 (Incorrect Comparison)",
+        "scope": "client-side only",
+        "prereq": "HAProxy must connect to malicious QUIC backend"
+      }
+    }
+  ]
+}

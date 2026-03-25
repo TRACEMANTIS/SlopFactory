@@ -1,0 +1,15 @@
+{
+  "script": "phase2e_cmdline_capture",
+  "phase": "phase2",
+  "target": "Jellyfin 10.11.6",
+  "start_time": "2026-03-02T18:51:57.330611",
+  "end_time": "2026-03-02T18:52:10.787879",
+  "summary": {
+    "total_tests": 0,
+    "findings": 0,
+    "anomalies": 0
+  },
+  "tests": [],
+  "findings": [],
+  "anomalies": []
+}

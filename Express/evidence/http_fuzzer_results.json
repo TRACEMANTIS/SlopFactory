@@ -1,0 +1,2222 @@
+{
+  "metadata": {
+    "phase": "2.1",
+    "name": "HTTP Route Fuzzer",
+    "timestamp": "2026-02-15T12:29:11.494383",
+    "scope": "Framework HTTP handling behavior"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "method_GET_/health",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 207
+      }
+    },
+    {
+      "id": 2,
+      "test": "method_POST_/health",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 146
+      }
+    },
+    {
+      "id": 3,
+      "test": "method_PUT_/health",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 145
+      }
+    },
+    {
+      "id": 4,
+      "test": "method_DELETE_/health",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 148
+      }
+    },
+    {
+      "id": 5,
+      "test": "method_PATCH_/health",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 147
+      }
+    },
+    {
+      "id": 6,
+      "test": "method_OPTIONS_/health",
+      "version": "v5",
+      "data": {
+        "status": 204,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 7,
+      "test": "method_HEAD_/health",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 8,
+      "test": "method_TRACE_/health",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 147
+      }
+    },
+    {
+      "id": 9,
+      "test": "method_CONNECT_/health",
+      "version": "v5",
+      "data": {
+        "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+      }
+    },
+    {
+      "id": 10,
+      "test": "method_PROPFIND_/health",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 150
+      }
+    },
+    {
+      "id": 11,
+      "test": "method_MKCOL_/health",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 147
+      }
+    },
+    {
+      "id": 12,
+      "test": "method_COPY_/health",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 146
+      }
+    },
+    {
+      "id": 13,
+      "test": "method_MOVE_/health",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 146
+      }
+    },
+    {
+      "id": 14,
+      "test": "method_LOCK_/health",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 146
+      }
+    },
+    {
+      "id": 15,
+      "test": "method_UNLOCK_/health",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 148
+      }
+    },
+    {
+      "id": 16,
+      "test": "method_FAKEMETH_/health",
+      "version": "v5",
+      "data": {
+        "status": 400,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 17,
+      "test": "method_get_/health",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 207
+      }
+    },
+    {
+      "id": 18,
+      "test": "method_GeT_/health",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 207
+      }
+    },
+    {
+      "id": 19,
+      "test": "method_GET_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 285
+      }
+    },
+    {
+      "id": 20,
+      "test": "method_POST_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 307
+      }
+    },
+    {
+      "id": 21,
+      "test": "method_PUT_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 306
+      }
+    },
+    {
+      "id": 22,
+      "test": "method_DELETE_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 309
+      }
+    },
+    {
+      "id": 23,
+      "test": "method_PATCH_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 308
+      }
+    },
+    {
+      "id": 24,
+      "test": "method_OPTIONS_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 204,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 25,
+      "test": "method_HEAD_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 26,
+      "test": "method_TRACE_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 308
+      }
+    },
+    {
+      "id": 27,
+      "test": "method_CONNECT_/method-test",
+      "version": "v5",
+      "data": {
+        "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+      }
+    },
+    {
+      "id": 28,
+      "test": "method_PROPFIND_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 311
+      }
+    },
+    {
+      "id": 29,
+      "test": "method_MKCOL_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 308
+      }
+    },
+    {
+      "id": 30,
+      "test": "method_COPY_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 307
+      }
+    },
+    {
+      "id": 31,
+      "test": "method_MOVE_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 307
+      }
+    },
+    {
+      "id": 32,
+      "test": "method_LOCK_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 307
+      }
+    },
+    {
+      "id": 33,
+      "test": "method_UNLOCK_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 309
+      }
+    },
+    {
+      "id": 34,
+      "test": "method_FAKEMETH_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 400,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 35,
+      "test": "method_get_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 285
+      }
+    },
+    {
+      "id": 36,
+      "test": "method_GeT_/method-test",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 285
+      }
+    },
+    {
+      "id": 37,
+      "test": "method_GET_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 261
+      }
+    },
+    {
+      "id": 38,
+      "test": "method_POST_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 201,
+        "content_length": 34
+      }
+    },
+    {
+      "id": 39,
+      "test": "method_PUT_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 148
+      }
+    },
+    {
+      "id": 40,
+      "test": "method_DELETE_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 151
+      }
+    },
+    {
+      "id": 41,
+      "test": "method_PATCH_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 150
+      }
+    },
+    {
+      "id": 42,
+      "test": "method_OPTIONS_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 204,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 43,
+      "test": "method_HEAD_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 44,
+      "test": "method_TRACE_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 150
+      }
+    },
+    {
+      "id": 45,
+      "test": "method_CONNECT_/api/users",
+      "version": "v5",
+      "data": {
+        "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+      }
+    },
+    {
+      "id": 46,
+      "test": "method_PROPFIND_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 153
+      }
+    },
+    {
+      "id": 47,
+      "test": "method_MKCOL_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 150
+      }
+    },
+    {
+      "id": 48,
+      "test": "method_COPY_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 149
+      }
+    },
+    {
+      "id": 49,
+      "test": "method_MOVE_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 149
+      }
+    },
+    {
+      "id": 50,
+      "test": "method_LOCK_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 149
+      }
+    },
+    {
+      "id": 51,
+      "test": "method_UNLOCK_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 404,
+        "content_length": 151
+      }
+    },
+    {
+      "id": 52,
+      "test": "method_FAKEMETH_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 400,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 53,
+      "test": "method_get_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 284
+      }
+    },
+    {
+      "id": 54,
+      "test": "method_GeT_/api/users",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "content_length": 284
+      }
+    },
+    {
+      "id": 55,
+      "test": "method_GET_/health",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 208
+      }
+    },
+    {
+      "id": 56,
+      "test": "method_POST_/health",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 146
+      }
+    },
+    {
+      "id": 57,
+      "test": "method_PUT_/health",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 145
+      }
+    },
+    {
+      "id": 58,
+      "test": "method_DELETE_/health",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 148
+      }
+    },
+    {
+      "id": 59,
+      "test": "method_PATCH_/health",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 147
+      }
+    },
+    {
+      "id": 60,
+      "test": "method_OPTIONS_/health",
+      "version": "v4",
+      "data": {
+        "status": 204,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 61,
+      "test": "method_HEAD_/health",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 62,
+      "test": "method_TRACE_/health",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 147
+      }
+    },
+    {
+      "id": 63,
+      "test": "method_CONNECT_/health",
+      "version": "v4",
+      "data": {
+        "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+      }
+    },
+    {
+      "id": 64,
+      "test": "method_PROPFIND_/health",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 150
+      }
+    },
+    {
+      "id": 65,
+      "test": "method_MKCOL_/health",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 147
+      }
+    },
+    {
+      "id": 66,
+      "test": "method_COPY_/health",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 146
+      }
+    },
+    {
+      "id": 67,
+      "test": "method_MOVE_/health",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 146
+      }
+    },
+    {
+      "id": 68,
+      "test": "method_LOCK_/health",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 146
+      }
+    },
+    {
+      "id": 69,
+      "test": "method_UNLOCK_/health",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 148
+      }
+    },
+    {
+      "id": 70,
+      "test": "method_FAKEMETH_/health",
+      "version": "v4",
+      "data": {
+        "status": 400,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 71,
+      "test": "method_get_/health",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 208
+      }
+    },
+    {
+      "id": 72,
+      "test": "method_GeT_/health",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 208
+      }
+    },
+    {
+      "id": 73,
+      "test": "method_GET_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 285
+      }
+    },
+    {
+      "id": 74,
+      "test": "method_POST_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 307
+      }
+    },
+    {
+      "id": 75,
+      "test": "method_PUT_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 306
+      }
+    },
+    {
+      "id": 76,
+      "test": "method_DELETE_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 309
+      }
+    },
+    {
+      "id": 77,
+      "test": "method_PATCH_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 308
+      }
+    },
+    {
+      "id": 78,
+      "test": "method_OPTIONS_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 204,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 79,
+      "test": "method_HEAD_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 80,
+      "test": "method_TRACE_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 308
+      }
+    },
+    {
+      "id": 81,
+      "test": "method_CONNECT_/method-test",
+      "version": "v4",
+      "data": {
+        "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+      }
+    },
+    {
+      "id": 82,
+      "test": "method_PROPFIND_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 311
+      }
+    },
+    {
+      "id": 83,
+      "test": "method_MKCOL_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 308
+      }
+    },
+    {
+      "id": 84,
+      "test": "method_COPY_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 307
+      }
+    },
+    {
+      "id": 85,
+      "test": "method_MOVE_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 307
+      }
+    },
+    {
+      "id": 86,
+      "test": "method_LOCK_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 307
+      }
+    },
+    {
+      "id": 87,
+      "test": "method_UNLOCK_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 309
+      }
+    },
+    {
+      "id": 88,
+      "test": "method_FAKEMETH_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 400,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 89,
+      "test": "method_get_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 285
+      }
+    },
+    {
+      "id": 90,
+      "test": "method_GeT_/method-test",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 285
+      }
+    },
+    {
+      "id": 91,
+      "test": "method_GET_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 261
+      }
+    },
+    {
+      "id": 92,
+      "test": "method_POST_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 201,
+        "content_length": 34
+      }
+    },
+    {
+      "id": 93,
+      "test": "method_PUT_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 148
+      }
+    },
+    {
+      "id": 94,
+      "test": "method_DELETE_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 151
+      }
+    },
+    {
+      "id": 95,
+      "test": "method_PATCH_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 150
+      }
+    },
+    {
+      "id": 96,
+      "test": "method_OPTIONS_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 204,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 97,
+      "test": "method_HEAD_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 98,
+      "test": "method_TRACE_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 150
+      }
+    },
+    {
+      "id": 99,
+      "test": "method_CONNECT_/api/users",
+      "version": "v4",
+      "data": {
+        "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+      }
+    },
+    {
+      "id": 100,
+      "test": "method_PROPFIND_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 153
+      }
+    },
+    {
+      "id": 101,
+      "test": "method_MKCOL_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 150
+      }
+    },
+    {
+      "id": 102,
+      "test": "method_COPY_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 149
+      }
+    },
+    {
+      "id": 103,
+      "test": "method_MOVE_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 149
+      }
+    },
+    {
+      "id": 104,
+      "test": "method_LOCK_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 149
+      }
+    },
+    {
+      "id": 105,
+      "test": "method_UNLOCK_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 404,
+        "content_length": 151
+      }
+    },
+    {
+      "id": 106,
+      "test": "method_FAKEMETH_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 400,
+        "content_length": 0
+      }
+    },
+    {
+      "id": 107,
+      "test": "method_get_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 284
+      }
+    },
+    {
+      "id": 108,
+      "test": "method_GeT_/api/users",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "content_length": 284
+      }
+    },
+    {
+      "id": 109,
+      "test": "header_oversized_host",
+      "version": "v5",
+      "data": {
+        "status": 431,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 110,
+      "test": "header_newline_host",
+      "version": "v5",
+      "data": {
+        "error": "Invalid leading whitespace, reserved character(s), or return character(s) in header value: 'a.com\\r\\nX-Inject: evil'"
+      }
+    },
+    {
+      "id": 111,
+      "test": "header_null_host",
+      "version": "v5",
+      "data": {
+        "status": 400,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 112,
+      "test": "header_empty_host",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "response_size": 248
+      }
+    },
+    {
+      "id": 113,
+      "test": "header_xff_single",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "response_size": 314
+      }
+    },
+    {
+      "id": 114,
+      "test": "header_xff_chain",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "response_size": 339
+      }
+    },
+    {
+      "id": 115,
+      "test": "header_xfh_override",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "response_size": 315
+      }
+    },
+    {
+      "id": 116,
+      "test": "header_xfp_https",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "response_size": 313
+      }
+    },
+    {
+      "id": 117,
+      "test": "header_duplicate_content_type",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "response_size": 319
+      }
+    },
+    {
+      "id": 118,
+      "test": "header_huge_header_value",
+      "version": "v5",
+      "data": {
+        "error": "(\"Connection broken: ConnectionResetError(104, 'Connection reset by peer')\", ConnectionResetError(104, 'Connection reset by peer'))"
+      }
+    },
+    {
+      "id": 119,
+      "test": "header_many_headers",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "response_size": 2765
+      }
+    },
+    {
+      "id": 120,
+      "test": "header_transfer_encoding_chunked",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "response_size": 315
+      }
+    },
+    {
+      "id": 121,
+      "test": "header_te_cl_conflict",
+      "version": "v5",
+      "data": {
+        "status": 400,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 122,
+      "test": "header_double_te",
+      "version": "v5",
+      "data": {
+        "status": 400,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 123,
+      "test": "header_te_weird_case",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "response_size": 315
+      }
+    },
+    {
+      "id": 124,
+      "test": "header_connection_up[REDACTED]",
+      "version": "v5",
+      "data": {
+        "status": 200,
+        "response_size": 304
+      }
+    },
+    {
+      "id": 125,
+      "test": "header_oversized_host",
+      "version": "v4",
+      "data": {
+        "status": 431,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 126,
+      "test": "header_newline_host",
+      "version": "v4",
+      "data": {
+        "error": "Invalid leading whitespace, reserved character(s), or return character(s) in header value: 'a.com\\r\\nX-Inject: evil'"
+      }
+    },
+    {
+      "id": 127,
+      "test": "header_null_host",
+      "version": "v4",
+      "data": {
+        "status": 400,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 128,
+      "test": "header_empty_host",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "response_size": 248
+      }
+    },
+    {
+      "id": 129,
+      "test": "header_xff_single",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "response_size": 314
+      }
+    },
+    {
+      "id": 130,
+      "test": "header_xff_chain",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "response_size": 339
+      }
+    },
+    {
+      "id": 131,
+      "test": "header_xfh_override",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "response_size": 315
+      }
+    },
+    {
+      "id": 132,
+      "test": "header_xfp_https",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "response_size": 313
+      }
+    },
+    {
+      "id": 133,
+      "test": "header_duplicate_content_type",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "response_size": 319
+      }
+    },
+    {
+      "id": 134,
+      "test": "header_huge_header_value",
+      "version": "v4",
+      "data": {
+        "error": "(\"Connection broken: ConnectionResetError(104, 'Connection reset by peer')\", ConnectionResetError(104, 'Connection reset by peer'))"
+      }
+    },
+    {
+      "id": 135,
+      "test": "header_many_headers",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "response_size": 2765
+      }
+    },
+    {
+      "id": 136,
+      "test": "header_transfer_encoding_chunked",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "response_size": 315
+      }
+    },
+    {
+      "id": 137,
+      "test": "header_te_cl_conflict",
+      "version": "v4",
+      "data": {
+        "status": 400,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 138,
+      "test": "header_double_te",
+      "version": "v4",
+      "data": {
+        "status": 400,
+        "response_size": 0
+      }
+    },
+    {
+      "id": 139,
+      "test": "header_te_weird_case",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "response_size": 315
+      }
+    },
+    {
+      "id": 140,
+      "test": "header_connection_up[REDACTED]",
+      "version": "v4",
+      "data": {
+        "status": 200,
+        "response_size": 304
+      }
+    },
+    {
+      "id": 141,
+      "test": "path_double_slash",
+      "version": "v5",
+      "data": {
+        "path": "//health",
+        "status": 200,
+        "content_length": 207,
+        "body_snippet": "{\"status\":\"ok\",\"version\":\"5.2.1\",\"node\":\"v22.22.0\",\"uptime\":384.507663941,\"memoryUsage\":{\"rss\":91717632,\"heapTotal\":19791872,\"heapUsed\":18057704,\"external\":2387764,\"arrayBuffers\":174594},\"env\":\"develo"
+      }
+    },
+    {
+      "id": 142,
+      "test": "path_triple_slash",
+      "version": "v5",
+      "data": {
+        "path": "///health",
+        "status": 200,
+        "content_length": 207,
+        "body_snippet": "{\"status\":\"ok\",\"version\":\"5.2.1\",\"node\":\"v22.22.0\",\"uptime\":384.507663941,\"memoryUsage\":{\"rss\":91717632,\"heapTotal\":19791872,\"heapUsed\":18124512,\"external\":2387788,\"arrayBuffers\":174618},\"env\":\"develo"
+      }
+    },
+    {
+      "id": 143,
+      "test": "path_backslash",
+      "version": "v5",
+      "data": {
+        "path": "/health\\..\\env-test",
+        "status": 404,
+        "content_length": 161,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health%5C..%5Cenv-test</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 144,
+      "test": "path_encoded_dot",
+      "version": "v5",
+      "data": {
+        "path": "/%2e%2e/env-test",
+        "status": 404,
+        "content_length": 150,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /../env-test</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 145,
+      "test": "path_double_encoded_dot",
+      "version": "v5",
+      "data": {
+        "path": "/%252e%252e/env-test",
+        "status": 404,
+        "content_length": 158,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /%252e%252e/env-test</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 146,
+      "test": "path_null_byte",
+      "version": "v5",
+      "data": {
+        "path": "/health%00",
+        "status": 404,
+        "content_length": 148,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health%00</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 147,
+      "test": "path_null_in_path",
+      "version": "v5",
+      "data": {
+        "path": "/health%00.json",
+        "status": 404,
+        "content_length": 153,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health%00.json</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 148,
+      "test": "path_overlong_utf8",
+      "version": "v5",
+      "data": {
+        "path": "/%c0%ae%c0%ae/env-test",
+        "status": 404,
+        "content_length": 160,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /%C0%AE%C0%AE/env-test</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 149,
+      "test": "path_unicode_homoglyph",
+      "version": "v5",
+      "data": {
+        "path": "/health",
+        "status": 200,
+        "content_length": 207,
+        "body_snippet": "{\"status\":\"ok\",\"version\":\"5.2.1\",\"node\":\"v22.22.0\",\"uptime\":384.535649942,\"memoryUsage\":{\"rss\":92110848,\"heapTotal\":20054016,\"heapUsed\":18255320,\"external\":2387740,\"arrayBuffers\":174570},\"env\":\"develo"
+      }
+    },
+    {
+      "id": 150,
+      "test": "path_tab_in_path",
+      "version": "v5",
+      "data": {
+        "path": "/health%09",
+        "status": 404,
+        "content_length": 148,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health%09</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 151,
+      "test": "path_space_in_path",
+      "version": "v5",
+      "data": {
+        "path": "/health%20",
+        "status": 404,
+        "content_length": 148,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health%20</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 152,
+      "test": "path_semicolon_param",
+      "version": "v5",
+      "data": {
+        "path": "/health;id=1",
+        "status": 404,
+        "content_length": 150,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health;id=1</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 153,
+      "test": "path_hash_in_path",
+      "version": "v5",
+      "data": {
+        "path": "/health%23fragment",
+        "status": 404,
+        "content_length": 156,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health%23fragment</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 154,
+      "test": "path_very_long_path",
+      "version": "v5",
+      "data": {
+        "path": "/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "status": 404,
+        "content_length": 10139,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": 155,
+      "test": "path_deeply_nested",
+      "version": "v5",
+      "data": {
+        "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p",
+        "status": 404,
+        "content_length": 170,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 156,
+      "test": "path_dots_traversal",
+      "version": "v5",
+      "data": {
+        "path": "/static/../../../etc/passwd",
+        "status": 404,
+        "content_length": 149,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /etc/passwd</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 157,
+      "test": "path_encoded_traversal",
+      "version": "v5",
+      "data": {
+        "path": "/static/..%2f..%2f..%2fetc%2fpasswd",
+        "status": 404,
+        "content_length": 173,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /static/..%2F..%2F..%2Fetc%2Fpasswd</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 158,
+      "test": "path_double_encoded_traversal",
+      "version": "v5",
+      "data": {
+        "path": "/static/..%252f..%252f..%252fetc%252fpasswd",
+        "status": 404,
+        "content_length": 181,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /static/..%252f..%252f..%252fetc%252fpasswd</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 159,
+      "test": "path_backslash_traversal",
+      "version": "v5",
+      "data": {
+        "path": "/static/..\\..\\..\\etc\\passwd",
+        "status": 404,
+        "content_length": 173,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /static/..%5C..%5C..%5Cetc%5Cpasswd</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 160,
+      "test": "path_mixed_slashes",
+      "version": "v5",
+      "data": {
+        "path": "/static/..%5c..%5c..%5cetc%5cpasswd",
+        "status": 404,
+        "content_length": 173,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /static/..%5C..%5C..%5Cetc%5Cpasswd</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 161,
+      "test": "path_double_slash",
+      "version": "v4",
+      "data": {
+        "path": "//health",
+        "status": 200,
+        "content_length": 208,
+        "body_snippet": "{\"status\":\"ok\",\"version\":\"4.22.1\",\"node\":\"v22.22.0\",\"uptime\":380.437699794,\"memoryUsage\":{\"rss\":91189248,\"heapTotal\":20054016,\"heapUsed\":18769360,\"external\":2462082,\"arrayBuffers\":248912},\"env\":\"devel"
+      }
+    },
+    {
+      "id": 162,
+      "test": "path_triple_slash",
+      "version": "v4",
+      "data": {
+        "path": "///health",
+        "status": 200,
+        "content_length": 208,
+        "body_snippet": "{\"status\":\"ok\",\"version\":\"4.22.1\",\"node\":\"v22.22.0\",\"uptime\":380.437699794,\"memoryUsage\":{\"rss\":91189248,\"heapTotal\":20316160,\"heapUsed\":18434832,\"external\":2395932,\"arrayBuffers\":182762},\"env\":\"devel"
+      }
+    },
+    {
+      "id": 163,
+      "test": "path_backslash",
+      "version": "v4",
+      "data": {
+        "path": "/health\\..\\env-test",
+        "status": 404,
+        "content_length": 161,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health%5C..%5Cenv-test</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 164,
+      "test": "path_encoded_dot",
+      "version": "v4",
+      "data": {
+        "path": "/%2e%2e/env-test",
+        "status": 404,
+        "content_length": 150,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /../env-test</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 165,
+      "test": "path_double_encoded_dot",
+      "version": "v4",
+      "data": {
+        "path": "/%252e%252e/env-test",
+        "status": 404,
+        "content_length": 158,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /%252e%252e/env-test</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 166,
+      "test": "path_null_byte",
+      "version": "v4",
+      "data": {
+        "path": "/health%00",
+        "status": 404,
+        "content_length": 148,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health%00</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 167,
+      "test": "path_null_in_path",
+      "version": "v4",
+      "data": {
+        "path": "/health%00.json",
+        "status": 404,
+        "content_length": 153,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health%00.json</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 168,
+      "test": "path_overlong_utf8",
+      "version": "v4",
+      "data": {
+        "path": "/%c0%ae%c0%ae/env-test",
+        "status": 404,
+        "content_length": 160,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /%C0%AE%C0%AE/env-test</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 169,
+      "test": "path_unicode_homoglyph",
+      "version": "v4",
+      "data": {
+        "path": "/health",
+        "status": 200,
+        "content_length": 208,
+        "body_snippet": "{\"status\":\"ok\",\"version\":\"4.22.1\",\"node\":\"v22.22.0\",\"uptime\":380.461687795,\"memoryUsage\":{\"rss\":91189248,\"heapTotal\":20316160,\"heapUsed\":18911848,\"external\":2396100,\"arrayBuffers\":182930},\"env\":\"devel"
+      }
+    },
+    {
+      "id": 170,
+      "test": "path_tab_in_path",
+      "version": "v4",
+      "data": {
+        "path": "/health%09",
+        "status": 404,
+        "content_length": 148,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health%09</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 171,
+      "test": "path_space_in_path",
+      "version": "v4",
+      "data": {
+        "path": "/health%20",
+        "status": 404,
+        "content_length": 148,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health%20</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 172,
+      "test": "path_semicolon_param",
+      "version": "v4",
+      "data": {
+        "path": "/health;id=1",
+        "status": 404,
+        "content_length": 150,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health;id=1</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 173,
+      "test": "path_hash_in_path",
+      "version": "v4",
+      "data": {
+        "path": "/health%23fragment",
+        "status": 404,
+        "content_length": 156,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /health%23fragment</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 174,
+      "test": "path_very_long_path",
+      "version": "v4",
+      "data": {
+        "path": "/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "status": 404,
+        "content_length": 10139,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": 175,
+      "test": "path_deeply_nested",
+      "version": "v4",
+      "data": {
+        "path": "/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p",
+        "status": 404,
+        "content_length": 170,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 176,
+      "test": "path_dots_traversal",
+      "version": "v4",
+      "data": {
+        "path": "/static/../../../etc/passwd",
+        "status": 404,
+        "content_length": 149,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /etc/passwd</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 177,
+      "test": "path_encoded_traversal",
+      "version": "v4",
+      "data": {
+        "path": "/static/..%2f..%2f..%2fetc%2fpasswd",
+        "status": 404,
+        "content_length": 173,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /static/..%2F..%2F..%2Fetc%2Fpasswd</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 178,
+      "test": "path_double_encoded_traversal",
+      "version": "v4",
+      "data": {
+        "path": "/static/..%252f..%252f..%252fetc%252fpasswd",
+        "status": 404,
+        "content_length": 181,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /static/..%252f..%252f..%252fetc%252fpasswd</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 179,
+      "test": "path_backslash_traversal",
+      "version": "v4",
+      "data": {
+        "path": "/static/..\\..\\..\\etc\\passwd",
+        "status": 404,
+        "content_length": 173,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /static/..%5C..%5C..%5Cetc%5Cpasswd</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 180,
+      "test": "path_mixed_slashes",
+      "version": "v4",
+      "data": {
+        "path": "/static/..%5c..%5c..%5cetc%5cpasswd",
+        "status": 404,
+        "content_length": 173,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /static/..%5C..%5C..%5Cetc%5Cpasswd</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 181,
+      "test": "ct_json_normal",
+      "version": "v5",
+      "data": {
+        "content_type": "application/json",
+        "status": 200,
+        "body_parsed": "{'key': 'value'}"
+      }
+    },
+    {
+      "id": 182,
+      "test": "ct_json_charset",
+      "version": "v5",
+      "data": {
+        "content_type": "application/json; charset=utf-8",
+        "status": 200,
+        "body_parsed": "{'key': 'value'}"
+      }
+    },
+    {
+      "id": 183,
+      "test": "ct_json_utf7",
+      "version": "v5",
+      "data": {
+        "content_type": "application/json; charset=utf-7",
+        "status": 200,
+        "body_parsed": "{'key': 'value'}"
+      }
+    },
+    {
+      "id": 184,
+      "test": "ct_json_uppercase",
+      "version": "v5",
+      "data": {
+        "content_type": "APPLICATION/JSON",
+        "status": 200,
+        "body_parsed": "{'key': 'value'}"
+      }
+    },
+    {
+      "id": 185,
+      "test": "ct_urlenc_normal",
+      "version": "v5",
+      "data": {
+        "content_type": "application/x-www-form-urlencoded",
+        "status": 200,
+        "body_parsed": "{'key': 'value'}"
+      }
+    },
+    {
+      "id": 186,
+      "test": "ct_text_plain",
+      "version": "v5",
+      "data": {
+        "content_type": "text/plain",
+        "status": 200,
+        "body_parsed": "{}"
+      }
+    },
+    {
+      "id": 187,
+      "test": "ct_xml",
+      "version": "v5",
+      "data": {
+        "content_type": "application/xml",
+        "status": 200,
+        "body_parsed": "{}"
+      }
+    },
+    {
+      "id": 188,
+      "test": "ct_xxe",
+      "version": "v5",
+      "data": {
+        "content_type": "application/xml",
+        "status": 200,
+        "body_parsed": "{}"
+      }
+    },
+    {
+      "id": 189,
+      "test": "ct_multipart_no_file",
+      "version": "v5",
+      "data": {
+        "content_type": "multipart/form-data; boundary=----Boundary",
+        "status": 200,
+        "body_parsed": "{}"
+      }
+    },
+    {
+      "id": 190,
+      "test": "ct_empty_content_type",
+      "version": "v5",
+      "data": {
+        "content_type": "",
+        "status": 200,
+        "body_parsed": "{}"
+      }
+    },
+    {
+      "id": 191,
+      "test": "ct_null_in_ct",
+      "version": "v5",
+      "data": {
+        "content_type": "application/json\u0000text/html",
+        "status": 400,
+        "body_parsed": ""
+      }
+    },
+    {
+      "id": 192,
+      "test": "ct_very_long_ct",
+      "version": "v5",
+      "data": {
+        "content_type": "application/json; aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "status": 200,
+        "body_parsed": "{}"
+      }
+    },
+    {
+      "id": 193,
+      "test": "ct_json_normal",
+      "version": "v4",
+      "data": {
+        "content_type": "application/json",
+        "status": 200,
+        "body_parsed": "{'key': 'value'}"
+      }
+    },
+    {
+      "id": 194,
+      "test": "ct_json_charset",
+      "version": "v4",
+      "data": {
+        "content_type": "application/json; charset=utf-8",
+        "status": 200,
+        "body_parsed": "{'key': 'value'}"
+      }
+    },
+    {
+      "id": 195,
+      "test": "ct_json_utf7",
+      "version": "v4",
+      "data": {
+        "content_type": "application/json; charset=utf-7",
+        "status": 200,
+        "body_parsed": "{'key': 'value'}"
+      }
+    },
+    {
+      "id": 196,
+      "test": "ct_json_uppercase",
+      "version": "v4",
+      "data": {
+        "content_type": "APPLICATION/JSON",
+        "status": 200,
+        "body_parsed": "{'key': 'value'}"
+      }
+    },
+    {
+      "id": 197,
+      "test": "ct_urlenc_normal",
+      "version": "v4",
+      "data": {
+        "content_type": "application/x-www-form-urlencoded",
+        "status": 200,
+        "body_parsed": "{'key': 'value'}"
+      }
+    },
+    {
+      "id": 198,
+      "test": "ct_text_plain",
+      "version": "v4",
+      "data": {
+        "content_type": "text/plain",
+        "status": 200,
+        "body_parsed": "{}"
+      }
+    },
+    {
+      "id": 199,
+      "test": "ct_xml",
+      "version": "v4",
+      "data": {
+        "content_type": "application/xml",
+        "status": 200,
+        "body_parsed": "{}"
+      }
+    },
+    {
+      "id": 200,
+      "test": "ct_xxe",
+      "version": "v4",
+      "data": {
+        "content_type": "application/xml",
+        "status": 200,
+        "body_parsed": "{}"
+      }
+    },
+    {
+      "id": 201,
+      "test": "ct_multipart_no_file",
+      "version": "v4",
+      "data": {
+        "content_type": "multipart/form-data; boundary=----Boundary",
+        "status": 200,
+        "body_parsed": "{}"
+      }
+    },
+    {
+      "id": 202,
+      "test": "ct_empty_content_type",
+      "version": "v4",
+      "data": {
+        "content_type": "",
+        "status": 200,
+        "body_parsed": "{}"
+      }
+    },
+    {
+      "id": 203,
+      "test": "ct_null_in_ct",
+      "version": "v4",
+      "data": {
+        "content_type": "application/json\u0000text/html",
+        "status": 400,
+        "body_parsed": ""
+      }
+    },
+    {
+      "id": 204,
+      "test": "ct_very_long_ct",
+      "version": "v4",
+      "data": {
+        "content_type": "application/json; aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "status": 200,
+        "body_parsed": "{}"
+      }
+    },
+    {
+      "id": 205,
+      "test": "size_10kb",
+      "version": "v5",
+      "data": {
+        "sent_bytes": 10252,
+        "status": 200
+      }
+    },
+    {
+      "id": 206,
+      "test": "size_100kb",
+      "version": "v5",
+      "data": {
+        "sent_bytes": 102412,
+        "status": 413
+      }
+    },
+    {
+      "id": 207,
+      "test": "size_101kb",
+      "version": "v5",
+      "data": {
+        "sent_bytes": 103436,
+        "status": 413
+      }
+    },
+    {
+      "id": 208,
+      "test": "size_1mb",
+      "version": "v5",
+      "data": {
+        "sent_bytes": 1048588,
+        "status": 413
+      }
+    },
+    {
+      "id": 209,
+      "test": "size_10mb",
+      "version": "v5",
+      "data": {
+        "sent_bytes": 10485772,
+        "status": 413
+      }
+    },
+    {
+      "id": 210,
+      "test": "size_10kb",
+      "version": "v4",
+      "data": {
+        "sent_bytes": 10252,
+        "status": 200
+      }
+    },
+    {
+      "id": 211,
+      "test": "size_100kb",
+      "version": "v4",
+      "data": {
+        "sent_bytes": 102412,
+        "status": 413
+      }
+    },
+    {
+      "id": 212,
+      "test": "size_101kb",
+      "version": "v4",
+      "data": {
+        "sent_bytes": 103436,
+        "status": 413
+      }
+    },
+    {
+      "id": 213,
+      "test": "size_1mb",
+      "version": "v4",
+      "data": {
+        "sent_bytes": 1048588,
+        "status": 413
+      }
+    },
+    {
+      "id": 214,
+      "test": "size_10mb",
+      "version": "v4",
+      "data": {
+        "sent_bytes": 10485772,
+        "status": 413
+      }
+    },
+    {
+      "id": 215,
+      "test": "smuggle_cl_te_basic",
+      "version": "v5",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47
+      }
+    },
+    {
+      "id": 216,
+      "test": "smuggle_te_cl_basic",
+      "version": "v5",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47
+      }
+    },
+    {
+      "id": 217,
+      "test": "smuggle_te_space",
+      "version": "v5",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47
+      }
+    },
+    {
+      "id": 218,
+      "test": "smuggle_te_newline",
+      "version": "v5",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47
+      }
+    },
+    {
+      "id": 219,
+      "test": "smuggle_double_cl",
+      "version": "v5",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47
+      }
+    },
+    {
+      "id": 220,
+      "test": "smuggle_cl_te_basic",
+      "version": "v4",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47
+      }
+    },
+    {
+      "id": 221,
+      "test": "smuggle_te_cl_basic",
+      "version": "v4",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47
+      }
+    },
+    {
+      "id": 222,
+      "test": "smuggle_te_space",
+      "version": "v4",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47
+      }
+    },
+    {
+      "id": 223,
+      "test": "smuggle_te_newline",
+      "version": "v4",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47
+      }
+    },
+    {
+      "id": 224,
+      "test": "smuggle_double_cl",
+      "version": "v4",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "title": "HTTP TRACE Method Accepted",
+      "severity": "LOW",
+      "cwe": "CWE-693",
+      "description": "Express accepts TRACE on /method-test",
+      "framework_behavior": true,
+      "version": "v5"
+    },
+    {
+      "id": 2,
+      "title": "HTTP TRACE Method Accepted",
+      "severity": "LOW",
+      "cwe": "CWE-693",
+      "description": "Express accepts TRACE on /method-test",
+      "framework_behavior": true,
+      "version": "v4"
+    }
+  ],
+  "anomalies": [
+    {
+      "id": 1,
+      "test": "method_get_/health",
+      "version": "v5",
+      "desc": "Case-insensitive method get accepted on /health"
+    },
+    {
+      "id": 2,
+      "test": "method_GeT_/health",
+      "version": "v5",
+      "desc": "Case-insensitive method GeT accepted on /health"
+    },
+    {
+      "id": 3,
+      "test": "method_get_/method-test",
+      "version": "v5",
+      "desc": "Case-insensitive method get accepted on /method-test"
+    },
+    {
+      "id": 4,
+      "test": "method_GeT_/method-test",
+      "version": "v5",
+      "desc": "Case-insensitive method GeT accepted on /method-test"
+    },
+    {
+      "id": 5,
+      "test": "method_get_/api/users",
+      "version": "v5",
+      "desc": "Case-insensitive method get accepted on /api/users"
+    },
+    {
+      "id": 6,
+      "test": "method_GeT_/api/users",
+      "version": "v5",
+      "desc": "Case-insensitive method GeT accepted on /api/users"
+    },
+    {
+      "id": 7,
+      "test": "method_get_/health",
+      "version": "v4",
+      "desc": "Case-insensitive method get accepted on /health"
+    },
+    {
+      "id": 8,
+      "test": "method_GeT_/health",
+      "version": "v4",
+      "desc": "Case-insensitive method GeT accepted on /health"
+    },
+    {
+      "id": 9,
+      "test": "method_get_/method-test",
+      "version": "v4",
+      "desc": "Case-insensitive method get accepted on /method-test"
+    },
+    {
+      "id": 10,
+      "test": "method_GeT_/method-test",
+      "version": "v4",
+      "desc": "Case-insensitive method GeT accepted on /method-test"
+    },
+    {
+      "id": 11,
+      "test": "method_get_/api/users",
+      "version": "v4",
+      "desc": "Case-insensitive method get accepted on /api/users"
+    },
+    {
+      "id": 12,
+      "test": "method_GeT_/api/users",
+      "version": "v4",
+      "desc": "Case-insensitive method GeT accepted on /api/users"
+    }
+  ],
+  "summary": {
+    "total_tests": 224,
+    "findings_count": 2,
+    "anomalies_count": 12,
+    "findings_by_severity": {
+      "LOW": 2
+    }
+  }
+}

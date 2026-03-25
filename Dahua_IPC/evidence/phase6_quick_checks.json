@@ -1,0 +1,42 @@
+{
+  "phase": 6,
+  "title": "Quick Checks (P6-P9)",
+  "date": "2026-03-06",
+
+  "P6_mDNS_Bonjour": {
+    "library": "Apple mDNSResponder",
+    "dahua_wrapper": "CDHBonjourRunner (Src/Bonjour/DHBonjourRunner.cpp at VMA 0xa24104)",
+    "risk": "LOW -- well-audited open-source library",
+    "verdict": "ELIMINATED"
+  },
+
+  "P7_RTSP_over_HTTP_Auth": {
+    "config_key": "RtspSvrConfigRtspOverHttpAuthType",
+    "options": "None-0, Basic-1, Digest-2, Alter-3",
+    "config_attachment_at": "0x8db60",
+    "default": "UNKNOWN from static analysis -- set at runtime from config DB",
+    "verdict": "INCONCLUSIVE -- requires runtime test. If default is None, RTSP parser becomes reachable via HTTP without auth."
+  },
+
+  "P8_console_runCmd": {
+    "rpc_table_at": "0x9aca60",
+    "methods": ["console.attach (0x16e001)", "console.detach (0x16dec5)", "console.runCmd (0x16dd49)", "console.listMethod (0x16d915)"],
+    "session_check_at": "0x16dc94",
+    "check_mechanism": "Loads session pointer from [r0+16], validates non-NULL",
+    "verdict": "ELIMINATED -- all console methods require authenticated session"
+  },
+
+  "P9_AutoSearchIP": {
+    "code_range": "0x296ff8-0x2eb500",
+    "source": "Src/AutoSearchIPNew/BroadcastDevDiscoverSvr.cpp",
+    "protocol": "DHProtocol2nd/3rd over UDP broadcast",
+    "unsafe_calls": {"memcpy": 16, "strncpy": 8, "sscanf": 1},
+    "bounds_checking": [
+      "0x2e89e8: strncpy(buf, src, 17) -- 17 bytes max",
+      "0x2e8a0c-0x2e8a18: cmp r7, #127; movcs r2, #127; memcpy -- capped 127",
+      "0x2e8a6c: cmp.w r9, #512; bcs skip -- 512 byte validation",
+      "0x297044: cmp.w r0, #65536; bcs skip -- 64K limit"
+    ],
+    "verdict": "BOUNDED -- explicit size checks before all copy operations. Pre-auth via UDP but safe."
+  }
+}

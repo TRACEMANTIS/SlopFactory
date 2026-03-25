@@ -1,0 +1,118 @@
+{
+  "metadata": {
+    "script": "attack_www_crypto.py",
+    "phase": "Phase 4: RC4 Session Crypto Analysis",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "start_time": "2026-02-16T14:15:04.736601",
+    "total_tests": 8,
+    "anomalies": 2,
+    "findings_count": 1
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "collection",
+      "name": "token_collection",
+      "description": "Collected session tokens from 120 sessions",
+      "result": "0 unique tokens from 120 sessions, 0 total cookies",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:15:04.724607",
+      "details": {
+        "unique_tokens": 0,
+        "total_cookies": 0,
+        "cookie_names": [],
+        "sample_tokens": []
+      }
+    },
+    {
+      "id": 2,
+      "category": "entropy",
+      "name": "no_tokens",
+      "description": "No tokens to analyze",
+      "result": "SKIP",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:15:04.724607"
+    },
+    {
+      "id": 3,
+      "category": "key_reuse",
+      "name": "insufficient_tokens",
+      "description": "Need 2+ tokens",
+      "result": "SKIP",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:15:04.724607"
+    },
+    {
+      "id": 4,
+      "category": "forgery",
+      "name": "no_cookies",
+      "description": "No cookies to forge",
+      "result": "SKIP",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:15:04.724607"
+    },
+    {
+      "id": 5,
+      "category": "cross_user",
+      "name": "admin_token",
+      "description": "Collected admin session token",
+      "result": "Cookies: []",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:15:04.728605"
+    },
+    {
+      "id": 6,
+      "category": "cross_user",
+      "name": "noauth_token",
+      "description": "Collected no-auth session token",
+      "result": "Cookies: []",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:15:04.732603"
+    },
+    {
+      "id": 7,
+      "category": "rc4_bias",
+      "name": "insufficient_data",
+      "description": "Need 20+ tokens for RC4 bias detection",
+      "result": "SKIP",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:15:04.732603"
+    },
+    {
+      "id": 8,
+      "category": "fixation",
+      "name": "session_fixation_test",
+      "description": "Session fixation: pre-set session cookie accepted?",
+      "result": "VULNERABLE \u2014 Set: AAAAAABBBBCCCCDDDD12..., Final: AAAAAABBBBCCCCDDDD12...",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:15:04.736601"
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "HIGH",
+      "title": "Session fixation confirmed (pristine [REDACTED-INTERNAL-IP])",
+      "description": "Server accepts client-supplied session cookie without regeneration after authentication. Confirms Finding 10 from main assessment on fresh pristine CHR.",
+      "timestamp": "2026-02-16T14:15:04.736601",
+      "cwe": "CWE-384"
+    }
+  ],
+  "analysis": {
+    "tokens_collected": 0,
+    "entropy": {},
+    "key_reuse": {},
+    "structure": {},
+    "forgery": {
+      "attempts": [],
+      "success": false
+    },
+    "cross_user": {
+      "user_tokens": {
+        "admin": {},
+        "noauth": {}
+      }
+    },
+    "rc4_bias": {}
+  }
+}

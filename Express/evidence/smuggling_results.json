@@ -1,0 +1,450 @@
+{
+  "metadata": {
+    "phase": "3.5",
+    "name": "HTTP Request Smuggling",
+    "timestamp": "2026-02-15T12:37:56.959538",
+    "scope": "Node.js HTTP parser behavior"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "smuggle_cl_te_basic",
+      "version": "v5",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47,
+        "response_count": 1,
+        "response_preview": "HTTP/1.1 400 Bad Request\r\nConnection: close\r\n\r\n"
+      }
+    },
+    {
+      "id": 2,
+      "test": "smuggle_cl_te_prefix_method",
+      "version": "v5",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47,
+        "response_count": 1,
+        "response_preview": "HTTP/1.1 400 Bad Request\r\nConnection: close\r\n\r\n"
+      }
+    },
+    {
+      "id": 3,
+      "test": "smuggle_te_cl_basic",
+      "version": "v5",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47,
+        "response_count": 1,
+        "response_preview": "HTTP/1.1 400 Bad Request\r\nConnection: close\r\n\r\n"
+      }
+    },
+    {
+      "id": 4,
+      "test": "smuggle_cl_te_basic",
+      "version": "v4",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47,
+        "response_count": 1,
+        "response_preview": "HTTP/1.1 400 Bad Request\r\nConnection: close\r\n\r\n"
+      }
+    },
+    {
+      "id": 5,
+      "test": "smuggle_cl_te_prefix_method",
+      "version": "v4",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47,
+        "response_count": 1,
+        "response_preview": "HTTP/1.1 400 Bad Request\r\nConnection: close\r\n\r\n"
+      }
+    },
+    {
+      "id": 6,
+      "test": "smuggle_te_cl_basic",
+      "version": "v4",
+      "data": {
+        "status_line": "HTTP/1.1 400 Bad Request",
+        "response_size": 47,
+        "response_count": 1,
+        "response_preview": "HTTP/1.1 400 Bad Request\r\nConnection: close\r\n\r\n"
+      }
+    },
+    {
+      "id": 7,
+      "test": "te_te_space_before",
+      "version": "v5",
+      "data": {
+        "te_header": "Transfer-Encoding : chunked",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 8,
+      "test": "te_te_space_after",
+      "version": "v5",
+      "data": {
+        "te_header": "Transfer-Encoding: chunked ",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 9,
+      "test": "te_te_tab",
+      "version": "v5",
+      "data": {
+        "te_header": "Transfer-Encoding:\tchunked",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 10,
+      "test": "te_te_newline_fold",
+      "version": "v5",
+      "data": {
+        "te_header": "Transfer-Encoding:\r\n chunked",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 11,
+      "test": "te_te_mixed_case",
+      "version": "v5",
+      "data": {
+        "te_header": "Transfer-Encoding: cHuNkEd",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 12,
+      "test": "te_te_double",
+      "version": "v5",
+      "data": {
+        "te_header": "Transfer-Encoding: chunked\r\nTransfer-Encoding: identity",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 13,
+      "test": "te_te_comma",
+      "version": "v5",
+      "data": {
+        "te_header": "Transfer-Encoding: chunked, identity",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 14,
+      "test": "te_te_x_prefix",
+      "version": "v5",
+      "data": {
+        "te_header": "X-Transfer-Encoding: chunked",
+        "status_line": "HTTP/1.1 200 OK"
+      }
+    },
+    {
+      "id": 15,
+      "test": "te_te_null",
+      "version": "v5",
+      "data": {
+        "te_header": "Transfer-Encoding: chunked\u0000",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 16,
+      "test": "te_te_vertical_tab",
+      "version": "v5",
+      "data": {
+        "te_header": "Transfer-Encoding:\u000bchunked",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 17,
+      "test": "te_te_space_before",
+      "version": "v4",
+      "data": {
+        "te_header": "Transfer-Encoding : chunked",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 18,
+      "test": "te_te_space_after",
+      "version": "v4",
+      "data": {
+        "te_header": "Transfer-Encoding: chunked ",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 19,
+      "test": "te_te_tab",
+      "version": "v4",
+      "data": {
+        "te_header": "Transfer-Encoding:\tchunked",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 20,
+      "test": "te_te_newline_fold",
+      "version": "v4",
+      "data": {
+        "te_header": "Transfer-Encoding:\r\n chunked",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 21,
+      "test": "te_te_mixed_case",
+      "version": "v4",
+      "data": {
+        "te_header": "Transfer-Encoding: cHuNkEd",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 22,
+      "test": "te_te_double",
+      "version": "v4",
+      "data": {
+        "te_header": "Transfer-Encoding: chunked\r\nTransfer-Encoding: identity",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 23,
+      "test": "te_te_comma",
+      "version": "v4",
+      "data": {
+        "te_header": "Transfer-Encoding: chunked, identity",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 24,
+      "test": "te_te_x_prefix",
+      "version": "v4",
+      "data": {
+        "te_header": "X-Transfer-Encoding: chunked",
+        "status_line": "HTTP/1.1 500 Internal Server Error"
+      }
+    },
+    {
+      "id": 25,
+      "test": "te_te_null",
+      "version": "v4",
+      "data": {
+        "te_header": "Transfer-Encoding: chunked\u0000",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 26,
+      "test": "te_te_vertical_tab",
+      "version": "v4",
+      "data": {
+        "te_header": "Transfer-Encoding:\u000bchunked",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 27,
+      "test": "reqline_normal",
+      "version": "v5",
+      "data": {
+        "request_line": "GET /health HTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 200 OK"
+      }
+    },
+    {
+      "id": 28,
+      "test": "reqline_http_09",
+      "version": "v5",
+      "data": {
+        "request_line": "GET /health\r\n",
+        "status_line": "HTTP/1.1 200 OK"
+      }
+    },
+    {
+      "id": 29,
+      "test": "reqline_http_20",
+      "version": "v5",
+      "data": {
+        "request_line": "GET /health HTTP/2.0\r\n",
+        "status_line": "HTTP/1.1 200 OK"
+      }
+    },
+    {
+      "id": 30,
+      "test": "reqline_http_30",
+      "version": "v5",
+      "data": {
+        "request_line": "GET /health HTTP/3.0\r\n",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 31,
+      "test": "reqline_extra_spaces",
+      "version": "v5",
+      "data": {
+        "request_line": "GET  /health  HTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 200 OK"
+      }
+    },
+    {
+      "id": 32,
+      "test": "reqline_tab_separator",
+      "version": "v5",
+      "data": {
+        "request_line": "GET\t/health\tHTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 33,
+      "test": "reqline_abs_uri",
+      "version": "v5",
+      "data": {
+        "request_line": "GET http://127.0.0.1:3000/health HTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 200 OK"
+      }
+    },
+    {
+      "id": 34,
+      "test": "reqline_long_method",
+      "version": "v5",
+      "data": {
+        "request_line": "AAAAAAAAAAAAA /health HTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 35,
+      "test": "reqline_null_in_path",
+      "version": "v5",
+      "data": {
+        "request_line": "GET /hea\u0000lth HTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 36,
+      "test": "reqline_crlf_in_path",
+      "version": "v5",
+      "data": {
+        "request_line": "GET /health\r\nInjected: true HTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 200 OK"
+      }
+    },
+    {
+      "id": 37,
+      "test": "reqline_normal",
+      "version": "v4",
+      "data": {
+        "request_line": "GET /health HTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 500 Internal Server Error"
+      }
+    },
+    {
+      "id": 38,
+      "test": "reqline_http_09",
+      "version": "v4",
+      "data": {
+        "request_line": "GET /health\r\n",
+        "status_line": "HTTP/1.1 500 Internal Server Error"
+      }
+    },
+    {
+      "id": 39,
+      "test": "reqline_http_20",
+      "version": "v4",
+      "data": {
+        "request_line": "GET /health HTTP/2.0\r\n",
+        "status_line": "HTTP/1.1 500 Internal Server Error"
+      }
+    },
+    {
+      "id": 40,
+      "test": "reqline_http_30",
+      "version": "v4",
+      "data": {
+        "request_line": "GET /health HTTP/3.0\r\n",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 41,
+      "test": "reqline_extra_spaces",
+      "version": "v4",
+      "data": {
+        "request_line": "GET  /health  HTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 500 Internal Server Error"
+      }
+    },
+    {
+      "id": 42,
+      "test": "reqline_tab_separator",
+      "version": "v4",
+      "data": {
+        "request_line": "GET\t/health\tHTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 43,
+      "test": "reqline_abs_uri",
+      "version": "v4",
+      "data": {
+        "request_line": "GET http://127.0.0.1:3000/health HTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 500 Internal Server Error"
+      }
+    },
+    {
+      "id": 44,
+      "test": "reqline_long_method",
+      "version": "v4",
+      "data": {
+        "request_line": "AAAAAAAAAAAAA /health HTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 45,
+      "test": "reqline_null_in_path",
+      "version": "v4",
+      "data": {
+        "request_line": "GET /hea\u0000lth HTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 400 Bad Request"
+      }
+    },
+    {
+      "id": 46,
+      "test": "reqline_crlf_in_path",
+      "version": "v4",
+      "data": {
+        "request_line": "GET /health\r\nInjected: true HTTP/1.1\r\n",
+        "status_line": "HTTP/1.1 500 Internal Server Error"
+      }
+    }
+  ],
+  "findings": [],
+  "anomalies": [
+    {
+      "id": 1,
+      "test": "te_x_prefix",
+      "desc": "Accepted with obfuscated TE: HTTP/1.1 200 OK",
+      "version": "v5"
+    }
+  ],
+  "summary": {
+    "total_tests": 46,
+    "findings_count": 0,
+    "anomalies_count": 1
+  }
+}

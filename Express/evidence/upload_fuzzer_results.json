@@ -1,0 +1,1011 @@
+{
+  "metadata": {
+    "phase": "2.5",
+    "name": "File Upload Fuzzer",
+    "timestamp": "2026-02-15T12:34:02.772682"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "upload_safe_normal",
+      "version": "v5",
+      "data": {
+        "filename": "test.txt",
+        "status": 200,
+        "saved_name": "c0439c7a33fa5320c50bf3089025ea37",
+        "original_preserved": true
+      }
+    },
+    {
+      "id": 2,
+      "test": "upload_unsafe_normal",
+      "version": "v5",
+      "data": {
+        "filename": "test.txt",
+        "status": 200,
+        "saved_name": "test.txt",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/test.txt"
+      }
+    },
+    {
+      "id": 3,
+      "test": "upload_safe_traversal_basic",
+      "version": "v5",
+      "data": {
+        "filename": "../../../etc/evil.txt",
+        "status": 200,
+        "saved_name": "234f4554e8fa02db6523c9714a6aa135",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 4,
+      "test": "upload_unsafe_traversal_basic",
+      "version": "v5",
+      "data": {
+        "filename": "../../../etc/evil.txt",
+        "status": 200,
+        "saved_name": "evil.txt",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/evil.txt"
+      }
+    },
+    {
+      "id": 5,
+      "test": "upload_safe_traversal_encoded",
+      "version": "v5",
+      "data": {
+        "filename": "..%2f..%2f..%2fetc%2fevil.txt",
+        "status": 200,
+        "saved_name": "fdefd1555f73f774ca9dc8d9d16f76f2",
+        "original_preserved": true
+      }
+    },
+    {
+      "id": 6,
+      "test": "upload_unsafe_traversal_encoded",
+      "version": "v5",
+      "data": {
+        "filename": "..%2f..%2f..%2fetc%2fevil.txt",
+        "status": 200,
+        "saved_name": "..%2f..%2f..%2fetc%2fevil.txt",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/..%2f..%2f..%2fetc%2fevil.txt"
+      }
+    },
+    {
+      "id": 7,
+      "test": "upload_safe_null_byte",
+      "version": "v5",
+      "data": {
+        "filename": "test.txt\u0000.exe",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 8,
+      "test": "upload_unsafe_null_byte",
+      "version": "v5",
+      "data": {
+        "filename": "test.txt\u0000.exe",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 9,
+      "test": "upload_safe_null_in_ext",
+      "version": "v5",
+      "data": {
+        "filename": "test\u0000.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 10,
+      "test": "upload_unsafe_null_in_ext",
+      "version": "v5",
+      "data": {
+        "filename": "test\u0000.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 11,
+      "test": "upload_safe_double_extension",
+      "version": "v5",
+      "data": {
+        "filename": "test.txt.exe",
+        "status": 200,
+        "saved_name": "e5a266ea5ee77b54f26a471f0256fb5b",
+        "original_preserved": true
+      }
+    },
+    {
+      "id": 12,
+      "test": "upload_unsafe_double_extension",
+      "version": "v5",
+      "data": {
+        "filename": "test.txt.exe",
+        "status": 200,
+        "saved_name": "test.txt.exe",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/test.txt.exe"
+      }
+    },
+    {
+      "id": 13,
+      "test": "upload_safe_hidden_file",
+      "version": "v5",
+      "data": {
+        "filename": ".hidden",
+        "status": 200,
+        "saved_name": "84c863d71f78651aef639cc2bd22c8f2",
+        "original_preserved": true
+      }
+    },
+    {
+      "id": 14,
+      "test": "upload_unsafe_hidden_file",
+      "version": "v5",
+      "data": {
+        "filename": ".hidden",
+        "status": 200,
+        "saved_name": ".hidden",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/.hidden"
+      }
+    },
+    {
+      "id": 15,
+      "test": "upload_safe_dotdot_name",
+      "version": "v5",
+      "data": {
+        "filename": "..test",
+        "status": 200,
+        "saved_name": "686e66bb0428d8a74ba6e189be836fc0",
+        "original_preserved": true
+      }
+    },
+    {
+      "id": 16,
+      "test": "upload_unsafe_dotdot_name",
+      "version": "v5",
+      "data": {
+        "filename": "..test",
+        "status": 200,
+        "saved_name": "..test",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/..test"
+      }
+    },
+    {
+      "id": 17,
+      "test": "upload_safe_long_name",
+      "version": "v5",
+      "data": {
+        "filename": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "status": 200,
+        "saved_name": "5a1b87a5b6ff53814269db2eabf61341",
+        "original_preserved": true
+      }
+    },
+    {
+      "id": 18,
+      "test": "upload_unsafe_long_name",
+      "version": "v5",
+      "data": {
+        "filename": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 19,
+      "test": "upload_safe_unicode_name",
+      "version": "v5",
+      "data": {
+        "filename": "\u202efdp.exe",
+        "status": 200,
+        "saved_name": "1fe33fe70bda3851d759f3a948223ed7",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 20,
+      "test": "upload_unsafe_unicode_name",
+      "version": "v5",
+      "data": {
+        "filename": "\u202efdp.exe",
+        "status": 200,
+        "saved_name": "\u00e2\u0080\u00aefdp.exe",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/\u00e2\u0080\u00aefdp.exe"
+      }
+    },
+    {
+      "id": 21,
+      "test": "upload_safe_spaces",
+      "version": "v5",
+      "data": {
+        "filename": "test file name.txt",
+        "status": 200,
+        "saved_name": "321010557fcc6f5b27dfc0b1d1ef2bc3",
+        "original_preserved": true
+      }
+    },
+    {
+      "id": 22,
+      "test": "upload_unsafe_spaces",
+      "version": "v5",
+      "data": {
+        "filename": "test file name.txt",
+        "status": 200,
+        "saved_name": "test file name.txt",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/test file name.txt"
+      }
+    },
+    {
+      "id": 23,
+      "test": "upload_safe_special_chars",
+      "version": "v5",
+      "data": {
+        "filename": "test<>:\"|?*.txt",
+        "status": 200,
+        "saved_name": "0fe1c80f88012a9454f144c7236f6bbb",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 24,
+      "test": "upload_unsafe_special_chars",
+      "version": "v5",
+      "data": {
+        "filename": "test<>:\"|?*.txt",
+        "status": 200,
+        "saved_name": "test<>:%22|?*.txt",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/test<>:%22|?*.txt"
+      }
+    },
+    {
+      "id": 25,
+      "test": "upload_safe_backslash",
+      "version": "v5",
+      "data": {
+        "filename": "test\\..\\evil.txt",
+        "status": 200,
+        "saved_name": "3c2770d46c31f98e84cfaa02f0e429ee",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 26,
+      "test": "upload_unsafe_backslash",
+      "version": "v5",
+      "data": {
+        "filename": "test\\..\\evil.txt",
+        "status": 200,
+        "saved_name": "evil.txt",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/evil.txt"
+      }
+    },
+    {
+      "id": 27,
+      "test": "upload_safe_absolute_path",
+      "version": "v5",
+      "data": {
+        "filename": "/tmp/evil.txt",
+        "status": 200,
+        "saved_name": "4cc62d6d6249e17d0debd77b5ac5f03c",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 28,
+      "test": "upload_unsafe_absolute_path",
+      "version": "v5",
+      "data": {
+        "filename": "/tmp/evil.txt",
+        "status": 200,
+        "saved_name": "evil.txt",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/evil.txt"
+      }
+    },
+    {
+      "id": 29,
+      "test": "upload_safe_windows_path",
+      "version": "v5",
+      "data": {
+        "filename": "C:\\Windows\\evil.txt",
+        "status": 200,
+        "saved_name": "72ee16886b1c68bc94758c924b822c27",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 30,
+      "test": "upload_unsafe_windows_path",
+      "version": "v5",
+      "data": {
+        "filename": "C:\\Windows\\evil.txt",
+        "status": 200,
+        "saved_name": "evil.txt",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/evil.txt"
+      }
+    },
+    {
+      "id": 31,
+      "test": "upload_safe_pipe_char",
+      "version": "v5",
+      "data": {
+        "filename": "test|evil.txt",
+        "status": 200,
+        "saved_name": "b063226c5534fe8285d1f98570d00d6f",
+        "original_preserved": true
+      }
+    },
+    {
+      "id": 32,
+      "test": "upload_unsafe_pipe_char",
+      "version": "v5",
+      "data": {
+        "filename": "test|evil.txt",
+        "status": 200,
+        "saved_name": "test|evil.txt",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/test|evil.txt"
+      }
+    },
+    {
+      "id": 33,
+      "test": "upload_safe_semicolon",
+      "version": "v5",
+      "data": {
+        "filename": "test;evil.txt",
+        "status": 200,
+        "saved_name": "6a8e0c30de4987006a622356e7ad000e",
+        "original_preserved": true
+      }
+    },
+    {
+      "id": 34,
+      "test": "upload_unsafe_semicolon",
+      "version": "v5",
+      "data": {
+        "filename": "test;evil.txt",
+        "status": 200,
+        "saved_name": "test;evil.txt",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/test;evil.txt"
+      }
+    },
+    {
+      "id": 35,
+      "test": "upload_safe_crlf",
+      "version": "v5",
+      "data": {
+        "filename": "test\r\nevil.txt",
+        "status": 200,
+        "saved_name": "40cff1489c9ab75a6d2ffddc7ae4366b",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 36,
+      "test": "upload_unsafe_crlf",
+      "version": "v5",
+      "data": {
+        "filename": "test\r\nevil.txt",
+        "status": 200,
+        "saved_name": "test%0D%0Aevil.txt",
+        "path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/uploads/test%0D%0Aevil.txt"
+      }
+    },
+    {
+      "id": 37,
+      "test": "upload_safe_normal",
+      "version": "v4",
+      "data": {
+        "filename": "test.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 38,
+      "test": "upload_unsafe_normal",
+      "version": "v4",
+      "data": {
+        "filename": "test.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 39,
+      "test": "upload_safe_traversal_basic",
+      "version": "v4",
+      "data": {
+        "filename": "../../../etc/evil.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 40,
+      "test": "upload_unsafe_traversal_basic",
+      "version": "v4",
+      "data": {
+        "filename": "../../../etc/evil.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 41,
+      "test": "upload_safe_traversal_encoded",
+      "version": "v4",
+      "data": {
+        "filename": "..%2f..%2f..%2fetc%2fevil.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 42,
+      "test": "upload_unsafe_traversal_encoded",
+      "version": "v4",
+      "data": {
+        "filename": "..%2f..%2f..%2fetc%2fevil.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 43,
+      "test": "upload_safe_null_byte",
+      "version": "v4",
+      "data": {
+        "filename": "test.txt\u0000.exe",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 44,
+      "test": "upload_unsafe_null_byte",
+      "version": "v4",
+      "data": {
+        "filename": "test.txt\u0000.exe",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 45,
+      "test": "upload_safe_null_in_ext",
+      "version": "v4",
+      "data": {
+        "filename": "test\u0000.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 46,
+      "test": "upload_unsafe_null_in_ext",
+      "version": "v4",
+      "data": {
+        "filename": "test\u0000.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 47,
+      "test": "upload_safe_double_extension",
+      "version": "v4",
+      "data": {
+        "filename": "test.txt.exe",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 48,
+      "test": "upload_unsafe_double_extension",
+      "version": "v4",
+      "data": {
+        "filename": "test.txt.exe",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 49,
+      "test": "upload_safe_hidden_file",
+      "version": "v4",
+      "data": {
+        "filename": ".hidden",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 50,
+      "test": "upload_unsafe_hidden_file",
+      "version": "v4",
+      "data": {
+        "filename": ".hidden",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 51,
+      "test": "upload_safe_dotdot_name",
+      "version": "v4",
+      "data": {
+        "filename": "..test",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 52,
+      "test": "upload_unsafe_dotdot_name",
+      "version": "v4",
+      "data": {
+        "filename": "..test",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 53,
+      "test": "upload_safe_long_name",
+      "version": "v4",
+      "data": {
+        "filename": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 54,
+      "test": "upload_unsafe_long_name",
+      "version": "v4",
+      "data": {
+        "filename": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 55,
+      "test": "upload_safe_unicode_name",
+      "version": "v4",
+      "data": {
+        "filename": "\u202efdp.exe",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 56,
+      "test": "upload_unsafe_unicode_name",
+      "version": "v4",
+      "data": {
+        "filename": "\u202efdp.exe",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 57,
+      "test": "upload_safe_spaces",
+      "version": "v4",
+      "data": {
+        "filename": "test file name.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 58,
+      "test": "upload_unsafe_spaces",
+      "version": "v4",
+      "data": {
+        "filename": "test file name.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 59,
+      "test": "upload_safe_special_chars",
+      "version": "v4",
+      "data": {
+        "filename": "test<>:\"|?*.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 60,
+      "test": "upload_unsafe_special_chars",
+      "version": "v4",
+      "data": {
+        "filename": "test<>:\"|?*.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 61,
+      "test": "upload_safe_backslash",
+      "version": "v4",
+      "data": {
+        "filename": "test\\..\\evil.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 62,
+      "test": "upload_unsafe_backslash",
+      "version": "v4",
+      "data": {
+        "filename": "test\\..\\evil.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 63,
+      "test": "upload_safe_absolute_path",
+      "version": "v4",
+      "data": {
+        "filename": "/tmp/evil.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 64,
+      "test": "upload_unsafe_absolute_path",
+      "version": "v4",
+      "data": {
+        "filename": "/tmp/evil.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 65,
+      "test": "upload_safe_windows_path",
+      "version": "v4",
+      "data": {
+        "filename": "C:\\Windows\\evil.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 66,
+      "test": "upload_unsafe_windows_path",
+      "version": "v4",
+      "data": {
+        "filename": "C:\\Windows\\evil.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 67,
+      "test": "upload_safe_pipe_char",
+      "version": "v4",
+      "data": {
+        "filename": "test|evil.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 68,
+      "test": "upload_unsafe_pipe_char",
+      "version": "v4",
+      "data": {
+        "filename": "test|evil.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 69,
+      "test": "upload_safe_semicolon",
+      "version": "v4",
+      "data": {
+        "filename": "test;evil.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 70,
+      "test": "upload_unsafe_semicolon",
+      "version": "v4",
+      "data": {
+        "filename": "test;evil.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 71,
+      "test": "upload_safe_crlf",
+      "version": "v4",
+      "data": {
+        "filename": "test\r\nevil.txt",
+        "status": 500,
+        "saved_name": "",
+        "original_preserved": false
+      }
+    },
+    {
+      "id": 72,
+      "test": "upload_unsafe_crlf",
+      "version": "v4",
+      "data": {
+        "filename": "test\r\nevil.txt",
+        "status": 500,
+        "saved_name": "",
+        "path": ""
+      }
+    },
+    {
+      "id": 73,
+      "test": "upload_size_1mb",
+      "version": "v5",
+      "data": {
+        "size": 1048576,
+        "status": 200
+      }
+    },
+    {
+      "id": 74,
+      "test": "upload_size_5mb",
+      "version": "v5",
+      "data": {
+        "size": 5242880,
+        "status": 500
+      }
+    },
+    {
+      "id": 75,
+      "test": "upload_size_6mb",
+      "version": "v5",
+      "data": {
+        "size": 6291456,
+        "status": 500
+      }
+    },
+    {
+      "id": 76,
+      "test": "upload_size_10mb",
+      "version": "v5",
+      "data": {
+        "size": 10485760,
+        "status": 500
+      }
+    },
+    {
+      "id": 77,
+      "test": "upload_size_1mb",
+      "version": "v4",
+      "data": {
+        "size": 1048576,
+        "status": 500
+      }
+    },
+    {
+      "id": 78,
+      "test": "upload_size_5mb",
+      "version": "v4",
+      "data": {
+        "size": 5242880,
+        "status": 500
+      }
+    },
+    {
+      "id": 79,
+      "test": "upload_size_6mb",
+      "version": "v4",
+      "data": {
+        "size": 6291456,
+        "status": 500
+      }
+    },
+    {
+      "id": 80,
+      "test": "upload_size_10mb",
+      "version": "v4",
+      "data": {
+        "size": 10485760,
+        "status": 500
+      }
+    },
+    {
+      "id": 81,
+      "test": "mime_exe_as_txt",
+      "version": "v5",
+      "data": {
+        "filename": "evil.exe",
+        "sent_mime": "text/plain",
+        "status": 200,
+        "stored_mime": "text/plain"
+      }
+    },
+    {
+      "id": 82,
+      "test": "mime_html_as_img",
+      "version": "v5",
+      "data": {
+        "filename": "evil.html",
+        "sent_mime": "image/png",
+        "status": 200,
+        "stored_mime": "image/png"
+      }
+    },
+    {
+      "id": 83,
+      "test": "mime_php_file",
+      "version": "v5",
+      "data": {
+        "filename": "evil.php",
+        "sent_mime": "application/x-php",
+        "status": 200,
+        "stored_mime": "application/x-php"
+      }
+    },
+    {
+      "id": 84,
+      "test": "mime_no_mime",
+      "version": "v5",
+      "data": {
+        "filename": "test.bin",
+        "sent_mime": "",
+        "status": 200,
+        "stored_mime": "application/octet-stream"
+      }
+    },
+    {
+      "id": 85,
+      "test": "mime_null_mime",
+      "version": "v5",
+      "data": {
+        "filename": "test.bin",
+        "sent_mime": "\u0000",
+        "status": 500,
+        "stored_mime": ""
+      }
+    },
+    {
+      "id": 86,
+      "test": "mime_exe_as_txt",
+      "version": "v4",
+      "data": {
+        "filename": "evil.exe",
+        "sent_mime": "text/plain",
+        "status": 500,
+        "stored_mime": ""
+      }
+    },
+    {
+      "id": 87,
+      "test": "mime_html_as_img",
+      "version": "v4",
+      "data": {
+        "filename": "evil.html",
+        "sent_mime": "image/png",
+        "status": 500,
+        "stored_mime": ""
+      }
+    },
+    {
+      "id": 88,
+      "test": "mime_php_file",
+      "version": "v4",
+      "data": {
+        "filename": "evil.php",
+        "sent_mime": "application/x-php",
+        "status": 500,
+        "stored_mime": ""
+      }
+    },
+    {
+      "id": 89,
+      "test": "mime_no_mime",
+      "version": "v4",
+      "data": {
+        "filename": "test.bin",
+        "sent_mime": "",
+        "status": 500,
+        "stored_mime": ""
+      }
+    },
+    {
+      "id": 90,
+      "test": "mime_null_mime",
+      "version": "v4",
+      "data": {
+        "filename": "test.bin",
+        "sent_mime": "\u0000",
+        "status": 500,
+        "stored_mime": ""
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "title": "Path Traversal in Upload Filename (traversal_encoded)",
+      "severity": "HIGH",
+      "cwe": "CWE-22",
+      "description": "multer saved file with traversal chars in name: ..%2f..%2f..%2fetc%2fevil.txt",
+      "framework_behavior": true,
+      "note": "multer diskStorage with user filename does not sanitize path traversal",
+      "version": "v5"
+    },
+    {
+      "id": 2,
+      "title": "Path Traversal in Upload Filename (dotdot_name)",
+      "severity": "HIGH",
+      "cwe": "CWE-22",
+      "description": "multer saved file with traversal chars in name: ..test",
+      "framework_behavior": true,
+      "note": "multer diskStorage with user filename does not sanitize path traversal",
+      "version": "v5"
+    }
+  ],
+  "anomalies": [],
+  "summary": {
+    "total_tests": 90,
+    "findings_count": 2,
+    "anomalies_count": 0
+  }
+}

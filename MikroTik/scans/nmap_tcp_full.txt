@@ -1,0 +1,211 @@
+# Nmap 7.95 scan initiated Sun Feb 15 21:52:12 2026 as: /usr/lib/nmap/nmap --privileged -sT -sV -sC -O -p- --open -T4 --max-retries 2 -oX /home/[REDACTED]/Desktop/[REDACTED-PATH]/MikroTik/scans/nmap_tcp_full.xml -oN /home/[REDACTED]/Desktop/[REDACTED-PATH]/MikroTik/scans/nmap_tcp_full.txt [REDACTED-INTERNAL-IP]
+Nmap scan report for [REDACTED-INTERNAL-IP]
+Host is up (0.00024s latency).
+Not shown: 64753 closed tcp ports (conn-refused), 773 filtered tcp ports (no-response)
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT     STATE SERVICE          VERSION
+21/tcp   open  ftp              MikroTik router ftpd 7.20.8
+| ftp-syst: 
+|   SYST: UNIX MikroTik 7.20.8
+|   STAT: 
+|  MikroTik FTP server (MikroTik 7.20.8) status:
+| Logged in as 
+| TYPE: ASCII; STRUcture: File; transfer MODE: Stream
+| No data connection
+|_End of status
+22/tcp   open  ssh              MikroTik RouterOS sshd (protocol 2.0)
+| ssh-hostkey: 
+|_  2048 4c:dc:a0:b2:29:b0:29:35:76:ce:93:90:e1:7f:6f:2d (RSA)
+23/tcp   open  telnet           Linux telnetd
+80/tcp   open  http
+| http-robots.txt: 1 disallowed entry 
+|_/
+|_http-title: RouterOS
+| fingerprint-strings: 
+|   GetRequest: 
+|     HTTP/1.0 200 OK
+|     Cache-Control: max-age=31536000
+|     Connection: close
+|     Content-Length: 1280
+|     Content-Type: text/html
+|     Date: Mon, 16 Feb 2026 02:55:32 GMT
+|     Expires: Tue, 16 Feb 2027 02:55:32 GMT
+|     X-Frame-Options: sameorigin
+|     <!doctype html>
+|     <html lang="en">
+|     <meta charset="utf-8">
+|     <meta name="viewport" content="width=device-width, initial-scale=1">
+|     <link rel="icon" href="/favicon.png">
+|     <link rel="icon" href="/favicon.svg">
+|     <title>RouterOS</title>
+|     <link rel="stylesheet" href="/assets/style-ae67df160dad.css">
+|     <script src="/assets/script-ae01587e2c4c.js"></script>
+|     <div class="login">
+|     <section>
+|     <div class="brand"><img src="mikrotik_logo.svg" alt=""></div>
+|     <form class="form" id="login">
+|     <div id="error" class="errorMessage"></div>
+|     <div>
+|     <label for="name">Login</label>
+|     <input id="name" autocomplete="username" type="text" data-defaultuser="admin">
+|     </div>
+|     <div>
+|     <label for="password">Password
+|   HTTPOptions: 
+|     HTTP/1.0 503 Service Unavailable
+|     Cache-Control: no-store
+|     Connection: close
+|     Content-Length: 109
+|     Content-Type: text/html
+|     Date: Mon, 16 Feb 2026 02:55:32 GMT
+|     Expires: 0
+|     Pragma: no-cache
+|     X-Frame-Options: sameorigin
+|     <!doctype html>
+|     <html lang=en>
+|     <title>Error 503 : unknown method</title>
+|     <h1>Error 503 : unknown method</h1>
+|   RTSPRequest: 
+|     HTTP/1.0 503 Service Unavailable
+|     Cache-Control: no-store
+|     Connection: close
+|     Content-Length: 109
+|     Content-Type: text/html
+|     Date: Mon, 16 Feb 2026 02:55:33 GMT
+|     Expires: 0
+|     Pragma: no-cache
+|     X-Frame-Options: sameorigin
+|     <!doctype html>
+|     <html lang=en>
+|     <title>Error 503 : unknown method</title>
+|_    <h1>Error 503 : unknown method</h1>
+443/tcp  open  ssl/https
+|_http-title: RouterOS
+|_ssl-date: TLS randomness does not represent time
+| fingerprint-strings: 
+|   Help, SSLSessionReq, TLSSessionReq: 
+|     HTTP/1.0 400 Bad Request
+|     Cache-Control: no-store
+|     Connection: close
+|     Content-Length: 103
+|     Content-Type: text/html
+|     Date: Mon, 16 Feb 2026 02:56:14 GMT
+|     Expires: 0
+|     Pragma: no-cache
+|     X-Frame-Options: sameorigin
+|     <!doctype html>
+|     <html lang=en>
+|     <title>Error 400 : Bad Request</title>
+|     <h1>Error 400 : Bad Request</h1>
+|   Kerberos: 
+|     HTTP/1.0 400 Bad Request
+|     Cache-Control: no-store
+|     Connection: close
+|     Content-Length: 103
+|     Content-Type: text/html
+|     Date: Mon, 16 Feb 2026 02:56:15 GMT
+|     Expires: 0
+|     Pragma: no-cache
+|     X-Frame-Options: sameorigin
+|     <!doctype html>
+|     <html lang=en>
+|     <title>Error 400 : Bad Request</title>
+|     <h1>Error 400 : Bad Request</h1>
+|   TerminalServerCookie: 
+|     HTTP/1.0 503 Service Unavailable
+|     Cache-Control: no-store
+|     Connection: close
+|     Content-Length: 109
+|     Content-Type: text/html
+|     Date: Mon, 16 Feb 2026 02:56:14 GMT
+|     Expires: 0
+|     Pragma: no-cache
+|     X-Frame-Options: sameorigin
+|     <!doctype html>
+|     <html lang=en>
+|     <title>Error 503 : unknown method</title>
+|_    <h1>Error 503 : unknown method</h1>
+| ssl-cert: Subject: commonName=mikrotik-test
+| Not valid before: 2026-02-16T02:49:16
+|_Not valid after:  2027-02-16T02:49:16
+2000/tcp open  bandwidth-test   MikroTik bandwidth-test server
+8291/tcp open  unknown
+8728/tcp open  routeros-api     MikroTik RouterOS API
+8729/tcp open  ssl/routeros-api MikroTik RouterOS API
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port80-TCP:V=7.95%I=7%D=2/15%Time=6992867F%P=x86_64-pc-linux-gnu%r(GetR
+SF:equest,5E0,"HTTP/1\.0\x20200\x20OK\r\nCache-Control:\x20max-age=3153600
+SF:0\r\nConnection:\x20close\r\nContent-Length:\x201280\r\nContent-Type:\x
+SF:20text/html\r\nDate:\x20Mon,\x2016\x20Feb\x202026\x2002:55:32\x20GMT\r\
+SF:nExpires:\x20Tue,\x2016\x20Feb\x202027\x2002:55:32\x20GMT\r\nX-Frame-Op
+SF:tions:\x20sameorigin\r\n\r\n<!doctype\x20html>\n<html\x20lang=\"en\">\n
+SF:<meta\x20charset=\"utf-8\">\n<meta\x20name=\"viewport\"\x20content=\"wi
+SF:dth=device-width,\x20initial-scale=1\">\n<link\x20rel=\"icon\"\x20href=
+SF:\"/favicon\.png\">\n<link\x20rel=\"icon\"\x20href=\"/favicon\.svg\">\n<
+SF:title>RouterOS</title>\n<link\x20rel=\"stylesheet\"\x20href=\"/assets/s
+SF:tyle-ae67df160dad\.css\">\n<script\x20src=\"/assets/script-ae01587e2c4c
+SF:\.js\"></script>\n\n<div\x20class=\"login\">\n<section>\n<div\x20class=
+SF:\"brand\"><img\x20src=\"mikrotik_logo\.svg\"\x20alt=\"\"></div>\n<form\
+SF:x20class=\"form\"\x20id=\"login\">\n<div\x20id=\"error\"\x20class=\"err
+SF:orMessage\"></div>\n<div>\n\x20\x20<label\x20for=\"name\">Login</label>
+SF:\n\x20\x20<input\x20id=\"name\"\x20autocomplete=\"username\"\x20type=\"
+SF:text\"\x20data-defaultuser=\"admin\">\n</div>\n<div>\n\x20\x20<label\x2
+SF:0for=\"password\">Password")%r(HTTPOptions,14B,"HTTP/1\.0\x20503\x20Ser
+SF:vice\x20Unavailable\r\nCache-Control:\x20no-store\r\nConnection:\x20clo
+SF:se\r\nContent-Length:\x20109\r\nContent-Type:\x20text/html\r\nDate:\x20
+SF:Mon,\x2016\x20Feb\x202026\x2002:55:32\x20GMT\r\nExpires:\x200\r\nPragma
+SF::\x20no-cache\r\nX-Frame-Options:\x20sameorigin\r\n\r\n<!doctype\x20htm
+SF:l>\n<html\x20lang=en>\n<title>Error\x20503\x20:\x20unknown\x20method</t
+SF:itle>\n<h1>Error\x20503\x20:\x20unknown\x20method</h1>\n")%r(RTSPReques
+SF:t,14B,"HTTP/1\.0\x20503\x20Service\x20Unavailable\r\nCache-Control:\x20
+SF:no-store\r\nConnection:\x20close\r\nContent-Length:\x20109\r\nContent-T
+SF:ype:\x20text/html\r\nDate:\x20Mon,\x2016\x20Feb\x202026\x2002:55:33\x20
+SF:GMT\r\nExpires:\x200\r\nPragma:\x20no-cache\r\nX-Frame-Options:\x20same
+SF:origin\r\n\r\n<!doctype\x20html>\n<html\x20lang=en>\n<title>Error\x2050
+SF:3\x20:\x20unknown\x20method</title>\n<h1>Error\x20503\x20:\x20unknown\x
+SF:20method</h1>\n");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port443-TCP:V=7.95%T=SSL%I=7%D=2/15%Time=699286A8%P=x86_64-pc-linux-gnu
+SF:%r(Help,13D,"HTTP/1\.0\x20400\x20Bad\x20Request\r\nCache-Control:\x20no
+SF:-store\r\nConnection:\x20close\r\nContent-Length:\x20103\r\nContent-Typ
+SF:e:\x20text/html\r\nDate:\x20Mon,\x2016\x20Feb\x202026\x2002:56:14\x20GM
+SF:T\r\nExpires:\x200\r\nPragma:\x20no-cache\r\nX-Frame-Options:\x20sameor
+SF:igin\r\n\r\n<!doctype\x20html>\n<html\x20lang=en>\n<title>Error\x20400\
+SF:x20:\x20Bad\x20Request</title>\n<h1>Error\x20400\x20:\x20Bad\x20Request
+SF:</h1>\n")%r(SSLSessionReq,13D,"HTTP/1\.0\x20400\x20Bad\x20Request\r\nCa
+SF:che-Control:\x20no-store\r\nConnection:\x20close\r\nContent-Length:\x20
+SF:103\r\nContent-Type:\x20text/html\r\nDate:\x20Mon,\x2016\x20Feb\x202026
+SF:\x2002:56:14\x20GMT\r\nExpires:\x200\r\nPragma:\x20no-cache\r\nX-Frame-
+SF:Options:\x20sameorigin\r\n\r\n<!doctype\x20html>\n<html\x20lang=en>\n<t
+SF:itle>Error\x20400\x20:\x20Bad\x20Request</title>\n<h1>Error\x20400\x20:
+SF:\x20Bad\x20Request</h1>\n")%r(TerminalServerCookie,14B,"HTTP/1\.0\x2050
+SF:3\x20Service\x20Unavailable\r\nCache-Control:\x20no-store\r\nConnection
+SF::\x20close\r\nContent-Length:\x20109\r\nContent-Type:\x20text/html\r\nD
+SF:ate:\x20Mon,\x2016\x20Feb\x202026\x2002:56:14\x20GMT\r\nExpires:\x200\r
+SF:\nPragma:\x20no-cache\r\nX-Frame-Options:\x20sameorigin\r\n\r\n<!doctyp
+SF:e\x20html>\n<html\x20lang=en>\n<title>Error\x20503\x20:\x20unknown\x20m
+SF:ethod</title>\n<h1>Error\x20503\x20:\x20unknown\x20method</h1>\n")%r(TL
+SF:SSessionReq,13D,"HTTP/1\.0\x20400\x20Bad\x20Request\r\nCache-Control:\x
+SF:20no-store\r\nConnection:\x20close\r\nContent-Length:\x20103\r\nContent
+SF:-Type:\x20text/html\r\nDate:\x20Mon,\x2016\x20Feb\x202026\x2002:56:14\x
+SF:20GMT\r\nExpires:\x200\r\nPragma:\x20no-cache\r\nX-Frame-Options:\x20sa
+SF:meorigin\r\n\r\n<!doctype\x20html>\n<html\x20lang=en>\n<title>Error\x20
+SF:400\x20:\x20Bad\x20Request</title>\n<h1>Error\x20400\x20:\x20Bad\x20Req
+SF:uest</h1>\n")%r(Kerberos,13D,"HTTP/1\.0\x20400\x20Bad\x20Request\r\nCac
+SF:he-Control:\x20no-store\r\nConnection:\x20close\r\nContent-Length:\x201
+SF:03\r\nContent-Type:\x20text/html\r\nDate:\x20Mon,\x2016\x20Feb\x202026\
+SF:x2002:56:15\x20GMT\r\nExpires:\x200\r\nPragma:\x20no-cache\r\nX-Frame-O
+SF:ptions:\x20sameorigin\r\n\r\n<!doctype\x20html>\n<html\x20lang=en>\n<ti
+SF:tle>Error\x20400\x20:\x20Bad\x20Request</title>\n<h1>Error\x20400\x20:\
+SF:x20Bad\x20Request</h1>\n");
+MAC Address: 08:00:27:6F:D1:3D (PCS Systemtechnik/Oracle VirtualBox virtual NIC)
+Device type: general purpose|router
+Running: Linux 4.X|5.X, MikroTik RouterOS 7.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5 cpe:/o:mikrotik:routeros:7 cpe:/o:linux:linux_kernel:5.6.3
+OS details: Linux 4.15 - 5.19, OpenWrt 21.02 (Linux 5.4), MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3)
+Network Distance: 1 hop
+Service Info: OSs: Linux, RouterOS; Device: router; CPE: cpe:/o:mikrotik:routeros, cpe:/o:linux:linux_kernel
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Feb 15 21:56:09 2026 -- 1 IP address (1 host up) scanned in 237.23 seconds

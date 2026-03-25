@@ -1,0 +1,4430 @@
+{
+  "metadata": {
+    "script": "novel_winbox_deep.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 9,
+    "start_time": "2026-02-16T01:36:25.868987",
+    "end_time": "2026-02-16T01:51:07.016193",
+    "total_tests": 212,
+    "anomalies": 1,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "13m48s",
+    "router_log_count": 95,
+    "router_interesting_events": 5,
+    "final_health": {
+      "alive": true,
+      "uptime": "28m29s",
+      "cpu_load": "0",
+      "free_memory": "836313088",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "handler_enum",
+      "name": "Handler 1: no_response",
+      "description": "Probe handler ID 1 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:36:29.183329",
+      "details": {
+        "handler_id": 1,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 2,
+      "category": "handler_enum",
+      "name": "Handler 2: no_response",
+      "description": "Probe handler ID 2 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:36:32.701569",
+      "details": {
+        "handler_id": 2,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 3,
+      "category": "handler_enum",
+      "name": "Handler 3: no_response",
+      "description": "Probe handler ID 3 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:36:36.111863",
+      "details": {
+        "handler_id": 3,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 4,
+      "category": "handler_enum",
+      "name": "Handler 4: no_response",
+      "description": "Probe handler ID 4 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:36:39.522157",
+      "details": {
+        "handler_id": 4,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 5,
+      "category": "handler_enum",
+      "name": "Handler 5: no_response",
+      "description": "Probe handler ID 5 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:36:42.928453",
+      "details": {
+        "handler_id": 5,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 6,
+      "category": "handler_enum",
+      "name": "Handler 6: no_response",
+      "description": "Probe handler ID 6 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:36:46.338747",
+      "details": {
+        "handler_id": 6,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 7,
+      "category": "handler_enum",
+      "name": "Handler 7: no_response",
+      "description": "Probe handler ID 7 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:36:49.757037",
+      "details": {
+        "handler_id": 7,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 8,
+      "category": "handler_enum",
+      "name": "Handler 8: no_response",
+      "description": "Probe handler ID 8 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:36:53.167331",
+      "details": {
+        "handler_id": 8,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 9,
+      "category": "handler_enum",
+      "name": "Handler 9: no_response",
+      "description": "Probe handler ID 9 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:36:56.577625",
+      "details": {
+        "handler_id": 9,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 10,
+      "category": "handler_enum",
+      "name": "Handler 10: no_response",
+      "description": "Probe handler ID 10 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:36:59.983921",
+      "details": {
+        "handler_id": 10,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 11,
+      "category": "handler_enum",
+      "name": "Handler 11: no_response",
+      "description": "Probe handler ID 11 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:03.434195",
+      "details": {
+        "handler_id": 11,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 12,
+      "category": "handler_enum",
+      "name": "Handler 12: no_response",
+      "description": "Probe handler ID 12 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:06.844489",
+      "details": {
+        "handler_id": 12,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 13,
+      "category": "handler_enum",
+      "name": "Handler 13: no_response",
+      "description": "Probe handler ID 13 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:10.246787",
+      "details": {
+        "handler_id": 13,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 14,
+      "category": "handler_enum",
+      "name": "Handler 14: no_response",
+      "description": "Probe handler ID 14 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:13.641089",
+      "details": {
+        "handler_id": 14,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 15,
+      "category": "handler_enum",
+      "name": "Handler 15: no_response",
+      "description": "Probe handler ID 15 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:17.051383",
+      "details": {
+        "handler_id": 15,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 16,
+      "category": "handler_enum",
+      "name": "Handler 16: no_response",
+      "description": "Probe handler ID 16 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:20.509653",
+      "details": {
+        "handler_id": 16,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 17,
+      "category": "handler_enum",
+      "name": "Handler 17: no_response",
+      "description": "Probe handler ID 17 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:23.919947",
+      "details": {
+        "handler_id": 17,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 18,
+      "category": "handler_enum",
+      "name": "Handler 18: no_response",
+      "description": "Probe handler ID 18 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:27.346233",
+      "details": {
+        "handler_id": 18,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 19,
+      "category": "handler_enum",
+      "name": "Handler 19: no_response",
+      "description": "Probe handler ID 19 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:30.756527",
+      "details": {
+        "handler_id": 19,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 20,
+      "category": "handler_enum",
+      "name": "Handler 20: no_response",
+      "description": "Probe handler ID 20 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:34.170819",
+      "details": {
+        "handler_id": 20,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 21,
+      "category": "handler_enum",
+      "name": "Handler 21: no_response",
+      "description": "Probe handler ID 21 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:37.585111",
+      "details": {
+        "handler_id": 21,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 22,
+      "category": "handler_enum",
+      "name": "Handler 22: no_response",
+      "description": "Probe handler ID 22 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:40.995405",
+      "details": {
+        "handler_id": 22,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 23,
+      "category": "handler_enum",
+      "name": "Handler 23: no_response",
+      "description": "Probe handler ID 23 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:44.405699",
+      "details": {
+        "handler_id": 23,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 24,
+      "category": "handler_enum",
+      "name": "Handler 24: no_response",
+      "description": "Probe handler ID 24 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:47.815993",
+      "details": {
+        "handler_id": 24,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 25,
+      "category": "handler_enum",
+      "name": "Handler 25: no_response",
+      "description": "Probe handler ID 25 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:51.226287",
+      "details": {
+        "handler_id": 25,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 26,
+      "category": "handler_enum",
+      "name": "Handler 26: no_response",
+      "description": "Probe handler ID 26 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:54.636581",
+      "details": {
+        "handler_id": 26,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 27,
+      "category": "handler_enum",
+      "name": "Handler 27: no_response",
+      "description": "Probe handler ID 27 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:37:58.046875",
+      "details": {
+        "handler_id": 27,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 28,
+      "category": "handler_enum",
+      "name": "Handler 28: no_response",
+      "description": "Probe handler ID 28 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:01.457169",
+      "details": {
+        "handler_id": 28,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 29,
+      "category": "handler_enum",
+      "name": "Handler 29: no_response",
+      "description": "Probe handler ID 29 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:04.867463",
+      "details": {
+        "handler_id": 29,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 30,
+      "category": "handler_enum",
+      "name": "Handler 30: no_response",
+      "description": "Probe handler ID 30 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:08.285753",
+      "details": {
+        "handler_id": 30,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 31,
+      "category": "handler_enum",
+      "name": "Handler 31: no_response",
+      "description": "Probe handler ID 31 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:11.752019",
+      "details": {
+        "handler_id": 31,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 32,
+      "category": "handler_enum",
+      "name": "Handler 32: no_response",
+      "description": "Probe handler ID 32 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:15.350219",
+      "details": {
+        "handler_id": 32,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 33,
+      "category": "handler_enum",
+      "name": "Handler 33: no_response",
+      "description": "Probe handler ID 33 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:18.752517",
+      "details": {
+        "handler_id": 33,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 34,
+      "category": "handler_enum",
+      "name": "Handler 34: no_response",
+      "description": "Probe handler ID 34 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:22.146819",
+      "details": {
+        "handler_id": 34,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 35,
+      "category": "handler_enum",
+      "name": "Handler 35: no_response",
+      "description": "Probe handler ID 35 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:25.541121",
+      "details": {
+        "handler_id": 35,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 36,
+      "category": "handler_enum",
+      "name": "Handler 36: no_response",
+      "description": "Probe handler ID 36 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:28.935423",
+      "details": {
+        "handler_id": 36,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 37,
+      "category": "handler_enum",
+      "name": "Handler 37: no_response",
+      "description": "Probe handler ID 37 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:32.345717",
+      "details": {
+        "handler_id": 37,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 38,
+      "category": "handler_enum",
+      "name": "Handler 38: no_response",
+      "description": "Probe handler ID 38 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:35.744017",
+      "details": {
+        "handler_id": 38,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 39,
+      "category": "handler_enum",
+      "name": "Handler 39: no_response",
+      "description": "Probe handler ID 39 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:39.142317",
+      "details": {
+        "handler_id": 39,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 40,
+      "category": "handler_enum",
+      "name": "Handler 40: no_response",
+      "description": "Probe handler ID 40 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:42.540617",
+      "details": {
+        "handler_id": 40,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 41,
+      "category": "handler_enum",
+      "name": "Handler 41: no_response",
+      "description": "Probe handler ID 41 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:45.938917",
+      "details": {
+        "handler_id": 41,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 42,
+      "category": "handler_enum",
+      "name": "Handler 42: no_response",
+      "description": "Probe handler ID 42 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:49.349211",
+      "details": {
+        "handler_id": 42,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 43,
+      "category": "handler_enum",
+      "name": "Handler 43: no_response",
+      "description": "Probe handler ID 43 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:52.763503",
+      "details": {
+        "handler_id": 43,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 44,
+      "category": "handler_enum",
+      "name": "Handler 44: no_response",
+      "description": "Probe handler ID 44 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:56.161803",
+      "details": {
+        "handler_id": 44,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 45,
+      "category": "handler_enum",
+      "name": "Handler 45: no_response",
+      "description": "Probe handler ID 45 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:38:59.568099",
+      "details": {
+        "handler_id": 45,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 46,
+      "category": "handler_enum",
+      "name": "Handler 46: no_response",
+      "description": "Probe handler ID 46 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:02.962401",
+      "details": {
+        "handler_id": 46,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 47,
+      "category": "handler_enum",
+      "name": "Handler 47: no_response",
+      "description": "Probe handler ID 47 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:06.368697",
+      "details": {
+        "handler_id": 47,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 48,
+      "category": "handler_enum",
+      "name": "Handler 48: no_response",
+      "description": "Probe handler ID 48 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:09.762999",
+      "details": {
+        "handler_id": 48,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 49,
+      "category": "handler_enum",
+      "name": "Handler 49: no_response",
+      "description": "Probe handler ID 49 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:13.173293",
+      "details": {
+        "handler_id": 49,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 50,
+      "category": "handler_enum",
+      "name": "Handler 50: no_response",
+      "description": "Probe handler ID 50 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:16.575591",
+      "details": {
+        "handler_id": 50,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 51,
+      "category": "handler_enum",
+      "name": "Handler 51: no_response",
+      "description": "Probe handler ID 51 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:19.977889",
+      "details": {
+        "handler_id": 51,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 52,
+      "category": "handler_enum",
+      "name": "Handler 52: no_response",
+      "description": "Probe handler ID 52 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:23.388183",
+      "details": {
+        "handler_id": 52,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 53,
+      "category": "handler_enum",
+      "name": "Handler 53: no_response",
+      "description": "Probe handler ID 53 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:26.802475",
+      "details": {
+        "handler_id": 53,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 54,
+      "category": "handler_enum",
+      "name": "Handler 54: no_response",
+      "description": "Probe handler ID 54 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:30.212769",
+      "details": {
+        "handler_id": 54,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 55,
+      "category": "handler_enum",
+      "name": "Handler 55: no_response",
+      "description": "Probe handler ID 55 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:33.635057",
+      "details": {
+        "handler_id": 55,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 56,
+      "category": "handler_enum",
+      "name": "Handler 56: no_response",
+      "description": "Probe handler ID 56 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:37.045351",
+      "details": {
+        "handler_id": 56,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 57,
+      "category": "handler_enum",
+      "name": "Handler 57: no_response",
+      "description": "Probe handler ID 57 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:40.439653",
+      "details": {
+        "handler_id": 57,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 58,
+      "category": "handler_enum",
+      "name": "Handler 58: no_response",
+      "description": "Probe handler ID 58 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:43.841951",
+      "details": {
+        "handler_id": 58,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 59,
+      "category": "handler_enum",
+      "name": "Handler 59: no_response",
+      "description": "Probe handler ID 59 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:47.240251",
+      "details": {
+        "handler_id": 59,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 60,
+      "category": "handler_enum",
+      "name": "Handler 60: no_response",
+      "description": "Probe handler ID 60 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:50.642549",
+      "details": {
+        "handler_id": 60,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 61,
+      "category": "handler_enum",
+      "name": "Handler 61: no_response",
+      "description": "Probe handler ID 61 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:54.040849",
+      "details": {
+        "handler_id": 61,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 62,
+      "category": "handler_enum",
+      "name": "Handler 62: no_response",
+      "description": "Probe handler ID 62 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:39:57.443147",
+      "details": {
+        "handler_id": 62,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 63,
+      "category": "handler_enum",
+      "name": "Handler 63: no_response",
+      "description": "Probe handler ID 63 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:40:00.853441",
+      "details": {
+        "handler_id": 63,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 64,
+      "category": "handler_enum",
+      "name": "Handler 64: no_response",
+      "description": "Probe handler ID 64 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:40:04.263735",
+      "details": {
+        "handler_id": 64,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 65,
+      "category": "handler_enum",
+      "name": "Handler 65: no_response",
+      "description": "Probe handler ID 65 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:40:07.678027",
+      "details": {
+        "handler_id": 65,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 66,
+      "category": "handler_enum",
+      "name": "Handler 66: no_response",
+      "description": "Probe handler ID 66 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:40:11.096317",
+      "details": {
+        "handler_id": 66,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 67,
+      "category": "handler_enum",
+      "name": "Handler 67: no_response",
+      "description": "Probe handler ID 67 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:40:14.510609",
+      "details": {
+        "handler_id": 67,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 68,
+      "category": "handler_enum",
+      "name": "Handler 68: no_response",
+      "description": "Probe handler ID 68 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:40:17.924901",
+      "details": {
+        "handler_id": 68,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 69,
+      "category": "handler_enum",
+      "name": "Handler 69: no_response",
+      "description": "Probe handler ID 69 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:40:21.335195",
+      "details": {
+        "handler_id": 69,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 70,
+      "category": "handler_enum",
+      "name": "Handler 70: no_response",
+      "description": "Probe handler ID 70 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:40:24.745489",
+      "details": {
+        "handler_id": 70,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 71,
+      "category": "handler_enum",
+      "name": "Handler 71: no_response",
+      "description": "Probe handler ID 71 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:40:28.139791",
+      "details": {
+        "handler_id": 71,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 72,
+      "category": "handler_enum",
+      "name": "Handler 72: no_response",
+      "description": "Probe handler ID 72 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:40:31.550085",
+      "details": {
+        "handler_id": 72,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 73,
+      "category": "handler_enum",
+      "name": "Handler 73",
+      "description": "Probe handler ID 73 pre-auth",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:40:44.525317",
+      "details": {
+        "handler_id": 73,
+        "status": "connection_failed"
+      }
+    },
+    {
+      "id": 74,
+      "category": "handler_enum",
+      "name": "Handler 74: no_response",
+      "description": "Probe handler ID 74 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:16.151774",
+      "details": {
+        "handler_id": 74,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 75,
+      "category": "handler_enum",
+      "name": "Handler 75: no_response",
+      "description": "Probe handler ID 75 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:19.558069",
+      "details": {
+        "handler_id": 75,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 76,
+      "category": "handler_enum",
+      "name": "Handler 76: no_response",
+      "description": "Probe handler ID 76 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:22.964365",
+      "details": {
+        "handler_id": 76,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 77,
+      "category": "handler_enum",
+      "name": "Handler 77: no_response",
+      "description": "Probe handler ID 77 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:26.422635",
+      "details": {
+        "handler_id": 77,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 78,
+      "category": "handler_enum",
+      "name": "Handler 78: no_response",
+      "description": "Probe handler ID 78 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:29.836927",
+      "details": {
+        "handler_id": 78,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 79,
+      "category": "handler_enum",
+      "name": "Handler 79: no_response",
+      "description": "Probe handler ID 79 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:33.247221",
+      "details": {
+        "handler_id": 79,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 80,
+      "category": "handler_enum",
+      "name": "Handler 80: no_response",
+      "description": "Probe handler ID 80 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:36.657515",
+      "details": {
+        "handler_id": 80,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 81,
+      "category": "handler_enum",
+      "name": "Handler 81: no_response",
+      "description": "Probe handler ID 81 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:40.067809",
+      "details": {
+        "handler_id": 81,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 82,
+      "category": "handler_enum",
+      "name": "Handler 82: no_response",
+      "description": "Probe handler ID 82 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:43.478103",
+      "details": {
+        "handler_id": 82,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 83,
+      "category": "handler_enum",
+      "name": "Handler 83: no_response",
+      "description": "Probe handler ID 83 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:46.880401",
+      "details": {
+        "handler_id": 83,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 84,
+      "category": "handler_enum",
+      "name": "Handler 84: no_response",
+      "description": "Probe handler ID 84 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:50.274703",
+      "details": {
+        "handler_id": 84,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 85,
+      "category": "handler_enum",
+      "name": "Handler 85: no_response",
+      "description": "Probe handler ID 85 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:53.684997",
+      "details": {
+        "handler_id": 85,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 86,
+      "category": "handler_enum",
+      "name": "Handler 86: no_response",
+      "description": "Probe handler ID 86 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:41:57.079299",
+      "details": {
+        "handler_id": 86,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 87,
+      "category": "handler_enum",
+      "name": "Handler 87: no_response",
+      "description": "Probe handler ID 87 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:00.489593",
+      "details": {
+        "handler_id": 87,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 88,
+      "category": "handler_enum",
+      "name": "Handler 88: no_response",
+      "description": "Probe handler ID 88 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:03.899887",
+      "details": {
+        "handler_id": 88,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 89,
+      "category": "handler_enum",
+      "name": "Handler 89: no_response",
+      "description": "Probe handler ID 89 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:07.306183",
+      "details": {
+        "handler_id": 89,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 90,
+      "category": "handler_enum",
+      "name": "Handler 90: no_response",
+      "description": "Probe handler ID 90 pre-auth",
+      "result": "Response: 0 bytes, class=no_response, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:10.724473",
+      "details": {
+        "handler_id": 90,
+        "classification": "no_response",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 91,
+      "category": "handler_enum",
+      "name": "Handler enumeration summary",
+      "description": "Summary of handler ID scan (1-90)",
+      "result": "Classifications: {'no_response': 89, 'connection_failed': 1}, responding: 0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:10.828421",
+      "details": {
+        "handler_map": {
+          "1": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "2": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "3": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "4": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "5": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "6": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "7": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "8": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "9": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "10": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "11": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "12": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "13": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "14": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "15": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "16": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "17": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "18": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "19": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "20": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "21": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "22": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "23": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "24": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "25": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "26": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "27": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "28": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "29": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "30": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "31": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "32": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "33": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "34": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "35": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "36": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "37": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "38": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "39": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "40": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "41": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "42": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "43": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "44": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "45": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "46": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "47": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "48": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "49": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "50": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "51": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "52": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "53": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "54": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "55": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "56": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "57": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "58": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "59": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "60": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "61": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "62": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "63": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "64": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "65": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "66": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "67": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "68": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "69": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "70": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "71": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "72": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "73": {
+            "status": "connection_failed"
+          },
+          "74": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "75": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "76": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "77": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "78": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "79": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "80": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "81": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "82": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "83": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "84": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "85": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "86": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "87": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "88": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "89": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          },
+          "90": {
+            "status": "no_response",
+            "response_size": 0,
+            "tlv_count": 0
+          }
+        },
+        "classifications": {
+          "no_response": 89,
+          "connection_failed": 1
+        },
+        "responding_handlers": []
+      }
+    },
+    {
+      "id": 92,
+      "category": "perm_bypass",
+      "name": "Handler 2/login cmd=1",
+      "description": "Pre-auth: Authentication handler with command 1",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:14.134767",
+      "details": {
+        "handler_id": 2,
+        "handler_name": "login",
+        "command": 1,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 93,
+      "category": "perm_bypass",
+      "name": "Handler 2/login cmd=2",
+      "description": "Pre-auth: Authentication handler with command 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:14.490589",
+      "details": {
+        "handler_id": 2,
+        "handler_name": "login",
+        "command": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 94,
+      "category": "perm_bypass",
+      "name": "Handler 2/login cmd=3",
+      "description": "Pre-auth: Authentication handler with command 3",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:17.848909",
+      "details": {
+        "handler_id": 2,
+        "handler_name": "login",
+        "command": 3,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 95,
+      "category": "perm_bypass",
+      "name": "Handler 2/login cmd=4",
+      "description": "Pre-auth: Authentication handler with command 4",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:18.208729",
+      "details": {
+        "handler_id": 2,
+        "handler_name": "login",
+        "command": 4,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 96,
+      "category": "perm_bypass",
+      "name": "Handler 2/login cmd=5",
+      "description": "Pre-auth: Authentication handler with command 5",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:18.564551",
+      "details": {
+        "handler_id": 2,
+        "handler_name": "login",
+        "command": 5,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 97,
+      "category": "perm_bypass",
+      "name": "Handler 2/login cmd=6",
+      "description": "Pre-auth: Authentication handler with command 6",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:21.922871",
+      "details": {
+        "handler_id": 2,
+        "handler_name": "login",
+        "command": 6,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 98,
+      "category": "perm_bypass",
+      "name": "Handler 2/login cmd=7",
+      "description": "Pre-auth: Authentication handler with command 7",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:25.285189",
+      "details": {
+        "handler_id": 2,
+        "handler_name": "login",
+        "command": 7,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 99,
+      "category": "perm_bypass",
+      "name": "Handler 2/login cmd=0",
+      "description": "Pre-auth: Authentication handler with command 0",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:25.641011",
+      "details": {
+        "handler_id": 2,
+        "handler_name": "login",
+        "command": 0,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 100,
+      "category": "perm_bypass",
+      "name": "Handler 2/login cmd=255",
+      "description": "Pre-auth: Authentication handler with command 255",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:28.999331",
+      "details": {
+        "handler_id": 2,
+        "handler_name": "login",
+        "command": 255,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 101,
+      "category": "perm_bypass",
+      "name": "Handler 13/system cmd=1",
+      "description": "Pre-auth: System management with command 1",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:32.361649",
+      "details": {
+        "handler_id": 13,
+        "handler_name": "system",
+        "command": 1,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 102,
+      "category": "perm_bypass",
+      "name": "Handler 13/system cmd=2",
+      "description": "Pre-auth: System management with command 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:32.717471",
+      "details": {
+        "handler_id": 13,
+        "handler_name": "system",
+        "command": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 103,
+      "category": "perm_bypass",
+      "name": "Handler 13/system cmd=3",
+      "description": "Pre-auth: System management with command 3",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:36.079789",
+      "details": {
+        "handler_id": 13,
+        "handler_name": "system",
+        "command": 3,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 104,
+      "category": "perm_bypass",
+      "name": "Handler 13/system cmd=4",
+      "description": "Pre-auth: System management with command 4",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:39.458099",
+      "details": {
+        "handler_id": 13,
+        "handler_name": "system",
+        "command": 4,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 105,
+      "category": "perm_bypass",
+      "name": "Handler 13/system cmd=5",
+      "description": "Pre-auth: System management with command 5",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:39.817919",
+      "details": {
+        "handler_id": 13,
+        "handler_name": "system",
+        "command": 5,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 106,
+      "category": "perm_bypass",
+      "name": "Handler 13/system cmd=6",
+      "description": "Pre-auth: System management with command 6",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:43.212221",
+      "details": {
+        "handler_id": 13,
+        "handler_name": "system",
+        "command": 6,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 107,
+      "category": "perm_bypass",
+      "name": "Handler 13/system cmd=7",
+      "description": "Pre-auth: System management with command 7",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:46.582535",
+      "details": {
+        "handler_id": 13,
+        "handler_name": "system",
+        "command": 7,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 108,
+      "category": "perm_bypass",
+      "name": "Handler 13/system cmd=0",
+      "description": "Pre-auth: System management with command 0",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:46.938357",
+      "details": {
+        "handler_id": 13,
+        "handler_name": "system",
+        "command": 0,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 109,
+      "category": "perm_bypass",
+      "name": "Handler 13/system cmd=255",
+      "description": "Pre-auth: System management with command 255",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:50.308671",
+      "details": {
+        "handler_id": 13,
+        "handler_name": "system",
+        "command": 255,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 110,
+      "category": "perm_bypass",
+      "name": "Handler 14/interface cmd=1",
+      "description": "Pre-auth: Interface management with command 1",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:53.670989",
+      "details": {
+        "handler_id": 14,
+        "handler_name": "interface",
+        "command": 1,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 111,
+      "category": "perm_bypass",
+      "name": "Handler 14/interface cmd=2",
+      "description": "Pre-auth: Interface management with command 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:54.014817",
+      "details": {
+        "handler_id": 14,
+        "handler_name": "interface",
+        "command": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 112,
+      "category": "perm_bypass",
+      "name": "Handler 14/interface cmd=3",
+      "description": "Pre-auth: Interface management with command 3",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:42:57.369139",
+      "details": {
+        "handler_id": 14,
+        "handler_name": "interface",
+        "command": 3,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 113,
+      "category": "perm_bypass",
+      "name": "Handler 14/interface cmd=4",
+      "description": "Pre-auth: Interface management with command 4",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:00.715465",
+      "details": {
+        "handler_id": 14,
+        "handler_name": "interface",
+        "command": 4,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 114,
+      "category": "perm_bypass",
+      "name": "Handler 14/interface cmd=5",
+      "description": "Pre-auth: Interface management with command 5",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:01.059293",
+      "details": {
+        "handler_id": 14,
+        "handler_name": "interface",
+        "command": 5,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 115,
+      "category": "perm_bypass",
+      "name": "Handler 14/interface cmd=6",
+      "description": "Pre-auth: Interface management with command 6",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:04.405619",
+      "details": {
+        "handler_id": 14,
+        "handler_name": "interface",
+        "command": 6,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 116,
+      "category": "perm_bypass",
+      "name": "Handler 14/interface cmd=7",
+      "description": "Pre-auth: Interface management with command 7",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:07.751945",
+      "details": {
+        "handler_id": 14,
+        "handler_name": "interface",
+        "command": 7,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 117,
+      "category": "perm_bypass",
+      "name": "Handler 14/interface cmd=0",
+      "description": "Pre-auth: Interface management with command 0",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:08.095773",
+      "details": {
+        "handler_id": 14,
+        "handler_name": "interface",
+        "command": 0,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 118,
+      "category": "perm_bypass",
+      "name": "Handler 14/interface cmd=255",
+      "description": "Pre-auth: Interface management with command 255",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:11.454093",
+      "details": {
+        "handler_id": 14,
+        "handler_name": "interface",
+        "command": 255,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 119,
+      "category": "perm_bypass",
+      "name": "Handler 15/ip cmd=1",
+      "description": "Pre-auth: IP configuration with command 1",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:14.812413",
+      "details": {
+        "handler_id": 15,
+        "handler_name": "ip",
+        "command": 1,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 120,
+      "category": "perm_bypass",
+      "name": "Handler 15/ip cmd=2",
+      "description": "Pre-auth: IP configuration with command 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:15.184227",
+      "details": {
+        "handler_id": 15,
+        "handler_name": "ip",
+        "command": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 121,
+      "category": "perm_bypass",
+      "name": "Handler 15/ip cmd=3",
+      "description": "Pre-auth: IP configuration with command 3",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:18.546545",
+      "details": {
+        "handler_id": 15,
+        "handler_name": "ip",
+        "command": 3,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 122,
+      "category": "perm_bypass",
+      "name": "Handler 15/ip cmd=4",
+      "description": "Pre-auth: IP configuration with command 4",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:21.904865",
+      "details": {
+        "handler_id": 15,
+        "handler_name": "ip",
+        "command": 4,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 123,
+      "category": "perm_bypass",
+      "name": "Handler 15/ip cmd=5",
+      "description": "Pre-auth: IP configuration with command 5",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:22.260687",
+      "details": {
+        "handler_id": 15,
+        "handler_name": "ip",
+        "command": 5,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 124,
+      "category": "perm_bypass",
+      "name": "Handler 15/ip cmd=6",
+      "description": "Pre-auth: IP configuration with command 6",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:25.619007",
+      "details": {
+        "handler_id": 15,
+        "handler_name": "ip",
+        "command": 6,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 125,
+      "category": "perm_bypass",
+      "name": "Handler 15/ip cmd=7",
+      "description": "Pre-auth: IP configuration with command 7",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:29.129251",
+      "details": {
+        "handler_id": 15,
+        "handler_name": "ip",
+        "command": 7,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 126,
+      "category": "perm_bypass",
+      "name": "Handler 15/ip cmd=0",
+      "description": "Pre-auth: IP configuration with command 0",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:29.489071",
+      "details": {
+        "handler_id": 15,
+        "handler_name": "ip",
+        "command": 0,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 127,
+      "category": "perm_bypass",
+      "name": "Handler 15/ip cmd=255",
+      "description": "Pre-auth: IP configuration with command 255",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:32.847391",
+      "details": {
+        "handler_id": 15,
+        "handler_name": "ip",
+        "command": 255,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 128,
+      "category": "perm_bypass",
+      "name": "Handler 24/user cmd=1",
+      "description": "Pre-auth: User management (sensitive) with command 1",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:36.205711",
+      "details": {
+        "handler_id": 24,
+        "handler_name": "user",
+        "command": 1,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 129,
+      "category": "perm_bypass",
+      "name": "Handler 24/user cmd=2",
+      "description": "Pre-auth: User management (sensitive) with command 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:36.553537",
+      "details": {
+        "handler_id": 24,
+        "handler_name": "user",
+        "command": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 130,
+      "category": "perm_bypass",
+      "name": "Handler 24/user cmd=3",
+      "description": "Pre-auth: User management (sensitive) with command 3",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:39.911857",
+      "details": {
+        "handler_id": 24,
+        "handler_name": "user",
+        "command": 3,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 131,
+      "category": "perm_bypass",
+      "name": "Handler 24/user cmd=4",
+      "description": "Pre-auth: User management (sensitive) with command 4",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:43.302161",
+      "details": {
+        "handler_id": 24,
+        "handler_name": "user",
+        "command": 4,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 132,
+      "category": "perm_bypass",
+      "name": "Handler 24/user cmd=5",
+      "description": "Pre-auth: User management (sensitive) with command 5",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:43.657983",
+      "details": {
+        "handler_id": 24,
+        "handler_name": "user",
+        "command": 5,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 133,
+      "category": "perm_bypass",
+      "name": "Handler 24/user cmd=6",
+      "description": "Pre-auth: User management (sensitive) with command 6",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:47.016303",
+      "details": {
+        "handler_id": 24,
+        "handler_name": "user",
+        "command": 6,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 134,
+      "category": "perm_bypass",
+      "name": "Handler 24/user cmd=7",
+      "description": "Pre-auth: User management (sensitive) with command 7",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:50.374623",
+      "details": {
+        "handler_id": 24,
+        "handler_name": "user",
+        "command": 7,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 135,
+      "category": "perm_bypass",
+      "name": "Handler 24/user cmd=0",
+      "description": "Pre-auth: User management (sensitive) with command 0",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:50.730445",
+      "details": {
+        "handler_id": 24,
+        "handler_name": "user",
+        "command": 0,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 136,
+      "category": "perm_bypass",
+      "name": "Handler 24/user cmd=255",
+      "description": "Pre-auth: User management (sensitive) with command 255",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:54.088765",
+      "details": {
+        "handler_id": 24,
+        "handler_name": "user",
+        "command": 255,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 137,
+      "category": "perm_bypass",
+      "name": "Handler 26/file cmd=1",
+      "description": "Pre-auth: File access with command 1",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:57.439089",
+      "details": {
+        "handler_id": 26,
+        "handler_name": "file",
+        "command": 1,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 138,
+      "category": "perm_bypass",
+      "name": "Handler 26/file cmd=2",
+      "description": "Pre-auth: File access with command 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:43:57.786915",
+      "details": {
+        "handler_id": 26,
+        "handler_name": "file",
+        "command": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 139,
+      "category": "perm_bypass",
+      "name": "Handler 26/file cmd=3",
+      "description": "Pre-auth: File access with command 3",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:01.137239",
+      "details": {
+        "handler_id": 26,
+        "handler_name": "file",
+        "command": 3,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 140,
+      "category": "perm_bypass",
+      "name": "Handler 26/file cmd=4",
+      "description": "Pre-auth: File access with command 4",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:04.487563",
+      "details": {
+        "handler_id": 26,
+        "handler_name": "file",
+        "command": 4,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 141,
+      "category": "perm_bypass",
+      "name": "Handler 26/file cmd=5",
+      "description": "Pre-auth: File access with command 5",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:04.831391",
+      "details": {
+        "handler_id": 26,
+        "handler_name": "file",
+        "command": 5,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 142,
+      "category": "perm_bypass",
+      "name": "Handler 26/file cmd=6",
+      "description": "Pre-auth: File access with command 6",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:08.181715",
+      "details": {
+        "handler_id": 26,
+        "handler_name": "file",
+        "command": 6,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 143,
+      "category": "perm_bypass",
+      "name": "Handler 26/file cmd=7",
+      "description": "Pre-auth: File access with command 7",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:11.528041",
+      "details": {
+        "handler_id": 26,
+        "handler_name": "file",
+        "command": 7,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 144,
+      "category": "perm_bypass",
+      "name": "Handler 26/file cmd=0",
+      "description": "Pre-auth: File access with command 0",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:11.871869",
+      "details": {
+        "handler_id": 26,
+        "handler_name": "file",
+        "command": 0,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 145,
+      "category": "perm_bypass",
+      "name": "Handler 26/file cmd=255",
+      "description": "Pre-auth: File access with command 255",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:15.230189",
+      "details": {
+        "handler_id": 26,
+        "handler_name": "file",
+        "command": 255,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 146,
+      "category": "perm_bypass",
+      "name": "Handler 33/certificate cmd=1",
+      "description": "Pre-auth: Certificate management with command 1",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:18.580513",
+      "details": {
+        "handler_id": 33,
+        "handler_name": "certificate",
+        "command": 1,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 147,
+      "category": "perm_bypass",
+      "name": "Handler 33/certificate cmd=2",
+      "description": "Pre-auth: Certificate management with command 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:18.944331",
+      "details": {
+        "handler_id": 33,
+        "handler_name": "certificate",
+        "command": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 148,
+      "category": "perm_bypass",
+      "name": "Handler 33/certificate cmd=3",
+      "description": "Pre-auth: Certificate management with command 3",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:22.302651",
+      "details": {
+        "handler_id": 33,
+        "handler_name": "certificate",
+        "command": 3,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 149,
+      "category": "perm_bypass",
+      "name": "Handler 33/certificate cmd=4",
+      "description": "Pre-auth: Certificate management with command 4",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:25.668967",
+      "details": {
+        "handler_id": 33,
+        "handler_name": "certificate",
+        "command": 4,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 150,
+      "category": "perm_bypass",
+      "name": "Handler 33/certificate cmd=5",
+      "description": "Pre-auth: Certificate management with command 5",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:26.012795",
+      "details": {
+        "handler_id": 33,
+        "handler_name": "certificate",
+        "command": 5,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 151,
+      "category": "perm_bypass",
+      "name": "Handler 33/certificate cmd=6",
+      "description": "Pre-auth: Certificate management with command 6",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:29.407097",
+      "details": {
+        "handler_id": 33,
+        "handler_name": "certificate",
+        "command": 6,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 152,
+      "category": "perm_bypass",
+      "name": "Handler 33/certificate cmd=7",
+      "description": "Pre-auth: Certificate management with command 7",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:32.797401",
+      "details": {
+        "handler_id": 33,
+        "handler_name": "certificate",
+        "command": 7,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 153,
+      "category": "perm_bypass",
+      "name": "Handler 33/certificate cmd=0",
+      "description": "Pre-auth: Certificate management with command 0",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:33.153223",
+      "details": {
+        "handler_id": 33,
+        "handler_name": "certificate",
+        "command": 0,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 154,
+      "category": "perm_bypass",
+      "name": "Handler 33/certificate cmd=255",
+      "description": "Pre-auth: Certificate management with command 255",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:36.511543",
+      "details": {
+        "handler_id": 33,
+        "handler_name": "certificate",
+        "command": 255,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 155,
+      "category": "perm_bypass",
+      "name": "Handler 37/log cmd=1",
+      "description": "Pre-auth: Log access with command 1",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:39.869863",
+      "details": {
+        "handler_id": 37,
+        "handler_name": "log",
+        "command": 1,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 156,
+      "category": "perm_bypass",
+      "name": "Handler 37/log cmd=2",
+      "description": "Pre-auth: Log access with command 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:40.225685",
+      "details": {
+        "handler_id": 37,
+        "handler_name": "log",
+        "command": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 157,
+      "category": "perm_bypass",
+      "name": "Handler 37/log cmd=3",
+      "description": "Pre-auth: Log access with command 3",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:43.595999",
+      "details": {
+        "handler_id": 37,
+        "handler_name": "log",
+        "command": 3,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 158,
+      "category": "perm_bypass",
+      "name": "Handler 37/log cmd=4",
+      "description": "Pre-auth: Log access with command 4",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:46.998297",
+      "details": {
+        "handler_id": 37,
+        "handler_name": "log",
+        "command": 4,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 159,
+      "category": "perm_bypass",
+      "name": "Handler 37/log cmd=5",
+      "description": "Pre-auth: Log access with command 5",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:47.346123",
+      "details": {
+        "handler_id": 37,
+        "handler_name": "log",
+        "command": 5,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 160,
+      "category": "perm_bypass",
+      "name": "Handler 37/log cmd=6",
+      "description": "Pre-auth: Log access with command 6",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:50.692449",
+      "details": {
+        "handler_id": 37,
+        "handler_name": "log",
+        "command": 6,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 161,
+      "category": "perm_bypass",
+      "name": "Handler 37/log cmd=7",
+      "description": "Pre-auth: Log access with command 7",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:54.054767",
+      "details": {
+        "handler_id": 37,
+        "handler_name": "log",
+        "command": 7,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 162,
+      "category": "perm_bypass",
+      "name": "Handler 37/log cmd=0",
+      "description": "Pre-auth: Log access with command 0",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:54.394597",
+      "details": {
+        "handler_id": 37,
+        "handler_name": "log",
+        "command": 0,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 163,
+      "category": "perm_bypass",
+      "name": "Handler 37/log cmd=255",
+      "description": "Pre-auth: Log access with command 255",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:44:57.736925",
+      "details": {
+        "handler_id": 37,
+        "handler_name": "log",
+        "command": 255,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 164,
+      "category": "perm_bypass",
+      "name": "Handler 44/ppp cmd=1",
+      "description": "Pre-auth: PPP/VPN secrets with command 1",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:01.099243",
+      "details": {
+        "handler_id": 44,
+        "handler_name": "ppp",
+        "command": 1,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 165,
+      "category": "perm_bypass",
+      "name": "Handler 44/ppp cmd=2",
+      "description": "Pre-auth: PPP/VPN secrets with command 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:01.495045",
+      "details": {
+        "handler_id": 44,
+        "handler_name": "ppp",
+        "command": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 166,
+      "category": "perm_bypass",
+      "name": "Handler 44/ppp cmd=3",
+      "description": "Pre-auth: PPP/VPN secrets with command 3",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:04.877353",
+      "details": {
+        "handler_id": 44,
+        "handler_name": "ppp",
+        "command": 3,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 167,
+      "category": "perm_bypass",
+      "name": "Handler 44/ppp cmd=4",
+      "description": "Pre-auth: PPP/VPN secrets with command 4",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:08.227677",
+      "details": {
+        "handler_id": 44,
+        "handler_name": "ppp",
+        "command": 4,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 168,
+      "category": "perm_bypass",
+      "name": "Handler 44/ppp cmd=5",
+      "description": "Pre-auth: PPP/VPN secrets with command 5",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:08.575503",
+      "details": {
+        "handler_id": 44,
+        "handler_name": "ppp",
+        "command": 5,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 169,
+      "category": "perm_bypass",
+      "name": "Handler 44/ppp cmd=6",
+      "description": "Pre-auth: PPP/VPN secrets with command 6",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:11.925827",
+      "details": {
+        "handler_id": 44,
+        "handler_name": "ppp",
+        "command": 6,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 170,
+      "category": "perm_bypass",
+      "name": "Handler 44/ppp cmd=7",
+      "description": "Pre-auth: PPP/VPN secrets with command 7",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:15.272153",
+      "details": {
+        "handler_id": 44,
+        "handler_name": "ppp",
+        "command": 7,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 171,
+      "category": "perm_bypass",
+      "name": "Handler 44/ppp cmd=0",
+      "description": "Pre-auth: PPP/VPN secrets with command 0",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:15.615981",
+      "details": {
+        "handler_id": 44,
+        "handler_name": "ppp",
+        "command": 0,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 172,
+      "category": "perm_bypass",
+      "name": "Handler 44/ppp cmd=255",
+      "description": "Pre-auth: PPP/VPN secrets with command 255",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:18.974301",
+      "details": {
+        "handler_id": 44,
+        "handler_name": "ppp",
+        "command": 255,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 173,
+      "category": "type_confusion",
+      "name": "Type: string_as_u32_sys_to \u2192 login",
+      "description": "String for SYS_TO (expects u32) \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:22.332621",
+      "details": {
+        "test": "string_as_u32_sys_to",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 174,
+      "category": "type_confusion",
+      "name": "Type: u32_as_string_username \u2192 login",
+      "description": "u32 for username field (expects string) \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:25.690941",
+      "details": {
+        "test": "u32_as_string_username",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 175,
+      "category": "type_confusion",
+      "name": "Type: max_u32_handler \u2192 login",
+      "description": "Max u32 for handler ID \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:29.053259",
+      "details": {
+        "test": "max_u32_handler",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 176,
+      "category": "type_confusion",
+      "name": "Type: negative_handler \u2192 login",
+      "description": "Negative handler ID (signed overflow) \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:32.411579",
+      "details": {
+        "test": "negative_handler",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 177,
+      "category": "type_confusion",
+      "name": "Type: zero_handler \u2192 login",
+      "description": "Zero handler ID \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:35.769899",
+      "details": {
+        "test": "zero_handler",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 178,
+      "category": "type_confusion",
+      "name": "Type: raw_as_u32 \u2192 login",
+      "description": "Raw bytes for SYS_TO field \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:39.128219",
+      "details": {
+        "test": "raw_as_u32",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 179,
+      "category": "type_confusion",
+      "name": "Type: empty_username \u2192 login",
+      "description": "Empty string username \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:42.486539",
+      "details": {
+        "test": "empty_username",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 180,
+      "category": "type_confusion",
+      "name": "Type: long_username \u2192 login",
+      "description": "10KB username string \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:42.830367",
+      "details": {
+        "test": "long_username",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 181,
+      "category": "type_confusion",
+      "name": "Type: null_in_username \u2192 login",
+      "description": "Username with null byte \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:46.188687",
+      "details": {
+        "test": "null_in_username",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 182,
+      "category": "type_confusion",
+      "name": "Type: bool_as_handler \u2192 login",
+      "description": "Boolean for handler ID \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:49.539011",
+      "details": {
+        "test": "bool_as_handler",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 183,
+      "category": "type_confusion",
+      "name": "Type: u64_handler \u2192 login",
+      "description": "u64 for handler ID (expects u32) \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:49.878841",
+      "details": {
+        "test": "u64_handler",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 184,
+      "category": "type_confusion",
+      "name": "Type: nested_message \u2192 login",
+      "description": "Nested M2 message as username \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:53.221169",
+      "details": {
+        "test": "nested_message",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 185,
+      "category": "type_confusion",
+      "name": "Type: format_string_username \u2192 login",
+      "description": "Format string in username \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:56.579489",
+      "details": {
+        "test": "format_string_username",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 186,
+      "category": "type_confusion",
+      "name": "Type: sqli_username \u2192 login",
+      "description": "SQL injection in username \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:45:59.941807",
+      "details": {
+        "test": "sqli_username",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 187,
+      "category": "type_confusion",
+      "name": "Type: binary_garbage_username \u2192 login",
+      "description": "Binary garbage as username \u2192 handler 2",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:46:03.304125",
+      "details": {
+        "test": "binary_garbage_username",
+        "handler": "login",
+        "handler_id": 2,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 188,
+      "category": "type_confusion",
+      "name": "Type: string_as_u32_sys_to \u2192 system",
+      "description": "String for SYS_TO (expects u32) \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:46:06.682435",
+      "details": {
+        "test": "string_as_u32_sys_to",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 189,
+      "category": "type_confusion",
+      "name": "Type: u32_as_string_username \u2192 system",
+      "description": "u32 for username field (expects string) \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:46:10.028761",
+      "details": {
+        "test": "u32_as_string_username",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 190,
+      "category": "type_confusion",
+      "name": "Type: max_u32_handler \u2192 system",
+      "description": "Max u32 for handler ID \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:46:13.387081",
+      "details": {
+        "test": "max_u32_handler",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 191,
+      "category": "type_confusion",
+      "name": "Type: negative_handler \u2192 system",
+      "description": "Negative handler ID (signed overflow) \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:46:16.773387",
+      "details": {
+        "test": "negative_handler",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 192,
+      "category": "type_confusion",
+      "name": "Type: zero_handler \u2192 system",
+      "description": "Zero handler ID \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:46:20.159693",
+      "details": {
+        "test": "zero_handler",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 193,
+      "category": "type_confusion",
+      "name": "Type: raw_as_u32 \u2192 system",
+      "description": "Raw bytes for SYS_TO field \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:46:23.522011",
+      "details": {
+        "test": "raw_as_u32",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 194,
+      "category": "type_confusion",
+      "name": "Type: empty_username \u2192 system",
+      "description": "Empty string username \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:46:26.880331",
+      "details": {
+        "test": "empty_username",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 195,
+      "category": "type_confusion",
+      "name": "Type: long_username \u2192 system",
+      "description": "10KB username string \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:46:27.256143",
+      "details": {
+        "test": "long_username",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 196,
+      "category": "type_confusion",
+      "name": "Type: null_in_username \u2192 system",
+      "description": "Username with null byte \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:46:30.618461",
+      "details": {
+        "test": "null_in_username",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 197,
+      "category": "type_confusion",
+      "name": "Type: bool_as_handler \u2192 system",
+      "description": "Boolean for handler ID \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:46:33.984777",
+      "details": {
+        "test": "bool_as_handler",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 198,
+      "category": "type_confusion",
+      "name": "Type: u64_handler \u2192 system",
+      "description": "u64 for handler ID (expects u32) \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:46:34.340599",
+      "details": {
+        "test": "u64_handler",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 199,
+      "category": "type_confusion",
+      "name": "Type: nested_message \u2192 system",
+      "description": "Nested M2 message as username \u2192 handler 13",
+      "result": "No response (connection closed/reset)",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:48:28.971259",
+      "details": {
+        "test": "nested_message",
+        "handler": "system"
+      }
+    },
+    {
+      "id": 200,
+      "category": "type_confusion",
+      "name": "Type: format_string_username \u2192 system",
+      "description": "Format string in username \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:48:32.329578",
+      "details": {
+        "test": "format_string_username",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 201,
+      "category": "type_confusion",
+      "name": "Type: sqli_username \u2192 system",
+      "description": "SQL injection in username \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:48:35.691896",
+      "details": {
+        "test": "sqli_username",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 202,
+      "category": "type_confusion",
+      "name": "Type: binary_garbage_username \u2192 system",
+      "description": "Binary garbage as username \u2192 handler 13",
+      "result": "Response: 0 bytes, tlvs=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:48:39.042220",
+      "details": {
+        "test": "binary_garbage_username",
+        "handler": "system",
+        "handler_id": 13,
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 203,
+      "category": "ec_srp5",
+      "name": "Auth handshake capture (5 attempts)",
+      "description": "Capture 5 EC-SRP5 authentication handshake initiations",
+      "result": "Captured 5 responses",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:49:07.623920",
+      "details": {
+        "handshakes": [
+          {
+            "attempt": 1,
+            "status": "timeout"
+          },
+          {
+            "attempt": 2,
+            "status": "timeout"
+          },
+          {
+            "attempt": 3,
+            "status": "timeout"
+          },
+          {
+            "attempt": 4,
+            "status": "timeout"
+          },
+          {
+            "attempt": 5,
+            "status": "timeout"
+          }
+        ]
+      }
+    },
+    {
+      "id": 204,
+      "category": "ec_srp5",
+      "name": "EC point data",
+      "description": "Search for EC point data in handshake",
+      "result": "No raw TLVs >= 32 bytes found in handshake responses",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:49:07.623920"
+    },
+    {
+      "id": 205,
+      "category": "ec_srp5",
+      "name": "Malformed EC: zero_point",
+      "description": "Send All-zero EC point to login handler",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:49:10.938261",
+      "details": {
+        "name": "zero_point",
+        "point_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 206,
+      "category": "ec_srp5",
+      "name": "Malformed EC: one_point",
+      "description": "Send EC point = (1, 0) to login handler",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:49:14.244607",
+      "details": {
+        "name": "one_point",
+        "point_hex": "0100000000000000000000000000000000000000000000000000000000000000",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 207,
+      "category": "ec_srp5",
+      "name": "Malformed EC: max_point",
+      "description": "Send All-ones EC point to login handler",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:49:17.550953",
+      "details": {
+        "name": "max_point",
+        "point_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 208,
+      "category": "ec_srp5",
+      "name": "Malformed EC: small_order",
+      "description": "Send Potential small subgroup point to login handler",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:49:20.861297",
+      "details": {
+        "name": "small_order",
+        "point_hex": "0000000000000000000000000000000001000000000000000000000000000000",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 209,
+      "category": "ec_srp5",
+      "name": "Malformed EC: identity",
+      "description": "Send EC identity point (33 bytes, compressed) to login handler",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:49:24.175639",
+      "details": {
+        "name": "identity",
+        "point_hex": "000000000000000000000000000000000000000000000000000000000000000000",
+        "response_size": 0,
+        "parsed": {
+          "raw_len": 0,
+          "raw_hex": ""
+        }
+      }
+    },
+    {
+      "id": 210,
+      "category": "ec_srp5",
+      "name": "Username enumeration via Winbox",
+      "description": "Compare auth timing/response for valid vs invalid usernames",
+      "result": "Valid avg: 3306.35ms, Invalid avg: 3311.94ms, diff: 5.60ms, sizes_differ: False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:49:57.806815",
+      "details": {
+        "valid_times": [
+          {
+            "time_ms": 3306.35,
+            "resp_size": 0
+          },
+          {
+            "time_ms": 3310.34,
+            "resp_size": 0
+          },
+          {
+            "time_ms": 3298.35,
+            "resp_size": 0
+          },
+          {
+            "time_ms": 3310.34,
+            "resp_size": 0
+          },
+          {
+            "time_ms": 3306.35,
+            "resp_size": 0
+          }
+        ],
+        "invalid_times": [
+          {
+            "time_ms": 3306.35,
+            "resp_size": 0
+          },
+          {
+            "time_ms": 3306.35,
+            "resp_size": 0
+          },
+          {
+            "time_ms": 3306.35,
+            "resp_size": 0
+          },
+          {
+            "time_ms": 3310.34,
+            "resp_size": 0
+          },
+          {
+            "time_ms": 3330.33,
+            "resp_size": 0
+          }
+        ],
+        "valid_avg_ms": 3306.35,
+        "invalid_avg_ms": 3311.94,
+        "timing_diff_ms": 5.6,
+        "size_differs": false,
+        "valid_sizes": [
+          0
+        ],
+        "invalid_sizes": [
+          0
+        ]
+      }
+    },
+    {
+      "id": 211,
+      "category": "session_predict",
+      "name": "Collected 0 session-like values",
+      "description": "Collect potential session identifiers from handshake responses",
+      "result": "Found 0 candidate values from 20 handshakes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:51:07.012195",
+      "details": {
+        "session_data": []
+      }
+    },
+    {
+      "id": 212,
+      "category": "session_predict",
+      "name": "Session prediction risk summary",
+      "description": "Overall assessment of Winbox session predictability",
+      "result": "Analyzed 0 values across 0 keys",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:51:07.012195",
+      "details": {
+        "total_values": 0
+      }
+    }
+  ],
+  "findings": []
+}

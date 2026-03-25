@@ -1,0 +1,2015 @@
+{
+  "metadata": {
+    "script": "ros_api_boofuzz.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 7,
+    "start_time": "2026-02-16T00:54:53.815624",
+    "end_time": "2026-02-16T00:59:04.502227",
+    "total_tests": 125,
+    "anomalies": 40,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "53m54s",
+    "router_log_count": 24,
+    "router_interesting_events": 0,
+    "final_health": {
+      "alive": true,
+      "uptime": "58m5s",
+      "cpu_load": "1",
+      "free_memory": "837623808",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "word_length",
+      "name": "boundary_correct_1byte_near_max_0x7E",
+      "description": "Correctly encoded word at length boundary 1byte_near_max_0x7E (126 bytes)",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:54:54.127468",
+      "details": {
+        "payload_size": 128,
+        "payload_hex": "7e2f4141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 2,
+      "category": "word_length",
+      "name": "boundary_correct_1byte_max_0x7F",
+      "description": "Correctly encoded word at length boundary 1byte_max_0x7F (127 bytes)",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:54:54.431316",
+      "details": {
+        "payload_size": 129,
+        "payload_hex": "7f2f4141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 3,
+      "category": "word_length",
+      "name": "boundary_correct_2byte_min_0x80",
+      "description": "Correctly encoded word at length boundary 2byte_min_0x80 (128 bytes)",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:54:54.735164",
+      "details": {
+        "payload_size": 131,
+        "payload_hex": "80802f41414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 4,
+      "category": "word_length",
+      "name": "boundary_correct_2byte_0x81",
+      "description": "Correctly encoded word at length boundary 2byte_0x81 (129 bytes)",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:54:55.031016",
+      "details": {
+        "payload_size": 132,
+        "payload_hex": "80812f41414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 5,
+      "category": "word_length",
+      "name": "boundary_correct_2byte_near_max_0x3FFE",
+      "description": "Correctly encoded word at length boundary 2byte_near_max_0x3FFE (16382 bytes)",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:54:55.326868",
+      "details": {
+        "payload_size": 16385,
+        "payload_hex": "bffe2f41414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 6,
+      "category": "word_length",
+      "name": "boundary_correct_2byte_max_0x3FFF",
+      "description": "Correctly encoded word at length boundary 2byte_max_0x3FFF (16383 bytes)",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:54:55.622720",
+      "details": {
+        "payload_size": 16386,
+        "payload_hex": "bfff2f41414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 7,
+      "category": "word_length",
+      "name": "boundary_correct_3byte_min_0x4000",
+      "description": "Correctly encoded word at length boundary 3byte_min_0x4000 (16384 bytes)",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:54:55.918572",
+      "details": {
+        "payload_size": 16388,
+        "payload_hex": "c040002f414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 8,
+      "category": "word_length",
+      "name": "boundary_correct_3byte_0x4001",
+      "description": "Correctly encoded word at length boundary 3byte_0x4001 (16385 bytes)",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:54:56.214424",
+      "details": {
+        "payload_size": 16389,
+        "payload_hex": "c040012f414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 9,
+      "category": "word_length",
+      "name": "boundary_truncated_3byte_near_max_0x1FFFFE",
+      "description": "Truncated word at length boundary 3byte_near_max_0x1FFFFE (claims 2097150, sends 1025)",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:54:56.514274",
+      "details": {
+        "payload_size": 1029,
+        "payload_hex": "dffffe2f414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 10,
+      "category": "word_length",
+      "name": "boundary_truncated_3byte_max_0x1FFFFF",
+      "description": "Truncated word at length boundary 3byte_max_0x1FFFFF (claims 2097151, sends 1025)",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:54:56.818122",
+      "details": {
+        "payload_size": 1029,
+        "payload_hex": "dfffff2f414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 11,
+      "category": "word_length",
+      "name": "boundary_truncated_4byte_min_0x200000",
+      "description": "Truncated word at length boundary 4byte_min_0x200000 (claims 2097152, sends 1025)",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:54:57.125968",
+      "details": {
+        "payload_size": 1030,
+        "payload_hex": "e02000002f4141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 12,
+      "category": "word_length",
+      "name": "zero_length_word",
+      "description": "Word with encoded length=0 (empty word before terminator)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:02.435312",
+      "details": {
+        "payload_size": 2,
+        "payload_hex": "0000",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 13,
+      "category": "word_length",
+      "name": "length_mismatch_100_10",
+      "description": "Length says 100 but only 10 bytes of content sent",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:07.744656",
+      "details": {
+        "payload_size": 12,
+        "payload_hex": "644141414141414141414100",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 14,
+      "category": "word_length",
+      "name": "length_mismatch_10_100",
+      "description": "Length says 10 but 100 bytes of content sent",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:13.054000",
+      "details": {
+        "payload_size": 102,
+        "payload_hex": "0a414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 15,
+      "category": "word_length",
+      "name": "max_5byte_length",
+      "description": "5-byte length encoding claiming ~4GB with only 10 bytes of content",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:13.357848",
+      "details": {
+        "payload_size": 16,
+        "payload_hex": "f0ffffffff4141414141414141414100",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 16,
+      "category": "word_length",
+      "name": "invalid_length_byte_0xf1",
+      "description": "Invalid length prefix byte 0xF1",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:18.671191",
+      "details": {
+        "payload_size": 16,
+        "payload_hex": "f1000000004141414141414141414100",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 17,
+      "category": "word_length",
+      "name": "invalid_length_byte_0xf8",
+      "description": "Invalid length prefix byte 0xF8",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:18.975039",
+      "details": {
+        "payload_size": 16,
+        "payload_hex": "f8000000004141414141414141414100",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 18,
+      "category": "word_length",
+      "name": "invalid_length_byte_0xfc",
+      "description": "Invalid length prefix byte 0xFC",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:19.278887",
+      "details": {
+        "payload_size": 16,
+        "payload_hex": "fc000000004141414141414141414100",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 19,
+      "category": "word_length",
+      "name": "invalid_length_byte_0xfe",
+      "description": "Invalid length prefix byte 0xFE",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:19.582735",
+      "details": {
+        "payload_size": 16,
+        "payload_hex": "fe000000004141414141414141414100",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 20,
+      "category": "word_length",
+      "name": "invalid_length_byte_0xff",
+      "description": "Invalid length prefix byte 0xFF",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:19.878587",
+      "details": {
+        "payload_size": 16,
+        "payload_hex": "ff000000004141414141414141414100",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 21,
+      "category": "word_length",
+      "name": "partial_2byte_encoding",
+      "description": "Partial 2-byte length encoding (missing second byte)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:25.183933",
+      "details": {
+        "payload_size": 1,
+        "payload_hex": "80",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 22,
+      "category": "word_length",
+      "name": "partial_3byte_encoding",
+      "description": "Partial 3-byte length encoding (missing third byte)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:30.493277",
+      "details": {
+        "payload_size": 2,
+        "payload_hex": "c040",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 23,
+      "category": "word_length",
+      "name": "partial_4byte_encoding",
+      "description": "Partial 4-byte length encoding (missing fourth byte)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:35.798623",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "e02000",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 24,
+      "category": "word_length",
+      "name": "partial_5byte_encoding",
+      "description": "Partial 5-byte length encoding (missing fifth byte)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:41.111965",
+      "details": {
+        "payload_size": 4,
+        "payload_hex": "f0100000",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 25,
+      "category": "word_length",
+      "name": "signbit_length",
+      "description": "Length with high bit set in value portion (potential signed int confusion)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:41.407817",
+      "details": {
+        "payload_size": 16,
+        "payload_hex": "f0800000004141414141414141414100",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 26,
+      "category": "word_length",
+      "name": "all_ff_length",
+      "description": "All 0xFF bytes in length field",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:41.703669",
+      "details": {
+        "payload_size": 16,
+        "payload_hex": "ffffffffff4141414141414141414100",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 27,
+      "category": "word_length",
+      "name": "cascaded_lengths",
+      "description": "Multiple length encodings cascaded with no content between",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:47.005018",
+      "details": {
+        "payload_size": 4,
+        "payload_hex": "05050500",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 28,
+      "category": "word_length",
+      "name": "single_byte_word_00",
+      "description": "Single-byte word containing 0x00",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:55:47.308866",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "010000",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 29,
+      "category": "word_length",
+      "name": "single_byte_word_01",
+      "description": "Single-byte word containing 0x01",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:55:47.620710",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "010100",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 30,
+      "category": "word_length",
+      "name": "single_byte_word_ff",
+      "description": "Single-byte word containing 0xff",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:55:47.924558",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "01ff00",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 31,
+      "category": "word_length",
+      "name": "single_byte_word_2f",
+      "description": "Single-byte word containing 0x2f",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:55:48.232404",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "012f00",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 32,
+      "category": "word_length",
+      "name": "single_byte_word_3d",
+      "description": "Single-byte word containing 0x3d",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:55:48.576232",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "013d00",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 33,
+      "category": "sentence_structure",
+      "name": "multiple_terminators_10",
+      "description": "10 consecutive zero bytes (sentence terminators)",
+      "result": "Response: 39 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:55:48.884078",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "00000000000000000000",
+        "response_size": 39,
+        "response_preview": "0621666174616c1e746f6f206d616e7920636f6d6d616e6473206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 34,
+      "category": "sentence_structure",
+      "name": "multiple_terminators_100",
+      "description": "100 consecutive zero bytes",
+      "result": "Response: 39 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:55:49.187926",
+      "details": {
+        "payload_size": 100,
+        "payload_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "response_size": 39,
+        "response_preview": "0621666174616c1e746f6f206d616e7920636f6d6d616e6473206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 35,
+      "category": "sentence_structure",
+      "name": "no_terminator",
+      "description": "Valid command word with no sentence terminator",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:55:54.493272",
+      "details": {
+        "payload_size": 23,
+        "payload_hex": "162f73797374656d2f7265736f757263652f7072696e74",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 36,
+      "category": "sentence_structure",
+      "name": "100_words",
+      "description": "Sentence with 100 attribute words",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:55:54.797120",
+      "details": {
+        "payload_size": 1504,
+        "payload_hex": "162f73797374656d2f7265736f757263652f7072696e740c3d6b6579303d76616c7565300c3d6b6579313d76616c7565310c3d6b6579323d76616c7565320c3d6b6579333d76616c7565330c3d6b6579343d76616c7565340c3d6b6579353d76616c7565",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 37,
+      "category": "sentence_structure",
+      "name": "500_words",
+      "description": "Sentence with 500 attribute words",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:55:55.100968",
+      "details": {
+        "payload_size": 5288,
+        "payload_hex": "062f6c6f67696e063d6b303d7630063d6b313d7631063d6b323d7632063d6b333d7633063d6b343d7634063d6b353d7635063d6b363d7636063d6b373d7637063d6b383d7638063d6b393d7639083d6b31303d763130083d6b31313d763131083d6b3132",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 38,
+      "category": "sentence_structure",
+      "name": "empty_first_word",
+      "description": "Sentence starting with empty word (immediate terminator then another)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:00.410312",
+      "details": {
+        "payload_size": 2,
+        "payload_hex": "0000",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 39,
+      "category": "sentence_structure",
+      "name": "only_terminators_5",
+      "description": "5 empty sentences (just terminators)",
+      "result": "Response: 39 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:00.714160",
+      "details": {
+        "payload_size": 5,
+        "payload_hex": "0000000000",
+        "response_size": 39,
+        "response_preview": "0621666174616c1e746f6f206d616e7920636f6d6d616e6473206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 40,
+      "category": "sentence_structure",
+      "name": "duplicate_commands",
+      "description": "Sentence with duplicate /login command words",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:06.023504",
+      "details": {
+        "payload_size": 22,
+        "payload_hex": "062f6c6f67696e062f6c6f67696e062f6c6f67696e00",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d626336636566663262633730633533326562656166343738643561343831356200",
+        "is_error": false
+      }
+    },
+    {
+      "id": 41,
+      "category": "sentence_structure",
+      "name": "two_sentences",
+      "description": "Two complete sentences back-to-back",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:06.323354",
+      "details": {
+        "payload_size": 32,
+        "payload_hex": "062f6c6f67696e00162f73797374656d2f7265736f757263652f7072696e7400",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 42,
+      "category": "sentence_structure",
+      "name": "10_rapid_sentences",
+      "description": "10 /system/resource/print sentences in one TCP send",
+      "result": "Response: 237 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:06.619206",
+      "details": {
+        "payload_size": 240,
+        "payload_hex": "162f73797374656d2f7265736f757263652f7072696e7400162f73797374656d2f7265736f757263652f7072696e7400162f73797374656d2f7265736f757263652f7072696e7400162f73797374656d2f7265736f757263652f7072696e7400162f7379",
+        "response_size": 237,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e000621666174616c0d6e6f74206c6f6767656420696e000621666174616c0d6e6f74206c6f6767656420696e000621666174616c0d6e6f74206c6f6767656420696e000621666174616c1e746f6f206d616e7920636f6d6d616e6473206265666f7265206c6f67696e000621666174616c0d6e6f74206c6f6767656420696e0006",
+        "is_error": false
+      }
+    },
+    {
+      "id": 43,
+      "category": "sentence_structure",
+      "name": "50_rapid_sentences",
+      "description": "50 sentences in one TCP send",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:06.915058",
+      "details": {
+        "payload_size": 1200,
+        "payload_hex": "162f73797374656d2f7265736f757263652f7072696e7400162f73797374656d2f7265736f757263652f7072696e7400162f73797374656d2f7265736f757263652f7072696e7400162f73797374656d2f7265736f757263652f7072696e7400162f7379",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 44,
+      "category": "sentence_structure",
+      "name": "interleaved_valid_invalid",
+      "description": "Interleaved valid sentences and garbage data",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:07.210910",
+      "details": {
+        "payload_size": 280,
+        "payload_hex": "162f73797374656d2f7265736f757263652f7072696e7400ffffff00162f73797374656d2f7265736f757263652f7072696e7400ffffff00162f73797374656d2f7265736f757263652f7072696e7400ffffff00162f73797374656d2f7265736f757263",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 45,
+      "category": "sentence_structure",
+      "name": "many_empty_words",
+      "description": "Command followed by 20 empty-string words",
+      "result": "Response: 61 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:07.506762",
+      "details": {
+        "payload_size": 44,
+        "payload_hex": "162f73797374656d2f7265736f757263652f7072696e74000000000000000000000000000000000000000000",
+        "response_size": 61,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e000621666174616c1e746f6f206d616e7920636f6d6d616e6473206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 46,
+      "category": "sentence_structure",
+      "name": "10KB_single_word",
+      "description": "Single word of 10KB as command path",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:07.802614",
+      "details": {
+        "payload_size": 10244,
+        "payload_hex": "a8012f41414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 47,
+      "category": "sentence_structure",
+      "name": "whitespace_words",
+      "description": "Sentence with whitespace-only words",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:08.102464",
+      "details": {
+        "payload_size": 14,
+        "payload_hex": "0320202003090909040d0a0d0a00",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 48,
+      "category": "sentence_structure",
+      "name": "all_byte_values",
+      "description": "Word containing all 256 byte values (0x00-0xFF)",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:08.402314",
+      "details": {
+        "payload_size": 259,
+        "payload_hex": "8100000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f6061",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 49,
+      "category": "sentence_structure",
+      "name": "cancel_mid_sentence",
+      "description": "Send partial sentence then close connection",
+      "result": "Connection closed without terminator",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:09.401814",
+      "details": {
+        "partial_size": 23
+      }
+    },
+    {
+      "id": 50,
+      "category": "sentence_structure",
+      "name": "slow_sentence_5s",
+      "description": "Send command word, wait 5 seconds, then send terminator",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:15.406811",
+      "details": {
+        "delay_seconds": 5,
+        "response_size": 22,
+        "response_hex": "0621666174616c0d6e6f74206c6f6767656420696e00"
+      }
+    },
+    {
+      "id": 51,
+      "category": "sentence_structure",
+      "name": "fragmented_word",
+      "description": "Send length bytes, wait 1s, then send content",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:16.910059",
+      "details": {
+        "response_size": 22
+      }
+    },
+    {
+      "id": 52,
+      "category": "preauth_binary",
+      "name": "random_binary_10B",
+      "description": "Send 10 bytes of random binary data before any login",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:17.209909",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "fd04147aec1d793345b4",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 53,
+      "category": "preauth_binary",
+      "name": "random_binary_50B",
+      "description": "Send 50 bytes of random binary data before any login",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:22.511257",
+      "details": {
+        "payload_size": 50,
+        "payload_hex": "4503120715ee7c5ffa09271c39edb578acd968ccbae0c54ca7b6e4fc7e7602e15dda658bce7eeab7a90b8ffd311f3d344a01",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 54,
+      "category": "preauth_binary",
+      "name": "random_binary_100B",
+      "description": "Send 100 bytes of random binary data before any login",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:22.807109",
+      "details": {
+        "payload_size": 100,
+        "payload_hex": "e7546aec6eaa69c75d09dfa7144caae918a25943993e8352e49c6426dffb99f231800df46cfab62ce1595d2b7f15b0b5205f8c595d055fe2e19f0a77e5e8467ee548921ce0c15159ed8d7398a564092d05459538b044ea0241e0feaccab6dd63704c2356",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 55,
+      "category": "preauth_binary",
+      "name": "random_binary_500B",
+      "description": "Send 500 bytes of random binary data before any login",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:28.108457",
+      "details": {
+        "payload_size": 500,
+        "payload_hex": "13d125651dcfc61eb876d28dee3ac55934ab8b4a160416d7ebc4886c8ae05524d9f6c041c1a376b43bf4bca445ea52b9bc1c4712380d09cfc09a33ccea6df6b1264a1f9de9c678bf4e8de1742564cbe20ef51fb738e3edaf500973ded791b680893e1eb7",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 56,
+      "category": "preauth_binary",
+      "name": "random_binary_1000B",
+      "description": "Send 1000 bytes of random binary data before any login",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:33.417801",
+      "details": {
+        "payload_size": 1000,
+        "payload_hex": "267b404f76d2c86cda0bf399ea82b69a5fbcfd791f2867fdf797095f541def9a09aa4a3077b424ad1d4c510325d3e2b3fea2d07fecf74a7db19de60eeb5340381d21ce05ffa5d5639c642807bdf72371f0e0474161a1d8565ddaebe7a8696ff24434a00c",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 57,
+      "category": "preauth_binary",
+      "name": "random_binary_5000B",
+      "description": "Send 5000 bytes of random binary data before any login",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:33.713653",
+      "details": {
+        "payload_size": 5000,
+        "payload_hex": "59e01cd7941c3040092d64caccae78d9ad92a7ee529f9316d477a033b11215a244e9d2d7dc616e1c8bcad94f006b962da7640a21e77ccce5626657c70e2528394289a8df5dd0e21be0f97f398b7c737781edd456bf16aa24ef8944b2d62b07f8585aa01f",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 58,
+      "category": "preauth_binary",
+      "name": "random_binary_10000B",
+      "description": "Send 10000 bytes of random binary data before any login",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:34.021499",
+      "details": {
+        "payload_size": 10000,
+        "payload_hex": "d8824c9054cfea00b33a2feec3229251b04a256eef86d6c3b139d1fc7192a0ac4eb50cda15f34c2c1c228d458753f48aa1021e2b782238fffd7457dde1ade056bfe4e680f3ead57ff80976e2fea96e74e2263f336209a303012e07c67dd34f127b567855",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 59,
+      "category": "preauth_binary",
+      "name": "all_zeros_100B",
+      "description": "Send 100 zero bytes",
+      "result": "Response: 39 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:34.325347",
+      "details": {
+        "payload_size": 100,
+        "payload_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "response_size": 39,
+        "response_preview": "0621666174616c1e746f6f206d616e7920636f6d6d616e6473206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 60,
+      "category": "preauth_binary",
+      "name": "all_zeros_1000B",
+      "description": "Send 1000 zero bytes",
+      "result": "Response: 39 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:34.629195",
+      "details": {
+        "payload_size": 1000,
+        "payload_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "response_size": 39,
+        "response_preview": "0621666174616c1e746f6f206d616e7920636f6d6d616e6473206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 61,
+      "category": "preauth_binary",
+      "name": "all_zeros_10000B",
+      "description": "Send 10000 zero bytes",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:34.933043",
+      "details": {
+        "payload_size": 10000,
+        "payload_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 62,
+      "category": "preauth_binary",
+      "name": "all_ff_100B",
+      "description": "Send 100 0xFF bytes",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:35.236891",
+      "details": {
+        "payload_size": 100,
+        "payload_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 63,
+      "category": "preauth_binary",
+      "name": "all_ff_1000B",
+      "description": "Send 1000 0xFF bytes",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:35.540739",
+      "details": {
+        "payload_size": 1000,
+        "payload_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 64,
+      "category": "preauth_binary",
+      "name": "all_ff_10000B",
+      "description": "Send 10000 0xFF bytes",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:35.848585",
+      "details": {
+        "payload_size": 10000,
+        "payload_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 65,
+      "category": "preauth_binary",
+      "name": "deadbeef_10KB",
+      "description": "10KB of repeating 0xDEADBEEF pattern",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:36.152433",
+      "details": {
+        "payload_size": 10000,
+        "payload_hex": "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 66,
+      "category": "preauth_binary",
+      "name": "incrementing_1000B",
+      "description": "1000 bytes of incrementing values (0x00-0xFF repeating)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:36.456281",
+      "details": {
+        "payload_size": 1000,
+        "payload_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f60616263",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 67,
+      "category": "preauth_binary",
+      "name": "http_on_api_port",
+      "description": "Send HTTP GET request to API port (protocol confusion)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:41.761628",
+      "details": {
+        "payload_size": 36,
+        "payload_hex": "474554202f20485454502f312e310d0a486f73743a2031302e302e302e3131300d0a0d0a",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 68,
+      "category": "preauth_binary",
+      "name": "winbox_m2_on_api_port",
+      "description": "Send Winbox M2 frame to API port (protocol confusion)",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:47.074970",
+      "details": {
+        "payload_size": 22,
+        "payload_hex": "00140101010101010101010101010101010101010101",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 69,
+      "category": "preauth_binary",
+      "name": "ssh_banner_on_api_port",
+      "description": "Send SSH banner to API port",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:52.380316",
+      "details": {
+        "payload_size": 21,
+        "payload_hex": "5353482d322e302d4f70656e5353485f382e300d0a",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 70,
+      "category": "preauth_binary",
+      "name": "partial_length_then_garbage",
+      "description": "5-byte length prefix (0xF0) followed by 100 random bytes",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:52.684164",
+      "details": {
+        "payload_size": 101,
+        "payload_hex": "f07e2a2bb6001ec712a6607ee229e6d0f5626d5152c2bd56ca4b56cd062df23dca5116a751fb39df7e196985ce765704c72c28aa9dc8f6452eb7ad47f8c58870b50c0a3b277007fa907656d77bfdd122a4e5159ae9193750b0d0ee83afca90cecf69d62f",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 71,
+      "category": "preauth_binary",
+      "name": "valid_structure_garbage_content",
+      "description": "Properly structured word with random content",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:56:52.988012",
+      "details": {
+        "payload_size": 52,
+        "payload_hex": "32b6b4316410a25f919d74306bcc4060919f2d093a27f2f554e7c220efc644f371d7e52d61a33237b689b391aea63390ae3f8600",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 72,
+      "category": "preauth_binary",
+      "name": "single_byte_0x00",
+      "description": "Single byte 0x00 to API port",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:56:58.293358",
+      "details": {
+        "payload_size": 1,
+        "payload_hex": "00",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 73,
+      "category": "preauth_binary",
+      "name": "single_byte_0x01",
+      "description": "Single byte 0x01 to API port",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:57:03.602702",
+      "details": {
+        "payload_size": 1,
+        "payload_hex": "01",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 74,
+      "category": "preauth_binary",
+      "name": "single_byte_0x7f",
+      "description": "Single byte 0x7F to API port",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:57:08.912047",
+      "details": {
+        "payload_size": 1,
+        "payload_hex": "7f",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 75,
+      "category": "preauth_binary",
+      "name": "single_byte_0x80",
+      "description": "Single byte 0x80 to API port",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:57:14.213395",
+      "details": {
+        "payload_size": 1,
+        "payload_hex": "80",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 76,
+      "category": "preauth_binary",
+      "name": "single_byte_0xc0",
+      "description": "Single byte 0xC0 to API port",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:57:19.514743",
+      "details": {
+        "payload_size": 1,
+        "payload_hex": "c0",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 77,
+      "category": "preauth_binary",
+      "name": "single_byte_0xe0",
+      "description": "Single byte 0xE0 to API port",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:57:24.816091",
+      "details": {
+        "payload_size": 1,
+        "payload_hex": "e0",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 78,
+      "category": "preauth_binary",
+      "name": "single_byte_0xf0",
+      "description": "Single byte 0xF0 to API port",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:57:30.157419",
+      "details": {
+        "payload_size": 1,
+        "payload_hex": "f0",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 79,
+      "category": "preauth_binary",
+      "name": "single_byte_0xff",
+      "description": "Single byte 0xFF to API port",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:57:30.453271",
+      "details": {
+        "payload_size": 1,
+        "payload_hex": "ff",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 80,
+      "category": "command_path",
+      "name": "path_valid_sysresource",
+      "description": "Command path fuzzing: valid_sysresource",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:30.753121",
+      "details": {
+        "payload_size": 24,
+        "payload_hex": "162f73797374656d2f7265736f757263652f7072696e7400",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 81,
+      "category": "command_path",
+      "name": "path_valid_login",
+      "description": "Command path fuzzing: valid_login",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:36.054470",
+      "details": {
+        "payload_size": 8,
+        "payload_hex": "062f6c6f67696e00",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d396166353737663937646339393063623764343161306133613764643461356500",
+        "is_error": false
+      }
+    },
+    {
+      "id": 82,
+      "category": "command_path",
+      "name": "path_valid_cancel",
+      "description": "Command path fuzzing: valid_cancel",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:36.358318",
+      "details": {
+        "payload_size": 9,
+        "payload_hex": "072f63616e63656c00",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 83,
+      "category": "command_path",
+      "name": "path_traversal_etc_passwd",
+      "description": "Command path fuzzing: traversal_etc_passwd",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:36.662166",
+      "details": {
+        "payload_size": 22,
+        "payload_hex": "142f2e2e2f2e2e2f2e2e2f6574632f70617373776400",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 84,
+      "category": "command_path",
+      "name": "path_traversal_etc_shadow",
+      "description": "Command path fuzzing: traversal_etc_shadow",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:36.966014",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "182f73797374656d2f2e2e2f2e2e2f6574632f736861646f7700",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 85,
+      "category": "command_path",
+      "name": "path_long_path_1KB",
+      "description": "Command path fuzzing: long_path_1KB",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:37.269862",
+      "details": {
+        "payload_size": 1004,
+        "payload_hex": "83e92f41414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 86,
+      "category": "command_path",
+      "name": "path_long_path_10KB",
+      "description": "Command path fuzzing: long_path_10KB",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:37.573710",
+      "details": {
+        "payload_size": 10004,
+        "payload_hex": "a7112f41414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 87,
+      "category": "command_path",
+      "name": "path_deep_path_200_segments",
+      "description": "Command path fuzzing: deep_path_200_segments",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:37.869562",
+      "details": {
+        "payload_size": 1603,
+        "payload_hex": "86402f7365676d656e742f7365676d656e742f7365676d656e742f7365676d656e742f7365676d656e742f7365676d656e742f7365676d656e742f7365676d656e742f7365676d656e742f7365676d656e742f7365676d656e742f7365676d656e742f73",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 88,
+      "category": "command_path",
+      "name": "path_null_in_path",
+      "description": "Command path fuzzing: null_in_path",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:38.169412",
+      "details": {
+        "payload_size": 25,
+        "payload_hex": "172f73797374656d002f7265736f757263652f7072696e7400",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 89,
+      "category": "command_path",
+      "name": "path_null_mid_path",
+      "description": "Command path fuzzing: null_mid_path",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:38.469262",
+      "details": {
+        "payload_size": 29,
+        "payload_hex": "1b2f73797374656d2f7265736f75726365006576696c2f7072696e7400",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 90,
+      "category": "command_path",
+      "name": "path_format_string_s",
+      "description": "Command path fuzzing: format_string_s",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:38.769112",
+      "details": {
+        "payload_size": 19,
+        "payload_hex": "112f2573257325732573257325732573257300",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 91,
+      "category": "command_path",
+      "name": "path_format_string_n",
+      "description": "Command path fuzzing: format_string_n",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:39.076958",
+      "details": {
+        "payload_size": 13,
+        "payload_hex": "0b2f256e256e256e256e256e00",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 92,
+      "category": "command_path",
+      "name": "path_format_string_x",
+      "description": "Command path fuzzing: format_string_x",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:39.372810",
+      "details": {
+        "payload_size": 19,
+        "payload_hex": "112f2578257825782578257825782578257800",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 93,
+      "category": "command_path",
+      "name": "path_format_string_addr_leak",
+      "description": "Command path fuzzing: format_string_addr_leak",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:39.668662",
+      "details": {
+        "payload_size": 26,
+        "payload_hex": "182f41414141253038782e253038782e253038782e2530387800",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 94,
+      "category": "command_path",
+      "name": "path_xss_in_path",
+      "description": "Command path fuzzing: xss_in_path",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:39.968512",
+      "details": {
+        "payload_size": 35,
+        "payload_hex": "212f73797374656d2f3c7363726970743e616c6572742831293c2f7363726970743e00",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 95,
+      "category": "command_path",
+      "name": "path_sql_inject_path",
+      "description": "Command path fuzzing: sql_inject_path",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:40.272360",
+      "details": {
+        "payload_size": 27,
+        "payload_hex": "192f73797374656d2f273b2044524f50205441424c453b202d2d00",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 96,
+      "category": "command_path",
+      "name": "path_template_inject_path",
+      "description": "Command path fuzzing: template_inject_path",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:40.576208",
+      "details": {
+        "payload_size": 16,
+        "payload_hex": "0e2f73797374656d2f247b372a377d00",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 97,
+      "category": "command_path",
+      "name": "path_overlong_utf8_dots",
+      "description": "Command path fuzzing: overlong_utf8_dots",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:40.880056",
+      "details": {
+        "payload_size": 27,
+        "payload_hex": "192f73797374656d2fc380c2aec380c2ae2f7265736f7572636500",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 98,
+      "category": "command_path",
+      "name": "path_high_bytes_path",
+      "description": "Command path fuzzing: high_bytes_path",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:41.183904",
+      "details": {
+        "payload_size": 11,
+        "payload_hex": "092fc3bfc3bec3bdc3bc00",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 99,
+      "category": "command_path",
+      "name": "path_empty_path",
+      "description": "Command path fuzzing: empty_path",
+      "result": "Response: 0 bytes",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:57:46.489250",
+      "details": {
+        "payload_size": 2,
+        "payload_hex": "0000",
+        "response_size": 0,
+        "response_preview": "(empty)",
+        "is_error": false
+      }
+    },
+    {
+      "id": 100,
+      "category": "command_path",
+      "name": "path_root_only",
+      "description": "Command path fuzzing: root_only",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:46.785102",
+      "details": {
+        "payload_size": 3,
+        "payload_hex": "012f00",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 101,
+      "category": "command_path",
+      "name": "path_whitespace_path",
+      "description": "Command path fuzzing: whitespace_path",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:47.100944",
+      "details": {
+        "payload_size": 5,
+        "payload_hex": "0320202000",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 102,
+      "category": "command_path",
+      "name": "path_reboot_command",
+      "description": "Command path fuzzing: reboot_command",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:47.408790",
+      "details": {
+        "payload_size": 16,
+        "payload_hex": "0e2f73797374656d2f7265626f6f7400",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 103,
+      "category": "command_path",
+      "name": "path_shutdown_command",
+      "description": "Command path fuzzing: shutdown_command",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:47.712638",
+      "details": {
+        "payload_size": 18,
+        "payload_hex": "102f73797374656d2f73687574646f776e00",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 104,
+      "category": "command_path",
+      "name": "path_export_command",
+      "description": "Command path fuzzing: export_command",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:48.016486",
+      "details": {
+        "payload_size": 9,
+        "payload_hex": "072f6578706f727400",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 105,
+      "category": "attribute",
+      "name": "valid_login",
+      "description": "Valid login sentence with correct credentials",
+      "result": "Response: 7 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:53.325830",
+      "details": {
+        "payload_size": 42,
+        "payload_hex": "062f6c6f67696e0b3d6e616d653d61646d696e153d70617373776f72643d546573745061737331323300",
+        "response_size": 7,
+        "response_preview": "0521646f6e6500",
+        "is_error": false
+      }
+    },
+    {
+      "id": 106,
+      "category": "attribute",
+      "name": "long_attr_name_1KB",
+      "description": "Attribute with 1KB name",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:58.635174",
+      "details": {
+        "payload_size": 1017,
+        "payload_hex": "062f6c6f67696e83ef3d414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d316162666563386138336137316632353833616462313939383361333737386600",
+        "is_error": false
+      }
+    },
+    {
+      "id": 107,
+      "category": "attribute",
+      "name": "long_attr_name_10KB",
+      "description": "Attribute with 10KB name",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:58.943020",
+      "details": {
+        "payload_size": 10017,
+        "payload_hex": "062f6c6f67696ea7173d414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 108,
+      "category": "attribute",
+      "name": "long_attr_value_10KB",
+      "description": "Attribute with 10KB value",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:57:59.286848",
+      "details": {
+        "payload_size": 10016,
+        "payload_hex": "062f6c6f67696ea7163d6e616d653d42424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 109,
+      "category": "attribute",
+      "name": "missing_equals",
+      "description": "Attribute word without = separator",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:58:04.596193",
+      "details": {
+        "payload_size": 18,
+        "payload_hex": "062f6c6f67696e096e616d6576616c756500",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d326330356635343263616364363839363763633838663933323936613935353100",
+        "is_error": false
+      }
+    },
+    {
+      "id": 110,
+      "category": "attribute",
+      "name": "extra_equals",
+      "description": "Attribute with multiple = signs",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:58:09.905537",
+      "details": {
+        "payload_size": 33,
+        "payload_hex": "062f6c6f67696e183d6e616d653d76616c3d75653d65787472613d7369676e7300",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d383230386535326636653137303235636664386665633364356463633930653500",
+        "is_error": false
+      }
+    },
+    {
+      "id": 111,
+      "category": "attribute",
+      "name": "empty_name",
+      "description": "Attribute with empty name (==value)",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:58:15.214881",
+      "details": {
+        "payload_size": 16,
+        "payload_hex": "062f6c6f67696e073d3d76616c756500",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d356233363538383161353133333262303363383431613562633337373331656500",
+        "is_error": false
+      }
+    },
+    {
+      "id": 112,
+      "category": "attribute",
+      "name": "empty_value",
+      "description": "Attribute with empty value (=name=)",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:58:20.524225",
+      "details": {
+        "payload_size": 15,
+        "payload_hex": "062f6c6f67696e063d6e616d653d00",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d343334306134366632656365396134623536353833393736383066616562656100",
+        "is_error": false
+      }
+    },
+    {
+      "id": 113,
+      "category": "attribute",
+      "name": "both_empty",
+      "description": "Attribute with empty name and value (==)",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:58:25.833569",
+      "details": {
+        "payload_size": 11,
+        "payload_hex": "062f6c6f67696e023d3d00",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d353731343964316438393762313263396338653163626364333964386138323600",
+        "is_error": false
+      }
+    },
+    {
+      "id": 114,
+      "category": "attribute",
+      "name": "just_equals",
+      "description": "Attribute that is just =",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:58:31.142914",
+      "details": {
+        "payload_size": 10,
+        "payload_hex": "062f6c6f67696e013d00",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d366634323638343532303838303966626162313936353533393764326533303100",
+        "is_error": false
+      }
+    },
+    {
+      "id": 115,
+      "category": "attribute",
+      "name": "null_in_name",
+      "description": "Null byte in attribute name",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:58:36.448260",
+      "details": {
+        "payload_size": 21,
+        "payload_hex": "062f6c6f67696e0c3d6e61006d653d76616c756500",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d613036336238393265373065363263363032663137646639663139343638326100",
+        "is_error": false
+      }
+    },
+    {
+      "id": 116,
+      "category": "attribute",
+      "name": "null_in_value",
+      "description": "Null byte in attribute value",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:58:41.749608",
+      "details": {
+        "payload_size": 21,
+        "payload_hex": "062f6c6f67696e0c3d6e616d653d76616c00756500",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d313734356362346366396230343863393061666364346630333338356139383000",
+        "is_error": false
+      }
+    },
+    {
+      "id": 117,
+      "category": "attribute",
+      "name": "format_string_value",
+      "description": "Format string specifiers in attribute value",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:58:47.050956",
+      "details": {
+        "payload_size": 31,
+        "payload_hex": "062f6c6f67696e163d6e616d653d25732573257325732573256e256e256e00",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d313961663039343330616362326136353261396165366434326461663731636300",
+        "is_error": false
+      }
+    },
+    {
+      "id": 118,
+      "category": "attribute",
+      "name": "format_string_name",
+      "description": "Format string specifiers in attribute name",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:58:52.360300",
+      "details": {
+        "payload_size": 22,
+        "payload_hex": "062f6c6f67696e0d3d256e256e256e3d76616c756500",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d653031636636396662333739653363656439643563366234353731376661343700",
+        "is_error": false
+      }
+    },
+    {
+      "id": 119,
+      "category": "attribute",
+      "name": "binary_value",
+      "description": "All 256 byte values in attribute value",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:58:57.673643",
+      "details": {
+        "payload_size": 272,
+        "payload_hex": "062f6c6f67696e81063d6e616d653d000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f5051525354",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d633163303639346536366237666566326238373435653863373736653036343500",
+        "is_error": false
+      }
+    },
+    {
+      "id": 120,
+      "category": "attribute",
+      "name": "50_duplicate_attrs",
+      "description": "50 duplicate =name=admin attributes",
+      "result": "Response: 45 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:59:02.982987",
+      "details": {
+        "payload_size": 608,
+        "payload_hex": "062f6c6f67696e0b3d6e616d653d61646d696e0b3d6e616d653d61646d696e0b3d6e616d653d61646d696e0b3d6e616d653d61646d696e0b3d6e616d653d61646d696e0b3d6e616d653d61646d696e0b3d6e616d653d61646d696e0b3d6e616d653d6164",
+        "response_size": 45,
+        "response_preview": "0521646f6e65253d7265743d393737376665383834633532333761646437656130323835646361633538663100",
+        "is_error": false
+      }
+    },
+    {
+      "id": 121,
+      "category": "attribute",
+      "name": "100_unique_attrs",
+      "description": "100 unique attributes in one sentence",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:59:03.286835",
+      "details": {
+        "payload_size": 1388,
+        "payload_hex": "062f6c6f67696e0b3d61747472303d76616c300b3d61747472313d76616c310b3d61747472323d76616c320b3d61747472333d76616c330b3d61747472343d76616c340b3d61747472353d76616c350b3d61747472363d76616c360b3d61747472373d76",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 122,
+      "category": "attribute",
+      "name": "query_operators",
+      "description": "Query operator attributes (?name=, ?#=, etc.)",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:59:03.590683",
+      "details": {
+        "payload_size": 41,
+        "payload_hex": "0b2f757365722f7072696e740b3f6e616d653d61646d696e033f233d033f2321033f237c033f232600",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 123,
+      "category": "attribute",
+      "name": "long_tag",
+      "description": "Login with 1KB .tag value",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:59:03.894531",
+      "details": {
+        "payload_size": 1049,
+        "payload_hex": "062f6c6f67696e0b3d6e616d653d61646d696e153d70617373776f72643d546573745061737331323383ed2e7461673d41414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 124,
+      "category": "attribute",
+      "name": "special_prefixes",
+      "description": "Attributes with special RouterOS prefixes (.id, .proplist, .query)",
+      "result": "Response: 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:59:04.198379",
+      "details": {
+        "payload_size": 74,
+        "payload_hex": "0b2f757365722f7072696e74062e69643d2a30172e70726f706c6973743d6e616d652c70617373776f7264112e71756572793d6e616d653d61646d696e0b3d6e756d626572733d2a3000",
+        "response_size": 22,
+        "response_preview": "0621666174616c0d6e6f74206c6f6767656420696e00",
+        "is_error": false
+      }
+    },
+    {
+      "id": 125,
+      "category": "attribute",
+      "name": "huge_sentence_200_attrs",
+      "description": "Huge sentence with 200 attributes of 100-char values",
+      "result": "Response: 36 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:59:04.502227",
+      "details": {
+        "payload_size": 21698,
+        "payload_hex": "062f6c6f67696e6a3d6b6579303d5656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656",
+        "response_size": 36,
+        "response_preview": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00",
+        "is_error": false
+      }
+    }
+  ],
+  "findings": []
+}

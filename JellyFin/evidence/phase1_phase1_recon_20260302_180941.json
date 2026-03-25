@@ -1,0 +1,340 @@
+{
+  "script": "phase1_recon",
+  "phase": "phase1",
+  "target": "Jellyfin 10.11.6",
+  "start_time": "2026-03-02T18:09:15.944412",
+  "end_time": "2026-03-02T18:09:41.431660",
+  "summary": {
+    "total_tests": 36,
+    "findings": 0,
+    "anomalies": 0
+  },
+  "tests": [
+    {
+      "id": "RECON-001",
+      "description": "Public system info",
+      "request": "GET /System/Info/Public",
+      "response": "{\n  \"LocalAddress\": \"http://localhost:8096\",\n  \"ServerName\": \"de9009906440\",\n  \"Version\": \"10.11.6\",\n  \"ProductName\": \"Jellyfin Server\",\n  \"OperatingSystem\": \"\",\n  \"Id\": \"73f6fc4a3e4d48d28bfd39d5b24c743c\",\n  \"StartupWizardCompleted\": true\n}",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:16.000384"
+    },
+    {
+      "id": "RECON-002",
+      "description": "Full system info (authenticated)",
+      "request": "GET /System/Info",
+      "response": "{\n  \"OperatingSystem\": \"\",\n  \"OperatingSystemDisplayName\": \"\",\n  \"Architecture\": null,\n  \"LocalAddress\": \"http://localhost:8096\",\n  \"ServerName\": \"de9009906440\",\n  \"Version\": \"10.11.6\",\n  \"HasPendingRestart\": false,\n  \"HasUpdateAvailable\": false,\n  \"InternalMetadataPath\": \"/config/metadata\",\n  \"LogPath\": \"/config/log\",\n  \"TranscodingTempPath\": \"/cache/transcodes\",\n  \"CachePath\": \"/cache\",\n  \"WebPath\": \"/jellyfin/jellyfin-web\",\n  \"ProgramDataPath\": \"/config\",\n  \"ItemsByNamePath\": \"/config/metadata\",\n  \"CanSelfRestart\": true,\n  \"CanSelfUpdate\": null,\n  \"SupportsLibraryMonitor\": true,\n  \"EncoderLocation\": \"System\",\n  \"SystemArchitecture\": \"X64\"\n}",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:16.016376"
+    },
+    {
+      "id": "RECON-003",
+      "description": "Response headers analysis",
+      "request": "GET /",
+      "response": "{\n  \"Content-Type\": \"text/html\",\n  \"Date\": \"Mon, 02 Mar 2026 23:09:15 GMT\",\n  \"Server\": \"Kestrel\",\n  \"Accept-Ranges\": \"bytes\",\n  \"Cache-Control\": \"no-cache\",\n  \"Content-Encoding\": \"br\",\n  \"ETag\": \"\\\"1dc88e01aec13d3\\\"\",\n  \"Last-Modified\": \"Mon, 19 Jan 2026 01:08:22 GMT\",\n  \"Transfer-Encoding\": \"chunked\",\n  \"Vary\": \"Accept-Encoding\",\n  \"X-Response-Time-ms\": \"11.9939\"\n}",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:16.044362"
+    },
+    {
+      "id": "ENDPOINT-System-Info-Public",
+      "description": "GET /System/Info/Public \u2014 Public server info",
+      "request": "GET /System/Info/Public (unauthenticated)",
+      "response": "Unauth: HTTP 200, Auth: HTTP 200",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:16.060354"
+    },
+    {
+      "id": "ENDPOINT-System-Info",
+      "description": "GET /System/Info \u2014 Full server info (admin)",
+      "request": "GET /System/Info (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:16.180294"
+    },
+    {
+      "id": "ENDPOINT-System-Configuration",
+      "description": "GET /System/Configuration \u2014 Server configuration",
+      "request": "GET /System/Configuration (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:16.344212"
+    },
+    {
+      "id": "ENDPOINT-System-Logs",
+      "description": "GET /System/Logs \u2014 Server log files",
+      "request": "GET /System/Logs (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:16.464152"
+    },
+    {
+      "id": "ENDPOINT-System-Logs-Log",
+      "description": "GET /System/Logs/Log \u2014 Download server log",
+      "request": "GET /System/Logs/Log (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 400",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:16.592088"
+    },
+    {
+      "id": "ENDPOINT-System-Restart",
+      "description": "POST /System/Restart \u2014 Restart server",
+      "request": "POST /System/Restart (unauthenticated)",
+      "response": "Unauth: HTTP 204, Auth: HTTP 204",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:16.696036"
+    },
+    {
+      "id": "ENDPOINT-System-Shutdown",
+      "description": "POST /System/Shutdown \u2014 Shutdown server",
+      "request": "POST /System/Shutdown (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 204",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:16.811978"
+    },
+    {
+      "id": "ENDPOINT-Users",
+      "description": "GET /Users \u2014 List all users",
+      "request": "GET /Users (unauthenticated)",
+      "response": "Unauth: HTTP 500, Auth: HTTP 503",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:16.959904"
+    },
+    {
+      "id": "ENDPOINT-Items-RemoteSearch-Image",
+      "description": "GET /Items/RemoteSearch/Image \u2014 Remote search image",
+      "request": "GET /Items/RemoteSearch/Image (unauthenticated)",
+      "response": "Unauth: HTTP 503, Auth: HTTP 503",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:17.339714"
+    },
+    {
+      "id": "ENDPOINT-Videos-test-stream",
+      "description": "GET /Videos/test/stream \u2014 Video stream",
+      "request": "GET /Videos/test/stream (unauthenticated)",
+      "response": "Unauth: HTTP 503, Auth: HTTP 503",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:17.451658"
+    },
+    {
+      "id": "ENDPOINT-Audio-test-stream",
+      "description": "GET /Audio/test/stream \u2014 Audio stream",
+      "request": "GET /Audio/test/stream (unauthenticated)",
+      "response": "Unauth: HTTP 503, Auth: HTTP 503",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:17.603582"
+    },
+    {
+      "id": "ENDPOINT-System-MediaEncoder-Path",
+      "description": "GET /System/MediaEncoder/Path \u2014 FFmpeg path",
+      "request": "GET /System/MediaEncoder/Path (unauthenticated)",
+      "response": "Unauth: HTTP 503, Auth: HTTP 503",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:17.719524"
+    },
+    {
+      "id": "ENDPOINT-Encoding-MediaInfo",
+      "description": "GET /Encoding/MediaInfo \u2014 Encoding info",
+      "request": "GET /Encoding/MediaInfo (unauthenticated)",
+      "response": "Unauth: HTTP 503, Auth: HTTP 503",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:17.827470"
+    },
+    {
+      "id": "ENDPOINT-Dlna-Profiles",
+      "description": "GET /Dlna/Profiles \u2014 DLNA profiles",
+      "request": "GET /Dlna/Profiles (unauthenticated)",
+      "response": "Unauth: HTTP 503, Auth: HTTP 503",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:17.939414"
+    },
+    {
+      "id": "ENDPOINT-Dlna-Info",
+      "description": "GET /Dlna/Info \u2014 DLNA info",
+      "request": "GET /Dlna/Info (unauthenticated)",
+      "response": "Unauth: HTTP 503, Auth: HTTP 503",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:18.367199"
+    },
+    {
+      "id": "ENDPOINT-api-docs-openapi.json",
+      "description": "GET /api-docs/openapi.json \u2014 OpenAPI spec",
+      "request": "GET /api-docs/openapi.json (unauthenticated)",
+      "response": "Unauth: HTTP 200, Auth: HTTP 200",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:37.497628"
+    },
+    {
+      "id": "ENDPOINT-api-docs-swagger",
+      "description": "GET /api-docs/swagger \u2014 Swagger UI",
+      "request": "GET /api-docs/swagger (unauthenticated)",
+      "response": "Unauth: HTTP 200, Auth: HTTP 200",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:37.645554"
+    },
+    {
+      "id": "ENDPOINT-Sessions",
+      "description": "GET /Sessions \u2014 Active sessions",
+      "request": "GET /Sessions (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:37.769492"
+    },
+    {
+      "id": "ENDPOINT-Devices",
+      "description": "GET /Devices \u2014 Registered devices",
+      "request": "GET /Devices (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:37.897428"
+    },
+    {
+      "id": "ENDPOINT-Plugins",
+      "description": "GET /Plugins \u2014 Installed plugins",
+      "request": "GET /Plugins (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:38.025364"
+    },
+    {
+      "id": "ENDPOINT-Repositories",
+      "description": "GET /Repositories \u2014 Plugin repositories",
+      "request": "GET /Repositories (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:38.141306"
+    },
+    {
+      "id": "ENDPOINT-ScheduledTasks",
+      "description": "GET /ScheduledTasks \u2014 Scheduled tasks",
+      "request": "GET /ScheduledTasks (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:38.273240"
+    },
+    {
+      "id": "ENDPOINT-System-ActivityLog-Entries",
+      "description": "GET /System/ActivityLog/Entries \u2014 Activity log",
+      "request": "GET /System/ActivityLog/Entries (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:38.417168"
+    },
+    {
+      "id": "ENDPOINT-Branding-Configuration",
+      "description": "GET /Branding/Configuration \u2014 Branding config",
+      "request": "GET /Branding/Configuration (unauthenticated)",
+      "response": "Unauth: HTTP 200, Auth: HTTP 200",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:38.537108"
+    },
+    {
+      "id": "ENDPOINT-Branding-Css",
+      "description": "GET /Branding/Css \u2014 Custom CSS",
+      "request": "GET /Branding/Css (unauthenticated)",
+      "response": "Unauth: HTTP 200, Auth: HTTP 200",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:38.649052"
+    },
+    {
+      "id": "ENDPOINT-QuickConnect-Enabled",
+      "description": "GET /QuickConnect/Enabled \u2014 Quick Connect status",
+      "request": "GET /QuickConnect/Enabled (unauthenticated)",
+      "response": "Unauth: HTTP 200, Auth: HTTP 200",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:38.764994"
+    },
+    {
+      "id": "ENDPOINT-Search-Hints?searchTerm=test",
+      "description": "GET /Search/Hints?searchTerm=test \u2014 Search",
+      "request": "GET /Search/Hints?searchTerm=test (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:39.032860"
+    },
+    {
+      "id": "ENDPOINT-Notifications-Types",
+      "description": "GET /Notifications/Types \u2014 Notification types",
+      "request": "GET /Notifications/Types (unauthenticated)",
+      "response": "Unauth: HTTP 404, Auth: HTTP 404",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:39.144804"
+    },
+    {
+      "id": "ENDPOINT-Packages",
+      "description": "GET /Packages \u2014 Available packages",
+      "request": "GET /Packages (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:40.288232"
+    },
+    {
+      "id": "ENDPOINT-Playback-BitrateTest",
+      "description": "GET /Playback/BitrateTest \u2014 Bitrate test",
+      "request": "GET /Playback/BitrateTest (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:40.408172"
+    },
+    {
+      "id": "ENDPOINT-Environment-DefaultDirectoryBr",
+      "description": "GET /Environment/DefaultDirectoryBrowser \u2014 Directory browser",
+      "request": "GET /Environment/DefaultDirectoryBrowser (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:40.520116"
+    },
+    {
+      "id": "ENDPOINT-Auth-Keys",
+      "description": "GET /Auth/Keys \u2014 API keys",
+      "request": "GET /Auth/Keys (unauthenticated)",
+      "response": "Unauth: HTTP 401, Auth: HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:40.644054"
+    },
+    {
+      "id": "OPENAPI-001",
+      "description": "OpenAPI spec: 315 paths, 388 endpoints",
+      "request": "GET /api-docs/openapi.json",
+      "response": "Paths: 315, Endpoints: 388, No-auth: 59",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:09:41.007872"
+    }
+  ],
+  "findings": [],
+  "anomalies": []
+}

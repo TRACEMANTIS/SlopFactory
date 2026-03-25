@@ -1,0 +1,366 @@
+{
+  "metadata": {
+    "phase": "3.2",
+    "name": "JWT Attacks",
+    "timestamp": "2026-02-15T12:37:51.394322",
+    "scope": "jsonwebtoken library + Express integration"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "alg_none",
+      "version": "v5",
+      "data": {
+        "alg": "none",
+        "status": 403,
+        "accepted": false
+      }
+    },
+    {
+      "id": 2,
+      "test": "alg_None",
+      "version": "v5",
+      "data": {
+        "alg": "None",
+        "status": 403,
+        "accepted": false
+      }
+    },
+    {
+      "id": 3,
+      "test": "alg_NONE",
+      "version": "v5",
+      "data": {
+        "alg": "NONE",
+        "status": 403,
+        "accepted": false
+      }
+    },
+    {
+      "id": 4,
+      "test": "alg_nOnE",
+      "version": "v5",
+      "data": {
+        "alg": "nOnE",
+        "status": 403,
+        "accepted": false
+      }
+    },
+    {
+      "id": 5,
+      "test": "alg_none",
+      "version": "v4",
+      "data": {
+        "error": "Could not get valid token"
+      }
+    },
+    {
+      "id": 6,
+      "test": "weak_secret",
+      "version": "v5",
+      "data": {
+        "cracked": true,
+        "secret": "secret123",
+        "attempts": 2
+      }
+    },
+    {
+      "id": 7,
+      "test": "weak_secret",
+      "version": "v4",
+      "data": {
+        "error": "Could not get valid token"
+      }
+    },
+    {
+      "id": 8,
+      "test": "expired_token",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false
+      }
+    },
+    {
+      "id": 9,
+      "test": "expired_token",
+      "version": "v4",
+      "data": {
+        "status": 500,
+        "accepted": false
+      }
+    },
+    {
+      "id": 10,
+      "test": "claims_no_exp",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false,
+        "payload_keys": [
+          "userId",
+          "username",
+          "role"
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "test": "claims_no_iat",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false,
+        "payload_keys": [
+          "userId",
+          "username",
+          "role",
+          "exp"
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "test": "claims_no_sub",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false,
+        "payload_keys": [
+          "role",
+          "exp"
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "test": "claims_empty_payload",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false,
+        "payload_keys": []
+      }
+    },
+    {
+      "id": 14,
+      "test": "claims_extra_claims",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false,
+        "payload_keys": [
+          "userId",
+          "username",
+          "role",
+          "isAdmin",
+          "exp"
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "test": "claims_role_escalation",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false,
+        "payload_keys": [
+          "userId",
+          "username",
+          "role",
+          "exp"
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "test": "claims_no_exp",
+      "version": "v4",
+      "data": {
+        "status": 500,
+        "accepted": false,
+        "payload_keys": [
+          "userId",
+          "username",
+          "role"
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "test": "claims_no_iat",
+      "version": "v4",
+      "data": {
+        "status": 500,
+        "accepted": false,
+        "payload_keys": [
+          "userId",
+          "username",
+          "role",
+          "exp"
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "test": "claims_no_sub",
+      "version": "v4",
+      "data": {
+        "status": 500,
+        "accepted": false,
+        "payload_keys": [
+          "role",
+          "exp"
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "test": "claims_empty_payload",
+      "version": "v4",
+      "data": {
+        "status": 500,
+        "accepted": false,
+        "payload_keys": []
+      }
+    },
+    {
+      "id": 20,
+      "test": "claims_extra_claims",
+      "version": "v4",
+      "data": {
+        "status": 500,
+        "accepted": false,
+        "payload_keys": [
+          "userId",
+          "username",
+          "role",
+          "isAdmin",
+          "exp"
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "test": "claims_role_escalation",
+      "version": "v4",
+      "data": {
+        "status": 500,
+        "accepted": false,
+        "payload_keys": [
+          "userId",
+          "username",
+          "role",
+          "exp"
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "test": "manip_empty_token",
+      "version": "v5",
+      "data": {
+        "status": 401,
+        "accepted": false
+      }
+    },
+    {
+      "id": 23,
+      "test": "manip_dot_only",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false
+      }
+    },
+    {
+      "id": 24,
+      "test": "manip_two_dots",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false
+      }
+    },
+    {
+      "id": 25,
+      "test": "manip_three_dots",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false
+      }
+    },
+    {
+      "id": 26,
+      "test": "manip_no_signature",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false
+      }
+    },
+    {
+      "id": 27,
+      "test": "manip_truncated_sig",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false
+      }
+    },
+    {
+      "id": 28,
+      "test": "manip_extra_part",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false
+      }
+    },
+    {
+      "id": 29,
+      "test": "manip_null_bytes",
+      "version": "v5",
+      "data": {
+        "status": 400,
+        "accepted": false
+      }
+    },
+    {
+      "id": 30,
+      "test": "manip_very_long",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false
+      }
+    },
+    {
+      "id": 31,
+      "test": "manip_sql_in_token",
+      "version": "v5",
+      "data": {
+        "status": 403,
+        "accepted": false
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "title": "JWT Secret Cracked: \"secret123\"",
+      "severity": "INFO",
+      "cwe": "CWE-521",
+      "description": "JWT signed with weak secret \"secret123\" \u2014 cracked via dictionary. Note: This is app-level config, not framework default.",
+      "framework_behavior": false,
+      "note": "jsonwebtoken does not enforce minimum secret strength",
+      "version": "v5"
+    }
+  ],
+  "summary": {
+    "total_tests": 31,
+    "findings_count": 1
+  }
+}

@@ -1,0 +1,554 @@
+{
+  "project": "[REDACTED-ID]_Tenda",
+  "script": "phase2_ac15_deep_dive",
+  "start_time": "2026-03-04T00:03:11.592690",
+  "end_time": "2026-03-04T00:03:11.592690",
+  "test_count": 13,
+  "finding_count": 14,
+  "anomaly_count": 5,
+  "tests": [
+    {
+      "id": "F1-DISASM",
+      "description": "Disassembly of formSetFirewallCfg (3152 bytes at 0x000ad470)",
+      "request": "r2 -c 'aaa; s sym.formSetFirewallCfg; pdf'",
+      "response": "Stack frame: sub sp, sp, 0x2f8 (760 bytes). Function signature: (int32_t arg1, int32_t arg2). 125 stack variables (sp[0x4..0x308]). Saves {r4, r5, fp, lr} on entry.",
+      "status": "VULN",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "F1-STRCPY2",
+      "description": "Second strcpy in formSetFirewallCfg \u2014 copies getWispIfName result to var_298h",
+      "request": "0x000adde4: strcpy(var_298h, getWispIfName_result)",
+      "response": "At 0xaddac: getWispIfName() returns interface name into var_2ch. At 0xadde4: strcpy(var_298h, var_2ch) \u2014 copies to stack. var_298h then used in doSystemCmd with iptables format strings. Source is getWispIfName() (internal function, not direct user input). However, if getWispIfName returns attacker-controlled data, command injection via iptables format string possible.",
+      "status": "INFO",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "F2-DISASM",
+      "description": "Disassembly of formSetQosBand (708 bytes at 0x00063470)",
+      "request": "r2 -c 'aaa; s sym.formSetQosBand; pdf'",
+      "response": "Stack frame: sub sp, sp, 0x7c (124 bytes). Calls: fcn.0002bd4c (websGetVar) x1, GetValue x2, strcmp, printf, set_wl_guest_qos_list, CommitCfm, doSystemCmd, sprintf. One sprintf at 0x63718 writes result code to stack buffer s (fp-0x38). sprintf format: '{\"errCode\":\"%d\"}' with var_10h \u2014 safe (integer only).",
+      "status": "PASS",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "F2-DOSYSTEMCMD",
+      "description": "doSystemCmd in formSetQosBand \u2014 fixed format string",
+      "request": "0x000636fc: doSystemCmd('cfm Post netctrl %d?op=%d', 0xf, 6)",
+      "response": "The doSystemCmd call at 0x636fc uses hardcoded integer arguments (15, 6). No user-controlled string data reaches doSystemCmd. Safe.",
+      "status": "PASS",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "F3-DISASM",
+      "description": "Disassembly of formSetPPTPUserList (3452 bytes at 0x000b87a8)",
+      "request": "r2 -c 'aaa; s sym.formSetPPTPUserList; pdf'",
+      "response": "Stack frame: sub sp, sp, 0x3180 + 0x30 = 0x31B0 (12720 bytes). HUGE stack frame. Saves {r4, r5, r6, r7, fp, lr}. websGetVar('list', default) at 0xb89e4. Multiple large memset calls: 0x200, 0x1c0, 0x1000, 0x200, 0x1000, 0x400, 0x200, 0x40, 0x200 bytes. Contains sprintf, strcpy, strcat, strcmp calls.",
+      "status": "VULN",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "F4-DISASM",
+      "description": "Disassembly of formWifiBasicSet (6384 bytes at 0x00092154)",
+      "request": "r2 -c 'aaa; s sym.formWifiBasicSet; pdf'",
+      "response": "Stack frame: large. 10+ websGetVar calls. Parameters: wrlEn, hideSsid, ssid, security, wrlPwd, wrlEn_5g, hideSsid_5g, ssid_5g, security_5g, wrlPwd_5g (and more). 2 strcpy calls, many SetValue calls, 2 GetValue, multiple strlen checks.",
+      "status": "VULN",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "F5-DISASM",
+      "description": "Disassembly of formGetRouterStatus (6032 bytes at 0x0005e1dc)",
+      "request": "r2 -c 'aaa; s sym.formGetRouterStatus; pdf'",
+      "response": "Stack frame: large. Primarily a getter/status function. Uses malloc for buffer allocation. Contains: sprintf x6, GetValue x10+, strcmp x10+, printf x12+, memcpy x5, strcat x1, doSystemCmd x1, getLanIfName, getIfIp. No websGetVar calls (getter function \u2014 reads config, doesn't write).",
+      "status": "INFO",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "F6-DISASM",
+      "description": "Disassembly of formGetSystemStatus (10060 bytes at 0x00058ad8)",
+      "request": "r2 -c 'aaa; s sym.formGetSystemStatus; pdf'",
+      "response": "Stack frame: massive (10060 bytes function). Pure getter function \u2014 reads system status. Contains: snprintf x2 (safe!), GetValue x20+, strcmp x20+, printf x20+, memcpy x10+, atoi x5, memset x15+. Uses snprintf (bounded) instead of sprintf in some places. No websGetVar calls. No strcpy. No doSystemCmd with user input.",
+      "status": "PASS",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "F7-DISASM",
+      "description": "Disassembly of formGetPortStatus (6192 bytes at 0x00057180)",
+      "request": "r2 -c 'aaa; s sym.formGetPortStatus; pdf'",
+      "response": "Stack frame: large. Port status getter. Contains: GetValue x10+, strcpy x9, memcpy x14, memset x10+, strcmp x3, strlen, atoi. No websGetVar calls.",
+      "status": "INFO",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "F8-DISASM",
+      "description": "Disassembly of formMfgTest (388 bytes at 0x00044bb4)",
+      "request": "r2 -c 'aaa; s sym.formMfgTest; pdf'",
+      "response": "Stack frame: sub sp, sp, 0x2c (44 bytes). Small function. NO websGetVar calls \u2014 no user input processing. Calls get_eth_name, getIfIp, then 11 doSystemCmd calls with HARDCODED strings. Kills processes, flushes iptables, configures switch registers.",
+      "status": "VULN",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "F9-DISASM",
+      "description": "Disassembly of formWriteFacMac (128 bytes at 0x000455d0)",
+      "request": "r2 -c 'aaa; s sym.formWriteFacMac; pdf'",
+      "response": "Stack frame: sub sp, sp, 0x1c (28 bytes). Very small function. websGetVar('mac', '00:01:02:11:22:33') at 0x4560c. doSystemCmd('cfm mac %s', mac_value) at 0x45638. DIRECT command injection path: user input \u2192 format string \u2192 system command.",
+      "status": "VULN",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "F10-DISASM",
+      "description": "Disassembly of formQuickIndex (916 bytes at 0x00050318)",
+      "request": "r2 -c 'aaa; s sym.formQuickIndex; pdf'",
+      "response": "Stack frame: sub sp, sp, 0x74 (116 bytes). websGetVar calls: mit_rate, PPPOEName, PPPOEPassword, mit_wrlpwd, mit_linktype. Uses SetValue extensively (15+ calls). One doSystemCmd call. No strcpy. No sprintf with user input.",
+      "status": "INFO",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "AUTH-BYPASS",
+      "description": "R7WebsSecurityHandler whitelist analysis",
+      "request": "r2 -c 'aaa; s sym.R7WebsSecurityHandler; pdf' \u2014 search for goform endpoints",
+      "response": "R7WebsSecurityHandler (5280 bytes at 0x2f500) contains whitelist of URLs that bypass authentication. Whitelisted goform endpoints found:\n  /goform/getRebootStatus (0xdf4fc)\n  /goform/telnet (0xdf540) \u2014 CRITICAL: telnet access without auth!\n  /goform/ate (0xdf550) \u2014 ATE test without auth\n  /goform/GetRouterStatus (0xdf5a4) \u2014 info disclosure\n  /goform/getWanParameters (0xdf5bc)\n  /goform/GetUSBStatus (0xdf5d8)\n  /goform/WifiApScan (0xdf640)\nThese endpoints can be accessed without any authentication cookie.",
+      "status": "VULN",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    }
+  ],
+  "findings": [
+    {
+      "id": "AC15-VULN-001",
+      "severity": "CRITICAL",
+      "title": "Stack Buffer Overflow in formSetFirewallCfg via 'firewallEn' parameter (strcpy)",
+      "details": {
+        "function": "formSetFirewallCfg",
+        "address": "0x000ad470",
+        "size_bytes": 3152,
+        "vulnerable_instruction": "0x000ad87c: bl sym.imp.strcpy",
+        "source": "websGetVar(connId, 'firewallEn', '1111') at 0x000ad850 via fcn.0002bd4c",
+        "sink": "strcpy(dest, src) at 0x000ad87c \u2014 dest is stack buffer at fp-0x34",
+        "buffer_size": "~4 bytes (dest from fp-0x34, next var var_30h at fp-0x30)",
+        "overflow_to_lr": "0x38 (56 bytes) from buffer start to saved LR",
+        "guard_condition": "strlen(firewallEn) > 3 (at 0xad864: cmp r3, 3; bls 0xae048)",
+        "data_flow": [
+          "0xad850: fcn.0002bd4c(connId, 'firewallEn', '1111') -> returns user input pointer",
+          "0xad854: str r0, [src] (fp-0x1c) \u2014 stores input pointer",
+          "0xad858: strlen(src) -> r3",
+          "0xad864: if strlen <= 3, skip (goes to 0xae048)",
+          "0xad86c: ldr r3, [src] \u2014 load input pointer",
+          "0xad870: sub r2, dest \u2014 r2 = fp-0x34 (destination buffer)",
+          "0xad87c: strcpy(fp-0x34, user_input) \u2014 NO BOUNDS CHECK"
+        ],
+        "post_overflow_impact": [
+          "After strcpy, code reads individual chars: dest[0] (fp-0x34), dest[2] (fp-0x32), dest[1] (fp-0x33)",
+          "Then uses sprintf at 0xad8d8 with format '%c,1500;%c,1500;%c,1500' into var_fch (64 bytes at fp-0xfc)",
+          "Overflow overwrites var_30h, var_2ch, var_28h, var_24h, var_20h, var_1ch (src pointer itself!), var_18h, var_14h, var_10h, fp, lr",
+          "Control of LR = arbitrary code execution (no canary, no PIE)"
+        ],
+        "mitigations": "NONE (No canary, No PIE, No RELRO, No FORTIFY)",
+        "authentication_required": true,
+        "auth_notes": "Not in R7WebsSecurityHandler whitelist \u2014 requires valid session cookie",
+        "related_cve": "CVE-2024-40891 (Zyxel, similar pattern; this is a DIFFERENT vendor/product)",
+        "exploitability": "Trivial \u2014 56 bytes to overwrite saved LR, no mitigations, fixed binary base"
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cvss": "9.8",
+      "cwe": "CWE-120",
+      "endpoint": "/goform/SetFirewallCfg",
+      "parameter": "firewallEn"
+    },
+    {
+      "id": "AC15-VULN-002",
+      "severity": "MEDIUM",
+      "title": "Potential Command Injection via iptables format strings in formSetFirewallCfg",
+      "details": {
+        "function": "formSetFirewallCfg",
+        "address": "0x000ad470",
+        "doSystemCmd_calls": [
+          "0xade08: doSystemCmd('iptables -t filter -D INPUT -i %s -p icmp ...', var_298h)",
+          "0xade20: doSystemCmd('iptables -t filter -I INPUT -i %s -p icmp ...', var_298h)",
+          "0xade3c: doSystemCmd('iptables -t filter -D INPUT -i %s -p icmp ...', var_298h)",
+          "0xadf4c-0xae024: Multiple additional iptables doSystemCmd calls with var_298h and var_2a8h"
+        ],
+        "format_strings": [
+          "'iptables -t filter -D INPUT -i %s -p icmp -m icmp --icmp-type 8 -j DROP' (0xf5b58)",
+          "'iptables -t filter -I INPUT -i %s -p icmp -m icmp --icmp-type 8 -j DROP' (0xf5ba0)"
+        ],
+        "source_of_format_arg": "var_298h populated from strcpy(var_298h, getWispIfName()) at 0xadde4",
+        "risk": "getWispIfName() returns interface name from config \u2014 if config is corrupted or WISP interface name is user-controlled, command injection is possible",
+        "authentication_required": true
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cvss": "6.5",
+      "cwe": "CWE-78",
+      "endpoint": "/goform/SetFirewallCfg",
+      "parameter": "(indirect via getWispIfName)"
+    },
+    {
+      "id": "AC15-INFO-001",
+      "severity": "LOW",
+      "title": "formSetQosBand \u2014 No exploitable vulnerability found",
+      "details": {
+        "function": "formSetQosBand",
+        "address": "0x00063470",
+        "size_bytes": 708,
+        "websGetVar_params": [
+          "(parameter name at computed address \u2014 likely band config)"
+        ],
+        "dangerous_sinks": {
+          "sprintf": "1 call at 0x63718 \u2014 writes integer error code, safe",
+          "doSystemCmd": "1 call at 0x636fc \u2014 hardcoded integers, safe",
+          "strcpy": "0 calls",
+          "strcat": "0 calls"
+        },
+        "assessment": "No user-controlled data reaches dangerous sinks without sanitization"
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cvss": "0.0",
+      "cwe": "N/A",
+      "endpoint": "/goform/SetQosBand"
+    },
+    {
+      "id": "AC15-VULN-003",
+      "severity": "HIGH",
+      "title": "Stack Buffer Overflow in formSetPPTPUserList via sprintf with user data",
+      "details": {
+        "function": "formSetPPTPUserList",
+        "address": "0x000b87a8",
+        "size_bytes": 3452,
+        "vulnerable_instructions": [
+          "0xb8b58: sprintf(s, '%s;%s;%s;%s;%s', parsed_fields...) \u2014 writes to stack buffer indexed by loop counter * 0x200",
+          "0xb8dc8: sprintf(s, '%d;%d;%s;%s;%s;%s;%s;%s', ...) \u2014 writes to var_610h area (0x200 bytes)",
+          "0xb8e50: sprintf(s, '%s;%s;%s;%s;%s', ...) \u2014 another large format into stack"
+        ],
+        "source": "websGetVar(connId, 'list', default) at 0xb89e4",
+        "data_flow": [
+          "User input 'list' parameter parsed with delimiter '~' (strchr at 0xb8c84)",
+          "Each segment parsed into struct fields via fcn.0xb7cfc and fcn.0xb7da4",
+          "Fields at offsets 0x00, 0x40, 0x80, 0xc0, 0x100, 0x140, 0x180 in parsed struct",
+          "sprintf at 0xb8b58 concatenates all fields with '%s;%s;%s;%s;%s' format",
+          "Destination buffer is at loop_counter * 0x200 offset from stack base"
+        ],
+        "loop_info": "Loop runs up to 8 iterations (cmp r3, 7 at 0xb8bd8)",
+        "buffer_sizes": {
+          "per_entry_buffer": "0x200 (512 bytes) \u2014 each PPTP user entry",
+          "total_user_area": "8 * 512 = 4096 bytes allocated",
+          "parsed_field_size": "0x40 (64 bytes) each, 7 fields per entry"
+        },
+        "risk": "If any parsed field exceeds 64 bytes, sprintf overflows the 512-byte per-entry buffer. Multiple %s concatenation without bounds checking.",
+        "authentication_required": true
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cvss": "8.1",
+      "cwe": "CWE-120",
+      "endpoint": "/goform/SetPPTPUserList",
+      "parameter": "list"
+    },
+    {
+      "id": "AC15-VULN-004",
+      "severity": "HIGH",
+      "title": "Unsafe strcpy calls in formSetPPTPUserList",
+      "details": {
+        "function": "formSetPPTPUserList",
+        "address": "0x000b87a8",
+        "vulnerable_instructions": [
+          "0xb8b98: strcpy(dest, src+0x80) \u2014 copies parsed username to array entry (64-byte dest, unbounded src)",
+          "0xb8f08: strcpy(dest, parsed_str) \u2014 copies parsed struct data into entry array"
+        ],
+        "strcpy_contexts": [
+          "At 0xb8b98: dest = entry_array[dest_counter * 64], src = parsed_struct + 0x80 (username field). dest_counter incremented, entry used for comparison later.",
+          "At 0xb8f08: dest = entry_array[dest_counter * 64], src = parsed_struct base. This is in the user-matching branch \u2014 copies current entry data."
+        ],
+        "buffer_size": "64 bytes per entry in comparison array (shifted left by 6 = *64)",
+        "risk": "Username/password fields from user input parsed without length validation, then strcpy'd into 64-byte stack slots",
+        "authentication_required": true
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cvss": "7.5",
+      "cwe": "CWE-120",
+      "endpoint": "/goform/SetPPTPUserList",
+      "parameter": "list"
+    },
+    {
+      "id": "AC15-VULN-005",
+      "severity": "MEDIUM",
+      "title": "Unsafe strcat in formSetPPTPUserList",
+      "details": {
+        "function": "formSetPPTPUserList",
+        "address": "0x000b87a8",
+        "vulnerable_instruction": "0xb939c: strcat(s1, s2) \u2014 appends data without bounds check",
+        "context": "In the PPTP user config serialization loop, strcat appends entries to an output buffer. If many entries with long fields, buffer overflow occurs.",
+        "authentication_required": true
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cvss": "6.5",
+      "cwe": "CWE-120",
+      "endpoint": "/goform/SetPPTPUserList",
+      "parameter": "list"
+    },
+    {
+      "id": "AC15-VULN-006",
+      "severity": "HIGH",
+      "title": "Stack Buffer Overflow in formWifiBasicSet via 'wrlPwd'/'wrlPwd_5g' parameters (strcpy)",
+      "details": {
+        "function": "formWifiBasicSet",
+        "address": "0x00092154",
+        "size_bytes": 6384,
+        "vulnerable_instructions": [
+          "0x929ec: strcpy(dest, src) \u2014 dest at fp-0x9d (var 'dest'), src from websGetVar 'wrlPwd'",
+          "0x92d60: strcpy(s, src) \u2014 dest at fp-0x5d (var 's'), src from websGetVar 'wrlPwd_5g'"
+        ],
+        "websGetVar_parameters": [
+          "wrlEn (2.4GHz WiFi enable)",
+          "hideSsid (hide SSID flag)",
+          "ssid (2.4GHz SSID name)",
+          "security (security type, default 'none')",
+          "wrlPwd (2.4GHz WiFi password, default '12345678')",
+          "wrlEn_5g (5GHz WiFi enable)",
+          "hideSsid_5g (5GHz hide SSID)",
+          "ssid_5g (5GHz SSID)",
+          "security_5g (5GHz security type)",
+          "wrlPwd_5g (5GHz WiFi password)"
+        ],
+        "data_flow_wrlPwd": [
+          "0x92388: websGetVar(connId, 'wrlPwd', '12345678') -> stored as var 'src' at fp-0x2c",
+          "0x929dc: ldr r3, [src] (fp-0x2c) \u2014 load wrlPwd pointer",
+          "0x929e0: sub r2, dest (fp-0x9d) \u2014 destination buffer",
+          "0x929ec: strcpy(fp-0x9d, wrlPwd_input) \u2014 NO BOUNDS CHECK"
+        ],
+        "data_flow_wrlPwd_5g": [
+          "Similar flow: websGetVar 'wrlPwd_5g' -> var_1ch at fp-0x1c",
+          "0x92d50: ldr r3, [var_1ch] \u2014 load password pointer",
+          "0x92d54: sub r2, s (fp-0x5d) \u2014 destination buffer",
+          "0x92d60: strcpy(fp-0x5d, wrlPwd_5g_input) \u2014 NO BOUNDS CHECK"
+        ],
+        "context": "After strcpy, the code reads individual characters for WPA PSK config processing. The passwords are used with SetValue to configure wl.0.s.wpa_psk.pass and wl.5.s.wpa_psk.pass.",
+        "buffer_analysis": "dest at fp-0x9d and s at fp-0x5d are small stack buffers, likely sized for typical WPA passwords (8-63 chars). Overflow with long password string corrupts stack.",
+        "authentication_required": true,
+        "mitigations": "NONE"
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cvss": "8.8",
+      "cwe": "CWE-120",
+      "endpoint": "/goform/WifiBasicSet",
+      "parameter": "wrlPwd, wrlPwd_5g"
+    },
+    {
+      "id": "AC15-VULN-007",
+      "severity": "MEDIUM",
+      "title": "Auth Bypass \u2014 formGetRouterStatus accessible without authentication",
+      "details": {
+        "function": "formGetRouterStatus",
+        "address": "0x0005e1dc",
+        "size_bytes": 6032,
+        "auth_bypass": true,
+        "evidence": "R7WebsSecurityHandler at 0x2f500 contains whitelist entry: strncmp(url, '/goform/GetRouterStatus', 23) at ~0x2fd00. String at 0xdf5a4: '/goform/GetRouterStatus'",
+        "information_leaked": [
+          "WAN connection status and type",
+          "LAN IP address and network info",
+          "WiFi status (2.4GHz and 5GHz)",
+          "Online client MAC addresses (via tpi_get_online_mac_info)",
+          "Firewall/DDoS configuration (security.ddos.map)",
+          "DNS settings",
+          "System mode"
+        ],
+        "risk": "Pre-auth information disclosure of router network configuration",
+        "dangerous_sinks": {
+          "sprintf": "6 calls \u2014 write config data to heap-allocated response buffer (malloc'd)",
+          "strcat": "1 call at 0x5f458 \u2014 concatenates status data",
+          "doSystemCmd": "1 call at 0x5e69c \u2014 with format from get_proc_pid, not user-controlled"
+        },
+        "assessment": "No direct stack buffer overflow from user input (no websGetVar), but information disclosure via unauthenticated access is significant."
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cvss": "5.3",
+      "cwe": "CWE-200",
+      "endpoint": "/goform/GetRouterStatus"
+    },
+    {
+      "id": "AC15-INFO-002",
+      "severity": "LOW",
+      "title": "formGetSystemStatus \u2014 Uses snprintf, no exploitable overflow found",
+      "details": {
+        "function": "formGetSystemStatus",
+        "address": "0x00058ad8",
+        "size_bytes": 10060,
+        "assessment": "Largest handler analyzed. Uses snprintf at 0x594a4 and 0x5991c (bounded writes). No websGetVar calls \u2014 pure status getter. No strcpy/sprintf with user input. Reads config via GetValue and formats output via printf. Relatively safe despite size.",
+        "safe_patterns": [
+          "snprintf used for formatted output (0x594a4, 0x5991c)",
+          "No user input processing (no websGetVar)",
+          "GetValue reads from config store, not from HTTP request"
+        ]
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cwe": "N/A",
+      "endpoint": "/goform/GetSystemStatus"
+    },
+    {
+      "id": "AC15-INFO-003",
+      "severity": "LOW",
+      "title": "formGetPortStatus \u2014 9 strcpy calls but source is internal (GetValue/tpi functions)",
+      "details": {
+        "function": "formGetPortStatus",
+        "address": "0x00057180",
+        "size_bytes": 6192,
+        "strcpy_calls": [
+          "0x5791c, 0x57944, 0x5796c, 0x57994, 0x579bc \u2014 5 strcpy calls copying WiFi status info",
+          "0x57b28 \u2014 strcpy for additional interface data",
+          "0x57cb4, 0x57cfc, 0x57d44 \u2014 3 strcpy calls copying GetValue results"
+        ],
+        "source_analysis": "All strcpy sources come from GetValue() (config store reads) or tpi_wifi_get_status/tpi_wifi_get_ip_info (internal APIs). No direct user input via websGetVar. Risk: if config store contains oversized values, overflow possible.",
+        "assessment": "Low direct risk \u2014 no user input paths. Internal config corruption could potentially trigger overflow via GetValue -> strcpy chain."
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cwe": "CWE-120",
+      "endpoint": "/goform/GetPortStatus"
+    },
+    {
+      "id": "AC15-VULN-008",
+      "severity": "HIGH",
+      "title": "Manufacturing Test Mode \u2014 No authentication, destructive operations via doSystemCmd",
+      "details": {
+        "function": "formMfgTest",
+        "address": "0x00044bb4",
+        "size_bytes": 388,
+        "no_user_input": true,
+        "doSystemCmd_calls": [
+          "0x44c6c: 'killall -9 multiWAN'",
+          "0x44c7c: 'killall -9 dhcpcd_wan1'",
+          "0x44c8c: 'killall -9 dhcpcd_wan2'",
+          "0x44c9c: 'killall -9 pppd_wan1'",
+          "0x44cac: 'killall -9 pppd_wan2'",
+          "0x44cbc: 'killall -9 netctrl'",
+          "0x44ccc: 'killall -9 arpbrocast'",
+          "0x44cdc: (another killall)",
+          "0x44cec: 'iptables -t nat -F'",
+          "0x44cfc: 'switch reg w 40 0x1001'",
+          "0x44d0c: 'switch reg w 70 0xffffffff'"
+        ],
+        "risk": "Triggers manufacturing test mode \u2014 kills all network daemons, flushes iptables NAT rules, reconfigures hardware switch registers. Effectively a denial-of-service that disrupts all router networking. Response: 'start mfg mode success.'",
+        "authentication_required": "Unknown \u2014 needs dynamic verification. Not in R7WebsSecurityHandler whitelist, so likely requires auth. However, Tenda routers have historically had auth bypass issues.",
+        "no_command_injection": "All doSystemCmd strings are hardcoded \u2014 no injection possible"
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cvss": "7.5",
+      "cwe": "CWE-749",
+      "endpoint": "/goform/MfgTest"
+    },
+    {
+      "id": "AC15-VULN-009",
+      "severity": "CRITICAL",
+      "title": "Command Injection in formWriteFacMac via 'mac' parameter (doSystemCmd)",
+      "details": {
+        "function": "formWriteFacMac",
+        "address": "0x000455d0",
+        "size_bytes": 128,
+        "vulnerable_instruction": "0x00045638: bl sym.imp.doSystemCmd",
+        "source": "websGetVar(connId, 'mac', '00:01:02:11:22:33') at 0x0004560c via fcn.0002bd4c",
+        "sink": "doSystemCmd('cfm mac %s', mac_input) at 0x00045638",
+        "format_string": "'cfm mac %s' (at 0xe29ec)",
+        "default_value": "'00:01:02:11:22:33' (at 0xe29c4)",
+        "data_flow": [
+          "0x455f0: ldr r0, [var_18h] \u2014 load connection handle (arg1)",
+          "0x455f4-0x45608: load 'mac' string and '00:01:02:11:22:33' default",
+          "0x4560c: fcn.0002bd4c(connId, 'mac', '00:01:02:11:22:33') \u2014 websGetVar",
+          "0x45610: str r0, [var_10h] \u2014 store user input pointer",
+          "0x4562c: load format string 'cfm mac %s' into r3",
+          "0x45634: ldr r1, [var_10h] \u2014 load user mac value as arg",
+          "0x45638: doSystemCmd('cfm mac %s', user_mac) \u2014 COMMAND INJECTION"
+        ],
+        "exploitation": "Send mac=;id or mac=`id` or mac=$(whoami) to execute arbitrary commands. The 'cfm mac %s' format passes user input directly to system()/popen(). No sanitization, no validation of MAC format.",
+        "authentication_required": true,
+        "auth_notes": "Not in R7WebsSecurityHandler whitelist \u2014 requires session. However, this is a factory/manufacturing endpoint that may have reduced auth.",
+        "mitigations": "NONE",
+        "impact": "Full remote code execution as root (httpd runs as root on Tenda routers)"
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cvss": "9.8",
+      "cwe": "CWE-78",
+      "endpoint": "/goform/WriteFacMac",
+      "parameter": "mac"
+    },
+    {
+      "id": "AC15-VULN-010",
+      "severity": "MEDIUM",
+      "title": "formQuickIndex \u2014 User credentials passed directly to SetValue without sanitization",
+      "details": {
+        "function": "formQuickIndex",
+        "address": "0x00050318",
+        "size_bytes": 916,
+        "websGetVar_parameters": {
+          "mit_rate": "WiFi rate setting",
+          "PPPOEName": "PPPoE username (ISP credential)",
+          "PPPOEPassword": "PPPoE password (ISP credential)",
+          "mit_wrlpwd": "WiFi password",
+          "mit_linktype": "WAN link type"
+        },
+        "doSystemCmd_call": "0x50438: doSystemCmd('cfm post multiWAN ManualDown1\\n') \u2014 hardcoded, safe",
+        "additional_doSystemCmd": "0x50664: doSystemCmd('cfm post multiWAN ManualDown1') \u2014 hardcoded, safe",
+        "data_flow": [
+          "PPPOEPassword -> stored via SetValue to 'wan1.ppoe.password' (config key)",
+          "mit_wrlpwd -> stored via SetValue to 'wl.0.s.wpa_psk.pass' and 'wl.5.s.wpa_psk.pass'",
+          "PPPOEName -> stored via SetValue to PPPoE config"
+        ],
+        "risk": "No direct overflow or injection. User credentials stored in plaintext config. The passwords are passed to SetValue with SetValue handling the storage. If SetValue has internal buffer overflows, this could be exploitable.",
+        "authentication_required": true,
+        "assessment": "No direct memory corruption in this function. Passwords stored in plaintext (CWE-256). Thread created with delay_restart_multiWAN callback."
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cvss": "4.3",
+      "cwe": "CWE-256",
+      "endpoint": "/goform/QuickIndex",
+      "parameter": "PPPOEPassword, mit_wrlpwd"
+    },
+    {
+      "id": "AC15-VULN-011",
+      "severity": "CRITICAL",
+      "title": "Authentication Bypass \u2014 Multiple goform endpoints accessible without auth",
+      "details": {
+        "function": "R7WebsSecurityHandler",
+        "address": "0x0002f500",
+        "size_bytes": 5280,
+        "whitelisted_endpoints": [
+          "/goform/getRebootStatus \u2014 check if router rebooting",
+          "/goform/telnet \u2014 ENABLE TELNET ACCESS (root shell!)",
+          "/goform/ate \u2014 ATE hardware test mode",
+          "/goform/GetRouterStatus \u2014 full network status disclosure",
+          "/goform/getWanParameters \u2014 WAN configuration disclosure",
+          "/goform/GetUSBStatus \u2014 USB device info",
+          "/goform/WifiApScan \u2014 WiFi AP scanning"
+        ],
+        "critical_bypass": "/goform/telnet allows unauthenticated activation of telnet daemon, providing root shell access to the router. This is the most severe auth bypass as it provides direct OS-level access.",
+        "risk": "Pre-authentication access to sensitive router functions and information. The /goform/telnet endpoint is particularly dangerous as it enables remote root access without any credentials."
+      },
+      "timestamp": "2026-03-04T00:03:11.592690",
+      "cvss": "9.8",
+      "cwe": "CWE-306",
+      "endpoint": "/goform/telnet, /goform/GetRouterStatus, /goform/ate"
+    }
+  ],
+  "anomalies": [
+    {
+      "id": "ANOM-001",
+      "description": "formSetFirewallCfg contains 9+ doSystemCmd calls with iptables commands using %s format. While the immediate source is getWispIfName() (internal), if the WISP interface name can be influenced through other config endpoints, this becomes a command injection chain.",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "ANOM-002",
+      "description": "formSetPPTPUserList has a 12KB+ stack frame (0x31B0 bytes). This is unusually large and suggests complex parsing logic with multiple large buffers. The sprintf calls use multi-field format strings ('%s;%s;%s;%s;%s' and '%d;%d;%s;%s;%s;%s;%s;%s') that concatenate parsed user input fields \u2014 classic recipe for buffer overflow.",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "ANOM-003",
+      "description": "formMfgTest has NO input validation at all \u2014 no websGetVar. It simply executes a sequence of killall and system commands. This is a pure DoS endpoint if accessible.",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "ANOM-004",
+      "description": "The R7WebsSecurityHandler whitelist uses strncmp with exact lengths, suggesting the whitelist was intentionally designed. The inclusion of /goform/telnet is likely a development/factory backdoor that was never removed in production firmware.",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    },
+    {
+      "id": "ANOM-005",
+      "description": "fcn.0002bd4c (websGetVar wrapper) is called extensively across all form handlers. It takes 3 args: (connId, paramName, defaultValue). The return value is a pointer to the HTTP POST parameter value, which can be arbitrarily long. Every function that passes this pointer to strcpy/sprintf without length check is vulnerable.",
+      "timestamp": "2026-03-04T00:03:11.592690"
+    }
+  ]
+}

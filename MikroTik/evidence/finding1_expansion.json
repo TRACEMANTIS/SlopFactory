@@ -1,0 +1,1963 @@
+{
+  "metadata": {
+    "script": "finding1_expansion.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "version": "7.20.8 (long-term)",
+    "timestamp": "2026-02-16T11:18:52.250568",
+    "purpose": "Enumerate full scope of REST API privilege escalation (Finding 1)"
+  },
+  "critical_write_tests": [
+    {
+      "endpoint": "POST /rest/user/add",
+      "description": "Create full-privilege admin user",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/user/add",
+      "description": "Create full-privilege admin user",
+      "user": "testwrite",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/user/add",
+      "description": "Create write-privilege user",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/user/add",
+      "description": "Create write-privilege user",
+      "user": "testwrite",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/system/script/add",
+      "description": "Create RouterOS script (potential RCE)",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/system/script/add",
+      "description": "Create RouterOS script (potential RCE)",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "{'ret': '*4'}",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/system/scheduler/add",
+      "description": "Create scheduled task (persistent backdoor)",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/system/scheduler/add",
+      "description": "Create scheduled task (persistent backdoor)",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "{'ret': '*7'}",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    }
+  ],
+  "high_write_tests": [
+    {
+      "endpoint": "POST /rest/ip/firewall/filter/add",
+      "description": "Add firewall filter rule",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/ip/firewall/filter/add",
+      "description": "Add firewall filter rule",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "{'ret': '*2'}",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/ip/firewall/nat/add",
+      "description": "Add NAT rule",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/ip/firewall/nat/add",
+      "description": "Add NAT rule",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "{'ret': '*2'}",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/ip/firewall/mangle/add",
+      "description": "Add mangle rule",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/ip/firewall/mangle/add",
+      "description": "Add mangle rule",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "{'ret': '*2'}",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/ip/dns/static/add",
+      "description": "Add static DNS entry (DNS hijacking)",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/ip/dns/static/add",
+      "description": "Add static DNS entry (DNS hijacking)",
+      "user": "testwrite",
+      "http_status": 400,
+      "error": null,
+      "response_preview": "{'detail': 'failure: entry already exists', 'error': 400, 'message': 'Bad Request'}",
+      "accessible": "PARTIAL",
+      "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'failure: entry already exists', 'error': 400, 'message': 'Bad Request'}"
+    },
+    {
+      "endpoint": "POST /rest/ip/route/add",
+      "description": "Add IP route",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/ip/route/add",
+      "description": "Add IP route",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "{'ret': '*80000003'}",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/ip/address/add",
+      "description": "Add IP address to interface",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/ip/address/add",
+      "description": "Add IP address to interface",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "{'ret': '*3'}",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/certificate/add",
+      "description": "Create certificate",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/certificate/add",
+      "description": "Create certificate",
+      "user": "testwrite",
+      "http_status": 400,
+      "error": null,
+      "response_preview": "{'detail': 'failure: Name exists, please choose another!', 'error': 400, 'message': 'Bad Request'}",
+      "accessible": "PARTIAL",
+      "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'failure: Name exists, please choose another!', 'error': 400, 'message': 'Bad Request'}"
+    }
+  ],
+  "medium_write_tests": [
+    {
+      "endpoint": "PATCH /rest/snmp/set",
+      "description": "Modify SNMP settings",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "PATCH /rest/snmp/set",
+      "description": "Modify SNMP settings",
+      "user": "testwrite",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "PATCH /rest/system/identity/set",
+      "description": "Change system identity",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "PATCH /rest/system/identity/set",
+      "description": "Change system identity",
+      "user": "testwrite",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/system/logging/add",
+      "description": "Add logging rule",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/system/logging/add",
+      "description": "Add logging rule",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "{'ret': '*6'}",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "PATCH /rest/ip/service/set",
+      "description": "Enable/disable IP service",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "PATCH /rest/ip/service/set",
+      "description": "Enable/disable IP service",
+      "user": "testwrite",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "PATCH /rest/interface/set",
+      "description": "Modify interface properties",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "PATCH /rest/interface/set",
+      "description": "Modify interface properties",
+      "user": "testwrite",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/ppp/secret/add",
+      "description": "Add PPP secret",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/ppp/secret/add",
+      "description": "Add PPP secret",
+      "user": "testwrite",
+      "http_status": 400,
+      "error": null,
+      "response_preview": "{'detail': 'failure: secret with the same name already exists', 'error': 400, 'message': 'Bad Request'}",
+      "accessible": "PARTIAL",
+      "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'failure: secret with the same name already exists', 'error': 400, 'message': 'Bad Request'}"
+    },
+    {
+      "endpoint": "POST /rest/ip/dhcp-server/add",
+      "description": "Add DHCP server",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/ip/dhcp-server/add",
+      "description": "Add DHCP server",
+      "user": "testwrite",
+      "http_status": 400,
+      "error": null,
+      "response_preview": "{'detail': 'failure: server with such name already exists', 'error': 400, 'message': 'Bad Request'}",
+      "accessible": "PARTIAL",
+      "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'failure: server with such name already exists', 'error': 400, 'message': 'Bad Request'}"
+    },
+    {
+      "endpoint": "POST /rest/interface/bridge/add",
+      "description": "Create bridge interface",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/interface/bridge/add",
+      "description": "Create bridge interface",
+      "user": "testwrite",
+      "http_status": 400,
+      "error": null,
+      "response_preview": "{'detail': 'failure: already have interface with such name', 'error': 400, 'message': 'Bad Request'}",
+      "accessible": "PARTIAL",
+      "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'failure: already have interface with such name', 'error': 400, 'message': 'Bad Request'}"
+    },
+    {
+      "endpoint": "POST /rest/interface/vlan/add",
+      "description": "Create VLAN interface",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/interface/vlan/add",
+      "description": "Create VLAN interface",
+      "user": "testwrite",
+      "http_status": 400,
+      "error": null,
+      "response_preview": "{'detail': 'failure: already have interface with such name', 'error': 400, 'message': 'Bad Request'}",
+      "accessible": "PARTIAL",
+      "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'failure: already have interface with such name', 'error': 400, 'message': 'Bad Request'}"
+    }
+  ],
+  "system_ops_tests": [
+    {
+      "endpoint": "POST /rest/system/script/run",
+      "description": "Run a script (command execution)",
+      "user": "testread",
+      "http_status": 400,
+      "error": null,
+      "response_preview": "{'detail': 'script not found', 'error': 400, 'message': 'Bad Request'}",
+      "accessible": "PARTIAL",
+      "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'script not found', 'error': 400, 'message': 'Bad Request'}"
+    },
+    {
+      "endpoint": "POST /rest/system/script/run",
+      "description": "Run a script (command execution)",
+      "user": "testwrite",
+      "http_status": 400,
+      "error": null,
+      "response_preview": "{'detail': 'script not found', 'error': 400, 'message': 'Bad Request'}",
+      "accessible": "PARTIAL",
+      "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'script not found', 'error': 400, 'message': 'Bad Request'}"
+    },
+    {
+      "endpoint": "POST /rest/export",
+      "description": "Export full configuration",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "response_preview": null,
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/export",
+      "description": "Export full configuration",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": null,
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/system/backup/save",
+      "description": "Create system backup",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/system/backup/save",
+      "description": "Create system backup",
+      "user": "testwrite",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/system/package/update/check-for-updates",
+      "description": "Check for firmware updates",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/system/package/update/check-for-updates",
+      "description": "Check for firmware updates",
+      "user": "testwrite",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/tool/fetch",
+      "description": "SSRF via tool/fetch (read user)",
+      "user": "testread",
+      "http_status": 400,
+      "error": null,
+      "response_preview": "{'detail': 'failure: cannot open file: permission denied', 'error': 400, 'message': 'Bad Request'}",
+      "accessible": false,
+      "outcome": "Permission denied"
+    },
+    {
+      "endpoint": "POST /rest/tool/fetch",
+      "description": "SSRF via tool/fetch (read user)",
+      "user": "testwrite",
+      "http_status": 400,
+      "error": null,
+      "response_preview": "{'detail': 'failure: cannot open file: permission denied', 'error': 400, 'message': 'Bad Request'}",
+      "accessible": false,
+      "outcome": "Permission denied"
+    },
+    {
+      "endpoint": "POST /rest/ping",
+      "description": "Execute ping from router",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "[{'avg-rtt': '33us', 'host': '127.0.0.1', 'max-rtt': '33us', 'min-rtt': '33us', 'packet-loss': '0', 'received': '1', 'sent': '1', 'seq': '0', 'size': '56', 'time': '33us', 'ttl': '64'}]",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/ping",
+      "description": "Execute ping from router",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "[{'avg-rtt': '27us', 'host': '127.0.0.1', 'max-rtt': '27us', 'min-rtt': '27us', 'packet-loss': '0', 'received': '1', 'sent': '1', 'seq': '0', 'size': '56', 'time': '27us', 'ttl': '64'}]",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/tool/torch",
+      "description": "Run traffic torch (monitoring)",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "response_preview": null,
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/tool/torch",
+      "description": "Run traffic torch (monitoring)",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": null,
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/tool/traceroute",
+      "description": "Execute traceroute from router",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "[{'.section': '0', 'address': '127.0.0.1', 'avg': '0', 'best': '0', 'last': '0', 'loss': '0', 'sent': '1', 'status': '', 'std-dev': '0', 'worst': '0'}]",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/tool/traceroute",
+      "description": "Execute traceroute from router",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "[{'.section': '0', 'address': '127.0.0.1', 'avg': '0', 'best': '0', 'last': '0', 'loss': '0', 'sent': '1', 'status': '', 'std-dev': '0', 'worst': '0'}]",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/tool/bandwidth-test",
+      "description": "Run bandwidth test",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "[{'.section': '0', 'connection-count': '20', 'direction': 'receive', 'lost-packets': '0', 'random-data': 'false', 'rx-10-second-average': '0', 'rx-current': '0', 'rx-size': '65535', 'rx-total-average': '0', 'status': 'connecting'}, {'.section': '1', 'connection-count': '20', 'direction': 'receive', ",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/tool/bandwidth-test",
+      "description": "Run bandwidth test",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "[{'.section': '0', 'connection-count': '20', 'direction': 'receive', 'lost-packets': '0', 'random-data': 'false', 'rx-10-second-average': '0', 'rx-current': '0', 'rx-size': '65535', 'rx-total-average': '0', 'status': 'connecting'}, {'.section': '1', 'connection-count': '20', 'direction': 'receive', ",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/system/sup-output",
+      "description": "Generate support output file",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/system/sup-output",
+      "description": "Generate support output file",
+      "user": "testwrite",
+      "http_status": 500,
+      "error": null,
+      "response_preview": "{'detail': 'not enough permissions (9)', 'error': 500, 'message': 'Internal Server Error'}",
+      "accessible": "UNKNOWN",
+      "outcome": "HTTP 500"
+    },
+    {
+      "endpoint": "POST /rest/tool/e-mail/send",
+      "description": "Send email from router",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "[{}]",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/tool/e-mail/send",
+      "description": "Send email from router",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "response_preview": "[{}]",
+      "accessible": true,
+      "outcome": "SUCCESS \u2014 operation executed"
+    },
+    {
+      "endpoint": "POST /rest/system/script/run",
+      "description": "Run existing script",
+      "user": "testread",
+      "http_status": 404,
+      "error": null,
+      "response_preview": "{'error': 404, 'message': 'Not Found'}",
+      "accessible": false,
+      "outcome": "Endpoint not found"
+    },
+    {
+      "endpoint": "POST /rest/system/script/run",
+      "description": "Run existing script",
+      "user": "testwrite",
+      "http_status": 404,
+      "error": null,
+      "response_preview": "{'error': 404, 'message': 'Not Found'}",
+      "accessible": false,
+      "outcome": "Endpoint not found"
+    }
+  ],
+  "sensitive_read_tests": [
+    {
+      "endpoint": "GET /rest/user",
+      "description": "User list (usernames, groups)",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 3,
+      "response_preview": "[{'.id': '*1', 'address': '', 'comment': 'system default user', 'disabled': 'false', 'expired': 'false', 'group': 'full', 'inactivity-policy': 'none', 'inactivity-timeout': '10m', 'last-logged-in': '2026-02-16 15:40:39', 'name': 'admin'}, {'.id': '*4', 'address': '', 'disabled': 'false', 'expired': 'false', 'group': 'read', 'inactivity-policy': 'none', 'inactivity-timeout': '10m', 'name': 'testread'}]"
+    },
+    {
+      "endpoint": "GET /rest/user",
+      "description": "User list (usernames, groups)",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 3,
+      "response_preview": "[{'.id': '*1', 'address': '', 'comment': 'system default user', 'disabled': 'false', 'expired': 'false', 'group': 'full', 'inactivity-policy': 'none', 'inactivity-timeout': '10m', 'last-logged-in': '2026-02-16 15:40:39', 'name': 'admin'}, {'.id': '*4', 'address': '', 'disabled': 'false', 'expired': 'false', 'group': 'read', 'inactivity-policy': 'none', 'inactivity-timeout': '10m', 'name': 'testread'}]"
+    },
+    {
+      "endpoint": "GET /rest/ppp/secret",
+      "description": "PPP secrets (credentials)",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*1', 'caller-id': '', 'comment': 'TEST_MARKER', 'disabled': 'false', 'ipv6-routes': '', 'last-logged-out': '1970-01-01 00:00:00', 'limit-bytes-in': '0', 'limit-bytes-out': '0', 'name': 'test_ppp', 'password': 'ppp_test_123', 'profile': 'default', 'routes': '', 'service': 'any'}]"
+    },
+    {
+      "endpoint": "GET /rest/ppp/secret",
+      "description": "PPP secrets (credentials)",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*1', 'caller-id': '', 'comment': 'TEST_MARKER', 'disabled': 'false', 'ipv6-routes': '', 'last-logged-out': '1970-01-01 00:00:00', 'limit-bytes-in': '0', 'limit-bytes-out': '0', 'name': 'test_ppp', 'password': 'ppp_test_123', 'profile': 'default', 'routes': '', 'service': 'any'}]"
+    },
+    {
+      "endpoint": "GET /rest/system/resource",
+      "description": "System resources",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'architecture-name': 'x86_64', 'board-name': 'CHR innotek GmbH VirtualBox', 'build-time': '2026-01-30 09:17:54', 'cpu': 'AMD', 'cpu-count': '1', 'cpu-frequency': '4391', 'cpu-load': '1', 'factory-software': '7.1', 'free-hdd-space': '73256960', 'free-memory': '838062080', 'platform': 'MikroTik', 'total-hdd-space': '93564928', 'total-memory': '1073741824', 'uptime': '42m16s', 'version': '7.20.8 (long-term)', 'write-sect-since-reboot': '3896', 'write-sect-total': '3896'}"
+    },
+    {
+      "endpoint": "GET /rest/system/resource",
+      "description": "System resources",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'architecture-name': 'x86_64', 'board-name': 'CHR innotek GmbH VirtualBox', 'build-time': '2026-01-30 09:17:54', 'cpu': 'AMD', 'cpu-count': '1', 'cpu-frequency': '4391', 'cpu-load': '1', 'factory-software': '7.1', 'free-hdd-space': '73256960', 'free-memory': '838062080', 'platform': 'MikroTik', 'total-hdd-space': '93564928', 'total-memory': '1073741824', 'uptime': '42m17s', 'version': '7.20.8 (long-term)', 'write-sect-since-reboot': '3896', 'write-sect-total': '3896'}"
+    },
+    {
+      "endpoint": "GET /rest/system/identity",
+      "description": "System identity",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'name': 'MikroTik'}"
+    },
+    {
+      "endpoint": "GET /rest/system/identity",
+      "description": "System identity",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'name': 'MikroTik'}"
+    },
+    {
+      "endpoint": "GET /rest/ip/address",
+      "description": "IP addresses",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 3,
+      "response_preview": "[{'.id': '*1', 'actual-interface': 'ether1', 'address': '[REDACTED-INTERNAL-IP]/24', 'disabled': 'false', 'dynamic': 'true', 'interface': 'ether1', 'invalid': 'false', 'network': '[REDACTED-INTERNAL-IP]', 'slave': 'false'}, {'.id': '*2', 'actual-interface': 'ether1', 'address': '[REDACTED-INTERNAL-IP]/24', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dynamic': 'false', 'interface': 'ether1', 'invalid': 'false', 'network': '[REDACTED-INTERNAL-IP]', 'slave': 'false'}]"
+    },
+    {
+      "endpoint": "GET /rest/ip/address",
+      "description": "IP addresses",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 3,
+      "response_preview": "[{'.id': '*1', 'actual-interface': 'ether1', 'address': '[REDACTED-INTERNAL-IP]/24', 'disabled': 'false', 'dynamic': 'true', 'interface': 'ether1', 'invalid': 'false', 'network': '[REDACTED-INTERNAL-IP]', 'slave': 'false'}, {'.id': '*2', 'actual-interface': 'ether1', 'address': '[REDACTED-INTERNAL-IP]/24', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dynamic': 'false', 'interface': 'ether1', 'invalid': 'false', 'network': '[REDACTED-INTERNAL-IP]', 'slave': 'false'}]"
+    },
+    {
+      "endpoint": "GET /rest/ip/route",
+      "description": "Routing table",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 4,
+      "response_preview": "[{'.id': '*80000002', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dst-address': '[REDACTED-IP]/24', 'gateway': '[REDACTED-INTERNAL-IP]', 'inactive': 'true', 'static': 'true'}, {'.id': '*80000003', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dst-address': '[REDACTED-IP]/24', 'gateway': '[REDACTED-INTERNAL-IP]', 'inactive': 'true', 'static': 'true'}]"
+    },
+    {
+      "endpoint": "GET /rest/ip/route",
+      "description": "Routing table",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 4,
+      "response_preview": "[{'.id': '*80000002', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dst-address': '[REDACTED-IP]/24', 'gateway': '[REDACTED-INTERNAL-IP]', 'inactive': 'true', 'static': 'true'}, {'.id': '*80000003', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dst-address': '[REDACTED-IP]/24', 'gateway': '[REDACTED-INTERNAL-IP]', 'inactive': 'true', 'static': 'true'}]"
+    },
+    {
+      "endpoint": "GET /rest/ip/firewall/filter",
+      "description": "Firewall filter rules",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 2,
+      "response_preview": "[{'.id': '*1', 'action': 'accept', 'bytes': '0', 'chain': 'input', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dynamic': 'false', 'invalid': 'false', 'packets': '0'}, {'.id': '*2', 'action': 'accept', 'bytes': '0', 'chain': 'input', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dynamic': 'false', 'invalid': 'false', 'packets': '0'}]"
+    },
+    {
+      "endpoint": "GET /rest/ip/firewall/filter",
+      "description": "Firewall filter rules",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 2,
+      "response_preview": "[{'.id': '*1', 'action': 'accept', 'bytes': '0', 'chain': 'input', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dynamic': 'false', 'invalid': 'false', 'packets': '0'}, {'.id': '*2', 'action': 'accept', 'bytes': '0', 'chain': 'input', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dynamic': 'false', 'invalid': 'false', 'packets': '0'}]"
+    },
+    {
+      "endpoint": "GET /rest/ip/firewall/nat",
+      "description": "NAT rules",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 2,
+      "response_preview": "[{'.id': '*1', 'action': 'accept', 'bytes': '0', 'chain': 'dstnat', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dynamic': 'false', 'invalid': 'false', 'packets': '0'}, {'.id': '*2', 'action': 'accept', 'bytes': '0', 'chain': 'dstnat', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dynamic': 'false', 'invalid': 'false', 'packets': '0'}]"
+    },
+    {
+      "endpoint": "GET /rest/ip/firewall/nat",
+      "description": "NAT rules",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 2,
+      "response_preview": "[{'.id': '*1', 'action': 'accept', 'bytes': '0', 'chain': 'dstnat', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dynamic': 'false', 'invalid': 'false', 'packets': '0'}, {'.id': '*2', 'action': 'accept', 'bytes': '0', 'chain': 'dstnat', 'comment': 'TEST_MARKER', 'disabled': 'true', 'dynamic': 'false', 'invalid': 'false', 'packets': '0'}]"
+    },
+    {
+      "endpoint": "GET /rest/ip/dns",
+      "description": "DNS configuration",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'address-list-extra-time': '0s', 'allow-remote-requests': 'false', 'cache-max-ttl': '1w', 'cache-size': '2048', 'cache-used': '51', 'doh-max-concurrent-queries': '50', 'doh-max-server-connections': '5', 'doh-timeout': '5s', 'dynamic-servers': '[REDACTED-IP]', 'max-concurrent-queries': '100', 'max-concurrent-tcp-sessions': '20', 'max-udp-packet-size': '4096', 'mdns-repeat-ifaces': '', 'query-server-timeout': '2s', 'query-total-timeout': '10s', 'servers': '', 'use-doh-server': '', 'verify-doh-cert'"
+    },
+    {
+      "endpoint": "GET /rest/ip/dns",
+      "description": "DNS configuration",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'address-list-extra-time': '0s', 'allow-remote-requests': 'false', 'cache-max-ttl': '1w', 'cache-size': '2048', 'cache-used': '51', 'doh-max-concurrent-queries': '50', 'doh-max-server-connections': '5', 'doh-timeout': '5s', 'dynamic-servers': '[REDACTED-IP]', 'max-concurrent-queries': '100', 'max-concurrent-tcp-sessions': '20', 'max-udp-packet-size': '4096', 'mdns-repeat-ifaces': '', 'query-server-timeout': '2s', 'query-total-timeout': '10s', 'servers': '', 'use-doh-server': '', 'verify-doh-cert'"
+    },
+    {
+      "endpoint": "GET /rest/ip/service",
+      "description": "IP services config",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 13,
+      "response_preview": "[{'.id': '*1', 'address': '', 'disabled': 'false', 'dynamic': 'false', 'invalid': 'false', 'max-sessions': '20', 'name': 'ftp', 'port': '21', 'proto': 'tcp', 'vrf': 'main'}, {'.id': '*4', 'address': '', 'disabled': 'false', 'dynamic': 'false', 'invalid': 'false', 'max-sessions': '20', 'name': 'ssh', 'port': '22', 'proto': 'tcp', 'vrf': 'main'}]"
+    },
+    {
+      "endpoint": "GET /rest/ip/service",
+      "description": "IP services config",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 13,
+      "response_preview": "[{'.id': '*1', 'address': '', 'disabled': 'false', 'dynamic': 'false', 'invalid': 'false', 'max-sessions': '20', 'name': 'ftp', 'port': '21', 'proto': 'tcp', 'vrf': 'main'}, {'.id': '*4', 'address': '', 'disabled': 'false', 'dynamic': 'false', 'invalid': 'false', 'max-sessions': '20', 'name': 'ssh', 'port': '22', 'proto': 'tcp', 'vrf': 'main'}]"
+    },
+    {
+      "endpoint": "GET /rest/system/logging",
+      "description": "Logging configuration",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 6,
+      "response_preview": "[{'.id': '*1', 'action': 'memory', 'default': 'true', 'disabled': 'false', 'invalid': 'false', 'prefix': '', 'regex': '', 'topics': 'info'}, {'.id': '*2', 'action': 'memory', 'default': 'true', 'disabled': 'false', 'invalid': 'false', 'prefix': '', 'regex': '', 'topics': 'error'}]"
+    },
+    {
+      "endpoint": "GET /rest/system/logging",
+      "description": "Logging configuration",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 6,
+      "response_preview": "[{'.id': '*1', 'action': 'memory', 'default': 'true', 'disabled': 'false', 'invalid': 'false', 'prefix': '', 'regex': '', 'topics': 'info'}, {'.id': '*2', 'action': 'memory', 'default': 'true', 'disabled': 'false', 'invalid': 'false', 'prefix': '', 'regex': '', 'topics': 'error'}]"
+    },
+    {
+      "endpoint": "GET /rest/system/clock",
+      "description": "System clock",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'date': '2026-02-16', 'dst-active': 'false', 'gmt-offset': '+00:00', 'time': '16:22:09', 'time-zone-autodetect': 'true', 'time-zone-name': 'manual'}"
+    },
+    {
+      "endpoint": "GET /rest/system/clock",
+      "description": "System clock",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'date': '2026-02-16', 'dst-active': 'false', 'gmt-offset': '+00:00', 'time': '16:22:10', 'time-zone-autodetect': 'true', 'time-zone-name': 'manual'}"
+    },
+    {
+      "endpoint": "GET /rest/system/ntp/client",
+      "description": "NTP client config",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'enabled': 'false', 'freq-drift': '0', 'mode': 'unicast', 'servers': '', 'status': 'stopped', 'vrf': 'main'}"
+    },
+    {
+      "endpoint": "GET /rest/system/ntp/client",
+      "description": "NTP client config",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'enabled': 'false', 'freq-drift': '0', 'mode': 'unicast', 'servers': '', 'status': 'stopped', 'vrf': 'main'}"
+    },
+    {
+      "endpoint": "GET /rest/system/package",
+      "description": "Installed packages",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*1', 'available': 'false', 'build-time': '2026-01-30 09:17:54', 'disabled': 'false', 'name': 'routeros', 'scheduled': '', 'size': '20054899', 'version': '7.20.8'}]"
+    },
+    {
+      "endpoint": "GET /rest/system/package",
+      "description": "Installed packages",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*1', 'available': 'false', 'build-time': '2026-01-30 09:17:54', 'disabled': 'false', 'name': 'routeros', 'scheduled': '', 'size': '20054899', 'version': '7.20.8'}]"
+    },
+    {
+      "endpoint": "GET /rest/system/history",
+      "description": "Command history",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 62,
+      "response_preview": "[{'.id': '*3E', 'action': 'log rule added', 'by': 'testwrite', 'policy': 'write', 'redo': '/system logging add action=memory prefix=TEST_MARKER topics=info\\r\\n', 'time': '2026-02-16 16:21:41', 'trace': 'api:testwrite@::', 'undo': '/system logging remove \"\"\\r\\n', 'undoable': 'true'}, {'.id': '*3D', 'action': 'address added', 'by': 'testwrite', 'policy': 'write', 'redo': '/ip address add address=[REDACTED-INTERNAL-IP]/24 comment=TEST_MARKER \\\\\\r\\n    disabled=true interface=ether1\\r\\n', 'time': '2026-02-16 1"
+    },
+    {
+      "endpoint": "GET /rest/system/history",
+      "description": "Command history",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 62,
+      "response_preview": "[{'.id': '*3E', 'action': 'log rule added', 'by': 'testwrite', 'policy': 'write', 'redo': '/system logging add action=memory prefix=TEST_MARKER topics=info\\r\\n', 'time': '2026-02-16 16:21:41', 'trace': 'api:testwrite@::', 'undo': '/system logging remove \"\"\\r\\n', 'undoable': 'true'}, {'.id': '*3D', 'action': 'address added', 'by': 'testwrite', 'policy': 'write', 'redo': '/ip address add address=[REDACTED-INTERNAL-IP]/24 comment=TEST_MARKER \\\\\\r\\n    disabled=true interface=ether1\\r\\n', 'time': '2026-02-16 1"
+    },
+    {
+      "endpoint": "GET /rest/system/license",
+      "description": "License info",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'level': 'free', 'system-id': 'Gsx3BP+bnsA'}"
+    },
+    {
+      "endpoint": "GET /rest/system/license",
+      "description": "License info",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'level': 'free', 'system-id': 'Gsx3BP+bnsA'}"
+    },
+    {
+      "endpoint": "GET /rest/certificate",
+      "description": "Certificates",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*1', 'common-name': 'evil.test', 'crl': 'false', 'days-valid': '365', 'key-size': '2048', 'key-type': 'rsa', 'key-usage': 'digital-signature,key-encipherment,data-encipherment,key-cert-sign,crl-sign,tls-server,tls-client', 'name': 'test_cert', 'private-key': 'false', 'subject-alt-name': ''}]"
+    },
+    {
+      "endpoint": "GET /rest/certificate",
+      "description": "Certificates",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*1', 'common-name': 'evil.test', 'crl': 'false', 'days-valid': '365', 'key-size': '2048', 'key-type': 'rsa', 'key-usage': 'digital-signature,key-encipherment,data-encipherment,key-cert-sign,crl-sign,tls-server,tls-client', 'name': 'test_cert', 'private-key': 'false', 'subject-alt-name': ''}]"
+    },
+    {
+      "endpoint": "GET /rest/interface",
+      "description": "Interface list",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 4,
+      "response_preview": "[{'.id': '*2', 'actual-mtu': '1500', 'default-name': 'ether1', 'disabled': 'false', 'fp-rx-byte': '0', 'fp-rx-packet': '0', 'fp-tx-byte': '0', 'fp-tx-packet': '0', 'last-link-up-time': '2026-02-16 15:39:54', 'link-downs': '0', 'mac-address': '08:00:27:C8:20:FD', 'mtu': '1500', 'name': 'ether1', 'running': 'true', 'rx-byte': '2375383', 'rx-drop': '0', 'rx-error': '0', 'rx-packet': '18234', 'tx-byte': '591816', 'tx-drop': '0', 'tx-error': '0', 'tx-packet': '2161', 'tx-queue-drop': '0', 'type': 'et"
+    },
+    {
+      "endpoint": "GET /rest/interface",
+      "description": "Interface list",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 4,
+      "response_preview": "[{'.id': '*2', 'actual-mtu': '1500', 'default-name': 'ether1', 'disabled': 'false', 'fp-rx-byte': '0', 'fp-rx-packet': '0', 'fp-tx-byte': '0', 'fp-tx-packet': '0', 'last-link-up-time': '2026-02-16 15:39:54', 'link-downs': '0', 'mac-address': '08:00:27:C8:20:FD', 'mtu': '1500', 'name': 'ether1', 'running': 'true', 'rx-byte': '2375383', 'rx-drop': '0', 'rx-error': '0', 'rx-packet': '18234', 'tx-byte': '591816', 'tx-drop': '0', 'tx-error': '0', 'tx-packet': '2161', 'tx-queue-drop': '0', 'type': 'et"
+    },
+    {
+      "endpoint": "GET /rest/ip/neighbor",
+      "description": "Neighbor discovery",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*1', 'age': '10m45s', 'discovered-by': 'lldp', 'identity': '', 'interface': 'ether1', 'mac-address': '74:56:3C:B5:77:9B', 'platform': '', 'system-caps': '', 'system-caps-enabled': '', 'unpack': 'none', 'version': ''}]"
+    },
+    {
+      "endpoint": "GET /rest/ip/neighbor",
+      "description": "Neighbor discovery",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*1', 'age': '10m46s', 'discovered-by': 'lldp', 'identity': '', 'interface': 'ether1', 'mac-address': '74:56:3C:B5:77:9B', 'platform': '', 'system-caps': '', 'system-caps-enabled': '', 'unpack': 'none', 'version': ''}]"
+    },
+    {
+      "endpoint": "GET /rest/system/script",
+      "description": "Scripts (source code)",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*4', 'dont-require-permissions': 'false', 'invalid': 'false', 'name': 'test_exploit', 'owner': 'testwrite', 'policy': 'reboot,read,write,test,password,sniff,sensitive,romon', 'run-count': '0', 'source': ':log info \"EXPLOIT_MARKER\"'}]"
+    },
+    {
+      "endpoint": "GET /rest/system/script",
+      "description": "Scripts (source code)",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*4', 'dont-require-permissions': 'false', 'invalid': 'false', 'name': 'test_exploit', 'owner': 'testwrite', 'policy': 'reboot,read,write,test,password,sniff,sensitive,romon', 'run-count': '0', 'source': ':log info \"EXPLOIT_MARKER\"'}]"
+    },
+    {
+      "endpoint": "GET /rest/system/scheduler",
+      "description": "Scheduled tasks",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*7', 'disabled': 'false', 'interval': '1d', 'name': 'test_sched', 'next-run': '2026-02-17 16:21:30', 'on-event': ':log info \"SCHED_MARKER\"', 'owner': 'testwrite', 'policy': 'reboot,read,write,test,password,sniff,sensitive,romon', 'run-count': '0', 'start-date': '2026-02-16', 'start-time': '16:21:30'}]"
+    },
+    {
+      "endpoint": "GET /rest/system/scheduler",
+      "description": "Scheduled tasks",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*7', 'disabled': 'false', 'interval': '1d', 'name': 'test_sched', 'next-run': '2026-02-17 16:21:30', 'on-event': ':log info \"SCHED_MARKER\"', 'owner': 'testwrite', 'policy': 'reboot,read,write,test,password,sniff,sensitive,romon', 'run-count': '0', 'start-date': '2026-02-16', 'start-time': '16:21:30'}]"
+    },
+    {
+      "endpoint": "GET /rest/file",
+      "description": "File listing",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 4,
+      "response_preview": "[{'.id': '*/1000FE21086964656E74697479', 'contents': '{\"name\":\"MikroTik\"}', 'last-modified': '2026-02-16 15:43:31', 'name': 'identity', 'size': '19', 'type': 'file'}, {'.id': '*/1000FE210466696C65', 'contents': '<!doctype html>\\n<html lang=\"en\">\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<link rel=\"icon\" href=\"/favicon.png\">\\n<link rel=\"icon\" href=\"/favicon.svg\">\\n<title>RouterOS</title>\\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df160dad."
+    },
+    {
+      "endpoint": "GET /rest/file",
+      "description": "File listing",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 4,
+      "response_preview": "[{'.id': '*/1000FE21086964656E74697479', 'contents': '{\"name\":\"MikroTik\"}', 'last-modified': '2026-02-16 15:43:31', 'name': 'identity', 'size': '19', 'type': 'file'}, {'.id': '*/1000FE210466696C65', 'contents': '<!doctype html>\\n<html lang=\"en\">\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<link rel=\"icon\" href=\"/favicon.png\">\\n<link rel=\"icon\" href=\"/favicon.svg\">\\n<title>RouterOS</title>\\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df160dad."
+    },
+    {
+      "endpoint": "GET /rest/log",
+      "description": "System log",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 262,
+      "response_preview": "[{'.id': '*0', 'extra-info': '', 'message': 'router rebooted', 'time': '2026-02-16 15:39:51', 'topics': 'system,info'}, {'.id': '*1', 'extra-info': '', 'message': 'lo link up', 'time': '2026-02-16 15:39:51', 'topics': 'interface,info'}]"
+    },
+    {
+      "endpoint": "GET /rest/log",
+      "description": "System log",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 262,
+      "response_preview": "[{'.id': '*0', 'extra-info': '', 'message': 'router rebooted', 'time': '2026-02-16 15:39:51', 'topics': 'system,info'}, {'.id': '*1', 'extra-info': '', 'message': 'lo link up', 'time': '2026-02-16 15:39:51', 'topics': 'interface,info'}]"
+    },
+    {
+      "endpoint": "GET /rest/ip/ssh",
+      "description": "SSH configuration",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'always-allow-password-login': 'false', 'ciphers': 'auto', 'forwarding-enabled': 'no', 'host-key-size': '2048', 'host-key-type': 'rsa', 'strong-crypto': 'false'}"
+    },
+    {
+      "endpoint": "GET /rest/ip/ssh",
+      "description": "SSH configuration",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'always-allow-password-login': 'false', 'ciphers': 'auto', 'forwarding-enabled': 'no', 'host-key-size': '2048', 'host-key-type': 'rsa', 'strong-crypto': 'false'}"
+    },
+    {
+      "endpoint": "GET /rest/user/group",
+      "description": "User groups & permissions",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 3,
+      "response_preview": "[{'.id': '*1', 'name': 'read', 'policy': 'local,telnet,ssh,reboot,read,test,winbox,password,web,sniff,sensitive,api,romon,rest-api,!ftp,!write,!policy', 'skin': 'default'}, {'.id': '*2', 'name': 'write', 'policy': 'local,telnet,ssh,reboot,read,write,test,winbox,password,web,sniff,sensitive,api,romon,rest-api,!ftp,!policy', 'skin': 'default'}]"
+    },
+    {
+      "endpoint": "GET /rest/user/group",
+      "description": "User groups & permissions",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 3,
+      "response_preview": "[{'.id': '*1', 'name': 'read', 'policy': 'local,telnet,ssh,reboot,read,test,winbox,password,web,sniff,sensitive,api,romon,rest-api,!ftp,!write,!policy', 'skin': 'default'}, {'.id': '*2', 'name': 'write', 'policy': 'local,telnet,ssh,reboot,read,write,test,winbox,password,web,sniff,sensitive,api,romon,rest-api,!ftp,!policy', 'skin': 'default'}]"
+    },
+    {
+      "endpoint": "GET /rest/snmp",
+      "description": "SNMP configuration",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'contact': '', 'enabled': 'false', 'engine-id': '80003a8c04', 'engine-id-suffix': '', 'location': '', 'src-address': '::', 'trap-community': 'public', 'trap-generators': 'temp-exception', 'trap-target': '', 'trap-version': '1', 'vrf': 'main'}"
+    },
+    {
+      "endpoint": "GET /rest/snmp",
+      "description": "SNMP configuration",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'contact': '', 'enabled': 'false', 'engine-id': '80003a8c04', 'engine-id-suffix': '', 'location': '', 'src-address': '::', 'trap-community': 'public', 'trap-generators': 'temp-exception', 'trap-target': '', 'trap-version': '1', 'vrf': 'main'}"
+    },
+    {
+      "endpoint": "GET /rest/snmp/community",
+      "description": "SNMP community strings",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*0', 'addresses': '::/0', 'authentication-password': '', 'authentication-protocol': 'MD5', 'default': 'true', 'disabled': 'false', 'encryption-password': '', 'encryption-protocol': 'DES', 'name': 'public', 'read-access': 'true', 'security': 'none', 'write-access': 'false'}]"
+    },
+    {
+      "endpoint": "GET /rest/snmp/community",
+      "description": "SNMP community strings",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*0', 'addresses': '::/0', 'authentication-password': '', 'authentication-protocol': 'MD5', 'default': 'true', 'disabled': 'false', 'encryption-password': '', 'encryption-protocol': 'DES', 'name': 'public', 'read-access': 'true', 'security': 'none', 'write-access': 'false'}]"
+    },
+    {
+      "endpoint": "GET /rest/radius",
+      "description": "RADIUS configuration",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 0,
+      "response_preview": "[]"
+    },
+    {
+      "endpoint": "GET /rest/radius",
+      "description": "RADIUS configuration",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 0,
+      "response_preview": "[]"
+    },
+    {
+      "endpoint": "GET /rest/ip/hotspot",
+      "description": "Hotspot configuration",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 0,
+      "response_preview": "[]"
+    },
+    {
+      "endpoint": "GET /rest/ip/hotspot",
+      "description": "Hotspot configuration",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 0,
+      "response_preview": "[]"
+    },
+    {
+      "endpoint": "GET /rest/ip/proxy",
+      "description": "Web proxy config",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'always-from-cache': 'false', 'anonymous': 'false', 'cache-administrator': 'webmaster', 'cache-hit-dscp': '4', 'cache-on-disk': 'false', 'cache-path': 'web-proxy', 'enabled': 'false', 'max-cache-object-size': '2048', 'max-cache-size': 'unlimited', 'max-client-connections': '600', 'max-fresh-time': '3d', 'max-server-connections': '600', 'parent-proxy': '::', 'parent-proxy-port': '0', 'port': '8080', 'serialize-connections': 'false', 'src-address': '::'}"
+    },
+    {
+      "endpoint": "GET /rest/ip/proxy",
+      "description": "Web proxy config",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "{'always-from-cache': 'false', 'anonymous': 'false', 'cache-administrator': 'webmaster', 'cache-hit-dscp': '4', 'cache-on-disk': 'false', 'cache-path': 'web-proxy', 'enabled': 'false', 'max-cache-object-size': '2048', 'max-cache-size': 'unlimited', 'max-client-connections': '600', 'max-fresh-time': '3d', 'max-server-connections': '600', 'parent-proxy': '::', 'parent-proxy-port': '0', 'port': '8080', 'serialize-connections': 'false', 'src-address': '::'}"
+    },
+    {
+      "endpoint": "GET /rest/env",
+      "description": "Environment variables (undocumented)",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 0,
+      "response_preview": "[]"
+    },
+    {
+      "endpoint": "GET /rest/env",
+      "description": "Environment variables (undocumented)",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 0,
+      "response_preview": "[]"
+    },
+    {
+      "endpoint": "GET /rest/system/console",
+      "description": "Console sessions (undocumented)",
+      "user": "testread",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*1', 'channel': '0', 'default': 'true', 'disabled': 'false', 'term': 'linux', 'used': 'true', 'vcno': '1'}]"
+    },
+    {
+      "endpoint": "GET /rest/system/console",
+      "description": "Console sessions (undocumented)",
+      "user": "testwrite",
+      "http_status": 200,
+      "error": null,
+      "accessible": true,
+      "data_returned": true,
+      "record_count": 1,
+      "response_preview": "[{'.id': '*1', 'channel': '0', 'default': 'true', 'disabled': 'false', 'term': 'linux', 'used': 'true', 'vcno': '1'}]"
+    },
+    {
+      "endpoint": "GET /rest/file/flash",
+      "description": "File access: /rest/file/flash",
+      "user": "testread",
+      "http_status": 500,
+      "error": null,
+      "accessible": "UNKNOWN",
+      "data_returned": false
+    },
+    {
+      "endpoint": "GET /rest/file/flash/rw",
+      "description": "File access: /rest/file/flash/rw",
+      "user": "testread",
+      "http_status": 400,
+      "error": null,
+      "accessible": "UNKNOWN",
+      "data_returned": false
+    },
+    {
+      "endpoint": "GET /rest/file/flash",
+      "description": "File access: /rest/file/flash",
+      "user": "testwrite",
+      "http_status": 500,
+      "error": null,
+      "accessible": "UNKNOWN",
+      "data_returned": false
+    },
+    {
+      "endpoint": "GET /rest/file/flash/rw",
+      "description": "File access: /rest/file/flash/rw",
+      "user": "testwrite",
+      "http_status": 400,
+      "error": null,
+      "accessible": "UNKNOWN",
+      "data_returned": false
+    }
+  ],
+  "summary": {
+    "total_tests": 132,
+    "total_accessible": 84,
+    "total_partial": 8,
+    "total_blocked": 4,
+    "accessible_by_read_user": [
+      {
+        "endpoint": "POST /rest/system/script/run",
+        "description": "Run a script (command execution)",
+        "status": 400,
+        "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'script not found', 'error': 400, 'message': 'Bad Request'}"
+      },
+      {
+        "endpoint": "POST /rest/export",
+        "description": "Export full configuration",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/ping",
+        "description": "Execute ping from router",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/tool/torch",
+        "description": "Run traffic torch (monitoring)",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/tool/traceroute",
+        "description": "Execute traceroute from router",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/tool/bandwidth-test",
+        "description": "Run bandwidth test",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/tool/e-mail/send",
+        "description": "Send email from router",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "GET /rest/user",
+        "description": "User list (usernames, groups)",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ppp/secret",
+        "description": "PPP secrets (credentials)",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/resource",
+        "description": "System resources",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/identity",
+        "description": "System identity",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/address",
+        "description": "IP addresses",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/route",
+        "description": "Routing table",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/firewall/filter",
+        "description": "Firewall filter rules",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/firewall/nat",
+        "description": "NAT rules",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/dns",
+        "description": "DNS configuration",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/service",
+        "description": "IP services config",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/logging",
+        "description": "Logging configuration",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/clock",
+        "description": "System clock",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/ntp/client",
+        "description": "NTP client config",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/package",
+        "description": "Installed packages",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/history",
+        "description": "Command history",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/license",
+        "description": "License info",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/certificate",
+        "description": "Certificates",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/interface",
+        "description": "Interface list",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/neighbor",
+        "description": "Neighbor discovery",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/script",
+        "description": "Scripts (source code)",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/scheduler",
+        "description": "Scheduled tasks",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/file",
+        "description": "File listing",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/log",
+        "description": "System log",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/ssh",
+        "description": "SSH configuration",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/user/group",
+        "description": "User groups & permissions",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/snmp",
+        "description": "SNMP configuration",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/snmp/community",
+        "description": "SNMP community strings",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/radius",
+        "description": "RADIUS configuration",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/hotspot",
+        "description": "Hotspot configuration",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/proxy",
+        "description": "Web proxy config",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/env",
+        "description": "Environment variables (undocumented)",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/console",
+        "description": "Console sessions (undocumented)",
+        "status": 200,
+        "outcome": "accessible"
+      }
+    ],
+    "accessible_by_write_user": [
+      {
+        "endpoint": "POST /rest/system/script/add",
+        "description": "Create RouterOS script (potential RCE)",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/system/scheduler/add",
+        "description": "Create scheduled task (persistent backdoor)",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/ip/firewall/filter/add",
+        "description": "Add firewall filter rule",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/ip/firewall/nat/add",
+        "description": "Add NAT rule",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/ip/firewall/mangle/add",
+        "description": "Add mangle rule",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/ip/dns/static/add",
+        "description": "Add static DNS entry (DNS hijacking)",
+        "status": 400,
+        "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'failure: entry already exists', 'error': 400, 'message': 'Bad Request'}"
+      },
+      {
+        "endpoint": "POST /rest/ip/route/add",
+        "description": "Add IP route",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/ip/address/add",
+        "description": "Add IP address to interface",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/certificate/add",
+        "description": "Create certificate",
+        "status": 400,
+        "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'failure: Name exists, please choose another!', 'error': 400, 'message': 'Bad Request'}"
+      },
+      {
+        "endpoint": "POST /rest/system/logging/add",
+        "description": "Add logging rule",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/ppp/secret/add",
+        "description": "Add PPP secret",
+        "status": 400,
+        "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'failure: secret with the same name already exists', 'error': 400, 'message': 'Bad Request'}"
+      },
+      {
+        "endpoint": "POST /rest/ip/dhcp-server/add",
+        "description": "Add DHCP server",
+        "status": 400,
+        "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'failure: server with such name already exists', 'error': 400, 'message': 'Bad Request'}"
+      },
+      {
+        "endpoint": "POST /rest/interface/bridge/add",
+        "description": "Create bridge interface",
+        "status": 400,
+        "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'failure: already have interface with such name', 'error': 400, 'message': 'Bad Request'}"
+      },
+      {
+        "endpoint": "POST /rest/interface/vlan/add",
+        "description": "Create VLAN interface",
+        "status": 400,
+        "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'failure: already have interface with such name', 'error': 400, 'message': 'Bad Request'}"
+      },
+      {
+        "endpoint": "POST /rest/system/script/run",
+        "description": "Run a script (command execution)",
+        "status": 400,
+        "outcome": "HTTP 400 \u2014 past auth but request error: {'detail': 'script not found', 'error': 400, 'message': 'Bad Request'}"
+      },
+      {
+        "endpoint": "POST /rest/export",
+        "description": "Export full configuration",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/ping",
+        "description": "Execute ping from router",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/tool/torch",
+        "description": "Run traffic torch (monitoring)",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/tool/traceroute",
+        "description": "Execute traceroute from router",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/tool/bandwidth-test",
+        "description": "Run bandwidth test",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "POST /rest/tool/e-mail/send",
+        "description": "Send email from router",
+        "status": 200,
+        "outcome": "SUCCESS \u2014 operation executed"
+      },
+      {
+        "endpoint": "GET /rest/user",
+        "description": "User list (usernames, groups)",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ppp/secret",
+        "description": "PPP secrets (credentials)",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/resource",
+        "description": "System resources",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/identity",
+        "description": "System identity",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/address",
+        "description": "IP addresses",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/route",
+        "description": "Routing table",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/firewall/filter",
+        "description": "Firewall filter rules",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/firewall/nat",
+        "description": "NAT rules",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/dns",
+        "description": "DNS configuration",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/service",
+        "description": "IP services config",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/logging",
+        "description": "Logging configuration",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/clock",
+        "description": "System clock",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/ntp/client",
+        "description": "NTP client config",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/package",
+        "description": "Installed packages",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/history",
+        "description": "Command history",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/license",
+        "description": "License info",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/certificate",
+        "description": "Certificates",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/interface",
+        "description": "Interface list",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/neighbor",
+        "description": "Neighbor discovery",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/script",
+        "description": "Scripts (source code)",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/scheduler",
+        "description": "Scheduled tasks",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/file",
+        "description": "File listing",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/log",
+        "description": "System log",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/ssh",
+        "description": "SSH configuration",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/user/group",
+        "description": "User groups & permissions",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/snmp",
+        "description": "SNMP configuration",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/snmp/community",
+        "description": "SNMP community strings",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/radius",
+        "description": "RADIUS configuration",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/hotspot",
+        "description": "Hotspot configuration",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/ip/proxy",
+        "description": "Web proxy config",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/env",
+        "description": "Environment variables (undocumented)",
+        "status": 200,
+        "outcome": "accessible"
+      },
+      {
+        "endpoint": "GET /rest/system/console",
+        "description": "Console sessions (undocumented)",
+        "status": 200,
+        "outcome": "accessible"
+      }
+    ],
+    "read_user_accessible_count": 39,
+    "write_user_accessible_count": 53
+  }
+}

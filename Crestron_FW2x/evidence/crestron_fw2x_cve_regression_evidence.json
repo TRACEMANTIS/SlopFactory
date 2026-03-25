@@ -1,0 +1,156 @@
+{
+  "metadata": {
+    "assessment": "CrestronFW2x — Crestron FW 2.x (DMPS3) Security Assessment",
+    "phase": "Phase 7 — CVE Regression Testing",
+    "firmware": "PufVersion 1.5010.00023",
+    "timestamp": "2026-03-03T22:30:00Z",
+    "script": "manual analysis (r2, strings, file inspection)"
+  },
+  "cve_regression_results": [
+    {
+      "cve": "CVE-2025-47421",
+      "title": "SCP Argument Injection",
+      "fix_version": "3.001.0031",
+      "fw2x_version": "1.5010.00023",
+      "status": "UNPATCHED",
+      "confidence": "HIGH",
+      "evidence": {
+        "file": "/system/bin/sshShell.sh",
+        "vulnerable_line": 95,
+        "pattern": "scp -U $SCP_PARAM $new_cmd",
+        "issue": "$new_cmd is unquoted, allowing argument injection",
+        "awk_extraction": "new_cmd=`echo \"$@\" | busybox awk '{print $2 \" \" $3 ...}'`",
+        "operator_bypass": "grep \" -t\" is bypassable with tab character"
+      },
+      "live_test": "NOT POSSIBLE — SSH port 22 not accessible from AWS test position",
+      "finding_id": "[REDACTED-ID]_009"
+    },
+    {
+      "cve": "CVE-2025-47416",
+      "title": "Console Command Prefix Hijacking",
+      "fix_version": "3.001.0031",
+      "fw2x_version": "1.5010.00023",
+      "status": "UNPATCHED",
+      "confidence": "HIGH",
+      "evidence": {
+        "binary": "libsymproc.so",
+        "functions": [
+          "ConsoleFindCommandMatchList",
+          "ConsoleFindCommandMatch",
+          "HandleConsoleCommand",
+          "RequestConsoleCommand",
+          "RequestConsoleCommandWithAccessLevel"
+        ],
+        "ipc_paths": [
+          "/dev/shm/symproc/join_in",
+          "/dev/shm/symproc/join_out",
+          "/dev/shm/symproc/cres_in",
+          "/dev/shm/symproc/cres_out",
+          "/dev/shm/symproc/ctp_in",
+          "/dev/shm/symproc/ctp_out"
+        ]
+      },
+      "live_test": "NOT POSSIBLE — CTP port 41795 not accessible from AWS test position",
+      "finding_id": "[REDACTED-ID]_010"
+    },
+    {
+      "cve": "CVE-2025-47415",
+      "title": "Console Command Related (sibling to CVE-2025-47416)",
+      "fix_version": "3.001.0031",
+      "fw2x_version": "1.5010.00023",
+      "status": "LIKELY UNPATCHED",
+      "confidence": "MEDIUM",
+      "evidence": {
+        "note": "Same libsymproc.so dispatch functions present; CVE details suggest related vulnerability class"
+      },
+      "live_test": "NOT POSSIBLE — CTP port 41795 not accessible from AWS test position",
+      "finding_id": "[REDACTED-ID]_010 (combined)"
+    },
+    {
+      "cve": "CVE-2018-5553",
+      "title": "CTP Command Injection on DGE-100",
+      "fix_version": "Unknown (2018 advisory)",
+      "fw2x_version": "1.5010.00023",
+      "status": "VULNERABILITY CLASS PERSISTS",
+      "confidence": "HIGH",
+      "evidence": {
+        "binary": "a_console",
+        "system_logging": "%s: called system(\"%s\"), returned: %d",
+        "validation_weakness": "validateCharacters() blocks only 7 chars: < > & \\ | ; $ `",
+        "unquoted_format_strings": [
+          "ping %s (offset 0x7ebce)",
+          "ping -c 3 %s (offset 0x81146)"
+        ],
+        "quoted_format_strings": [
+          "ping -W 1 -c 3 '%s' (offset 0x7dbfa)",
+          "ping -c 3 '%s' (offset 0x810f2)"
+        ],
+        "dge100_in_target_list": true
+      },
+      "live_test": "LIMITED — HOSTNAME CTP works, ADDUSER CTP times out, direct CTP port not accessible",
+      "finding_id": "[REDACTED-ID]_011"
+    },
+    {
+      "cve": "CVE-2019-3931",
+      "title": "SNMP OID Command Injection (AM-100/101 pattern)",
+      "fix_version": "N/A (different product line)",
+      "fw2x_version": "1.5010.00023",
+      "status": "PATTERN PRESENT",
+      "confidence": "MEDIUM",
+      "evidence": {
+        "binary": "crestronTouchMIB.so (17K)",
+        "functions": ["RequestConsoleCommand", "ConnectToConsole", "commandQuery"],
+        "crestronMIB_binary": "crestronMIB.so (14K, NO STACK CANARY)",
+        "crestronMIB_functions": ["write_crestronint", "write_crestrontrap", "write_crestrontrap2"],
+        "snmp_config": {
+          "file": "/crestron/data/snmp/snmpd.conf",
+          "view": "sysview included .1 (full MIB tree)",
+          "community_string": "NOT DEFINED in config (may use defaults)",
+          "modules": ["crestronMIB.so", "crestronTouchMIB.so"]
+        }
+      },
+      "live_test": "NOT POSSIBLE — SNMP port 161/UDP not accessible from AWS test position",
+      "finding_id": "[REDACTED-ID]_011 (subsection)"
+    },
+    {
+      "cve": "CVE-2019-3932",
+      "title": "return.cgi Auth Bypass (AM-100/AM-101)",
+      "fix_version": "N/A (different product line)",
+      "fw2x_version": "1.5010.00023",
+      "status": "NOT APPLICABLE",
+      "confidence": "HIGH",
+      "evidence": {
+        "note": "return.cgi does not exist in DMPS3 firmware — different product family"
+      },
+      "live_test": "N/A",
+      "finding_id": "N/A"
+    }
+  ],
+  "novel_findings_from_regression": [
+    {
+      "id": "PING_INCONSISTENT_QUOTING",
+      "description": "a_console contains both quoted (ping '%s') and unquoted (ping %s) format strings. If the unquoted path is reachable via CTP PING command, command injection is possible.",
+      "offsets": {
+        "quoted_1": "0x7dbfa: ping -W 1 -c 3 '%s'",
+        "unquoted_1": "0x7ebce: ping %s",
+        "quoted_2": "0x810f2: ping -c 3 '%s'",
+        "unquoted_2": "0x81146: ping -c 3 %s"
+      },
+      "context": {
+        "unquoted_ping_s": "Near 'PING transmit failed' — likely user-facing PING command",
+        "unquoted_ping_c3_s": "Near 'Error pinging Default Gateway' — diagnostics check, may use user-configured gateway"
+      },
+      "severity": "HIGH if reachable",
+      "finding_id": "[REDACTED-ID]_011 (subsection)"
+    }
+  ],
+  "summary": {
+    "total_cves_tested": 6,
+    "unpatched": 2,
+    "likely_unpatched": 1,
+    "pattern_present": 2,
+    "not_applicable": 1,
+    "live_validated": 0,
+    "not_testable_from_aws": 5
+  }
+}

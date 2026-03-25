@@ -1,0 +1,284 @@
+{
+  "metadata": {
+    "phase": "4.5",
+    "name": "Middleware Ordering Analysis",
+    "timestamp": "2026-02-15T12:42:06.438745"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "security_headers",
+      "version": "v5",
+      "data": {
+        "present_count": 0,
+        "missing_count": 13,
+        "present": [],
+        "missing": [
+          "Content-Security-Policy",
+          "Cross-Origin-Embedder-Policy",
+          "Cross-Origin-Opener-Policy",
+          "Cross-Origin-Resource-Policy",
+          "X-DNS-Prefetch-Control",
+          "X-Frame-Options",
+          "Strict-Transport-Security",
+          "X-Download-Options",
+          "X-Content-Type-Options",
+          "Origin-Agent-Cluster",
+          "X-Permitted-Cross-Domain-Policies",
+          "Referrer-Policy",
+          "X-XSS-Protection"
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "test": "security_headers",
+      "version": "v4",
+      "data": {
+        "present_count": 2,
+        "missing_count": 11,
+        "present": [
+          "Content-Security-Policy: default-src 'none'",
+          "X-Content-Type-Options: nosniff"
+        ],
+        "missing": [
+          "Cross-Origin-Embedder-Policy",
+          "Cross-Origin-Opener-Policy",
+          "Cross-Origin-Resource-Policy",
+          "X-DNS-Prefetch-Control",
+          "X-Frame-Options",
+          "Strict-Transport-Security",
+          "X-Download-Options",
+          "Origin-Agent-Cluster",
+          "X-Permitted-Cross-Domain-Policies",
+          "Referrer-Policy",
+          "X-XSS-Protection"
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "test": "error_before_auth",
+      "version": "v5",
+      "data": {
+        "status": 400,
+        "body": "{\"error\":\"Unexpected token 'n', \\\"not valid json\\\" is not valid JSON\",\"stack\":\"SyntaxError: Unexpected token 'n', \\\"not valid json\\\" is not valid JSON\\n    at JSON.parse (<anonymous>)\\n    at createStrictSyntaxError (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/node_modules/body-parser/lib/types/jso",
+        "reveals_parser_info": true
+      }
+    },
+    {
+      "id": 4,
+      "test": "error_before_auth",
+      "version": "v4",
+      "data": {
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test",
+        "reveals_parser_info": false
+      }
+    },
+    {
+      "id": 5,
+      "test": "cors_preflight_auth",
+      "version": "v5",
+      "data": {
+        "status": 204,
+        "cors_headers": {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "true",
+          "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,PATCH,OPTIONS",
+          "Access-Control-Allow-Headers": "Authorization"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "test": "cors_preflight_auth",
+      "version": "v4",
+      "data": {
+        "status": 500,
+        "cors_headers": {}
+      }
+    },
+    {
+      "id": 7,
+      "test": "error_unhandled_error",
+      "version": "v5",
+      "data": {
+        "path": "/error-test",
+        "status": 500,
+        "has_stack_trace": true,
+        "has_file_paths": true,
+        "body_snippet": "{\"error\":\"Intentional test error with sensitive info: DB_PASSWORD=s3cret\",\"stack\":\"Error: Intentional test error with sensitive info: DB_PASSWORD=s3cret\\n    at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/app.js:553:9\\n    at Layer.handleRequest (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v5/node_mo"
+      }
+    },
+    {
+      "id": 8,
+      "test": "error_not_found",
+      "version": "v5",
+      "data": {
+        "path": "/nonexistent-path-xyz",
+        "status": 404,
+        "has_stack_trace": false,
+        "has_file_paths": false,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /nonexistent-path-xyz</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 9,
+      "test": "error_bad_method",
+      "version": "v5",
+      "data": {
+        "path": "/health",
+        "status": 404,
+        "has_stack_trace": false,
+        "has_file_paths": false,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot POST /health</pre>\n</body>\n</html>\n"
+      }
+    },
+    {
+      "id": 10,
+      "test": "error_unhandled_error",
+      "version": "v4",
+      "data": {
+        "path": "/error-test",
+        "status": 500,
+        "has_stack_trace": true,
+        "has_file_paths": true,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 11,
+      "test": "error_not_found",
+      "version": "v4",
+      "data": {
+        "path": "/nonexistent-path-xyz",
+        "status": 500,
+        "has_stack_trace": true,
+        "has_file_paths": true,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 12,
+      "test": "error_bad_method",
+      "version": "v4",
+      "data": {
+        "path": "/health",
+        "status": 500,
+        "has_stack_trace": true,
+        "has_file_paths": true,
+        "body_snippet": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 13,
+      "test": "settings_exposure",
+      "version": "v5",
+      "data": {
+        "env_var_count": 61,
+        "express_version": "5.2.1",
+        "node_env": ""
+      }
+    },
+    {
+      "id": 14,
+      "test": "settings_exposure",
+      "version": "v4",
+      "data": {
+        "env_var_count": 0,
+        "express_version": "",
+        "node_env": ""
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "title": "Express Default: 13 Security Headers Missing",
+      "severity": "MEDIUM",
+      "cwe": "CWE-693",
+      "description": "Express does not set any security headers by default. Missing: Content-Security-Policy, Cross-Origin-Embedder-Policy, Cross-Origin-Opener-Policy, Cross-Origin-Resource-Policy, X-DNS-Prefetch-Control... Helmet.js or manual configuration required.",
+      "framework_behavior": true,
+      "version": "v5"
+    },
+    {
+      "id": 2,
+      "title": "Express Default: 11 Security Headers Missing",
+      "severity": "MEDIUM",
+      "cwe": "CWE-693",
+      "description": "Express does not set any security headers by default. Missing: Cross-Origin-Embedder-Policy, Cross-Origin-Opener-Policy, Cross-Origin-Resource-Policy, X-DNS-Prefetch-Control, X-Frame-Options... Helmet.js or manual configuration required.",
+      "framework_behavior": true,
+      "version": "v4"
+    },
+    {
+      "id": 3,
+      "title": "Body Parser Error Leaks Details Before Auth Check",
+      "severity": "LOW",
+      "cwe": "CWE-209",
+      "description": "body-parser returns detailed parse errors before authentication: {\"error\":\"Unexpected token 'n', \\\"not valid json\\\" is not valid JSON\",\"stack\":\"SyntaxError: Unexpected token 'n', \\\"not valid json\\\" is not valid JSON\\n    at JSON.parse (<anonymous>)\\n    at createSt",
+      "framework_behavior": true,
+      "note": "body-parser middleware runs before route auth \u2014 parse errors bypass auth",
+      "version": "v5"
+    },
+    {
+      "id": 4,
+      "title": "CORS Preflight Bypasses Auth on Protected Endpoint",
+      "severity": "LOW",
+      "cwe": "CWE-346",
+      "description": "OPTIONS /admin/dashboard returns 204 with CORS headers without authentication check. CORS middleware runs before auth.",
+      "framework_behavior": true,
+      "note": "CORS preflight is by design unauthenticated \u2014 but reveals endpoint existence",
+      "version": "v5"
+    },
+    {
+      "id": 5,
+      "title": "Error Response Leaks Internal Paths (unhandled_error)",
+      "severity": "LOW",
+      "cwe": "CWE-209",
+      "description": "Error response for unhandled_error reveals stack trace or file paths",
+      "framework_behavior": true,
+      "version": "v5"
+    },
+    {
+      "id": 6,
+      "title": "Error Response Leaks Internal Paths (unhandled_error)",
+      "severity": "LOW",
+      "cwe": "CWE-209",
+      "description": "Error response for unhandled_error reveals stack trace or file paths",
+      "framework_behavior": true,
+      "version": "v4"
+    },
+    {
+      "id": 7,
+      "title": "Error Response Leaks Internal Paths (not_found)",
+      "severity": "LOW",
+      "cwe": "CWE-209",
+      "description": "Error response for not_found reveals stack trace or file paths",
+      "framework_behavior": true,
+      "version": "v4"
+    },
+    {
+      "id": 8,
+      "title": "Error Response Leaks Internal Paths (bad_method)",
+      "severity": "LOW",
+      "cwe": "CWE-209",
+      "description": "Error response for bad_method reveals stack trace or file paths",
+      "framework_behavior": true,
+      "version": "v4"
+    },
+    {
+      "id": 9,
+      "title": "Full Environment Variables Exposed",
+      "severity": "INFO",
+      "cwe": "CWE-200",
+      "description": "process.env exposed via API (61 variables). Note: App-level issue, not framework default.",
+      "framework_behavior": false,
+      "version": "v5"
+    }
+  ],
+  "summary": {
+    "total_tests": 14,
+    "findings_count": 9
+  }
+}

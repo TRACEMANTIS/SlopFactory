@@ -1,0 +1,37 @@
+{
+  "phase": 3,
+  "title": "HTTP Multipart Parser and ONVIF XML Parser Audit",
+  "date": "2026-03-06",
+
+  "multipart_parser": {
+    "function_vma": "0x4ef728",
+    "frame_size": 336,
+    "buffer": "sp+0x50, 256 bytes",
+    "result": "SAFE -- uses snprintf with 256-byte limit, not sprintf",
+    "boundary_validation": "0x4ef818 NULL check triggers 'boundaryBuf is not valid!' error",
+    "file_end_boundary": "0x4caf76-0x4cb0ec uses std::string operations (safe)",
+    "verdict": "No exploitable overflow. Bounded operations throughout."
+  },
+
+  "onvif_xml_parser": {
+    "parsers_identified": [
+      {"name": "Dahua::TiXml (custom TinyXML)", "vtable": "0xfa70"},
+      {"name": "ixml (Intel UPnP SDK)", "error_string": "ixmlParseBufferEx error"},
+      {"name": "Dahua::SOAPFramework::tinyxml2", "address": "0xba6860"}
+    ],
+    "dispatch_table": {
+      "address": "0xd59500",
+      "format": "(auth_level, action_name, handler_address)",
+      "auth_levels": "0=None(pre-auth), 1=Read, 3=Admin, 5=SuperAdmin"
+    },
+    "pre_auth_actions": [
+      {"action": "GetServices", "handler": "0x0a1bc5", "auth_level": 0},
+      {"action": "GetServiceCapabilities", "handler": "0x0a12ed", "auth_level": 0},
+      {"action": "GetCapabilities", "handler": "0x0a132d", "auth_level": 0},
+      {"action": "GetSystemDateAndTime", "handler": "0x0a92b9", "auth_level": 0}
+    ],
+    "unsafe_calls_in_preauth_handlers": 0,
+    "result": "SAFE -- All pre-auth ONVIF handlers use C++ std::string and Json::Value exclusively. Zero direct unsafe PLT calls.",
+    "verdict": "No exploitable overflow in pre-auth ONVIF handlers."
+  }
+}

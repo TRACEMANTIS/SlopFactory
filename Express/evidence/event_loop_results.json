@@ -1,0 +1,425 @@
+{
+  "metadata": {
+    "phase": "4.1",
+    "name": "Event Loop Analysis",
+    "timestamp": "2026-02-15T12:41:34.278832",
+    "scope": "Node.js event loop blocking and resource exhaustion"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "cpu_block_1000",
+      "version": "v5",
+      "data": {
+        "iterations": 1000,
+        "slow_hash_ms": 0,
+        "health_time_ms": 0,
+        "baseline_avg_ms": 2.4,
+        "blocking_factor": 0.0
+      }
+    },
+    {
+      "id": 2,
+      "test": "cpu_block_10000",
+      "version": "v5",
+      "data": {
+        "iterations": 10000,
+        "slow_hash_ms": 16,
+        "health_time_ms": 0,
+        "baseline_avg_ms": 2.4,
+        "blocking_factor": 0.0
+      }
+    },
+    {
+      "id": 3,
+      "test": "cpu_block_100000",
+      "version": "v5",
+      "data": {
+        "iterations": 100000,
+        "slow_hash_ms": 64,
+        "health_time_ms": 4,
+        "baseline_avg_ms": 2.4,
+        "blocking_factor": 1.7
+      }
+    },
+    {
+      "id": 4,
+      "test": "cpu_block_500000",
+      "version": "v5",
+      "data": {
+        "iterations": 500000,
+        "slow_hash_ms": 652,
+        "health_time_ms": 556,
+        "baseline_avg_ms": 2.4,
+        "blocking_factor": 231.7
+      }
+    },
+    {
+      "id": 5,
+      "test": "cpu_block_1000",
+      "version": "v4",
+      "data": {
+        "iterations": 1000,
+        "slow_hash_ms": -1,
+        "health_time_ms": 0,
+        "baseline_avg_ms": 0.8,
+        "blocking_factor": 0.0
+      }
+    },
+    {
+      "id": 6,
+      "test": "cpu_block_10000",
+      "version": "v4",
+      "data": {
+        "iterations": 10000,
+        "slow_hash_ms": -1,
+        "health_time_ms": 0,
+        "baseline_avg_ms": 0.8,
+        "blocking_factor": 0.0
+      }
+    },
+    {
+      "id": 7,
+      "test": "cpu_block_100000",
+      "version": "v4",
+      "data": {
+        "iterations": 100000,
+        "slow_hash_ms": -1,
+        "health_time_ms": 4,
+        "baseline_avg_ms": 0.8,
+        "blocking_factor": 5.0
+      }
+    },
+    {
+      "id": 8,
+      "test": "cpu_block_500000",
+      "version": "v4",
+      "data": {
+        "iterations": 500000,
+        "slow_hash_ms": -1,
+        "health_time_ms": 0,
+        "baseline_avg_ms": 0.8,
+        "blocking_factor": 0.0
+      }
+    },
+    {
+      "id": 9,
+      "test": "json_bomb_10",
+      "version": "v5",
+      "data": {
+        "depth": 10,
+        "status": 200,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "id": 10,
+      "test": "json_bomb_50",
+      "version": "v5",
+      "data": {
+        "depth": 50,
+        "status": 200,
+        "elapsed_ms": 4
+      }
+    },
+    {
+      "id": 11,
+      "test": "json_bomb_100",
+      "version": "v5",
+      "data": {
+        "depth": 100,
+        "status": 200,
+        "elapsed_ms": 4
+      }
+    },
+    {
+      "id": 12,
+      "test": "json_bomb_500",
+      "version": "v5",
+      "data": {
+        "depth": 500,
+        "status": 200,
+        "elapsed_ms": 4
+      }
+    },
+    {
+      "id": 13,
+      "test": "json_bomb_1000",
+      "version": "v5",
+      "data": {
+        "depth": 1000,
+        "status": 200,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "id": 14,
+      "test": "json_bomb_10",
+      "version": "v4",
+      "data": {
+        "depth": 10,
+        "status": 500,
+        "elapsed_ms": 4
+      }
+    },
+    {
+      "id": 15,
+      "test": "json_bomb_50",
+      "version": "v4",
+      "data": {
+        "depth": 50,
+        "status": 500,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "id": 16,
+      "test": "json_bomb_100",
+      "version": "v4",
+      "data": {
+        "depth": 100,
+        "status": 500,
+        "elapsed_ms": 4
+      }
+    },
+    {
+      "id": 17,
+      "test": "json_bomb_500",
+      "version": "v4",
+      "data": {
+        "depth": 500,
+        "status": 500,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "id": 18,
+      "test": "json_bomb_1000",
+      "version": "v4",
+      "data": {
+        "depth": 1000,
+        "status": 500,
+        "elapsed_ms": 4
+      }
+    },
+    {
+      "id": 19,
+      "test": "qs_bomb_many_params_100",
+      "version": "v5",
+      "data": {
+        "qs_length": 779,
+        "status": 200,
+        "elapsed_ms": 4,
+        "parsed_params": 100
+      }
+    },
+    {
+      "id": 20,
+      "test": "qs_bomb_many_params_500",
+      "version": "v5",
+      "data": {
+        "qs_length": 4779,
+        "status": 200,
+        "elapsed_ms": 8,
+        "parsed_params": 500
+      }
+    },
+    {
+      "id": 21,
+      "test": "qs_bomb_many_params_1000",
+      "version": "v5",
+      "data": {
+        "qs_length": 9779,
+        "status": 200,
+        "elapsed_ms": 12,
+        "parsed_params": 1000
+      }
+    },
+    {
+      "id": 22,
+      "test": "qs_bomb_deep_nesting_5",
+      "version": "v5",
+      "data": {
+        "qs_length": 19,
+        "status": 200,
+        "elapsed_ms": 4,
+        "parsed_params": 1
+      }
+    },
+    {
+      "id": 23,
+      "test": "qs_bomb_deep_nesting_10",
+      "version": "v5",
+      "data": {
+        "qs_length": 35,
+        "status": 200,
+        "elapsed_ms": 0,
+        "parsed_params": 1
+      }
+    },
+    {
+      "id": 24,
+      "test": "qs_bomb_large_array_20",
+      "version": "v5",
+      "data": {
+        "qs_length": 179,
+        "status": 200,
+        "elapsed_ms": 4,
+        "parsed_params": 20
+      }
+    },
+    {
+      "id": 25,
+      "test": "qs_bomb_large_array_100",
+      "version": "v5",
+      "data": {
+        "qs_length": 979,
+        "status": 200,
+        "elapsed_ms": 4,
+        "parsed_params": 100
+      }
+    },
+    {
+      "id": 26,
+      "test": "qs_bomb_long_value",
+      "version": "v5",
+      "data": {
+        "error": "(\"Connection broken: ConnectionResetError(104, 'Connection reset by peer')\", ConnectionResetError(104, 'Connection reset by peer'))"
+      }
+    },
+    {
+      "id": 27,
+      "test": "qs_bomb_many_params_100",
+      "version": "v4",
+      "data": {
+        "qs_length": 779,
+        "status": 500,
+        "elapsed_ms": 4,
+        "parsed_params": 0
+      }
+    },
+    {
+      "id": 28,
+      "test": "qs_bomb_many_params_500",
+      "version": "v4",
+      "data": {
+        "qs_length": 4779,
+        "status": 500,
+        "elapsed_ms": 8,
+        "parsed_params": 0
+      }
+    },
+    {
+      "id": 29,
+      "test": "qs_bomb_many_params_1000",
+      "version": "v4",
+      "data": {
+        "qs_length": 9779,
+        "status": 500,
+        "elapsed_ms": 8,
+        "parsed_params": 0
+      }
+    },
+    {
+      "id": 30,
+      "test": "qs_bomb_deep_nesting_5",
+      "version": "v4",
+      "data": {
+        "qs_length": 19,
+        "status": 500,
+        "elapsed_ms": 4,
+        "parsed_params": 0
+      }
+    },
+    {
+      "id": 31,
+      "test": "qs_bomb_deep_nesting_10",
+      "version": "v4",
+      "data": {
+        "qs_length": 35,
+        "status": 500,
+        "elapsed_ms": 0,
+        "parsed_params": 0
+      }
+    },
+    {
+      "id": 32,
+      "test": "qs_bomb_large_array_20",
+      "version": "v4",
+      "data": {
+        "qs_length": 179,
+        "status": 500,
+        "elapsed_ms": 0,
+        "parsed_params": 0
+      }
+    },
+    {
+      "id": 33,
+      "test": "qs_bomb_large_array_100",
+      "version": "v4",
+      "data": {
+        "qs_length": 979,
+        "status": 500,
+        "elapsed_ms": 4,
+        "parsed_params": 0
+      }
+    },
+    {
+      "id": 34,
+      "test": "qs_bomb_long_value",
+      "version": "v4",
+      "data": {
+        "error": "(\"Connection broken: ConnectionResetError(104, 'Connection reset by peer')\", ConnectionResetError(104, 'Connection reset by peer'))"
+      }
+    },
+    {
+      "id": 35,
+      "test": "memory_leak",
+      "version": "v5",
+      "data": {
+        "initial_mb": 19.0,
+        "final_mb": 14.0,
+        "growth_kb": -5158,
+        "requests": 200
+      }
+    },
+    {
+      "id": 36,
+      "test": "memory_leak",
+      "version": "v4",
+      "data": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      }
+    },
+    {
+      "id": 37,
+      "test": "rapid_connections",
+      "version": "v5",
+      "data": {
+        "total": 100,
+        "success": 100,
+        "errors": 0,
+        "elapsed_s": 0.2,
+        "rps": 463.2
+      }
+    },
+    {
+      "id": 38,
+      "test": "rapid_connections",
+      "version": "v4",
+      "data": {
+        "total": 100,
+        "success": 0,
+        "errors": 100,
+        "elapsed_s": 0.2,
+        "rps": 555.8
+      }
+    }
+  ],
+  "findings": [],
+  "anomalies": [],
+  "summary": {
+    "total_tests": 38,
+    "findings_count": 0
+  }
+}

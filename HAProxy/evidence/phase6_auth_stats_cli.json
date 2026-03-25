@@ -1,0 +1,672 @@
+{
+  "phase": "Phase 6: Auth, Stats & CLI Attacks",
+  "target": "HAProxy v3.3.0",
+  "timestamp": 1771458345.4353347,
+  "summary": {
+    "total_tests": 68,
+    "anomalies": 10,
+    "findings": 8
+  },
+  "findings": [
+    {
+      "id": 4,
+      "category": "Stats-Auth",
+      "name": "timing_oracle",
+      "result": "FINDING",
+      "details": "Valid user avg: 3012.5ms, Invalid user avg: 3048.1ms, Diff: 35.6ms",
+      "timestamp": 1771458027.0386024,
+      "severity": "MEDIUM",
+      "raw_data": {
+        "avg_valid_ms": 3012.4929428100586,
+        "avg_invalid_ms": 3048.075270652771,
+        "diff_ms": 35.58232784271276
+      }
+    },
+    {
+      "id": 13,
+      "category": "Info-Disclosure",
+      "name": "prometheus_unauth",
+      "result": "FINDING",
+      "details": "Prometheus: HTTP 200, has metrics: True",
+      "timestamp": 1771458112.5598202,
+      "severity": "MEDIUM",
+      "raw_data": {
+        "has_metrics": true,
+        "sample": "3B34\r\n# HELP haproxy_process_nbthread Number of started threads (global.nbthread)\n# TYPE haproxy_process_nbthread gauge\nhaproxy_process_nbthread 4\n# HELP haproxy_process_nbproc Number of started worker processes (historical, always 1)\n# TYPE haproxy_process_nbproc gauge\nhaproxy_process_nbproc 1\n# HELP haproxy_process_relative_process_id Relative worker process number (1)\n# TYPE haproxy_process_relative_process_id gauge\nhaproxy_process_relative_process_id 1\n# HELP haproxy_process_uptime_seconds H"
+      }
+    },
+    {
+      "id": 14,
+      "category": "Info-Disclosure",
+      "name": "cli_show_info",
+      "result": "FINDING",
+      "details": "CLI show info: version disclosed",
+      "timestamp": 1771458112.5638182,
+      "severity": "INFO",
+      "raw_data": {
+        "response_preview": "Name: HAProxy\nVersion: 3.3.0\nRelease_date: 2025/11/26\nNbthread: 4\nNbproc: 1\nProcess_num: 1\nPid: 3176838\nUptime: 0d 0h52m18s\nUptime_sec: 3138\nMemmax_MB: 0\nPoolAlloc_MB: 3\nPoolUsed_MB: 3\nPoolFailed: 0\nUlimit-n: 8234\nMaxsock: 8234\nMaxconn: 4096\nHard_maxconn: 4096\nCurrConns: 0\nCumConns: 3466\nCumReq: 329\nMaxSslConns: 0\nCurrSslConns: 0\nCumSslConns: 390\nMaxpipes: 0\nPipesUsed: 0\nPipesFree: 0\nConnRate: 0\nConnRateLimit: 0\nMaxConnRate: 25\nSessRate: 0\nSessRateLimit: 0\nMaxSessRate: 25\nSslRate: 0\nSslRateLimit"
+      }
+    },
+    {
+      "id": 15,
+      "category": "Info-Disclosure",
+      "name": "cli_show_env",
+      "result": "FINDING",
+      "details": "CLI show env: EXPOSES ALL ENVIRONMENT VARIABLES",
+      "timestamp": 1771458112.5638182,
+      "severity": "MEDIUM",
+      "raw_data": {
+        "has_sensitive": true,
+        "preview": "COLORFGBG=15;0\nCOLORTERM=truecolor\nCOMMAND_NOT_FOUND_INSTALL_PROMPT=1\nDBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus\nDESKTOP_SESSION=lightdm-xsession\nDISPLAY=:0.0\nDOTNET_CLI_TELEMETRY_OPTOUT=1\nGDMSESSION=lightdm-xsession\nHOME=/home/svc\nLANG=en_US.UTF-8\nLANGUAGE=\nLOGNAME=svc\nNMAP_PRIVILEGED=\nPATH=/home/[REDACTED]/.local/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/[REDACTED]/.dotnet/tools\nPOWERSHELL_TELEMETRY_OPTOUT=1\nPOWERSHELL_UPDATECHECK=Off\nPWD=/"
+      }
+    },
+    {
+      "id": 20,
+      "category": "CLI-Security",
+      "name": "no_auth_access",
+      "result": "FINDING",
+      "details": "CLI access without auth: GRANTED",
+      "timestamp": 1771458117.5693142,
+      "severity": "MEDIUM"
+    },
+    {
+      "id": 21,
+      "category": "CLI-Security",
+      "name": "disable_server",
+      "result": "FINDING",
+      "details": "CLI 'disable server webfarm/web1': EXECUTED\nNo such backend.",
+      "timestamp": 1771458117.5693142,
+      "severity": "HIGH"
+    },
+    {
+      "id": 23,
+      "category": "CLI-Security",
+      "name": "set_weight",
+      "result": "FINDING",
+      "details": "CLI 'set weight webfarm/web1 50%': EXECUTED\nNo such backend.",
+      "timestamp": 1771458117.5693142,
+      "severity": "HIGH"
+    },
+    {
+      "id": 24,
+      "category": "CLI-Security",
+      "name": "shutdown_sessions",
+      "result": "FINDING",
+      "details": "CLI 'shutdown sessions server webfarm/web1': EXECUTED\nNo such backend.",
+      "timestamp": 1771458117.5733123,
+      "severity": "HIGH"
+    }
+  ],
+  "tests": [
+    {
+      "id": 1,
+      "category": "Stats-Auth",
+      "name": "no_auth",
+      "result": "SAFE",
+      "details": "No auth: HTTP 401",
+      "timestamp": 1771457956.4259264
+    },
+    {
+      "id": 2,
+      "category": "Stats-Auth",
+      "name": "valid_creds",
+      "result": "SAFE",
+      "details": "Valid creds: HTTP 200",
+      "timestamp": 1771457961.4314222
+    },
+    {
+      "id": 3,
+      "category": "Stats-Auth",
+      "name": "invalid_creds",
+      "result": "SAFE",
+      "details": "Bad creds: HTTP 401",
+      "timestamp": 1771457966.4329202
+    },
+    {
+      "id": 4,
+      "category": "Stats-Auth",
+      "name": "timing_oracle",
+      "result": "FINDING",
+      "details": "Valid user avg: 3012.5ms, Invalid user avg: 3048.1ms, Diff: 35.6ms",
+      "timestamp": 1771458027.0386024,
+      "severity": "MEDIUM",
+      "raw_data": {
+        "avg_valid_ms": 3012.4929428100586,
+        "avg_invalid_ms": 3048.075270652771,
+        "diff_ms": 35.58232784271276
+      }
+    },
+    {
+      "id": 5,
+      "category": "Stats-Auth",
+      "name": "bypass_empty_auth",
+      "result": "SAFE",
+      "details": "Bypass empty_auth: HTTP 401",
+      "timestamp": 1771458032.2519944
+    },
+    {
+      "id": 6,
+      "category": "Stats-Auth",
+      "name": "bypass_null_password",
+      "result": "SAFE",
+      "details": "Bypass null_password: HTTP 401",
+      "timestamp": 1771458037.253492
+    },
+    {
+      "id": 7,
+      "category": "Stats-Auth",
+      "name": "bypass_double_colon",
+      "result": "SAFE",
+      "details": "Bypass double_colon: HTTP 401",
+      "timestamp": 1771458042.2549903
+    },
+    {
+      "id": 8,
+      "category": "Stats-Auth",
+      "name": "bypass_unicode_user",
+      "result": "SAFE",
+      "details": "Bypass unicode_user: HTTP 401",
+      "timestamp": 1771458047.2644844
+    },
+    {
+      "id": 9,
+      "category": "Stats-Auth",
+      "name": "bypass_case_user",
+      "result": "SAFE",
+      "details": "Bypass case_user: HTTP 401",
+      "timestamp": 1771458052.2659822
+    },
+    {
+      "id": 10,
+      "category": "Stats-Auth",
+      "name": "bypass_trailing_space",
+      "result": "SAFE",
+      "details": "Bypass trailing_space: HTTP 401",
+      "timestamp": 1771458057.2714782
+    },
+    {
+      "id": 11,
+      "category": "Stats-Auth",
+      "name": "bypass_bearer_token",
+      "result": "SAFE",
+      "details": "Bypass bearer_token: HTTP 401",
+      "timestamp": 1771458062.2729764
+    },
+    {
+      "id": 12,
+      "category": "Stats-Auth",
+      "name": "no_lockout",
+      "result": "ANOMALY",
+      "details": "After 20 failed attempts, valid login: HTTP 200",
+      "timestamp": 1771458107.5503263,
+      "severity": "LOW"
+    },
+    {
+      "id": 13,
+      "category": "Info-Disclosure",
+      "name": "prometheus_unauth",
+      "result": "FINDING",
+      "details": "Prometheus: HTTP 200, has metrics: True",
+      "timestamp": 1771458112.5598202,
+      "severity": "MEDIUM",
+      "raw_data": {
+        "has_metrics": true,
+        "sample": "3B34\r\n# HELP haproxy_process_nbthread Number of started threads (global.nbthread)\n# TYPE haproxy_process_nbthread gauge\nhaproxy_process_nbthread 4\n# HELP haproxy_process_nbproc Number of started worker processes (historical, always 1)\n# TYPE haproxy_process_nbproc gauge\nhaproxy_process_nbproc 1\n# HELP haproxy_process_relative_process_id Relative worker process number (1)\n# TYPE haproxy_process_relative_process_id gauge\nhaproxy_process_relative_process_id 1\n# HELP haproxy_process_uptime_seconds H"
+      }
+    },
+    {
+      "id": 14,
+      "category": "Info-Disclosure",
+      "name": "cli_show_info",
+      "result": "FINDING",
+      "details": "CLI show info: version disclosed",
+      "timestamp": 1771458112.5638182,
+      "severity": "INFO",
+      "raw_data": {
+        "response_preview": "Name: HAProxy\nVersion: 3.3.0\nRelease_date: 2025/11/26\nNbthread: 4\nNbproc: 1\nProcess_num: 1\nPid: 3176838\nUptime: 0d 0h52m18s\nUptime_sec: 3138\nMemmax_MB: 0\nPoolAlloc_MB: 3\nPoolUsed_MB: 3\nPoolFailed: 0\nUlimit-n: 8234\nMaxsock: 8234\nMaxconn: 4096\nHard_maxconn: 4096\nCurrConns: 0\nCumConns: 3466\nCumReq: 329\nMaxSslConns: 0\nCurrSslConns: 0\nCumSslConns: 390\nMaxpipes: 0\nPipesUsed: 0\nPipesFree: 0\nConnRate: 0\nConnRateLimit: 0\nMaxConnRate: 25\nSessRate: 0\nSessRateLimit: 0\nMaxSessRate: 25\nSslRate: 0\nSslRateLimit"
+      }
+    },
+    {
+      "id": 15,
+      "category": "Info-Disclosure",
+      "name": "cli_show_env",
+      "result": "FINDING",
+      "details": "CLI show env: EXPOSES ALL ENVIRONMENT VARIABLES",
+      "timestamp": 1771458112.5638182,
+      "severity": "MEDIUM",
+      "raw_data": {
+        "has_sensitive": true,
+        "preview": "COLORFGBG=15;0\nCOLORTERM=truecolor\nCOMMAND_NOT_FOUND_INSTALL_PROMPT=1\nDBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus\nDESKTOP_SESSION=lightdm-xsession\nDISPLAY=:0.0\nDOTNET_CLI_TELEMETRY_OPTOUT=1\nGDMSESSION=lightdm-xsession\nHOME=/home/svc\nLANG=en_US.UTF-8\nLANGUAGE=\nLOGNAME=svc\nNMAP_PRIVILEGED=\nPATH=/home/[REDACTED]/.local/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/[REDACTED]/.dotnet/tools\nPOWERSHELL_TELEMETRY_OPTOUT=1\nPOWERSHELL_UPDATECHECK=Off\nPWD=/"
+      }
+    },
+    {
+      "id": 16,
+      "category": "Info-Disclosure",
+      "name": "cli_show_proc",
+      "result": "SAFE",
+      "details": "CLI show proc: Unknown command: 'show', but maybe one of the following ones is a better match:\n  show errors [<px>] [request|response]   : report last request and/or response errors for each proxy\n  show fd [-!plcfb",
+      "timestamp": 1771458112.5638182
+    },
+    {
+      "id": 17,
+      "category": "Info-Disclosure",
+      "name": "cli_show_pools",
+      "result": "ANOMALY",
+      "details": "CLI show pools: Dumping pools usage. Use SIGQUIT to flush them.\n  - Pool ssl_sock_ct (136 bytes/8) : 0 allocated (0 bytes), 0 used (~0 by thread caches), needed_avg 0, 0 failures, 1 users, @0x7e48cb5e0840\n  - Pool ss",
+      "timestamp": 1771458112.5638182
+    },
+    {
+      "id": 18,
+      "category": "Info-Disclosure",
+      "name": "error_page_version",
+      "result": "SAFE",
+      "details": "Error page version disclosure: False",
+      "timestamp": 1771458117.5693142
+    },
+    {
+      "id": 19,
+      "category": "Info-Disclosure",
+      "name": "server_header",
+      "result": "ANOMALY",
+      "details": "Server header: server: BaseHTTP/0.6 Python/3.13.7",
+      "timestamp": 1771458117.5693142
+    },
+    {
+      "id": 20,
+      "category": "CLI-Security",
+      "name": "no_auth_access",
+      "result": "FINDING",
+      "details": "CLI access without auth: GRANTED",
+      "timestamp": 1771458117.5693142,
+      "severity": "MEDIUM"
+    },
+    {
+      "id": 21,
+      "category": "CLI-Security",
+      "name": "disable_server",
+      "result": "FINDING",
+      "details": "CLI 'disable server webfarm/web1': EXECUTED\nNo such backend.",
+      "timestamp": 1771458117.5693142,
+      "severity": "HIGH"
+    },
+    {
+      "id": 22,
+      "category": "CLI-Security",
+      "name": "enable_server",
+      "result": "ANOMALY",
+      "details": "CLI 'enable server webfarm/web1': No such backend.",
+      "timestamp": 1771458117.5693142
+    },
+    {
+      "id": 23,
+      "category": "CLI-Security",
+      "name": "set_weight",
+      "result": "FINDING",
+      "details": "CLI 'set weight webfarm/web1 50%': EXECUTED\nNo such backend.",
+      "timestamp": 1771458117.5693142,
+      "severity": "HIGH"
+    },
+    {
+      "id": 24,
+      "category": "CLI-Security",
+      "name": "shutdown_sessions",
+      "result": "FINDING",
+      "details": "CLI 'shutdown sessions server webfarm/web1': EXECUTED\nNo such backend.",
+      "timestamp": 1771458117.5733123,
+      "severity": "HIGH"
+    },
+    {
+      "id": 25,
+      "category": "CLI-Security",
+      "name": "clear_counters",
+      "result": "SAFE",
+      "details": "CLI 'clear counters': blocked\n",
+      "timestamp": 1771458117.5733123
+    },
+    {
+      "id": 26,
+      "category": "CLI-Security",
+      "name": "show_stat",
+      "result": "SAFE",
+      "details": "CLI 'show stat': # pxname,svname,qcur,qmax,scur,smax,slim,stot,bin,bout,dreq,dresp,ereq,econ,eresp,wretr,wredis,status,weight,act,bck,chkfail,chkdown,lastchg,downtime,qlimit,pid,iid,sid,throttle,lbtot,tracked,type,rat",
+      "timestamp": 1771458117.5733123
+    },
+    {
+      "id": 27,
+      "category": "CLI-Security",
+      "name": "show_servers",
+      "result": "ANOMALY",
+      "details": "CLI 'show servers state': 1\n# be_id be_name srv_id srv_name srv_addr srv_op_state srv_admin_state srv_uweight srv_iweight srv_time_since_last_change srv_check_status srv_check_result srv_check_health srv_check_state srv_agent_",
+      "timestamp": 1771458117.5733123
+    },
+    {
+      "id": 28,
+      "category": "CLI-Security",
+      "name": "show_backend",
+      "result": "ANOMALY",
+      "details": "CLI 'show backend': # name\napp_back\nstatic_back\ntcp_back",
+      "timestamp": 1771458117.5733123
+    },
+    {
+      "id": 29,
+      "category": "CLI-Security",
+      "name": "show_sess",
+      "result": "ANOMALY",
+      "details": "CLI 'show sess': 0x7cc8cb8f3880: proto=unix_stream src=unix:1 fe=GLOBAL be=<NONE> srv=<none> ts=00 epoch=0 age=0s calls=1 rate=0 cpu=0 lat=0 rq[f=10848100h,i=0,an=00h,ax=] rp[f=80008000h,i=0,an=00h,ax=] scf=[8,0h,fd=2",
+      "timestamp": 1771458117.5733123
+    },
+    {
+      "id": 30,
+      "category": "CLI-Security",
+      "name": "show_table",
+      "result": "ANOMALY",
+      "details": "CLI 'show table': # table: http_front, type: ip, size:102400, used:1",
+      "timestamp": 1771458117.5733123
+    },
+    {
+      "id": 31,
+      "category": "CLI-Security",
+      "name": "inject_semicolon",
+      "result": "SAFE",
+      "details": "Injection 'semicolon': safe\nName: HAProxy\nVersion: 3.3.0\nRelease_date: 2025/11/26\nNbthread: 4\nNbproc: 1\nProcess_num: 1\nPid: 3176838\nUptime: 0d 0h52m23s\nUptime_sec: 3143\nMemmax_MB: 0\nPoolAlloc_MB: 3\nPoolUsed_MB: 3\nPoolFailed: 0\nU",
+      "timestamp": 1771458117.5773103
+    },
+    {
+      "id": 32,
+      "category": "CLI-Security",
+      "name": "inject_pipe",
+      "result": "SAFE",
+      "details": "Injection 'pipe': safe\nName: HAProxy\nVersion: 3.3.0\nRelease_date: 2025/11/26\nNbthread: 4\nNbproc: 1\nProcess_num: 1\nPid: 3176838\nUptime: 0d 0h52m23s\nUptime_sec: 3143\nMemmax_MB: 0\nPoolAlloc_MB: 3\nPoolUsed_MB: 3\nPoolFailed: 0\nU",
+      "timestamp": 1771458117.5773103
+    },
+    {
+      "id": 33,
+      "category": "CLI-Security",
+      "name": "inject_backtick",
+      "result": "SAFE",
+      "details": "Injection 'backtick': safe\nName: HAProxy\nVersion: 3.3.0\nRelease_date: 2025/11/26\nNbthread: 4\nNbproc: 1\nProcess_num: 1\nPid: 3176838\nUptime: 0d 0h52m23s\nUptime_sec: 3143\nMemmax_MB: 0\nPoolAlloc_MB: 3\nPoolUsed_MB: 3\nPoolFailed: 0\nU",
+      "timestamp": 1771458117.5773103
+    },
+    {
+      "id": 34,
+      "category": "CLI-Security",
+      "name": "inject_dollar",
+      "result": "SAFE",
+      "details": "Injection 'dollar': safe\nName: HAProxy\nVersion: 3.3.0\nRelease_date: 2025/11/26\nNbthread: 4\nNbproc: 1\nProcess_num: 1\nPid: 3176838\nUptime: 0d 0h52m23s\nUptime_sec: 3143\nMemmax_MB: 0\nPoolAlloc_MB: 3\nPoolUsed_MB: 3\nPoolFailed: 0\nU",
+      "timestamp": 1771458117.5773103
+    },
+    {
+      "id": 35,
+      "category": "CLI-Security",
+      "name": "inject_newline",
+      "result": "SAFE",
+      "details": "Injection 'newline': safe\nName: HAProxy\nVersion: 3.3.0\nRelease_date: 2025/11/26\nNbthread: 4\nNbproc: 1\nProcess_num: 1\nPid: 3176838\nUptime: 0d 0h52m23s\nUptime_sec: 3143\nMemmax_MB: 0\nPoolAlloc_MB: 3\nPoolUsed_MB: 3\nPoolFailed: 0\nU",
+      "timestamp": 1771458117.5773103
+    },
+    {
+      "id": 36,
+      "category": "CLI-Security",
+      "name": "buffer_overflow",
+      "result": "SAFE",
+      "details": "Long command: Unknown command: 'show', but maybe one of the following ones is a better match:\n  show acl [@<ver>] <acl>]                : report available acls or dump an acl's contents\n  show anon                 ",
+      "timestamp": 1771458117.5813081
+    },
+    {
+      "id": 37,
+      "category": "CLI-Security",
+      "name": "null_byte",
+      "result": "SAFE",
+      "details": "Null byte in command: Name: HAProxy\nVersion: 3.3.0\nRelease_date: 2025/11/26\nNbthread: 4\nNbproc: 1\nProcess_num: 1\nPid: 3176838\nUptime: 0d 0h52m23s\nUptime_sec: 3143\nMemmax_MB: 0\nPoolAlloc_MB: 3\nPoolUsed_MB: 3\nPoolFailed: 0\nU",
+      "timestamp": 1771458117.5813081
+    },
+    {
+      "id": 38,
+      "category": "ACL-Bypass",
+      "name": "host_normal",
+      "result": "SAFE",
+      "details": "Host=b'127.0.0.1:8180': HTTP 200",
+      "timestamp": 1771458122.5908022
+    },
+    {
+      "id": 39,
+      "category": "ACL-Bypass",
+      "name": "host_localhost",
+      "result": "SAFE",
+      "details": "Host=b'localhost:8180': HTTP 200",
+      "timestamp": 1771458127.5962982
+    },
+    {
+      "id": 40,
+      "category": "ACL-Bypass",
+      "name": "host_ipv6_loopback",
+      "result": "SAFE",
+      "details": "Host=b'[::1]:8180': HTTP 200",
+      "timestamp": 1771458132.6017942
+    },
+    {
+      "id": 41,
+      "category": "ACL-Bypass",
+      "name": "host_double_host",
+      "result": "SAFE",
+      "details": "Host=b'127.0.0.1:8180\\r\\nHost: evil.com': HTTP 400",
+      "timestamp": 1771458132.6057923
+    },
+    {
+      "id": 42,
+      "category": "ACL-Bypass",
+      "name": "host_empty_host",
+      "result": "SAFE",
+      "details": "Host=b'': HTTP 200",
+      "timestamp": 1771458137.6112883
+    },
+    {
+      "id": 43,
+      "category": "ACL-Bypass",
+      "name": "host_space_host",
+      "result": "SAFE",
+      "details": "Host=b' 127.0.0.1:8180': HTTP 200",
+      "timestamp": 1771458142.6167843
+    },
+    {
+      "id": 44,
+      "category": "ACL-Bypass",
+      "name": "host_tab_host",
+      "result": "SAFE",
+      "details": "Host=b'\\t127.0.0.1:8180': HTTP 200",
+      "timestamp": 1771458147.8261783
+    },
+    {
+      "id": 45,
+      "category": "ACL-Bypass",
+      "name": "host_case_host",
+      "result": "SAFE",
+      "details": "Host=b'127.0.0.1:8180': HTTP 200",
+      "timestamp": 1771458153.03957
+    },
+    {
+      "id": 46,
+      "category": "ACL-Bypass",
+      "name": "method_GET",
+      "result": "SAFE",
+      "details": "Method GET: HTTP 200",
+      "timestamp": 1771458158.0431054
+    },
+    {
+      "id": 47,
+      "category": "ACL-Bypass",
+      "name": "method_POST",
+      "result": "SAFE",
+      "details": "Method POST: HTTP 200",
+      "timestamp": 1771458163.2497075
+    },
+    {
+      "id": 48,
+      "category": "ACL-Bypass",
+      "name": "method_PUT",
+      "result": "SAFE",
+      "details": "Method PUT: HTTP 200",
+      "timestamp": 1771458168.4683154
+    },
+    {
+      "id": 49,
+      "category": "ACL-Bypass",
+      "name": "method_DELETE",
+      "result": "SAFE",
+      "details": "Method DELETE: HTTP 200",
+      "timestamp": 1771458173.4708154
+    },
+    {
+      "id": 50,
+      "category": "ACL-Bypass",
+      "name": "method_PATCH",
+      "result": "SAFE",
+      "details": "Method PATCH: HTTP 200",
+      "timestamp": 1771458178.6827385
+    },
+    {
+      "id": 51,
+      "category": "ACL-Bypass",
+      "name": "method_OPTIONS",
+      "result": "SAFE",
+      "details": "Method OPTIONS: HTTP 200",
+      "timestamp": 1771458183.6922324
+    },
+    {
+      "id": 52,
+      "category": "ACL-Bypass",
+      "name": "method_HEAD",
+      "result": "SAFE",
+      "details": "Method HEAD: HTTP 200",
+      "timestamp": 1771458188.7097223
+    },
+    {
+      "id": 53,
+      "category": "ACL-Bypass",
+      "name": "method_TRACE",
+      "result": "SAFE",
+      "details": "Method TRACE: HTTP 501",
+      "timestamp": 1771458193.7152185
+    },
+    {
+      "id": 54,
+      "category": "ACL-Bypass",
+      "name": "method_CONNECT",
+      "result": "SAFE",
+      "details": "Method CONNECT: HTTP 400",
+      "timestamp": 1771458193.7152185
+    },
+    {
+      "id": 55,
+      "category": "ACL-Bypass",
+      "name": "method_PROPFIND",
+      "result": "SAFE",
+      "details": "Method PROPFIND: HTTP 501",
+      "timestamp": 1771458198.7167163
+    },
+    {
+      "id": 56,
+      "category": "ACL-Bypass",
+      "name": "method_CUSTOM",
+      "result": "SAFE",
+      "details": "Method CUSTOM: HTTP 501",
+      "timestamp": 1771458203.7182145
+    },
+    {
+      "id": 57,
+      "category": "ACL-Bypass",
+      "name": "path_/stats",
+      "result": "SAFE",
+      "details": "Path /stats: HTTP 200",
+      "timestamp": 1771458208.7224324
+    },
+    {
+      "id": 58,
+      "category": "ACL-Bypass",
+      "name": "path_/stats/",
+      "result": "SAFE",
+      "details": "Path /stats/: HTTP 200",
+      "timestamp": 1771458213.728934
+    },
+    {
+      "id": 59,
+      "category": "ACL-Bypass",
+      "name": "path_/Stats",
+      "result": "SAFE",
+      "details": "Path /Stats: HTTP 200",
+      "timestamp": 1771458218.7354362
+    },
+    {
+      "id": 60,
+      "category": "ACL-Bypass",
+      "name": "path_/STATS",
+      "result": "SAFE",
+      "details": "Path /STATS: HTTP 200",
+      "timestamp": 1771458223.737936
+    },
+    {
+      "id": 61,
+      "category": "ACL-Bypass",
+      "name": "path_/../stats",
+      "result": "SAFE",
+      "details": "Path /../stats: HTTP 200",
+      "timestamp": 1771458228.7404363
+    },
+    {
+      "id": 62,
+      "category": "ACL-Bypass",
+      "name": "path_/.%2e/stats",
+      "result": "SAFE",
+      "details": "Path /.%2e/stats: HTTP 200",
+      "timestamp": 1771458233.9510403
+    },
+    {
+      "id": 63,
+      "category": "ACL-Bypass",
+      "name": "path_/stats%00",
+      "result": "SAFE",
+      "details": "Path /stats%00: HTTP 400",
+      "timestamp": 1771458233.9510403
+    },
+    {
+      "id": 64,
+      "category": "ACL-Bypass",
+      "name": "path_/stats;param",
+      "result": "SAFE",
+      "details": "Path /stats;param: HTTP 200",
+      "timestamp": 1771458238.9815543
+    },
+    {
+      "id": 65,
+      "category": "ACL-Bypass",
+      "name": "path_/stats?query",
+      "result": "SAFE",
+      "details": "Path /stats?query: HTTP 200",
+      "timestamp": 1771458243.9880564
+    },
+    {
+      "id": 66,
+      "category": "ACL-Bypass",
+      "name": "path_/stats#frag",
+      "result": "SAFE",
+      "details": "Path /stats#frag: HTTP 400",
+      "timestamp": 1771458243.9880564
+    },
+    {
+      "id": 67,
+      "category": "Stick-Table",
+      "name": "list_tables",
+      "result": "ANOMALY",
+      "details": "Stick tables: # table: http_front, type: ip, size:102400, used:1",
+      "timestamp": 1771458243.9880564
+    },
+    {
+      "id": 68,
+      "category": "Stick-Table",
+      "name": "rapid_flood_50",
+      "result": "ANOMALY",
+      "details": "50 rapid requests in 101.45s: 50/50 succeeded\nRate: 0 req/s \u2014 no rate limiting",
+      "timestamp": 1771458345.4353347,
+      "severity": "LOW"
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "metadata": {
+    "collector": "phase4_script_injection",
+    "phase": "phase4",
+    "started": "2026-03-03T06:38:28.109393",
+    "target": "Zabbix 7.0.23 LTS",
+    "target_url": "http://localhost:9080",
+    "completed": "2026-03-03T06:38:35.108891",
+    "test_count": 19,
+    "finding_count": 0,
+    "anomaly_count": 0
+  },
+  "findings": [],
+  "anomalies": [],
+  "tests": [
+    {
+      "id": "SCRIPT-CREATE-SecTest-Echo-NoValid",
+      "description": "Create script: No validation (string type, empty valida",
+      "request": "script.create(SecTest-Echo-NoValidation)",
+      "response": "FAILED",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:28.377527"
+    },
+    {
+      "id": "SCRIPT-CREATE-SecTest-Echo-WeakReg",
+      "description": "Create script: Unanchored regex (partial match)",
+      "request": "script.create(SecTest-Echo-WeakRegex)",
+      "response": "OK (ID:4)",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:28.633655"
+    },
+    {
+      "id": "SCRIPT-CREATE-SecTest-Echo-StrongR",
+      "description": "Create script: Anchored regex (full match)",
+      "request": "script.create(SecTest-Echo-StrongRegex)",
+      "response": "OK (ID:5)",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:28.889783"
+    },
+    {
+      "id": "SCRIPT-CREATE-SecTest-Echo-Dropdow",
+      "description": "Create script: Dropdown list (comma-separated)",
+      "request": "script.create(SecTest-Echo-DropdownList)",
+      "response": "FAILED",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:29.149913"
+    },
+    {
+      "id": "INJECT-4-Normal_value_(b",
+      "description": "Injection: Normal value (baseline) on SecTest-Echo-WeakReg",
+      "request": "script.execute manualinput='normal-value'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:29.410043"
+    },
+    {
+      "id": "INJECT-4-Semicolon_comma",
+      "description": "Injection: Semicolon command separator + pwd on SecTest-Echo-WeakReg",
+      "request": "script.execute manualinput='test; pwd'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:29.766221"
+    },
+    {
+      "id": "INJECT-4-Command_substit",
+      "description": "Injection: Command substitution ($(pwd)) on SecTest-Echo-WeakReg",
+      "request": "script.execute manualinput='test$(pwd)'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:30.142409"
+    },
+    {
+      "id": "INJECT-4-Backtick_comman",
+      "description": "Injection: Backtick command substitution on SecTest-Echo-WeakReg",
+      "request": "script.execute manualinput='test`pwd`'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:30.506591"
+    },
+    {
+      "id": "INJECT-4-Double-quote_br",
+      "description": "Injection: Double-quote break + AND + pwd on SecTest-Echo-WeakReg",
+      "request": "script.execute manualinput='test\" && pwd #'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:30.870773"
+    },
+    {
+      "id": "INJECT-4-Newline_injecti",
+      "description": "Injection: Newline injection + pwd on SecTest-Echo-WeakReg",
+      "request": "script.execute manualinput='test\npwd'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:31.238957"
+    },
+    {
+      "id": "INJECT-4-Pipe_to_pwd",
+      "description": "Injection: Pipe to pwd on SecTest-Echo-WeakReg",
+      "request": "script.execute manualinput='test|pwd'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:31.595135"
+    },
+    {
+      "id": "INJECT-5-Normal_value_(b",
+      "description": "Injection: Normal value (baseline) on SecTest-Echo-StrongR",
+      "request": "script.execute manualinput='normal-value'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:31.963319"
+    },
+    {
+      "id": "INJECT-5-Semicolon_comma",
+      "description": "Injection: Semicolon command separator + pwd on SecTest-Echo-StrongR",
+      "request": "script.execute manualinput='test; pwd'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:32.319497"
+    },
+    {
+      "id": "INJECT-5-Command_substit",
+      "description": "Injection: Command substitution ($(pwd)) on SecTest-Echo-StrongR",
+      "request": "script.execute manualinput='test$(pwd)'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:32.679677"
+    },
+    {
+      "id": "INJECT-5-Backtick_comman",
+      "description": "Injection: Backtick command substitution on SecTest-Echo-StrongR",
+      "request": "script.execute manualinput='test`pwd`'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:33.051863"
+    },
+    {
+      "id": "INJECT-5-Double-quote_br",
+      "description": "Injection: Double-quote break + AND + pwd on SecTest-Echo-StrongR",
+      "request": "script.execute manualinput='test\" && pwd #'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:33.416045"
+    },
+    {
+      "id": "INJECT-5-Newline_injecti",
+      "description": "Injection: Newline injection + pwd on SecTest-Echo-StrongR",
+      "request": "script.execute manualinput='test\npwd'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:33.796235"
+    },
+    {
+      "id": "INJECT-5-Pipe_to_pwd",
+      "description": "Injection: Pipe to pwd on SecTest-Echo-StrongR",
+      "request": "script.execute manualinput='test|pwd'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:34.168421"
+    },
+    {
+      "id": "VIEWER-SCRIPT-4",
+      "description": "Viewer executes: SecTest-Echo-WeakRegex",
+      "request": "script.execute(4) as viewer",
+      "response": "Denied",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:38:34.680677"
+    }
+  ]
+}

@@ -1,0 +1,782 @@
+{
+  "metadata": {
+    "script": "attack_ftpd_retest.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "timestamp": "2026-02-16T15:22:44.407413",
+    "initial_uptime": "2m",
+    "description": "FTP re-test with per-connection management"
+  },
+  "tests": [
+    {
+      "test": "basic_login",
+      "result": "pass",
+      "category": "connectivity",
+      "details": {
+        "pwd": "/",
+        "syst": "215 UNIX MikroTik 7.20.8"
+      }
+    },
+    {
+      "test": "traversal_cwd_basic_traversal",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "CWD ../../etc",
+        "response": "553 ../../etc: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_cwd_deep_traversal",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "CWD ../../../../../etc/passwd",
+        "response": "553 ../../../../../etc/passwd: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_cwd_absolute",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "CWD /etc/passwd",
+        "response": "553 /etc/passwd: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_cwd_root",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "CWD /",
+        "response": "250 CWD command successful",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_cwd_mixed",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "CWD ./../../../",
+        "response": "553 ./../../../: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_retr_etc_passwd",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "RETR ../../etc/passwd",
+        "response": "553 ../../etc/passwd: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_retr_absolute",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "RETR /etc/passwd",
+        "response": "553 /etc/passwd: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_retr_etc_shadow",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "RETR ../../etc/shadow",
+        "response": "553 ../../etc/shadow: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_retr_userdat_traversal",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "RETR ../flash/rw/store/user.dat",
+        "response": "553 ../flash/rw/store/user.dat: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_retr_cve2019_3943",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "RETR ../../../../../flash/rw/store/user.dat",
+        "response": "553 ../../../../../flash/rw/store/user.dat: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_stor_traversal",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "STOR ../../tmp/ftp_test_write",
+        "response": "553 ../../tmp/ftp_test_write: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_list_traversal",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "LIST ../../etc",
+        "response": "553 ../../etc: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_size_traversal",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "SIZE ../../etc/passwd",
+        "response": "553 ../../etc/passwd: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_cwd_url_encoded",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "CWD %2e%2e%2f%2e%2e%2f",
+        "response": "550 %2e%2e%2f%2e%2e%2f: No such file or directory",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_cwd_double_encoded",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "CWD %252e%252e%252f",
+        "response": "550 %252e%252e%252f: No such file or directory",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_cwd_unicode_overlong",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "CWD ..%c0%af..%c0%af",
+        "response": "550 ..%c0%af..%c0%af: No such file or directory",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_cwd_backslash",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "CWD ..\\..\\",
+        "response": "550 ..\\..\\: No such file or directory",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "traversal_retr_null_byte",
+      "result": "pass",
+      "category": "path_traversal",
+      "details": {
+        "cmd": "RETR ../../etc/passwd%00.txt",
+        "response": "553 ../../etc/passwd%00.txt: Permission denied",
+        "traversal_success": false
+      }
+    },
+    {
+      "test": "fmtstr_cwd_hex",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "CWD %x.%x.%x.%x.%x.%x.%x.%x",
+        "response": "550 %x.%x.%x.%x.%x.%x.%x.%x: No such file or directory",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_cwd_ptr",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "CWD %p.%p.%p.%p.%p.%p.%p.%p",
+        "response": "550 %p.%p.%p.%p.%p.%p.%p.%p: No such file or directory",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_cwd_str",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "CWD %s%s%s%s",
+        "response": "550 %s%s%s%s: No such file or directory",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_retr_hex",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "RETR %x.%x.%x.%x",
+        "response": "550 %x.%x.%x.%x: No such file or directory",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_mkd_hex",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "MKD %x.%x.%x.%x",
+        "response": "257 \"%x.%x.%x.%x\" directory created",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_dele_hex",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "DELE %x.%x.%x.%x",
+        "response": "553 %x.%x.%x.%x: Permission denied",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_size_hex",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "SIZE %x.%x.%x.%x",
+        "response": "550 %x.%x.%x.%x: Not a plain file",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_list_hex",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "LIST %x.%x.%x.%x",
+        "response": "425 Can't build data connection",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_rnfr_hex",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "RNFR %x.%x.%x.%x",
+        "response": "350 Ready for destination name",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_rnto_hex",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "RNTO %x.%x.%x.%x",
+        "response": "451 Requested action aborted: empty file name",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_port_hex",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "PORT %x,%x,%x,%x,%x,%x",
+        "response": "500 Bad PORT command",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_rest_hex",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "REST %x%x%x%x",
+        "response": "350 Restarting at 0. Send STORE or RETRIEVE to initiate transfer",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_cwd_write_n",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "CWD %n%n%n%n",
+        "response": "550 %n%n%n%n: No such file or directory",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_retr_write_n",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "RETR %n%n%n%n",
+        "response": "550 %n%n%n%n: No such file or directory",
+        "processed": false
+      }
+    },
+    {
+      "test": "fmtstr_stor_write_n",
+      "result": "pass",
+      "category": "format_string",
+      "details": {
+        "cmd": "STOR %n%n%n%n",
+        "response": "425 Can't open data connection",
+        "processed": false
+      }
+    },
+    {
+      "test": "sensitive_user.dat",
+      "result": "pass",
+      "category": "sensitive_file",
+      "details": {
+        "path": "user.dat",
+        "response": "550 user.dat: No such file or directory",
+        "leaked": false
+      }
+    },
+    {
+      "test": "sensitive_User.Dat",
+      "result": "pass",
+      "category": "sensitive_file",
+      "details": {
+        "path": "User.Dat",
+        "response": "550 User.Dat: No such file or directory",
+        "leaked": false
+      }
+    },
+    {
+      "test": "sensitive_USER.DAT",
+      "result": "pass",
+      "category": "sensitive_file",
+      "details": {
+        "path": "USER.DAT",
+        "response": "550 USER.DAT: No such file or directory",
+        "leaked": false
+      }
+    },
+    {
+      "test": "sensitive_/flash/rw/store/user.dat",
+      "result": "pass",
+      "category": "sensitive_file",
+      "details": {
+        "path": "/flash/rw/store/user.dat",
+        "response": "553 /flash/rw/store/user.dat: Permission denied",
+        "leaked": false
+      }
+    },
+    {
+      "test": "sensitive_user.dat%00.txt",
+      "result": "pass",
+      "category": "sensitive_file",
+      "details": {
+        "path": "user.dat%00.txt",
+        "response": "550 user.dat%00.txt: No such file or directory",
+        "leaked": false
+      }
+    },
+    {
+      "test": "sensitive_/flash/nova/etc/devel-login",
+      "result": "pass",
+      "category": "sensitive_file",
+      "details": {
+        "path": "/flash/nova/etc/devel-login",
+        "response": "553 /flash/nova/etc/devel-login: Permission denied",
+        "leaked": false
+      }
+    },
+    {
+      "test": "sensitive_/flash/rw/RESET",
+      "result": "pass",
+      "category": "sensitive_file",
+      "details": {
+        "path": "/flash/rw/RESET",
+        "response": "553 /flash/rw/RESET: Permission denied",
+        "leaked": false
+      }
+    },
+    {
+      "test": "sensitive_../flash/rw/store/user.dat",
+      "result": "pass",
+      "category": "sensitive_file",
+      "details": {
+        "path": "../flash/rw/store/user.dat",
+        "response": "553 ../flash/rw/store/user.dat: Permission denied",
+        "leaked": false
+      }
+    },
+    {
+      "test": "sensitive_./user.dat",
+      "result": "pass",
+      "category": "sensitive_file",
+      "details": {
+        "path": "./user.dat",
+        "response": "550 ./user.dat: No such file or directory",
+        "leaked": false
+      }
+    },
+    {
+      "test": "size_overflow_256B",
+      "result": "pass",
+      "category": "size_overflow",
+      "details": {
+        "size": 256,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    },
+    {
+      "test": "size_overflow_512B",
+      "result": "pass",
+      "category": "size_overflow",
+      "details": {
+        "size": 512,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    },
+    {
+      "test": "size_overflow_1024B",
+      "result": "pass",
+      "category": "size_overflow",
+      "details": {
+        "size": 1024,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    },
+    {
+      "test": "size_overflow_4096B",
+      "result": "pass",
+      "category": "size_overflow",
+      "details": {
+        "size": 4096,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    },
+    {
+      "test": "size_overflow_8192B",
+      "result": "pass",
+      "category": "size_overflow",
+      "details": {
+        "size": 8192,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    },
+    {
+      "test": "bounce_bounce_loopback_http",
+      "result": "anomaly",
+      "category": "ftp_bounce",
+      "details": {
+        "cmd": "PORT 127,0,0,1,0,80",
+        "response": "200 PORT command successful",
+        "accepted": true
+      }
+    },
+    {
+      "test": "bounce_bounce_loopback_ssh",
+      "result": "anomaly",
+      "category": "ftp_bounce",
+      "details": {
+        "cmd": "PORT 127,0,0,1,0,22",
+        "response": "200 PORT command successful",
+        "accepted": true
+      }
+    },
+    {
+      "test": "bounce_bounce_loopback_ftp",
+      "result": "anomaly",
+      "category": "ftp_bounce",
+      "details": {
+        "cmd": "PORT 127,0,0,1,0,21",
+        "response": "200 PORT command successful",
+        "accepted": true
+      }
+    },
+    {
+      "test": "bounce_bounce_gateway_http",
+      "result": "anomaly",
+      "category": "ftp_bounce",
+      "details": {
+        "cmd": "PORT 10,0,0,1,0,80",
+        "response": "200 PORT command successful",
+        "accepted": true
+      }
+    },
+    {
+      "test": "bounce_bounce_any",
+      "result": "anomaly",
+      "category": "ftp_bounce",
+      "details": {
+        "cmd": "PORT 0,0,0,0,0,80",
+        "response": "200 PORT command successful",
+        "accepted": true
+      }
+    },
+    {
+      "test": "bounce_eprt_loopback",
+      "result": "anomaly",
+      "category": "ftp_bounce",
+      "details": {
+        "cmd": "EPRT |1|127.0.0.1|80|",
+        "response": "200 EPRT command successful",
+        "accepted": true
+      }
+    },
+    {
+      "test": "bounce_eprt_ipv6_loopback",
+      "result": "anomaly",
+      "category": "ftp_bounce",
+      "details": {
+        "cmd": "EPRT |2|::1|80|",
+        "response": "200 EPRT command successful",
+        "accepted": true
+      }
+    },
+    {
+      "test": "edge_site_help",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "SITE HELP",
+        "response": "500 'SITE': command not understood"
+      }
+    },
+    {
+      "test": "edge_site_exec",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "SITE EXEC id",
+        "response": "500 'SITE': command not understood"
+      }
+    },
+    {
+      "test": "edge_type_ascii",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "TYPE A",
+        "response": "200 Type set to A"
+      }
+    },
+    {
+      "test": "edge_type_binary",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "TYPE I",
+        "response": "200 Type set to I"
+      }
+    },
+    {
+      "test": "edge_stru_file",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "STRU F",
+        "response": "200 Command okay"
+      }
+    },
+    {
+      "test": "edge_mode_stream",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "MODE S",
+        "response": "200 Command okay"
+      }
+    },
+    {
+      "test": "edge_rest_zero",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "REST 0",
+        "response": "350 Restarting at 0. Send STORE or RETRIEVE to initiate transfer"
+      }
+    },
+    {
+      "test": "edge_rest_negative",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "REST -1",
+        "response": "350 Restarting at -1. Send STORE or RETRIEVE to initiate transfer"
+      }
+    },
+    {
+      "test": "edge_rest_uint32_max",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "REST 4294967295",
+        "response": "350 Restarting at 4294967295. Send STORE or RETRIEVE to initiate transfer"
+      }
+    },
+    {
+      "test": "edge_rest_huge",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "REST 99999999999999999",
+        "response": "350 Restarting at 99999999999999999. Send STORE or RETRIEVE to initiate transfer"
+      }
+    },
+    {
+      "test": "edge_abor",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "ABOR",
+        "response": "200 Abort okay"
+      }
+    },
+    {
+      "test": "edge_feat",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "FEAT",
+        "response": "500 'FEAT': command not understood"
+      }
+    },
+    {
+      "test": "edge_mlst",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "MLST",
+        "response": "500 'MLST': command not understood"
+      }
+    },
+    {
+      "test": "edge_noop",
+      "result": "pass",
+      "category": "edge_case",
+      "details": {
+        "cmd": "NOOP",
+        "response": "200 Command okay"
+      }
+    },
+    {
+      "test": "data_pasv",
+      "result": "pass",
+      "category": "data_connection",
+      "details": {
+        "cmd": "PASV",
+        "response": "227 Entering Passive Mode (10,0,0,113,141,119).",
+        "ip": "[REDACTED-INTERNAL-IP]",
+        "port": 36215
+      }
+    },
+    {
+      "test": "data_epsv",
+      "result": "pass",
+      "category": "data_connection",
+      "details": {
+        "cmd": "EPSV",
+        "response": "229 Entering Extended Passive Mode (|||48967|)"
+      }
+    },
+    {
+      "test": "final_health",
+      "result": "pass",
+      "category": "health",
+      "details": {
+        "alive": true,
+        "initial_uptime": "2m",
+        "final_uptime": "3m21s"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "title": "FTP bounce accepted: PORT 127,0,0,1,0,80",
+      "description": "Server accepted PORT/EPRT to internal network",
+      "evidence": {
+        "cmd": "PORT 127,0,0,1,0,80",
+        "response": "200 PORT command successful"
+      }
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "FTP bounce accepted: PORT 127,0,0,1,0,22",
+      "description": "Server accepted PORT/EPRT to internal network",
+      "evidence": {
+        "cmd": "PORT 127,0,0,1,0,22",
+        "response": "200 PORT command successful"
+      }
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "FTP bounce accepted: PORT 127,0,0,1,0,21",
+      "description": "Server accepted PORT/EPRT to internal network",
+      "evidence": {
+        "cmd": "PORT 127,0,0,1,0,21",
+        "response": "200 PORT command successful"
+      }
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "FTP bounce accepted: PORT 10,0,0,1,0,80",
+      "description": "Server accepted PORT/EPRT to internal network",
+      "evidence": {
+        "cmd": "PORT 10,0,0,1,0,80",
+        "response": "200 PORT command successful"
+      }
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "FTP bounce accepted: PORT 0,0,0,0,0,80",
+      "description": "Server accepted PORT/EPRT to internal network",
+      "evidence": {
+        "cmd": "PORT 0,0,0,0,0,80",
+        "response": "200 PORT command successful"
+      }
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "FTP bounce accepted: EPRT |1|127.0.0.1|80|",
+      "description": "Server accepted PORT/EPRT to internal network",
+      "evidence": {
+        "cmd": "EPRT |1|127.0.0.1|80|",
+        "response": "200 EPRT command successful"
+      }
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "FTP bounce accepted: EPRT |2|::1|80|",
+      "description": "Server accepted PORT/EPRT to internal network",
+      "evidence": {
+        "cmd": "EPRT |2|::1|80|",
+        "response": "200 EPRT command successful"
+      }
+    }
+  ],
+  "anomalies": [],
+  "summary": {
+    "total_tests": 72,
+    "total_anomalies": 0,
+    "total_findings": 7
+  }
+}

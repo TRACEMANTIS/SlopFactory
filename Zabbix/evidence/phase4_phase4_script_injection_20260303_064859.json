@@ -1,0 +1,294 @@
+{
+  "metadata": {
+    "collector": "phase4_script_injection",
+    "phase": "phase4",
+    "started": "2026-03-03T06:48:45.385928",
+    "target": "Zabbix 7.0.23 LTS",
+    "target_url": "http://localhost:9080",
+    "completed": "2026-03-03T06:48:59.090773",
+    "test_count": 30,
+    "finding_count": 4,
+    "anomaly_count": 0
+  },
+  "findings": [
+    {
+      "id": "MANUALINPUT-INJECT-12-Command substit",
+      "severity": "HIGH",
+      "title": "Command injection via MANUALINPUT: Command substitution $(pwd)",
+      "details": "Script: SecTest-UnanchoredRegex\nValidator: [a-zA-Z0-9]+ (type=0)\nPayload: 'abc$(pwd)'\nOutput: OUTPUT_abc/var/lib/zabbix_END\n\n\nRoot cause: substitute_macro() in nodecommand.c performs raw string replacement of {MANUALINPUT} into shell commands without any escaping. The regex validation uses zbx_regexp_match_full() which performs PCRE partial matching (not anchored), so an unanchored regex like [a-zA-Z0-9]+ passes 'abc$(pwd)' because 'abc' satisfies the partial match. The command is then executed via execl('/bin/sh', 'sh', '-c', command).",
+      "evidence": "{\n  \"response\": \"success\",\n  \"value\": \"OUTPUT_abc/var/lib/zabbix_END\\n\",\n  \"debug\": []\n}",
+      "remediation": "1. Shell-escape the MANUALINPUT value before substitution into commands (e.g., replace single quotes and wrap in single quotes).\n2. Enforce anchored regex matching: automatically wrap validator regex in ^...$ if not already anchored, or use pcre2_match with PCRE2_ANCHORED.\n3. Use argument-based execution instead of shell string interpolation: pass MANUALINPUT as an environment variable rather than substituting into the command string.\n4. Add a character allowlist/blocklist for MANUALINPUT values to reject shell metacharacters ($, `, \\, etc.).",
+      "timestamp": "2026-03-03T06:48:49.623427"
+    },
+    {
+      "id": "MANUALINPUT-INJECT-12-Command substit",
+      "severity": "HIGH",
+      "title": "Command injection via MANUALINPUT: Command substitution $(id)",
+      "details": "Script: SecTest-UnanchoredRegex\nValidator: [a-zA-Z0-9]+ (type=0)\nPayload: 'abc$(id)'\nOutput: OUTPUT_abcuid=1997(zabbix) gid=1995(zabbix) groups=1995(zabbix),20(dialout)_END\n\n\nRoot cause: substitute_macro() in nodecommand.c performs raw string replacement of {MANUALINPUT} into shell commands without any escaping. The regex validation uses zbx_regexp_match_full() which performs PCRE partial matching (not anchored), so an unanchored regex like [a-zA-Z0-9]+ passes 'abc$(pwd)' because 'abc' satisfies the partial match. The command is then executed via execl('/bin/sh', 'sh', '-c', command).",
+      "evidence": "{\n  \"response\": \"success\",\n  \"value\": \"OUTPUT_abcuid=1997(zabbix) gid=1995(zabbix) groups=1995(zabbix),20(dialout)_END\\n\",\n  \"debug\": []\n}",
+      "remediation": "1. Shell-escape the MANUALINPUT value before substitution into commands (e.g., replace single quotes and wrap in single quotes).\n2. Enforce anchored regex matching: automatically wrap validator regex in ^...$ if not already anchored, or use pcre2_match with PCRE2_ANCHORED.\n3. Use argument-based execution instead of shell string interpolation: pass MANUALINPUT as an environment variable rather than substituting into the command string.\n4. Add a character allowlist/blocklist for MANUALINPUT values to reject shell metacharacters ($, `, \\, etc.).",
+      "timestamp": "2026-03-03T06:48:50.035221"
+    },
+    {
+      "id": "MANUALINPUT-INJECT-12-Backtick comman",
+      "severity": "HIGH",
+      "title": "Command injection via MANUALINPUT: Backtick command substitution",
+      "details": "Script: SecTest-UnanchoredRegex\nValidator: [a-zA-Z0-9]+ (type=0)\nPayload: 'abc`pwd`'\nOutput: OUTPUT_abc/var/lib/zabbix_END\n\n\nRoot cause: substitute_macro() in nodecommand.c performs raw string replacement of {MANUALINPUT} into shell commands without any escaping. The regex validation uses zbx_regexp_match_full() which performs PCRE partial matching (not anchored), so an unanchored regex like [a-zA-Z0-9]+ passes 'abc$(pwd)' because 'abc' satisfies the partial match. The command is then executed via execl('/bin/sh', 'sh', '-c', command).",
+      "evidence": "{\n  \"response\": \"success\",\n  \"value\": \"OUTPUT_abc/var/lib/zabbix_END\\n\",\n  \"debug\": []\n}",
+      "remediation": "1. Shell-escape the MANUALINPUT value before substitution into commands (e.g., replace single quotes and wrap in single quotes).\n2. Enforce anchored regex matching: automatically wrap validator regex in ^...$ if not already anchored, or use pcre2_match with PCRE2_ANCHORED.\n3. Use argument-based execution instead of shell string interpolation: pass MANUALINPUT as an environment variable rather than substituting into the command string.\n4. Add a character allowlist/blocklist for MANUALINPUT values to reject shell metacharacters ($, `, \\, etc.).",
+      "timestamp": "2026-03-03T06:48:50.419029"
+    },
+    {
+      "id": "MANUALINPUT-INJECT-12-Variable expans",
+      "severity": "HIGH",
+      "title": "Command injection via MANUALINPUT: Variable expansion ${PATH}",
+      "details": "Script: SecTest-UnanchoredRegex\nValidator: [a-zA-Z0-9]+ (type=0)\nPayload: 'abc${PATH}'\nOutput: OUTPUT_abc/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin_END\n\n\nRoot cause: substitute_macro() in nodecommand.c performs raw string replacement of {MANUALINPUT} into shell commands without any escaping. The regex validation uses zbx_regexp_match_full() which performs PCRE partial matching (not anchored), so an unanchored regex like [a-zA-Z0-9]+ passes 'abc$(pwd)' because 'abc' satisfies the partial match. The command is then executed via execl('/bin/sh', 'sh', '-c', command).",
+      "evidence": "{\n  \"response\": \"success\",\n  \"value\": \"OUTPUT_abc/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin_END\\n\",\n  \"debug\": []\n}",
+      "remediation": "1. Shell-escape the MANUALINPUT value before substitution into commands (e.g., replace single quotes and wrap in single quotes).\n2. Enforce anchored regex matching: automatically wrap validator regex in ^...$ if not already anchored, or use pcre2_match with PCRE2_ANCHORED.\n3. Use argument-based execution instead of shell string interpolation: pass MANUALINPUT as an environment variable rather than substituting into the command string.\n4. Add a character allowlist/blocklist for MANUALINPUT values to reject shell metacharacters ($, `, \\, etc.).",
+      "timestamp": "2026-03-03T06:48:50.782847"
+    }
+  ],
+  "anomalies": [],
+  "tests": [
+    {
+      "id": "SCRIPT-CREATE-SecTest-UnanchoredRegex",
+      "description": "Create script: Unanchored regex [a-zA-Z0-9]+ (partial match)",
+      "request": "script.create(SecTest-UnanchoredRegex)",
+      "response": "OK (ID:12)",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:45.718094"
+    },
+    {
+      "id": "SCRIPT-CREATE-SecTest-AnchoredRegex",
+      "description": "Create script: Anchored regex ^[a-zA-Z0-9]+$ (full match)",
+      "request": "script.create(SecTest-AnchoredRegex)",
+      "response": "OK (ID:13)",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:48.723596"
+    },
+    {
+      "id": "SCRIPT-CREATE-SecTest-DropdownList",
+      "description": "Create script: Dropdown list [safe1,safe2,safe3]",
+      "request": "script.create(SecTest-DropdownList)",
+      "response": "FAILED: Invalid parameter \"/1/manualinput_default_value\": value must",
+      "result": "FAIL",
+      "timestamp": "2026-03-03T06:48:48.967718"
+    },
+    {
+      "id": "INJECT-12-Baseline_(clean_valu",
+      "description": "Injection: Baseline (clean value) on SecTest-UnanchoredRegex",
+      "request": "script.execute manualinput='test123'",
+      "response": "Output: OUTPUT_test123_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:49.247615"
+    },
+    {
+      "id": "INJECT-12-Command_substitution",
+      "description": "Injection: Command substitution $(pwd) on SecTest-UnanchoredRegex",
+      "request": "script.execute manualinput='abc$(pwd)'",
+      "response": "Output: OUTPUT_abc/var/lib/zabbix_END\n",
+      "result": "VULN",
+      "timestamp": "2026-03-03T06:48:49.623427"
+    },
+    {
+      "id": "INJECT-12-Command_substitution",
+      "description": "Injection: Command substitution $(id) on SecTest-UnanchoredRegex",
+      "request": "script.execute manualinput='abc$(id)'",
+      "response": "Output: OUTPUT_abcuid=1997(zabbix) gid=1995(zabbix) groups=1995(zabbix),20(dialout)_END\n",
+      "result": "VULN",
+      "timestamp": "2026-03-03T06:48:50.035221"
+    },
+    {
+      "id": "INJECT-12-Backtick_command_sub",
+      "description": "Injection: Backtick command substitution on SecTest-UnanchoredRegex",
+      "request": "script.execute manualinput='abc`pwd`'",
+      "response": "Output: OUTPUT_abc/var/lib/zabbix_END\n",
+      "result": "VULN",
+      "timestamp": "2026-03-03T06:48:50.419029"
+    },
+    {
+      "id": "INJECT-12-Variable_expansion_$",
+      "description": "Injection: Variable expansion ${PATH} on SecTest-UnanchoredRegex",
+      "request": "script.execute manualinput='abc${PATH}'",
+      "response": "Output: OUTPUT_abc/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin_END\n",
+      "result": "VULN",
+      "timestamp": "2026-03-03T06:48:50.782847"
+    },
+    {
+      "id": "INJECT-12-Semicolon_separator",
+      "description": "Injection: Semicolon separator on SecTest-UnanchoredRegex",
+      "request": "script.execute manualinput='test;pwd'",
+      "response": "REJECTED: OUTPUT_test\nsh: 1: pwd_END: not found",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:51.162657"
+    },
+    {
+      "id": "INJECT-12-Pipe_operator",
+      "description": "Injection: Pipe operator on SecTest-UnanchoredRegex",
+      "request": "script.execute manualinput='test|pwd'",
+      "response": "REJECTED: sh: 1: pwd_END: not found",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:51.538469"
+    },
+    {
+      "id": "INJECT-12-Double_ampersand",
+      "description": "Injection: Double ampersand on SecTest-UnanchoredRegex",
+      "request": "script.execute manualinput='test&&pwd'",
+      "response": "REJECTED: OUTPUT_test\nsh: 1: pwd_END: not found",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:51.934271"
+    },
+    {
+      "id": "INJECT-12-Double_pipe_(OR)",
+      "description": "Injection: Double pipe (OR) on SecTest-UnanchoredRegex",
+      "request": "script.execute manualinput='test||pwd'",
+      "response": "Output: OUTPUT_test\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:52.322077"
+    },
+    {
+      "id": "INJECT-12-Newline_injection",
+      "description": "Injection: Newline injection on SecTest-UnanchoredRegex",
+      "request": "script.execute manualinput='test\\npwd'",
+      "response": "REJECTED: OUTPUT_test\nsh: 2: pwd_END: not found",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:52.717879"
+    },
+    {
+      "id": "INJECT-12-Single_quote_break",
+      "description": "Injection: Single quote break on SecTest-UnanchoredRegex",
+      "request": "script.execute manualinput=\"test'pwd'\"",
+      "response": "Output: OUTPUT_testpwd_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:53.089693"
+    },
+    {
+      "id": "INJECT-12-Double_quote_break",
+      "description": "Injection: Double quote break on SecTest-UnanchoredRegex",
+      "request": "script.execute manualinput='test\"pwd\"'",
+      "response": "Output: OUTPUT_testpwd_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:53.465505"
+    },
+    {
+      "id": "INJECT-13-Baseline_(clean_valu",
+      "description": "Injection: Baseline (clean value) on SecTest-AnchoredRegex",
+      "request": "script.execute manualinput='test123'",
+      "response": "Output: OUTPUT_test123_END\n",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:53.921277"
+    },
+    {
+      "id": "INJECT-13-Command_substitution",
+      "description": "Injection: Command substitution $(pwd) on SecTest-AnchoredRegex",
+      "request": "script.execute manualinput='abc$(pwd)'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:54.281097"
+    },
+    {
+      "id": "INJECT-13-Command_substitution",
+      "description": "Injection: Command substitution $(id) on SecTest-AnchoredRegex",
+      "request": "script.execute manualinput='abc$(id)'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:54.636919"
+    },
+    {
+      "id": "INJECT-13-Backtick_command_sub",
+      "description": "Injection: Backtick command substitution on SecTest-AnchoredRegex",
+      "request": "script.execute manualinput='abc`pwd`'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:54.992741"
+    },
+    {
+      "id": "INJECT-13-Variable_expansion_$",
+      "description": "Injection: Variable expansion ${PATH} on SecTest-AnchoredRegex",
+      "request": "script.execute manualinput='abc${PATH}'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:55.436519"
+    },
+    {
+      "id": "INJECT-13-Semicolon_separator",
+      "description": "Injection: Semicolon separator on SecTest-AnchoredRegex",
+      "request": "script.execute manualinput='test;pwd'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:55.852311"
+    },
+    {
+      "id": "INJECT-13-Pipe_operator",
+      "description": "Injection: Pipe operator on SecTest-AnchoredRegex",
+      "request": "script.execute manualinput='test|pwd'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:56.236119"
+    },
+    {
+      "id": "INJECT-13-Double_ampersand",
+      "description": "Injection: Double ampersand on SecTest-AnchoredRegex",
+      "request": "script.execute manualinput='test&&pwd'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:56.595939"
+    },
+    {
+      "id": "INJECT-13-Double_pipe_(OR)",
+      "description": "Injection: Double pipe (OR) on SecTest-AnchoredRegex",
+      "request": "script.execute manualinput='test||pwd'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:56.955759"
+    },
+    {
+      "id": "INJECT-13-Newline_injection",
+      "description": "Injection: Newline injection on SecTest-AnchoredRegex",
+      "request": "script.execute manualinput='test\\npwd'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:57.327573"
+    },
+    {
+      "id": "INJECT-13-Single_quote_break",
+      "description": "Injection: Single quote break on SecTest-AnchoredRegex",
+      "request": "script.execute manualinput=\"test'pwd'\"",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:57.687393"
+    },
+    {
+      "id": "INJECT-13-Double_quote_break",
+      "description": "Injection: Double quote break on SecTest-AnchoredRegex",
+      "request": "script.execute manualinput='test\"pwd\"'",
+      "response": "REJECTED: Provided script user input failed validation.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:58.063205"
+    },
+    {
+      "id": "VIEWER-SCRIPT-EXEC",
+      "description": "Viewer executes script with injection",
+      "request": "script.execute as viewer with manualinput='abc$(id)'",
+      "response": "Denied",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:58.534969"
+    },
+    {
+      "id": "SCRIPT-MODIFY-VIEWER",
+      "description": "Viewer attempts to modify/create scripts",
+      "request": "script.update/create as viewer",
+      "response": "Denied",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:58.626923"
+    },
+    {
+      "id": "DEFAULT-MANUALINPUT-SCRIPTS",
+      "description": "Check for default scripts with MANUALINPUT enabled",
+      "request": "script.get output=extend filter manualinput=1",
+      "response": "0 scripts found",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:48:58.674899"
+    }
+  ]
+}

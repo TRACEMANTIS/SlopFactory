@@ -1,0 +1,512 @@
+{
+  "metadata": {
+    "phase": "2.7",
+    "name": "ReDoS Fuzzer",
+    "timestamp": "2026-02-15T12:34:14.606762",
+    "scope": "Express routing regex + Node.js regex handling"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "redos_exponential_1",
+      "version": "v5",
+      "data": {
+        "pattern": "(a+)+$",
+        "input_length": 26,
+        "server_time_ms": 24,
+        "wall_time_s": 1.895,
+        "status": 200
+      }
+    },
+    {
+      "id": 2,
+      "test": "redos_exponential_2",
+      "version": "v5",
+      "data": {
+        "pattern": "(a|aa)+$",
+        "input_length": 26,
+        "server_time_ms": 8,
+        "wall_time_s": 0.028,
+        "status": 200
+      }
+    },
+    {
+      "id": 3,
+      "test": "redos_exponential_3",
+      "version": "v5",
+      "data": {
+        "pattern": "(a|a?)+$",
+        "input_length": 26,
+        "server_time_ms": 3986,
+        "wall_time_s": 15.416,
+        "status": 200
+      }
+    },
+    {
+      "id": 4,
+      "test": "redos_polynomial_1",
+      "version": "v5",
+      "data": {
+        "pattern": "(a+)*$",
+        "input_length": 26,
+        "server_time_ms": 311,
+        "wall_time_s": 2.247,
+        "status": 200
+      }
+    },
+    {
+      "id": 5,
+      "test": "redos_nested_quantifier",
+      "version": "v5",
+      "data": {
+        "pattern": "(.*a){10}",
+        "input_length": 21,
+        "server_time_ms": 0,
+        "wall_time_s": 0.004,
+        "status": 200
+      }
+    },
+    {
+      "id": 6,
+      "test": "redos_alternation_deep",
+      "version": "v5",
+      "data": {
+        "pattern": "(a|b|ab)+$",
+        "input_length": 31,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 200
+      }
+    },
+    {
+      "id": 7,
+      "test": "redos_email_like",
+      "version": "v5",
+      "data": {
+        "pattern": "^([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)+$",
+        "input_length": 26,
+        "server_time_ms": 0,
+        "wall_time_s": 0.02,
+        "status": 200
+      }
+    },
+    {
+      "id": 8,
+      "test": "redos_url_like",
+      "version": "v5",
+      "data": {
+        "pattern": "^(https?://[^/]+/)+$",
+        "input_length": 131,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 200
+      }
+    },
+    {
+      "id": 9,
+      "test": "redos_safe_pattern",
+      "version": "v5",
+      "data": {
+        "pattern": "^[a-z]+$",
+        "input_length": 7,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 200
+      }
+    },
+    {
+      "id": 10,
+      "test": "redos_safe_number",
+      "version": "v5",
+      "data": {
+        "pattern": "^\\d+$",
+        "input_length": 5,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 200
+      }
+    },
+    {
+      "id": 11,
+      "test": "redos_path_segment",
+      "version": "v5",
+      "data": {
+        "pattern": "([^/]+)",
+        "input_length": 10,
+        "server_time_ms": 0,
+        "wall_time_s": 0.012,
+        "status": 200
+      }
+    },
+    {
+      "id": 12,
+      "test": "redos_optional_segment",
+      "version": "v5",
+      "data": {
+        "pattern": "([^/]+)?",
+        "input_length": 6,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 200
+      }
+    },
+    {
+      "id": 13,
+      "test": "redos_wildcard",
+      "version": "v5",
+      "data": {
+        "pattern": "(.*)",
+        "input_length": 11,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 200
+      }
+    },
+    {
+      "id": 14,
+      "test": "redos_repeated_slash",
+      "version": "v5",
+      "data": {
+        "pattern": "(\\/[^/]+)+",
+        "input_length": 101,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 200
+      }
+    },
+    {
+      "id": 15,
+      "test": "redos_exponential_1",
+      "version": "v4",
+      "data": {
+        "pattern": "(a+)+$",
+        "input_length": 26,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 16,
+      "test": "redos_exponential_2",
+      "version": "v4",
+      "data": {
+        "pattern": "(a|aa)+$",
+        "input_length": 26,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 17,
+      "test": "redos_exponential_3",
+      "version": "v4",
+      "data": {
+        "pattern": "(a|a?)+$",
+        "input_length": 26,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 18,
+      "test": "redos_polynomial_1",
+      "version": "v4",
+      "data": {
+        "pattern": "(a+)*$",
+        "input_length": 26,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 19,
+      "test": "redos_nested_quantifier",
+      "version": "v4",
+      "data": {
+        "pattern": "(.*a){10}",
+        "input_length": 21,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 20,
+      "test": "redos_alternation_deep",
+      "version": "v4",
+      "data": {
+        "pattern": "(a|b|ab)+$",
+        "input_length": 31,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 21,
+      "test": "redos_email_like",
+      "version": "v4",
+      "data": {
+        "pattern": "^([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)+$",
+        "input_length": 26,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 22,
+      "test": "redos_url_like",
+      "version": "v4",
+      "data": {
+        "pattern": "^(https?://[^/]+/)+$",
+        "input_length": 131,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 23,
+      "test": "redos_safe_pattern",
+      "version": "v4",
+      "data": {
+        "pattern": "^[a-z]+$",
+        "input_length": 7,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 24,
+      "test": "redos_safe_number",
+      "version": "v4",
+      "data": {
+        "pattern": "^\\d+$",
+        "input_length": 5,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 25,
+      "test": "redos_path_segment",
+      "version": "v4",
+      "data": {
+        "pattern": "([^/]+)",
+        "input_length": 10,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 26,
+      "test": "redos_optional_segment",
+      "version": "v4",
+      "data": {
+        "pattern": "([^/]+)?",
+        "input_length": 6,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 27,
+      "test": "redos_wildcard",
+      "version": "v4",
+      "data": {
+        "pattern": "(.*)",
+        "input_length": 11,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 28,
+      "test": "redos_repeated_slash",
+      "version": "v4",
+      "data": {
+        "pattern": "(\\/[^/]+)+",
+        "input_length": 101,
+        "server_time_ms": 0,
+        "wall_time_s": 0.0,
+        "status": 500
+      }
+    },
+    {
+      "id": 29,
+      "test": "event_loop_block",
+      "version": "v5",
+      "data": {
+        "health_time_ms": 0,
+        "blocked": false
+      }
+    },
+    {
+      "id": 30,
+      "test": "event_loop_block",
+      "version": "v4",
+      "data": {
+        "health_time_ms": 0,
+        "blocked": false
+      }
+    },
+    {
+      "id": 31,
+      "test": "route_normal_route",
+      "version": "v5",
+      "data": {
+        "path_length": 8,
+        "status": 404,
+        "elapsed_ms": 12
+      }
+    },
+    {
+      "id": 32,
+      "test": "route_long_param",
+      "version": "v5",
+      "data": {
+        "path_length": 1007,
+        "status": 404,
+        "elapsed_ms": 4
+      }
+    },
+    {
+      "id": 33,
+      "test": "route_very_long_param",
+      "version": "v5",
+      "data": {
+        "path_length": 10007,
+        "status": 404,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "id": 34,
+      "test": "route_special_chars_in_param",
+      "version": "v5",
+      "data": {
+        "path_length": 107,
+        "status": 404,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "id": 35,
+      "test": "route_repeated_slashes",
+      "version": "v5",
+      "data": {
+        "path_length": 200,
+        "status": 404,
+        "elapsed_ms": 12
+      }
+    },
+    {
+      "id": 36,
+      "test": "route_unicode_in_route",
+      "version": "v5",
+      "data": {
+        "path_length": 1007,
+        "status": 404,
+        "elapsed_ms": 4
+      }
+    },
+    {
+      "id": 37,
+      "test": "route_normal_route",
+      "version": "v4",
+      "data": {
+        "path_length": 8,
+        "status": 500,
+        "elapsed_ms": 4
+      }
+    },
+    {
+      "id": 38,
+      "test": "route_long_param",
+      "version": "v4",
+      "data": {
+        "path_length": 1007,
+        "status": 500,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "id": 39,
+      "test": "route_very_long_param",
+      "version": "v4",
+      "data": {
+        "path_length": 10007,
+        "status": 500,
+        "elapsed_ms": 4
+      }
+    },
+    {
+      "id": 40,
+      "test": "route_special_chars_in_param",
+      "version": "v4",
+      "data": {
+        "path_length": 107,
+        "status": 500,
+        "elapsed_ms": 8
+      }
+    },
+    {
+      "id": 41,
+      "test": "route_repeated_slashes",
+      "version": "v4",
+      "data": {
+        "path_length": 200,
+        "status": 500,
+        "elapsed_ms": 0
+      }
+    },
+    {
+      "id": 42,
+      "test": "route_unicode_in_route",
+      "version": "v4",
+      "data": {
+        "path_length": 1007,
+        "status": 500,
+        "elapsed_ms": 0
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "title": "ReDoS: Pattern \"(a|a?)+$\" Blocked Event Loop (3986ms)",
+      "severity": "MEDIUM",
+      "cwe": "CWE-1333",
+      "description": "Regex pattern caused 3986ms server-side execution. Node.js single-threaded event loop was blocked.",
+      "framework_behavior": true,
+      "note": "Node.js/V8 regex engine is single-threaded \u2014 catastrophic backtracking blocks all requests",
+      "version": "v5"
+    },
+    {
+      "id": 2,
+      "title": "ReDoS: Pattern \"(a+)*$\" Blocked Event Loop (311ms)",
+      "severity": "MEDIUM",
+      "cwe": "CWE-1333",
+      "description": "Regex pattern caused 311ms server-side execution. Node.js single-threaded event loop was blocked.",
+      "framework_behavior": true,
+      "note": "Node.js/V8 regex engine is single-threaded \u2014 catastrophic backtracking blocks all requests",
+      "version": "v5"
+    }
+  ],
+  "anomalies": [],
+  "summary": {
+    "total_tests": 42,
+    "findings_count": 2,
+    "anomalies_count": 0
+  }
+}

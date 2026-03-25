@@ -1,0 +1,231 @@
+{
+  "phase": "6+7",
+  "title": "File Upload, Static Serving & CVE Regression",
+  "target": "Fastify v5.7.4",
+  "timestamp": "2026-02-18T20:43:39Z",
+  "tests": [
+    {
+      "id": 1,
+      "name": "Upload-normal",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 2,
+      "name": "Upload-traversal-../../../tmp/pwned.t",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 3,
+      "name": "Upload-traversal-..\\..\\..\\tmp\\pwned.t",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 4,
+      "name": "Upload-traversal-....//....//tmp/pwne",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 5,
+      "name": "Upload-traversal-%2e%2e/%2e%2e/tmp/pw",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 6,
+      "name": "Upload-traversal-test/../../../tmp/pw",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 7,
+      "name": "Upload-nullbyte",
+      "category": "upload",
+      "result": "500"
+    },
+    {
+      "id": 8,
+      "name": "Upload-ext-.php",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 9,
+      "name": "Upload-ext-.jsp",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 10,
+      "name": "Upload-ext-.aspx",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 11,
+      "name": "Upload-ext-.sh",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 12,
+      "name": "Upload-ext-.py",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 13,
+      "name": "Upload-ext-.js",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 14,
+      "name": "Upload-ext-.ejs",
+      "category": "upload",
+      "result": "200"
+    },
+    {
+      "id": 15,
+      "name": "Upload-oversized",
+      "category": "upload",
+      "result": "tested"
+    },
+    {
+      "id": 16,
+      "name": "Static-dotenv",
+      "category": "static",
+      "result": "200"
+    },
+    {
+      "id": 17,
+      "name": "Static-traversal-/static/../server.js",
+      "category": "static",
+      "result": "404"
+    },
+    {
+      "id": 18,
+      "name": "Static-traversal-/../../../etc/passwd",
+      "category": "static",
+      "result": "404"
+    },
+    {
+      "id": 19,
+      "name": "Static-traversal-%2F..%2Fetc%2Fpasswd",
+      "category": "static",
+      "result": "403"
+    },
+    {
+      "id": 20,
+      "name": "Static-traversal-2e/%2e%2e/etc/passwd",
+      "category": "static",
+      "result": "403"
+    },
+    {
+      "id": 21,
+      "name": "Static-traversal-..//....//etc/passwd",
+      "category": "static",
+      "result": "404"
+    },
+    {
+      "id": 22,
+      "name": "Static-traversal-tic/..\\..\\etc\\passwd",
+      "category": "static",
+      "result": "403"
+    },
+    {
+      "id": 23,
+      "name": "Static-nullbyte",
+      "category": "static",
+      "result": "400"
+    },
+    {
+      "id": 24,
+      "name": "Static-hidden-.htaccess",
+      "category": "static",
+      "result": "404"
+    },
+    {
+      "id": 25,
+      "name": "Static-hidden-.git/HEAD",
+      "category": "static",
+      "result": "404"
+    },
+    {
+      "id": 26,
+      "name": "Static-hidden-.gitignore",
+      "category": "static",
+      "result": "404"
+    },
+    {
+      "id": 27,
+      "name": "Static-hidden-.npmrc",
+      "category": "static",
+      "result": "404"
+    },
+    {
+      "id": 28,
+      "name": "Static-hidden-.env.backup",
+      "category": "static",
+      "result": "404"
+    },
+    {
+      "id": 29,
+      "name": "CVE-2026-25224",
+      "category": "cve-regression",
+      "result": "PATCHED",
+      "details": {
+        "mem_diff_mb": -5.5
+      }
+    },
+    {
+      "id": 30,
+      "name": "CVE-2024-58027",
+      "category": "cve-regression",
+      "result": "PATCHED"
+    },
+    {
+      "id": 31,
+      "name": "CVE-2025-32442",
+      "category": "cve-regression",
+      "result": "PATCHED"
+    },
+    {
+      "id": 32,
+      "name": "CVE-2022-41919",
+      "category": "cve-regression",
+      "result": "PATCHED"
+    },
+    {
+      "id": 33,
+      "name": "CVE-2022-39288",
+      "category": "cve-regression",
+      "result": "PATCHED"
+    },
+    {
+      "id": 34,
+      "name": "Proto-pollution-default",
+      "category": "cve-regression",
+      "result": "SAFE"
+    }
+  ],
+  "findings": [
+    {
+      "id": "P6-F02",
+      "severity": "HIGH",
+      "title": "Static serving exposes .env file",
+      "description": "With dotfiles:allow configuration, .env file with secrets is served.",
+      "note": "Config-dependent (dotfiles:allow). Framework default is dotfiles:ignore.",
+      "evidence": {
+        "content_preview": "SECRET_KEY=test_secret_do_not_expose\nDB_PASSWORD=hunter2\nAPI_TOKEN=sk-fake-token-12345\n"
+      }
+    }
+  ],
+  "anomalies": [],
+  "total_tests": 34,
+  "total_findings": 1,
+  "total_anomalies": 0
+}

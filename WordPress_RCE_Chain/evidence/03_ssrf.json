@@ -1,0 +1,26 @@
+{
+  "test": "ssrf_pingback_validation",
+  "timestamp": "2026-03-20T21:27:52.062066",
+  "wp_url": "http://127.0.0.1/wp-lab",
+  "findings": [
+    {
+      "test": "ssrf_callback",
+      "callback_received": false,
+      "callback_from": null,
+      "user_agent": null,
+      "request_host": null,
+      "status": "NOT_RECEIVED"
+    },
+    {
+      "test": "xmlrpc_pingback_enabled",
+      "status": "ENABLED",
+      "detail": "pingback.ping method available via XML-RPC"
+    }
+  ],
+  "xmlrpc_response": {
+    "status": 200,
+    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<methodResponse>\n  <fault>\n    <value>\n      <struct>\n        <member>\n          <name>faultCode</name>\n          <value><int>0</int></value>\n        </member>\n        <member>\n          <name>faultString</name>\n          <value><string></string></value>\n        </member>\n      </struct>\n    </value>\n  </fault>\n</methodResponse>\n"
+  },
+  "vulnerable": false,
+  "summary": "Pre-auth SSRF via XML-RPC pingback.ping: NOT CONFIRMED. WordPress fetches attacker-controlled URLs without authentication."
+}

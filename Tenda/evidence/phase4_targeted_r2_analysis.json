@@ -1,0 +1,452 @@
+{
+  "metadata": {
+    "assessment_id": "TendaAssmt",
+    "target": "Tenda AC15 httpd V15.03.05.19",
+    "binary": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac15",
+    "analysis_type": "targeted_reverse_engineering",
+    "tool": "radare2",
+    "date": "2026-03-04",
+    "analyst": "claude-opus-4-6",
+    "description": "Systematic disassembly and analysis of 16 high-priority goform/ handler functions, tracing all websGetVar (fcn.0002bd4c) calls to dangerous sinks (doSystemCmd, system, strcpy, sprintf)"
+  },
+  "key_functions": {
+    "websGetVar_wrapper": "fcn.0002bd4c (0x0002bd4c)",
+    "doSystemCmd": "sym.imp.doSystemCmd (0x0000f7e4)",
+    "system": "sym.imp.system (0x0000f040)",
+    "strcpy": "sym.imp.strcpy (0x0000fbf8)",
+    "sprintf": "sym.imp.sprintf (0x0000f8bc)",
+    "snprintf": "sym.imp.snprintf (0x0000f334)"
+  },
+  "handlers_analyzed": [
+    {
+      "name": "formSetSambaConf",
+      "address": "0x000a6320",
+      "size": 892,
+      "endpoint": "/goform/SetSambaConf",
+      "websGetVar_params": [
+        {"name": "password", "default": "admin", "stored_var": "var_10h"},
+        {"name": "premitEn", "default": "", "stored_var": "var_14h"},
+        {"name": "internetPort", "default": "", "stored_var": "var_18h"},
+        {"name": "action", "default": "", "stored_var": "var_1ch"},
+        {"name": "usbName", "default": "", "stored_var": "var_20h"},
+        {"name": "guestpwd", "default": "", "stored_var": "var_24h"},
+        {"name": "guestuser", "default": "", "stored_var": "var_28h"},
+        {"name": "guestaccess", "default": "", "stored_var": "var_2ch"},
+        {"name": "fileCode", "default": "", "stored_var": "var_30h"}
+      ],
+      "dangerous_sinks": [
+        {
+          "type": "COMMAND_INJECTION",
+          "severity": "CRITICAL",
+          "address": "0x000a64d4",
+          "sink": "doSystemCmd",
+          "format_string": "cfm post netctrl %d?op=%d,string_info=%s",
+          "args": ["0x33 (51)", "3", "var_20h (usbName)"],
+          "user_input_param": "usbName",
+          "validation": "NONE - strcmp(action, 'del') == 0 branch, but usbName is not validated",
+          "path": "websGetVar('usbName') -> var_20h -> doSystemCmd('cfm post netctrl %d?op=%d,string_info=%s', 51, 3, usbName)",
+          "notes": "When action=='del', user-supplied usbName is passed directly as string_info to cfm command via doSystemCmd. No sanitization. Attacker can inject shell metacharacters (;, |, $(), `) to execute arbitrary commands as root."
+        },
+        {
+          "type": "COMMAND_INJECTION",
+          "severity": "MEDIUM",
+          "address": "0x000a654c",
+          "sink": "doSystemCmd",
+          "format_string": "busybox deluser %s",
+          "args": ["value from GetValue('usb.samba.guest.user')"],
+          "user_input_param": "INDIRECT - guestuser saved to config via SetValue, then retrieved via GetValue",
+          "validation": "NONE on the stored value, but requires two-step exploitation",
+          "path": "websGetVar('guestuser') -> SetValue('usb.samba.guest.user') -> CommitCfm -> GetValue('usb.samba.guest.user') -> doSystemCmd('busybox deluser %s')",
+          "notes": "User-supplied guestuser is first saved to NVRAM config, then on the non-del path the stored value is retrieved and passed to 'busybox deluser %s'. Two-step attack: first save malicious username, then trigger the code path."
+        },
+        {
+          "type": "SAFE",
+          "address": "0x000a6658",
+          "sink": "doSystemCmd",
+          "format_string": "cfm Post netctrl %d?op=%d",
+          "args": ["0x33 (51)", "5"],
+          "notes": "Hardcoded integer arguments only, no user input"
+        }
+      ],
+      "finding_id": "[REDACTED-ID]_006"
+    },
+    {
+      "name": "formSetSysToolDDNS",
+      "address": "0x0007822c",
+      "size": 1620,
+      "endpoint": "/goform/SetSysToolDDNS",
+      "websGetVar_params": [
+        {"name": "ddnsEn", "default": "", "stored_var": "var_14h"},
+        {"name": "serverName", "default": "", "stored_var": "var_18h"},
+        {"name": "ddnsUser", "default": "", "stored_var": "var_1ch"},
+        {"name": "ddnsPwd", "default": "", "stored_var": "var_20h"},
+        {"name": "ddnsDomain", "default": "", "stored_var": "var_24h"},
+        {"name": "check2", "default": "", "stored_var": "var_14h (reused)"},
+        {"name": "serverName2", "default": "", "stored_var": "var_18h (reused)"},
+        {"name": "userName2", "default": "", "stored_var": "var_1ch (reused)"},
+        {"name": "password2", "default": "", "stored_var": "var_20h (reused)"},
+        {"name": "remark2", "default": "", "stored_var": "var_24h (reused)"},
+        {"name": "check3", "default": ""},
+        {"name": "serverName3", "default": ""},
+        {"name": "userName3", "default": ""},
+        {"name": "password3", "default": ""},
+        {"name": "remark3", "default": ""},
+        {"name": "check4", "default": ""},
+        {"name": "serverName4", "default": ""},
+        {"name": "userName4", "default": ""},
+        {"name": "password4", "default": ""},
+        {"name": "remark4", "default": ""},
+        {"name": "check5", "default": ""},
+        {"name": "serverName5", "default": ""},
+        {"name": "userName5", "default": ""},
+        {"name": "password5", "default": ""},
+        {"name": "remark5", "default": ""}
+      ],
+      "dangerous_sinks": [],
+      "notes": "All 25 parameters are passed through SetValue() to NVRAM configuration. No doSystemCmd/system/strcpy calls with user input. The only sprintf writes '{\"errCode\":%d}' response. send_msg_to_netctrl('advance_type=%d', hardcoded) is used for IPC. NOT VULNERABLE to injection or BOF.",
+      "verdict": "SAFE"
+    },
+    {
+      "name": "formSetSpeedWan",
+      "address": "0x00062098",
+      "size": 776,
+      "endpoint": "/goform/SetSpeedWan",
+      "websGetVar_params": [
+        {"name": "speed_dir", "default": "", "stored_var": "var_14h"},
+        {"name": "ucloud_enable", "default": "", "stored_var": "var_18h"},
+        {"name": "password", "default": "", "stored_var": "var_1ch"}
+      ],
+      "dangerous_sinks": [
+        {
+          "type": "SAFE",
+          "address": "0x00062300",
+          "sink": "doSystemCmd",
+          "format_string": "cfm Post ucloud 0",
+          "notes": "Hardcoded string, no user input"
+        },
+        {
+          "type": "SAFE",
+          "address": "0x00062334",
+          "sink": "doSystemCmd",
+          "format_string": "/bin/speedtest %d %d &",
+          "args": ["1", "1"],
+          "notes": "Hardcoded integer arguments only"
+        },
+        {
+          "type": "SAFE",
+          "address": "0x00062364",
+          "sink": "doSystemCmd",
+          "format_string": "cfm Post ucloud 5",
+          "notes": "Hardcoded string, no user input"
+        }
+      ],
+      "verdict": "SAFE - all doSystemCmd calls use hardcoded values, user input only goes to SetValue()"
+    },
+    {
+      "name": "formSetDeviceName",
+      "address": "0x00061b60",
+      "size": 436,
+      "endpoint": "/goform/SetDeviceName",
+      "websGetVar_params": [
+        {"name": "mac", "default": "", "stored_var": "var_14h"},
+        {"name": "devName", "default": "", "stored_var": "var_18h"}
+      ],
+      "dangerous_sinks": [],
+      "notes": "Parameters passed to internal function at 0xc7b94 for processing. sprintf writes '{\"errCode\":%d}' response only. CommitCfm called. No doSystemCmd/system/strcpy with user input.",
+      "verdict": "SAFE"
+    },
+    {
+      "name": "formSetCfm",
+      "address": "0x00044e34",
+      "size": 1332,
+      "endpoint": "/goform/SetCfm",
+      "websGetVar_params": [
+        {"name": "save", "default": "", "stored_var": "var_2ch"},
+        {"name": "name%d (loop 0-20)", "default": "", "stored_var": "var_18h"},
+        {"name": "value%d (loop 0-20)", "default": "", "stored_var": "var_14h"},
+        {"name": "msgname", "default": "", "stored_var": "var_1ch"},
+        {"name": "msgtype", "default": "", "stored_var": "var_34h"},
+        {"name": "funcname", "default": "", "stored_var": "var_1ch (reused)"},
+        {"name": "funcpara1", "default": "", "stored_var": "var_20h"},
+        {"name": "funcpara2", "default": "", "stored_var": "var_24h"}
+      ],
+      "dangerous_sinks": [],
+      "notes": "This is a generic configuration setter. It iterates over name0-name20/value0-value20 pairs and calls SetValue(). When msgtype=='PostMsgToNetctrl', it calls PostMsgToNetctrl(). When funcname=='save_list_data', calls fcn.0004f080. When funcname=='changelanip', calls changelanip(). No doSystemCmd/system. Large attack surface but uses safe APIs.",
+      "verdict": "SAFE - no command injection, though the generic config-setting nature allows broad config manipulation"
+    },
+    {
+      "name": "formSetPPTPServer",
+      "address": "0x000b8120",
+      "size": 1552,
+      "endpoint": "/goform/SetPPTPServer",
+      "websGetVar_params": [
+        {"name": "serverEn", "default": "", "stored_var": "var_14h"},
+        {"name": "mppe", "default": "", "stored_var": "var_18h"},
+        {"name": "mppeOp", "default": "128", "stored_var": "var_1ch"},
+        {"name": "startIp", "default": "", "stored_var": "var_20h"},
+        {"name": "endIp", "default": "", "stored_var": "var_24h"}
+      ],
+      "dangerous_sinks": [
+        {
+          "type": "POTENTIAL_BOF",
+          "severity": "MEDIUM",
+          "address": "0x000b8520",
+          "sink": "sprintf",
+          "format_string": "%s.%s.%s.%s",
+          "dest_buffer": "fp - 0xa4 (0x80 = 128 bytes)",
+          "user_input_param": "startIp (parsed via sscanf into 4 octets)",
+          "validation": "sscanf('%[^.].%[^.].%[^.].%s') validates IP format to 4 parts, limiting injection",
+          "notes": "startIp is parsed via sscanf into 4 dot-separated parts, then reassembled via sprintf. The sscanf parse limits each part but does not enforce length. However, the reassembly into a 128-byte buffer from 4 small parts makes overflow unlikely."
+        }
+      ],
+      "notes": "Most input goes through SetValue(). IP addresses are parsed via sscanf and validated to have 4 dot-separated parts. send_msg_to_netctrl used with hardcoded format. No doSystemCmd with user input.",
+      "verdict": "LOW RISK - sscanf provides minimal format validation"
+    },
+    {
+      "name": "formSetQosBand",
+      "address": "0x00063470",
+      "size": 708,
+      "endpoint": "/goform/SetQosBand",
+      "websGetVar_params": [
+        {"name": "list", "default": "", "stored_var": "var_14h"}
+      ],
+      "dangerous_sinks": [
+        {
+          "type": "SAFE",
+          "address": "0x000636fc",
+          "sink": "doSystemCmd",
+          "format_string": "cfm Post netctrl %d?op=%d",
+          "args": ["0xf (15)", "6"],
+          "notes": "Hardcoded integer arguments only"
+        }
+      ],
+      "notes": "The 'list' parameter is processed through a parsing function (0x7eb18) then passed to set_wl_guest_qos_list(). doSystemCmd uses only hardcoded values. No user input reaches dangerous sinks.",
+      "verdict": "SAFE"
+    },
+    {
+      "name": "fromSetRouteStatic",
+      "address": "0x00079724",
+      "size": 260,
+      "endpoint": "/goform/SetRouteStatic",
+      "websGetVar_params": [
+        {"name": "list", "default": "", "stored_var": "var_14h"}
+      ],
+      "dangerous_sinks": [],
+      "notes": "The 'list' parameter is passed to a parsing function (0x79160) which processes route entries. CommitCfm is called, then send_msg_to_netctrl with hardcoded 'advance_type=%d'. No doSystemCmd/system/strcpy with user input.",
+      "verdict": "SAFE"
+    },
+    {
+      "name": "mDMZSetCfg",
+      "address": "0x0007651c",
+      "size": 464,
+      "endpoint": "/goform/SetDMZ (actual handler name: mDMZSetCfg)",
+      "websGetVar_params": [
+        {"name": "dmzEn", "default": "", "stored_var": "var_14h"},
+        {"name": "dmzIp", "default": "", "stored_var": "var_18h"}
+      ],
+      "dangerous_sinks": [],
+      "notes": "dmzEn and dmzIp are validated (inet_addr check for IP), then saved via SetValue('wan1.dmzen'/'wan1.dmzip'). send_msg_to_netctrl with hardcoded format. No doSystemCmd/system/strcpy with user input.",
+      "verdict": "SAFE - inet_addr validation prevents injection"
+    },
+    {
+      "name": "formSetSafeWanWebMan",
+      "address": "0x00075ed8",
+      "size": 516,
+      "endpoint": "/goform/SetSafeWanWebMan (remote management)",
+      "websGetVar_params": [
+        {"name": "wan_ssl_en", "default": "", "stored_var": "var_14h"},
+        {"name": "remoteWebEn", "default": "", "stored_var": "var_18h"},
+        {"name": "remoteIp", "default": "", "stored_var": "var_1ch"},
+        {"name": "remotePort", "default": "", "stored_var": "var_20h"}
+      ],
+      "dangerous_sinks": [],
+      "notes": "All parameters saved via SetValue(). send_msg_to_netctrl used with hardcoded format. IP validation via helper function (0xb7c44). No doSystemCmd/system/strcpy with user input.",
+      "verdict": "SAFE"
+    },
+    {
+      "name": "formSetVirtualSer",
+      "address": "0x000779c4",
+      "size": 260,
+      "endpoint": "/goform/SetVirtualSer (port forwarding)",
+      "websGetVar_params": [
+        {"name": "list", "default": "", "stored_var": "var_14h"}
+      ],
+      "dangerous_sinks": [],
+      "notes": "The 'list' parameter is passed to parsing function (0x77488). CommitCfm called, then send_msg_to_netctrl with hardcoded format. No doSystemCmd/system/strcpy with user input.",
+      "verdict": "SAFE"
+    },
+    {
+      "name": "formWanParameterSetting",
+      "address": "0x00071050",
+      "size": 572,
+      "endpoint": "/goform/WanParameterSetting (PPPoE/Static/DHCP WAN setup)",
+      "websGetVar_params": [
+        {"name": "module", "default": "wan1", "stored_var": "var_14h"},
+        {"name": "multiWanEn", "default": "false", "stored_var": "var_18h"}
+      ],
+      "dangerous_sinks": [],
+      "notes": "Module parameter selects wan1/wan2 config path. Calls sub-function (0x70858) for actual configuration. No doSystemCmd/system/strcpy with user input in this handler.",
+      "verdict": "SAFE"
+    },
+    {
+      "name": "formSetClientState",
+      "address": "0x00061d28",
+      "size": 836,
+      "endpoint": "/goform/SetClientState",
+      "websGetVar_params": [
+        {"name": "deviceId", "default": "", "stored_var": "var_14h"},
+        {"name": "limitEn", "default": "", "stored_var": "var_18h"},
+        {"name": "limitSpeed", "default": "", "stored_var": "var_1ch"},
+        {"name": "limitSpeedUp", "default": "", "stored_var": "var_20h_param"}
+      ],
+      "dangerous_sinks": [
+        {
+          "type": "SAFE",
+          "address": "0x00061f84",
+          "sink": "doSystemCmd",
+          "format_string": "cfm Post netctrl %d?op=%d",
+          "args": ["0xf (15)", "5"],
+          "notes": "Hardcoded integer arguments only"
+        },
+        {
+          "type": "POTENTIAL_BOF",
+          "severity": "LOW",
+          "address": "0x00061fd4",
+          "sink": "sprintf",
+          "format_string": "%d;%s;%s;%s",
+          "dest_buffer": "fp - 0x224",
+          "user_input_param": "Multiple params assembled",
+          "notes": "atoi(limitEn), limitSpeed, limitSpeedUp, deviceId assembled via sprintf into buffer. Buffer is large (fp-0x224 ≈ 548 bytes) relative to typical input sizes."
+        }
+      ],
+      "verdict": "LOW RISK - doSystemCmd uses hardcoded args, sprintf buffer appears adequately sized"
+    },
+    {
+      "name": "formSetSchedLed",
+      "address": "0x0008ef48",
+      "size": 1200,
+      "endpoint": "/goform/SetSchedLed",
+      "websGetVar_params": [
+        {"name": "ledType", "default": "open"},
+        {"name": "time", "default": "00:00-06:30"},
+        {"name": "day", "default": "1,1,1,1,1,1,1"},
+        {"name": "ledCloseType", "default": "allClose"}
+      ],
+      "dangerous_sinks": [],
+      "notes": "All parameters saved via SetValue(). No doSystemCmd/system/strcpy with user input. Uses send_msg_to_time_check for IPC.",
+      "verdict": "SAFE"
+    },
+    {
+      "name": "formSetMacFilterCfg",
+      "address": "0x000c175c",
+      "size": 1884,
+      "endpoint": "/goform/SetMacFilterCfg",
+      "websGetVar_params": [
+        {"name": "macFilterType", "default": ""},
+        {"name": "deviceList", "default": ""}
+      ],
+      "dangerous_sinks": [],
+      "notes": "Parameters passed to parsing functions (0xc1f0c, 0xc2318). snprintf used for 'op=%d,wl_rate=%d' with hardcoded values sent to send_msg_to_netctrl. No doSystemCmd/system/strcpy with user input.",
+      "verdict": "SAFE"
+    },
+    {
+      "name": "fromNatStaticSetting",
+      "address": "0x00077ef4",
+      "size": 368,
+      "endpoint": "/goform/NatStaticSetting",
+      "websGetVar_params": [
+        {"name": "entrys", "default": ""},
+        {"name": "page", "default": ""},
+        {"name": "isoncheck", "default": ""}
+      ],
+      "dangerous_sinks": [],
+      "notes": "Parameters used with SetValue() and parsing functions. PostMsgToNetctrl used with internal data. No doSystemCmd/system/strcpy with user input.",
+      "verdict": "SAFE"
+    }
+  ],
+  "handlers_not_found": [
+    {
+      "requested_name": "formSetAutoPing",
+      "notes": "No formSetAutoPing handler exists in AC15 httpd. Ping functionality uses simple_ping() library call, not system('ping ...'). The firewall ping setting (firewall.pingwan) is set via formSetFirewallCfg which is already documented."
+    },
+    {
+      "requested_name": "formSetRemoteWebCfg",
+      "actual_name": "formSetSafeWanWebMan",
+      "notes": "The remote web management handler is named formSetSafeWanWebMan in the binary. Analyzed above."
+    },
+    {
+      "requested_name": "formSetWanPPPoE",
+      "actual_name": "formWanParameterSetting",
+      "notes": "PPPoE configuration is handled by formWanParameterSetting which dispatches to sub-handlers. Analyzed above."
+    },
+    {
+      "requested_name": "formSetStaticIp",
+      "actual_name": "fromNatStaticSetting",
+      "notes": "Static IP/NAT configuration uses fromNatStaticSetting. Analyzed above."
+    },
+    {
+      "requested_name": "formSetPortForward",
+      "actual_name": "formSetVirtualSer",
+      "notes": "Port forwarding uses formSetVirtualSer. Analyzed above."
+    },
+    {
+      "requested_name": "formSetDMZ",
+      "actual_name": "mDMZSetCfg",
+      "notes": "DMZ configuration uses mDMZSetCfg. Analyzed above."
+    },
+    {
+      "requested_name": "formSetNetControl",
+      "notes": "No dedicated formSetNetControl handler. Network control is distributed across formSetClientState, formSetQosBand, and formSetMacFilterCfg."
+    },
+    {
+      "requested_name": "formSetURLFilter",
+      "notes": "No formSetURLFilter handler found. URL filtering may be handled through aspTendaGetStatus or formSetFirewallCfg."
+    }
+  ],
+  "new_findings": [
+    {
+      "id": "[REDACTED-ID]_006",
+      "title": "Command Injection in formSetSambaConf via usbName Parameter",
+      "severity": "CRITICAL",
+      "handler": "formSetSambaConf",
+      "address": "0x000a6320",
+      "parameter": "usbName",
+      "sink": "doSystemCmd at 0x000a64d4",
+      "format_string": "cfm post netctrl %d?op=%d,string_info=%s",
+      "validation": "NONE",
+      "path": "POST /goform/SetSambaConf action=del&usbName=PAYLOAD -> doSystemCmd('cfm post netctrl 51?op=3,string_info=PAYLOAD')",
+      "notes": "The usbName HTTP parameter is passed directly to doSystemCmd without any sanitization when action=='del'. Shell metacharacters in usbName will be executed as root."
+    },
+    {
+      "id": "[REDACTED-ID]_007",
+      "title": "Stored Command Injection in formSetSambaConf via guestuser Parameter",
+      "severity": "HIGH",
+      "handler": "formSetSambaConf",
+      "address": "0x000a6320",
+      "parameter": "guestuser",
+      "sink": "doSystemCmd at 0x000a654c",
+      "format_string": "busybox deluser %s",
+      "validation": "NONE",
+      "path": "Step 1: POST /goform/SetSambaConf action=set&guestuser=PAYLOAD (stored to NVRAM 'usb.samba.guest.user'). Step 2: Next invocation retrieves stored value via GetValue() and passes to doSystemCmd('busybox deluser %s', stored_value)",
+      "notes": "Two-step stored injection. The guestuser value is saved to NVRAM first, then retrieved and used in a busybox deluser command on subsequent calls. No sanitization at either step."
+    }
+  ],
+  "summary": {
+    "total_handlers_analyzed": 16,
+    "new_critical_findings": 1,
+    "new_high_findings": 1,
+    "safe_handlers": 14,
+    "key_observation": "Most Tenda AC15 handlers follow a safe pattern: websGetVar -> SetValue -> CommitCfm -> send_msg_to_netctrl(hardcoded). The vulnerability in formSetSambaConf is an exception where user input flows directly to doSystemCmd via the string_info parameter of a cfm command. The formSetAutoPing handler does not exist in this firmware - ping uses simple_ping() library function.",
+    "patterns_observed": {
+      "safe_pattern": "websGetVar -> SetValue/CommitCfm -> send_msg_to_netctrl (hardcoded format)",
+      "vulnerable_pattern": "websGetVar -> doSystemCmd with user-controlled %s argument",
+      "common_sinks": {
+        "SetValue": "NVRAM setter - safe for injection, but allows arbitrary config changes",
+        "doSystemCmd": "Shell command execution - dangerous when format string has %s from user input",
+        "send_msg_to_netctrl": "IPC message - generally uses hardcoded formats, safe",
+        "PostMsgToNetctrl": "IPC message - uses internal data, safe",
+        "CommitCfm": "Config commit - no user input passed"
+      }
+    }
+  }
+}

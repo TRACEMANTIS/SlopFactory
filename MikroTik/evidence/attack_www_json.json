@@ -1,0 +1,3186 @@
+{
+  "metadata": {
+    "script": "attack_www_json.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": "JSON parser deep fuzzing (www binary)",
+    "start_time": "2026-02-16T14:07:08.268218",
+    "end_time": "2026-02-16T14:08:16.738700",
+    "total_tests": 199,
+    "anomalies": 3,
+    "crashes": 0,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "2h7m46s",
+    "final_health": {
+      "alive": true,
+      "uptime": "2h8m54s",
+      "cpu_load": "0",
+      "free_memory": "843816960",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "deep_nesting",
+      "name": "nested_objects_100",
+      "description": "POST 100-level nested JSON objects to trigger parse_json_element recursion",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.336252",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 606,
+        "crashed": false
+      }
+    },
+    {
+      "id": 2,
+      "category": "deep_nesting",
+      "name": "nested_objects_500",
+      "description": "POST 500-level nested JSON objects to trigger parse_json_element recursion",
+      "result": "HTTP 400 | 0ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.344256",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 3006,
+        "crashed": false
+      }
+    },
+    {
+      "id": 3,
+      "category": "deep_nesting",
+      "name": "nested_objects_1000",
+      "description": "POST 1000-level nested JSON objects to trigger parse_json_element recursion",
+      "result": "HTTP 400 | 0ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.352260",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 6006,
+        "crashed": false
+      }
+    },
+    {
+      "id": 4,
+      "category": "deep_nesting",
+      "name": "nested_objects_5000",
+      "description": "POST 5000-level nested JSON objects to trigger parse_json_element recursion",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.360264",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 30006,
+        "crashed": false
+      }
+    },
+    {
+      "id": 5,
+      "category": "deep_nesting",
+      "name": "nested_objects_10000",
+      "description": "POST 10000-level nested JSON objects to trigger parse_json_element recursion",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.368268",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 60006,
+        "crashed": false
+      }
+    },
+    {
+      "id": 6,
+      "category": "deep_nesting",
+      "name": "nested_arrays_100",
+      "description": "POST 100-level nested JSON arrays to test stack depth limits",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.376272",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 201,
+        "crashed": false
+      }
+    },
+    {
+      "id": 7,
+      "category": "deep_nesting",
+      "name": "nested_arrays_500",
+      "description": "POST 500-level nested JSON arrays to test stack depth limits",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.384276",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 1001,
+        "crashed": false
+      }
+    },
+    {
+      "id": 8,
+      "category": "deep_nesting",
+      "name": "nested_arrays_1000",
+      "description": "POST 1000-level nested JSON arrays to test stack depth limits",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.392280",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 2001,
+        "crashed": false
+      }
+    },
+    {
+      "id": 9,
+      "category": "deep_nesting",
+      "name": "nested_arrays_5000",
+      "description": "POST 5000-level nested JSON arrays to test stack depth limits",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.400284",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 10001,
+        "crashed": false
+      }
+    },
+    {
+      "id": 10,
+      "category": "deep_nesting",
+      "name": "nested_arrays_10000",
+      "description": "POST 10000-level nested JSON arrays to test stack depth limits",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.408288",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 20001,
+        "crashed": false
+      }
+    },
+    {
+      "id": 11,
+      "category": "deep_nesting",
+      "name": "nested_alternating_100",
+      "description": "POST 100-level alternating obj/arr nesting to stress type-tracking state machine",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.416292",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 806,
+        "crashed": false
+      }
+    },
+    {
+      "id": 12,
+      "category": "deep_nesting",
+      "name": "nested_alternating_500",
+      "description": "POST 500-level alternating obj/arr nesting to stress type-tracking state machine",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.424296",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 4006,
+        "crashed": false
+      }
+    },
+    {
+      "id": 13,
+      "category": "deep_nesting",
+      "name": "nested_alternating_1000",
+      "description": "POST 1000-level alternating obj/arr nesting to stress type-tracking state machine",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.432300",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 8006,
+        "crashed": false
+      }
+    },
+    {
+      "id": 14,
+      "category": "deep_nesting",
+      "name": "nested_alternating_5000",
+      "description": "POST 5000-level alternating obj/arr nesting to stress type-tracking state machine",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.444306",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 40006,
+        "crashed": false
+      }
+    },
+    {
+      "id": 15,
+      "category": "deep_nesting",
+      "name": "nested_wide_50",
+      "description": "POST 50-level nested objects with 3 sibling keys per level",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.452310",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 1510,
+        "crashed": false
+      }
+    },
+    {
+      "id": 16,
+      "category": "deep_nesting",
+      "name": "nested_wide_200",
+      "description": "POST 200-level nested objects with 3 sibling keys per level",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.460314",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 6010,
+        "crashed": false
+      }
+    },
+    {
+      "id": 17,
+      "category": "long_strings",
+      "name": "long_string_value_1KB",
+      "description": "POST JSON with 1KB string value to test StreamParser buffer handling",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.468318",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 1036,
+        "crashed": false
+      }
+    },
+    {
+      "id": 18,
+      "category": "long_strings",
+      "name": "long_string_value_10KB",
+      "description": "POST JSON with 10KB string value to test StreamParser buffer handling",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.476322",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 10252,
+        "crashed": false
+      }
+    },
+    {
+      "id": 19,
+      "category": "long_strings",
+      "name": "long_string_value_100KB",
+      "description": "POST JSON with 100KB string value to test StreamParser buffer handling",
+      "result": "HTTP 400 | 0ms | resp_len=63 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.476322",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Session closed\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 102412,
+        "crashed": false
+      }
+    },
+    {
+      "id": 20,
+      "category": "long_strings",
+      "name": "long_string_value_1MB",
+      "description": "POST JSON with 1MB string value to test StreamParser buffer handling",
+      "result": "HTTP 413 | 8ms | resp_len=43 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:08.516342",
+      "details": {
+        "status": 413,
+        "response": "{\"error\":413,\"message\":\"Payload Too Large\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 1048588,
+        "crashed": false
+      }
+    },
+    {
+      "id": 21,
+      "category": "long_strings",
+      "name": "long_escaped_newlines_100KB",
+      "description": "POST JSON with 50000 \\n escape sequences (~100KB) to stress escape decoder",
+      "result": "HTTP 200 | 5147ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.666916",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 5146.6,
+        "payload_size": 100011,
+        "crashed": false
+      }
+    },
+    {
+      "id": 22,
+      "category": "long_strings",
+      "name": "long_unicode_escapes_120KB",
+      "description": "POST JSON with 20000 \\u0041 Unicode escapes (~120KB) to stress escape decoder",
+      "result": "HTTP 200 | 20ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.694930",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 20.0,
+        "payload_size": 120011,
+        "crashed": false
+      }
+    },
+    {
+      "id": 23,
+      "category": "long_strings",
+      "name": "long_backslashes_100KB",
+      "description": "POST JSON with 50000 escaped backslash pairs to test escape handling",
+      "result": "HTTP 200 | 24ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.726946",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 24.0,
+        "payload_size": 100011,
+        "crashed": false
+      }
+    },
+    {
+      "id": 24,
+      "category": "long_strings",
+      "name": "long_string_pow2_minus1_4096",
+      "description": "POST JSON with string length 4095 (2^12-1) \u2014 allocation boundary",
+      "result": "HTTP 200 | 16ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.750958",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 16.0,
+        "payload_size": 4107,
+        "crashed": false
+      }
+    },
+    {
+      "id": 25,
+      "category": "long_strings",
+      "name": "long_string_pow2_minus1_65536",
+      "description": "POST JSON with string length 65535 (2^16-1) \u2014 allocation boundary",
+      "result": "HTTP 400 | 8ms | resp_len=63 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.762964",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Session closed\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 65547,
+        "crashed": false
+      }
+    },
+    {
+      "id": 26,
+      "category": "long_keys",
+      "name": "long_key_name_1KB",
+      "description": "POST JSON with 1KB key name to test parser key buffer allocation",
+      "result": "HTTP 400 | 4ms | resp_len=1091 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.778972",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK...",
+        "elapsed_ms": 4.0,
+        "payload_size": 1036,
+        "crashed": false
+      }
+    },
+    {
+      "id": 27,
+      "category": "long_keys",
+      "name": "long_key_name_10KB",
+      "description": "POST JSON with 10KB key name to test parser key buffer allocation",
+      "result": "HTTP 400 | 8ms | resp_len=10307 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.790978",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK...",
+        "elapsed_ms": 8.0,
+        "payload_size": 10252,
+        "crashed": false
+      }
+    },
+    {
+      "id": 28,
+      "category": "long_keys",
+      "name": "long_key_name_100KB",
+      "description": "POST JSON with 100KB key name to test parser key buffer allocation",
+      "result": "HTTP 400 | 8ms | resp_len=63 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.802984",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Session closed\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 102412,
+        "crashed": false
+      }
+    },
+    {
+      "id": 29,
+      "category": "long_keys",
+      "name": "long_key_name_1MB",
+      "description": "POST JSON with 1MB key name to test parser key buffer allocation",
+      "result": "HTTP 413 | 4ms | resp_len=43 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.818992",
+      "details": {
+        "status": 413,
+        "response": "{\"error\":413,\"message\":\"Payload Too Large\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 1048588,
+        "crashed": false
+      }
+    },
+    {
+      "id": 30,
+      "category": "long_keys",
+      "name": "long_key_unicode_escapes",
+      "description": "POST JSON with 5000 unicode-escaped key chars to stress key decoder",
+      "result": "HTTP 400 | 8ms | resp_len=35067 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.830998",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter \\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\u004B\\\\...",
+        "elapsed_ms": 8.0,
+        "payload_size": 30012,
+        "crashed": false
+      }
+    },
+    {
+      "id": 31,
+      "category": "long_keys",
+      "name": "many_keys_1000",
+      "description": "POST JSON object with 1000 distinct key-value pairs",
+      "result": "HTTP 400 | 8ms | resp_len=69 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.847006",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter k0\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 13781,
+        "crashed": false
+      }
+    },
+    {
+      "id": 32,
+      "category": "long_keys",
+      "name": "many_keys_5000",
+      "description": "POST JSON object with 5000 distinct key-value pairs",
+      "result": "HTTP 400 | 24ms | resp_len=69 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.875020",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter k0\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 24.0,
+        "payload_size": 77781,
+        "crashed": false
+      }
+    },
+    {
+      "id": 33,
+      "category": "unicode",
+      "name": "overlong_utf8_2byte",
+      "description": "Overlong UTF-8 encoding (2-byte for ASCII char) to test UTF-8 validation",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.891028",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 20,
+        "crashed": false
+      }
+    },
+    {
+      "id": 34,
+      "category": "unicode",
+      "name": "surrogate_pair_valid",
+      "description": "Valid surrogate pair (\\uD800\\uDC00) in JSON string",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.903034",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 30,
+        "crashed": false
+      }
+    },
+    {
+      "id": 35,
+      "category": "unicode",
+      "name": "lone_high_surrogate",
+      "description": "Lone high surrogate (\\uD800) without low surrogate \u2014 invalid",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.915040",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 24,
+        "crashed": false
+      }
+    },
+    {
+      "id": 36,
+      "category": "unicode",
+      "name": "lone_low_surrogate",
+      "description": "Lone low surrogate (\\uDC00) without high surrogate \u2014 invalid",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.927046",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 24,
+        "crashed": false
+      }
+    },
+    {
+      "id": 37,
+      "category": "unicode",
+      "name": "json_null_char",
+      "description": "Null character via \\u0000 JSON escape in string value",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.939052",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 24,
+        "crashed": false
+      }
+    },
+    {
+      "id": 38,
+      "category": "unicode",
+      "name": "unicode_fffe",
+      "description": "U+FFFE (non-character, byte-order mark inverse) in JSON string",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.951058",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 24,
+        "crashed": false
+      }
+    },
+    {
+      "id": 39,
+      "category": "unicode",
+      "name": "emoji_4byte",
+      "description": "4-byte UTF-8 emoji (U+1F4A9) in JSON string value",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.963064",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 22,
+        "crashed": false
+      }
+    },
+    {
+      "id": 40,
+      "category": "unicode",
+      "name": "invalid_utf8_ff",
+      "description": "Invalid UTF-8 byte 0xFF in JSON string value",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.971068",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 19,
+        "crashed": false
+      }
+    },
+    {
+      "id": 41,
+      "category": "unicode",
+      "name": "invalid_utf8_fe",
+      "description": "Invalid UTF-8 byte 0xFE in JSON string value",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.979072",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 19,
+        "crashed": false
+      }
+    },
+    {
+      "id": 42,
+      "category": "unicode",
+      "name": "continuation_no_start",
+      "description": "UTF-8 continuation bytes (0x80-0x82) without start byte",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.979072",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 21,
+        "crashed": false
+      }
+    },
+    {
+      "id": 43,
+      "category": "unicode",
+      "name": "start_no_continuation",
+      "description": "UTF-8 3-byte start (0xE0) without continuation bytes",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.979072",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 19,
+        "crashed": false
+      }
+    },
+    {
+      "id": 44,
+      "category": "unicode",
+      "name": "overlong_utf8_3byte",
+      "description": "Overlong 3-byte UTF-8 encoding of ASCII '/' \u2014 security bypass vector",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:13.979072",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 21,
+        "crashed": false
+      }
+    },
+    {
+      "id": 45,
+      "category": "unicode",
+      "name": "utf8_bom_prefix",
+      "description": "UTF-8 BOM (0xEF 0xBB 0xBF) prepended to JSON body",
+      "result": "HTTP 400 | 0ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.019092",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 46,
+      "category": "unicode",
+      "name": "mixed_valid_invalid_utf8",
+      "description": "Mix of valid UTF-8 (e-acute), invalid 0xFF, and overlong sequence",
+      "result": "HTTP 200 | 24ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.043104",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 24.0,
+        "payload_size": 38,
+        "crashed": false
+      }
+    },
+    {
+      "id": 47,
+      "category": "unicode",
+      "name": "raw_null_in_json_string",
+      "description": "Raw 0x00 byte in JSON string (different from \\u0000 escape)",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.043104",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 19,
+        "crashed": false
+      }
+    },
+    {
+      "id": 48,
+      "category": "unicode",
+      "name": "max_unicode_codepoint",
+      "description": "Maximum Unicode code point U+10FFFF in string",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.063114",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 22,
+        "crashed": false
+      }
+    },
+    {
+      "id": 49,
+      "category": "unicode",
+      "name": "rtl_override",
+      "description": "Right-to-left override (U+202E) \u2014 text direction attack",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.075120",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 24,
+        "crashed": false
+      }
+    },
+    {
+      "id": 50,
+      "category": "unicode",
+      "name": "zwj_sequence",
+      "description": "Zero-width joiner, non-joiner, and space sequence",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.079122",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 36,
+        "crashed": false
+      }
+    },
+    {
+      "id": 51,
+      "category": "unicode",
+      "name": "replacement_char_flood",
+      "description": "1000 U+FFFD replacement characters in string",
+      "result": "HTTP 200 | 20ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.099132",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 20.0,
+        "payload_size": 3011,
+        "crashed": false
+      }
+    },
+    {
+      "id": 52,
+      "category": "unicode",
+      "name": "private_use_area",
+      "description": "Private Use Area characters (BMP and supplementary)",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.107136",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 42,
+        "crashed": false
+      }
+    },
+    {
+      "id": 53,
+      "category": "number_parsing",
+      "name": "int32_max",
+      "description": "JSON with numeric value 2147483647 to test number parser edge cases",
+      "result": "HTTP 400 | 8ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.131148",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 34,
+        "crashed": false
+      }
+    },
+    {
+      "id": 54,
+      "category": "number_parsing",
+      "name": "int32_max_plus1",
+      "description": "JSON with numeric value 2147483648 to test number parser edge cases",
+      "result": "HTTP 400 | 52ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.183174",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 52.0,
+        "payload_size": 34,
+        "crashed": false
+      }
+    },
+    {
+      "id": 55,
+      "category": "number_parsing",
+      "name": "int32_min",
+      "description": "JSON with numeric value -2147483648 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.187176",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 35,
+        "crashed": false
+      }
+    },
+    {
+      "id": 56,
+      "category": "number_parsing",
+      "name": "int32_min_minus1",
+      "description": "JSON with numeric value -2147483649 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.195180",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 35,
+        "crashed": false
+      }
+    },
+    {
+      "id": 57,
+      "category": "number_parsing",
+      "name": "uint32_max",
+      "description": "JSON with numeric value 4294967295 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.203184",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 34,
+        "crashed": false
+      }
+    },
+    {
+      "id": 58,
+      "category": "number_parsing",
+      "name": "uint32_max_plus1",
+      "description": "JSON with numeric value 4294967296 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.215190",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 34,
+        "crashed": false
+      }
+    },
+    {
+      "id": 59,
+      "category": "number_parsing",
+      "name": "int64_max",
+      "description": "JSON with numeric value 9223372036854775807 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.223194",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 43,
+        "crashed": false
+      }
+    },
+    {
+      "id": 60,
+      "category": "number_parsing",
+      "name": "int64_max_plus1",
+      "description": "JSON with numeric value 9223372036854775808 to test number parser edge cases",
+      "result": "HTTP 400 | 0ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.235200",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 43,
+        "crashed": false
+      }
+    },
+    {
+      "id": 61,
+      "category": "number_parsing",
+      "name": "large_integer",
+      "description": "JSON with numeric value 9999999999999999 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.243204",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 40,
+        "crashed": false
+      }
+    },
+    {
+      "id": 62,
+      "category": "number_parsing",
+      "name": "float_max",
+      "description": "JSON with numeric value 1e308 to test number parser edge cases",
+      "result": "HTTP 400 | 12ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.255210",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 12.0,
+        "payload_size": 29,
+        "crashed": false
+      }
+    },
+    {
+      "id": 63,
+      "category": "number_parsing",
+      "name": "float_overflow",
+      "description": "JSON with numeric value 1e309 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.259212",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 29,
+        "crashed": false
+      }
+    },
+    {
+      "id": 64,
+      "category": "number_parsing",
+      "name": "nan_literal",
+      "description": "JSON with numeric value NaN to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.267216",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 27,
+        "crashed": false
+      }
+    },
+    {
+      "id": 65,
+      "category": "number_parsing",
+      "name": "inf_literal",
+      "description": "JSON with numeric value Infinity to test number parser edge cases",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.279222",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 32,
+        "crashed": false
+      }
+    },
+    {
+      "id": 66,
+      "category": "number_parsing",
+      "name": "neg_inf_literal",
+      "description": "JSON with numeric value -Infinity to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.287226",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 33,
+        "crashed": false
+      }
+    },
+    {
+      "id": 67,
+      "category": "number_parsing",
+      "name": "neg_zero",
+      "description": "JSON with numeric value -0 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.295230",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 26,
+        "crashed": false
+      }
+    },
+    {
+      "id": 68,
+      "category": "number_parsing",
+      "name": "tiny_float",
+      "description": "JSON with numeric value 0.0000000000000001 to test number parser edge cases",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.307236",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 42,
+        "crashed": false
+      }
+    },
+    {
+      "id": 69,
+      "category": "number_parsing",
+      "name": "float_underflow",
+      "description": "JSON with numeric value 1e-400 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.315240",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 30,
+        "crashed": false
+      }
+    },
+    {
+      "id": 70,
+      "category": "number_parsing",
+      "name": "leading_zeros",
+      "description": "JSON with numeric value 007 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.327246",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 27,
+        "crashed": false
+      }
+    },
+    {
+      "id": 71,
+      "category": "number_parsing",
+      "name": "leading_plus",
+      "description": "JSON with numeric value +42 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.335250",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 27,
+        "crashed": false
+      }
+    },
+    {
+      "id": 72,
+      "category": "number_parsing",
+      "name": "hex_literal",
+      "description": "JSON with numeric value 0xFF to test number parser edge cases",
+      "result": "HTTP 400 | 8ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.343254",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 28,
+        "crashed": false
+      }
+    },
+    {
+      "id": 73,
+      "category": "number_parsing",
+      "name": "octal_literal",
+      "description": "JSON with numeric value 0777 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.355260",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 28,
+        "crashed": false
+      }
+    },
+    {
+      "id": 74,
+      "category": "number_parsing",
+      "name": "double_negative",
+      "description": "JSON with numeric value --1 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.363264",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 27,
+        "crashed": false
+      }
+    },
+    {
+      "id": 75,
+      "category": "number_parsing",
+      "name": "exp_plus",
+      "description": "JSON with numeric value 1e+308 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.371268",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 30,
+        "crashed": false
+      }
+    },
+    {
+      "id": 76,
+      "category": "number_parsing",
+      "name": "exp_negative_large",
+      "description": "JSON with numeric value 1e-308 to test number parser edge cases",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.383274",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 30,
+        "crashed": false
+      }
+    },
+    {
+      "id": 77,
+      "category": "number_parsing",
+      "name": "very_long_integer",
+      "description": "JSON with numeric value 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 to test number parser edge cases",
+      "result": "HTTP 400 | 8ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.395280",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 1024,
+        "crashed": false
+      }
+    },
+    {
+      "id": 78,
+      "category": "number_parsing",
+      "name": "very_long_decimal",
+      "description": "JSON with numeric value 0.1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 to test number parser edge cases",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.407286",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 1026,
+        "crashed": false
+      }
+    },
+    {
+      "id": 79,
+      "category": "number_parsing",
+      "name": "many_leading_zeros",
+      "description": "JSON with numeric value 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 to test number parser edge cases",
+      "result": "HTTP 400 | 4ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.415290",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 125,
+        "crashed": false
+      }
+    },
+    {
+      "id": 80,
+      "category": "truncated_json",
+      "name": "mid_string",
+      "description": "Truncated JSON (mid_string) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.427296",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 13,
+        "crashed": false
+      }
+    },
+    {
+      "id": 81,
+      "category": "truncated_json",
+      "name": "mid_number",
+      "description": "Truncated JSON (mid_number) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.435300",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 21,
+        "crashed": false
+      }
+    },
+    {
+      "id": 82,
+      "category": "truncated_json",
+      "name": "mid_key",
+      "description": "Truncated JSON (mid_key) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.447306",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 4,
+        "crashed": false
+      }
+    },
+    {
+      "id": 83,
+      "category": "truncated_json",
+      "name": "after_colon",
+      "description": "Truncated JSON (after_colon) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.455310",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 8,
+        "crashed": false
+      }
+    },
+    {
+      "id": 84,
+      "category": "truncated_json",
+      "name": "after_comma",
+      "description": "Truncated JSON (after_comma) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.463314",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 12,
+        "crashed": false
+      }
+    },
+    {
+      "id": 85,
+      "category": "truncated_json",
+      "name": "after_open_brace",
+      "description": "Truncated JSON (after_open_brace) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.471318",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 1,
+        "crashed": false
+      }
+    },
+    {
+      "id": 86,
+      "category": "truncated_json",
+      "name": "after_open_bracket",
+      "description": "Truncated JSON (after_open_bracket) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 0ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.479322",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 1,
+        "crashed": false
+      }
+    },
+    {
+      "id": 87,
+      "category": "truncated_json",
+      "name": "mid_true",
+      "description": "Truncated JSON (mid_true) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.487326",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 11,
+        "crashed": false
+      }
+    },
+    {
+      "id": 88,
+      "category": "truncated_json",
+      "name": "mid_false",
+      "description": "Truncated JSON (mid_false) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 0ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.495330",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 11,
+        "crashed": false
+      }
+    },
+    {
+      "id": 89,
+      "category": "truncated_json",
+      "name": "mid_null",
+      "description": "Truncated JSON (mid_null) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.507336",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 10,
+        "crashed": false
+      }
+    },
+    {
+      "id": 90,
+      "category": "truncated_json",
+      "name": "mid_escape",
+      "description": "Truncated JSON (mid_escape) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.519342",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 14,
+        "crashed": false
+      }
+    },
+    {
+      "id": 91,
+      "category": "truncated_json",
+      "name": "mid_unicode_escape",
+      "description": "Truncated JSON (mid_unicode_escape) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.527346",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 17,
+        "crashed": false
+      }
+    },
+    {
+      "id": 92,
+      "category": "truncated_json",
+      "name": "after_backslash_u",
+      "description": "Truncated JSON (after_backslash_u) \u2014 tests StreamParser incomplete input handling",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.535350",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 15,
+        "crashed": false
+      }
+    },
+    {
+      "id": 93,
+      "category": "type_confusion",
+      "name": "string_for_number",
+      "description": "String value where numeric expected",
+      "result": "HTTP 400 | 4ms | resp_len=72 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.547356",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter value\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 38,
+        "crashed": false
+      }
+    },
+    {
+      "id": 94,
+      "category": "type_confusion",
+      "name": "array_for_object",
+      "description": "Top-level array instead of object",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.555360",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 17,
+        "crashed": false
+      }
+    },
+    {
+      "id": 95,
+      "category": "type_confusion",
+      "name": "object_for_string",
+      "description": "Object value where string expected",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.563364",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 28,
+        "crashed": false
+      }
+    },
+    {
+      "id": 96,
+      "category": "type_confusion",
+      "name": "array_for_string",
+      "description": "Array value where string expected",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.575370",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 22,
+        "crashed": false
+      }
+    },
+    {
+      "id": 97,
+      "category": "type_confusion",
+      "name": "bool_for_string",
+      "description": "Boolean value where string expected",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.587376",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 13,
+        "crashed": false
+      }
+    },
+    {
+      "id": 98,
+      "category": "type_confusion",
+      "name": "null_for_string",
+      "description": "Null value where string expected",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.599382",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 13,
+        "crashed": false
+      }
+    },
+    {
+      "id": 99,
+      "category": "type_confusion",
+      "name": "number_for_string",
+      "description": "Number value where string expected",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.607386",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 11,
+        "crashed": false
+      }
+    },
+    {
+      "id": 100,
+      "category": "type_confusion",
+      "name": "nested_array_of_objects",
+      "description": "Nested arrays of objects where string expected",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.615390",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 40,
+        "crashed": false
+      }
+    },
+    {
+      "id": 101,
+      "category": "type_confusion",
+      "name": "nested_empty_containers",
+      "description": "Deeply nested empty objects",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.627396",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 29,
+        "crashed": false
+      }
+    },
+    {
+      "id": 102,
+      "category": "type_confusion",
+      "name": "mixed_type_array",
+      "description": "Array with mixed types where string expected",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.635400",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 43,
+        "crashed": false
+      }
+    },
+    {
+      "id": 103,
+      "category": "type_confusion",
+      "name": "dup_keys_diff_types",
+      "description": "Duplicate key 'note' with string, number, boolean, null values",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.643404",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 52,
+        "crashed": false
+      }
+    },
+    {
+      "id": 104,
+      "category": "type_confusion",
+      "name": "deep_mixed_nesting",
+      "description": "Mixed object/array nesting to confuse type tracking",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.651408",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 40,
+        "crashed": false
+      }
+    },
+    {
+      "id": 105,
+      "category": "null_bytes",
+      "name": "raw_null_in_value",
+      "description": "Raw null byte (0x00) in JSON string value",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.667416",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 23,
+        "crashed": false
+      }
+    },
+    {
+      "id": 106,
+      "category": "null_bytes",
+      "name": "raw_null_in_key",
+      "description": "Raw null byte in JSON key name \u2014 may truncate key",
+      "result": "HTTP 400 | 4ms | resp_len=77 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.675420",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter no\\u0000te\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 17,
+        "crashed": false
+      }
+    },
+    {
+      "id": 107,
+      "category": "null_bytes",
+      "name": "null_between_tokens",
+      "description": "Null byte between key and colon",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.687426",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 17,
+        "crashed": false
+      }
+    },
+    {
+      "id": 108,
+      "category": "null_bytes",
+      "name": "null_before_json",
+      "description": "Null byte before opening brace",
+      "result": "HTTP 400 | 0ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.695430",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 17,
+        "crashed": false
+      }
+    },
+    {
+      "id": 109,
+      "category": "null_bytes",
+      "name": "null_after_json",
+      "description": "Null byte after closing brace",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.703434",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 17,
+        "crashed": false
+      }
+    },
+    {
+      "id": 110,
+      "category": "null_bytes",
+      "name": "multiple_nulls",
+      "description": "Five consecutive null bytes in string value",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.711438",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 16,
+        "crashed": false
+      }
+    },
+    {
+      "id": 111,
+      "category": "null_bytes",
+      "name": "json_escape_null_key",
+      "description": "JSON-escaped null (\\u0000) in key name",
+      "result": "HTTP 400 | 4ms | resp_len=78 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.719442",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter no\\\\u0000te\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 22,
+        "crashed": false
+      }
+    },
+    {
+      "id": 112,
+      "category": "null_bytes",
+      "name": "null_between_pairs",
+      "description": "Null byte between two key-value pairs",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.727446",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 113,
+      "category": "null_bytes",
+      "name": "null_flood_value",
+      "description": "1000 consecutive null bytes in string value",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.735450",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 1011,
+        "crashed": false
+      }
+    },
+    {
+      "id": 114,
+      "category": "escape_sequences",
+      "name": "all_valid_escapes",
+      "description": "All valid JSON escape characters in one string",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.751458",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 27,
+        "crashed": false
+      }
+    },
+    {
+      "id": 115,
+      "category": "escape_sequences",
+      "name": "invalid_escape_x",
+      "description": "Invalid escape \\x (not a valid JSON escape)",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.759462",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 20,
+        "crashed": false
+      }
+    },
+    {
+      "id": 116,
+      "category": "escape_sequences",
+      "name": "invalid_escape_a",
+      "description": "Invalid escape \\a (bell character, not valid in JSON)",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.771468",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 20,
+        "crashed": false
+      }
+    },
+    {
+      "id": 117,
+      "category": "escape_sequences",
+      "name": "invalid_escape_0",
+      "description": "Invalid escape \\0 (C-style null, not valid JSON)",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.779472",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 20,
+        "crashed": false
+      }
+    },
+    {
+      "id": 118,
+      "category": "escape_sequences",
+      "name": "invalid_escape_v",
+      "description": "Invalid escape \\v (vertical tab, not valid JSON)",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.791478",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 20,
+        "crashed": false
+      }
+    },
+    {
+      "id": 119,
+      "category": "escape_sequences",
+      "name": "lone_backslash_end",
+      "description": "Lone backslash at end of JSON string \u2014 unterminated escape",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.803484",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 16,
+        "crashed": false
+      }
+    },
+    {
+      "id": 120,
+      "category": "escape_sequences",
+      "name": "double_escaped_n",
+      "description": "Double-escaped \\\\n \u2014 should produce literal backslash + n",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.815490",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 21,
+        "crashed": false
+      }
+    },
+    {
+      "id": 121,
+      "category": "escape_sequences",
+      "name": "unicode_escape_lowercase",
+      "description": "Lowercase hex in unicode escape (e-acute)",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.823494",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 17,
+        "crashed": false
+      }
+    },
+    {
+      "id": 122,
+      "category": "escape_sequences",
+      "name": "unicode_escape_uppercase",
+      "description": "Uppercase hex in unicode escape (e-acute)",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.831498",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 17,
+        "crashed": false
+      }
+    },
+    {
+      "id": 123,
+      "category": "escape_sequences",
+      "name": "unicode_escape_incomplete_3",
+      "description": "Incomplete unicode escape (only 3 hex digits)",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.843504",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 16,
+        "crashed": false
+      }
+    },
+    {
+      "id": 124,
+      "category": "escape_sequences",
+      "name": "unicode_escape_incomplete_2",
+      "description": "Incomplete unicode escape (only 2 hex digits)",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.855510",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 15,
+        "crashed": false
+      }
+    },
+    {
+      "id": 125,
+      "category": "escape_sequences",
+      "name": "unicode_escape_non_hex",
+      "description": "Non-hex characters in unicode escape",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.871518",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 17,
+        "crashed": false
+      }
+    },
+    {
+      "id": 126,
+      "category": "duplicate_keys",
+      "name": "dup_same_value",
+      "description": "Duplicate key 'note' with different string values \u2014 which wins?",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.887526",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 32,
+        "crashed": false
+      }
+    },
+    {
+      "id": 127,
+      "category": "duplicate_keys",
+      "name": "dup_diff_types",
+      "description": "Duplicate key with string then number \u2014 type confusion",
+      "result": "HTTP 200 | 12ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.899532",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 12.0,
+        "payload_size": 28,
+        "crashed": false
+      }
+    },
+    {
+      "id": 128,
+      "category": "duplicate_keys",
+      "name": "dup_triple",
+      "description": "Triple duplicate key",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.899532",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 34,
+        "crashed": false
+      }
+    },
+    {
+      "id": 129,
+      "category": "duplicate_keys",
+      "name": "dup_null_then_string",
+      "description": "Duplicate key: null then string \u2014 null override test",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.899532",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 33,
+        "crashed": false
+      }
+    },
+    {
+      "id": 130,
+      "category": "duplicate_keys",
+      "name": "dup_nested_then_flat",
+      "description": "Duplicate key: object then string \u2014 type confusion",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.899532",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 32,
+        "crashed": false
+      }
+    },
+    {
+      "id": 131,
+      "category": "duplicate_keys",
+      "name": "dup_100_keys",
+      "description": "100 duplicate 'note' keys \u2014 stress hash table/last-wins handling",
+      "result": "HTTP 200 | 36ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.935550",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 36.0,
+        "payload_size": 1894,
+        "crashed": false
+      }
+    },
+    {
+      "id": 132,
+      "category": "whitespace",
+      "name": "leading_spaces",
+      "description": "JSON with leading spaces before opening brace",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.947556",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 133,
+      "category": "whitespace",
+      "name": "leading_tabs",
+      "description": "JSON with leading tabs before opening brace",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.947556",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 134,
+      "category": "whitespace",
+      "name": "leading_newlines",
+      "description": "JSON with leading newlines before opening brace",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.947556",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 135,
+      "category": "whitespace",
+      "name": "leading_crlf",
+      "description": "JSON with leading CRLF before opening brace",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.947556",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 19,
+        "crashed": false
+      }
+    },
+    {
+      "id": 136,
+      "category": "whitespace",
+      "name": "excessive_internal_whitespace",
+      "description": "JSON with excessive whitespace between all tokens",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.983574",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 27,
+        "crashed": false
+      }
+    },
+    {
+      "id": 137,
+      "category": "whitespace",
+      "name": "only_whitespace",
+      "description": "Body is only whitespace characters \u2014 no JSON at all",
+      "result": "HTTP 400 | 0ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.991578",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 9,
+        "crashed": false
+      }
+    },
+    {
+      "id": 138,
+      "category": "whitespace",
+      "name": "large_whitespace_prefix",
+      "description": "100KB of spaces before the JSON body starts",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.991578",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 100015,
+        "crashed": false
+      }
+    },
+    {
+      "id": 139,
+      "category": "whitespace",
+      "name": "whitespace_around_colon",
+      "description": "Tabs and newlines around colon and between tokens",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:14.991578",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 25,
+        "crashed": false
+      }
+    },
+    {
+      "id": 140,
+      "category": "whitespace",
+      "name": "form_feed_between_tokens",
+      "description": "Form feed (0x0C) between JSON tokens \u2014 not valid JSON whitespace",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.035600",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 19,
+        "crashed": false
+      }
+    },
+    {
+      "id": 141,
+      "category": "whitespace",
+      "name": "vertical_tab_between_tokens",
+      "description": "Vertical tab (0x0B) between JSON tokens \u2014 not valid JSON whitespace",
+      "result": "HTTP 200 | 12ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.047606",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 12.0,
+        "payload_size": 19,
+        "crashed": false
+      }
+    },
+    {
+      "id": 142,
+      "category": "malformed_json",
+      "name": "trailing_comma_obj",
+      "description": "Trailing comma in object \u2014 invalid JSON",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.063614",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 16,
+        "crashed": false
+      }
+    },
+    {
+      "id": 143,
+      "category": "malformed_json",
+      "name": "trailing_comma_arr",
+      "description": "Trailing comma in array \u2014 invalid JSON",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.079622",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 19,
+        "crashed": false
+      }
+    },
+    {
+      "id": 144,
+      "category": "malformed_json",
+      "name": "double_comma",
+      "description": "Double comma between key-value pairs",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.091628",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 25,
+        "crashed": false
+      }
+    },
+    {
+      "id": 145,
+      "category": "malformed_json",
+      "name": "missing_colon",
+      "description": "Missing colon between key and value",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.103634",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 15,
+        "crashed": false
+      }
+    },
+    {
+      "id": 146,
+      "category": "malformed_json",
+      "name": "missing_comma",
+      "description": "Missing comma between key-value pairs",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.111638",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 24,
+        "crashed": false
+      }
+    },
+    {
+      "id": 147,
+      "category": "malformed_json",
+      "name": "single_quotes",
+      "description": "Single-quoted strings (JavaScript-style, not valid JSON)",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.123644",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 15,
+        "crashed": false
+      }
+    },
+    {
+      "id": 148,
+      "category": "malformed_json",
+      "name": "unquoted_key",
+      "description": "Unquoted key name (JavaScript-style, not valid JSON)",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.135650",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 13,
+        "crashed": false
+      }
+    },
+    {
+      "id": 149,
+      "category": "malformed_json",
+      "name": "extra_closing_brace",
+      "description": "Extra closing brace after valid JSON object",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.143654",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 16,
+        "crashed": false
+      }
+    },
+    {
+      "id": 150,
+      "category": "malformed_json",
+      "name": "extra_closing_bracket",
+      "description": "Extra closing bracket after valid array",
+      "result": "HTTP 400 | 0ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.143654",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 15,
+        "crashed": false
+      }
+    },
+    {
+      "id": 151,
+      "category": "malformed_json",
+      "name": "mismatched_brackets",
+      "description": "Opening bracket closed with brace \u2014 mismatched delimiters",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.167666",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 16,
+        "crashed": false
+      }
+    },
+    {
+      "id": 152,
+      "category": "malformed_json",
+      "name": "mismatched_braces",
+      "description": "Opening brace closed with bracket \u2014 mismatched delimiters",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.179672",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 15,
+        "crashed": false
+      }
+    },
+    {
+      "id": 153,
+      "category": "malformed_json",
+      "name": "just_value_string",
+      "description": "Bare JSON string at top level (not in object)",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.191678",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 20,
+        "crashed": false
+      }
+    },
+    {
+      "id": 154,
+      "category": "malformed_json",
+      "name": "just_value_number",
+      "description": "Bare JSON number at top level (not in object)",
+      "result": "HTTP 400 | 0ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.191678",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 2,
+        "crashed": false
+      }
+    },
+    {
+      "id": 155,
+      "category": "malformed_json",
+      "name": "just_value_null",
+      "description": "Bare null at top level (not in object)",
+      "result": "HTTP 400 | 0ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.191678",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 4,
+        "crashed": false
+      }
+    },
+    {
+      "id": 156,
+      "category": "malformed_json",
+      "name": "just_value_true",
+      "description": "Bare boolean at top level (not in object)",
+      "result": "HTTP 400 | 28ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.219692",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 28.0,
+        "payload_size": 4,
+        "crashed": false
+      }
+    },
+    {
+      "id": 157,
+      "category": "malformed_json",
+      "name": "multiple_top_level",
+      "description": "Two JSON objects concatenated \u2014 multiple top-level values",
+      "result": "HTTP 400 | 8ms | resp_len=68 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.231698",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter a\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 158,
+      "category": "malformed_json",
+      "name": "json_with_js_comments_line",
+      "description": "JSON followed by JavaScript line comment",
+      "result": "HTTP 200 | 12ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.247706",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 12.0,
+        "payload_size": 26,
+        "crashed": false
+      }
+    },
+    {
+      "id": 159,
+      "category": "malformed_json",
+      "name": "json_with_js_comments_block",
+      "description": "JavaScript block comment embedded in JSON",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.255710",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 28,
+        "crashed": false
+      }
+    },
+    {
+      "id": 160,
+      "category": "malformed_json",
+      "name": "json_with_hash_comment",
+      "description": "Hash comment before JSON body",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.263714",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 25,
+        "crashed": false
+      }
+    },
+    {
+      "id": 161,
+      "category": "large_collections",
+      "name": "large_array_100",
+      "description": "JSON with array of 100 integer elements",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.275720",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 314,
+        "crashed": false
+      }
+    },
+    {
+      "id": 162,
+      "category": "large_collections",
+      "name": "large_array_1000",
+      "description": "JSON with array of 1000 integer elements",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.287726",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 3914,
+        "crashed": false
+      }
+    },
+    {
+      "id": 163,
+      "category": "large_collections",
+      "name": "large_array_10000",
+      "description": "JSON with array of 10000 integer elements",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.299732",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 48914,
+        "crashed": false
+      }
+    },
+    {
+      "id": 164,
+      "category": "large_collections",
+      "name": "large_string_array_1000",
+      "description": "JSON with array of 1000 string elements",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.311738",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 6900,
+        "crashed": false
+      }
+    },
+    {
+      "id": 165,
+      "category": "large_collections",
+      "name": "large_string_array_5000",
+      "description": "JSON with array of 5000 string elements",
+      "result": "HTTP 200 | 0ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.315740",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 0.0,
+        "payload_size": 38900,
+        "crashed": false
+      }
+    },
+    {
+      "id": 166,
+      "category": "large_collections",
+      "name": "large_empty_obj_array_1000",
+      "description": "JSON with array of 1000 empty objects",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.339752",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 3010,
+        "crashed": false
+      }
+    },
+    {
+      "id": 167,
+      "category": "large_collections",
+      "name": "large_empty_obj_array_5000",
+      "description": "JSON with array of 5000 empty objects",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.355760",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 15010,
+        "crashed": false
+      }
+    },
+    {
+      "id": 168,
+      "category": "large_collections",
+      "name": "many_empty_values_10000",
+      "description": "JSON object with 10000 keys, all with empty string values",
+      "result": "HTTP 400 | 40ms | resp_len=69 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.407786",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"unknown parameter k0\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 40.0,
+        "payload_size": 108891,
+        "crashed": false
+      }
+    },
+    {
+      "id": 169,
+      "category": "large_collections",
+      "name": "large_null_array_10000",
+      "description": "JSON with array of 10000 null values",
+      "result": "HTTP 200 | 12ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.427796",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 12.0,
+        "payload_size": 50010,
+        "crashed": false
+      }
+    },
+    {
+      "id": 170,
+      "category": "large_collections",
+      "name": "large_bool_array_10000",
+      "description": "JSON with array of 10000 alternating true/false values",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.443804",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 55010,
+        "crashed": false
+      }
+    },
+    {
+      "id": 171,
+      "category": "large_collections",
+      "name": "nested_arrays_1000x3",
+      "description": "JSON with 1000 sub-arrays of 3 elements each (3000 total elements)",
+      "result": "HTTP 200 | 8ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.451808",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 8.0,
+        "payload_size": 8010,
+        "crashed": false
+      }
+    },
+    {
+      "id": 172,
+      "category": "binary_bodies",
+      "name": "all_zeros",
+      "description": "100 bytes of 0x00 as body",
+      "result": "HTTP 400 | 12ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.471818",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 12.0,
+        "payload_size": 100,
+        "crashed": false
+      }
+    },
+    {
+      "id": 173,
+      "category": "binary_bodies",
+      "name": "all_ff",
+      "description": "100 bytes of 0xFF as body",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.479822",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 100,
+        "crashed": false
+      }
+    },
+    {
+      "id": 174,
+      "category": "binary_bodies",
+      "name": "random_binary",
+      "description": "All 256 byte values (0x00-0xFF) as body",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.491828",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 256,
+        "crashed": false
+      }
+    },
+    {
+      "id": 175,
+      "category": "binary_bodies",
+      "name": "elf_header",
+      "description": "ELF binary header as body (test for magic number handling)",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.499832",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 108,
+        "crashed": false
+      }
+    },
+    {
+      "id": 176,
+      "category": "binary_bodies",
+      "name": "gzip_header",
+      "description": "Gzip header as body (test for compression detection)",
+      "result": "HTTP 400 | 4ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.511838",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 104,
+        "crashed": false
+      }
+    },
+    {
+      "id": 177,
+      "category": "binary_bodies",
+      "name": "xml_body",
+      "description": "XML body with application/json Content-Type",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.523844",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 51,
+        "crashed": false
+      }
+    },
+    {
+      "id": 178,
+      "category": "binary_bodies",
+      "name": "empty_body",
+      "description": "Completely empty body (zero bytes)",
+      "result": "HTTP 200 | 4ms | resp_len=2 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.527846",
+      "details": {
+        "status": 200,
+        "response": "[]",
+        "elapsed_ms": 4.0,
+        "payload_size": 0,
+        "crashed": false
+      }
+    },
+    {
+      "id": 179,
+      "category": "binary_bodies",
+      "name": "single_byte_bodies",
+      "description": "Single open brace as complete body",
+      "result": "HTTP 400 | 8ms | resp_len=61 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.543854",
+      "details": {
+        "status": 400,
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 1,
+        "crashed": false
+      }
+    },
+    {
+      "id": 180,
+      "category": "content_type",
+      "name": "wrong_ct_text_plain",
+      "description": "POST valid JSON with Content-Type: 'text/plain' instead of application/json",
+      "result": "HTTP 415 | 4ms | resp_len=48 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.563864",
+      "details": {
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 181,
+      "category": "content_type",
+      "name": "wrong_ct_text_html",
+      "description": "POST valid JSON with Content-Type: 'text/html' instead of application/json",
+      "result": "HTTP 415 | 8ms | resp_len=48 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.575870",
+      "details": {
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 182,
+      "category": "content_type",
+      "name": "wrong_ct_text_xml",
+      "description": "POST valid JSON with Content-Type: 'text/xml' instead of application/json",
+      "result": "HTTP 415 | 0ms | resp_len=48 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.579872",
+      "details": {
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 183,
+      "category": "content_type",
+      "name": "wrong_ct_app_xml",
+      "description": "POST valid JSON with Content-Type: 'application/xml' instead of application/json",
+      "result": "HTTP 415 | 12ms | resp_len=48 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.591878",
+      "details": {
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "elapsed_ms": 12.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 184,
+      "category": "content_type",
+      "name": "wrong_ct_form_urlencoded",
+      "description": "POST valid JSON with Content-Type: 'application/x-www-form-urlencoded' instead of application/json",
+      "result": "HTTP 415 | 4ms | resp_len=48 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.599882",
+      "details": {
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "elapsed_ms": 4.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 185,
+      "category": "content_type",
+      "name": "wrong_ct_multipart_formdata",
+      "description": "POST valid JSON with Content-Type: 'multipart/form-data; boundary=----Boundary' instead of application/json",
+      "result": "HTTP 415 | 0ms | resp_len=48 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.607886",
+      "details": {
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "elapsed_ms": 0.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 186,
+      "category": "content_type",
+      "name": "wrong_ct_octet_stream",
+      "description": "POST valid JSON with Content-Type: 'application/octet-stream' instead of application/json",
+      "result": "HTTP 415 | 8ms | resp_len=48 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.619892",
+      "details": {
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 187,
+      "category": "content_type",
+      "name": "wrong_ct_empty_content_type",
+      "description": "POST valid JSON with Content-Type: '' instead of application/json",
+      "result": "HTTP 415 | 8ms | resp_len=48 | crash=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.631898",
+      "details": {
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "elapsed_ms": 8.0,
+        "payload_size": 18,
+        "crashed": false
+      }
+    },
+    {
+      "id": 188,
+      "category": "content_type",
+      "name": "double_content_type_header",
+      "description": "POST with two Content-Type headers (text/plain then application/json) via raw socket",
+      "result": "HTTP 415 | 0ms",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:15.635900",
+      "details": {
+        "status": 415,
+        "response": "HTTP/1.1 415 Unsupported Media Type\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 48\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:47:11 GMT\r\nExpires: Tue, 16 Feb 2027 21:47:11 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "elapsed_ms": 0.0
+      }
+    },
+    {
+      "id": 189,
+      "category": "content_type",
+      "name": "charset_utf32",
+      "description": "POST with Content-Type: application/json; charset=utf-32 (body is UTF-8)",
+      "result": "HTTP 200 | 10009ms",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:25.648904",
+      "details": {
+        "status": 200,
+        "response": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: Keep-Alive\r\nContent-Length: 2\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:47:11 GMT\r\nExpires: Tue, 16 Feb 2027 21:47:11 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n[]",
+        "elapsed_ms": 10009.0
+      }
+    },
+    {
+      "id": 190,
+      "category": "content_length",
+      "name": "no_content_length",
+      "description": "POST without Content-Length header (body appended after headers)",
+      "result": "HTTP 200 | 0ms",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:25.652906",
+      "details": {
+        "status": 200,
+        "response": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 2\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:47:21 GMT\r\nExpires: Tue, 16 Feb 2027 21:47:21 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n[]",
+        "elapsed_ms": 0.0
+      }
+    },
+    {
+      "id": 191,
+      "category": "content_length",
+      "name": "cl_zero_with_body",
+      "description": "POST with Content-Length: 0 but JSON body appended",
+      "result": "HTTP 200 | 10009ms",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:35.665910",
+      "details": {
+        "status": 200,
+        "response": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: Keep-Alive\r\nContent-Length: 2\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:47:21 GMT\r\nExpires: Tue, 16 Feb 2027 21:47:21 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n[]",
+        "elapsed_ms": 10009.0
+      }
+    },
+    {
+      "id": 192,
+      "category": "content_length",
+      "name": "cl_too_small",
+      "description": "POST with Content-Length: 5 but body is 18 bytes \u2014 truncated read",
+      "result": "HTTP 0 | 10009ms",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:07:45.674912",
+      "details": {
+        "status": 0,
+        "response": "",
+        "actual_body_len": 18,
+        "elapsed_ms": 10009.0
+      }
+    },
+    {
+      "id": 193,
+      "category": "content_length",
+      "name": "cl_too_large",
+      "description": "POST with Content-Length: 99999 but body is only 18 bytes \u2014 server hangs waiting?",
+      "result": "HTTP 0 | 8008ms",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:07:53.682914",
+      "details": {
+        "status": 0,
+        "response": "",
+        "elapsed_ms": 8008.0
+      }
+    },
+    {
+      "id": 194,
+      "category": "content_length",
+      "name": "cl_integer_overflow",
+      "description": "POST with Content-Length: 99999999999999999999 (integer overflow attempt)",
+      "result": "HTTP 413 | 0ms",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:53.682914",
+      "details": {
+        "status": 413,
+        "response": "HTTP/1.1 413 Payload Too Large\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 43\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:47:49 GMT\r\nExpires: Tue, 16 Feb 2027 21:47:49 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n{\"error\":413,\"message\":\"Payload Too Large\"}",
+        "elapsed_ms": 0.0
+      }
+    },
+    {
+      "id": 195,
+      "category": "content_length",
+      "name": "cl_negative",
+      "description": "POST with Content-Length: -1 \u2014 signed/unsigned confusion test",
+      "result": "HTTP 413 | 0ms",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:07:53.690918",
+      "details": {
+        "status": 413,
+        "response": "HTTP/1.1 413 Payload Too Large\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 43\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:47:49 GMT\r\nExpires: Tue, 16 Feb 2027 21:47:49 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n{\"error\":413,\"message\":\"Payload Too Large\"}",
+        "elapsed_ms": 0.0
+      }
+    },
+    {
+      "id": 196,
+      "category": "content_length",
+      "name": "duplicate_cl_headers",
+      "description": "POST with two Content-Length headers (18 and 0) \u2014 request smuggling vector",
+      "result": "HTTP 200 | 10014ms",
+      "anomaly": true,
+      "timestamp": "2026-02-16T14:08:03.705220",
+      "details": {
+        "status": 200,
+        "response": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: Keep-Alive\r\nContent-Length: 2\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:47:49 GMT\r\nExpires: Tue, 16 Feb 2027 21:47:49 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n[]",
+        "elapsed_ms": 10014.3
+      }
+    },
+    {
+      "id": 197,
+      "category": "content_length",
+      "name": "transfer_encoding_chunked",
+      "description": "POST with Transfer-Encoding: chunked instead of Content-Length",
+      "result": "HTTP 200 | 4ms",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:03.709218",
+      "details": {
+        "status": 200,
+        "response": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 2\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:47:59 GMT\r\nExpires: Tue, 16 Feb 2027 21:47:59 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n[]",
+        "elapsed_ms": 4.0
+      }
+    },
+    {
+      "id": 198,
+      "category": "content_length",
+      "name": "cl_and_te_smuggling",
+      "description": "POST with BOTH Content-Length and Transfer-Encoding: chunked \u2014 HTTP smuggling test",
+      "result": "HTTP 0 | 12986ms",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:16.694722",
+      "details": {
+        "status": 0,
+        "response": "",
+        "elapsed_ms": 12985.5
+      }
+    },
+    {
+      "id": 199,
+      "category": "content_length",
+      "name": "cl_non_numeric",
+      "description": "POST with Content-Length: abc (non-numeric) \u2014 input validation test",
+      "result": "HTTP 200 | 32ms",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:16.730704",
+      "details": {
+        "status": 200,
+        "response": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 2\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:48:12 GMT\r\nExpires: Tue, 16 Feb 2027 21:48:12 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n[]",
+        "elapsed_ms": 32.0
+      }
+    }
+  ],
+  "findings": [],
+  "crashes": []
+}

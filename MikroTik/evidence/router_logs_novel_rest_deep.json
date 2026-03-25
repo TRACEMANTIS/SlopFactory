@@ -1,0 +1,179 @@
+{
+  "phase": "novel_rest_deep",
+  "pulled_at": "2026-02-16T01:22:50.260995",
+  "log_entry_count": 18,
+  "log_entries": [
+    {
+      ".id": "*0",
+      "extra-info": "",
+      "message": "router rebooted by api:admin@::/script:_novel_inj_var_inject/:execute:1",
+      "time": "2026-02-23 05:13:25",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1",
+      "extra-info": "",
+      "message": "lo link up",
+      "time": "2026-02-23 05:13:25",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*2",
+      "extra-info": "",
+      "message": "ether1 link up (speed 1G, full duplex)",
+      "time": "2026-02-23 05:13:28",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*3",
+      "extra-info": "",
+      "message": "dhcp-client on ether1 got IP address [REDACTED-INTERNAL-IP]",
+      "time": "2026-02-23 05:13:29",
+      "topics": "dhcp,info"
+    },
+    {
+      ".id": "*4",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-23 05:13:30",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-23 05:13:30",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*6",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:0 (/system script remove *9A)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*7",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:1 (/system script remove *9B)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*8",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:2 (/system script remove *9C)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*9",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:3 (/system script remove *9D)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*A",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:4 (/system script remove *9E)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*B",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:5 (/system script remove *9F)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*C",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:6 (/system script remove *A0)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*D",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:7 (/system script remove *A1)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*E",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:8 (/system script remove *A2)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*F",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:9 (/system script remove *A3)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*10",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:10 (/system script remove *A4)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*11",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-23 05:13:33",
+      "topics": "system,info"
+    }
+  ],
+  "categories": {
+    "system,info": 13,
+    "interface,info": 2,
+    "dhcp,info": 1,
+    "system,info,account": 2
+  },
+  "interesting_entries": [],
+  "interesting_count": 0,
+  "system_resource": {
+    "architecture-name": "x86_64",
+    "board-name": "CHR innotek GmbH VirtualBox",
+    "build-time": "2026-01-30 09:17:54",
+    "cpu": "AMD",
+    "cpu-count": "1",
+    "cpu-frequency": "4391",
+    "cpu-load": "0",
+    "factory-software": "7.1",
+    "free-hdd-space": "72925184",
+    "free-memory": "843673600",
+    "platform": "MikroTik",
+    "total-hdd-space": "93564928",
+    "total-memory": "1073741824",
+    "uptime": "12s",
+    "version": "7.20.8 (long-term)",
+    "write-sect-since-reboot": "336",
+    "write-sect-total": "336"
+  },
+  "active_users": [
+    {
+      ".id": "*1",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-23 05:13:30"
+    },
+    {
+      ".id": "*2",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-23 05:13:30"
+    }
+  ]
+}

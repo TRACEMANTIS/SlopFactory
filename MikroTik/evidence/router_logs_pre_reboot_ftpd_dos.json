@@ -1,0 +1,702 @@
+[
+  {
+    ".id": "*5BF",
+    "extra-info": "",
+    "message": "new script added by api:admin@:: (*A = /system script add name=_bnd_1023 source=BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5C0",
+    "extra-info": "",
+    "message": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB)",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5C1",
+    "extra-info": "",
+    "message": "new script added by api:admin@:: (*B = /system script add name=_bnd_1024 source=BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5C2",
+    "extra-info": "",
+    "message": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB)",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5C3",
+    "extra-info": "",
+    "message": "new script added by api:admin@:: (*C = /system script add name=_bnd_4095 source=BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5C4",
+    "extra-info": "",
+    "message": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5C5",
+    "extra-info": "",
+    "message": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5C6",
+    "extra-info": "",
+    "message": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5C7",
+    "extra-info": "",
+    "message": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB)",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5C8",
+    "extra-info": "",
+    "message": "new script added by api:admin@:: (*D = /system script add name=_bnd_4096 source=BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5C9",
+    "extra-info": "",
+    "message": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5CA",
+    "extra-info": "",
+    "message": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5CB",
+    "extra-info": "",
+    "message": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5CC",
+    "extra-info": "",
+    "message": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB)",
+    "time": "2026-02-16 22:54:54",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5CD",
+    "extra-info": "",
+    "message": "system identity changed by api:admin@:: (/system identity set name=\"AAA\\00BBB\")",
+    "time": "2026-02-16 22:54:55",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5CE",
+    "extra-info": "",
+    "message": "new script added by api:admin@:: (*E = /system script add name=_null_test source=\"echo\\00inject\")",
+    "time": "2026-02-16 22:54:55",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5CF",
+    "extra-info": "",
+    "message": "filter rule added by api:admin@:: (*3 = /ip firewall filter add action=accept chain=forward comment=\"before\\00after\")",
+    "time": "2026-02-16 22:54:55",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5D0",
+    "extra-info": "",
+    "message": "new script scheduled by api:admin@:: (*1 = /system scheduler add interval=14w1d name=\"_null_sched\\00evil\" on-event=\":log info ok\")",
+    "time": "2026-02-16 22:54:55",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5D1",
+    "extra-info": "app=api duser=admin outcome=success ",
+    "message": "user admin logged out via api",
+    "time": "2026-02-16 22:54:56",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5D2",
+    "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via rest-api",
+    "time": "2026-02-16 22:54:56",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5D3",
+    "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+    "time": "2026-02-16 22:54:56",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5D4",
+    "extra-info": "app=api duser=admin outcome=success ",
+    "message": "user admin logged in via api",
+    "time": "2026-02-16 22:54:56",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5D5",
+    "extra-info": "",
+    "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+    "time": "2026-02-16 22:54:58",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5D6",
+    "extra-info": "",
+    "message": "Couldn't start task: Conflicting modes provided in URI and parameter",
+    "time": "2026-02-16 22:55:00",
+    "topics": "fetch,error"
+  },
+  {
+    ".id": "*5D7",
+    "extra-info": "",
+    "message": "Couldn't start task: Conflicting modes provided in URI and parameter",
+    "time": "2026-02-16 22:55:00",
+    "topics": "fetch,error"
+  },
+  {
+    ".id": "*5D8",
+    "extra-info": "",
+    "message": "Couldn't start task: Conflicting modes provided in URI and parameter",
+    "time": "2026-02-16 22:55:00",
+    "topics": "fetch,error"
+  },
+  {
+    ".id": "*5D9",
+    "extra-info": "",
+    "message": "Couldn't start task: Conflicting modes provided in URI and parameter",
+    "time": "2026-02-16 22:55:01",
+    "topics": "fetch,error"
+  },
+  {
+    ".id": "*5DA",
+    "extra-info": "",
+    "message": "Couldn't start task: Conflicting modes provided in URI and parameter",
+    "time": "2026-02-16 22:55:01",
+    "topics": "fetch,error"
+  },
+  {
+    ".id": "*5DB",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:55:55",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5DC",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:55:55",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5DD",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:55:57",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5DE",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:04",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5DF",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:05",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5E0",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:08",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5E1",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:08",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5E2",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:08",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5E3",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:08",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5E4",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:08",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5E5",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:09",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5E6",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:09",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5E7",
+    "extra-info": "app=api duser=admin3 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+    "message": "login failure for user admin3 from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:09",
+    "topics": "system,error,critical"
+  },
+  {
+    ".id": "*5E8",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:09",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5E9",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:09",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5EA",
+    "extra-info": "",
+    "message": "filter rule added by api:admin@:: (*4 = /ip firewall filter add action=accept chain=forward comment=%x%x%x%x%x%x%x%x)",
+    "time": "2026-02-16 22:56:10",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5EB",
+    "extra-info": "",
+    "message": "filter rule added by api:admin@:: (*5 = /ip firewall filter add action=accept chain=forward comment=%p%p%p%p%p%p%p%p)",
+    "time": "2026-02-16 22:56:10",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5EC",
+    "extra-info": "",
+    "message": "new script added by api:admin@:: (*F = /system script add name=_fmt_%x%x%x%x source=\":log info test\")",
+    "time": "2026-02-16 22:56:10",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5ED",
+    "extra-info": "",
+    "message": "new script added by api:admin@:: (*10 = /system script add name=_fmt_%s%s%s%s%s%s%s%s source=\":log info test\")",
+    "time": "2026-02-16 22:56:11",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5EE",
+    "extra-info": "",
+    "message": "new script scheduled by api:admin@:: (*2 = /system scheduler add interval=14w1d name=_fmt_%08x_%08x_%08x_%08x on-event=\":log info test\")",
+    "time": "2026-02-16 22:56:11",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5EF",
+    "extra-info": "",
+    "message": "simple queue added by api:admin@:: (*2 = /queue simple add name=_fmt_%p%p%p%p target=0.0.0.0/0)",
+    "time": "2026-02-16 22:56:11",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5F0",
+    "extra-info": "",
+    "message": "system identity changed by api:admin@:: (/system identity set name=%x%x%x%x%x%x%x%x)",
+    "time": "2026-02-16 22:56:21",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5F1",
+    "extra-info": "",
+    "message": "system identity changed by api:admin@:: (/system identity set name=%p%p%p%p%p%p%p%p)",
+    "time": "2026-02-16 22:56:22",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5F2",
+    "extra-info": "",
+    "message": "system identity changed by api:admin@:: (/system identity set name=%s%s%s%s)",
+    "time": "2026-02-16 22:56:23",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5F3",
+    "extra-info": "",
+    "message": "system identity changed by api:admin@:: (/system identity set name=%n%n%n%n)",
+    "time": "2026-02-16 22:56:32",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5F4",
+    "extra-info": "",
+    "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+    "time": "2026-02-16 22:56:34",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5F5",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:34",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5F6",
+    "extra-info": "",
+    "message": "system identity changed by api:admin@[REDACTED-INTERNAL-IP] (/system identity set name=%x%x%x%x)",
+    "time": "2026-02-16 22:56:34",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5F7",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:34",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5F8",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:34",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5F9",
+    "extra-info": "",
+    "message": "system identity changed by api:admin@[REDACTED-INTERNAL-IP] (/system identity set name=%p%p%p%p)",
+    "time": "2026-02-16 22:56:34",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5FA",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:34",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5FB",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5FC",
+    "extra-info": "",
+    "message": "filter rule added by api:admin@[REDACTED-INTERNAL-IP] (*6 = /ip firewall filter add action=accept chain=forward comment=%08x.%08x.%08x.%08x)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*5FD",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5FE",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*5FF",
+    "extra-info": "",
+    "message": "new script added by api:admin@[REDACTED-INTERNAL-IP] (*11 = /system script add name=_apifmt_%x%x source=\":log info test\")",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*600",
+    "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*601",
+    "extra-info": "",
+    "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*602",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:5 (/system script remove *1)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*603",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:6 (/system script remove *2)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*604",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:7 (/system script remove *3)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*605",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:8 (/system script remove *4)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*606",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:9 (/system script remove *5)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*607",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:10 (/system script remove *6)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*608",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:11 (/system script remove *7)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*609",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:12 (/system script remove *8)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*60A",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:13 (/system script remove *9)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*60B",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:14 (/system script remove *A)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*60C",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:15 (/system script remove *B)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*60D",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:16 (/system script remove *C)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*60E",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:17 (/system script remove *D)",
+    "time": "2026-02-16 22:56:35",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*60F",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:18 (/system script remove *E)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*610",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:19 (/system script remove *F)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*611",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:20 (/system script remove *10)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*612",
+    "extra-info": "",
+    "message": "script removed by api:admin@::/action:21 (/system script remove *11)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*613",
+    "extra-info": "",
+    "message": "script removed from scheduler by api:admin@::/action:22 (/system scheduler remove *0)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*614",
+    "extra-info": "",
+    "message": "script removed from scheduler by api:admin@::/action:23 (/system scheduler remove *1)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*615",
+    "extra-info": "",
+    "message": "script removed from scheduler by api:admin@::/action:24 (/system scheduler remove *2)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*616",
+    "extra-info": "",
+    "message": "filter rule removed by api:admin@::/action:25 (/ip firewall filter remove *1)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*617",
+    "extra-info": "",
+    "message": "filter rule removed by api:admin@::/action:26 (/ip firewall filter remove *2)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*618",
+    "extra-info": "",
+    "message": "filter rule removed by api:admin@::/action:27 (/ip firewall filter remove *3)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*619",
+    "extra-info": "",
+    "message": "filter rule removed by api:admin@::/action:28 (/ip firewall filter remove *4)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*61A",
+    "extra-info": "",
+    "message": "filter rule removed by api:admin@::/action:29 (/ip firewall filter remove *5)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*61B",
+    "extra-info": "",
+    "message": "filter rule removed by api:admin@::/action:30 (/ip firewall filter remove *6)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*61C",
+    "extra-info": "",
+    "message": "simple queue removed by api:admin@::/action:31 (/queue simple remove *1)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*61D",
+    "extra-info": "",
+    "message": "simple queue removed by api:admin@::/action:32 (/queue simple remove *2)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*61E",
+    "extra-info": "",
+    "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+    "time": "2026-02-16 22:56:36",
+    "topics": "system,info"
+  },
+  {
+    ".id": "*61F",
+    "extra-info": "app=api duser=admin outcome=success ",
+    "message": "user admin logged out via api",
+    "time": "2026-02-16 22:56:53",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*620",
+    "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged out from [REDACTED-INTERNAL-IP] via rest-api",
+    "time": "2026-02-16 22:56:53",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*621",
+    "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+    "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+    "time": "2026-02-16 22:59:01",
+    "topics": "system,info,account"
+  },
+  {
+    ".id": "*622",
+    "extra-info": "app=api duser=admin outcome=success ",
+    "message": "user admin logged in via api",
+    "time": "2026-02-16 22:59:01",
+    "topics": "system,info,account"
+  }
+]

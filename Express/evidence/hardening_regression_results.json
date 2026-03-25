@@ -1,0 +1,236 @@
+{
+  "metadata": {
+    "phase": "5",
+    "name": "Hardening & Regression",
+    "timestamp": "2026-02-15T12:43:01.559173"
+  },
+  "hardening_measures": [
+    {
+      "id": 1,
+      "measure": "Enable Helmet.js (all defaults)",
+      "description": "Adds CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, etc.",
+      "code": "app.use(helmet());",
+      "mitigates": [
+        "Missing security headers",
+        "X-Powered-By disclosure"
+      ]
+    },
+    {
+      "id": 2,
+      "measure": "Disable X-Powered-By",
+      "description": "Removes X-Powered-By: Express header",
+      "code": "app.disable('x-powered-by');",
+      "mitigates": [
+        "Framework version disclosure"
+      ]
+    },
+    {
+      "id": 3,
+      "measure": "Add __proto__ filtering in deep merge",
+      "description": "Filter __proto__, constructor, prototype from deep merge operations",
+      "code": "if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;",
+      "mitigates": [
+        "Prototype pollution via deep merge"
+      ]
+    },
+    {
+      "id": 4,
+      "measure": "Parameterize all SQL queries",
+      "description": "Use prepared statements instead of string concatenation",
+      "code": "db.prepare('SELECT * FROM products WHERE name LIKE ?').all('%' + q + '%');",
+      "mitigates": [
+        "SQL injection (app-level)"
+      ]
+    },
+    {
+      "id": 5,
+      "measure": "Remove user-controlled template strings",
+      "description": "Never pass user input as template string to EJS/Handlebars",
+      "code": "// Use fixed templates only: res.render('template', {data})",
+      "mitigates": [
+        "SSTI \u2192 RCE"
+      ]
+    },
+    {
+      "id": 6,
+      "measure": "Enforce JWT algorithm",
+      "description": "Specify algorithms whitelist in jwt.verify()",
+      "code": "jwt.verify(token, secret, { algorithms: ['HS256'] });",
+      "mitigates": [
+        "JWT algorithm confusion"
+      ]
+    },
+    {
+      "id": 7,
+      "measure": "Secure session cookie flags",
+      "description": "Enable httpOnly, secure, sameSite on session cookie",
+      "code": "cookie: { httpOnly: true, secure: true, sameSite: 'strict' }",
+      "mitigates": [
+        "Session cookie theft via XSS",
+        "CSRF"
+      ]
+    },
+    {
+      "id": 8,
+      "measure": "Disable user-supplied regex",
+      "description": "Validate regex input or use RE2 for safe regex",
+      "code": "// Reject user-supplied regex patterns",
+      "mitigates": [
+        "ReDoS"
+      ]
+    },
+    {
+      "id": 9,
+      "measure": "Set dotfiles: \"deny\" on express.static",
+      "description": "Deny access to dotfiles in static serving",
+      "code": "express.static(dir, { dotfiles: 'deny' });",
+      "mitigates": [
+        "Dotfile exposure (.env, .git)"
+      ]
+    },
+    {
+      "id": 10,
+      "measure": "Set NODE_ENV=production",
+      "description": "Disables stack trace exposure in error responses",
+      "code": "NODE_ENV=production node app.js",
+      "mitigates": [
+        "Stack trace information disclosure"
+      ]
+    }
+  ],
+  "regression_tests": [
+    {
+      "id": 1,
+      "test": "pre_xpoweredby_v5",
+      "data": {
+        "present": true,
+        "value": "Express",
+        "hardened": false
+      }
+    },
+    {
+      "id": 2,
+      "test": "pre_security_headers_v5",
+      "data": {
+        "missing_count": 4,
+        "missing": [
+          "Content-Security-Policy",
+          "X-Frame-Options",
+          "Strict-Transport-Security",
+          "X-Content-Type-Options"
+        ],
+        "hardened": false
+      }
+    },
+    {
+      "id": 3,
+      "test": "pre_stack_trace_v5",
+      "data": {
+        "exposed": true,
+        "hardened": false
+      }
+    },
+    {
+      "id": 4,
+      "test": "pre_dotfile_v5",
+      "data": {
+        "accessible": true,
+        "hardened": false
+      }
+    },
+    {
+      "id": 5,
+      "test": "pre_cookie_flags_v5",
+      "data": {
+        "httponly": false,
+        "samesite": false,
+        "hardened": false
+      }
+    },
+    {
+      "id": 6,
+      "test": "pre_proto_pollution_v5",
+      "data": {
+        "polluted": true,
+        "hardened": false
+      }
+    },
+    {
+      "id": 7,
+      "test": "pre_404_disclosure_v5",
+      "data": {
+        "reveals_method": true,
+        "hardened": false
+      }
+    },
+    {
+      "id": 8,
+      "test": "pre_xpoweredby_v4",
+      "data": {
+        "present": false,
+        "value": "NOT SET",
+        "hardened": false
+      }
+    },
+    {
+      "id": 9,
+      "test": "pre_security_headers_v4",
+      "data": {
+        "missing_count": 2,
+        "missing": [
+          "X-Frame-Options",
+          "Strict-Transport-Security"
+        ],
+        "hardened": false
+      }
+    },
+    {
+      "id": 10,
+      "test": "pre_stack_trace_v4",
+      "data": {
+        "exposed": true,
+        "hardened": false
+      }
+    },
+    {
+      "id": 11,
+      "test": "pre_dotfile_v4",
+      "data": {
+        "accessible": false,
+        "hardened": false
+      }
+    },
+    {
+      "id": 12,
+      "test": "pre_cookie_flags_v4",
+      "data": {
+        "httponly": false,
+        "samesite": false,
+        "hardened": false
+      }
+    },
+    {
+      "id": 13,
+      "test": "pre_proto_pollution_v4",
+      "data": {
+        "polluted": false,
+        "hardened": false
+      }
+    },
+    {
+      "id": 14,
+      "test": "pre_404_disclosure_v4",
+      "data": {
+        "reveals_method": false,
+        "hardened": false
+      }
+    }
+  ],
+  "findings": [],
+  "summary": {
+    "total_tests": 14,
+    "findings_count": 0,
+    "hardening_measures": 10,
+    "note": "Tests run against unhardened servers as baseline. Hardening measures documented for implementation guidance."
+  }
+}

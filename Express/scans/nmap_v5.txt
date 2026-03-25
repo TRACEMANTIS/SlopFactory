@@ -1,0 +1,24 @@
+# Nmap 7.95 scan initiated Sun Feb 15 12:24:38 2026 as: /usr/lib/nmap/nmap --privileged -sV -sC --script=http-headers,http-methods,http-server-header -p 3000 -oN /home/[REDACTED]/Desktop/[REDACTED-PATH]/Express/scans/nmap_v5.txt 127.0.0.1
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00s latency).
+
+PORT     STATE SERVICE VERSION
+3000/tcp open  http    Node.js Express framework
+| http-headers: 
+|   X-Powered-By: Express
+|   Access-Control-Allow-Origin: *
+|   Access-Control-Allow-Credentials: true
+|   Content-Security-Policy: default-src 'none'
+|   X-Content-Type-Options: nosniff
+|   Content-Type: text/html; charset=utf-8
+|   Content-Length: 139
+|   Set-Cookie: connect.sid=s%3AqzGoiJxocD-w3P0gYILpn-eqbFhGfSGA.AvzGrA0yujug1%2Fs5JhM2ui%2F8AcVHxG4GCaB992PYjRM; Path=/; Expires=Mon, 16 Feb 2026 17:24:50 GMT
+|   Date: Sun, 15 Feb 2026 17:24:50 GMT
+|   Connection: close
+|   
+|_  (Request type: GET)
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Feb 15 12:24:50 2026 -- 1 IP address (1 host up) scanned in 11.33 seconds

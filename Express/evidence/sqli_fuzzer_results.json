@@ -1,0 +1,823 @@
+{
+  "metadata": {
+    "phase": "2.3",
+    "name": "SQL Injection Fuzzer",
+    "timestamp": "2026-02-15T12:33:47.212465",
+    "scope": "Framework input handling \u2014 SQL payloads via qs/body-parser"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "sqli_basic_quote",
+      "version": "v5",
+      "data": {
+        "payload": "' OR '1'='1",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 10,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 2,
+      "test": "sqli_double_quote",
+      "version": "v5",
+      "data": {
+        "payload": "\" OR \"1\"=\"1",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 3,
+      "test": "sqli_comment",
+      "version": "v5",
+      "data": {
+        "payload": "' OR 1=1--",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 10,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 4,
+      "test": "sqli_union_basic",
+      "version": "v5",
+      "data": {
+        "payload": "' UNION SELECT 1,2,3,4--",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 11,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 5,
+      "test": "sqli_union_sqlite_master",
+      "version": "v5",
+      "data": {
+        "payload": "' UNION SELECT 1,name,sql,4 FROM sqlite_master--",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 14,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 6,
+      "test": "sqli_stacked_query",
+      "version": "v5",
+      "data": {
+        "payload": "'; DROP TABLE products;--",
+        "safe_status": 200,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 7,
+      "test": "sqli_blind_boolean",
+      "version": "v5",
+      "data": {
+        "payload": "' AND 1=1--",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 10,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 8,
+      "test": "sqli_blind_boolean_false",
+      "version": "v5",
+      "data": {
+        "payload": "' AND 1=2--",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 9,
+      "test": "sqli_time_blind",
+      "version": "v5",
+      "data": {
+        "payload": "' AND (SELECT 1 FROM (SELECT SLEEP(2)) AS t)--",
+        "safe_status": 200,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 10,
+      "test": "sqli_sqlite_version",
+      "version": "v5",
+      "data": {
+        "payload": "' UNION SELECT 1,sqlite_version(),3,4--",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 11,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 11,
+      "test": "sqli_hex_encode",
+      "version": "v5",
+      "data": {
+        "payload": "' OR 0x31=0x31--",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 10,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 12,
+      "test": "sqli_char_encode",
+      "version": "v5",
+      "data": {
+        "payload": "' OR CHAR(49)=CHAR(49)--",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 10,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 13,
+      "test": "sqli_null_byte",
+      "version": "v5",
+      "data": {
+        "payload": "test%00' OR '1'='1",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 14,
+      "test": "sqli_backslash_escape",
+      "version": "v5",
+      "data": {
+        "payload": "test\\' OR \\'1\\'=\\'1",
+        "safe_status": 200,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 15,
+      "test": "sqli_wide_char",
+      "version": "v5",
+      "data": {
+        "payload": "test%bf%27 OR 1=1--",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 16,
+      "test": "sqli_nested_select",
+      "version": "v5",
+      "data": {
+        "payload": "' AND (SELECT COUNT(*) FROM users)>0--",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 10,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 17,
+      "test": "sqli_like_wildcard",
+      "version": "v5",
+      "data": {
+        "payload": "%",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 10,
+        "vuln_count": 10,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 18,
+      "test": "sqli_like_underscore",
+      "version": "v5",
+      "data": {
+        "payload": "_",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 10,
+        "vuln_count": 10,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 19,
+      "test": "sqli_integer_overflow",
+      "version": "v5",
+      "data": {
+        "payload": "99999999999999999999",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 20,
+      "test": "sqli_negative_zero",
+      "version": "v5",
+      "data": {
+        "payload": "-0",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 21,
+      "test": "sqli_scientific_notation",
+      "version": "v5",
+      "data": {
+        "payload": "1e309",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 22,
+      "test": "sqli_empty_string",
+      "version": "v5",
+      "data": {
+        "payload": "",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 10,
+        "vuln_count": 10,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 23,
+      "test": "sqli_null_literal",
+      "version": "v5",
+      "data": {
+        "payload": "NULL",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 24,
+      "test": "sqli_semicolon",
+      "version": "v5",
+      "data": {
+        "payload": ";",
+        "safe_status": 200,
+        "vuln_status": 200,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 25,
+      "test": "sqli_batch_insert",
+      "version": "v5",
+      "data": {
+        "payload": "'); INSERT INTO users VALUES(999,'evil','evil','admin');--",
+        "safe_status": 200,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 26,
+      "test": "sqli_basic_quote",
+      "version": "v4",
+      "data": {
+        "payload": "' OR '1'='1",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 27,
+      "test": "sqli_double_quote",
+      "version": "v4",
+      "data": {
+        "payload": "\" OR \"1\"=\"1",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 28,
+      "test": "sqli_comment",
+      "version": "v4",
+      "data": {
+        "payload": "' OR 1=1--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 29,
+      "test": "sqli_union_basic",
+      "version": "v4",
+      "data": {
+        "payload": "' UNION SELECT 1,2,3,4--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 30,
+      "test": "sqli_union_sqlite_master",
+      "version": "v4",
+      "data": {
+        "payload": "' UNION SELECT 1,name,sql,4 FROM sqlite_master--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 31,
+      "test": "sqli_stacked_query",
+      "version": "v4",
+      "data": {
+        "payload": "'; DROP TABLE products;--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 32,
+      "test": "sqli_blind_boolean",
+      "version": "v4",
+      "data": {
+        "payload": "' AND 1=1--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 33,
+      "test": "sqli_blind_boolean_false",
+      "version": "v4",
+      "data": {
+        "payload": "' AND 1=2--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 34,
+      "test": "sqli_time_blind",
+      "version": "v4",
+      "data": {
+        "payload": "' AND (SELECT 1 FROM (SELECT SLEEP(2)) AS t)--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 35,
+      "test": "sqli_sqlite_version",
+      "version": "v4",
+      "data": {
+        "payload": "' UNION SELECT 1,sqlite_version(),3,4--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 36,
+      "test": "sqli_hex_encode",
+      "version": "v4",
+      "data": {
+        "payload": "' OR 0x31=0x31--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 37,
+      "test": "sqli_char_encode",
+      "version": "v4",
+      "data": {
+        "payload": "' OR CHAR(49)=CHAR(49)--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 38,
+      "test": "sqli_null_byte",
+      "version": "v4",
+      "data": {
+        "payload": "test%00' OR '1'='1",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 39,
+      "test": "sqli_backslash_escape",
+      "version": "v4",
+      "data": {
+        "payload": "test\\' OR \\'1\\'=\\'1",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 40,
+      "test": "sqli_wide_char",
+      "version": "v4",
+      "data": {
+        "payload": "test%bf%27 OR 1=1--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 41,
+      "test": "sqli_nested_select",
+      "version": "v4",
+      "data": {
+        "payload": "' AND (SELECT COUNT(*) FROM users)>0--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 42,
+      "test": "sqli_like_wildcard",
+      "version": "v4",
+      "data": {
+        "payload": "%",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 43,
+      "test": "sqli_like_underscore",
+      "version": "v4",
+      "data": {
+        "payload": "_",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 44,
+      "test": "sqli_integer_overflow",
+      "version": "v4",
+      "data": {
+        "payload": "99999999999999999999",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 45,
+      "test": "sqli_negative_zero",
+      "version": "v4",
+      "data": {
+        "payload": "-0",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 46,
+      "test": "sqli_scientific_notation",
+      "version": "v4",
+      "data": {
+        "payload": "1e309",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 47,
+      "test": "sqli_empty_string",
+      "version": "v4",
+      "data": {
+        "payload": "",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": true
+      }
+    },
+    {
+      "id": 48,
+      "test": "sqli_null_literal",
+      "version": "v4",
+      "data": {
+        "payload": "NULL",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 49,
+      "test": "sqli_semicolon",
+      "version": "v4",
+      "data": {
+        "payload": ";",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 50,
+      "test": "sqli_batch_insert",
+      "version": "v4",
+      "data": {
+        "payload": "'); INSERT INTO users VALUES(999,'evil','evil','admin');--",
+        "safe_status": 500,
+        "vuln_status": 500,
+        "safe_count": 0,
+        "vuln_count": 0,
+        "vuln_error": false,
+        "payload_preserved": false
+      }
+    },
+    {
+      "id": 51,
+      "test": "type_array_param",
+      "version": "v5",
+      "data": {
+        "query_string": "q[]=admin&q[]=user",
+        "status": 200,
+        "error": null,
+        "response": "{\"query\":\"\",\"results\":[{\"id\":21,\"name\":\"Laptop\",\"price\":999.99,\"category\":\"electronics\"},{\"id\":22,\"name\":\"Phone\",\"price\":699.99,\"category\":\"electronics\"},{\"id\":23,\"name\":\"Book\",\"price\":19.99,\"category"
+      }
+    },
+    {
+      "id": 52,
+      "test": "type_object_param",
+      "version": "v5",
+      "data": {
+        "query_string": "q[key]=value",
+        "status": 200,
+        "error": null,
+        "response": "{\"query\":\"\",\"results\":[{\"id\":21,\"name\":\"Laptop\",\"price\":999.99,\"category\":\"electronics\"},{\"id\":22,\"name\":\"Phone\",\"price\":699.99,\"category\":\"electronics\"},{\"id\":23,\"name\":\"Book\",\"price\":19.99,\"category"
+      }
+    },
+    {
+      "id": 53,
+      "test": "type_nested_array",
+      "version": "v5",
+      "data": {
+        "query_string": "q[0][0]=test",
+        "status": 200,
+        "error": null,
+        "response": "{\"query\":\"\",\"results\":[{\"id\":21,\"name\":\"Laptop\",\"price\":999.99,\"category\":\"electronics\"},{\"id\":22,\"name\":\"Phone\",\"price\":699.99,\"category\":\"electronics\"},{\"id\":23,\"name\":\"Book\",\"price\":19.99,\"category"
+      }
+    },
+    {
+      "id": 54,
+      "test": "type_boolean_string",
+      "version": "v5",
+      "data": {
+        "query_string": "q=true",
+        "status": 200,
+        "error": null,
+        "response": "{\"query\":\"true\",\"results\":[],\"count\":0,\"method\":\"raw_concat\"}"
+      }
+    },
+    {
+      "id": 55,
+      "test": "type_number_string",
+      "version": "v5",
+      "data": {
+        "query_string": "q=42",
+        "status": 200,
+        "error": null,
+        "response": "{\"query\":\"42\",\"results\":[],\"count\":0,\"method\":\"raw_concat\"}"
+      }
+    },
+    {
+      "id": 56,
+      "test": "type_array_param",
+      "version": "v4",
+      "data": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      }
+    },
+    {
+      "id": 57,
+      "test": "type_object_param",
+      "version": "v4",
+      "data": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      }
+    },
+    {
+      "id": 58,
+      "test": "type_nested_array",
+      "version": "v4",
+      "data": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      }
+    },
+    {
+      "id": 59,
+      "test": "type_boolean_string",
+      "version": "v4",
+      "data": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      }
+    },
+    {
+      "id": 60,
+      "test": "type_number_string",
+      "version": "v4",
+      "data": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "title": "SQLi Union Extraction Successful (union_sqlite_master)",
+      "severity": "INFO",
+      "cwe": "CWE-89",
+      "description": "Note: This is app-level (string concat), not framework. body-parser/qs passed payload unmodified.",
+      "framework_behavior": false,
+      "note": "Harness vuln \u2014 confirms framework does not sanitize SQL in transit",
+      "version": "v5"
+    }
+  ],
+  "anomalies": [],
+  "summary": {
+    "total_tests": 60,
+    "findings_count": 1,
+    "anomalies_count": 0
+  }
+}

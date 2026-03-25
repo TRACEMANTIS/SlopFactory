@@ -1,0 +1,191 @@
+{
+  "metadata": {
+    "phase": "3.1",
+    "name": "Session & Cookie Attacks",
+    "timestamp": "2026-02-15T12:37:45.653194",
+    "scope": "express-session defaults and cookie security"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "session_fixation",
+      "version": "v5",
+      "data": {
+        "pre_login_sid": "s%3ANRceC_hI8A3SEgjc...",
+        "post_login_sid": "s%3ANRceC_hI8A3SEgjc...",
+        "same_session": true
+      }
+    },
+    {
+      "id": 2,
+      "test": "session_fixation",
+      "version": "v4",
+      "data": {
+        "pre_login_sid": "none",
+        "post_login_sid": "none",
+        "same_session": true
+      }
+    },
+    {
+      "id": 3,
+      "test": "session_entropy",
+      "version": "v5",
+      "data": {
+        "sample_size": 100,
+        "unique_ids": 100,
+        "avg_length": 32.0,
+        "charset_size": 64,
+        "bits_per_char": 5.99,
+        "estimated_entropy_bits": 191.6
+      }
+    },
+    {
+      "id": 4,
+      "test": "session_entropy",
+      "version": "v4",
+      "data": {
+        "error": "No SIDs collected"
+      }
+    },
+    {
+      "id": 5,
+      "test": "cookie_flags",
+      "version": "v5",
+      "data": {
+        "set_cookie_header": "connect.sid=s%3AXfVvIwwX4ObOtYKqEAdiw5Fl940zUXhk.DH00tPH82QmqRP4fS1CPt31%2F87DJrfjn9fGKPNLBv04; Path=/; Expires=Mon, 16 Feb 2026 17:37:46 GMT",
+        "flags": {
+          "httponly": false,
+          "secure": false,
+          "samesite": false,
+          "path": true,
+          "max_age": true
+        },
+        "issues": [
+          "Missing HttpOnly flag (XSS can steal session)",
+          "Missing Secure flag (sent over HTTP)",
+          "Missing SameSite flag (CSRF vulnerable)"
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "test": "cookie_flags",
+      "version": "v4",
+      "data": {
+        "set_cookie_header": "",
+        "flags": {
+          "httponly": false,
+          "secure": false,
+          "samesite": false,
+          "path": false,
+          "max_age": false
+        },
+        "issues": [
+          "Missing HttpOnly flag (XSS can steal session)",
+          "Missing Secure flag (sent over HTTP)",
+          "Missing SameSite flag (CSRF vulnerable)"
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "test": "memorystore_growth",
+      "version": "v5",
+      "data": {
+        "initial_heap_mb": 17.8,
+        "final_heap_mb": 17.0,
+        "growth_kb": -838,
+        "sessions_created": 500
+      }
+    },
+    {
+      "id": 8,
+      "test": "memorystore_growth",
+      "version": "v4",
+      "data": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      }
+    },
+    {
+      "id": 9,
+      "test": "cookie_remove_sig",
+      "version": "v5",
+      "data": {
+        "status": 401,
+        "authenticated": false
+      }
+    },
+    {
+      "id": 10,
+      "test": "cookie_bad_sig",
+      "version": "v5",
+      "data": {
+        "status": 401,
+        "authenticated": false
+      }
+    },
+    {
+      "id": 11,
+      "test": "cookie_empty_sig",
+      "version": "v5",
+      "data": {
+        "status": 401,
+        "authenticated": false
+      }
+    },
+    {
+      "id": 12,
+      "test": "cookie_random_sid",
+      "version": "v5",
+      "data": {
+        "status": 401,
+        "authenticated": false
+      }
+    },
+    {
+      "id": 13,
+      "test": "cookie_tamper",
+      "version": "v4",
+      "data": {
+        "error": "No cookie obtained"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "title": "Session Fixation: Session ID Not Regenerated on Login",
+      "severity": "MEDIUM",
+      "cwe": "CWE-384",
+      "description": "express-session does not automatically regenerate session ID on authentication. Same connect.sid before and after login.",
+      "framework_behavior": true,
+      "note": "express-session requires manual req.session.regenerate() \u2014 not automatic",
+      "version": "v5"
+    },
+    {
+      "id": 2,
+      "title": "express-session Default Cookie Missing Security Flags",
+      "severity": "MEDIUM",
+      "cwe": "CWE-614",
+      "description": "Issues: Missing HttpOnly flag (XSS can steal session); Missing Secure flag (sent over HTTP); Missing SameSite flag (CSRF vulnerable)",
+      "framework_behavior": true,
+      "note": "express-session defaults: httpOnly=undefined, secure=false, sameSite=undefined",
+      "version": "v5"
+    },
+    {
+      "id": 3,
+      "title": "express-session Default Cookie Missing Security Flags",
+      "severity": "MEDIUM",
+      "cwe": "CWE-614",
+      "description": "Issues: Missing HttpOnly flag (XSS can steal session); Missing Secure flag (sent over HTTP); Missing SameSite flag (CSRF vulnerable)",
+      "framework_behavior": true,
+      "note": "express-session defaults: httpOnly=undefined, secure=false, sameSite=undefined",
+      "version": "v4"
+    }
+  ],
+  "anomalies": [],
+  "summary": {
+    "total_tests": 13,
+    "findings_count": 3
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "phase": 2,
+  "title": "RTSP/SDP Parser Deep Reverse Engineering",
+  "date": "2026-03-06",
+  "binary": "sonia (Rhea V2.622.18, 16MB ARM32 Thumb)",
+  "summary": "Comprehensive audit of all RTSP and SDP parser code regions for unsafe string function calls. Found 69 total unsafe calls (24 strcpy, 4 sprintf, 41 sscanf) with ZERO stack canaries in any RTSP/SDP function. Three critical overflow patterns identified, but all require post-auth access under default configuration.",
+
+  "rtsp_code_regions": [
+    {
+      "name": "RtspUrlParser",
+      "address_range": "0x5b000-0x5f000",
+      "source": "Src/Rtsp/RtspUrlParser.cpp",
+      "unsafe_calls": {"strcpy": 5, "sprintf": 0, "sscanf": 0},
+      "canaries": 0
+    },
+    {
+      "name": "SdpParser/Builder",
+      "address_range": "0x31a000-0x340000",
+      "source": "Src/Protocol/SdpParser.cpp",
+      "unsafe_calls": {"strcpy": 14, "sprintf": 0, "sscanf": 10},
+      "canaries": 0
+    },
+    {
+      "name": "RtspClient",
+      "address_range": "0x48e000-0x4a0000",
+      "source": "Src/Rtsp/RtspParser.cpp",
+      "unsafe_calls": {"strcpy": 1, "sprintf": 2, "sscanf": 4},
+      "canaries": 0
+    },
+    {
+      "name": "HttpRtspClient",
+      "address_range": "0x83a000-0x860000",
+      "source": "Src/Rtsp/HttpParser.cpp",
+      "unsafe_calls": {"strcpy": 4, "sprintf": 2, "sscanf": 27},
+      "canaries": 0
+    }
+  ],
+
+  "sdp_dispatch_table": {
+    "address": "0xd6dbf8",
+    "size": "168 bytes (14 triplets)",
+    "format": "(ASCII_char, parse_handler_ptr, serialize_handler_ptr)",
+    "entries": [
+      {"line": "v=", "char": "0x76", "parse": "0x33e301", "serialize": "0x33e101"},
+      {"line": "o=", "char": "0x6f", "parse": "0x33ea79", "serialize": "0x33e14d"},
+      {"line": "s=", "char": "0x73", "parse": "0x33eb27", "serialize": "0x33e8ad"},
+      {"line": "i=", "char": "0x69", "parse": "0x33eb7b", "serialize": "0x33e8b7"},
+      {"line": "u=", "char": "0x75", "parse": "0x33eb3b", "serialize": "0x33e8c3"},
+      {"line": "e=", "char": "0x65", "parse": "0x33fc9d", "serialize": "0x340375"},
+      {"line": "p=", "char": "0x70", "parse": "0x33fcfd", "serialize": "0x3403a5"},
+      {"line": "c=", "char": "0x63", "parse": "0x33fdd1", "serialize": "0x3404d1"},
+      {"line": "b=", "char": "0x62", "parse": "0x33ff29", "serialize": "0x340553"},
+      {"line": "t=", "char": "0x74", "parse": "0x33e46d", "serialize": "0x33e25d"},
+      {"line": "z=", "char": "0x7a", "parse": "0x33e3dd", "serialize": "0x33e1b9"},
+      {"line": "k=", "char": "0x6b", "parse": "0x33ebe7", "serialize": "0x33e785"},
+      {"line": "a=", "char": "0x61", "parse": "0x33ffd1", "serialize": "0x340a11"},
+      {"line": "m=", "char": "0x6d", "parse": "0x340745", "serialize": "0x340a41"}
+    ]
+  },
+
+  "critical_findings": [
+    {
+      "id": "RTSP-1",
+      "title": "SDP Serializer snprintf Accumulator Overflow",
+      "severity": "CRITICAL (if pre-auth reachable)",
+      "function_vma": "0x33e1b8",
+      "frame_size": 2100,
+      "buffer": "sp+0x2c, 2048 bytes (memset) + 4 byte marker",
+      "vulnerability": "snprintf loop accumulates return values in r4. When r4 > 2050, the size parameter (2050-r4) wraps to ~4GB unsigned, causing subsequent snprintf calls to write unbounded past the buffer.",
+      "overflow_to_pc": 2088,
+      "strcpy_at": "0x33e23e (writes past buffer when r4 > 2050)",
+      "canary": false,
+      "nx_disabled": true,
+      "pre_auth": "POST-AUTH under default config (Digest). Pre-auth if RtspAuthType=0 (None).",
+      "multiple_instances": [
+        "0x33e1b8 (z= timezone serializer)",
+        "0x340a40 (m= media serializer, frame 2332 bytes)",
+        "0x33e5b0 (e= email)",
+        "0x33e690 (c/b connection/bandwidth)",
+        "0x33e710 (t= time)",
+        "0x33e830 (a= attribute)"
+      ],
+      "exploitation": "Send RTSP ANNOUNCE with SDP body containing enough a= attributes that total serialized length exceeds 2050 bytes. The accumulator wraps, snprintf writes unbounded, overwrites saved LR on stack. NX disabled = shellcode on stack."
+    },
+    {
+      "id": "RTSP-2",
+      "title": "RtspUrlParser Stack Buffer Overflow via strcpy",
+      "severity": "HIGH (conditional)",
+      "function_vma": "0x5d5bc",
+      "frame_size": 1044,
+      "buffers": ["sp+0x10 (512 bytes)", "sp+0x210 (512 bytes)"],
+      "strcpy_at": "0x5d658",
+      "vulnerability": "On parse failure path, strcpy copies buffer1 (sp+0x10) into buffer2 (sp+0x210, 512 bytes). Buffer1 is populated by earlier parsing with a 512-byte limit at one stage, but the initial URL copy may be unbounded.",
+      "overflow_to_pc": 528,
+      "canary": false,
+      "pre_auth": "POST-AUTH. RtspUrlParser called inside DESCRIBE/SETUP handlers, which run after session_process auth check.",
+      "additional_strcpy": "0x5d4dc (sub-function 0x5d430) copies raw URL on failure, dest is caller-supplied buffer of unknown size"
+    },
+    {
+      "id": "RTSP-3",
+      "title": "RtspClient strcpy+sprintf Double Overflow",
+      "severity": "MEDIUM",
+      "function_vma": "0x48e600",
+      "frame_size": 164,
+      "buffer": "sp+32, 128 bytes (memset 0x80)",
+      "vulnerability": "strcpy at 0x48e674 followed by sprintf at 0x48e68c into same 128-byte stack buffer. Source is from RTSP session data.",
+      "canary": false,
+      "pre_auth": "POST-AUTH (RTSP client code, not server processing)"
+    }
+  ],
+
+  "rtsp_auth_model": {
+    "config_string": "RtspSvrConfigRtspAuthType (None-0, Basic-1, Digest-2, Alter-3)",
+    "default": "Digest (2) -- factory default for Dahua cameras",
+    "auth_check_function": "0x309bd0 (session_process)",
+    "auth_check_location": "Called BEFORE per-method handlers in on_request",
+    "options_bypass": "OPTIONS method bypasses auth (RFC 2326 compliant)",
+    "teardown_bypass": "TEARDOWN always bypasses auth",
+    "pre_parser": "0x31cfb4 (uses bounded strncpy, NOT vulnerable)",
+    "url_parser_invocation": "Inside DESCRIBE/SETUP handlers (POST-AUTH)"
+  },
+
+  "verdict": "All RTSP/SDP overflow vulnerabilities are POST-AUTH under default Digest configuration. The pre-auth URL pre-parser (0x31cfb4) uses bounded strncpy. The vulnerable RtspUrlParser (0x5d5bc) is only invoked inside per-method handlers after auth verification. The SDP serializer overflow (0x33e1b8) is the most severe but requires authenticated RTSP session to trigger SDP re-serialization."
+}

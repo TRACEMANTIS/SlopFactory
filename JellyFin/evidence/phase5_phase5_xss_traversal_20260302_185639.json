@@ -1,0 +1,160 @@
+{
+  "script": "phase5_xss_traversal",
+  "phase": "phase5",
+  "target": "Jellyfin 10.11.6",
+  "start_time": "2026-03-02T18:56:22.640525",
+  "end_time": "2026-03-02T18:56:39.431891",
+  "summary": {
+    "total_tests": 16,
+    "findings": 0,
+    "anomalies": 0
+  },
+  "tests": [
+    {
+      "id": "XSS-LIB-0",
+      "description": "XSS in library name: <script>alert(1)</script>",
+      "request": "POST /Library/VirtualFolders?name=<script>alert(1)</script>",
+      "response": "HTTP 204",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:24.101255"
+    },
+    {
+      "id": "XSS-LIB-1",
+      "description": "XSS in library name: <img src=x onerror=alert(",
+      "request": "POST /Library/VirtualFolders?name=<img src=x onerror=alert(1)>",
+      "response": "HTTP 204",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:25.545977"
+    },
+    {
+      "id": "XSS-LIB-2",
+      "description": "XSS in library name: \"><script>alert(1)</scrip",
+      "request": "POST /Library/VirtualFolders?name=\"><script>alert(1)</script>",
+      "response": "HTTP 204",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:27.002705"
+    },
+    {
+      "id": "XSS-LIB-3",
+      "description": "XSS in library name: ';alert(1)//",
+      "request": "POST /Library/VirtualFolders?name=';alert(1)//",
+      "response": "HTTP 204",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:28.447427"
+    },
+    {
+      "id": "XSS-LIB-4",
+      "description": "XSS in library name: <svg onload=alert(1)>",
+      "request": "POST /Library/VirtualFolders?name=<svg onload=alert(1)>",
+      "response": "HTTP 204",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:29.900153"
+    },
+    {
+      "id": "XSS-LIB-5",
+      "description": "XSS in library name: {{constructor.constructor",
+      "request": "POST /Library/VirtualFolders?name={{constructor.constructor(\"ale",
+      "response": "HTTP 204",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:31.452929"
+    },
+    {
+      "id": "XSS-LIB-6",
+      "description": "XSS in library name: ${alert(1)}",
+      "request": "POST /Library/VirtualFolders?name=${alert(1)}",
+      "response": "HTTP 204",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:32.901653"
+    },
+    {
+      "id": "CSS-import_external",
+      "description": "CSS injection: CSS @import external URL",
+      "request": "POST /Branding/Configuration CustomCss=@import url('http://127.0.0.1:9999/evil.",
+      "response": "HTTP 405",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:33.209807"
+    },
+    {
+      "id": "CSS-expression_ie",
+      "description": "CSS injection: CSS expression (IE legacy)",
+      "request": "POST /Branding/Configuration CustomCss=body { background: expression(alert(1));",
+      "response": "HTTP 405",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:33.517961"
+    },
+    {
+      "id": "CSS-url_javascript",
+      "description": "CSS injection: CSS url() with javascript: scheme",
+      "request": "POST /Branding/Configuration CustomCss=body { background: url('javascript:alert",
+      "response": "HTTP 405",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:33.814109"
+    },
+    {
+      "id": "CSS-content_injection",
+      "description": "CSS injection: CSS content with HTML injection",
+      "request": "POST /Branding/Configuration CustomCss=body::after { content: \"</style><script>",
+      "response": "HTTP 405",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:34.114259"
+    },
+    {
+      "id": "DIRBROWSE-_etc",
+      "description": "Directory browse: /etc",
+      "request": "GET /Environment/DirectoryContents?path=/etc",
+      "response": "HTTP 200: 0 entries",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:36.495449"
+    },
+    {
+      "id": "DIRBROWSE-_config",
+      "description": "Directory browse: /config",
+      "request": "GET /Environment/DirectoryContents?path=/config",
+      "response": "HTTP 200: 0 entries",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:36.699551"
+    },
+    {
+      "id": "DIRBROWSE-_media",
+      "description": "Directory browse: /media",
+      "request": "GET /Environment/DirectoryContents?path=/media",
+      "response": "HTTP 200: 0 entries",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:36.899651"
+    },
+    {
+      "id": "DIRBROWSE-_proc",
+      "description": "Directory browse: /proc",
+      "request": "GET /Environment/DirectoryContents?path=/proc",
+      "response": "HTTP 200: 0 entries",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:37.099722"
+    },
+    {
+      "id": "DIRBROWSE-_config_data",
+      "description": "Directory browse: /config/data",
+      "request": "GET /Environment/DirectoryContents?path=/config/data",
+      "response": "HTTP 200: 0 entries",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:56:37.303760"
+    }
+  ],
+  "findings": [],
+  "anomalies": []
+}

@@ -1,0 +1,694 @@
+{
+  "metadata": {
+    "phase": "1.4",
+    "name": "Configuration Security Review",
+    "timestamp": "2026-02-15T12:27:58.071110",
+    "scope": "Express framework default configuration"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "env_setting",
+      "version": "v5",
+      "data": {
+        "env": "development",
+        "node": "v22.22.0"
+      },
+      "finding": {
+        "title": "Express Defaults to Development Mode",
+        "severity": "MEDIUM",
+        "cwe": "CWE-489",
+        "description": "Express defaults NODE_ENV to \"development\" which enables stack traces, verbose errors, and disables caching. This is a framework default.",
+        "framework_behavior": true
+      }
+    },
+    {
+      "id": 2,
+      "test": "etag_setting",
+      "version": "v5",
+      "data": {
+        "etag": "W/\"cf-8YLb9dFdJWzsqu2i1AQz5LLPd4k\"",
+        "present": true
+      }
+    },
+    {
+      "id": 3,
+      "test": "x_powered_by",
+      "version": "v5",
+      "data": {
+        "value": "Express"
+      },
+      "finding": {
+        "title": "X-Powered-By Header Exposes Framework Version",
+        "severity": "LOW",
+        "cwe": "CWE-200",
+        "description": "X-Powered-By: Express \u2014 Express enables this by default",
+        "framework_behavior": true
+      }
+    },
+    {
+      "id": 4,
+      "test": "env_setting",
+      "version": "v4",
+      "data": {
+        "env": "development",
+        "node": "v22.22.0"
+      },
+      "finding": {
+        "title": "Express Defaults to Development Mode",
+        "severity": "MEDIUM",
+        "cwe": "CWE-489",
+        "description": "Express defaults NODE_ENV to \"development\" which enables stack traces, verbose errors, and disables caching. This is a framework default.",
+        "framework_behavior": true
+      }
+    },
+    {
+      "id": 5,
+      "test": "etag_setting",
+      "version": "v4",
+      "data": {
+        "etag": "W/\"d0-Yr5s5mOI/uLRghXI5xgnVI89QFE\"",
+        "present": true
+      }
+    },
+    {
+      "id": 6,
+      "test": "x_powered_by",
+      "version": "v4",
+      "data": {
+        "value": "Express"
+      },
+      "finding": {
+        "title": "X-Powered-By Header Exposes Framework Version",
+        "severity": "LOW",
+        "cwe": "CWE-200",
+        "description": "X-Powered-By: Express \u2014 Express enables this by default",
+        "framework_behavior": true
+      }
+    },
+    {
+      "id": 7,
+      "test": "session_cookie",
+      "version": "v5",
+      "data": {
+        "name": "connect.sid",
+        "value_length": 82,
+        "secure": false,
+        "path": "/",
+        "issues": [
+          "httpOnly not set",
+          "secure flag not set",
+          "default cookie name reveals express-session"
+        ]
+      },
+      "finding": {
+        "title": "express-session Default Cookie Configuration Insecure",
+        "severity": "MEDIUM",
+        "cwe": "CWE-614",
+        "description": "Session cookie issues: httpOnly not set, secure flag not set, default cookie name reveals express-session. express-session defaults do not set httpOnly, secure, or sameSite.",
+        "framework_behavior": true,
+        "note": "While apps should configure these, the library defaults are insecure"
+      }
+    },
+    {
+      "id": 8,
+      "test": "session_cookie",
+      "version": "v4",
+      "data": {
+        "name": "connect.sid",
+        "value_length": 80,
+        "secure": false,
+        "path": "/",
+        "issues": [
+          "httpOnly not set",
+          "secure flag not set",
+          "default cookie name reveals express-session"
+        ]
+      },
+      "finding": {
+        "title": "express-session Default Cookie Configuration Insecure",
+        "severity": "MEDIUM",
+        "cwe": "CWE-614",
+        "description": "Session cookie issues: httpOnly not set, secure flag not set, default cookie name reveals express-session. express-session defaults do not set httpOnly, secure, or sameSite.",
+        "framework_behavior": true,
+        "note": "While apps should configure these, the library defaults are insecure"
+      }
+    },
+    {
+      "id": 9,
+      "test": "cors_preflight",
+      "version": "v5",
+      "data": {
+        "status": 204,
+        "cors_headers": {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,PATCH,OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          "Access-Control-Allow-Credentials": "true"
+        },
+        "origin_sent": "http://evil.com"
+      }
+    },
+    {
+      "id": 10,
+      "test": "cors_response",
+      "version": "v5",
+      "data": {
+        "acao": "*",
+        "acac": "true"
+      },
+      "finding": {
+        "title": "CORS Misconfiguration: Wildcard Origin with Credentials",
+        "severity": "HIGH",
+        "cwe": "CWE-346",
+        "description": "Access-Control-Allow-Origin: * with Access-Control-Allow-Credentials: true. Note: Browsers block this combination, but it indicates misconfiguration.",
+        "framework_behavior": false,
+        "note": "cors middleware allows this dangerous combination without warning"
+      }
+    },
+    {
+      "id": 11,
+      "test": "cors_preflight",
+      "version": "v4",
+      "data": {
+        "status": 204,
+        "cors_headers": {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,PATCH,OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          "Access-Control-Allow-Credentials": "true"
+        },
+        "origin_sent": "http://evil.com"
+      }
+    },
+    {
+      "id": 12,
+      "test": "cors_response",
+      "version": "v4",
+      "data": {
+        "acao": "*",
+        "acac": "true"
+      },
+      "finding": {
+        "title": "CORS Misconfiguration: Wildcard Origin with Credentials",
+        "severity": "HIGH",
+        "cwe": "CWE-346",
+        "description": "Access-Control-Allow-Origin: * with Access-Control-Allow-Credentials: true. Note: Browsers block this combination, but it indicates misconfiguration.",
+        "framework_behavior": false,
+        "note": "cors middleware allows this dangerous combination without warning"
+      }
+    },
+    {
+      "id": 13,
+      "test": "query_parser_basic",
+      "version": "v5",
+      "data": {
+        "query_string": "q=test",
+        "parsed": "{'q': 'test'}",
+        "status": 200
+      }
+    },
+    {
+      "id": 14,
+      "test": "query_parser_array",
+      "version": "v5",
+      "data": {
+        "query_string": "a[0]=1&a[1]=2",
+        "parsed": "{'a[0]': '1', 'a[1]': '2'}",
+        "status": 200
+      }
+    },
+    {
+      "id": 15,
+      "test": "query_parser_nested_object",
+      "version": "v5",
+      "data": {
+        "query_string": "a[b][c]=deep",
+        "parsed": "{'a[b][c]': 'deep'}",
+        "status": 200
+      }
+    },
+    {
+      "id": 16,
+      "test": "query_parser_deep_nesting",
+      "version": "v5",
+      "data": {
+        "query_string": "a[b][c][d][e][f]=very_deep",
+        "parsed": "{'a[b][c][d][e][f]': 'very_deep'}",
+        "status": 200
+      }
+    },
+    {
+      "id": 17,
+      "test": "query_parser_proto_via_qs",
+      "version": "v5",
+      "data": {
+        "query_string": "__proto__[polluted]=true",
+        "parsed": "{'__proto__[polluted]': 'true'}",
+        "status": 200
+      },
+      "finding": {
+        "title": "qs Allows __proto__ in Query String",
+        "severity": "HIGH",
+        "cwe": "CWE-1321",
+        "description": "qs module did not filter __proto__ from query parameters",
+        "framework_behavior": true
+      }
+    },
+    {
+      "id": 18,
+      "test": "query_parser_constructor_via_qs",
+      "version": "v5",
+      "data": {
+        "query_string": "constructor[prototype][polluted]=true",
+        "parsed": "{'constructor[prototype][polluted]': 'true'}",
+        "status": 200
+      }
+    },
+    {
+      "id": 19,
+      "test": "query_parser_array_limit",
+      "version": "v5",
+      "data": {
+        "query_string": "a[0]=0&a[1]=1&a[2]=2&a[3]=3&a[4]=4&a[5]=5&a[6]=6&a[7]=7&a[8]=8&a[9]=9&a[10]=10&a[11]=11&a[12]=12&a[13]=13&a[14]=14&a[15]=15&a[16]=16&a[17]=17&a[18]=18&a[19]=19&a[20]=20&a[21]=21&a[22]=22&a[23]=23&a[24",
+        "parsed": "{'a[0]': '0', 'a[1]': '1', 'a[2]': '2', 'a[3]': '3', 'a[4]': '4', 'a[5]': '5', 'a[6]': '6', 'a[7]': '7', 'a[8]': '8', 'a[9]': '9', 'a[10]': '10', 'a[11]': '11', 'a[12]': '12', 'a[13]': '13', 'a[14]': '14', 'a[15]': '15', 'a[16]': '16', 'a[17]': '17', 'a[18]': '18', 'a[19]': '19', 'a[20]': '20', 'a[21]': '21', 'a[22]': '22', 'a[23]': '23', 'a[24]': '24'}",
+        "status": 200
+      }
+    },
+    {
+      "id": 20,
+      "test": "query_parser_parameter_limit",
+      "version": "v5",
+      "data": {
+        "query_string": "p0=v0&p1=v1&p2=v2&p3=v3&p4=v4&p5=v5&p6=v6&p7=v7&p8=v8&p9=v9&p10=v10&p11=v11&p12=v12&p13=v13&p14=v14&p15=v15&p16=v16&p17=v17&p18=v18&p19=v19&p20=v20&p21=v21&p22=v22&p23=v23&p24=v24&p25=v25&p26=v26&p27=",
+        "parsed": "{'p0': 'v0', 'p1': 'v1', 'p2': 'v2', 'p3': 'v3', 'p4': 'v4', 'p5': 'v5', 'p6': 'v6', 'p7': 'v7', 'p8': 'v8', 'p9': 'v9', 'p10': 'v10', 'p11': 'v11', 'p12': 'v12', 'p13': 'v13', 'p14': 'v14', 'p15': 'v15', 'p16': 'v16', 'p17': 'v17', 'p18': 'v18', 'p19': 'v19', 'p20': 'v20', 'p21': 'v21', 'p22': 'v22', 'p23': 'v23', 'p24': 'v24', 'p25': 'v25', 'p26': 'v26', 'p27': 'v27', 'p28': 'v28', 'p29': 'v29', 'p30': 'v30', 'p31': 'v31', 'p32': 'v32', 'p33': 'v33', 'p34': 'v34', 'p35': 'v35', 'p36': 'v36', '",
+        "status": 200
+      }
+    },
+    {
+      "id": 21,
+      "test": "query_parser_basic",
+      "version": "v4",
+      "data": {
+        "query_string": "q=test",
+        "parsed": "{'q': 'test'}",
+        "status": 200
+      }
+    },
+    {
+      "id": 22,
+      "test": "query_parser_array",
+      "version": "v4",
+      "data": {
+        "query_string": "a[0]=1&a[1]=2",
+        "parsed": "{'a': ['1', '2']}",
+        "status": 200
+      }
+    },
+    {
+      "id": 23,
+      "test": "query_parser_nested_object",
+      "version": "v4",
+      "data": {
+        "query_string": "a[b][c]=deep",
+        "parsed": "{'a': {'b': {'c': 'deep'}}}",
+        "status": 200
+      }
+    },
+    {
+      "id": 24,
+      "test": "query_parser_deep_nesting",
+      "version": "v4",
+      "data": {
+        "query_string": "a[b][c][d][e][f]=very_deep",
+        "parsed": "{'a': {'b': {'c': {'d': {'e': {'f': 'very_deep'}}}}}}",
+        "status": 200
+      }
+    },
+    {
+      "id": 25,
+      "test": "query_parser_proto_via_qs",
+      "version": "v4",
+      "data": {
+        "query_string": "__proto__[polluted]=true",
+        "parsed": "{}",
+        "status": 200
+      }
+    },
+    {
+      "id": 26,
+      "test": "query_parser_constructor_via_qs",
+      "version": "v4",
+      "data": {
+        "query_string": "constructor[prototype][polluted]=true",
+        "parsed": "{'constructor': {'prototype': {'polluted': 'true'}}}",
+        "status": 200
+      }
+    },
+    {
+      "id": 27,
+      "test": "query_parser_array_limit",
+      "version": "v4",
+      "data": {
+        "query_string": "a[0]=0&a[1]=1&a[2]=2&a[3]=3&a[4]=4&a[5]=5&a[6]=6&a[7]=7&a[8]=8&a[9]=9&a[10]=10&a[11]=11&a[12]=12&a[13]=13&a[14]=14&a[15]=15&a[16]=16&a[17]=17&a[18]=18&a[19]=19&a[20]=20&a[21]=21&a[22]=22&a[23]=23&a[24",
+        "parsed": "{'a': {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '10': '10', '11': '11', '12': '12', '13': '13', '14': '14', '15': '15', '16': '16', '17': '17', '18': '18', '19': '19', '20': '20', '21': '21', '22': '22', '23': '23', '24': '24'}}",
+        "status": 200
+      }
+    },
+    {
+      "id": 28,
+      "test": "query_parser_parameter_limit",
+      "version": "v4",
+      "data": {
+        "query_string": "p0=v0&p1=v1&p2=v2&p3=v3&p4=v4&p5=v5&p6=v6&p7=v7&p8=v8&p9=v9&p10=v10&p11=v11&p12=v12&p13=v13&p14=v14&p15=v15&p16=v16&p17=v17&p18=v18&p19=v19&p20=v20&p21=v21&p22=v22&p23=v23&p24=v24&p25=v25&p26=v26&p27=",
+        "parsed": "{'p0': 'v0', 'p1': 'v1', 'p2': 'v2', 'p3': 'v3', 'p4': 'v4', 'p5': 'v5', 'p6': 'v6', 'p7': 'v7', 'p8': 'v8', 'p9': 'v9', 'p10': 'v10', 'p11': 'v11', 'p12': 'v12', 'p13': 'v13', 'p14': 'v14', 'p15': 'v15', 'p16': 'v16', 'p17': 'v17', 'p18': 'v18', 'p19': 'v19', 'p20': 'v20', 'p21': 'v21', 'p22': 'v22', 'p23': 'v23', 'p24': 'v24', 'p25': 'v25', 'p26': 'v26', 'p27': 'v27', 'p28': 'v28', 'p29': 'v29', 'p30': 'v30', 'p31': 'v31', 'p32': 'v32', 'p33': 'v33', 'p34': 'v34', 'p35': 'v35', 'p36': 'v36', '",
+        "status": 200
+      }
+    },
+    {
+      "id": 29,
+      "test": "body_size_1kb",
+      "version": "v5",
+      "data": {
+        "sent_size": 1024,
+        "status": 200,
+        "error": null
+      }
+    },
+    {
+      "id": 30,
+      "test": "body_size_100kb",
+      "version": "v5",
+      "data": {
+        "sent_size": 102400,
+        "status": 413,
+        "error": "request entity too large"
+      }
+    },
+    {
+      "id": 31,
+      "test": "body_size_1mb",
+      "version": "v5",
+      "data": {
+        "sent_size": 1048576,
+        "status": 413,
+        "error": "request entity too large"
+      }
+    },
+    {
+      "id": 32,
+      "test": "body_deep_nesting",
+      "version": "v5",
+      "data": {
+        "depth": 100,
+        "status": 200
+      }
+    },
+    {
+      "id": 33,
+      "test": "body_size_1kb",
+      "version": "v4",
+      "data": {
+        "sent_size": 1024,
+        "status": 200,
+        "error": null
+      }
+    },
+    {
+      "id": 34,
+      "test": "body_size_100kb",
+      "version": "v4",
+      "data": {
+        "sent_size": 102400,
+        "status": 413,
+        "error": "request entity too large"
+      }
+    },
+    {
+      "id": 35,
+      "test": "body_size_1mb",
+      "version": "v4",
+      "data": {
+        "sent_size": 1048576,
+        "status": 413,
+        "error": "request entity too large"
+      }
+    },
+    {
+      "id": 36,
+      "test": "body_deep_nesting",
+      "version": "v4",
+      "data": {
+        "depth": 100,
+        "status": 200
+      }
+    },
+    {
+      "id": 37,
+      "test": "static_dotfile_.env",
+      "version": "v5",
+      "data": {
+        "filename": ".env",
+        "status": 200,
+        "content_length": 70,
+        "content_preview": "DB_PASSWORD=s3cret_db_pass\nAPI_KEY=ak_live_12345\nSECRET=do_not_expose\n"
+      },
+      "finding": {
+        "title": "express.static Serves Dotfile: .env",
+        "severity": "HIGH",
+        "cwe": "CWE-538",
+        "description": "express.static with dotfiles:\"allow\" serves .env. Note: The default is \"ignore\" which returns 404 \u2014 this tests framework behavior when misconfigured.",
+        "framework_behavior": true,
+        "note": "Default dotfiles setting is \"ignore\" \u2014 but \"allow\" exposes all dotfiles"
+      }
+    },
+    {
+      "id": 38,
+      "test": "static_dotfile_.git_config_sample",
+      "version": "v5",
+      "data": {
+        "filename": ".git_config_sample",
+        "status": 200,
+        "content_length": 36,
+        "content_preview": "[core]\n\trepositoryformatversion = 0\n"
+      },
+      "finding": {
+        "title": "express.static Serves Dotfile: .git_config_sample",
+        "severity": "MEDIUM",
+        "cwe": "CWE-538",
+        "description": "express.static with dotfiles:\"allow\" serves .git_config_sample. Note: The default is \"ignore\" which returns 404 \u2014 this tests framework behavior when misconfigured.",
+        "framework_behavior": true,
+        "note": "Default dotfiles setting is \"ignore\" \u2014 but \"allow\" exposes all dotfiles"
+      }
+    },
+    {
+      "id": 39,
+      "test": "static_dotfile_.htaccess",
+      "version": "v5",
+      "data": {
+        "filename": ".htaccess",
+        "status": 404,
+        "content_length": 155,
+        "content_preview": ""
+      }
+    },
+    {
+      "id": 40,
+      "test": "static_dotfile_.env",
+      "version": "v4",
+      "data": {
+        "filename": ".env",
+        "status": 200,
+        "content_length": 70,
+        "content_preview": "DB_PASSWORD=s3cret_db_pass\nAPI_KEY=ak_live_12345\nSECRET=do_not_expose\n"
+      },
+      "finding": {
+        "title": "express.static Serves Dotfile: .env",
+        "severity": "HIGH",
+        "cwe": "CWE-538",
+        "description": "express.static with dotfiles:\"allow\" serves .env. Note: The default is \"ignore\" which returns 404 \u2014 this tests framework behavior when misconfigured.",
+        "framework_behavior": true,
+        "note": "Default dotfiles setting is \"ignore\" \u2014 but \"allow\" exposes all dotfiles"
+      }
+    },
+    {
+      "id": 41,
+      "test": "static_dotfile_.git_config_sample",
+      "version": "v4",
+      "data": {
+        "filename": ".git_config_sample",
+        "status": 200,
+        "content_length": 36,
+        "content_preview": "[core]\n\trepositoryformatversion = 0\n"
+      },
+      "finding": {
+        "title": "express.static Serves Dotfile: .git_config_sample",
+        "severity": "MEDIUM",
+        "cwe": "CWE-538",
+        "description": "express.static with dotfiles:\"allow\" serves .git_config_sample. Note: The default is \"ignore\" which returns 404 \u2014 this tests framework behavior when misconfigured.",
+        "framework_behavior": true,
+        "note": "Default dotfiles setting is \"ignore\" \u2014 but \"allow\" exposes all dotfiles"
+      }
+    },
+    {
+      "id": 42,
+      "test": "static_dotfile_.htaccess",
+      "version": "v4",
+      "data": {
+        "filename": ".htaccess",
+        "status": 404,
+        "content_length": 155,
+        "content_preview": ""
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "test_id": 1,
+      "version": "v5",
+      "title": "Express Defaults to Development Mode",
+      "severity": "MEDIUM",
+      "cwe": "CWE-489",
+      "description": "Express defaults NODE_ENV to \"development\" which enables stack traces, verbose errors, and disables caching. This is a framework default.",
+      "framework_behavior": true
+    },
+    {
+      "id": 2,
+      "test_id": 3,
+      "version": "v5",
+      "title": "X-Powered-By Header Exposes Framework Version",
+      "severity": "LOW",
+      "cwe": "CWE-200",
+      "description": "X-Powered-By: Express \u2014 Express enables this by default",
+      "framework_behavior": true
+    },
+    {
+      "id": 3,
+      "test_id": 4,
+      "version": "v4",
+      "title": "Express Defaults to Development Mode",
+      "severity": "MEDIUM",
+      "cwe": "CWE-489",
+      "description": "Express defaults NODE_ENV to \"development\" which enables stack traces, verbose errors, and disables caching. This is a framework default.",
+      "framework_behavior": true
+    },
+    {
+      "id": 4,
+      "test_id": 6,
+      "version": "v4",
+      "title": "X-Powered-By Header Exposes Framework Version",
+      "severity": "LOW",
+      "cwe": "CWE-200",
+      "description": "X-Powered-By: Express \u2014 Express enables this by default",
+      "framework_behavior": true
+    },
+    {
+      "id": 5,
+      "test_id": 7,
+      "version": "v5",
+      "title": "express-session Default Cookie Configuration Insecure",
+      "severity": "MEDIUM",
+      "cwe": "CWE-614",
+      "description": "Session cookie issues: httpOnly not set, secure flag not set, default cookie name reveals express-session. express-session defaults do not set httpOnly, secure, or sameSite.",
+      "framework_behavior": true,
+      "note": "While apps should configure these, the library defaults are insecure"
+    },
+    {
+      "id": 6,
+      "test_id": 8,
+      "version": "v4",
+      "title": "express-session Default Cookie Configuration Insecure",
+      "severity": "MEDIUM",
+      "cwe": "CWE-614",
+      "description": "Session cookie issues: httpOnly not set, secure flag not set, default cookie name reveals express-session. express-session defaults do not set httpOnly, secure, or sameSite.",
+      "framework_behavior": true,
+      "note": "While apps should configure these, the library defaults are insecure"
+    },
+    {
+      "id": 7,
+      "test_id": 10,
+      "version": "v5",
+      "title": "CORS Misconfiguration: Wildcard Origin with Credentials",
+      "severity": "HIGH",
+      "cwe": "CWE-346",
+      "description": "Access-Control-Allow-Origin: * with Access-Control-Allow-Credentials: true. Note: Browsers block this combination, but it indicates misconfiguration.",
+      "framework_behavior": false,
+      "note": "cors middleware allows this dangerous combination without warning"
+    },
+    {
+      "id": 8,
+      "test_id": 12,
+      "version": "v4",
+      "title": "CORS Misconfiguration: Wildcard Origin with Credentials",
+      "severity": "HIGH",
+      "cwe": "CWE-346",
+      "description": "Access-Control-Allow-Origin: * with Access-Control-Allow-Credentials: true. Note: Browsers block this combination, but it indicates misconfiguration.",
+      "framework_behavior": false,
+      "note": "cors middleware allows this dangerous combination without warning"
+    },
+    {
+      "id": 9,
+      "test_id": 17,
+      "version": "v5",
+      "title": "qs Allows __proto__ in Query String",
+      "severity": "HIGH",
+      "cwe": "CWE-1321",
+      "description": "qs module did not filter __proto__ from query parameters",
+      "framework_behavior": true
+    },
+    {
+      "id": 10,
+      "test_id": 37,
+      "version": "v5",
+      "title": "express.static Serves Dotfile: .env",
+      "severity": "HIGH",
+      "cwe": "CWE-538",
+      "description": "express.static with dotfiles:\"allow\" serves .env. Note: The default is \"ignore\" which returns 404 \u2014 this tests framework behavior when misconfigured.",
+      "framework_behavior": true,
+      "note": "Default dotfiles setting is \"ignore\" \u2014 but \"allow\" exposes all dotfiles"
+    },
+    {
+      "id": 11,
+      "test_id": 38,
+      "version": "v5",
+      "title": "express.static Serves Dotfile: .git_config_sample",
+      "severity": "MEDIUM",
+      "cwe": "CWE-538",
+      "description": "express.static with dotfiles:\"allow\" serves .git_config_sample. Note: The default is \"ignore\" which returns 404 \u2014 this tests framework behavior when misconfigured.",
+      "framework_behavior": true,
+      "note": "Default dotfiles setting is \"ignore\" \u2014 but \"allow\" exposes all dotfiles"
+    },
+    {
+      "id": 12,
+      "test_id": 40,
+      "version": "v4",
+      "title": "express.static Serves Dotfile: .env",
+      "severity": "HIGH",
+      "cwe": "CWE-538",
+      "description": "express.static with dotfiles:\"allow\" serves .env. Note: The default is \"ignore\" which returns 404 \u2014 this tests framework behavior when misconfigured.",
+      "framework_behavior": true,
+      "note": "Default dotfiles setting is \"ignore\" \u2014 but \"allow\" exposes all dotfiles"
+    },
+    {
+      "id": 13,
+      "test_id": 41,
+      "version": "v4",
+      "title": "express.static Serves Dotfile: .git_config_sample",
+      "severity": "MEDIUM",
+      "cwe": "CWE-538",
+      "description": "express.static with dotfiles:\"allow\" serves .git_config_sample. Note: The default is \"ignore\" which returns 404 \u2014 this tests framework behavior when misconfigured.",
+      "framework_behavior": true,
+      "note": "Default dotfiles setting is \"ignore\" \u2014 but \"allow\" exposes all dotfiles"
+    }
+  ],
+  "summary": {
+    "total_tests": 42,
+    "findings_count": 13,
+    "findings_by_severity": {
+      "MEDIUM": 6,
+      "LOW": 2,
+      "HIGH": 5
+    }
+  }
+}

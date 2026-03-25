@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "phase": "4.3",
+    "name": "Cryptographic Verification",
+    "timestamp": "2026-02-15T12:41:45.361288"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "session_randomness",
+      "version": "v5",
+      "data": {
+        "sample_size": 500,
+        "unique": 500,
+        "unique_ratio": 1.0,
+        "avg_length": 32,
+        "length_stddev": 0.0,
+        "charset_size": 64,
+        "entropy_per_char": 5.997,
+        "total_entropy_bits": 191.9,
+        "chi_square": 56.66,
+        "sample_ids": [
+          "EesqUUnbMrA414usrJbotrbtM1VXPo17",
+          "S_EuAKCAS11E3xBbdhHSMHJ21lHyUCiV",
+          "I6prXgwzX80E8n0d-NRKWrxJRvVLD-ZZ",
+          "HcSR7KuRTCYGcfk_JfyYVvkPwLGcTm3H",
+          "7agLSmjpN8QXxaQor7E8vd4Z81YvsKVx"
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "test": "session_randomness",
+      "version": "v4",
+      "data": {
+        "error": "Only collected 0 SIDs"
+      }
+    },
+    {
+      "id": 3,
+      "test": "sig_timing",
+      "version": "v5",
+      "data": {
+        "timings": {
+          "valid": {
+            "avg_ms": 1.36,
+            "std_ms": 2.08,
+            "samples": 50
+          },
+          "invalid_sig": {
+            "avg_ms": 1.28,
+            "std_ms": 1.88,
+            "samples": 50
+          },
+          "wrong_sig": {
+            "avg_ms": 1.36,
+            "std_ms": 1.91,
+            "samples": 50
+          },
+          "no_sig": {
+            "avg_ms": 1.92,
+            "std_ms": 2.02,
+            "samples": 50
+          },
+          "random": {
+            "avg_ms": 2.4,
+            "std_ms": 2.14,
+            "samples": 50
+          }
+        },
+        "valid_vs_invalid_diff_ms": 0.08
+      }
+    },
+    {
+      "id": 4,
+      "test": "sig_timing",
+      "version": "v4",
+      "data": {
+        "error": "No cookie obtained"
+      }
+    },
+    {
+      "id": 5,
+      "test": "jwt_timing",
+      "version": "v5",
+      "data": {
+        "timings": {
+          "valid": {
+            "avg_ms": 2.0,
+            "std_ms": 3.05
+          },
+          "invalid_sig": {
+            "avg_ms": 1.84,
+            "std_ms": 2.58
+          },
+          "expired": {
+            "avg_ms": 1.76,
+            "std_ms": 2.16
+          },
+          "wrong_key": {
+            "avg_ms": 1.92,
+            "std_ms": 2.02
+          }
+        }
+      }
+    },
+    {
+      "id": 6,
+      "test": "jwt_timing",
+      "version": "v4",
+      "data": {
+        "error": "No token obtained"
+      }
+    }
+  ],
+  "findings": [],
+  "summary": {
+    "total_tests": 6,
+    "findings_count": 0
+  }
+}

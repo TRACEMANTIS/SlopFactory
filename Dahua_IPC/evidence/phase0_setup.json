@@ -1,0 +1,91 @@
+{
+  "phase": 0,
+  "title": "DahuaAssmt Dahua Rhea V2.622.18 -- Project Setup",
+  "date": "2026-03-06",
+  "target": {
+    "product": "Dahua IPC-HX2X3X-Rhea",
+    "firmware": "V2.622.0000000.18.R (build 20171110)",
+    "binary": "sonia",
+    "binary_size": 16452500,
+    "architecture": "ARM32 EABI5 Thumb, glibc 2.19",
+    "base_address": "0x10000",
+    "entry_point": "0x53925",
+    "text_segment": "0x10000-0xd4e944 (R E)",
+    "data_segment": "0xd5e944+ (RW)",
+    "gnu_stack": "RWE (executable)"
+  },
+  "protection_profile": {
+    "sonia": {
+      "relro": "NONE",
+      "canary": "partial (some functions only)",
+      "nx": "DISABLED",
+      "pie": "No",
+      "fortify": "No",
+      "gnu_stack": "RWE"
+    },
+    "libosa_so": {
+      "relro": "NONE",
+      "canary": "No",
+      "nx": "DISABLED",
+      "pie": "DSO"
+    },
+    "libpdi_so": {
+      "relro": "NONE",
+      "canary": "No",
+      "nx": "Enabled",
+      "pie": "DSO"
+    },
+    "all_other_libs": {
+      "relro": "NONE",
+      "canary": "No",
+      "nx": "Enabled",
+      "pie": "DSO"
+    }
+  },
+  "unsafe_plt": {
+    "strcpy": "0x2f450",
+    "sprintf": "0x2f770",
+    "sscanf": "0x2f53c",
+    "memcpy": "0x2f2e4",
+    "strcat": "0x2e8a4",
+    "strncpy": "0x2e1a8"
+  },
+  "strings_analysis": {
+    "total_rhea_strings": 201341,
+    "rhea_only_strings": 57834,
+    "rhea_only_strings_file": "evidence/rhea_only_strings.txt",
+    "notable_rhea_only": [
+      "console.runCmd",
+      "getSecretQuestionInfo",
+      "getSecretQuestionInfo failed",
+      "create RtspOverHttpsession",
+      "create rtspsvr failed.",
+      "mDNS_AddDNSServer",
+      "mDNS_CheckForCacheRecord",
+      "boundary=\"======PRIVATE======\"",
+      "Content-Type: multipart/form-data; boundary=--------------------------7d51bb2150306",
+      "init sdp finish. ret:%d, modifier:%p",
+      "init sdp success, modifier:%p",
+      "CAroudMacSearch::onConsole m_openPrint"
+    ]
+  },
+  "shared_libraries": [
+    "libaewdrv.so", "libaew.so", "libalgae.so", "libalgh3a.so", "libalgicr.so",
+    "libamp.so", "libbinder.so", "libimg_algo_s3l.so", "libimg_dsp_s3l_hf.so",
+    "libivf.so", "liblog.so", "liblua-5.3.so", "libmvlog.so", "libosa.so",
+    "libpdi.so", "libs3l_usb.so", "libspf.so", "libstp.so", "libutils.so"
+  ],
+  "novelty_exclusions": {
+    "[REDACTED-ID]_F009": "UPnP SUBSCRIBE stack BOF -- any UPnP SUBSCRIBE = duplicate",
+    "[REDACTED-ID]_F010": "SNMP community string BOF -- SNMP config BOF = duplicate",
+    "[REDACTED-ID]_F011": "HTTP Digest auth header BOF -- HTTP Digest BOF = duplicate",
+    "[REDACTED-ID]_F014": "PasswdFind checkAuthCode -- auth code prediction = duplicate",
+    "[REDACTED-ID]_F003": "magicBox.getSystemInfo leak -- magicBox info leak = duplicate"
+  },
+  "directory_structure": {
+    "evidence/": "Phase evidence JSON files",
+    "scripts/": "PoC and validation scripts",
+    "findings/": "Per-finding detailed write-ups",
+    "firmware/": "Symlink to OG3 Rhea extraction"
+  }
+}

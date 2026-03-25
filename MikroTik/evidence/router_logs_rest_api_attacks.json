@@ -1,0 +1,1427 @@
+{
+  "phase": "rest_api_attacks",
+  "pulled_at": "2026-02-15T22:09:09.773851",
+  "log_entry_count": 150,
+  "log_entries": [
+    {
+      ".id": "*0",
+      "extra-info": "",
+      "message": "router rebooted by api:admin@::",
+      "time": "2026-02-16 22:20:05",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1",
+      "extra-info": "",
+      "message": "lo link up",
+      "time": "2026-02-16 22:20:05",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*2",
+      "extra-info": "",
+      "message": "ether1 link up (speed 1G, full duplex)",
+      "time": "2026-02-16 22:20:09",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*3",
+      "extra-info": "",
+      "message": "dhcp-client on ether1 got IP address [REDACTED-INTERNAL-IP]",
+      "time": "2026-02-16 22:20:09",
+      "topics": "dhcp,info"
+    },
+    {
+      ".id": "*4",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:20:11",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-16 22:20:11",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*6",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:20:11",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*7",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-16 22:20:11",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*8",
+      "extra-info": "app=rest-api duser=testfull outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testfull logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*9",
+      "extra-info": "app=api duser=testfull outcome=success ",
+      "message": "user testfull logged in via api",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*A",
+      "extra-info": "app=rest-api duser=testread outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testread logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*B",
+      "extra-info": "app=api duser=testread outcome=success ",
+      "message": "user testread logged in via api",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*C",
+      "extra-info": "app=rest-api duser=testwrite outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testwrite logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*D",
+      "extra-info": "app=api duser=testwrite outcome=success ",
+      "message": "user testwrite logged in via api",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*E",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*F",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*10",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged out via api",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*11",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*12",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*13",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*14",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"test\\00inject\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*15",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*2 = /system script add name=\"test\\00inject\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*16",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"test\\EF\\BF\\BD\\EF\\BF\\BDend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*17",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*3 = /system script add name=\"test\\EF\\BF\\BD\\EF\\BF\\BDend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*18",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"test\\C3\\80\\C2\\AFend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*19",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*4 = /system script add name=\"test\\C3\\80\\C2\\AFend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1A",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"test\\E2\\80\\8Fhidden\\E2\\80\\8Fend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1B",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*5 = /system script add name=\"test\\E2\\80\\8Fhidden\\E2\\80\\8Fend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1C",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"test\\E2\\80\\8Bend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1D",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*6 = /system script add name=\"test\\E2\\80\\8Bend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1E",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"test\\EF\\BF\\BDend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1F",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*7 = /system script add name=\"test\\EF\\BF\\BDend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*20",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"\\EF\\BB\\BFtest\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*21",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*8 = /system script add name=\"\\EF\\BB\\BFtest\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*22",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"test\\EF\\BF\\BD\\EF\\BF\\BDend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*23",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"\\t\\;     \\n\\r\\\\\\\"/\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*24",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*A = /system script add name=\"\\t\\;     \\n\\r\\\\\\\"/\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*25",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=12345)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*26",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=true)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*27",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*28",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*29",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=test)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2A",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2B",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=second)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2C",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=123)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2D",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=c)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2E",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=test)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2F",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*30",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"test\\\\end\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*31",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"test\\;     \\nend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*32",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=testAend)",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*33",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"test\\\\xend\")",
+      "time": "2026-02-16 22:20:48",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*34",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*B = /system script add name=_test_inj_subshell source=\"\\$(id)\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*35",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*C = /system script add name=_test_inj_backtick source=\"`id`\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*36",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*D = /system script add name=_test_inj_semicolon source=\";id\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*37",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*E = /system script add name=_test_inj_pipe source=|id)",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*38",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*F = /system script add name=_test_inj_newline source=\"echo test\\;     \\nid\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*39",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*10 = /system script add name=_test_inj_ampersand source=\"echo test && id\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*3A",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*11 = /system script add name=_test_inj_dollar_brace source=\"\\${IFS}id\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*3B",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*12 = /system script add name=_test_inj_null_byte source=\"echo test\\00id\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*3C",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*13 = /system script add name=_test_inj_comment_inject source=\"echo test # comment\\;     \\nid\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*3D",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*14 = /system script add name=_test_inj_redirect source=\"echo test > /tmp/rce_test\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*3E",
+      "extra-info": "",
+      "message": "new script scheduled by api:admin@:: (*1 = /system scheduler add interval=14w1d name=_test_sched_subshell_sched on-event=\"\\$(id)\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*3F",
+      "extra-info": "",
+      "message": "new script scheduled by api:admin@:: (*2 = /system scheduler add interval=14w1d name=_test_sched_backtick_sched on-event=\"`id`\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*40",
+      "extra-info": "",
+      "message": "new script scheduled by api:admin@:: (*3 = /system scheduler add interval=14w1d name=_test_sched_semicolon_sched on-event=\";/system/reboot\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*41",
+      "extra-info": "",
+      "message": "new script scheduled by api:admin@:: (*4 = /system scheduler add interval=14w1d name=_test_sched_pipe_sched on-event=|/system/reboot)",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*42",
+      "extra-info": "",
+      "message": "new script scheduled by api:admin@:: (*5 = /system scheduler add interval=14w1d name=_test_sched_newline_sched on-event=\"/log info \\\"safe\\\"\\;     \\n/system/reboot\")",
+      "time": "2026-02-16 22:20:49",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*43",
+      "extra-info": "",
+      "message": "Download from 127.0.0.1 FINISHED",
+      "time": "2026-02-16 22:20:49",
+      "topics": "fetch,info"
+    },
+    {
+      ".id": "*44",
+      "extra-info": "",
+      "message": "Download from [REDACTED-INTERNAL-IP] FINISHED",
+      "time": "2026-02-16 22:20:50",
+      "topics": "fetch,info"
+    },
+    {
+      ".id": "*45",
+      "extra-info": "",
+      "message": "Couldn't start task: Conflicting modes provided in URI and parameter",
+      "time": "2026-02-16 22:20:51",
+      "topics": "fetch,error"
+    },
+    {
+      ".id": "*46",
+      "extra-info": "",
+      "message": "Couldn't start task: Conflicting modes provided in URI and parameter",
+      "time": "2026-02-16 22:20:51",
+      "topics": "fetch,error"
+    },
+    {
+      ".id": "*47",
+      "extra-info": "",
+      "message": "Download from 0x7f000001 FAILED: resolving error",
+      "time": "2026-02-16 22:20:51",
+      "topics": "fetch,info"
+    },
+    {
+      ".id": "*48",
+      "extra-info": "",
+      "message": "Download from 2130706433 FAILED: resolving error",
+      "time": "2026-02-16 22:20:52",
+      "topics": "fetch,info"
+    },
+    {
+      ".id": "*49",
+      "extra-info": "",
+      "message": "Download from ::1 FINISHED",
+      "time": "2026-02-16 22:20:53",
+      "topics": "fetch,info"
+    },
+    {
+      ".id": "*4A",
+      "extra-info": "",
+      "message": "Download from 127.0.0.1 FAILED: Idle timeout - waiting data",
+      "time": "2026-02-16 22:21:04",
+      "topics": "fetch,info"
+    },
+    {
+      ".id": "*4B",
+      "extra-info": "app=local duser=admin outcome=failure ",
+      "message": "login failure for user admin via local",
+      "time": "2026-02-16 22:21:05",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4C",
+      "extra-info": "",
+      "message": "Download from [REDACTED-IP] FAILED: Idle timeout - connecting",
+      "time": "2026-02-16 22:21:14",
+      "topics": "fetch,info"
+    },
+    {
+      ".id": "*4D",
+      "extra-info": "",
+      "message": "Couldn't start task: Conflicting modes provided in URI and parameter",
+      "time": "2026-02-16 22:21:14",
+      "topics": "fetch,error"
+    },
+    {
+      ".id": "*4E",
+      "extra-info": "",
+      "message": "dns changed by api:admin@:: (/ip dns set servers=[REDACTED-IP])",
+      "time": "2026-02-16 22:21:14",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*4F",
+      "extra-info": "",
+      "message": "dns changed by api:admin@:: (/ip dns set servers=[REDACTED-IP])",
+      "time": "2026-02-16 22:21:14",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*50",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=\"test\\00inject\")",
+      "time": "2026-02-16 22:21:14",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*51",
+      "extra-info": "",
+      "message": "new script added by api:admin@:: (*15 = /system script add name=_null_test source=\"echo\\00inject\")",
+      "time": "2026-02-16 22:21:14",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*52",
+      "extra-info": "",
+      "message": "address added by api:admin@:: (*4 = /ip address add address=[REDACTED-INTERNAL-IP]/24 interface=ether1)",
+      "time": "2026-02-16 22:21:14",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*53",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-16 22:21:14",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*54",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set)",
+      "time": "2026-02-16 22:21:14",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*55",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*56",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*57",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*58",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*59",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*5A",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*5B",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5C",
+      "extra-info": "app=rest-api duser=  outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user   from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5D",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5E",
+      "extra-info": "app=rest-api duser=\u0000 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user \u0000 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5F",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*60",
+      "extra-info": "app=rest-api duser=admin\u0000extra outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\u0000extra from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*61",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*62",
+      "extra-info": "app=rest-api duser=ADMIN outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user ADMIN from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*63",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*64",
+      "extra-info": "app=rest-api duser=admin  outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin  from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*65",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*66",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*67",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*68",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*69",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6A",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6B",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6C",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6D",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6E",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6F",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*70",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*71",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*72",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*73",
+      "extra-info": "app=rest-api duser=nonexistent_user_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_user_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*74",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*75",
+      "extra-info": "app=rest-api duser=nonexistent_user_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_user_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*76",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*77",
+      "extra-info": "app=rest-api duser=nonexistent_user_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_user_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*78",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*79",
+      "extra-info": "app=rest-api duser=nonexistent_user_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_user_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7A",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7B",
+      "extra-info": "app=rest-api duser=nonexistent_user_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_user_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7C",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:0 (/system script remove *2)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*7D",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:1 (/system script remove *3)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*7E",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:2 (/system script remove *4)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*7F",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:3 (/system script remove *5)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*80",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:4 (/system script remove *6)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*81",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:5 (/system script remove *7)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*82",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:6 (/system script remove *8)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*83",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:7 (/system script remove *A)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*84",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:8 (/system script remove *B)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*85",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:9 (/system script remove *C)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*86",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:10 (/system script remove *D)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*87",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:11 (/system script remove *E)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*88",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:12 (/system script remove *F)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*89",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:13 (/system script remove *10)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*8A",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:14 (/system script remove *11)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*8B",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:15 (/system script remove *12)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*8C",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:16 (/system script remove *13)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*8D",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:17 (/system script remove *14)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*8E",
+      "extra-info": "",
+      "message": "script removed by api:admin@::/action:18 (/system script remove *15)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*8F",
+      "extra-info": "",
+      "message": "script removed from scheduler by api:admin@::/action:19 (/system scheduler remove *1)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*90",
+      "extra-info": "",
+      "message": "script removed from scheduler by api:admin@::/action:20 (/system scheduler remove *2)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*91",
+      "extra-info": "",
+      "message": "script removed from scheduler by api:admin@::/action:21 (/system scheduler remove *3)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*92",
+      "extra-info": "",
+      "message": "script removed from scheduler by api:admin@::/action:22 (/system scheduler remove *4)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*93",
+      "extra-info": "",
+      "message": "script removed from scheduler by api:admin@::/action:23 (/system scheduler remove *5)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*94",
+      "extra-info": "",
+      "message": "address removed by api:admin@::/action:24 (/ip address remove *4)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*95",
+      "extra-info": "",
+      "message": "system identity changed by api:admin@:: (/system identity set name=MikroTik)",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,info"
+    }
+  ],
+  "categories": {
+    "system,info": 89,
+    "interface,info": 2,
+    "dhcp,info": 1,
+    "system,info,account": 14,
+    "fetch,info": 7,
+    "fetch,error": 3,
+    "system,error,critical": 34
+  },
+  "interesting_entries": [
+    {
+      ".id": "*47",
+      "extra-info": "",
+      "message": "Download from 0x7f000001 FAILED: resolving error",
+      "time": "2026-02-16 22:20:51",
+      "topics": "fetch,info"
+    },
+    {
+      ".id": "*48",
+      "extra-info": "",
+      "message": "Download from 2130706433 FAILED: resolving error",
+      "time": "2026-02-16 22:20:52",
+      "topics": "fetch,info"
+    },
+    {
+      ".id": "*4B",
+      "extra-info": "app=local duser=admin outcome=failure ",
+      "message": "login failure for user admin via local",
+      "time": "2026-02-16 22:21:05",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5B",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5C",
+      "extra-info": "app=rest-api duser=  outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user   from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5D",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5E",
+      "extra-info": "app=rest-api duser=\u0000 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user \u0000 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5F",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*60",
+      "extra-info": "app=rest-api duser=admin\u0000extra outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\u0000extra from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*61",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*62",
+      "extra-info": "app=rest-api duser=ADMIN outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user ADMIN from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*63",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*64",
+      "extra-info": "app=rest-api duser=admin  outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin  from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*65",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*66",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*67",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*68",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*69",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6A",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6B",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6C",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6D",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6E",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6F",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*70",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*71",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*72",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*73",
+      "extra-info": "app=rest-api duser=nonexistent_user_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_user_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*74",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*75",
+      "extra-info": "app=rest-api duser=nonexistent_user_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_user_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*76",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*77",
+      "extra-info": "app=rest-api duser=nonexistent_user_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_user_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*78",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*79",
+      "extra-info": "app=rest-api duser=nonexistent_user_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_user_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7A",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7B",
+      "extra-info": "app=rest-api duser=nonexistent_user_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_user_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:21:28",
+      "topics": "system,error,critical"
+    }
+  ],
+  "interesting_count": 36,
+  "system_resource": {
+    "architecture-name": "x86_64",
+    "board-name": "CHR innotek GmbH VirtualBox",
+    "build-time": "2026-01-30 09:17:54",
+    "cpu": "AMD",
+    "cpu-count": "1",
+    "cpu-frequency": "4391",
+    "cpu-load": "0",
+    "factory-software": "7.1",
+    "free-hdd-space": "73175040",
+    "free-memory": "841842688",
+    "platform": "MikroTik",
+    "total-hdd-space": "93564928",
+    "total-memory": "1073741824",
+    "uptime": "1m28s",
+    "version": "7.20.8 (long-term)",
+    "write-sect-since-reboot": "936",
+    "write-sect-total": "936"
+  },
+  "active_users": [
+    {
+      ".id": "*3",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 22:20:11"
+    },
+    {
+      ".id": "*4",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 22:20:11"
+    },
+    {
+      ".id": "*5",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "testfull",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 22:20:48"
+    },
+    {
+      ".id": "*6",
+      "group": "full",
+      "name": "testfull",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 22:20:48"
+    },
+    {
+      ".id": "*7",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "read",
+      "name": "testread",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 22:20:48"
+    },
+    {
+      ".id": "*8",
+      "group": "read",
+      "name": "testread",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 22:20:48"
+    },
+    {
+      ".id": "*9",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "write",
+      "name": "testwrite",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 22:20:48"
+    },
+    {
+      ".id": "*A",
+      "group": "write",
+      "name": "testwrite",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 22:20:48"
+    },
+    {
+      ".id": "*B",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 22:20:48"
+    },
+    {
+      ".id": "*C",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 22:20:48"
+    }
+  ]
+}

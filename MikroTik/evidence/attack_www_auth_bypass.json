@@ -1,0 +1,1726 @@
+{
+  "metadata": {
+    "script": "attack_www_auth_bypass.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 9,
+    "start_time": "2026-02-16T14:11:14.659350",
+    "end_time": "2026-02-16T14:11:21.086478",
+    "total_tests": 101,
+    "anomalies": 0,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "2h11m52s",
+    "router_log_count": 1000,
+    "router_interesting_events": 1,
+    "final_health": {
+      "alive": true,
+      "uptime": "2h12m9s",
+      "cpu_load": "0",
+      "free_memory": "837058560",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "baseline",
+      "name": "Authenticated baseline",
+      "description": "GET /rest/system/resource with valid credentials",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.667354",
+      "details": {
+        "status": 200,
+        "body_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"0\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73211904\",\"free-memory\":\"837476352\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"935649"
+      }
+    },
+    {
+      "id": 2,
+      "category": "baseline",
+      "name": "Unauthenticated baseline",
+      "description": "GET /rest/system/resource without credentials",
+      "result": "Status None",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.667354",
+      "details": {
+        "status": null,
+        "body_preview": "(none)"
+      }
+    },
+    {
+      "id": 3,
+      "category": "verb_tampering",
+      "name": "Verb GET no-auth",
+      "description": "GET /rest/system/resource without credentials",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.667354",
+      "details": {
+        "method": "GET",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false,
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "38",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 21:51:10 GMT",
+          "Expires": "Tue, 16 Feb 2027 21:51:10 GMT",
+          "WWW-Authenticate": "Basic",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "category": "verb_tampering",
+      "name": "Verb POST no-auth",
+      "description": "POST /rest/system/resource without credentials",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.667354",
+      "details": {
+        "method": "POST",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false,
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "38",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 21:51:10 GMT",
+          "Expires": "Tue, 16 Feb 2027 21:51:10 GMT",
+          "WWW-Authenticate": "Basic",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "category": "verb_tampering",
+      "name": "Verb PUT no-auth",
+      "description": "PUT /rest/system/resource without credentials",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.667354",
+      "details": {
+        "method": "PUT",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false,
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "38",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 21:51:10 GMT",
+          "Expires": "Tue, 16 Feb 2027 21:51:10 GMT",
+          "WWW-Authenticate": "Basic",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "category": "verb_tampering",
+      "name": "Verb DELETE no-auth",
+      "description": "DELETE /rest/system/resource without credentials",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.667354",
+      "details": {
+        "method": "DELETE",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false,
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "38",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 21:51:10 GMT",
+          "Expires": "Tue, 16 Feb 2027 21:51:10 GMT",
+          "WWW-Authenticate": "Basic",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "category": "verb_tampering",
+      "name": "Verb PATCH no-auth",
+      "description": "PATCH /rest/system/resource without credentials",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.687364",
+      "details": {
+        "method": "PATCH",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false,
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "38",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 21:51:10 GMT",
+          "Expires": "Tue, 16 Feb 2027 21:51:10 GMT",
+          "WWW-Authenticate": "Basic",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "category": "verb_tampering",
+      "name": "Verb HEAD no-auth",
+      "description": "HEAD /rest/system/resource without credentials",
+      "result": "Status 401, blocked, body=(empty)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.695368",
+      "details": {
+        "method": "HEAD",
+        "status": 401,
+        "body_preview": "",
+        "auth_bypass": false,
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "38",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 21:51:10 GMT",
+          "Expires": "Tue, 16 Feb 2027 21:51:10 GMT",
+          "WWW-Authenticate": "Basic",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 9,
+      "category": "verb_tampering",
+      "name": "Verb OPTIONS no-auth",
+      "description": "OPTIONS /rest/system/resource without credentials",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.699370",
+      "details": {
+        "method": "OPTIONS",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 21:51:10 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "category": "verb_tampering",
+      "name": "Verb TRACE no-auth",
+      "description": "TRACE /rest/system/resource without credentials",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.703372",
+      "details": {
+        "method": "TRACE",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 21:51:10 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 11,
+      "category": "verb_tampering",
+      "name": "Verb CONNECT no-auth",
+      "description": "CONNECT /rest/system/resource without credentials",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.707374",
+      "details": {
+        "method": "CONNECT",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 21:51:10 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 12,
+      "category": "verb_tampering",
+      "name": "Verb PROPFIND no-auth",
+      "description": "PROPFIND /rest/system/resource without credentials",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.711376",
+      "details": {
+        "method": "PROPFIND",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 21:51:10 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 13,
+      "category": "verb_tampering",
+      "name": "Verb MKCOL no-auth",
+      "description": "MKCOL /rest/system/resource without credentials",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.715378",
+      "details": {
+        "method": "MKCOL",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 21:51:10 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        }
+      }
+    },
+    {
+      "id": 14,
+      "category": "path_normalization",
+      "name": "Path norm: double slash",
+      "description": "GET /rest//system/resource without auth \u2014 double slash",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.723382",
+      "details": {
+        "path": "/rest//system/resource",
+        "description": "double slash",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 15,
+      "category": "path_normalization",
+      "name": "Path norm: dot segment",
+      "description": "GET /rest/./system/resource without auth \u2014 dot segment",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.727384",
+      "details": {
+        "path": "/rest/./system/resource",
+        "description": "dot segment",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 16,
+      "category": "path_normalization",
+      "name": "Path norm: parent traversal to same",
+      "description": "GET /rest/system/../system/resource without auth \u2014 parent traversal to same",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.731386",
+      "details": {
+        "path": "/rest/system/../system/resource",
+        "description": "parent traversal to same",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 17,
+      "category": "path_normalization",
+      "name": "Path norm: uppercase REST",
+      "description": "GET /REST/system/resource without auth \u2014 uppercase REST",
+      "result": "Status 404, blocked, body=<!doctype html> <html lang=en> <title>Error 404 : Not Found</title> <h1>Error 404 : Not Found</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.735388",
+      "details": {
+        "path": "/REST/system/resource",
+        "description": "uppercase REST",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 18,
+      "category": "path_normalization",
+      "name": "Path norm: mixed case",
+      "description": "GET /Rest/System/Resource without auth \u2014 mixed case",
+      "result": "Status 404, blocked, body=<!doctype html> <html lang=en> <title>Error 404 : Not Found</title> <h1>Error 404 : Not Found</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.735388",
+      "details": {
+        "path": "/Rest/System/Resource",
+        "description": "mixed case",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 19,
+      "category": "path_normalization",
+      "name": "Path norm: trailing slash",
+      "description": "GET /rest/system/resource/ without auth \u2014 trailing slash",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.739390",
+      "details": {
+        "path": "/rest/system/resource/",
+        "description": "trailing slash",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 20,
+      "category": "path_normalization",
+      "name": "Path norm: empty query string",
+      "description": "GET /rest/system/resource? without auth \u2014 empty query string",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.743392",
+      "details": {
+        "path": "/rest/system/resource?",
+        "description": "empty query string",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 21,
+      "category": "path_normalization",
+      "name": "Path norm: fragment",
+      "description": "GET /rest/system/resource#fragment without auth \u2014 fragment",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.747394",
+      "details": {
+        "path": "/rest/system/resource#fragment",
+        "description": "fragment",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 22,
+      "category": "path_normalization",
+      "name": "Path norm: leading double slash",
+      "description": "GET //rest/system/resource without auth \u2014 leading double slash",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.751396",
+      "details": {
+        "path": "//rest/system/resource",
+        "description": "leading double slash",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 23,
+      "category": "path_normalization",
+      "name": "Path norm: backslash separator",
+      "description": "GET /rest\\system\\resource without auth \u2014 backslash separator",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.755398",
+      "details": {
+        "path": "/rest\\system\\resource",
+        "description": "backslash separator",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 24,
+      "category": "url_encoding",
+      "name": "URL encode: partial encode s->%73, r->%72",
+      "description": "GET /rest/%73ystem/%72esource without auth \u2014 partial encode s->%73, r->%72",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.763402",
+      "details": {
+        "path": "/rest/%73ystem/%72esource",
+        "description": "partial encode s->%73, r->%72",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 25,
+      "category": "url_encoding",
+      "name": "URL encode: encode 'r' in rest",
+      "description": "GET /%72est/system/resource without auth \u2014 encode 'r' in rest",
+      "result": "Status 404, blocked, body=<!doctype html> <html lang=en> <title>Error 404 : Not Found</title> <h1>Error 404 : Not Found</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.767404",
+      "details": {
+        "path": "/%72est/system/resource",
+        "description": "encode 'r' in rest",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 26,
+      "category": "url_encoding",
+      "name": "URL encode: encode 'e' in rest",
+      "description": "GET /r%65st/system/resource without auth \u2014 encode 'e' in rest",
+      "result": "Status 404, blocked, body=<!doctype html> <html lang=en> <title>Error 404 : Not Found</title> <h1>Error 404 : Not Found</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.771406",
+      "details": {
+        "path": "/r%65st/system/resource",
+        "description": "encode 'e' in rest",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 27,
+      "category": "url_encoding",
+      "name": "URL encode: encode 'y' in system",
+      "description": "GET /rest/s%79stem/resource without auth \u2014 encode 'y' in system",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.771406",
+      "details": {
+        "path": "/rest/s%79stem/resource",
+        "description": "encode 'y' in system",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 28,
+      "category": "url_encoding",
+      "name": "URL encode: full encode all",
+      "description": "GET /%72%65%73%74/%73%79%73%74%65%6d/%72%65%73%6f%75%72%63%65 without auth \u2014 full encode all",
+      "result": "Status 404, blocked, body=<!doctype html> <html lang=en> <title>Error 404 : Not Found</title> <h1>Error 404 : Not Found</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.775408",
+      "details": {
+        "path": "/%72%65%73%74/%73%79%73%74%65%6d/%72%65%73%6f%75%72%63%65",
+        "description": "full encode all",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 29,
+      "category": "url_encoding",
+      "name": "URL encode: double encode %73->%2573",
+      "description": "GET /rest/%2573ystem/resource without auth \u2014 double encode %73->%2573",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.779410",
+      "details": {
+        "path": "/rest/%2573ystem/resource",
+        "description": "double encode %73->%2573",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 30,
+      "category": "url_encoding",
+      "name": "URL encode: null byte suffix",
+      "description": "GET /rest/system/resource%00 without auth \u2014 null byte suffix",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.783412",
+      "details": {
+        "path": "/rest/system/resource%00",
+        "description": "null byte suffix",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 31,
+      "category": "url_encoding",
+      "name": "URL encode: space suffix",
+      "description": "GET /rest/system/resource%20 without auth \u2014 space suffix",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.787414",
+      "details": {
+        "path": "/rest/system/resource%20",
+        "description": "space suffix",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 32,
+      "category": "host_header",
+      "name": "Host: localhost",
+      "description": "GET /rest/system/resource with Host: 'localhost'",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.787414",
+      "details": {
+        "host_value": "localhost",
+        "description": "localhost",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 33,
+      "category": "host_header",
+      "name": "Host: loopback IPv4",
+      "description": "GET /rest/system/resource with Host: '127.0.0.1'",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.791416",
+      "details": {
+        "host_value": "127.0.0.1",
+        "description": "loopback IPv4",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 34,
+      "category": "host_header",
+      "name": "Host: loopback IPv6",
+      "description": "GET /rest/system/resource with Host: '::1'",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.795418",
+      "details": {
+        "host_value": "::1",
+        "description": "loopback IPv6",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 35,
+      "category": "host_header",
+      "name": "Host: actual target IP",
+      "description": "GET /rest/system/resource with Host: '[REDACTED-INTERNAL-IP]'",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.795418",
+      "details": {
+        "host_value": "[REDACTED-INTERNAL-IP]",
+        "description": "actual target IP",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 36,
+      "category": "host_header",
+      "name": "Host: arbitrary internal name",
+      "description": "GET /rest/system/resource with Host: 'internal'",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.799420",
+      "details": {
+        "host_value": "internal",
+        "description": "arbitrary internal name",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 37,
+      "category": "host_header",
+      "name": "Host: empty host header",
+      "description": "GET /rest/system/resource with Host: ''",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.803422",
+      "details": {
+        "host_value": "",
+        "description": "empty host header",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 38,
+      "category": "host_header",
+      "name": "Host: external domain",
+      "description": "GET /rest/system/resource with Host: 'evil.com'",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.807424",
+      "details": {
+        "host_value": "evil.com",
+        "description": "external domain",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 39,
+      "category": "forwarded_headers",
+      "name": "Proxy hdr: XFF 127.0.0.1",
+      "description": "GET /rest/system/resource with XFF 127.0.0.1 (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.815428",
+      "details": {
+        "headers_sent": {
+          "X-Forwarded-For": "127.0.0.1"
+        },
+        "description": "XFF 127.0.0.1",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 40,
+      "category": "forwarded_headers",
+      "name": "Proxy hdr: XFF ::1",
+      "description": "GET /rest/system/resource with XFF ::1 (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.815428",
+      "details": {
+        "headers_sent": {
+          "X-Forwarded-For": "::1"
+        },
+        "description": "XFF ::1",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 41,
+      "category": "forwarded_headers",
+      "name": "Proxy hdr: X-Real-IP 127.0.0.1",
+      "description": "GET /rest/system/resource with X-Real-IP 127.0.0.1 (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.819430",
+      "details": {
+        "headers_sent": {
+          "X-Real-IP": "127.0.0.1"
+        },
+        "description": "X-Real-IP 127.0.0.1",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 42,
+      "category": "forwarded_headers",
+      "name": "Proxy hdr: X-Forwarded-Host localhost",
+      "description": "GET /rest/system/resource with X-Forwarded-Host localhost (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.823432",
+      "details": {
+        "headers_sent": {
+          "X-Forwarded-Host": "localhost"
+        },
+        "description": "X-Forwarded-Host localhost",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 43,
+      "category": "forwarded_headers",
+      "name": "Proxy hdr: Forwarded for=127.0.0.1",
+      "description": "GET /rest/system/resource with Forwarded for=127.0.0.1 (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.827434",
+      "details": {
+        "headers_sent": {
+          "Forwarded": "for=127.0.0.1"
+        },
+        "description": "Forwarded for=127.0.0.1",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 44,
+      "category": "forwarded_headers",
+      "name": "Proxy hdr: all proxy headers combined",
+      "description": "GET /rest/system/resource with all proxy headers combined (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.831436",
+      "details": {
+        "headers_sent": {
+          "X-Forwarded-For": "127.0.0.1",
+          "X-Real-IP": "127.0.0.1",
+          "X-Forwarded-Host": "localhost"
+        },
+        "description": "all proxy headers combined",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 45,
+      "category": "forwarded_headers",
+      "name": "Proxy hdr: X-Original-URL",
+      "description": "GET /rest/system/resource with X-Original-URL (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.835438",
+      "details": {
+        "headers_sent": {
+          "X-Original-URL": "/rest/system/resource"
+        },
+        "description": "X-Original-URL",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 46,
+      "category": "forwarded_headers",
+      "name": "Proxy hdr: X-Rewrite-URL",
+      "description": "GET /rest/system/resource with X-Rewrite-URL (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.839440",
+      "details": {
+        "headers_sent": {
+          "X-Rewrite-URL": "/rest/system/resource"
+        },
+        "description": "X-Rewrite-URL",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 47,
+      "category": "http_version",
+      "name": "Version: HTTP/1.0",
+      "description": "GET /rest/system/resource with HTTP/1.0 (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.843442",
+      "details": {
+        "version": "HTTP/1.0",
+        "description": "HTTP/1.0",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false,
+        "raw_response_preview": "HTTP/1.0 401 Unauthorized\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 38\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:51:10 GMT\r\nExpires: Tue, 16 Feb 2027 21:51:10 GMT\r\nWWW-Authenticate: Basic\r\nX-Frame-Options: sameorigin\r\n\r\n{\"error\":401,\"message\":\"Unauthorized\"}"
+      }
+    },
+    {
+      "id": 48,
+      "category": "http_version",
+      "name": "Version: HTTP/1.1 (baseline)",
+      "description": "GET /rest/system/resource with HTTP/1.1 (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.843442",
+      "details": {
+        "version": "HTTP/1.1",
+        "description": "HTTP/1.1 (baseline)",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false,
+        "raw_response_preview": "HTTP/1.1 401 Unauthorized\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 38\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:51:10 GMT\r\nExpires: Tue, 16 Feb 2027 21:51:10 GMT\r\nWWW-Authenticate: Basic\r\nX-Frame-Options: sameorigin\r\n\r\n{\"error\":401,\"message\":\"Unauthorized\"}"
+      }
+    },
+    {
+      "id": 49,
+      "category": "http_version",
+      "name": "Version: HTTP/0.9 (ancient)",
+      "description": "GET /rest/system/resource with HTTP/0.9 (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.847444",
+      "details": {
+        "version": "HTTP/0.9",
+        "description": "HTTP/0.9 (ancient)",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false,
+        "raw_response_preview": "HTTP/1.0 401 Unauthorized\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 38\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:51:10 GMT\r\nExpires: Tue, 16 Feb 2027 21:51:10 GMT\r\nWWW-Authenticate: Basic\r\nX-Frame-Options: sameorigin\r\n\r\n{\"error\":401,\"message\":\"Unauthorized\"}"
+      }
+    },
+    {
+      "id": 50,
+      "category": "http_version",
+      "name": "Version: HTTP/2.0 (up[REDACTED] attempt)",
+      "description": "GET /rest/system/resource with HTTP/2.0 (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.851446",
+      "details": {
+        "version": "HTTP/2.0",
+        "description": "HTTP/2.0 (up[REDACTED] attempt)",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false,
+        "raw_response_preview": "HTTP/1.1 401 Unauthorized\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 38\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:51:10 GMT\r\nExpires: Tue, 16 Feb 2027 21:51:10 GMT\r\nWWW-Authenticate: Basic\r\nX-Frame-Options: sameorigin\r\n\r\n{\"error\":401,\"message\":\"Unauthorized\"}"
+      }
+    },
+    {
+      "id": 51,
+      "category": "request_smuggling",
+      "name": "CL/TE smuggling",
+      "description": "POST with CL + TE:chunked, smuggled GET without auth",
+      "result": "Status 501, blocked, body=<!doctype html> <html lang=en> <title>Error 501 : Not Implemented</title> <h1>Error 501 : Not Implemented</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.859450",
+      "details": {
+        "technique": "CL/TE",
+        "status": 501,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "auth_bypass": false,
+        "raw_response": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:51:10 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n"
+      }
+    },
+    {
+      "id": 52,
+      "category": "request_smuggling",
+      "name": "TE/CL smuggling",
+      "description": "POST with TE:chunked + CL:0, body has chunked data",
+      "result": "Status 501, blocked, body=<!doctype html> <html lang=en> <title>Error 501 : Not Implemented</title> <h1>Error 501 : Not Implemented</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.859450",
+      "details": {
+        "technique": "TE/CL",
+        "status": 501,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 53,
+      "category": "request_smuggling",
+      "name": "TE/TE obfuscation",
+      "description": "POST with two Transfer-Encoding headers (chunked + identity)",
+      "result": "Status 501, blocked, body=<!doctype html> <html lang=en> <title>Error 501 : Not Implemented</title> <h1>Error 501 : Not Implemented</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.863452",
+      "details": {
+        "technique": "TE/TE",
+        "status": 501,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n"
+      }
+    },
+    {
+      "id": 54,
+      "category": "request_smuggling",
+      "name": "TE variant: TE with space before colon",
+      "description": "POST with TE with space before colon (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.867454",
+      "details": {
+        "variant": "TE with space before colon",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 55,
+      "category": "request_smuggling",
+      "name": "TE variant: TE with trailing space",
+      "description": "POST with TE with trailing space (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.871456",
+      "details": {
+        "variant": "TE with trailing space",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 56,
+      "category": "request_smuggling",
+      "name": "TE variant: TE with tab",
+      "description": "POST with TE with tab (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.871456",
+      "details": {
+        "variant": "TE with tab",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 57,
+      "category": "request_smuggling",
+      "name": "TE variant: TE lowercase",
+      "description": "POST with TE lowercase (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.875458",
+      "details": {
+        "variant": "TE lowercase",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 58,
+      "category": "request_smuggling",
+      "name": "TE variant: TE uppercase",
+      "description": "POST with TE uppercase (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:14.879460",
+      "details": {
+        "variant": "TE uppercase",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 59,
+      "category": "conn_auth_state",
+      "name": "Keep-alive: first request (authed)",
+      "description": "GET /rest/system/resource with auth on keep-alive connection",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:15.383712",
+      "details": {
+        "status": 200,
+        "body_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"0\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73211904\",\"free-memory\":\"837476352\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"935649"
+      }
+    },
+    {
+      "id": 60,
+      "category": "conn_auth_state",
+      "name": "Keep-alive: second request (NO auth)",
+      "description": "GET /rest/system/resource without auth on SAME connection",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:15.883962",
+      "details": {
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false,
+        "first_status": 200
+      }
+    },
+    {
+      "id": 61,
+      "category": "conn_auth_state",
+      "name": "Pipelined: auth then no-auth",
+      "description": "Pipeline requests",
+      "result": "Only 1 response(s) received",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.890576",
+      "details": {
+        "raw_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: Keep-Alive\r\nContent-Length: 443\r\nContent-Type: application/json\r\nDate: Mon, 16 Feb 2026 21:51:11 GMT\r\nExpires: Tue, 16 Feb 2027 21:51:11 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"19\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73211904\",\"free-memory\":\"837476352\",\"platform\":"
+      }
+    },
+    {
+      "id": 62,
+      "category": "conn_auth_state",
+      "name": "Reverse pipeline: no-auth then auth",
+      "description": "Pipeline unauthed + authed requests (reversed)",
+      "result": "First (unauthed) status: 401",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.894574",
+      "details": {
+        "first_status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "response_count": 1
+      }
+    },
+    {
+      "id": 63,
+      "category": "path_confusion",
+      "name": "Path confusion: restx + parent traversal",
+      "description": "GET /restx/../rest/system/resource without auth \u2014 restx + parent traversal",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.914564",
+      "details": {
+        "path": "/restx/../rest/system/resource",
+        "description": "restx + parent traversal",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 64,
+      "category": "path_confusion",
+      "name": "Path confusion: rest.html + parent traversal",
+      "description": "GET /rest.html/../rest/system/resource without auth \u2014 rest.html + parent traversal",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.914564",
+      "details": {
+        "path": "/rest.html/../rest/system/resource",
+        "description": "rest.html + parent traversal",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 65,
+      "category": "path_confusion",
+      "name": "Path confusion: root parent traversal",
+      "description": "GET /../rest/system/resource without auth \u2014 root parent traversal",
+      "result": "Status 404, blocked, body=<!doctype html> <html lang=en> <title>Error 404 : Not Found</title> <h1>Error 404 : Not Found</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.926558",
+      "details": {
+        "path": "/../rest/system/resource",
+        "description": "root parent traversal",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 66,
+      "category": "path_confusion",
+      "name": "Path confusion: semicolon extension",
+      "description": "GET /rest/system/resource;.json without auth \u2014 semicolon extension",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.926558",
+      "details": {
+        "path": "/rest/system/resource;.json",
+        "description": "semicolon extension",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 67,
+      "category": "path_confusion",
+      "name": "Path confusion: .json extension",
+      "description": "GET /rest/system/resource.json without auth \u2014 .json extension",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.930556",
+      "details": {
+        "path": "/rest/system/resource.json",
+        "description": ".json extension",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 68,
+      "category": "path_confusion",
+      "name": "Path confusion: encoded hash",
+      "description": "GET /rest/system/resource%23 without auth \u2014 encoded hash",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.930556",
+      "details": {
+        "path": "/rest/system/resource%23",
+        "description": "encoded hash",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 69,
+      "category": "path_confusion",
+      "name": "Path confusion: /api prefix",
+      "description": "GET /api/rest/system/resource without auth \u2014 /api prefix",
+      "result": "Status 404, blocked, body=<!doctype html> <html lang=en> <title>Error 404 : Not Found</title> <h1>Error 404 : Not Found</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.934554",
+      "details": {
+        "path": "/api/rest/system/resource",
+        "description": "/api prefix",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 70,
+      "category": "path_confusion",
+      "name": "Path confusion: /v1 prefix",
+      "description": "GET /v1/rest/system/resource without auth \u2014 /v1 prefix",
+      "result": "Status 404, blocked, body=<!doctype html> <html lang=en> <title>Error 404 : Not Found</title> <h1>Error 404 : Not Found</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.942550",
+      "details": {
+        "path": "/v1/rest/system/resource",
+        "description": "/v1 prefix",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 71,
+      "category": "method_case",
+      "name": "Method case: 'get'",
+      "description": "get /rest/system/resource without auth",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.942550",
+      "details": {
+        "method": "get",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 72,
+      "category": "method_case",
+      "name": "Method case: 'Get'",
+      "description": "Get /rest/system/resource without auth",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.946548",
+      "details": {
+        "method": "Get",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 73,
+      "category": "method_case",
+      "name": "Method case: 'gEt'",
+      "description": "gEt /rest/system/resource without auth",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.946548",
+      "details": {
+        "method": "gEt",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 74,
+      "category": "method_case",
+      "name": "Method case: 'gET'",
+      "description": "gET /rest/system/resource without auth",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.954544",
+      "details": {
+        "method": "gET",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 75,
+      "category": "method_case",
+      "name": "Method case: 'GEt'",
+      "description": "GEt /rest/system/resource without auth",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.954544",
+      "details": {
+        "method": "GEt",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 76,
+      "category": "method_case",
+      "name": "Method case: 'GeT'",
+      "description": "GeT /rest/system/resource without auth",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.958542",
+      "details": {
+        "method": "GeT",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 77,
+      "category": "method_case",
+      "name": "Method case: 'geT'",
+      "description": "geT /rest/system/resource without auth",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.966538",
+      "details": {
+        "method": "geT",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 78,
+      "category": "method_case",
+      "name": "Method case: 'post'",
+      "description": "post /rest/system/resource without auth",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.970536",
+      "details": {
+        "method": "post",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 79,
+      "category": "method_case",
+      "name": "Method case: 'Post'",
+      "description": "Post /rest/system/resource without auth",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.970536",
+      "details": {
+        "method": "Post",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 80,
+      "category": "method_case",
+      "name": "Method case: 'pOsT'",
+      "description": "pOsT /rest/system/resource without auth",
+      "result": "Status 503, blocked, body=<!doctype html> <html lang=en> <title>Error 503 : unknown method</title> <h1>Error 503 : unknown method</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.970536",
+      "details": {
+        "method": "pOsT",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 81,
+      "category": "websocket_up[REDACTED]",
+      "name": "Up[REDACTED]: standard WebSocket up[REDACTED]",
+      "description": "GET /rest/system/resource with standard WebSocket up[REDACTED] (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.982530",
+      "details": {
+        "description": "standard WebSocket up[REDACTED]",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "upgrade_headers": {
+          "Up[REDACTED]": "websocket",
+          "Connection": "Up[REDACTED]",
+          "Sec-WebSocket-Key": "MDEyMzQ1Njc4OUFCQ0RFRg==",
+          "Sec-WebSocket-Version": "13"
+        },
+        "switching_protocols": false,
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 82,
+      "category": "websocket_up[REDACTED]",
+      "name": "Up[REDACTED]: WebSocket with Origin header",
+      "description": "GET /rest/system/resource with WebSocket with Origin header (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.982530",
+      "details": {
+        "description": "WebSocket with Origin header",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "upgrade_headers": {
+          "Up[REDACTED]": "websocket",
+          "Connection": "Up[REDACTED], keep-alive",
+          "Sec-WebSocket-Key": "dGVzdC13cy1rZXktMTIzNA==",
+          "Sec-WebSocket-Version": "13",
+          "Origin": "http://[REDACTED-INTERNAL-IP]"
+        },
+        "switching_protocols": false,
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 83,
+      "category": "websocket_up[REDACTED]",
+      "name": "Up[REDACTED]: h2c (HTTP/2 cleartext) up[REDACTED]",
+      "description": "GET /rest/system/resource with h2c (HTTP/2 cleartext) up[REDACTED] (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.994524",
+      "details": {
+        "description": "h2c (HTTP/2 cleartext) up[REDACTED]",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "upgrade_headers": {
+          "Up[REDACTED]": "h2c",
+          "Connection": "Up[REDACTED], HTTP2-Settings",
+          "HTTP2-Settings": "AA=="
+        },
+        "switching_protocols": false,
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 84,
+      "category": "websocket_up[REDACTED]",
+      "name": "Up[REDACTED]: TLS up[REDACTED] via Up[REDACTED] header",
+      "description": "GET /rest/system/resource with TLS up[REDACTED] via Up[REDACTED] header (no auth)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:20.998522",
+      "details": {
+        "description": "TLS up[REDACTED] via Up[REDACTED] header",
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "upgrade_headers": {
+          "Up[REDACTED]": "TLS/1.0",
+          "Connection": "Up[REDACTED]"
+        },
+        "switching_protocols": false,
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 85,
+      "category": "double_auth",
+      "name": "Double auth: valid first, invalid second",
+      "description": "Two Authorization headers: valid then invalid",
+      "result": "Status 200, accepted=True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.002520",
+      "details": {
+        "status": 200,
+        "body_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"0\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73211904\",\"free-memory\":\"837541888\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"93564928\",\"total-memory\":\"1073741824\",\"uptime\":\"2h11m58s\",\"version\":\"7.20.8 (long-term)\",\"write-sect-since-reboot\":\"3136\",\"write-sect-total\":\"3136\"}",
+        "first_header": "valid",
+        "second_header": "invalid",
+        "accepted": true
+      }
+    },
+    {
+      "id": 86,
+      "category": "double_auth",
+      "name": "Double auth: invalid first, valid second",
+      "description": "Two Authorization headers: invalid then valid",
+      "result": "Status 401, accepted=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.002520",
+      "details": {
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "first_header": "invalid",
+        "second_header": "valid",
+        "accepted": false,
+        "note": "If accepted, server uses LAST header = potential confusion"
+      }
+    },
+    {
+      "id": 87,
+      "category": "double_auth",
+      "name": "Double auth: empty first, valid second",
+      "description": "Empty Authorization header followed by valid one",
+      "result": "Status 401",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.010516",
+      "details": {
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}"
+      }
+    },
+    {
+      "id": 88,
+      "category": "double_auth",
+      "name": "Double auth: Bearer + Basic",
+      "description": "Bearer token header followed by valid Basic header",
+      "result": "Status 401",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.014514",
+      "details": {
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}"
+      }
+    },
+    {
+      "id": 89,
+      "category": "double_auth",
+      "name": "Malformed Basic auth",
+      "description": "Authorization: Basic with non-base64 value",
+      "result": "Status 400, blocked, body={\"error\":400,\"message\":\"Bad Request\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.014514",
+      "details": {
+        "status": 400,
+        "body_preview": "{\"error\":400,\"message\":\"Bad Request\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 90,
+      "category": "double_auth",
+      "name": "Digest auth scheme",
+      "description": "Authorization: Digest with fabricated values",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.014514",
+      "details": {
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 91,
+      "category": "misc_bypass",
+      "name": "Absolute URI in request line",
+      "description": "GET http://[REDACTED-INTERNAL-IP]/rest/system/resource (absolute URI)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.026508",
+      "details": {
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 92,
+      "category": "misc_bypass",
+      "name": "CONNECT tunnel attempt",
+      "description": "CONNECT [REDACTED-INTERNAL-IP]:80",
+      "result": "Status 503",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.034504",
+      "details": {
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n"
+      }
+    },
+    {
+      "id": 93,
+      "category": "misc_bypass",
+      "name": "Tab in request line",
+      "description": "GET with tab between path and HTTP version",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.042500",
+      "details": {
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 94,
+      "category": "misc_bypass",
+      "name": "Overlong UTF-8 slash (0xC0 0xAF)",
+      "description": "Path with overlong UTF-8 encoding of '/'",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.046498",
+      "details": {
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 95,
+      "category": "misc_bypass",
+      "name": "Fullwidth Unicode path",
+      "description": "GET /\uff52\uff45\uff53\uff54/system/resource (Unicode normalization attempt)",
+      "result": "Status 404, blocked, body=<!doctype html> <html lang=en> <title>Error 404 : Not Found</title> <h1>Error 404 : Not Found</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.050496",
+      "details": {
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 96,
+      "category": "misc_bypass",
+      "name": "Null byte in path",
+      "description": "GET /rest/system\\x00/resource (null byte truncation)",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.054494",
+      "details": {
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false
+      }
+    },
+    {
+      "id": 97,
+      "category": "misc_bypass",
+      "name": "Long query string padding (2KB)",
+      "description": "GET with 2KB query string padding",
+      "result": "Status 401, blocked, body={\"error\":401,\"message\":\"Unauthorized\"}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.058492",
+      "details": {
+        "status": 401,
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}",
+        "auth_bypass": false,
+        "query_length": 2048
+      }
+    },
+    {
+      "id": 98,
+      "category": "misc_bypass",
+      "name": "Many leading slashes (20x)",
+      "description": "GET ////////////////////rest/system/resource... without auth",
+      "result": "Status 404, blocked, body=<!doctype html> <html lang=en> <title>Error 404 : Not Found</title> <h1>Error 404 : Not Found</h1> ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.058492",
+      "details": {
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "auth_bypass": false,
+        "path": "////////////////////rest/system/resource"
+      }
+    },
+    {
+      "id": 99,
+      "category": "misc_bypass",
+      "name": "No-auth access: /webfig/",
+      "description": "GET /webfig/ without auth",
+      "result": "Status 200, size=22450b",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.070486",
+      "details": {
+        "path": "/webfig/",
+        "status": 200,
+        "content_length": 22450,
+        "content_type": "text/html",
+        "body_preview": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>"
+      }
+    },
+    {
+      "id": 100,
+      "category": "misc_bypass",
+      "name": "No-auth access: /webfig/#/",
+      "description": "GET /webfig/#/ without auth",
+      "result": "Status 200, size=22450b",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.074484",
+      "details": {
+        "path": "/webfig/#/",
+        "status": 200,
+        "content_length": 22450,
+        "content_type": "text/html",
+        "body_preview": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>"
+      }
+    },
+    {
+      "id": 101,
+      "category": "misc_bypass",
+      "name": "No-auth access: /graphs/",
+      "description": "GET /graphs/ without auth",
+      "result": "Status 200, size=230b",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:11:21.086478",
+      "details": {
+        "path": "/graphs/",
+        "status": 200,
+        "content_length": 230,
+        "content_type": "text/html",
+        "body_preview": "<!doctype html>\n<html lang=en>\n<link rel=icon href=/favicon.png>\n<link rel=icon href=/favicon.svg>\n<title>Graphing | MikroTik | RouterOS</title>\n<link rel=stylesheet href=/graph.css>\n\n<h1>Traffic and system resource graphing</h1>\n"
+      }
+    }
+  ],
+  "findings": []
+}

@@ -1,0 +1,5 @@
+220 ProFTPD Server (Debian) [::ffff:127.0.0.1]
+530 Please login with USER and PASS
+503-Bad sequence of commands
+503 Bad sequence of commands
+221 Goodbye.

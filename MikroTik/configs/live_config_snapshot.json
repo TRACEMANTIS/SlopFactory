@@ -1,0 +1,114 @@
+{
+  "system_identity": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "system_resource": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "ip_service": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "user_list": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "ip_firewall_filter": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "ip_firewall_nat": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "system_ntp_client": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "snmp_community": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "tool_mac_server": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "ip_dns": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "system_logging": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "ip_neighbor_discovery": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "system_package": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  },
+  "interface": {
+    "error": 400,
+    "data": {
+      "detail": "no such command or directory (rest)",
+      "error": 400,
+      "message": "Bad Request"
+    }
+  }
+}

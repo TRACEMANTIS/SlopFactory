@@ -1,0 +1,4496 @@
+{
+  "phase": "webfig_auth",
+  "pulled_at": "2026-02-15T22:07:22.711409",
+  "log_entry_count": 342,
+  "log_entries": [
+    {
+      ".id": "*0",
+      "extra-info": "",
+      "message": "router was rebooted without proper shutdown",
+      "time": "2026-02-16 02:45:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*1",
+      "extra-info": "",
+      "message": "lo link up",
+      "time": "2026-02-16 02:45:13",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*2",
+      "extra-info": "",
+      "message": "ether1 link up (speed 1G, full duplex)",
+      "time": "2026-02-16 02:45:16",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*3",
+      "extra-info": "",
+      "message": "dhcp-client on ether1 got IP address [REDACTED-INTERNAL-IP]",
+      "time": "2026-02-16 02:45:19",
+      "topics": "dhcp,info"
+    },
+    {
+      ".id": "*4",
+      "extra-info": "app=local duser=admin outcome=success ",
+      "message": "user admin logged in via local",
+      "time": "2026-02-16 02:45:30",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:46:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*6",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-16 02:46:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*7",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:48:22",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8",
+      "extra-info": "",
+      "message": "user admin changed by api:admin@::/action:0 (/user set admin)",
+      "time": "2026-02-16 02:48:26",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*9",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:48:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*A",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-16 02:48:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*B",
+      "extra-info": "",
+      "message": "user testfull added by api:admin@:: (*2 = /user add group=full name=testfull)",
+      "time": "2026-02-16 02:48:38",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*C",
+      "extra-info": "",
+      "message": "user testread added by api:admin@:: (*3 = /user add group=read name=testread)",
+      "time": "2026-02-16 02:48:38",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*D",
+      "extra-info": "",
+      "message": "user testwrite added by api:admin@:: (*4 = /user add group=write name=testwrite)",
+      "time": "2026-02-16 02:48:38",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*E",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:49:16",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*F",
+      "extra-info": "",
+      "message": "bandwidth-server changed by ssh-cmd:admin@[REDACTED-INTERNAL-IP] (/tool bandwidth-server set authenticate=no enabled=yes)",
+      "time": "2026-02-16 02:49:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*10",
+      "extra-info": "",
+      "message": "changed snmp settings by ssh-cmd:admin@[REDACTED-INTERNAL-IP] (/snmp set enabled=yes)",
+      "time": "2026-02-16 02:49:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*11",
+      "extra-info": "",
+      "message": "item changed by ssh-cmd:admin@[REDACTED-INTERNAL-IP]/action:1 (/snmp community set [ find ] read-access=yes write-access=no)",
+      "time": "2026-02-16 02:49:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*12",
+      "extra-info": "",
+      "message": "generated CA certificate: test-cert",
+      "time": "2026-02-16 02:49:16",
+      "topics": "certificate,info"
+    },
+    {
+      ".id": "*13",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:49:17",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*14",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:49:22",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*15",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:49:58",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*16",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:50:04",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*17",
+      "extra-info": "",
+      "message": "ip service changed by ssh-cmd:admin@[REDACTED-INTERNAL-IP]/action:2 (/ip service set www-ssl certificate=test-cert disabled=no)",
+      "time": "2026-02-16 02:50:04",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*18",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:50:04",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*19",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-16 02:50:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*1A",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-16 02:50:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*1B",
+      "extra-info": "app=rest-api duser=testfull outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testfull logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:50:18",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*1C",
+      "extra-info": "app=api duser=testfull outcome=success ",
+      "message": "user testfull logged in via api",
+      "time": "2026-02-16 02:50:18",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*1D",
+      "extra-info": "app=rest-api duser=testread outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testread logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:50:18",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*1E",
+      "extra-info": "app=api duser=testread outcome=success ",
+      "message": "user testread logged in via api",
+      "time": "2026-02-16 02:50:18",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*1F",
+      "extra-info": "app=rest-api duser=testwrite outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testwrite logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:50:18",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*20",
+      "extra-info": "app=api duser=testwrite outcome=success ",
+      "message": "user testwrite logged in via api",
+      "time": "2026-02-16 02:50:18",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*21",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:50:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*22",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:50:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*23",
+      "extra-info": "app=api duser=testwrite outcome=success ",
+      "message": "user testwrite logged out via api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*24",
+      "extra-info": "app=api duser=testread outcome=success ",
+      "message": "user testread logged out via api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*25",
+      "extra-info": "app=api duser=testfull outcome=success ",
+      "message": "user testfull logged out via api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*26",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged out via api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*27",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged out via api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*28",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*29",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*2A",
+      "extra-info": "app=rest-api duser=testfull outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testfull logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*2B",
+      "extra-info": "app=rest-api duser=testread outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testread logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*2C",
+      "extra-info": "app=rest-api duser=testwrite outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testwrite logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*2D",
+      "extra-info": "app=ftp duser=anonymous outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user anonymous from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 02:58:36",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*2E",
+      "extra-info": "app=ftp duser=anonymous outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user anonymous from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 02:58:36",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*2F",
+      "extra-info": "app=ftp duser=X:) outcome=failure ",
+      "message": "login failure for user X:) via ftp",
+      "time": "2026-02-16 03:01:33",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*30",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:05:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*31",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-16 03:05:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*32",
+      "extra-info": "app=ftp duser=anonymous outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user anonymous from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 03:05:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*33",
+      "extra-info": "app=ftp duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 03:05:43",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*34",
+      "extra-info": "app=ftp duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 03:05:43",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*35",
+      "extra-info": "app=ssh duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 03:06:26",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*36",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-16 03:06:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*37",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-16 03:06:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*38",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:38",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*39",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-16 03:08:38",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*3A",
+      "extra-info": "app=rest-api duser=testfull outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testfull logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*3B",
+      "extra-info": "app=api duser=testfull outcome=success ",
+      "message": "user testfull logged in via api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*3C",
+      "extra-info": "app=rest-api duser=testread outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testread logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*3D",
+      "extra-info": "app=api duser=testread outcome=success ",
+      "message": "user testread logged in via api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*3E",
+      "extra-info": "app=rest-api duser=testwrite outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testwrite logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*3F",
+      "extra-info": "app=api duser=testwrite outcome=success ",
+      "message": "user testwrite logged in via api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*40",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*41",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*42",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*43",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*44",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*45",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*46",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*47",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*48",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*49",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4A",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4B",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4C",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4D",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4E",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4F",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*50",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*51",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*52",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*53",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*54",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*55",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*56",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*57",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*58",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*59",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:00",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5A",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:00",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5B",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:00",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5C",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:00",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5D",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5E",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5F",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*60",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*61",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*62",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*63",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*64",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*65",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*66",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*67",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*68",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*69",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6A",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6B",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6C",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6D",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6E",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6F",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*70",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*71",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*72",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*73",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:08",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*74",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:09",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*75",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:09",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*76",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:09",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*77",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:09",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*78",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:09",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*79",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:09",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7A",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7B",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7C",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7D",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7E",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7F",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*80",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*81",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*82",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*83",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*84",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*85",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*86",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*87",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*88",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*89",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8A",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8B",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8C",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8D",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8E",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8F",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*90",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*91",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*92",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*93",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*94",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*95",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*96",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*97",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*98",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*99",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9A",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9B",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9C",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9D",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9E",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9F",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A0",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A1",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A2",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A3",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A4",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A5",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:19",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A6",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:21",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A7",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:23",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A8",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:25",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A9",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:27",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*AA",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:29",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*AB",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:31",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*AC",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:33",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*AD",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:35",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*AE",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:37",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*AF",
+      "extra-info": "app=rest-api duser=admin\u0000extra outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\u0000extra from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:39",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B0",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B1",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B2",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B3",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B4",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B5",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B6",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B7",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B8",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B9",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*BA",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*BB",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*BC",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*BD",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*BE",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*BF",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C0",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C1",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C2",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C3",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C4",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C5",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C6",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C7",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C8",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C9",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*CA",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*CB",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*CC",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*CD",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*CE",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*CF",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D0",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D1",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D2",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D3",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D4",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D5",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D6",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D7",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D8",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D9",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*DA",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*DB",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*DC",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*DD",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*DE",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*DF",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E0",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E1",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E2",
+      "extra-info": "app=rest-api duser=nonexist_0 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_0 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E3",
+      "extra-info": "app=rest-api duser=nonexist_1 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_1 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E4",
+      "extra-info": "app=rest-api duser=nonexist_2 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_2 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E5",
+      "extra-info": "app=rest-api duser=nonexist_3 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_3 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E6",
+      "extra-info": "app=rest-api duser=nonexist_4 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_4 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E7",
+      "extra-info": "app=rest-api duser=nonexist_5 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_5 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E8",
+      "extra-info": "app=rest-api duser=nonexist_6 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_6 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E9",
+      "extra-info": "app=rest-api duser=nonexist_7 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_7 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*EA",
+      "extra-info": "app=rest-api duser=nonexist_8 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_8 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*EB",
+      "extra-info": "app=rest-api duser=nonexist_9 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_9 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*EC",
+      "extra-info": "app=rest-api duser=nonexist_10 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_10 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*ED",
+      "extra-info": "app=rest-api duser=nonexist_11 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_11 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*EE",
+      "extra-info": "app=rest-api duser=nonexist_12 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_12 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*EF",
+      "extra-info": "app=rest-api duser=nonexist_13 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_13 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F0",
+      "extra-info": "app=rest-api duser=nonexist_14 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_14 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F1",
+      "extra-info": "app=rest-api duser=nonexist_15 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_15 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F2",
+      "extra-info": "app=rest-api duser=nonexist_16 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_16 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F3",
+      "extra-info": "app=rest-api duser=nonexist_17 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_17 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F4",
+      "extra-info": "app=rest-api duser=nonexist_18 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_18 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F5",
+      "extra-info": "app=rest-api duser=nonexist_19 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_19 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F6",
+      "extra-info": "app=rest-api duser=nonexist_20 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_20 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F7",
+      "extra-info": "app=rest-api duser=nonexist_21 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_21 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F8",
+      "extra-info": "app=rest-api duser=nonexist_22 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_22 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F9",
+      "extra-info": "app=rest-api duser=nonexist_23 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_23 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*FA",
+      "extra-info": "app=rest-api duser=nonexist_24 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_24 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*FB",
+      "extra-info": "app=rest-api duser=nonexist_25 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_25 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*FC",
+      "extra-info": "app=rest-api duser=nonexist_26 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_26 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*FD",
+      "extra-info": "app=rest-api duser=nonexist_27 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_27 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*FE",
+      "extra-info": "app=rest-api duser=nonexist_28 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_28 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*FF",
+      "extra-info": "app=rest-api duser=nonexist_29 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_29 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*100",
+      "extra-info": "app=rest-api duser=nonexist_30 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_30 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*101",
+      "extra-info": "app=rest-api duser=nonexist_31 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_31 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*102",
+      "extra-info": "app=rest-api duser=nonexist_32 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_32 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*103",
+      "extra-info": "app=rest-api duser=nonexist_33 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_33 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*104",
+      "extra-info": "app=rest-api duser=nonexist_34 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_34 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*105",
+      "extra-info": "app=rest-api duser=nonexist_35 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_35 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*106",
+      "extra-info": "app=rest-api duser=nonexist_36 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_36 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*107",
+      "extra-info": "app=rest-api duser=nonexist_37 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_37 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*108",
+      "extra-info": "app=rest-api duser=nonexist_38 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_38 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*109",
+      "extra-info": "app=rest-api duser=nonexist_39 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_39 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*10A",
+      "extra-info": "app=rest-api duser=nonexist_40 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_40 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*10B",
+      "extra-info": "app=rest-api duser=nonexist_41 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_41 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*10C",
+      "extra-info": "app=rest-api duser=nonexist_42 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_42 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*10D",
+      "extra-info": "app=rest-api duser=nonexist_43 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_43 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*10E",
+      "extra-info": "app=rest-api duser=nonexist_44 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_44 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*10F",
+      "extra-info": "app=rest-api duser=nonexist_45 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_45 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*110",
+      "extra-info": "app=rest-api duser=nonexist_46 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_46 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*111",
+      "extra-info": "app=rest-api duser=nonexist_47 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_47 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*112",
+      "extra-info": "app=rest-api duser=nonexist_48 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_48 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*113",
+      "extra-info": "app=rest-api duser=nonexist_49 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_49 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*114",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*115",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*116",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*117",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*118",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*119",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*11A",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*11B",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*11C",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*11D",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*11E",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*11F",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*120",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*121",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*122",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*123",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*124",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*125",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*126",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*127",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*128",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*129",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*12A",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*12B",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*12C",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*12D",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*12E",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*12F",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*130",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*131",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*132",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*133",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*134",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*135",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*136",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*137",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*138",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*139",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13A",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13B",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13C",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13D",
+      "extra-info": "app=rest-api duser=nonexistent_user_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_user_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13E",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:51",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13F",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*140",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*141",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*142",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*143",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*144",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*145",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*146",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*147",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*148",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*149",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14A",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14B",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14C",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14D",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14E",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14F",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:54",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*150",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:54",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*151",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:54",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*152",
+      "extra-info": "",
+      "message": "user testfull changed by api:admin@::/action:3 (/user set testfull)",
+      "time": "2026-02-16 03:09:57",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*153",
+      "extra-info": "app=rest-api duser=testfull outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testfull logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:58",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*154",
+      "extra-info": "app=api duser=testfull outcome=success ",
+      "message": "user testfull logged in via api",
+      "time": "2026-02-16 03:09:58",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*155",
+      "extra-info": "",
+      "message": "user testfull changed by api:admin@::/action:4 (/user set testfull)",
+      "time": "2026-02-16 03:09:58",
+      "topics": "system,info"
+    }
+  ],
+  "categories": {
+    "system,error,critical": 279,
+    "interface,info": 2,
+    "dhcp,info": 1,
+    "system,info,account": 49,
+    "system,info": 10,
+    "certificate,info": 1
+  },
+  "interesting_entries": [
+    {
+      ".id": "*7",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:48:22",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F",
+      "extra-info": "",
+      "message": "bandwidth-server changed by ssh-cmd:admin@[REDACTED-INTERNAL-IP] (/tool bandwidth-server set authenticate=no enabled=yes)",
+      "time": "2026-02-16 02:49:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*2D",
+      "extra-info": "app=ftp duser=anonymous outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user anonymous from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 02:58:36",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*2E",
+      "extra-info": "app=ftp duser=anonymous outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user anonymous from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 02:58:36",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*2F",
+      "extra-info": "app=ftp duser=X:) outcome=failure ",
+      "message": "login failure for user X:) via ftp",
+      "time": "2026-02-16 03:01:33",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*32",
+      "extra-info": "app=ftp duser=anonymous outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user anonymous from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 03:05:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*35",
+      "extra-info": "app=ssh duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 03:06:26",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*40",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*41",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*42",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*43",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*44",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*45",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*46",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*47",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*48",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*49",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4A",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4B",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4C",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4D",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4E",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*4F",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*50",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*51",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*52",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*53",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*54",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*55",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*56",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*57",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*58",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:08:59",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*59",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:00",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5A",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:00",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5B",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:00",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5C",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:00",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5D",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5E",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*5F",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*60",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*61",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*62",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*63",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*64",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*65",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*66",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:02",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*67",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*68",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*69",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6A",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6B",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6C",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6D",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6E",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*6F",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*70",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:03",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*73",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:08",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*74",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:09",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*75",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:09",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*76",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:09",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*77",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:09",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*78",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:09",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*79",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:09",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7A",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7B",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7C",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7D",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7E",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7F",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*80",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*81",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:10",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*82",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*83",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*84",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*85",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*86",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*87",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*88",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*89",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8A",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:11",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8B",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8C",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8D",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8E",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8F",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*90",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*91",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*92",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*93",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:12",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*94",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*95",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*96",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*97",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*98",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*99",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9A",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9B",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9C",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9D",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9E",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9F",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A0",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A1",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A2",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A3",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A4",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:14",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A5",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:19",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A6",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:21",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A7",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:23",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A8",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:25",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A9",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:27",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*AA",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:29",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*AB",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:31",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*AC",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:33",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*AD",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:35",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*AE",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:37",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*AF",
+      "extra-info": "app=rest-api duser=admin\u0000extra outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\u0000extra from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:39",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B0",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B1",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B2",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B3",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B4",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B5",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B6",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B7",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B8",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B9",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*BA",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*BB",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*BC",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*BD",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*BE",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:40",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*BF",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C0",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C1",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C2",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C3",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C4",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C5",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C6",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C7",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C8",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*C9",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*CA",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:41",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*CB",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*CC",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*CD",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*CE",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*CF",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D0",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D1",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D2",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D3",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D4",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D5",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D6",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D7",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D8",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*D9",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*DA",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*DB",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*DC",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*DD",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*DE",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*DF",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E0",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E1",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E2",
+      "extra-info": "app=rest-api duser=nonexist_0 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_0 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E3",
+      "extra-info": "app=rest-api duser=nonexist_1 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_1 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E4",
+      "extra-info": "app=rest-api duser=nonexist_2 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_2 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E5",
+      "extra-info": "app=rest-api duser=nonexist_3 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_3 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E6",
+      "extra-info": "app=rest-api duser=nonexist_4 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_4 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E7",
+      "extra-info": "app=rest-api duser=nonexist_5 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_5 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E8",
+      "extra-info": "app=rest-api duser=nonexist_6 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_6 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*E9",
+      "extra-info": "app=rest-api duser=nonexist_7 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_7 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*EA",
+      "extra-info": "app=rest-api duser=nonexist_8 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_8 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*EB",
+      "extra-info": "app=rest-api duser=nonexist_9 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_9 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:43",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*EC",
+      "extra-info": "app=rest-api duser=nonexist_10 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_10 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*ED",
+      "extra-info": "app=rest-api duser=nonexist_11 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_11 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*EE",
+      "extra-info": "app=rest-api duser=nonexist_12 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_12 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*EF",
+      "extra-info": "app=rest-api duser=nonexist_13 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_13 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F0",
+      "extra-info": "app=rest-api duser=nonexist_14 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_14 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F1",
+      "extra-info": "app=rest-api duser=nonexist_15 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_15 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F2",
+      "extra-info": "app=rest-api duser=nonexist_16 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_16 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F3",
+      "extra-info": "app=rest-api duser=nonexist_17 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_17 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F4",
+      "extra-info": "app=rest-api duser=nonexist_18 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_18 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F5",
+      "extra-info": "app=rest-api duser=nonexist_19 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_19 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F6",
+      "extra-info": "app=rest-api duser=nonexist_20 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_20 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:44",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F7",
+      "extra-info": "app=rest-api duser=nonexist_21 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_21 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F8",
+      "extra-info": "app=rest-api duser=nonexist_22 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_22 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*F9",
+      "extra-info": "app=rest-api duser=nonexist_23 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_23 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*FA",
+      "extra-info": "app=rest-api duser=nonexist_24 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_24 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*FB",
+      "extra-info": "app=rest-api duser=nonexist_25 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_25 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*FC",
+      "extra-info": "app=rest-api duser=nonexist_26 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_26 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*FD",
+      "extra-info": "app=rest-api duser=nonexist_27 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_27 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*FE",
+      "extra-info": "app=rest-api duser=nonexist_28 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_28 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*FF",
+      "extra-info": "app=rest-api duser=nonexist_29 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_29 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*100",
+      "extra-info": "app=rest-api duser=nonexist_30 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_30 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*101",
+      "extra-info": "app=rest-api duser=nonexist_31 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_31 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*102",
+      "extra-info": "app=rest-api duser=nonexist_32 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_32 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*103",
+      "extra-info": "app=rest-api duser=nonexist_33 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_33 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*104",
+      "extra-info": "app=rest-api duser=nonexist_34 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_34 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:45",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*105",
+      "extra-info": "app=rest-api duser=nonexist_35 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_35 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*106",
+      "extra-info": "app=rest-api duser=nonexist_36 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_36 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*107",
+      "extra-info": "app=rest-api duser=nonexist_37 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_37 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*108",
+      "extra-info": "app=rest-api duser=nonexist_38 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_38 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*109",
+      "extra-info": "app=rest-api duser=nonexist_39 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_39 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*10A",
+      "extra-info": "app=rest-api duser=nonexist_40 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_40 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*10B",
+      "extra-info": "app=rest-api duser=nonexist_41 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_41 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*10C",
+      "extra-info": "app=rest-api duser=nonexist_42 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_42 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*10D",
+      "extra-info": "app=rest-api duser=nonexist_43 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_43 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*10E",
+      "extra-info": "app=rest-api duser=nonexist_44 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_44 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*10F",
+      "extra-info": "app=rest-api duser=nonexist_45 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_45 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*110",
+      "extra-info": "app=rest-api duser=nonexist_46 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_46 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*111",
+      "extra-info": "app=rest-api duser=nonexist_47 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_47 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*112",
+      "extra-info": "app=rest-api duser=nonexist_48 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_48 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*113",
+      "extra-info": "app=rest-api duser=nonexist_49 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexist_49 from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*114",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*115",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:46",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*116",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*117",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*118",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*119",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*11A",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*11B",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*11C",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*11D",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*11E",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*11F",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*120",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*121",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*122",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*123",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:47",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*124",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*125",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*126",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*127",
+      "extra-info": "app=rest-api duser=testfull outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testfull from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*128",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*129",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*12A",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*12B",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*12C",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*12D",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*12E",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*12F",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*130",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*131",
+      "extra-info": "app=rest-api duser=testread outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testread from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:48",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*132",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*133",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*134",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*135",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*136",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*137",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*138",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*139",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13A",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13B",
+      "extra-info": "app=rest-api duser=testwrite outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user testwrite from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13C",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13D",
+      "extra-info": "app=rest-api duser=nonexistent_user_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_user_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:49",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13E",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:51",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13F",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*140",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*141",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*142",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*143",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*144",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*145",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*146",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:52",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*147",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*148",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*149",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14A",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14B",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14C",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14D",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14E",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:53",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14F",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:54",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*150",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:54",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*151",
+      "extra-info": "app=rest-api duser=nonexistent_xyz outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent_xyz from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:09:54",
+      "topics": "system,error,critical"
+    }
+  ],
+  "interesting_count": 279,
+  "system_resource": {
+    "architecture-name": "x86_64",
+    "board-name": "CHR innotek GmbH VirtualBox",
+    "build-time": "2026-01-30 09:17:54",
+    "cpu": "AMD",
+    "cpu-count": "1",
+    "cpu-frequency": "4391",
+    "cpu-load": "0",
+    "factory-software": "7.1",
+    "free-hdd-space": "73256960",
+    "free-memory": "838967296",
+    "platform": "MikroTik",
+    "total-hdd-space": "93564928",
+    "total-memory": "1073741824",
+    "uptime": "24m59s",
+    "version": "7.20.8 (long-term)",
+    "write-sect-since-reboot": "1704",
+    "write-sect-total": "1704"
+  },
+  "active_users": [
+    {
+      ".id": "*1",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "console",
+      "when": "2026-02-16 02:45:30"
+    },
+    {
+      ".id": "*11",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 03:05:26"
+    },
+    {
+      ".id": "*12",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 03:05:26"
+    },
+    {
+      ".id": "*15",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 03:08:38"
+    },
+    {
+      ".id": "*16",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 03:08:38"
+    },
+    {
+      ".id": "*17",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "testfull",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 03:08:58"
+    },
+    {
+      ".id": "*18",
+      "group": "full",
+      "name": "testfull",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 03:08:58"
+    },
+    {
+      ".id": "*19",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "read",
+      "name": "testread",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 03:08:58"
+    },
+    {
+      ".id": "*1A",
+      "group": "read",
+      "name": "testread",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 03:08:58"
+    },
+    {
+      ".id": "*1B",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "write",
+      "name": "testwrite",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 03:08:58"
+    },
+    {
+      ".id": "*1C",
+      "group": "write",
+      "name": "testwrite",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 03:08:58"
+    },
+    {
+      ".id": "*1E",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "testfull",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 03:09:58"
+    },
+    {
+      ".id": "*1F",
+      "group": "full",
+      "name": "testfull",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 03:09:58"
+    }
+  ]
+}

@@ -1,0 +1,1085 @@
+{
+  "metadata": {
+    "script": "attack_ssh_ftp_telnet.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 6,
+    "start_time": "2026-02-16T00:00:55.873373",
+    "end_time": "2026-02-16T00:03:45.804365",
+    "total_tests": 89,
+    "anomalies": 9,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "42m29s",
+    "router_log_count": 6,
+    "router_interesting_events": 0,
+    "final_health": {
+      "alive": true,
+      "uptime": "2m44s",
+      "cpu_load": "0",
+      "free_memory": "842571776",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "ssh",
+      "name": "SSH banner grab",
+      "description": "Capture SSH identification string for version disclosure",
+      "result": "Banner: SSH-2.0-ROSSSH",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:56.109255",
+      "details": {
+        "banner": "SSH-2.0-ROSSSH"
+      }
+    },
+    {
+      "id": 2,
+      "category": "ssh",
+      "name": "SSH algorithm enumeration (paramiko)",
+      "description": "Enumerate KEX, cipher, MAC, and key type algorithms via paramiko",
+      "result": "KEX: 10, Ciphers: 9, MACs: 8, Keys: 8",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:56.165227",
+      "details": {
+        "algorithms": {
+          "kex": [
+            "curve25519-sha256@libssh.org",
+            "ecdh-sha2-nistp256",
+            "ecdh-sha2-nistp384",
+            "ecdh-sha2-nistp521",
+            "diffie-hellman-group16-sha512",
+            "diffie-hellman-group-exchange-sha256",
+            "diffie-hellman-group14-sha256",
+            "diffie-hellman-group-exchange-sha1",
+            "diffie-hellman-group14-sha1",
+            "diffie-hellman-group1-sha1"
+          ],
+          "ciphers": [
+            "aes128-ctr",
+            "aes192-ctr",
+            "aes256-ctr",
+            "aes128-cbc",
+            "aes192-cbc",
+            "aes256-cbc",
+            "3des-cbc",
+            "aes128-gcm@openssh.com",
+            "aes256-gcm@openssh.com"
+          ],
+          "digests": [
+            "hmac-sha2-256",
+            "hmac-sha2-512",
+            "hmac-sha2-256-etm@openssh.com",
+            "hmac-sha2-512-etm@openssh.com",
+            "hmac-sha1",
+            "hmac-md5",
+            "hmac-sha1-96",
+            "hmac-md5-96"
+          ],
+          "key_types": [
+            "ssh-ed25519",
+            "ecdsa-sha2-nistp256",
+            "ecdsa-sha2-nistp384",
+            "ecdsa-sha2-nistp521",
+            "rsa-sha2-512",
+            "rsa-sha2-256",
+            "ssh-rsa",
+            "ssh-dss"
+          ]
+        }
+      }
+    },
+    {
+      "id": 3,
+      "category": "ssh",
+      "name": "Weak SSH ciphers",
+      "description": "Identify deprecated or weak cipher algorithms",
+      "result": "Weak ciphers: ['3des-cbc']",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:56.165227",
+      "details": {
+        "weak_ciphers": [
+          "3des-cbc"
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "category": "ssh",
+      "name": "Weak SSH key exchange",
+      "description": "Identify deprecated key exchange algorithms",
+      "result": "Weak KEX: ['diffie-hellman-group16-sha512', 'diffie-hellman-group14-sha256', 'diffie-hellman-group-exchange-sha1', 'diffie-hellman-group14-sha1', 'diffie-hellman-group1-sha1']",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:56.165227",
+      "details": {
+        "weak_kex": [
+          "diffie-hellman-group16-sha512",
+          "diffie-hellman-group14-sha256",
+          "diffie-hellman-group-exchange-sha1",
+          "diffie-hellman-group14-sha1",
+          "diffie-hellman-group1-sha1"
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "category": "ssh",
+      "name": "Weak SSH MACs",
+      "description": "Identify deprecated MAC algorithms",
+      "result": "Weak MACs: ['hmac-md5', 'hmac-sha1-96', 'hmac-md5-96']",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:56.165227",
+      "details": {
+        "weak_macs": [
+          "hmac-md5",
+          "hmac-sha1-96",
+          "hmac-md5-96"
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "category": "ssh",
+      "name": "SSH password auth",
+      "description": "Test password authentication with valid credentials",
+      "result": "Password authentication succeeded",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:56.217201",
+      "details": {
+        "method": "password",
+        "user": "admin"
+      }
+    },
+    {
+      "id": 7,
+      "category": "ssh",
+      "name": "SSH keyboard-interactive auth",
+      "description": "Test keyboard-interactive authentication",
+      "result": "Keyboard-interactive auth rejected or not supported",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:56.269175"
+    },
+    {
+      "id": 8,
+      "category": "ssh",
+      "name": "SSH publickey auth (random key)",
+      "description": "Test publickey authentication with unauthorized key",
+      "result": "Publickey auth rejected (expected)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:56.337141"
+    },
+    {
+      "id": 9,
+      "category": "ssh",
+      "name": "SSH auth methods summary",
+      "description": "Summary of tested authentication methods",
+      "result": "Methods tested: {'password': True, 'keyboard-interactive': False, 'publickey': False}",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:56.337141",
+      "details": {
+        "methods": {
+          "password": true,
+          "keyboard-interactive": false,
+          "publickey": false
+        }
+      }
+    },
+    {
+      "id": 10,
+      "category": "ssh",
+      "name": "SSH allowed auth types",
+      "description": "Enumerate allowed authentication types via auth_none",
+      "result": "Allowed: ['publickey', 'password']",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:56.393113",
+      "details": {
+        "allowed_types": [
+          "publickey",
+          "password"
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "category": "ssh",
+      "name": "SSH brute force lockout test",
+      "description": "Send 10 failed logins then attempt valid login",
+      "result": "Failures: 10, locked_out: False, valid_after: True",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.016801",
+      "details": {
+        "failed_attempts": 10,
+        "locked_out": false,
+        "valid_login_after": true
+      }
+    },
+    {
+      "id": 12,
+      "category": "ssh",
+      "name": "No SSH brute force protection",
+      "description": "SSH does not lock out after 10 failed attempts",
+      "result": "No lockout detected \u2014 brute force possible",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:57.016801"
+    },
+    {
+      "id": 13,
+      "category": "ssh",
+      "name": "CLI injection: Semicolon command separator",
+      "description": "Post-auth command injection attempt: Semicolon command separator",
+      "result": "Output:   name: MikroTik\r\n\r\n, Err: ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.076771",
+      "details": {
+        "command": "/system identity print ; /system reboot",
+        "stdout": "  name: MikroTik\r\n\r\n",
+        "stderr": "",
+        "payload": "; /system reboot"
+      }
+    },
+    {
+      "id": 14,
+      "category": "ssh",
+      "name": "CLI injection: Pipe command chaining",
+      "description": "CLI injection test",
+      "result": "Error: Invalid packet blocking",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.148735"
+    },
+    {
+      "id": 15,
+      "category": "ssh",
+      "name": "CLI injection: Command substitution $()",
+      "description": "CLI injection test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.156731"
+    },
+    {
+      "id": 16,
+      "category": "ssh",
+      "name": "CLI injection: Backtick command substitution",
+      "description": "CLI injection test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.156731"
+    },
+    {
+      "id": 17,
+      "category": "ssh",
+      "name": "CLI injection: Newline injection",
+      "description": "CLI injection test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.156731"
+    },
+    {
+      "id": 18,
+      "category": "ssh",
+      "name": "CLI injection: Ampersand background",
+      "description": "CLI injection test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.156731"
+    },
+    {
+      "id": 19,
+      "category": "ssh",
+      "name": "CLI injection: OR operator injection",
+      "description": "CLI injection test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.156731"
+    },
+    {
+      "id": 20,
+      "category": "ssh",
+      "name": "CLI injection: AND operator injection",
+      "description": "CLI injection test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.160729"
+    },
+    {
+      "id": 21,
+      "category": "ssh",
+      "name": "CLI injection: RouterOS command chain",
+      "description": "CLI injection test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.160729"
+    },
+    {
+      "id": 22,
+      "category": "ssh",
+      "name": "CLI injection: Path traversal in command",
+      "description": "CLI injection test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.160729"
+    },
+    {
+      "id": 23,
+      "category": "ssh",
+      "name": "Channel type: shell",
+      "description": "Channel request test",
+      "result": "Transport error: Unable to connect to [REDACTED-INTERNAL-IP]: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.160729"
+    },
+    {
+      "id": 24,
+      "category": "ssh",
+      "name": "Channel type: exec",
+      "description": "Channel request test",
+      "result": "Transport error: Unable to connect to [REDACTED-INTERNAL-IP]: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.164727"
+    },
+    {
+      "id": 25,
+      "category": "ssh",
+      "name": "Channel type: subsystem",
+      "description": "Channel request test",
+      "result": "Transport error: Unable to connect to [REDACTED-INTERNAL-IP]: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.164727"
+    },
+    {
+      "id": 26,
+      "category": "ssh",
+      "name": "Channel type: direct-tcpip",
+      "description": "Channel request test",
+      "result": "Transport error: Unable to connect to [REDACTED-INTERNAL-IP]: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.164727"
+    },
+    {
+      "id": 27,
+      "category": "ssh",
+      "name": "Channel type: forwarded-tcpip",
+      "description": "Channel request test",
+      "result": "Transport error: Unable to connect to [REDACTED-INTERNAL-IP]: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.164727"
+    },
+    {
+      "id": 28,
+      "category": "ssh",
+      "name": "Channel type: x11",
+      "description": "Channel request test",
+      "result": "Transport error: Unable to connect to [REDACTED-INTERNAL-IP]: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.164727"
+    },
+    {
+      "id": 29,
+      "category": "ssh",
+      "name": "Channel type: auth-agent@openssh.com",
+      "description": "Channel request test",
+      "result": "Transport error: Unable to connect to [REDACTED-INTERNAL-IP]: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.164727"
+    },
+    {
+      "id": 30,
+      "category": "ssh",
+      "name": "Channel type: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "description": "Channel request test",
+      "result": "Transport error: Unable to connect to [REDACTED-INTERNAL-IP]: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.168725"
+    },
+    {
+      "id": 31,
+      "category": "ssh",
+      "name": "Subsystem: sftp",
+      "description": "Subsystem test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.168725"
+    },
+    {
+      "id": 32,
+      "category": "ssh",
+      "name": "Subsystem: netconf",
+      "description": "Subsystem test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.168725"
+    },
+    {
+      "id": 33,
+      "category": "ssh",
+      "name": "Subsystem: shell",
+      "description": "Subsystem test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.168725"
+    },
+    {
+      "id": 34,
+      "category": "ssh",
+      "name": "Subsystem: admin",
+      "description": "Subsystem test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.168725"
+    },
+    {
+      "id": 35,
+      "category": "ssh",
+      "name": "Subsystem: mikrotik",
+      "description": "Subsystem test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.168725"
+    },
+    {
+      "id": 36,
+      "category": "ssh",
+      "name": "Subsystem: routeros",
+      "description": "Subsystem test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.168725"
+    },
+    {
+      "id": 37,
+      "category": "ssh",
+      "name": "Exec: Export full configuration",
+      "description": "SSH exec test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.172723"
+    },
+    {
+      "id": 38,
+      "category": "ssh",
+      "name": "Exec: Enumerate users with details",
+      "description": "SSH exec test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.172723"
+    },
+    {
+      "id": 39,
+      "category": "ssh",
+      "name": "Exec: List IP addresses",
+      "description": "SSH exec test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.172723"
+    },
+    {
+      "id": 40,
+      "category": "ssh",
+      "name": "Exec: List packages",
+      "description": "SSH exec test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.172723"
+    },
+    {
+      "id": 41,
+      "category": "ssh",
+      "name": "Exec: List files",
+      "description": "SSH exec test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.172723"
+    },
+    {
+      "id": 42,
+      "category": "ssh",
+      "name": "Exec: View logging config",
+      "description": "SSH exec test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.172723"
+    },
+    {
+      "id": 43,
+      "category": "ssh",
+      "name": "Exec: List enabled services",
+      "description": "SSH exec test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.176721"
+    },
+    {
+      "id": 44,
+      "category": "ssh",
+      "name": "Exec: View change history",
+      "description": "SSH exec test",
+      "result": "Error: [Errno None] Unable to connect to port 22 on [REDACTED-INTERNAL-IP]",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.176721"
+    },
+    {
+      "id": 45,
+      "category": "ftp",
+      "name": "FTP banner/anonymous",
+      "description": "FTP connection and anonymous login",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.180719"
+    },
+    {
+      "id": 46,
+      "category": "ftp",
+      "name": "FTP authenticated session",
+      "description": "Authenticated FTP connection",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.180719"
+    },
+    {
+      "id": 47,
+      "category": "telnet",
+      "name": "Telnet banner capture",
+      "description": "Telnet banner analysis",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.180719"
+    },
+    {
+      "id": 48,
+      "category": "telnet",
+      "name": "Cleartext credential capture",
+      "description": "Telnet cleartext test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.184717"
+    },
+    {
+      "id": 49,
+      "category": "telnet",
+      "name": "Escape injection: Screen clear (CSI 2J)",
+      "description": "Escape sequence test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.184717"
+    },
+    {
+      "id": 50,
+      "category": "telnet",
+      "name": "Escape injection: ANSI color injection",
+      "description": "Escape sequence test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.184717"
+    },
+    {
+      "id": 51,
+      "category": "telnet",
+      "name": "Escape injection: Title bar injection (OSC)",
+      "description": "Escape sequence test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.184717"
+    },
+    {
+      "id": 52,
+      "category": "telnet",
+      "name": "Escape injection: Hide cursor (CSI ?25l)",
+      "description": "Escape sequence test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.188715"
+    },
+    {
+      "id": 53,
+      "category": "telnet",
+      "name": "Escape injection: Cursor position query (CSI 6n)",
+      "description": "Escape sequence test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.188715"
+    },
+    {
+      "id": 54,
+      "category": "telnet",
+      "name": "Escape injection: Clear scrollback buffer",
+      "description": "Escape sequence test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.188715"
+    },
+    {
+      "id": 55,
+      "category": "telnet",
+      "name": "Escape injection: Save/restore cursor injection",
+      "description": "Escape sequence test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.188715"
+    },
+    {
+      "id": 56,
+      "category": "telnet",
+      "name": "Escape injection: Alternate screen buffer switch",
+      "description": "Escape sequence test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.188715"
+    },
+    {
+      "id": 57,
+      "category": "telnet",
+      "name": "Escape injection: Carriage return prompt spoofing",
+      "description": "Escape sequence test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.188715"
+    },
+    {
+      "id": 58,
+      "category": "telnet",
+      "name": "Escape injection: DCS query (potential info leak)",
+      "description": "Escape sequence test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.188715"
+    },
+    {
+      "id": 59,
+      "category": "telnet",
+      "name": "Long username (256B)",
+      "description": "Buffer overflow test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:57.192713"
+    },
+    {
+      "id": 60,
+      "category": "telnet",
+      "name": "Long password (256B)",
+      "description": "Buffer overflow test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.192713"
+    },
+    {
+      "id": 61,
+      "category": "telnet",
+      "name": "Long username (512B)",
+      "description": "Buffer overflow test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:57.192713"
+    },
+    {
+      "id": 62,
+      "category": "telnet",
+      "name": "Long password (512B)",
+      "description": "Buffer overflow test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.192713"
+    },
+    {
+      "id": 63,
+      "category": "telnet",
+      "name": "Long username (1024B)",
+      "description": "Buffer overflow test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:57.196711"
+    },
+    {
+      "id": 64,
+      "category": "telnet",
+      "name": "Long password (1024B)",
+      "description": "Buffer overflow test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.196711"
+    },
+    {
+      "id": 65,
+      "category": "telnet",
+      "name": "Long username (4096B)",
+      "description": "Buffer overflow test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:00:57.196711"
+    },
+    {
+      "id": 66,
+      "category": "telnet",
+      "name": "Long password (4096B)",
+      "description": "Buffer overflow test",
+      "result": "Error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:00:57.196711"
+    },
+    {
+      "id": 67,
+      "category": "telnet",
+      "name": "Login injection: Semicolon injection",
+      "description": "Injection in telnet login: Semicolon injection",
+      "result": "Response: admin;reboot\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:14.200205",
+      "details": {
+        "payload": "'admin;reboot'",
+        "description": "Semicolon injection",
+        "response": "admin;reboot\r\n"
+      }
+    },
+    {
+      "id": 68,
+      "category": "telnet",
+      "name": "Login injection: Null byte injection",
+      "description": "Injection in telnet login: Null byte injection",
+      "result": "Response: admin^@root\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:15.211699",
+      "details": {
+        "payload": "'admin\\x00root'",
+        "description": "Null byte injection",
+        "response": "admin^@root\r\n"
+      }
+    },
+    {
+      "id": 69,
+      "category": "telnet",
+      "name": "Login injection: Newline injection",
+      "description": "Injection in telnet login: Newline injection",
+      "result": "Response: admin\r\nPASS root\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:16.219195",
+      "details": {
+        "payload": "'admin\\nPASS root'",
+        "description": "Newline injection",
+        "response": "admin\r\nPASS root\r\n"
+      }
+    },
+    {
+      "id": 70,
+      "category": "telnet",
+      "name": "Login injection: Command substitution",
+      "description": "Injection in telnet login: Command substitution",
+      "result": "Response: admin$(reboot)\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:17.226691",
+      "details": {
+        "payload": "'admin$(reboot)'",
+        "description": "Command substitution",
+        "response": "admin$(reboot)\r\n"
+      }
+    },
+    {
+      "id": 71,
+      "category": "telnet",
+      "name": "Login injection: Backtick injection",
+      "description": "Injection in telnet login: Backtick injection",
+      "result": "Response: admin`id`\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:18.234187",
+      "details": {
+        "payload": "'admin`id`'",
+        "description": "Backtick injection",
+        "response": "admin`id`\r\n"
+      }
+    },
+    {
+      "id": 72,
+      "category": "telnet",
+      "name": "Login injection: Pipe injection",
+      "description": "Injection in telnet login: Pipe injection",
+      "result": "Response: admin|reboot\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:19.245681",
+      "details": {
+        "payload": "'admin|reboot'",
+        "description": "Pipe injection",
+        "response": "admin|reboot\r\n"
+      }
+    },
+    {
+      "id": 73,
+      "category": "telnet",
+      "name": "Login injection: SQL-style injection",
+      "description": "Injection in telnet login: SQL-style injection",
+      "result": "Response: ' OR '1'='1\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:20.253177",
+      "details": {
+        "payload": "\"' OR '1'='1\"",
+        "description": "SQL-style injection",
+        "response": "' OR '1'='1\r\n"
+      }
+    },
+    {
+      "id": 74,
+      "category": "telnet",
+      "name": "Login injection: Double CRLF injection",
+      "description": "Injection in telnet login: Double CRLF injection",
+      "result": "Response: admin\r\n\r\n/system reboot\r\n",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:21.260673",
+      "details": {
+        "payload": "'admin\\r\\n\\r\\n/system reboot'",
+        "description": "Double CRLF injection",
+        "response": "admin\r\n\r\n/system reboot\r\n"
+      }
+    },
+    {
+      "id": 75,
+      "category": "telnet",
+      "name": "IAC fuzz: Single IAC",
+      "description": "Send malformed IAC sequence: Single IAC",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:27.073765",
+      "details": {
+        "payload_hex": "ff",
+        "payload_size": 1,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 76,
+      "category": "telnet",
+      "name": "IAC fuzz: IAC IAC (escaped 0xFF)",
+      "description": "Send malformed IAC sequence: IAC IAC (escaped 0xFF)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:27.881361",
+      "details": {
+        "payload_hex": "ffff",
+        "payload_size": 2,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 77,
+      "category": "telnet",
+      "name": "IAC fuzz: IAC without option",
+      "description": "Send malformed IAC sequence: IAC without option",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:33.690455",
+      "details": {
+        "payload_hex": "fffb",
+        "payload_size": 2,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 78,
+      "category": "telnet",
+      "name": "IAC fuzz: IAC WILL all options",
+      "description": "Send malformed IAC sequence: IAC WILL all options",
+      "result": "Response: 780 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:34.498051",
+      "details": {
+        "payload_hex": "fffb00fffb01fffb02fffb03fffb04fffb05fffb06fffb07fffb08fffb09fffb0afffb0bfffb0cfffb0dfffb0efffb0ffffb10fffb11fffb12fffb13fffb14fffb15fffb16fffb17fffb18fffb19fffb1afffb1bfffb1cfffb1dfffb1efffb1ffffb20ff",
+        "payload_size": 768,
+        "response_size": 780,
+        "response_hex": "fffe00fffd01fffe02fffd03fffe04fffd05fffe06fffe07fffe08fffe09fffe0afffe0bfffe0cfffe0dfffe0efffe0ffffe10fffe11fffe12fffe13fffe14fffe15fffe16fffe17fffe19fffe1afffe1bfffe1cfffe1dfffe1efffd1ffffd21fffe22ff"
+      }
+    },
+    {
+      "id": 79,
+      "category": "telnet",
+      "name": "IAC fuzz: IAC DO all options",
+      "description": "Send malformed IAC sequence: IAC DO all options",
+      "result": "Response: 768 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:35.305647",
+      "details": {
+        "payload_hex": "fffd00fffd01fffd02fffd03fffd04fffd05fffd06fffd07fffd08fffd09fffd0afffd0bfffd0cfffd0dfffd0efffd0ffffd10fffd11fffd12fffd13fffd14fffd15fffd16fffd17fffd18fffd19fffd1afffd1bfffd1cfffd1dfffd1efffd1ffffd20ff",
+        "payload_size": 768,
+        "response_size": 768,
+        "response_hex": "fffc00fffb01fffc02fffb03fffc04fffb05fffc06fffc07fffc08fffc09fffc0afffc0bfffc0cfffc0dfffc0efffc0ffffc10fffc11fffc12fffc13fffc14fffc15fffc16fffc17fffb18fffc19fffc1afffc1bfffc1cfffc1dfffc1efffb1ffffc20ff"
+      }
+    },
+    {
+      "id": 80,
+      "category": "telnet",
+      "name": "IAC fuzz: IAC subneg unterminated",
+      "description": "Send malformed IAC sequence: IAC subneg unterminated",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:41.114741",
+      "details": {
+        "payload_hex": "fffa18004d494b524f54494b",
+        "payload_size": 12,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 81,
+      "category": "telnet",
+      "name": "IAC fuzz: IAC subneg with data",
+      "description": "Send malformed IAC sequence: IAC subneg with data",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:47.031781",
+      "details": {
+        "payload_hex": "fffa1800787465726d2d323536636f6c6f72fff0",
+        "payload_size": 20,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 82,
+      "category": "telnet",
+      "name": "IAC fuzz: Nested IAC in subneg",
+      "description": "Send malformed IAC sequence: Nested IAC in subneg",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:47.843375",
+      "details": {
+        "payload_hex": "fffa18fffa18fff0",
+        "payload_size": 8,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 83,
+      "category": "telnet",
+      "name": "IAC fuzz: IAC interrupt (IP)",
+      "description": "Send malformed IAC sequence: IAC interrupt (IP)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:48.650971",
+      "details": {
+        "payload_hex": "fff4",
+        "payload_size": 2,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 84,
+      "category": "telnet",
+      "name": "IAC fuzz: IAC break (BRK)",
+      "description": "Send malformed IAC sequence: IAC break (BRK)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:49.450571",
+      "details": {
+        "payload_hex": "fff3",
+        "payload_size": 2,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 85,
+      "category": "telnet",
+      "name": "IAC fuzz: IAC AYT (Are You There)",
+      "description": "Send malformed IAC sequence: IAC AYT (Are You There)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:50.250171",
+      "details": {
+        "payload_hex": "fff6",
+        "payload_size": 2,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 86,
+      "category": "telnet",
+      "name": "IAC fuzz: IAC abort output (AO)",
+      "description": "Send malformed IAC sequence: IAC abort output (AO)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:51.045773",
+      "details": {
+        "payload_hex": "fff5",
+        "payload_size": 2,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 87,
+      "category": "telnet",
+      "name": "IAC fuzz: 100x IAC NOP",
+      "description": "Send malformed IAC sequence: 100x IAC NOP",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:51.857367",
+      "details": {
+        "payload_hex": "fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1fff1",
+        "payload_size": 200,
+        "response_size": 0,
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 88,
+      "category": "telnet",
+      "name": "IAC fuzz: Rapid IAC mix",
+      "description": "Send malformed IAC sequence: Rapid IAC mix",
+      "result": "Response: 6 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:01:52.648971",
+      "details": {
+        "payload_hex": "fffb01fffd03fffe18fffc1ffffb01fffd03fffe18fffc1ffffb01fffd03fffe18fffc1ffffb01fffd03fffe18fffc1ffffb01fffd03fffe18fffc1ffffb01fffd03fffe18fffc1ffffb01fffd03fffe18fffc1ffffb01fffd03fffe18fffc1ffffb01ff",
+        "payload_size": 240,
+        "response_size": 6,
+        "response_hex": "fffd01fffb03"
+      }
+    },
+    {
+      "id": 89,
+      "category": "telnet",
+      "name": "Auth timing oracle",
+      "description": "Measure timing difference between valid/invalid usernames",
+      "result": "Valid user avg: 1.6ms, Invalid user avg: 0.8ms, Diff: 0.8ms",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:03:45.800367",
+      "details": {
+        "valid_user_times": [
+          0.0,
+          0.0,
+          0.0,
+          0.003997802734375,
+          0.0039980411529541016
+        ],
+        "invalid_user_times": [
+          0.0039980411529541016,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "avg_valid_ms": 1.6,
+        "avg_invalid_ms": 0.8,
+        "diff_ms": 0.8
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "LOW",
+      "title": "SSH weak cipher support",
+      "description": "SSH server supports weak ciphers: 3des-cbc",
+      "timestamp": "2026-02-16T00:00:56.165227",
+      "cwe": "CWE-327"
+    },
+    {
+      "id": 2,
+      "severity": "CRITICAL",
+      "title": "Telnet buffer overflow crash (4096B)",
+      "description": "Router crashed after 4096-byte input to telnet login",
+      "timestamp": "2026-02-16T00:00:57.200709",
+      "cwe": "CWE-120"
+    }
+  ]
+}

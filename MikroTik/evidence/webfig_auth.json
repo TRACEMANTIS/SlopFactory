@@ -1,0 +1,1744 @@
+{
+  "metadata": {
+    "script": "attack_webfig_auth.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 2,
+    "start_time": "2026-02-15T22:05:52.452561",
+    "end_time": "2026-02-15T22:07:22.683423",
+    "total_tests": 58,
+    "anomalies": 8,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "23m29s",
+    "router_log_count": 342,
+    "router_interesting_events": 279,
+    "final_health": {
+      "alive": true,
+      "uptime": "24m59s",
+      "cpu_load": "0",
+      "free_memory": "838967296",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "auth_mechanism",
+      "name": "REST API Basic Auth (HTTP)",
+      "description": "Test HTTP Basic Auth on REST API over plaintext HTTP",
+      "result": "Status 200, auth accepted=True",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:05:52.460557",
+      "details": {
+        "status": 200,
+        "auth_header_sent": "Basic",
+        "scheme": "http",
+        "cleartext": true
+      }
+    },
+    {
+      "id": 2,
+      "category": "auth_mechanism",
+      "name": "REST API Basic Auth (HTTPS)",
+      "description": "Test HTTP Basic Auth on REST API over TLS",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:05:52.520527",
+      "details": {
+        "status": 200,
+        "scheme": "https",
+        "cleartext": false
+      }
+    },
+    {
+      "id": 3,
+      "category": "auth_mechanism",
+      "name": "REST API no-auth challenge",
+      "description": "No-auth REST request",
+      "result": "Connection failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:05:52.524525"
+    },
+    {
+      "id": 4,
+      "category": "auth_mechanism",
+      "name": "WebFig root no-auth (HTTP)",
+      "description": "GET / without auth on HTTP",
+      "result": "Status 200, Location: ",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:05:52.528523",
+      "details": {
+        "status": 200,
+        "location": "",
+        "content_length": 1280,
+        "content_type": "text/html"
+      }
+    },
+    {
+      "id": 5,
+      "category": "auth_mechanism",
+      "name": "WebFig root no-auth (HTTPS)",
+      "description": "GET / without auth on HTTPS",
+      "result": "Status 200, Location: ",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:05:52.584495",
+      "details": {
+        "status": 200,
+        "location": "",
+        "content_length": 1280,
+        "content_type": "text/html"
+      }
+    },
+    {
+      "id": 6,
+      "category": "auth_mechanism",
+      "name": "WebFig login page analysis",
+      "description": "Analyze WebFig login page for auth mechanism indicators",
+      "result": "Login form=True, ECDH=False, Challenge=False, JS files=2",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:05:52.592491",
+      "details": {
+        "has_login_form": true,
+        "has_ecdh": false,
+        "has_challenge": false,
+        "js_files": [
+          "curve255-541e54a862be.js",
+          "master-61ed6e5ae60d.js"
+        ],
+        "page_size": 22450
+      }
+    },
+    {
+      "id": 7,
+      "category": "auth_mechanism",
+      "name": "jsproxy GET /jsproxy",
+      "description": "GET /jsproxy",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:05:52.596489"
+    },
+    {
+      "id": 8,
+      "category": "auth_mechanism",
+      "name": "jsproxy POST /jsproxy",
+      "description": "POST /jsproxy",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:02.667451"
+    },
+    {
+      "id": 9,
+      "category": "auth_mechanism",
+      "name": "jsproxy GET /jsproxy/",
+      "description": "GET /jsproxy/",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:02.671449"
+    },
+    {
+      "id": 10,
+      "category": "auth_mechanism",
+      "name": "jsproxy POST /jsproxy/",
+      "description": "POST /jsproxy/",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.678443"
+    },
+    {
+      "id": 11,
+      "category": "auth_mechanism",
+      "name": "jsproxy GET /jsproxy/login",
+      "description": "GET /jsproxy/login",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.682441"
+    },
+    {
+      "id": 12,
+      "category": "auth_mechanism",
+      "name": "jsproxy POST /jsproxy/login",
+      "description": "POST /jsproxy/login",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.682441"
+    },
+    {
+      "id": 13,
+      "category": "auth_mechanism",
+      "name": "jsproxy GET /jsproxy/authenticate",
+      "description": "GET /jsproxy/authenticate",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.690437"
+    },
+    {
+      "id": 14,
+      "category": "auth_mechanism",
+      "name": "jsproxy POST /jsproxy/authenticate",
+      "description": "POST /jsproxy/authenticate",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.698433"
+    },
+    {
+      "id": 15,
+      "category": "auth_mechanism",
+      "name": "WebFig session cookies (no auth)",
+      "description": "Check if WebFig sets session cookies before authentication",
+      "result": "Cookies set: []",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.706429",
+      "details": {
+        "cookies": {}
+      }
+    },
+    {
+      "id": 16,
+      "category": "auth_mechanism",
+      "name": "REST session cookies (after auth)",
+      "description": "Check if REST API sets session cookies after successful auth",
+      "result": "Cookies: []",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.710427",
+      "details": {
+        "cookies": {}
+      }
+    },
+    {
+      "id": 17,
+      "category": "auth_mechanism",
+      "name": "Cookie security attributes",
+      "description": "Inspect Set-Cookie headers for security attributes",
+      "result": "Raw cookies: 0, missing: []",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.714425",
+      "details": {
+        "set_cookie_headers": [],
+        "attributes": {
+          "httponly": false,
+          "secure": false,
+          "samesite": false,
+          "path": false,
+          "expires": false
+        },
+        "missing_attributes": []
+      }
+    },
+    {
+      "id": 18,
+      "category": "auth_mechanism",
+      "name": "HTTP-to-HTTPS redirect",
+      "description": "Check if HTTP WebFig redirects to HTTPS",
+      "result": "Redirect to HTTPS: False",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:06:12.722421",
+      "details": {
+        "status": 200,
+        "location": "",
+        "redirects": false
+      }
+    },
+    {
+      "id": 19,
+      "category": "auth_mechanism",
+      "name": "HSTS header",
+      "description": "Check for Strict-Transport-Security header on HTTPS",
+      "result": "HSTS: MISSING ()",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:06:12.778393",
+      "details": {
+        "hsts_header": "",
+        "present": false
+      }
+    },
+    {
+      "id": 20,
+      "category": "auth_mechanism",
+      "name": "Auth test: admin (full)",
+      "description": "Verify admin can authenticate via REST API",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.782391",
+      "details": {
+        "user": "admin",
+        "group": "full",
+        "status": 200,
+        "success": true
+      }
+    },
+    {
+      "id": 21,
+      "category": "auth_mechanism",
+      "name": "Auth test: testfull (full)",
+      "description": "Verify testfull can authenticate via REST API",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.790387",
+      "details": {
+        "user": "testfull",
+        "group": "full",
+        "status": 200,
+        "success": true
+      }
+    },
+    {
+      "id": 22,
+      "category": "auth_mechanism",
+      "name": "Auth test: testread (read)",
+      "description": "Verify testread can authenticate via REST API",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.798383",
+      "details": {
+        "user": "testread",
+        "group": "read",
+        "status": 200,
+        "success": true
+      }
+    },
+    {
+      "id": 23,
+      "category": "auth_mechanism",
+      "name": "Auth test: testwrite (write)",
+      "description": "Verify testwrite can authenticate via REST API",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.806379",
+      "details": {
+        "user": "testwrite",
+        "group": "write",
+        "status": 200,
+        "success": true
+      }
+    },
+    {
+      "id": 24,
+      "category": "auth_mechanism",
+      "name": "Wrong password: admin",
+      "description": "Wrong password for admin",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.806379"
+    },
+    {
+      "id": 25,
+      "category": "auth_mechanism",
+      "name": "Wrong password: testfull",
+      "description": "Wrong password for testfull",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.806379"
+    },
+    {
+      "id": 26,
+      "category": "auth_mechanism",
+      "name": "Wrong password: testread",
+      "description": "Wrong password for testread",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.806379"
+    },
+    {
+      "id": 27,
+      "category": "auth_mechanism",
+      "name": "Wrong password: testwrite",
+      "description": "Wrong password for testwrite",
+      "result": "Connection failed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:12.862351"
+    },
+    {
+      "id": 28,
+      "category": "bruteforce",
+      "name": "Rapid brute-force (25 attempts, admin)",
+      "description": "Send 25 rapid failed login attempts against admin account",
+      "result": "Lockout detected: False, lockout at attempt: None",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:06:14.861351",
+      "details": {
+        "attempts": 25,
+        "locked_out": false,
+        "lockout_threshold": null,
+        "status_codes": [
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error"
+        ],
+        "results": [
+          {
+            "attempt": 1,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 2,
+            "elapsed_ms": 11.99,
+            "status": "error"
+          },
+          {
+            "attempt": 3,
+            "elapsed_ms": 11.99,
+            "status": "error"
+          },
+          {
+            "attempt": 4,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 5,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 6,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 7,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 8,
+            "elapsed_ms": 15.99,
+            "status": "error"
+          },
+          {
+            "attempt": 9,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 10,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 11,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 12,
+            "elapsed_ms": 0.0,
+            "status": "error"
+          },
+          {
+            "attempt": 13,
+            "elapsed_ms": 11.99,
+            "status": "error"
+          },
+          {
+            "attempt": 14,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 15,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 16,
+            "elapsed_ms": 19.99,
+            "status": "error"
+          },
+          {
+            "attempt": 17,
+            "elapsed_ms": 4.0,
+            "status": "error"
+          },
+          {
+            "attempt": 18,
+            "elapsed_ms": 4.0,
+            "status": "error"
+          },
+          {
+            "attempt": 19,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 20,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 21,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 22,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 23,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 24,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          },
+          {
+            "attempt": 25,
+            "elapsed_ms": 8.0,
+            "status": "error"
+          }
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "category": "bruteforce",
+      "name": "Admin access after brute-force",
+      "description": "Verify admin can still log in after failed attempts",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:16.868347",
+      "details": {
+        "status": 200,
+        "accessible": true
+      }
+    },
+    {
+      "id": 30,
+      "category": "bruteforce",
+      "name": "Brute-force lockout (testread, 20 attempts)",
+      "description": "Send 20 failed logins against testread account",
+      "result": "Lockout: False",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:18.207677",
+      "details": {
+        "locked_out": false,
+        "statuses": [
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error",
+          "error"
+        ]
+      }
+    },
+    {
+      "id": 31,
+      "category": "bruteforce",
+      "name": "Lockout scope: per-user vs per-IP",
+      "description": "After brute-forcing admin, check if testfull is also locked",
+      "result": "testfull accessible: True (Status 200)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:18.215673",
+      "details": {
+        "testfull_status": 200,
+        "accessible": true,
+        "lockout_type": "per-user"
+      }
+    },
+    {
+      "id": 32,
+      "category": "bruteforce",
+      "name": "Lockout bypass: REST /system/resource",
+      "description": "After REST brute-force, try auth via REST /system/resource",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:18.215673",
+      "details": {
+        "endpoint": "REST /system/resource",
+        "status": 200,
+        "bypassed": true
+      }
+    },
+    {
+      "id": 33,
+      "category": "bruteforce",
+      "name": "Lockout bypass: WebFig /webfig/",
+      "description": "After REST brute-force, try auth via WebFig /webfig/",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:18.215673",
+      "details": {
+        "endpoint": "WebFig /webfig/",
+        "status": 200,
+        "bypassed": true
+      }
+    },
+    {
+      "id": 34,
+      "category": "bruteforce",
+      "name": "Lockout bypass: HTTPS REST",
+      "description": "After REST brute-force, try auth via HTTPS REST",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:18.275643",
+      "details": {
+        "endpoint": "HTTPS REST",
+        "status": 200,
+        "bypassed": true
+      }
+    },
+    {
+      "id": 35,
+      "category": "bruteforce",
+      "name": "Lockout bypass: SSH",
+      "description": "After REST brute-force, try SSH command execution",
+      "result": "RC=0, output=name: MikroTik",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:18.355603",
+      "details": {
+        "stdout": "name: MikroTik",
+        "stderr": "",
+        "returncode": 0,
+        "bypassed": true
+      }
+    },
+    {
+      "id": 36,
+      "category": "bruteforce",
+      "name": "Lockout duration",
+      "description": "Measure lockout duration",
+      "result": "N/A - no lockout was triggered",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:18.355603"
+    },
+    {
+      "id": 37,
+      "category": "bruteforce",
+      "name": "Lockout threshold detection (testwrite)",
+      "description": "Incrementally test failed logins to find exact lockout threshold",
+      "result": "Threshold: >50",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:29.266145",
+      "details": {
+        "threshold": null,
+        "attempts_made": 50,
+        "results": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 2,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 3,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 4,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 5,
+            "status": "error",
+            "elapsed_ms": 27.99
+          },
+          {
+            "attempt": 6,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 7,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 8,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 9,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 10,
+            "status": "error",
+            "elapsed_ms": 19.99
+          },
+          {
+            "attempt": 11,
+            "status": "error",
+            "elapsed_ms": 0.0
+          },
+          {
+            "attempt": 12,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 13,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 14,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 15,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 16,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 17,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 18,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 19,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 20,
+            "status": "error",
+            "elapsed_ms": 0.0
+          },
+          {
+            "attempt": 21,
+            "status": "error",
+            "elapsed_ms": 19.99
+          },
+          {
+            "attempt": 22,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 23,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 24,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 25,
+            "status": "error",
+            "elapsed_ms": 0.0
+          },
+          {
+            "attempt": 26,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 27,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 28,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 29,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 30,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 31,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 32,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 33,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 34,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 35,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 36,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 37,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 38,
+            "status": "error",
+            "elapsed_ms": 11.99
+          },
+          {
+            "attempt": 39,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 40,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 41,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 42,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 43,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 44,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 45,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 46,
+            "status": "error",
+            "elapsed_ms": 11.99
+          },
+          {
+            "attempt": 47,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 48,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 49,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 50,
+            "status": "error",
+            "elapsed_ms": 4.0
+          }
+        ]
+      }
+    },
+    {
+      "id": 38,
+      "category": "bruteforce",
+      "name": "Account recovery after threshold test",
+      "description": "Verify testwrite can log in after lockout test",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:34.283635",
+      "details": {
+        "status": 200,
+        "recovered": true
+      }
+    },
+    {
+      "id": 39,
+      "category": "bruteforce",
+      "name": "Brute-force with delays (evasion)",
+      "description": "10 failed attempts with 2s delay between each",
+      "result": "All 401: False (lockout evaded: False)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:54.373585",
+      "details": {
+        "all_401": false,
+        "results": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "elapsed_ms": 11.99
+          },
+          {
+            "attempt": 2,
+            "status": "error",
+            "elapsed_ms": 0.0
+          },
+          {
+            "attempt": 3,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 4,
+            "status": "error",
+            "elapsed_ms": 8.0
+          },
+          {
+            "attempt": 5,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 6,
+            "status": "error",
+            "elapsed_ms": 0.0
+          },
+          {
+            "attempt": 7,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 8,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 9,
+            "status": "error",
+            "elapsed_ms": 4.0
+          },
+          {
+            "attempt": 10,
+            "status": "error",
+            "elapsed_ms": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "id": 40,
+      "category": "timing_oracle",
+      "name": "Timing: valid user wrong password (50x)",
+      "description": "Measure response times for valid username with wrong password",
+      "result": "Mean: 7.44ms, Median: 4.00ms, StdDev: 7.49ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:06:57.931805",
+      "details": {
+        "count": 50,
+        "mean_ms": 7.44,
+        "median_ms": 4.0,
+        "stdev_ms": 7.49,
+        "min_ms": 0.0,
+        "max_ms": 51.97,
+        "all_times_ms": [
+          51.97,
+          8.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          8.0,
+          4.0,
+          8.0,
+          8.0,
+          15.99,
+          19.99,
+          4.0,
+          8.0,
+          4.0,
+          4.0,
+          4.0,
+          8.0,
+          4.0,
+          4.0,
+          0.0,
+          11.99,
+          8.0,
+          8.0,
+          4.0,
+          8.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          8.0,
+          8.0,
+          11.99,
+          8.0,
+          11.99,
+          15.99,
+          0.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          8.0,
+          4.0,
+          8.0,
+          8.0,
+          8.0,
+          4.0,
+          4.0,
+          4.0,
+          8.0
+        ],
+        "response_sizes": []
+      }
+    },
+    {
+      "id": 41,
+      "category": "timing_oracle",
+      "name": "Timing: invalid user wrong password (50x)",
+      "description": "Measure response times for invalid username with wrong password",
+      "result": "Mean: 6.08ms, Median: 4.00ms, StdDev: 4.59ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:01.322109",
+      "details": {
+        "count": 50,
+        "mean_ms": 6.08,
+        "median_ms": 4.0,
+        "stdev_ms": 4.59,
+        "min_ms": 0.0,
+        "max_ms": 19.99,
+        "all_times_ms": [
+          8.0,
+          8.0,
+          4.0,
+          8.0,
+          4.0,
+          4.0,
+          8.0,
+          19.99,
+          8.0,
+          8.0,
+          4.0,
+          8.0,
+          4.0,
+          4.0,
+          4.0,
+          0.0,
+          15.99,
+          4.0,
+          11.99,
+          0.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          19.99,
+          4.0,
+          4.0,
+          8.0,
+          4.0,
+          4.0,
+          0.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          8.0,
+          4.0,
+          11.99,
+          8.0,
+          19.99,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0
+        ],
+        "response_sizes": []
+      }
+    },
+    {
+      "id": 42,
+      "category": "timing_oracle",
+      "name": "Timing oracle analysis",
+      "description": "Compare valid vs invalid username response time distributions",
+      "result": "Delta: 1.36ms, Cohen's d: 0.22, Oracle detected: False",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:01.322109",
+      "details": {
+        "valid_user_mean_ms": 7.44,
+        "invalid_user_mean_ms": 6.08,
+        "delta_ms": 1.36,
+        "cohens_d": 0.22,
+        "oracle_detected": false
+      }
+    },
+    {
+      "id": 43,
+      "category": "timing_oracle",
+      "name": "Timing: admin (full) wrong pass (10x)",
+      "description": "Measure response times for admin with wrong password",
+      "result": "Mean: 7.60ms, StdDev: 3.98ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:02.093723",
+      "details": {
+        "user": "admin",
+        "group": "full",
+        "mean_ms": 7.6,
+        "times_ms": [
+          8.0,
+          8.0,
+          4.0,
+          15.99,
+          4.0,
+          11.99,
+          8.0,
+          4.0,
+          8.0,
+          4.0
+        ]
+      }
+    },
+    {
+      "id": 44,
+      "category": "timing_oracle",
+      "name": "Timing: testfull (full) wrong pass (10x)",
+      "description": "Measure response times for testfull with wrong password",
+      "result": "Mean: 6.40ms, StdDev: 2.80ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:02.665437",
+      "details": {
+        "user": "testfull",
+        "group": "full",
+        "mean_ms": 6.4,
+        "times_ms": [
+          4.0,
+          8.0,
+          8.0,
+          11.99,
+          4.0,
+          4.0,
+          4.0,
+          8.0,
+          4.0,
+          8.0
+        ]
+      }
+    },
+    {
+      "id": 45,
+      "category": "timing_oracle",
+      "name": "Timing: testread (read) wrong pass (10x)",
+      "description": "Measure response times for testread with wrong password",
+      "result": "Mean: 6.80ms, StdDev: 5.67ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:03.289125",
+      "details": {
+        "user": "testread",
+        "group": "read",
+        "mean_ms": 6.8,
+        "times_ms": [
+          8.0,
+          4.0,
+          11.99,
+          4.0,
+          4.0,
+          8.0,
+          19.99,
+          4.0,
+          4.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "id": 46,
+      "category": "timing_oracle",
+      "name": "Timing: testwrite (write) wrong pass (10x)",
+      "description": "Measure response times for testwrite with wrong password",
+      "result": "Mean: 23.99ms, StdDev: 48.27ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:04.192673",
+      "details": {
+        "user": "testwrite",
+        "group": "write",
+        "mean_ms": 23.99,
+        "times_ms": [
+          159.92,
+          8.0,
+          4.0,
+          4.0,
+          4.0,
+          27.99,
+          8.0,
+          8.0,
+          8.0,
+          8.0
+        ]
+      }
+    },
+    {
+      "id": 47,
+      "category": "timing_oracle",
+      "name": "Timing oracle: WebFig endpoint",
+      "description": "Compare timing on /webfig/ for valid vs invalid users",
+      "result": "Valid mean: 4.80ms, Invalid mean: 97.95ms, Delta: 93.15ms",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:06.363587",
+      "details": {
+        "valid_mean_ms": 4.8,
+        "invalid_mean_ms": 97.95,
+        "delta_ms": 93.15
+      }
+    },
+    {
+      "id": 48,
+      "category": "timing_oracle",
+      "name": "Timing oracle: HTTPS REST endpoint",
+      "description": "Compare timing on HTTPS REST for valid vs invalid users",
+      "result": "Valid mean: 58.37ms, Invalid mean: 59.97ms, Delta: 1.60ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:08.770383",
+      "details": {
+        "valid_mean_ms": 58.37,
+        "invalid_mean_ms": 59.97,
+        "delta_ms": 1.6
+      }
+    },
+    {
+      "id": 49,
+      "category": "session_mgmt",
+      "name": "Session token collection",
+      "description": "Collect session tokens for analysis",
+      "result": "No session cookies were set by WebFig",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:11.353091",
+      "details": {
+        "tokens_found": 0
+      }
+    },
+    {
+      "id": 50,
+      "category": "session_mgmt",
+      "name": "Session fixation test",
+      "description": "Set a known session ID before auth, check if accepted",
+      "result": "Fixation possible: True",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:11.429053",
+      "details": {
+        "pre_auth_cookie": "FIXATED_SESSION_12345",
+        "post_auth_cookies": {
+          "session": "FIXATED_SESSION_12345",
+          "PHPSESSID": "FIXATED_SESSION_12345",
+          "SID": "FIXATED_SESSION_12345",
+          "webfig_session": "FIXATED_SESSION_12345",
+          "username": "FIXATED_SESSION_12345",
+          "auth": "FIXATED_SESSION_12345"
+        },
+        "fixation_vulnerable": true
+      }
+    },
+    {
+      "id": 51,
+      "category": "session_mgmt",
+      "name": "Session reuse after logout",
+      "description": "Check if session remains valid after hitting logout endpoints",
+      "result": "Session reusable: False",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:11.513011",
+      "details": {
+        "pre_logout_cookies": {},
+        "reuse_status": "error",
+        "reusable": false
+      }
+    },
+    {
+      "id": 52,
+      "category": "session_mgmt",
+      "name": "Service configuration (session context)",
+      "description": "Retrieve IP service config for session timeout context",
+      "result": "Found 14 services",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:11.521007",
+      "details": {
+        "services": [
+          {
+            ".id": "*1",
+            "address": "",
+            "disabled": "false",
+            "dynamic": "false",
+            "invalid": "false",
+            "max-sessions": "20",
+            "name": "ftp",
+            "port": "21",
+            "proto": "tcp",
+            "vrf": "main"
+          },
+          {
+            ".id": "*4",
+            "address": "",
+            "disabled": "false",
+            "dynamic": "false",
+            "invalid": "false",
+            "max-sessions": "20",
+            "name": "ssh",
+            "port": "22",
+            "proto": "tcp",
+            "vrf": "main"
+          },
+          {
+            ".id": "*0",
+            "address": "",
+            "disabled": "false",
+            "dynamic": "false",
+            "invalid": "false",
+            "max-sessions": "20",
+            "name": "telnet",
+            "port": "23",
+            "proto": "tcp",
+            "vrf": "main"
+          },
+          {
+            ".id": "*E",
+            "disabled": "false",
+            "dynamic": "true",
+            "invalid": "false",
+            "name": "dhcpclient",
+            "port": "68",
+            "proto": "udp"
+          },
+          {
+            ".id": "*2",
+            "address": "",
+            "disabled": "false",
+            "dynamic": "false",
+            "invalid": "false",
+            "max-sessions": "20",
+            "name": "www",
+            "port": "80",
+            "proto": "tcp",
+            "vrf": "main"
+          },
+          {
+            ".id": "*19",
+            "connection": "true",
+            "disabled": "false",
+            "dynamic": "true",
+            "invalid": "false",
+            "local": "[REDACTED-INTERNAL-IP]",
+            "name": "www",
+            "port": "80",
+            "proto": "tcp",
+            "remote": "[REDACTED-INTERNAL-IP]:56542"
+          },
+          {
+            ".id": "*18",
+            "connection": "true",
+            "disabled": "false",
+            "dynamic": "true",
+            "invalid": "false",
+            "local": "[REDACTED-INTERNAL-IP]",
+            "name": "www",
+            "port": "80",
+            "proto": "tcp",
+            "remote": "[REDACTED-INTERNAL-IP]:56544"
+          },
+          {
+            ".id": "*10",
+            "disabled": "false",
+            "dynamic": "true",
+            "invalid": "false",
+            "name": "snmp",
+            "port": "161",
+            "proto": "udp"
+          },
+          {
+            ".id": "*6",
+            "address": "",
+            "certificate": "test-cert",
+            "disabled": "false",
+            "dynamic": "false",
+            "invalid": "false",
+            "max-sessions": "20",
+            "name": "www-ssl",
+            "port": "443",
+            "proto": "tcp",
+            "tls-version": "any",
+            "vrf": "main"
+          },
+          {
+            ".id": "*A",
+            "disabled": "false",
+            "dynamic": "true",
+            "invalid": "false",
+            "name": "btest",
+            "port": "2000",
+            "proto": "tcp"
+          },
+          {
+            ".id": "*D",
+            "disabled": "false",
+            "dynamic": "true",
+            "invalid": "false",
+            "name": "discover",
+            "port": "5678",
+            "proto": "udp"
+          },
+          {
+            ".id": "*8",
+            "address": "",
+            "disabled": "false",
+            "dynamic": "false",
+            "invalid": "false",
+            "max-sessions": "20",
+            "name": "winbox",
+            "port": "8291",
+            "proto": "tcp",
+            "vrf": "main"
+          },
+          {
+            ".id": "*7",
+            "address": "",
+            "disabled": "false",
+            "dynamic": "false",
+            "invalid": "false",
+            "max-sessions": "20",
+            "name": "api",
+            "port": "8728",
+            "proto": "tcp",
+            "vrf": "main"
+          },
+          {
+            ".id": "*9",
+            "address": "",
+            "certificate": "none",
+            "disabled": "false",
+            "dynamic": "false",
+            "invalid": "false",
+            "max-sessions": "20",
+            "name": "api-ssl",
+            "port": "8729",
+            "proto": "tcp",
+            "tls-version": "any",
+            "vrf": "main"
+          }
+        ]
+      }
+    },
+    {
+      "id": 53,
+      "category": "session_mgmt",
+      "name": "Concurrent session limit (10 sessions)",
+      "description": "Open 10 simultaneous authenticated sessions",
+      "result": "All succeeded: True",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:11.592971",
+      "details": {
+        "session_count": 10,
+        "all_ok": true,
+        "sessions": [
+          {
+            "session": 1,
+            "status": 200,
+            "cookies": {}
+          },
+          {
+            "session": 2,
+            "status": 200,
+            "cookies": {}
+          },
+          {
+            "session": 3,
+            "status": 200,
+            "cookies": {}
+          },
+          {
+            "session": 4,
+            "status": 200,
+            "cookies": {}
+          },
+          {
+            "session": 5,
+            "status": 200,
+            "cookies": {}
+          },
+          {
+            "session": 6,
+            "status": 200,
+            "cookies": {}
+          },
+          {
+            "session": 7,
+            "status": 200,
+            "cookies": {}
+          },
+          {
+            "session": 8,
+            "status": 200,
+            "cookies": {}
+          },
+          {
+            "session": 9,
+            "status": 200,
+            "cookies": {}
+          },
+          {
+            "session": 10,
+            "status": 200,
+            "cookies": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 54,
+      "category": "session_mgmt",
+      "name": "Active user sessions",
+      "description": "Query router for active user sessions",
+      "result": "Active sessions: 11",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:11.600967",
+      "details": {
+        "active_count": 11,
+        "sessions": [
+          {
+            ".id": "*1",
+            "group": "full",
+            "name": "admin",
+            "radius": "false",
+            "via": "console",
+            "when": "2026-02-16 02:45:30"
+          },
+          {
+            ".id": "*11",
+            "address": "[REDACTED-INTERNAL-IP]",
+            "group": "full",
+            "name": "admin",
+            "radius": "false",
+            "via": "rest-api",
+            "when": "2026-02-16 03:05:26"
+          },
+          {
+            ".id": "*12",
+            "group": "full",
+            "name": "admin",
+            "radius": "false",
+            "via": "api",
+            "when": "2026-02-16 03:05:26"
+          },
+          {
+            ".id": "*15",
+            "address": "[REDACTED-INTERNAL-IP]",
+            "group": "full",
+            "name": "admin",
+            "radius": "false",
+            "via": "rest-api",
+            "when": "2026-02-16 03:08:38"
+          },
+          {
+            ".id": "*16",
+            "group": "full",
+            "name": "admin",
+            "radius": "false",
+            "via": "api",
+            "when": "2026-02-16 03:08:38"
+          },
+          {
+            ".id": "*17",
+            "address": "[REDACTED-INTERNAL-IP]",
+            "group": "full",
+            "name": "testfull",
+            "radius": "false",
+            "via": "rest-api",
+            "when": "2026-02-16 03:08:58"
+          },
+          {
+            ".id": "*18",
+            "group": "full",
+            "name": "testfull",
+            "radius": "false",
+            "via": "api",
+            "when": "2026-02-16 03:08:58"
+          },
+          {
+            ".id": "*19",
+            "address": "[REDACTED-INTERNAL-IP]",
+            "group": "read",
+            "name": "testread",
+            "radius": "false",
+            "via": "rest-api",
+            "when": "2026-02-16 03:08:58"
+          },
+          {
+            ".id": "*1A",
+            "group": "read",
+            "name": "testread",
+            "radius": "false",
+            "via": "api",
+            "when": "2026-02-16 03:08:58"
+          },
+          {
+            ".id": "*1B",
+            "address": "[REDACTED-INTERNAL-IP]",
+            "group": "write",
+            "name": "testwrite",
+            "radius": "false",
+            "via": "rest-api",
+            "when": "2026-02-16 03:08:58"
+          },
+          {
+            ".id": "*1C",
+            "group": "write",
+            "name": "testwrite",
+            "radius": "false",
+            "via": "api",
+            "when": "2026-02-16 03:08:58"
+          }
+        ]
+      }
+    },
+    {
+      "id": 55,
+      "category": "session_mgmt",
+      "name": "Password change for session revocation test",
+      "description": "Change testfull password via admin REST API",
+      "result": "Status 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:11.616959",
+      "details": {
+        "status": 200,
+        "response": "{'.id': '*2', 'address': '', 'disabled': 'false', 'expired': 'false', 'group': 'full', 'inactivity-policy': 'none', 'inactivity-timeout': '10m', 'last-logged-in': '2026-02-16 02:50:18', 'name': 'testf"
+      }
+    },
+    {
+      "id": 56,
+      "category": "session_mgmt",
+      "name": "Session revocation on password change",
+      "description": "Check if old credentials still work after password change",
+      "result": "Old creds work: True, New creds work: True",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:12.628453",
+      "details": {
+        "old_credentials_valid": true,
+        "new_credentials_valid": true
+      }
+    },
+    {
+      "id": 57,
+      "category": "session_mgmt",
+      "name": "Password restoration (testfull)",
+      "description": "Restore testfull password to original value",
+      "result": "Restored",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:07:12.636449"
+    },
+    {
+      "id": 58,
+      "category": "session_mgmt",
+      "name": "CSRF token presence",
+      "description": "Check if WebFig pages include CSRF tokens",
+      "result": "CSRF indicator found: False, Hidden inputs: 0",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:07:12.640447",
+      "details": {
+        "csrf_found": false,
+        "hidden_inputs": []
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "HIGH",
+      "title": "REST API accepts Basic Auth over HTTP (cleartext)",
+      "description": "Credentials are transmitted as Base64-encoded cleartext over unencrypted HTTP. An attacker on the same network segment can capture credentials via passive sniffing.",
+      "timestamp": "2026-02-15T22:05:52.460557",
+      "evidence_refs": [
+        1
+      ],
+      "cwe": "CWE-319"
+    },
+    {
+      "id": 2,
+      "severity": "MEDIUM",
+      "title": "No account lockout after 25 failed login attempts",
+      "description": "The admin account was not locked after 25 rapid failed login attempts via REST API Basic Auth. This allows unlimited brute-force attacks.",
+      "timestamp": "2026-02-15T22:06:14.861351",
+      "cwe": "CWE-307"
+    },
+    {
+      "id": 3,
+      "severity": "HIGH",
+      "title": "Session fixation vulnerability",
+      "description": "The server accepts client-supplied session identifiers without regenerating them after authentication.",
+      "timestamp": "2026-02-15T22:07:11.429053",
+      "cwe": "CWE-384"
+    }
+  ]
+}

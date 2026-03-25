@@ -1,0 +1,22 @@
+=== mod_copy.so ===
+/usr/lib/proftpd/mod_copy.so:     file format elf64-x86-64
+0000000000000000      D  *UND*	0000000000000000  Base        pstrcat
+=== mod_sftp.so ===
+/usr/lib/proftpd/mod_sftp.so:     file format elf64-x86-64
+0000000000000000      D  *UND*	0000000000000000  Base        pr_regexp_exec
+0000000000000000      DF *UND*	0000000000000000 (GLIBC_2.2.5) execv
+0000000000000000      D  *UND*	0000000000000000  Base        pr_fs_fgetsize
+0000000000000000      D  *UND*	0000000000000000  Base        pr_fsio_gets
+0000000000000000      D  *UND*	0000000000000000  Base        pstrcat
+0000000000044c30 g    DF .text	00000000000001ba  Base        sftp_channel_register_exec_handler
+=== mod_tls.so ===
+/usr/lib/proftpd/mod_tls.so:     file format elf64-x86-64
+0000000000000000      DF *UND*	0000000000000000 (GLIBC_2.2.5) execv
+0000000000000000      D  *UND*	0000000000000000  Base        pstrcat
+=== mod_site_misc.so ===
+/usr/lib/proftpd/mod_site_misc.so:     file format elf64-x86-64
+0000000000000000      D  *UND*	0000000000000000  Base        pstrcat
+0000000000000000      D  *UND*	0000000000000000  Base        pr_regexp_exec
+=== mod_sql.so ===
+/usr/lib/proftpd/mod_sql.so:     file format elf64-x86-64
+0000000000000000      D  *UND*	0000000000000000  Base        pstrcat

@@ -1,0 +1,107 @@
+{
+  "attack": "anonymous_access_abuse",
+  "date": "2026-02-14T12:42:04.860883",
+  "tests": {
+    "anon_login": {
+      "success": true
+    },
+    "directory_traversal": {
+      "/srv/ftp": {
+        "label": "FTP root",
+        "entries": 0,
+        "sample": []
+      },
+      "/": {
+        "label": "Filesystem root",
+        "entries": 2,
+        "sample": [
+          "drwxrwxrwx   2 ftp      ftp          4096 Feb 14 01:21 incoming\r",
+          "-rw-r--r--   1 ftp      ftp           170 Dec 12  2024 welcome.msg"
+        ]
+      },
+      "/etc": {
+        "label": "/etc directory",
+        "entries": 0,
+        "sample": []
+      },
+      "/home": {
+        "label": "/home directory",
+        "entries": 0,
+        "sample": []
+      },
+      "/tmp": {
+        "label": "/tmp directory",
+        "entries": 0,
+        "sample": []
+      },
+      "../": {
+        "label": "Parent of FTP root",
+        "entries": 2,
+        "sample": [
+          "drwxrwxrwx   2 ftp      ftp          4096 Feb 14 01:21 incoming\r",
+          "-rw-r--r--   1 ftp      ftp           170 Dec 12  2024 welcome.msg"
+        ]
+      },
+      "../../": {
+        "label": "Two levels up",
+        "entries": 2,
+        "sample": [
+          "drwxrwxrwx   2 ftp      ftp          4096 Feb 14 01:21 incoming\r",
+          "-rw-r--r--   1 ftp      ftp           170 Dec 12  2024 welcome.msg"
+        ]
+      },
+      "../../../etc": {
+        "label": "/etc via traversal",
+        "entries": 0,
+        "sample": []
+      }
+    },
+    "anon_modcopy": {
+      "cpfr_response": "550 /etc/passwd: No such file or directory",
+      "cpto_response": "",
+      "success": false
+    },
+    "anon_symlink": {
+      "response": "550 /srv/ftp/shadow_link: Operation not permitted",
+      "success": false
+    },
+    "anon_upload": {
+      "success": true,
+      "response": "226 Transfer complete\r\n"
+    },
+    "anon_command_scope": {
+      "PWD": {
+        "code": "257",
+        "response": "257 \"/\" is the current directory"
+      },
+      "SYST": {
+        "code": "215",
+        "response": "215 UNIX Type: L8"
+      },
+      "SITE HELP": {
+        "code": "214",
+        "response": "214-The following SITE commands are recognized (* =>'s unimplemented)\r\n CPFR <sp> pathname\r\n CPTO <s"
+      },
+      "SITE CHMOD 777 /srv/ftp": {
+        "code": "550",
+        "response": "550 /srv/ftp: No such file or directory"
+      },
+      "SITE MKDIR /srv/ftp/newdir": {
+        "code": "550",
+        "response": "550 MKDIR /srv/ftp/newdir: Operation not permitted"
+      },
+      "SIZE /etc/passwd": {
+        "code": "550",
+        "response": "550 SIZE not allowed in ASCII mode"
+      },
+      "MDTM /etc/passwd": {
+        "code": "550",
+        "response": "550 /etc/passwd: No such file or directory"
+      },
+      "STAT /etc": {
+        "code": "450",
+        "response": "450 /etc: No such file or directory"
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "phase": "Phase 1: Reconnaissance & Static Analysis",
+  "target": "HAProxy v3.3.0",
+  "timestamp": "2026-02-18T22:55:00Z",
+  "summary": {
+    "total_tests": 215,
+    "anomalies": 12,
+    "findings": 22,
+    "binary_security": {
+      "NX": true, "PIE": true, "RELRO": "Partial",
+      "stack_canaries": false, "FORTIFY": "0/21 fortified",
+      "notes": "NO STACK CANARIES — any buffer overflow is potentially exploitable"
+    }
+  },
+  "source_audit_findings": {
+    "http1": {
+      "agent": "H1 parser audit",
+      "key_findings": [
+        {"severity": "MEDIUM", "id": "H1-2", "desc": "h1_do_not_close_on_insecure_t_e weakens TE+CL smuggling defense", "file": "h1.c:1139", "status": "by_design"},
+        {"severity": "MEDIUM", "id": "H1-4", "desc": "NUL bytes in header values accepted with accept-unsafe-violations", "file": "h1.c:877", "status": "by_design"},
+        {"severity": "MEDIUM", "id": "H1-5", "desc": "Non-token chars in header names accepted with accept-unsafe-violations", "file": "h1.c:800", "status": "by_design"},
+        {"severity": "LOW", "id": "H1-1", "desc": "Response status code uint16_t wrapping (no digit limit)", "file": "h1.c:702", "status": "present"},
+        {"severity": "INFO", "id": "H1-7", "desc": "CVE-2021-40346 FULLY PATCHED", "file": "http.c:802", "status": "patched"},
+        {"severity": "INFO", "id": "H1-8", "desc": "CVE-2023-40225 FULLY PATCHED", "file": "http.c:773", "status": "patched"},
+        {"severity": "INFO", "id": "H1-9", "desc": "CVE-2023-25725 FULLY PATCHED", "file": "h1.c:793", "status": "patched"}
+      ]
+    },
+    "http2": {
+      "agent": "H2/HPACK audit",
+      "key_findings": [
+        {"severity": "MEDIUM", "id": "H2-1", "desc": "HPACK get_var_int() shift overflow — UB when shift >= 32", "file": "hpack-dec.c:55-87", "status": "PRESENT"},
+        {"severity": "MEDIUM", "id": "H2-9", "desc": "VLA stack allocation + no stack canaries", "file": "mux_h2.c:5960", "status": "design_concern"},
+        {"severity": "LOW", "id": "H2-2", "desc": "CONTINUATION flood mitigation disabled by default (glitch threshold=0)", "file": "mux_h2.c:6229", "status": "patched_disabled"},
+        {"severity": "LOW", "id": "H2-3", "desc": "SETTINGS flood — no rate limiting", "file": "mux_h2.c:4384", "status": "not_patched"},
+        {"severity": "INFO", "id": "H2-8", "desc": "H2-to-H1 smuggling protections comprehensive", "file": "h2.c:320-537", "status": "patched"}
+      ]
+    },
+    "quic_h3": {
+      "agent": "QUIC/H3 audit — PRIMARY ZERO-DAY TARGET",
+      "key_findings": [
+        {"severity": "HIGH", "id": "Q-1", "desc": "QPACK varint shift overflow — UB when shift > 63 on uint64_t", "file": "qpack-dec.c:73-84", "status": "PRESENT"},
+        {"severity": "MEDIUM", "id": "Q-5", "desc": "CRYPTO frame offset+len overflow → underflow in partial overlap path — PRE-AUTH REACHABLE", "file": "quic_rx.c:679", "status": "PRESENT", "zero_day_candidate": true},
+        {"severity": "MEDIUM", "id": "Q-4", "desc": "STREAM frame offset+len overflow (missing RFC 9000 4.5 check)", "file": "quic_frame.c:556", "status": "PRESENT"},
+        {"severity": "MEDIUM", "id": "Q-10", "desc": "Transport param preferred address CID length check INVERTED", "file": "quic_tp.c:171", "status": "PRESENT"},
+        {"severity": "MEDIUM", "id": "Q-11", "desc": "CRYPTO frame missing offset+len > 2^62 check per RFC 9000", "file": "quic_frame.c:466", "status": "PRESENT"},
+        {"severity": "MEDIUM", "id": "Q-2", "desc": "ACK delay calculation integer overflow (uint64 << 20)", "file": "quic_rx.c:802", "status": "PRESENT"},
+        {"severity": "LOW", "id": "Q-6", "desc": "ACK frame gap+2 overflow bypasses validation", "file": "quic_rx.c:554", "status": "PRESENT"},
+        {"severity": "LOW", "id": "Q-13", "desc": "ACK delay uses wrong exponent direction (correctness bug)", "file": "quic_rx.c:802", "status": "PRESENT"}
+      ]
+    },
+    "lua_mjson_cli": {
+      "agent": "Lua/mjson/CLI audit",
+      "key_findings": [
+        {"severity": "HIGH", "id": "L-1", "desc": "No Lua sandbox — os.execute, io.open, debug.* all available", "file": "hlua.c:14062", "status": "by_design"},
+        {"severity": "MEDIUM", "id": "L-4", "desc": "Lua CLI commands have no access level enforcement", "file": "hlua.c:12163", "status": "PRESENT"},
+        {"severity": "MEDIUM", "id": "C-13", "desc": "show env exposes all environment variables at operator level", "file": "cli.c:1688", "status": "by_design"},
+        {"severity": "LOW", "id": "M-10", "desc": "mystrtod() reads past buffer bounds on non-null-terminated input", "file": "mjson.c:396", "status": "PRESENT"},
+        {"severity": "INFO", "id": "M-7", "desc": "CVE-2025-11230 PATCHED (MJSON_MAX_DEPTH=20)", "file": "mjson.h:46", "status": "patched"}
+      ]
+    }
+  },
+  "dynamic_findings": {
+    "bare_lf_injection": {
+      "severity": "MEDIUM",
+      "desc": "Bare LF (\\n without \\r) accepted as header line terminator — header injection vector",
+      "reproduction": "Send: b'GET / HTTP/1.1\\r\\nHost: 127.0.0.1:8180\\r\\nX-Test: before\\nInjected: evil\\r\\n\\r\\n'",
+      "impact": "Backend sees X-Test: before AND Injected: evil as separate headers",
+      "status": "confirmed"
+    },
+    "version_disclosure": {
+      "severity": "INFO",
+      "desc": "Full version info on CLI socket (show info), Prometheus metrics unauthenticated",
+      "status": "confirmed"
+    }
+  },
+  "zero_day_candidates": [
+    {
+      "id": "Q-5+Q-11",
+      "desc": "CRYPTO frame offset+len overflow → underflow in partial overlap handler",
+      "files": ["quic_frame.c:466", "quic_rx.c:679-693"],
+      "pre_auth": true,
+      "same_class_as": "CVE-2026-26081",
+      "attack_vector": "Send Initial QUIC packet with CRYPTO frame having offset near UINT64_MAX and small len",
+      "expected_impact": "Integer underflow in diff calculation → large len → memcpy OOB read/write",
+      "priority": "HIGHEST"
+    },
+    {
+      "id": "Q-1",
+      "desc": "QPACK/HPACK varint shift overflow → undefined behavior → potential garbage values used as indices/lengths",
+      "files": ["qpack-dec.c:73-84", "hpack-dec.c:55-87"],
+      "pre_auth": false,
+      "priority": "HIGH"
+    }
+  ]
+}

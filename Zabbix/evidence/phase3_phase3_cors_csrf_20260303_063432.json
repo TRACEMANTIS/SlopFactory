@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "collector": "phase3_cors_csrf",
+    "phase": "phase3",
+    "started": "2026-03-03T06:34:30.896826",
+    "target": "Zabbix 7.0.23 LTS",
+    "target_url": "http://localhost:9080",
+    "completed": "2026-03-03T06:34:32.869812",
+    "test_count": 9,
+    "finding_count": 0,
+    "anomaly_count": 0
+  },
+  "findings": [],
+  "anomalies": [],
+  "tests": [
+    {
+      "id": "CORS-https_//evil.com",
+      "description": "CORS preflight for origin https://evil.com",
+      "request": "OPTIONS /api_jsonrpc.php Origin: https://evil.com",
+      "response": "ACAO=*, ACAC=MISSING",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:34:30.896826"
+    },
+    {
+      "id": "CORS-https_//attacker.exa",
+      "description": "CORS preflight for origin https://attacker.example.",
+      "request": "OPTIONS /api_jsonrpc.php Origin: https://attacker.example.com",
+      "response": "ACAO=*, ACAC=MISSING",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:34:31.000878"
+    },
+    {
+      "id": "CORS-null",
+      "description": "CORS preflight for origin null",
+      "request": "OPTIONS /api_jsonrpc.php Origin: null",
+      "response": "ACAO=*, ACAC=MISSING",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:34:31.104930"
+    },
+    {
+      "id": "CORS-http_//localhost_908",
+      "description": "CORS preflight for origin http://localhost:9080",
+      "request": "OPTIONS /api_jsonrpc.php Origin: http://localhost:9080",
+      "response": "ACAO=*, ACAC=MISSING",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:34:31.208982"
+    },
+    {
+      "id": "COOKIE-SAMESITE",
+      "description": "zbx_session SameSite attribute",
+      "request": "POST /index.php login -> Set-Cookie analysis",
+      "response": "SameSite not explicitly set, Secure=False",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:34:31.453104"
+    },
+    {
+      "id": "CORS-CSRF-API",
+      "description": "Cross-origin API call with cookie auth",
+      "request": "POST /api_jsonrpc.php auth=null + zbx_session cookie + Origin: evil.com",
+      "response": "DENIED: {'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid params.', 'data': 'Not authorized.'",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:34:31.621188"
+    },
+    {
+      "id": "CSRF-Authentication_setti",
+      "description": "CSRF test: Authentication settings update (no CSRF)",
+      "request": "POST /zabbix.php?action=authentication.update without CSRF token",
+      "response": "HTTP 200",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:34:31.977366"
+    },
+    {
+      "id": "CSRF-User_profile_update_",
+      "description": "CSRF test: User profile update (no CSRF)",
+      "request": "POST /zabbix.php?action=userprofile.update without CSRF token",
+      "response": "HTTP 200",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:34:32.353554"
+    },
+    {
+      "id": "SESSION-ORACLE",
+      "description": "user.checkAuthentication as session validity oracle",
+      "request": "user.checkAuthentication(sessionid=<valid_id>) no auth",
+      "response": "Returns user profile: YES",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:34:32.817786"
+    }
+  ]
+}

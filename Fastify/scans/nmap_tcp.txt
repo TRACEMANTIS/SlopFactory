@@ -1,0 +1,78 @@
+# Nmap 7.95 scan initiated Wed Feb 18 15:18:24 2026 as: /usr/lib/nmap/nmap --privileged -sV -sC -p 3000 -oN /home/[REDACTED]/Desktop/[REDACTED-PATH]/Fastify/scans/nmap_tcp.txt 127.0.0.1
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00s latency).
+
+PORT     STATE SERVICE VERSION
+3000/tcp open  ppp?
+| fingerprint-strings: 
+|   DNSStatusRequestTCP, DNSVersionBindReqTCP, Help, NCP, RPCCheck: 
+|     HTTP/1.1 400 Bad Request
+|     Content-Length: 65
+|     Content-Type: application/json
+|     {"error":"Bad Request","message":"Client Error","statusCode":400}
+|   GetRequest: 
+|     HTTP/1.1 404 Not Found
+|     vary: Origin
+|     access-control-allow-credentials: true
+|     content-type: application/json; charset=utf-8
+|     x-request-id: 9861a528-bee4-4992-8f51-d6e385d339c3
+|     content-length: 72
+|     Date: Wed, 18 Feb 2026 20:18:35 GMT
+|     Connection: close
+|     {"message":"Route GET:/ not found","error":"Not Found","statusCode":404}
+|   HTTPOptions: 
+|     HTTP/1.1 400 Bad Request
+|     vary: Origin
+|     access-control-allow-credentials: true
+|     content-type: text/plain
+|     x-request-id: 4a754b29-3d17-44bd-81fd-ac6b85a82e9a
+|     content-length: 25
+|     Date: Wed, 18 Feb 2026 20:18:35 GMT
+|     Connection: close
+|     Invalid Preflight Request
+|   RTSPRequest: 
+|     HTTP/1.1 400 Bad Request
+|     vary: Origin
+|     access-control-allow-credentials: true
+|     content-type: text/plain
+|     x-request-id: f8c4f2d3-057a-4d5a-9cc7-8a423cfc16b8
+|     content-length: 25
+|     Date: Wed, 18 Feb 2026 20:18:35 GMT
+|     Connection: close
+|_    Invalid Preflight Request
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port3000-TCP:V=7.95%I=7%D=2/18%Time=69961E9B%P=x86_64-pc-linux-gnu%r(Ge
+SF:tRequest,147,"HTTP/1\.1\x20404\x20Not\x20Found\r\nvary:\x20Origin\r\nac
+SF:cess-control-allow-credentials:\x20true\r\ncontent-type:\x20application
+SF:/json;\x20charset=utf-8\r\nx-request-id:\x209861a528-bee4-4992-8f51-d6e
+SF:385d339c3\r\ncontent-length:\x2072\r\nDate:\x20Wed,\x2018\x20Feb\x20202
+SF:6\x2020:18:35\x20GMT\r\nConnection:\x20close\r\n\r\n{\"message\":\"Rout
+SF:e\x20GET:/\x20not\x20found\",\"error\":\"Not\x20Found\",\"statusCode\":
+SF:404}")%r(Help,91,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Length:
+SF:\x2065\r\nContent-Type:\x20application/json\r\n\r\n{\"error\":\"Bad\x20
+SF:Request\",\"message\":\"Client\x20Error\",\"statusCode\":400}")%r(NCP,9
+SF:1,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Length:\x2065\r\nConte
+SF:nt-Type:\x20application/json\r\n\r\n{\"error\":\"Bad\x20Request\",\"mes
+SF:sage\":\"Client\x20Error\",\"statusCode\":400}")%r(HTTPOptions,105,"HTT
+SF:P/1\.1\x20400\x20Bad\x20Request\r\nvary:\x20Origin\r\naccess-control-al
+SF:low-credentials:\x20true\r\ncontent-type:\x20text/plain\r\nx-request-id
+SF::\x204a754b29-3d17-44bd-81fd-ac6b85a82e9a\r\ncontent-length:\x2025\r\nD
+SF:ate:\x20Wed,\x2018\x20Feb\x202026\x2020:18:35\x20GMT\r\nConnection:\x20
+SF:close\r\n\r\nInvalid\x20Preflight\x20Request")%r(RTSPRequest,105,"HTTP/
+SF:1\.1\x20400\x20Bad\x20Request\r\nvary:\x20Origin\r\naccess-control-allo
+SF:w-credentials:\x20true\r\ncontent-type:\x20text/plain\r\nx-request-id:\
+SF:x20f8c4f2d3-057a-4d5a-9cc7-8a423cfc16b8\r\ncontent-length:\x2025\r\nDat
+SF:e:\x20Wed,\x2018\x20Feb\x202026\x2020:18:35\x20GMT\r\nConnection:\x20cl
+SF:ose\r\n\r\nInvalid\x20Preflight\x20Request")%r(RPCCheck,91,"HTTP/1\.1\x
+SF:20400\x20Bad\x20Request\r\nContent-Length:\x2065\r\nContent-Type:\x20ap
+SF:plication/json\r\n\r\n{\"error\":\"Bad\x20Request\",\"message\":\"Clien
+SF:t\x20Error\",\"statusCode\":400}")%r(DNSVersionBindReqTCP,91,"HTTP/1\.1
+SF:\x20400\x20Bad\x20Request\r\nContent-Length:\x2065\r\nContent-Type:\x20
+SF:application/json\r\n\r\n{\"error\":\"Bad\x20Request\",\"message\":\"Cli
+SF:ent\x20Error\",\"statusCode\":400}")%r(DNSStatusRequestTCP,91,"HTTP/1\.
+SF:1\x20400\x20Bad\x20Request\r\nContent-Length:\x2065\r\nContent-Type:\x2
+SF:0application/json\r\n\r\n{\"error\":\"Bad\x20Request\",\"message\":\"Cl
+SF:ient\x20Error\",\"statusCode\":400}");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Feb 18 15:18:35 2026 -- 1 IP address (1 host up) scanned in 11.55 seconds

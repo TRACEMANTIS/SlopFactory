@@ -1,0 +1,274 @@
+{
+  "phase": "Phase 3B: HTTP/2 Deep-Dive \u2014 H2-to-H1 Injection",
+  "target": "HAProxy v3.3.0",
+  "timestamp": 1771456264.7278483,
+  "summary": {
+    "total_tests": 20,
+    "anomalies": 1,
+    "findings": 5
+  },
+  "findings": [
+    {
+      "id": 9,
+      "category": "HPACK-Varint-Raw",
+      "name": "overlong_5extra",
+      "result": "FINDING",
+      "details": "Overlong varint with 5 extra bytes ACCEPTED!\nshift reaches 35+ bits \u2014 UB in get_var_int()\nBackend response: {'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "timestamp": 1771456248.7278523,
+      "severity": "MEDIUM",
+      "raw_data": {
+        "extra_bytes": 5,
+        "max_shift": 35,
+        "backend": "{'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'x-forwarded-proto': 'https', 'x-protocol': 'TLSv1.3', 'x-fron"
+      }
+    },
+    {
+      "id": 10,
+      "category": "HPACK-Varint-Raw",
+      "name": "overlong_8extra",
+      "result": "FINDING",
+      "details": "Overlong varint with 8 extra bytes ACCEPTED!\nshift reaches 56+ bits \u2014 UB in get_var_int()\nBackend response: {'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "timestamp": 1771456251.4464922,
+      "severity": "HIGH",
+      "raw_data": {
+        "extra_bytes": 8,
+        "max_shift": 56,
+        "backend": "{'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'x-forwarded-proto': 'https', 'x-protocol': 'TLSv1.3', 'x-fron"
+      }
+    },
+    {
+      "id": 11,
+      "category": "HPACK-Varint-Raw",
+      "name": "overlong_12extra",
+      "result": "FINDING",
+      "details": "Overlong varint with 12 extra bytes ACCEPTED!\nshift reaches 84+ bits \u2014 UB in get_var_int()\nBackend response: {'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "timestamp": 1771456254.3450422,
+      "severity": "HIGH",
+      "raw_data": {
+        "extra_bytes": 12,
+        "max_shift": 84,
+        "backend": "{'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'x-forwarded-proto': 'https', 'x-protocol': 'TLSv1.3', 'x-fron"
+      }
+    },
+    {
+      "id": 12,
+      "category": "HPACK-Varint-Raw",
+      "name": "overlong_20extra",
+      "result": "FINDING",
+      "details": "Overlong varint with 20 extra bytes ACCEPTED!\nshift reaches 140+ bits \u2014 UB in get_var_int()\nBackend response: {'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "timestamp": 1771456257.0636823,
+      "severity": "HIGH",
+      "raw_data": {
+        "extra_bytes": 20,
+        "max_shift": 140,
+        "backend": "{'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'x-forwarded-proto': 'https', 'x-protocol': 'TLSv1.3', 'x-fron"
+      }
+    },
+    {
+      "id": 13,
+      "category": "HPACK-Varint-Raw",
+      "name": "overlong_30extra",
+      "result": "FINDING",
+      "details": "Overlong varint with 30 extra bytes ACCEPTED!\nshift reaches 210+ bits \u2014 UB in get_var_int()\nBackend response: {'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "timestamp": 1771456259.7783241,
+      "severity": "HIGH",
+      "raw_data": {
+        "extra_bytes": 30,
+        "max_shift": 210,
+        "backend": "{'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'x-forwarded-proto': 'https', 'x-protocol': 'TLSv1.3', 'x-fron"
+      }
+    }
+  ],
+  "tests": [
+    {
+      "id": 1,
+      "category": "CRLF-Backend",
+      "name": "crlf_basic",
+      "result": "SAFE",
+      "details": "GOAWAY \u2014 rejected at H2 layer",
+      "timestamp": 1771456240.9037662
+    },
+    {
+      "id": 2,
+      "category": "CRLF-Backend",
+      "name": "bare_lf",
+      "result": "SAFE",
+      "details": "Bare LF in H2 value rejected",
+      "timestamp": 1771456241.5954201
+    },
+    {
+      "id": 3,
+      "category": "CRLF-Backend",
+      "name": "bare_cr",
+      "result": "SAFE",
+      "details": "Bare CR rejected",
+      "timestamp": 1771456242.2870743
+    },
+    {
+      "id": 4,
+      "category": "CRLF-Backend",
+      "name": "crlf_inject_cl",
+      "result": "SAFE",
+      "details": "CRLF+Content-Length injection rejected",
+      "timestamp": 1771456242.9867241
+    },
+    {
+      "id": 5,
+      "category": "CRLF-Backend",
+      "name": "crlf_inject_te",
+      "result": "SAFE",
+      "details": "CRLF+TE injection rejected",
+      "timestamp": 1771456243.6943703
+    },
+    {
+      "id": 6,
+      "category": "CRLF-Backend",
+      "name": "double_crlf_body_inject",
+      "result": "SAFE",
+      "details": "Double CRLF body injection rejected",
+      "timestamp": 1771456244.3980184
+    },
+    {
+      "id": 7,
+      "category": "Null-Backend",
+      "name": "null_basic",
+      "result": "SAFE",
+      "details": "Null byte rejected at H2 layer",
+      "timestamp": 1771456245.3055642
+    },
+    {
+      "id": 8,
+      "category": "Null-Backend",
+      "name": "null_truncation",
+      "result": "SAFE",
+      "details": "Null byte rejected",
+      "timestamp": 1771456246.0172083
+    },
+    {
+      "id": 9,
+      "category": "HPACK-Varint-Raw",
+      "name": "overlong_5extra",
+      "result": "FINDING",
+      "details": "Overlong varint with 5 extra bytes ACCEPTED!\nshift reaches 35+ bits \u2014 UB in get_var_int()\nBackend response: {'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "timestamp": 1771456248.7278523,
+      "severity": "MEDIUM",
+      "raw_data": {
+        "extra_bytes": 5,
+        "max_shift": 35,
+        "backend": "{'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'x-forwarded-proto': 'https', 'x-protocol': 'TLSv1.3', 'x-fron"
+      }
+    },
+    {
+      "id": 10,
+      "category": "HPACK-Varint-Raw",
+      "name": "overlong_8extra",
+      "result": "FINDING",
+      "details": "Overlong varint with 8 extra bytes ACCEPTED!\nshift reaches 56+ bits \u2014 UB in get_var_int()\nBackend response: {'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "timestamp": 1771456251.4464922,
+      "severity": "HIGH",
+      "raw_data": {
+        "extra_bytes": 8,
+        "max_shift": 56,
+        "backend": "{'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'x-forwarded-proto': 'https', 'x-protocol': 'TLSv1.3', 'x-fron"
+      }
+    },
+    {
+      "id": 11,
+      "category": "HPACK-Varint-Raw",
+      "name": "overlong_12extra",
+      "result": "FINDING",
+      "details": "Overlong varint with 12 extra bytes ACCEPTED!\nshift reaches 84+ bits \u2014 UB in get_var_int()\nBackend response: {'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "timestamp": 1771456254.3450422,
+      "severity": "HIGH",
+      "raw_data": {
+        "extra_bytes": 12,
+        "max_shift": 84,
+        "backend": "{'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'x-forwarded-proto': 'https', 'x-protocol': 'TLSv1.3', 'x-fron"
+      }
+    },
+    {
+      "id": 12,
+      "category": "HPACK-Varint-Raw",
+      "name": "overlong_20extra",
+      "result": "FINDING",
+      "details": "Overlong varint with 20 extra bytes ACCEPTED!\nshift reaches 140+ bits \u2014 UB in get_var_int()\nBackend response: {'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "timestamp": 1771456257.0636823,
+      "severity": "HIGH",
+      "raw_data": {
+        "extra_bytes": 20,
+        "max_shift": 140,
+        "backend": "{'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'x-forwarded-proto': 'https', 'x-protocol': 'TLSv1.3', 'x-fron"
+      }
+    },
+    {
+      "id": 13,
+      "category": "HPACK-Varint-Raw",
+      "name": "overlong_30extra",
+      "result": "FINDING",
+      "details": "Overlong varint with 30 extra bytes ACCEPTED!\nshift reaches 210+ bits \u2014 UB in get_var_int()\nBackend response: {'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "timestamp": 1771456259.7783241,
+      "severity": "HIGH",
+      "raw_data": {
+        "extra_bytes": 30,
+        "max_shift": 210,
+        "backend": "{'method': 'GET', 'path': '/', 'http_version': 'HTTP/1.1', 'headers': {'host': '127.0.0.1:8443', 'x-test': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'x-forwarded-proto': 'https', 'x-protocol': 'TLSv1.3', 'x-fron"
+      }
+    },
+    {
+      "id": 14,
+      "category": "HPACK-Varint-Raw",
+      "name": "huge_varint_uint32max",
+      "result": "SAFE",
+      "details": "GOAWAY \u2014 huge varint value rejected",
+      "timestamp": 1771456260.489968
+    },
+    {
+      "id": 15,
+      "category": "H2-Smuggle",
+      "name": "multi_host",
+      "result": "SAFE",
+      "details": "Multiple host headers rejected",
+      "timestamp": 1771456261.213606
+    },
+    {
+      "id": 16,
+      "category": "H2-Smuggle",
+      "name": "authority_host_conflict",
+      "result": "SAFE",
+      "details": "Conflicting authority/host rejected",
+      "timestamp": 1771456261.901262
+    },
+    {
+      "id": 17,
+      "category": "H2-Smuggle",
+      "name": "space_in_name",
+      "result": "SAFE",
+      "details": "Space in header name: rejected",
+      "timestamp": 1771456262.6169043
+    },
+    {
+      "id": 18,
+      "category": "H2-Smuggle",
+      "name": "te_trailers",
+      "result": "ANOMALY",
+      "details": "TE:trailers rejected: ",
+      "timestamp": 1771456263.3365443
+    },
+    {
+      "id": 19,
+      "category": "H2-Smuggle",
+      "name": "whitespace_value",
+      "result": "SAFE",
+      "details": "Whitespace-only value: rejected",
+      "timestamp": 1771456264.032196
+    },
+    {
+      "id": 20,
+      "category": "H2-Smuggle",
+      "name": "path_fragment",
+      "result": "SAFE",
+      "details": "Fragment in path rejected",
+      "timestamp": 1771456264.7238503
+    }
+  ]
+}

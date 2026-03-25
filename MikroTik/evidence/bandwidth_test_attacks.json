@@ -1,0 +1,1235 @@
+{
+  "metadata": {
+    "script": "attack_bandwidth_test.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 6,
+    "start_time": "2026-02-16T00:14:56.232983",
+    "end_time": "2026-02-16T00:15:58.002083",
+    "total_tests": 81,
+    "anomalies": 1,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "13m55s",
+    "router_log_count": 10,
+    "router_interesting_events": 0,
+    "final_health": {
+      "alive": true,
+      "uptime": "14m57s",
+      "cpu_load": "2",
+      "free_memory": "838434816",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "proto_analysis",
+      "name": "Connect-and-read",
+      "description": "Connect to btest and read any server-initiated data",
+      "result": "Received 4 bytes on connect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:14:56.736731",
+      "details": {
+        "hex": "01000000",
+        "size": 4
+      }
+    },
+    {
+      "id": 2,
+      "category": "proto_analysis",
+      "name": "Probe: Version-0 probe",
+      "description": "Send 1-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:14:57.040579",
+      "details": {
+        "probe_hex": "00",
+        "probe_size": 1,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 3,
+      "category": "proto_analysis",
+      "name": "Probe: Version-1 probe (4B)",
+      "description": "Send 4-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:14:57.344427",
+      "details": {
+        "probe_hex": "01000000",
+        "probe_size": 4,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 4,
+      "category": "proto_analysis",
+      "name": "Probe: Version-1 send direction",
+      "description": "Send 4-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:14:57.652273",
+      "details": {
+        "probe_hex": "01000001",
+        "probe_size": 4,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 5,
+      "category": "proto_analysis",
+      "name": "Probe: Version-1 receive direction",
+      "description": "Send 4-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:14:57.956121",
+      "details": {
+        "probe_hex": "01000002",
+        "probe_size": 4,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 6,
+      "category": "proto_analysis",
+      "name": "Probe: Version-1 both directions",
+      "description": "Send 4-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:14:58.259969",
+      "details": {
+        "probe_hex": "01000003",
+        "probe_size": 4,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 7,
+      "category": "proto_analysis",
+      "name": "Probe: Version-2 probe",
+      "description": "Send 4-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:14:58.563817",
+      "details": {
+        "probe_hex": "02000000",
+        "probe_size": 4,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 8,
+      "category": "proto_analysis",
+      "name": "Probe: Version-255 probe",
+      "description": "Send 4-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:14:58.867665",
+      "details": {
+        "probe_hex": "ff000000",
+        "probe_size": 4,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 9,
+      "category": "proto_analysis",
+      "name": "Probe: Large version number",
+      "description": "Send 4-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:14:59.171513",
+      "details": {
+        "probe_hex": "0100ffff",
+        "probe_size": 4,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 10,
+      "category": "proto_analysis",
+      "name": "Probe: All-zeros 8B",
+      "description": "Send 8-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:14:59.479359",
+      "details": {
+        "probe_hex": "0000000000000000",
+        "probe_size": 8,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 11,
+      "category": "proto_analysis",
+      "name": "Probe: All-ones 8B",
+      "description": "Send 8-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:14:59.783207",
+      "details": {
+        "probe_hex": "ffffffffffffffff",
+        "probe_size": 8,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 12,
+      "category": "proto_analysis",
+      "name": "Probe: Null byte only",
+      "description": "Send 1-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:00.087055",
+      "details": {
+        "probe_hex": "00",
+        "probe_size": 1,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 13,
+      "category": "proto_analysis",
+      "name": "Probe: Single 0x01",
+      "description": "Send 1-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:00.390903",
+      "details": {
+        "probe_hex": "01",
+        "probe_size": 1,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 14,
+      "category": "proto_analysis",
+      "name": "Probe: HTTP GET probe",
+      "description": "Send 18-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:00.694751",
+      "details": {
+        "probe_hex": "474554202f20485454502f312e300d0a0d0a",
+        "probe_size": 18,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 15,
+      "category": "proto_analysis",
+      "name": "Probe: RouterOS API /login",
+      "description": "Send 8-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:00.998599",
+      "details": {
+        "probe_hex": "062f6c6f67696e00",
+        "probe_size": 8,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 16,
+      "category": "proto_analysis",
+      "name": "Probe: 16-byte handshake",
+      "description": "Send 16-byte probe to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:01.302447",
+      "details": {
+        "probe_hex": "01000000000000000000000000000000",
+        "probe_size": 16,
+        "response_hex": "01000000",
+        "response_size": 4,
+        "response_text": "\u0001\u0000\u0000\u0000"
+      }
+    },
+    {
+      "id": 17,
+      "category": "proto_analysis",
+      "name": "Incremental packet lengths",
+      "description": "Send packets of increasing size to map protocol expectations",
+      "result": "Tested 7 lengths",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:03.429383",
+      "details": {
+        "results": [
+          {
+            "send_length": 1,
+            "response_length": 4,
+            "response_hex": "01000000"
+          },
+          {
+            "send_length": 2,
+            "response_length": 4,
+            "response_hex": "01000000"
+          },
+          {
+            "send_length": 4,
+            "response_length": 4,
+            "response_hex": "01000000"
+          },
+          {
+            "send_length": 8,
+            "response_length": 4,
+            "response_hex": "01000000"
+          },
+          {
+            "send_length": 16,
+            "response_length": 4,
+            "response_hex": "01000000"
+          },
+          {
+            "send_length": 32,
+            "response_length": 4,
+            "response_hex": "01000000"
+          },
+          {
+            "send_length": 64,
+            "response_length": 4,
+            "response_hex": "01000000"
+          }
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "category": "proto_analysis",
+      "name": "Auth probe with credentials",
+      "description": "Send btest probe with embedded credentials (authenticate=no config)",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:03.733231",
+      "details": {
+        "probe_hex": "010000000561646d696e0b5465737450617373313233",
+        "response_hex": "01000000",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 19,
+      "category": "proto_analysis",
+      "name": "IPv6-mapped connection",
+      "description": "Test btest accepts IPv4-mapped IPv6 connections",
+      "result": "Connection accepted on IPv4-mapped IPv6",
+      "anomaly": true,
+      "timestamp": "2026-02-16T00:15:03.733231"
+    },
+    {
+      "id": 20,
+      "category": "resource_exhaustion",
+      "name": "Baseline resource snapshot",
+      "description": "Capture CPU/memory before exhaustion tests",
+      "result": "CPU=1%, free_mem=837255168",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:03.733231",
+      "details": {
+        "snapshot": {
+          "cpu_load": "1",
+          "free_memory": "837255168",
+          "total_memory": "1073741824",
+          "uptime": "14m3s"
+        }
+      }
+    },
+    {
+      "id": 21,
+      "category": "resource_exhaustion",
+      "name": "Open 10 connections",
+      "description": "Attempt to open 10 simultaneous TCP connections to btest",
+      "result": "Connected: 10/10, failed: 0, time: 0.00s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:03.733231",
+      "details": {
+        "requested": 10,
+        "connected": 10,
+        "failed": 0,
+        "elapsed_seconds": 0.0
+      }
+    },
+    {
+      "id": 22,
+      "category": "resource_exhaustion",
+      "name": "Send data on 10 connections",
+      "description": "Send btest init data on 10 open connections",
+      "result": "Active after send: 10/10",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:03.733231",
+      "details": {
+        "active_after_send": 10,
+        "total_connected": 10
+      }
+    },
+    {
+      "id": 23,
+      "category": "resource_exhaustion",
+      "name": "Resource after 10 conns",
+      "description": "CPU/memory snapshot with 10 connections open",
+      "result": "CPU=3%, free_mem=837287936",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:04.744725",
+      "details": {
+        "snapshot": {
+          "cpu_load": "3",
+          "free_memory": "837287936",
+          "total_memory": "1073741824",
+          "uptime": "14m4s"
+        },
+        "connection_count": 10,
+        "baseline_cpu": "1",
+        "baseline_memory": "837255168"
+      }
+    },
+    {
+      "id": 24,
+      "category": "resource_exhaustion",
+      "name": "New conn after 10 open",
+      "description": "Can new clients connect while 10 are held open?",
+      "result": "New connection accepted (service still responsive)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:04.744725",
+      "details": {
+        "connected": true
+      }
+    },
+    {
+      "id": 25,
+      "category": "resource_exhaustion",
+      "name": "Health after 10 cleanup",
+      "description": "Router health after closing 10 connections",
+      "result": "Router healthy, uptime=14m5s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:05.748223",
+      "details": {
+        "health": {
+          "alive": true,
+          "uptime": "14m5s",
+          "cpu_load": "1",
+          "free_memory": "837255168",
+          "version": "7.20.8 (long-term)"
+        }
+      }
+    },
+    {
+      "id": 26,
+      "category": "resource_exhaustion",
+      "name": "Open 25 connections",
+      "description": "Attempt to open 25 simultaneous TCP connections to btest",
+      "result": "Connected: 25/25, failed: 0, time: 0.02s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:05.772211",
+      "details": {
+        "requested": 25,
+        "connected": 25,
+        "failed": 0,
+        "elapsed_seconds": 0.02
+      }
+    },
+    {
+      "id": 27,
+      "category": "resource_exhaustion",
+      "name": "Send data on 25 connections",
+      "description": "Send btest init data on 25 open connections",
+      "result": "Active after send: 25/25",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:05.772211",
+      "details": {
+        "active_after_send": 25,
+        "total_connected": 25
+      }
+    },
+    {
+      "id": 28,
+      "category": "resource_exhaustion",
+      "name": "Resource after 25 conns",
+      "description": "CPU/memory snapshot with 25 connections open",
+      "result": "CPU=2%, free_mem=837189632",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:06.775709",
+      "details": {
+        "snapshot": {
+          "cpu_load": "2",
+          "free_memory": "837189632",
+          "total_memory": "1073741824",
+          "uptime": "14m6s"
+        },
+        "connection_count": 25,
+        "baseline_cpu": "1",
+        "baseline_memory": "837255168"
+      }
+    },
+    {
+      "id": 29,
+      "category": "resource_exhaustion",
+      "name": "New conn after 25 open",
+      "description": "Can new clients connect while 25 are held open?",
+      "result": "New connection accepted (service still responsive)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:06.779707",
+      "details": {
+        "connected": true
+      }
+    },
+    {
+      "id": 30,
+      "category": "resource_exhaustion",
+      "name": "Health after 25 cleanup",
+      "description": "Router health after closing 25 connections",
+      "result": "Router healthy, uptime=14m7s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:07.783205",
+      "details": {
+        "health": {
+          "alive": true,
+          "uptime": "14m7s",
+          "cpu_load": "0",
+          "free_memory": "837156864",
+          "version": "7.20.8 (long-term)"
+        }
+      }
+    },
+    {
+      "id": 31,
+      "category": "resource_exhaustion",
+      "name": "Open 50 connections",
+      "description": "Attempt to open 50 simultaneous TCP connections to btest",
+      "result": "Connected: 50/50, failed: 0, time: 0.04s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:07.819187",
+      "details": {
+        "requested": 50,
+        "connected": 50,
+        "failed": 0,
+        "elapsed_seconds": 0.04
+      }
+    },
+    {
+      "id": 32,
+      "category": "resource_exhaustion",
+      "name": "Send data on 50 connections",
+      "description": "Send btest init data on 50 open connections",
+      "result": "Active after send: 50/50",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:07.823185",
+      "details": {
+        "active_after_send": 50,
+        "total_connected": 50
+      }
+    },
+    {
+      "id": 33,
+      "category": "resource_exhaustion",
+      "name": "Resource after 50 conns",
+      "description": "CPU/memory snapshot with 50 connections open",
+      "result": "CPU=6%, free_mem=836755456",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:08.826683",
+      "details": {
+        "snapshot": {
+          "cpu_load": "6",
+          "free_memory": "836755456",
+          "total_memory": "1073741824",
+          "uptime": "14m8s"
+        },
+        "connection_count": 50,
+        "baseline_cpu": "1",
+        "baseline_memory": "837255168"
+      }
+    },
+    {
+      "id": 34,
+      "category": "resource_exhaustion",
+      "name": "New conn after 50 open",
+      "description": "Can new clients connect while 50 are held open?",
+      "result": "New connection accepted (service still responsive)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:08.830681",
+      "details": {
+        "connected": true
+      }
+    },
+    {
+      "id": 35,
+      "category": "resource_exhaustion",
+      "name": "Health after 50 cleanup",
+      "description": "Router health after closing 50 connections",
+      "result": "Router healthy, uptime=14m9s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:09.830181",
+      "details": {
+        "health": {
+          "alive": true,
+          "uptime": "14m9s",
+          "cpu_load": "2",
+          "free_memory": "836788224",
+          "version": "7.20.8 (long-term)"
+        }
+      }
+    },
+    {
+      "id": 36,
+      "category": "resource_exhaustion",
+      "name": "Open 100 connections",
+      "description": "Attempt to open 100 simultaneous TCP connections to btest",
+      "result": "Connected: 100/100, failed: 0, time: 0.10s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:09.926133",
+      "details": {
+        "requested": 100,
+        "connected": 100,
+        "failed": 0,
+        "elapsed_seconds": 0.1
+      }
+    },
+    {
+      "id": 37,
+      "category": "resource_exhaustion",
+      "name": "Send data on 100 connections",
+      "description": "Send btest init data on 100 open connections",
+      "result": "Active after send: 100/100",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:09.930131",
+      "details": {
+        "active_after_send": 100,
+        "total_connected": 100
+      }
+    },
+    {
+      "id": 38,
+      "category": "resource_exhaustion",
+      "name": "Resource after 100 conns",
+      "description": "CPU/memory snapshot with 100 connections open",
+      "result": "CPU=9%, free_mem=836632576",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:10.929631",
+      "details": {
+        "snapshot": {
+          "cpu_load": "9",
+          "free_memory": "836632576",
+          "total_memory": "1073741824",
+          "uptime": "14m10s"
+        },
+        "connection_count": 100,
+        "baseline_cpu": "1",
+        "baseline_memory": "837255168"
+      }
+    },
+    {
+      "id": 39,
+      "category": "resource_exhaustion",
+      "name": "New conn after 100 open",
+      "description": "Can new clients connect while 100 are held open?",
+      "result": "New connection accepted (service still responsive)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:10.929631",
+      "details": {
+        "connected": true
+      }
+    },
+    {
+      "id": 40,
+      "category": "resource_exhaustion",
+      "name": "Health after 100 cleanup",
+      "description": "Router health after closing 100 connections",
+      "result": "Router healthy, uptime=14m11s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:11.941125",
+      "details": {
+        "health": {
+          "alive": true,
+          "uptime": "14m11s",
+          "cpu_load": "1",
+          "free_memory": "836698112",
+          "version": "7.20.8 (long-term)"
+        }
+      }
+    },
+    {
+      "id": 41,
+      "category": "resource_exhaustion",
+      "name": "Sustained 50-conn hold (30s)",
+      "description": "Hold 50 btest connections open for 30 seconds and check survival",
+      "result": "50/50 connections survived 30s hold",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:42.026075",
+      "details": {
+        "initial": 50,
+        "survived": 50,
+        "hold_seconds": 30
+      }
+    },
+    {
+      "id": 42,
+      "category": "resource_exhaustion",
+      "name": "Post-exhaustion recovery",
+      "description": "Resource snapshot after all exhaustion tests complete",
+      "result": "CPU=0%, free_mem=836763648",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:44.029073",
+      "details": {
+        "snapshot": {
+          "cpu_load": "0",
+          "free_memory": "836763648",
+          "total_memory": "1073741824",
+          "uptime": "14m43s"
+        },
+        "baseline": {
+          "cpu_load": "1",
+          "free_memory": "837255168",
+          "total_memory": "1073741824",
+          "uptime": "14m3s"
+        }
+      }
+    },
+    {
+      "id": 43,
+      "category": "resource_exhaustion",
+      "name": "Rapid open/close (200 cycles)",
+      "description": "Rapidly open and close TCP connections to btest",
+      "result": "Success: 200, failed: 0, time: 0.28s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:44.308933",
+      "details": {
+        "success": 200,
+        "failed": 0,
+        "elapsed": 0.28,
+        "rate": 714.6
+      }
+    },
+    {
+      "id": 44,
+      "category": "resource_exhaustion",
+      "name": "Simultaneous data streams (20x10KB)",
+      "description": "Send 10KB data on 20 simultaneous btest connections",
+      "result": "Sent 204800 bytes total, 0 send errors",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:44.344915",
+      "details": {
+        "connections": 20,
+        "bytes_sent": 204800,
+        "send_errors": 0
+      }
+    },
+    {
+      "id": 45,
+      "category": "proto_fuzz",
+      "name": "Pre-fuzz health",
+      "description": "Router health before protocol fuzzing",
+      "result": "Alive=True, uptime=14m43s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:44.356909",
+      "details": {
+        "health": {
+          "alive": true,
+          "uptime": "14m43s",
+          "cpu_load": "6",
+          "free_memory": "838270976",
+          "version": "7.20.8 (long-term)"
+        }
+      }
+    },
+    {
+      "id": 46,
+      "category": "proto_fuzz",
+      "name": "Random bytes (1B)",
+      "description": "Send 1 random bytes to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:44.660757",
+      "details": {
+        "payload_size": 1,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 47,
+      "category": "proto_fuzz",
+      "name": "Random bytes (2B)",
+      "description": "Send 2 random bytes to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:44.964605",
+      "details": {
+        "payload_size": 2,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 48,
+      "category": "proto_fuzz",
+      "name": "Random bytes (4B)",
+      "description": "Send 4 random bytes to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:45.268453",
+      "details": {
+        "payload_size": 4,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 49,
+      "category": "proto_fuzz",
+      "name": "Random bytes (8B)",
+      "description": "Send 8 random bytes to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:45.572301",
+      "details": {
+        "payload_size": 8,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 50,
+      "category": "proto_fuzz",
+      "name": "Random bytes (16B)",
+      "description": "Send 16 random bytes to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:45.876149",
+      "details": {
+        "payload_size": 16,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 51,
+      "category": "proto_fuzz",
+      "name": "Random bytes (32B)",
+      "description": "Send 32 random bytes to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:46.179997",
+      "details": {
+        "payload_size": 32,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 52,
+      "category": "proto_fuzz",
+      "name": "Random bytes (64B)",
+      "description": "Send 64 random bytes to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:46.483845",
+      "details": {
+        "payload_size": 64,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 53,
+      "category": "proto_fuzz",
+      "name": "Random bytes (128B)",
+      "description": "Send 128 random bytes to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:46.787693",
+      "details": {
+        "payload_size": 128,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 54,
+      "category": "proto_fuzz",
+      "name": "Random bytes (256B)",
+      "description": "Send 256 random bytes to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:47.095539",
+      "details": {
+        "payload_size": 256,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 55,
+      "category": "proto_fuzz",
+      "name": "Random bytes (512B)",
+      "description": "Send 512 random bytes to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:47.399387",
+      "details": {
+        "payload_size": 512,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 56,
+      "category": "proto_fuzz",
+      "name": "Random bytes (1024B)",
+      "description": "Send 1024 random bytes to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:47.699237",
+      "details": {
+        "payload_size": 1024,
+        "response_size": 4,
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 57,
+      "category": "proto_fuzz",
+      "name": "Oversized packet (1MB) send error",
+      "description": "Attempt to send 1MB to btest",
+      "result": "Send error: [Errno 104] Connection reset by peer",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:47.703235"
+    },
+    {
+      "id": 58,
+      "category": "proto_fuzz",
+      "name": "Oversized packet (1MB)",
+      "description": "Send 1MB of random data to bandwidth-test",
+      "result": "Sent -1 bytes, response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:47.703235",
+      "details": {
+        "sent": -1,
+        "response_size": 4
+      }
+    },
+    {
+      "id": 59,
+      "category": "proto_fuzz",
+      "name": "Zero-length send",
+      "description": "Connect to btest, send nothing, close after 1 second",
+      "result": "Connection closed cleanly (no crash)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:48.710731"
+    },
+    {
+      "id": 60,
+      "category": "proto_fuzz",
+      "name": "Partial handshake (1 byte)",
+      "description": "Send single byte and wait 3 seconds for server reaction",
+      "result": "Response: 4 bytes after 3s wait",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:51.713229",
+      "details": {
+        "response_hex": "01000000"
+      }
+    },
+    {
+      "id": 61,
+      "category": "proto_fuzz",
+      "name": "TCP RST after data",
+      "description": "Send data then force TCP RST (SO_LINGER=0)",
+      "result": "RST sent successfully",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:51.713229"
+    },
+    {
+      "id": 62,
+      "category": "proto_fuzz",
+      "name": "Format string #1",
+      "description": "Send format string payload to btest",
+      "result": "Response: 4 bytes (no crash)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:52.021075",
+      "details": {
+        "payload": "%s%s%s%s%s%s%s%s%s%s",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 63,
+      "category": "proto_fuzz",
+      "name": "Format string #2",
+      "description": "Send format string payload to btest",
+      "result": "Response: 4 bytes (no crash)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:52.324923",
+      "details": {
+        "payload": "%n%n%n%n",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 64,
+      "category": "proto_fuzz",
+      "name": "Format string #3",
+      "description": "Send format string payload to btest",
+      "result": "Response: 4 bytes (no crash)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:52.628771",
+      "details": {
+        "payload": "%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 65,
+      "category": "proto_fuzz",
+      "name": "Format string #4",
+      "description": "Send format string payload to btest",
+      "result": "Response: 4 bytes (no crash)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:52.932619",
+      "details": {
+        "payload": "%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 66,
+      "category": "proto_fuzz",
+      "name": "Format string #5",
+      "description": "Send format string payload to btest",
+      "result": "Response: 4 bytes (no crash)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:53.240465",
+      "details": {
+        "payload": "AAAA%08x.%08x.%08x.%08x",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 67,
+      "category": "proto_fuzz",
+      "name": "Control: All nulls 256B",
+      "description": "Send control character payload (All nulls 256B) to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:53.588291",
+      "details": {
+        "payload_size": 256,
+        "response_size": 4
+      }
+    },
+    {
+      "id": 68,
+      "category": "proto_fuzz",
+      "name": "Control: All 0xFF 256B",
+      "description": "Send control character payload (All 0xFF 256B) to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:53.980095",
+      "details": {
+        "payload_size": 256,
+        "response_size": 4
+      }
+    },
+    {
+      "id": 69,
+      "category": "proto_fuzz",
+      "name": "Control: Mixed control chars",
+      "description": "Send control character payload (Mixed control chars) to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:54.327921",
+      "details": {
+        "payload_size": 256,
+        "response_size": 4
+      }
+    },
+    {
+      "id": 70,
+      "category": "proto_fuzz",
+      "name": "Control: Newlines 1KB",
+      "description": "Send control character payload (Newlines 1KB) to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:54.631769",
+      "details": {
+        "payload_size": 1024,
+        "response_size": 4
+      }
+    },
+    {
+      "id": 71,
+      "category": "proto_fuzz",
+      "name": "Control: Backspace flood",
+      "description": "Send control character payload (Backspace flood) to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:54.927621",
+      "details": {
+        "payload_size": 256,
+        "response_size": 4
+      }
+    },
+    {
+      "id": 72,
+      "category": "proto_fuzz",
+      "name": "Control: DEL flood",
+      "description": "Send control character payload (DEL flood) to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:55.223473",
+      "details": {
+        "payload_size": 256,
+        "response_size": 4
+      }
+    },
+    {
+      "id": 73,
+      "category": "proto_fuzz",
+      "name": "Boundary: Max uint16",
+      "description": "Send integer boundary value (Max uint16) to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:55.519325",
+      "details": {
+        "payload_hex": "ffffffff",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 74,
+      "category": "proto_fuzz",
+      "name": "Boundary: Max uint32",
+      "description": "Send integer boundary value (Max uint32) to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:55.815177",
+      "details": {
+        "payload_hex": "ffffffff",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 75,
+      "category": "proto_fuzz",
+      "name": "Boundary: Negative-1 int32",
+      "description": "Send integer boundary value (Negative-1 int32) to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:56.119025",
+      "details": {
+        "payload_hex": "ffffffff",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 76,
+      "category": "proto_fuzz",
+      "name": "Boundary: Min int32",
+      "description": "Send integer boundary value (Min int32) to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:56.422873",
+      "details": {
+        "payload_hex": "80000000",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 77,
+      "category": "proto_fuzz",
+      "name": "Boundary: Zero int32",
+      "description": "Send integer boundary value (Zero int32) to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:56.726721",
+      "details": {
+        "payload_hex": "00000000",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 78,
+      "category": "proto_fuzz",
+      "name": "Boundary: Large length field",
+      "description": "Send integer boundary value (Large length field) to btest",
+      "result": "Response: 4 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:57.034567",
+      "details": {
+        "payload_hex": "7fffffff",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 79,
+      "category": "proto_fuzz",
+      "name": "Rapid connect/disconnect (50)",
+      "description": "50 rapid TCP connect/disconnect cycles to btest",
+      "result": "Success: 50/50 in 0.04s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:57.070549",
+      "details": {
+        "success": 50,
+        "failed": 0,
+        "elapsed": 0.04
+      }
+    },
+    {
+      "id": 80,
+      "category": "proto_fuzz",
+      "name": "Byte-at-a-time fragment",
+      "description": "Send btest header one byte at a time with 50ms delays",
+      "result": "Response: 4 bytes after fragmented send",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:57.998085",
+      "details": {
+        "payload_hex": "0100000000000000",
+        "response_size": 4
+      }
+    },
+    {
+      "id": 81,
+      "category": "proto_fuzz",
+      "name": "Post-fuzz health",
+      "description": "Router health after all protocol fuzzing",
+      "result": "Alive=True, uptime=14m57s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:15:57.998085",
+      "details": {
+        "health": {
+          "alive": true,
+          "uptime": "14m57s",
+          "cpu_load": "2",
+          "free_memory": "838434816",
+          "version": "7.20.8 (long-term)"
+        },
+        "pre_fuzz_uptime": "14m43s"
+      }
+    }
+  ],
+  "findings": []
+}

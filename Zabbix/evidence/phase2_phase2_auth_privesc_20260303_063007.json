@@ -1,0 +1,281 @@
+{
+  "metadata": {
+    "collector": "phase2_auth_privesc",
+    "phase": "phase2",
+    "started": "2026-03-03T06:29:59.673259",
+    "target": "Zabbix 7.0.23 LTS",
+    "target_url": "http://localhost:9080",
+    "completed": "2026-03-03T06:30:07.573208",
+    "test_count": 33,
+    "finding_count": 0,
+    "anomaly_count": 0
+  },
+  "findings": [],
+  "anomalies": [],
+  "tests": [
+    {
+      "id": "CVE-2024-36467",
+      "description": "Viewer self-add to admin group",
+      "request": "user.update usrgrps=[{usrgrpid:7}] as viewer",
+      "response": "DENIED: Only Super admin users can update \"usrgrps\" parameter.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:29:59.965405"
+    },
+    {
+      "id": "PRIVESC-ROLE",
+      "description": "Viewer self-promote to Super admin role",
+      "request": "user.update roleid=3 as viewer",
+      "response": "DENIED: User cannot change own role.",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:00.021433"
+    },
+    {
+      "id": "SQLI-user_get-selectRole_with_SQL_injec",
+      "description": "SQLi user.get: selectRole with SQL injection",
+      "request": "user.get {\"output\": [\"userid\", \"username\"], \"selectRole\": [\"roleid\", \"name\", \"type'; SELECT 1--\"]}",
+      "response": "Result type: error, Time: 0.04s",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:00.065455"
+    },
+    {
+      "id": "SQLI-user_get-sortfield_SQL_injection",
+      "description": "SQLi user.get: sortfield SQL injection",
+      "request": "user.get {\"output\": [\"userid\", \"username\"], \"sortfield\": \"username; DROP TABLE--\"}",
+      "response": "Result type: error, Time: 0.05s",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:00.313579"
+    },
+    {
+      "id": "SQLI-user_get-search_parameter_injectio",
+      "description": "SQLi user.get: search parameter injection",
+      "request": "user.get {\"output\": [\"userid\", \"username\"], \"search\": {\"username\": \"Admin' OR '1'='1\"}}",
+      "response": "Result type: data, Time: 0.06s",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:00.573709"
+    },
+    {
+      "id": "SQLI-user_get-filter_parameter_injectio",
+      "description": "SQLi user.get: filter parameter injection",
+      "request": "user.get {\"output\": [\"userid\", \"username\"], \"filter\": {\"username\": [\"Admin' UNION SELECT 1,2,3--\"]}}",
+      "response": "Result type: data, Time: 0.03s",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:00.829837"
+    },
+    {
+      "id": "SQLI-user_get-selectMedias_SQL_injectio",
+      "description": "SQLi user.get: selectMedias SQL injection",
+      "request": "user.get {\"output\": [\"userid\"], \"selectMedias\": [\"mediatypeid\", \"sendto'; SELECT pg_sleep(2)--\"]}",
+      "response": "Result type: data, Time: 0.05s",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:01.077961"
+    },
+    {
+      "id": "SQLI-user_get-limit_parameter_injection",
+      "description": "SQLi user.get: limit parameter injection",
+      "request": "user.get {\"output\": [\"userid\"], \"limit\": \"1; SELECT 1--\"}",
+      "response": "Result type: data, Time: 0.05s",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:01.326085"
+    },
+    {
+      "id": "SQLI-host.get_sortfield",
+      "description": "SQLi: host.get sortfield",
+      "request": "host.get with injection payload",
+      "response": "Error",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:01.566205"
+    },
+    {
+      "id": "SQLI-host.get_search",
+      "description": "SQLi: host.get search",
+      "request": "host.get with injection payload",
+      "response": "Data returned",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:01.734289"
+    },
+    {
+      "id": "SQLI-event.get_sortfield",
+      "description": "SQLi: event.get sortfield",
+      "request": "event.get with injection payload",
+      "response": "Error",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:01.878361"
+    },
+    {
+      "id": "SQLI-item.get_search",
+      "description": "SQLi: item.get search",
+      "request": "item.get with injection payload",
+      "response": "Data returned",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:02.042443"
+    },
+    {
+      "id": "SQLI-trigger.get_search",
+      "description": "SQLi: trigger.get search",
+      "request": "trigger.get with injection payload",
+      "response": "Data returned",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:02.206526"
+    },
+    {
+      "id": "SQLI-action.get_filter",
+      "description": "SQLi: action.get filter",
+      "request": "action.get with injection payload",
+      "response": "Data returned",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:02.358602"
+    },
+    {
+      "id": "SQLI-script.get_search",
+      "description": "SQLi: script.get search",
+      "request": "script.get with injection payload",
+      "response": "Data returned",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:02.506676"
+    },
+    {
+      "id": "IDOR-USER-001",
+      "description": "Viewer reads Admin profile",
+      "request": "user.get as viewer",
+      "response": "Denied",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:02.666756"
+    },
+    {
+      "id": "SESSION-TOKENS",
+      "description": "Session token analysis (5 tokens)",
+      "request": "user.login x5",
+      "response": "32-hex=True, unique=True",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:04.403624"
+    },
+    {
+      "id": "CVE-2024-36466",
+      "description": "Session cookie forgery test",
+      "request": "Forged zbx_session with modified sessionid/sign",
+      "response": "Forgery rejected",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:04.631738"
+    },
+    {
+      "id": "VIEWER-settings_get",
+      "description": "Viewer: Server settings",
+      "request": "settings.get as viewer",
+      "response": "Accessible",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:30:04.679762"
+    },
+    {
+      "id": "VIEWER-housekeeping_get",
+      "description": "Viewer: Housekeeping config",
+      "request": "housekeeping.get as viewer",
+      "response": "Accessible",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:30:04.823834"
+    },
+    {
+      "id": "VIEWER-mediatype_get",
+      "description": "Viewer: Media types (webhook secrets)",
+      "request": "mediatype.get as viewer",
+      "response": "Accessible",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:30:04.975910"
+    },
+    {
+      "id": "VIEWER-user_get",
+      "description": "Viewer: All users with media details",
+      "request": "user.get as viewer",
+      "response": "Accessible",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:30:05.123984"
+    },
+    {
+      "id": "VIEWER-script_get",
+      "description": "Viewer: All scripts (command execution)",
+      "request": "script.get as viewer",
+      "response": "Accessible",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:30:05.280062"
+    },
+    {
+      "id": "VIEWER-token_get",
+      "description": "Viewer: All API tokens",
+      "request": "token.get as viewer",
+      "response": "Accessible",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:30:05.432138"
+    },
+    {
+      "id": "VIEWER-maintenance_get",
+      "description": "Viewer: Maintenance windows",
+      "request": "maintenance.get as viewer",
+      "response": "Accessible",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:30:05.600222"
+    },
+    {
+      "id": "VIEWER-template_get",
+      "description": "Viewer: Templates",
+      "request": "template.get as viewer",
+      "response": "Accessible",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:30:05.760302"
+    },
+    {
+      "id": "VIEWER-drule_get",
+      "description": "Viewer: Discovery rules",
+      "request": "drule.get as viewer",
+      "response": "Accessible",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:30:05.916380"
+    },
+    {
+      "id": "VIEWER-item_get",
+      "description": "Viewer: Items",
+      "request": "item.get as viewer",
+      "response": "Accessible",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:30:06.124484"
+    },
+    {
+      "id": "GUEST-LOGIN",
+      "description": "Guest login with empty password",
+      "request": "user.login(guest, '')",
+      "response": "Failed",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:06.476660"
+    },
+    {
+      "id": "SCRIPT-EXEC-1",
+      "description": "Viewer executes script: Ping",
+      "request": "script.execute(1) as viewer",
+      "response": "Denied",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:06.580712"
+    },
+    {
+      "id": "SCRIPT-EXEC-2",
+      "description": "Viewer executes script: Traceroute",
+      "request": "script.execute(2) as viewer",
+      "response": "Denied",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:06.932888"
+    },
+    {
+      "id": "TOKEN-CREATE",
+      "description": "Viewer creates API token",
+      "request": "token.create as viewer",
+      "response": "Created",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:30:07.437140"
+    },
+    {
+      "id": "AUTH-CONFIG",
+      "description": "Authentication configuration",
+      "request": "authentication.get",
+      "response": "Login attempts=?, Block time=?s",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:30:07.473158"
+    }
+  ]
+}

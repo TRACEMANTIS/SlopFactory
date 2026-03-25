@@ -1,0 +1,473 @@
+{
+  "metadata": {
+    "collector": "phase1_recon",
+    "phase": "phase1",
+    "started": "2026-03-03T06:26:30.504710",
+    "target": "Zabbix 7.0.23 LTS",
+    "target_url": "http://localhost:9080",
+    "completed": "2026-03-03T06:27:12.829865",
+    "test_count": 57,
+    "finding_count": 0,
+    "anomaly_count": 0
+  },
+  "findings": [],
+  "anomalies": [],
+  "tests": [
+    {
+      "id": "RECON-001",
+      "description": "Unauthenticated API version disclosure",
+      "request": "POST /api_jsonrpc.php apiinfo.version (no auth)",
+      "response": "Version: 7.0.23",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:26:30.520718"
+    },
+    {
+      "id": "HEADERS-_",
+      "description": "Security headers on Main page",
+      "request": "GET /",
+      "response": "Present: 3/9, Missing: 6/9",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:26:30.592754"
+    },
+    {
+      "id": "HEADERS-_index.php",
+      "description": "Security headers on Login page",
+      "request": "GET /index.php",
+      "response": "Present: 3/9, Missing: 6/9",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:26:30.840878"
+    },
+    {
+      "id": "HEADERS-_api_jsonrpc.ph",
+      "description": "Security headers on JSON-RPC API",
+      "request": "POST /api_jsonrpc.php",
+      "response": "Present: 0/9, Missing: 9/9",
+      "result": "FAIL",
+      "timestamp": "2026-03-03T06:26:31.064990"
+    },
+    {
+      "id": "COOKIE-zbx_session",
+      "description": "Session cookie analysis: zbx_session",
+      "request": "GET / -> Set-Cookie",
+      "response": "Secure=False, HttpOnly=False, Value=eyJzZXNzaW9uaWQiOiI1NTQ3ZTEwNG...",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:26:31.317116"
+    },
+    {
+      "id": "CVE-2022-23134",
+      "description": "setup.php unauthenticated access",
+      "request": "GET /setup.php (no auth)",
+      "response": "HTTP 200, login_redirect=True",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:26:31.349132"
+    },
+    {
+      "id": "API-ENUM",
+      "description": "API method enumeration (59 objects)",
+      "request": "Tested 236 method combinations",
+      "response": "Accessible: 65, Denied: 118, Errors: 0",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:26:56.917912"
+    },
+    {
+      "id": "UNAUTH-apiinfo_version",
+      "description": "Unauthenticated access: Version disclosure",
+      "request": "POST api_jsonrpc.php apiinfo.version (no auth)",
+      "response": "HTTP 200: {'jsonrpc': '2.0', 'result': '7.0.23', 'id': 1}",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:26:56.949928"
+    },
+    {
+      "id": "UNAUTH-user_login",
+      "description": "Unauthenticated access: Login with wrong password",
+      "request": "POST api_jsonrpc.php user.login (no auth)",
+      "response": "HTTP 200: {'jsonrpc': '2.0', 'error': {'code': -32500, 'message': 'Application error.', 'data': 'Incorrect use",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:26:58.074490"
+    },
+    {
+      "id": "UNAUTH-user_get",
+      "description": "Unauthenticated access: User enumeration",
+      "request": "POST api_jsonrpc.php user.get (no auth)",
+      "response": "HTTP 200: {'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid params.', 'data': 'Not authorized.'",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:26:58.198552"
+    },
+    {
+      "id": "UNAUTH-host_get",
+      "description": "Unauthenticated access: Host enumeration",
+      "request": "POST api_jsonrpc.php host.get (no auth)",
+      "response": "HTTP 200: {'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid params.', 'data': 'Not authorized.'",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:26:58.326616"
+    },
+    {
+      "id": "UNAUTH-script_get",
+      "description": "Unauthenticated access: Script enumeration",
+      "request": "POST api_jsonrpc.php script.get (no auth)",
+      "response": "HTTP 200: {'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid params.', 'data': 'Not authorized.'",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:26:58.454680"
+    },
+    {
+      "id": "UNAUTH-settings_get",
+      "description": "Unauthenticated access: Settings disclosure",
+      "request": "POST api_jsonrpc.php settings.get (no auth)",
+      "response": "HTTP 200: {'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid params.', 'data': 'Not authorized.'",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:26:58.590748"
+    },
+    {
+      "id": "UNAUTH-authentication_get",
+      "description": "Unauthenticated access: Auth config disclosure",
+      "request": "POST api_jsonrpc.php authentication.get (no auth)",
+      "response": "HTTP 200: {'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid params.', 'data': 'Not authorized.'",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:26:58.726816"
+    },
+    {
+      "id": "UNAUTH-configuration_export",
+      "description": "Unauthenticated access: Config export",
+      "request": "POST api_jsonrpc.php configuration.export (no auth)",
+      "response": "HTTP 200: {'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid params.', 'data': 'Not authorized.'",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:26:58.858882"
+    },
+    {
+      "id": "UNAUTH-problem_get",
+      "description": "Unauthenticated access: Problem list",
+      "request": "POST api_jsonrpc.php problem.get (no auth)",
+      "response": "HTTP 200: {'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid params.', 'data': 'Not authorized.'",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:26:59.018962"
+    },
+    {
+      "id": "UNAUTH-alert_get",
+      "description": "Unauthenticated access: Alert list",
+      "request": "POST api_jsonrpc.php alert.get (no auth)",
+      "response": "HTTP 200: {'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid params.', 'data': 'Not authorized.'",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:26:59.151028"
+    },
+    {
+      "id": "ENUM-Valid_user,_wrong_pa",
+      "description": "Login: Valid user, wrong password",
+      "request": "user.login(Admin, wrong...)",
+      "response": "{'jsonrpc': '2.0', 'error': {'code': -32500, 'message': 'Application error.', 'data': 'Incorrect use",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:00.287596"
+    },
+    {
+      "id": "ENUM-Invalid_user,_wrong_",
+      "description": "Login: Invalid user, wrong password",
+      "request": "user.login(nonexistent_user_12345, wrong...)",
+      "response": "{'jsonrpc': '2.0', 'error': {'code': -32500, 'message': 'Application error.', 'data': 'Incorrect use",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:01.636271"
+    },
+    {
+      "id": "ENUM-Guest_user,_wrong_pa",
+      "description": "Login: Guest user, wrong password",
+      "request": "user.login(guest, wrong...)",
+      "response": "{'jsonrpc': '2.0', 'error': {'code': -32500, 'message': 'Application error.', 'data': 'Incorrect use",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:02.980943"
+    },
+    {
+      "id": "ENUM-admin_(lowercase),_w",
+      "description": "Login: admin (lowercase), wrong password",
+      "request": "user.login(admin, wrong...)",
+      "response": "{'jsonrpc': '2.0', 'error': {'code': -32500, 'message': 'Application error.', 'data': 'Incorrect use",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:04.325615"
+    },
+    {
+      "id": "ENUM-Empty_credentials",
+      "description": "Login: Empty credentials",
+      "request": "user.login(, ...)",
+      "response": "{'jsonrpc': '2.0', 'error': {'code': -32500, 'message': 'Application error.', 'data': 'Incorrect use",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:05.678291"
+    },
+    {
+      "id": "ENUM-Valid_user,_empty_pa",
+      "description": "Login: Valid user, empty password",
+      "request": "user.login(Admin, ...)",
+      "response": "{'jsonrpc': '2.0', 'error': {'code': -32500, 'message': 'Application error.', 'data': 'Incorrect use",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:07.018961"
+    },
+    {
+      "id": "PRIVESC-user_get",
+      "description": "Viewer access: List all users",
+      "request": "user.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'result': [{'userid': '3', 'username': 'viewer01', 'name': 'View', 'surname': 'Only', 'url': '', 'autologin': '0', 'autologout': '1",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:07.475189"
+    },
+    {
+      "id": "PRIVESC-user_get",
+      "description": "Viewer access: List users with media",
+      "request": "user.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'result': [{'userid': '3', 'username': 'viewer01', 'name': 'View', 'surname': 'Only', 'url': '', 'autologin': '0', 'autologout': '1",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:07.615259"
+    },
+    {
+      "id": "PRIVESC-host_get",
+      "description": "Viewer access: List all hosts",
+      "request": "host.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'result': [], 'id': 4}",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:07.779341"
+    },
+    {
+      "id": "PRIVESC-script_get",
+      "description": "Viewer access: List all scripts",
+      "request": "script.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'result': [{'scriptid': '1', 'name': 'Ping', 'command': 'ping -c 3 {HOST.CONN}; case $? in [01]) true;; *) false;; esac', 'host_acc",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:07.943423"
+    },
+    {
+      "id": "PRIVESC-authentication_get",
+      "description": "Viewer access: Auth configuration",
+      "request": "authentication.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'error': {'code': -32500, 'message': 'Application error.', 'data': 'No permissions to call \"authentication.get\".'}, 'id': 6}",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:08.063483"
+    },
+    {
+      "id": "PRIVESC-settings_get",
+      "description": "Viewer access: Server settings",
+      "request": "settings.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'result': {'default_theme': 'blue-theme', 'search_limit': '1000', 'max_in_table': '50', 'server_check_interval': '10', 'work_period",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:08.211557"
+    },
+    {
+      "id": "PRIVESC-autoregistration_get",
+      "description": "Viewer access: Autoregistration config",
+      "request": "autoregistration.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'error': {'code': -32500, 'message': 'Application error.', 'data': 'No permissions to call \"autoregistration.get\".'}, 'id': 8}",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:08.351627"
+    },
+    {
+      "id": "PRIVESC-role_get",
+      "description": "Viewer access: List all roles",
+      "request": "role.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'result': [{'roleid': '1', 'name': 'User role', 'type': '1', 'readonly': '0'}], 'id': 9}",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:08.515709"
+    },
+    {
+      "id": "PRIVESC-usergroup_get",
+      "description": "Viewer access: List all user groups",
+      "request": "usergroup.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'result': [{'usrgrpid': '8', 'name': 'Guests', 'gui_access': '0', 'users_status': '0', 'debug_mode': '0', 'mfa_status': '0'}], 'id'",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:08.659781"
+    },
+    {
+      "id": "PRIVESC-mediatype_get",
+      "description": "Viewer access: List all media types",
+      "request": "mediatype.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'result': [{'mediatypeid': '1', 'type': '0', 'name': 'Email', 'status': '1', 'description': '', 'maxattempts': '3'}, {'mediatypeid'",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:08.807855"
+    },
+    {
+      "id": "PRIVESC-proxy_get",
+      "description": "Viewer access: List proxies",
+      "request": "proxy.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'result': [], 'id': 12}",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:08.967935"
+    },
+    {
+      "id": "PRIVESC-auditlog_get",
+      "description": "Viewer access: Audit log",
+      "request": "auditlog.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'error': {'code': -32500, 'message': 'Application error.', 'data': 'No permissions to call \"auditlog.get\".'}, 'id': 13}",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:09.116009"
+    },
+    {
+      "id": "PRIVESC-token_get",
+      "description": "Viewer access: API tokens",
+      "request": "token.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'result': [], 'id': 14}",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:09.272087"
+    },
+    {
+      "id": "PRIVESC-housekeeping_get",
+      "description": "Viewer access: Housekeeping config",
+      "request": "housekeeping.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'result': {'hk_events_mode': '1', 'hk_events_trigger': '365d', 'hk_events_service': '1d', 'hk_events_internal': '1d', 'hk_events_di",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:09.412157"
+    },
+    {
+      "id": "PRIVESC-regexp_get",
+      "description": "Viewer access: Regular expressions",
+      "request": "regexp.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'error': {'code': -32500, 'message': 'Application error.', 'data': 'No permissions to call \"regexp.get\".'}, 'id': 16}",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:09.564233"
+    },
+    {
+      "id": "PRIVESC-connector_get",
+      "description": "Viewer access: Connectors",
+      "request": "connector.get as viewer01 (roleid=1)",
+      "response": "{'jsonrpc': '2.0', 'error': {'code': -32500, 'message': 'Application error.', 'data': 'No permissions to call \"connector.get\".'}, 'id': 17}",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:09.704303"
+    },
+    {
+      "id": "SCIM-SCIM_Users_(no_auth)",
+      "description": "SCIM: SCIM Users (no auth)",
+      "request": "GET /api_scim.php/Users",
+      "response": "HTTP 403: {\"schemas\":[\"urn:ietf:params:scim:api:messages:2.0:Error\"],\"detail\":\"Not authorized.\",\"status\":403}",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:09.928415"
+    },
+    {
+      "id": "SCIM-SCIM_Groups_(no_auth",
+      "description": "SCIM: SCIM Groups (no auth)",
+      "request": "GET /api_scim.php/Groups",
+      "response": "HTTP 403: {\"schemas\":[\"urn:ietf:params:scim:api:messages:2.0:Error\"],\"detail\":\"Not authorized.\",\"status\":403}",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:10.140521"
+    },
+    {
+      "id": "SCIM-SCIM_ServiceProvider",
+      "description": "SCIM: SCIM ServiceProviderConfig",
+      "request": "GET /api_scim.php/ServiceProviderConfig",
+      "response": "HTTP 200: {\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:ServiceProviderConfig\"],\"patch\":{\"supported\":true",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:10.412657"
+    },
+    {
+      "id": "SCIM-SCIM_Schemas",
+      "description": "SCIM: SCIM Schemas",
+      "request": "GET /api_scim.php/Schemas",
+      "response": "HTTP 500: {\"schemas\":[\"urn:ietf:params:scim:api:messages:2.0:Error\"],\"detail\":\"The requested endpoint \\\"schema",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:10.672787"
+    },
+    {
+      "id": "UNAUTH-PAGE-_",
+      "description": "Unauth page: Root",
+      "request": "GET / (no auth)",
+      "response": "HTTP 200, login_redirect=True",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:10.924913"
+    },
+    {
+      "id": "UNAUTH-PAGE-_index.php",
+      "description": "Unauth page: Login page",
+      "request": "GET /index.php (no auth)",
+      "response": "HTTP 200, login_redirect=True",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:11.068985"
+    },
+    {
+      "id": "UNAUTH-PAGE-_setup.php",
+      "description": "Unauth page: Setup wizard",
+      "request": "GET /setup.php (no auth)",
+      "response": "HTTP 200, login_redirect=True",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:11.209055"
+    },
+    {
+      "id": "UNAUTH-PAGE-_browserwarning",
+      "description": "Unauth page: Browser warning",
+      "request": "GET /browserwarning.php (no auth)",
+      "response": "HTTP 200, login_redirect=False",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:11.313107"
+    },
+    {
+      "id": "UNAUTH-PAGE-_robots.txt",
+      "description": "Unauth page: Robots.txt",
+      "request": "GET /robots.txt (no auth)",
+      "response": "HTTP 200, login_redirect=False",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:11.417159"
+    },
+    {
+      "id": "UNAUTH-PAGE-_favicon.ico",
+      "description": "Unauth page: Favicon",
+      "request": "GET /favicon.ico (no auth)",
+      "response": "HTTP 200, login_redirect=False",
+      "result": "ANOMALOUS",
+      "timestamp": "2026-03-03T06:27:11.689295"
+    },
+    {
+      "id": "UNAUTH-PAGE-_chart.php",
+      "description": "Unauth page: Chart",
+      "request": "GET /chart.php (no auth)",
+      "response": "HTTP 200, login_redirect=True",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:11.829365"
+    },
+    {
+      "id": "UNAUTH-PAGE-_chart2.php",
+      "description": "Unauth page: Chart2",
+      "request": "GET /chart2.php (no auth)",
+      "response": "HTTP 200, login_redirect=True",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:11.969435"
+    },
+    {
+      "id": "UNAUTH-PAGE-_graph.php",
+      "description": "Unauth page: Graph",
+      "request": "GET /graph.php (no auth)",
+      "response": "HTTP 404, login_redirect=False",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:12.073487"
+    },
+    {
+      "id": "UNAUTH-PAGE-_history.php",
+      "description": "Unauth page: History",
+      "request": "GET /history.php (no auth)",
+      "response": "HTTP 200, login_redirect=True",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:12.213557"
+    },
+    {
+      "id": "UNAUTH-PAGE-_map.php",
+      "description": "Unauth page: Map",
+      "request": "GET /map.php (no auth)",
+      "response": "HTTP 200, login_redirect=True",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:12.357629"
+    },
+    {
+      "id": "UNAUTH-PAGE-_jsrpc.php",
+      "description": "Unauth page: JS RPC",
+      "request": "GET /jsrpc.php (no auth)",
+      "response": "HTTP 200, login_redirect=True",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:12.493697"
+    },
+    {
+      "id": "UNAUTH-PAGE-_api_jsonrpc.ph",
+      "description": "Unauth page: JSON-RPC API",
+      "request": "GET /api_jsonrpc.php (no auth)",
+      "response": "HTTP 412, login_redirect=False",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:12.593747"
+    },
+    {
+      "id": "UNAUTH-PAGE-_api_scim.php",
+      "description": "Unauth page: SCIM API",
+      "request": "GET /api_scim.php (no auth)",
+      "response": "HTTP 500, login_redirect=False",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:27:12.729815"
+    }
+  ]
+}

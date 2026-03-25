@@ -1,0 +1,1271 @@
+{
+  "binary": "ftpd",
+  "binary_path": "source/squashfs-root/nova/bin/ftpd",
+  "decompiled_functions": [
+    {
+      "address": "0x804a0b0",
+      "name": "sscanf",
+      "size": 6,
+      "decompiled_c": "\nvoid sscanf(void)\n\n{\n  sscanf();\n  return;\n}\n\n",
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {
+          "name": "sscanf",
+          "address": "0x8052020"
+        }
+      ],
+      "callers": [
+        {
+          "name": "FUN_0804df74",
+          "address": "0x804df74"
+        }
+      ],
+      "dangerous_calls": [
+        {
+          "function": "sscanf",
+          "category": "sscanf"
+        },
+        {
+          "function": "sscanf",
+          "category": "scanf"
+        }
+      ],
+      "stack_frame_size": 4,
+      "return_type": "void"
+    },
+    {
+      "address": "0x804a100",
+      "name": "snprintf",
+      "size": 6,
+      "decompiled_c": "\nvoid snprintf(void)\n\n{\n  snprintf();\n  return;\n}\n\n",
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {
+          "name": "snprintf",
+          "address": "0x8052034"
+        }
+      ],
+      "callers": [
+        {
+          "name": "FUN_0804bcf0",
+          "address": "0x804bcf0"
+        }
+      ],
+      "dangerous_calls": [
+        {
+          "function": "snprintf",
+          "category": "snprintf"
+        }
+      ],
+      "stack_frame_size": 4,
+      "return_type": "void"
+    },
+    {
+      "address": "0x804a2b0",
+      "name": "getsockname",
+      "size": 6,
+      "decompiled_c": "\nvoid getsockname(void)\n\n{\n  getsockname();\n  return;\n}\n\n",
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {
+          "name": "getsockname",
+          "address": "0x80520a0"
+        }
+      ],
+      "callers": [
+        {
+          "name": "FUN_0804adc0",
+          "address": "0x804adc0"
+        },
+        {
+          "name": "FUN_0804dcf0",
+          "address": "0x804dcf0"
+        },
+        {
+          "name": "FUN_0804de58",
+          "address": "0x804de58"
+        }
+      ],
+      "dangerous_calls": [
+        {
+          "function": "getsockname",
+          "category": "gets"
+        }
+      ],
+      "stack_frame_size": 4,
+      "return_type": "void"
+    },
+    {
+      "address": "0x804a300",
+      "name": "strncpy",
+      "size": 6,
+      "decompiled_c": "\nvoid strncpy(void)\n\n{\n  strncpy();\n  return;\n}\n\n",
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {
+          "name": "strncpy",
+          "address": "0x80520b4"
+        }
+      ],
+      "callers": [
+        {
+          "name": "FUN_0804ba10",
+          "address": "0x804ba10"
+        }
+      ],
+      "dangerous_calls": [
+        {
+          "function": "strncpy",
+          "category": "strncpy"
+        }
+      ],
+      "stack_frame_size": 4,
+      "return_type": "void"
+    },
+    {
+      "address": "0x804adc0",
+      "name": "FUN_0804adc0",
+      "size": 171,
+      "decompiled_c": "\nundefined4 FUN_0804adc0(void)\n\n{\n  int in_EAX;\n  int iVar1;\n  undefined2 *in_EDX;\n  undefined4 uVar2;\n  \n  iVar1 = *(int *)(in_EAX + 0x40);\n  if (iVar1 != -1) {\n    iVar1 = close(iVar1);\n    *(undefined4 *)(in_EAX + 0x40) = 0xffffffff;\n  }\n  iVar1 = socket(*in_EDX,1,0,iVar1);\n  uVar2 = 0;\n  *(int *)(in_EAX + 0x40) = iVar1;\n  if (iVar1 != -1) {\n    iVar1 = bind(iVar1);\n    if (iVar1 != -1) {\n      iVar1 = getsockname(*(undefined4 *)(in_EAX + 0x40));\n      iVar1 = iVar1 + 1;\n      if ((iVar1 != 0) &&\n         (iVar1 = listen(*(undefined4 *)(in_EAX + 0x40),5,iVar1,iVar1), iVar1 != -1)) {\n        *(undefined1 *)(in_EAX + 0x3e) = 1;\n        return 1;\n      }\n    }\n    close(*(undefined4 *)(in_EAX + 0x40));\n    *(undefined4 *)(in_EAX + 0x40) = 0xffffffff;\n    uVar2 = 0xffffffff;\n  }\n  return uVar2;\n}\n\n",
+      "parameters": [],
+      "local_variables": [
+        {
+          "name": "iVar1",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "in_EAX",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "uVar2",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "in_EDX",
+          "type": "undefined2 *",
+          "size": 4
+        }
+      ],
+      "called_functions": [
+        {
+          "name": "socket",
+          "address": "0x804a3c0"
+        },
+        {
+          "name": "getsockname",
+          "address": "0x804a2b0"
+        },
+        {
+          "name": "close",
+          "address": "0x804a3d0"
+        },
+        {
+          "name": "listen",
+          "address": "0x804a050"
+        },
+        {
+          "name": "bind",
+          "address": "0x804a2c0"
+        }
+      ],
+      "callers": [
+        {
+          "name": "FUN_0804de58",
+          "address": "0x804de58"
+        },
+        {
+          "name": "FUN_0804dcf0",
+          "address": "0x804dcf0"
+        }
+      ],
+      "dangerous_calls": [
+        {
+          "function": "getsockname",
+          "category": "gets"
+        }
+      ],
+      "stack_frame_size": 20,
+      "return_type": "undefined4"
+    },
+    {
+      "address": "0x804ba10",
+      "name": "FUN_0804ba10",
+      "size": 343,
+      "decompiled_c": "\nvoid FUN_0804ba10(int param_1,int *param_2)\n\n{\n  char *pcVar1;\n  int iVar2;\n  char cVar3;\n  undefined4 uVar4;\n  char *pcVar5;\n  uint uVar6;\n  int iVar7;\n  uint uVar8;\n  undefined4 uStack_50;\n  int aiStack_4c [4];\n  char acStack_3c [4];\n  uint local_38;\n  int local_34;\n  uint local_30;\n  char *local_20 [4];\n  \n  param_2 = (int *)*param_2;\n  iVar7 = *param_2;\n  iVar2 = -(iVar7 + 0x10U & 0xfffffff0);\n  local_20[0] = acStack_3c + iVar2;\n  *(int *)((int)aiStack_4c + iVar2 + 8) = iVar7 + 1;\n  *(int **)((int)aiStack_4c + iVar2 + 4) = param_2 + 1;\n  *(char **)((int)aiStack_4c + iVar2) = acStack_3c + iVar2;\n  *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804ba44;\n  strncpy();\n  *(char **)((int)aiStack_4c + iVar2 + 4) = \"ftpd: rcvd PORT cmd: \\'\";\n  *(undefined1 **)((int)aiStack_4c + iVar2) = cerr;\n  *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804ba55;\n  _ZlsR7ostreamPKc();\n  *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804ba5c;\n  uVar4 = FUN_0804af32();\n  *(undefined **)((int)aiStack_4c + iVar2 + 4) = &DAT_0804f969;\n  *(undefined4 *)((int)aiStack_4c + iVar2) = uVar4;\n  *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804ba69;\n  _ZlsR7ostreamPKc();\n  *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804ba73;\n  FUN_0804a8f9();\n  *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804ba7a;\n  cVar3 = FUN_0804b7c2();\n  if (cVar3 != '\\0') {\n    *(undefined4 *)((int)aiStack_4c + iVar2 + 0xc) = 0x804ba8e;\n    pcVar5 = (char *)FUN_0804aae2();\n    local_34 = 4;\n    uVar8 = 0;\n    pcVar1 = local_20[0];\n    do {\n      local_20[0] = pcVar1;\n      local_38 = uVar8;\n      *(char **)((int)aiStack_4c + iVar2 + 0xc) = pcVar5;\n      *(undefined4 *)((int)aiStack_4c + iVar2 + 8) = 10;\n      *(char ***)((int)aiStack_4c + iVar2 + 4) = local_20;\n      *(char **)((int)aiStack_4c + iVar2) = local_20[0];\n      *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804baa9;\n      uVar6 = strtol();\n      pcVar5 = local_20[0];\n      pcVar1 = local_20[0] + 1;\n      uVar8 = local_38;\n      local_30 = uVar6;\n      if (*local_20[0] != ',') goto LAB_0804bb20;\n      uVar8 = local_38 * 0x100 + uVar6;\n      local_34 = local_34 + -1;\n    } while (local_34 != 0);\n    *(char **)((int)aiStack_4c + iVar2 + 0xc) = local_20[0];\n    local_20[0] = pcVar1;\n    *(char **)((int)aiStack_4c + iVar2 + 8) = pcVar5;\n    *(uint *)((int)aiStack_4c + iVar2 + 4) =\n         uVar8 >> 0x18 | (uVar8 & 0xff0000) >> 8 | (uVar8 & 0xff00) << 8 | uVar6 * 0x1000000;\n    *(int *)((int)aiStack_4c + iVar2) = param_1 + 0x18;\n    *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804bad9;\n    _ZN7IPAddr67setIPv4Ej();\n    *(undefined4 *)((int)aiStack_4c + iVar2 + 8) = 10;\n    *(char ***)((int)aiStack_4c + iVar2 + 4) = local_20;\n    *(char **)((int)aiStack_4c + iVar2) = local_20[0];\n    *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804bae7;\n    uVar8 = strtol();\n    *(uint *)(param_1 + 0x28) = uVar8;\n    pcVar1 = local_20[0] + 1;\n    if (*local_20[0] == ',') {\n      local_30 = uVar8;\n      pcVar5 = pcVar1;\n      *(char **)((int)aiStack_4c + iVar2 + 0xc) = local_20[0];\n      local_20[0] = pcVar5;\n      *(undefined4 *)((int)aiStack_4c + iVar2 + 8) = 10;\n      *(char ***)((int)aiStack_4c + iVar2 + 4) = local_20;\n      *(char **)((int)aiStack_4c + iVar2) = pcVar1;\n      *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804bb0a;\n      iVar7 = strtol();\n      pcVar1 = local_20[0];\n      uVar8 = local_30 * 0x100 + iVar7;\n      *(uint *)(param_1 + 0x28) = uVar8;\n      if (*local_20[0] == '\\0') {\n        *(char **)((int)aiStack_4c + iVar2 + 0xc) = local_20[0];\n        *(char **)((int)aiStack_4c + iVar2 + 8) = pcVar1;\n        *(char **)((int)aiStack_4c + iVar2 + 4) = \"200 PORT command successful\";\n        *(undefined1 **)((int)aiStack_4c + iVar2) = cout;\n        *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804bb52;\n        _ZlsR7ostreamPKc();\n        *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804bb5d;\n        FUN_0804af32();\n        return;\n      }\n    }\nLAB_0804bb20:\n    local_20[0] = pcVar1;\n    *(uint *)((int)aiStack_4c + iVar2 + 0xc) = uVar8;\n    *(uint *)((int)aiStack_4c + iVar2 + 8) = uVar8;\n    *(char **)((int)aiStack_4c + iVar2 + 4) = \"500 Bad PORT command\";\n    *(undefined1 **)((int)aiStack_4c + iVar2) = cout;\n    *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804bb31;\n    _ZlsR7ostreamPKc();\n    *(undefined4 *)((int)&uStack_50 + iVar2) = 0x804bb3c;\n    FUN_0804af32();\n  }\n  return;\n}\n\n",
+      "parameters": [
+        {
+          "name": "param_1",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "param_2",
+          "type": "int *",
+          "size": 4
+        }
+      ],
+      "local_variables": [
+        {
+          "name": "param_2",
+          "type": "int *",
+          "size": 4
+        },
+        {
+          "name": "param_1",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "iVar2",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "pcVar1",
+          "type": "char *",
+          "size": 4
+        },
+        {
+          "name": "uVar4",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "cVar3",
+          "type": "char",
+          "size": 1
+        },
+        {
+          "name": "uVar6",
+          "type": "uint",
+          "size": 4
+        },
+        {
+          "name": "pcVar5",
+          "type": "char *",
+          "size": 4
+        },
+        {
+          "name": "uVar8",
+          "type": "uint",
+          "size": 4
+        },
+        {
+          "name": "iVar7",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "local_38",
+          "type": "uint",
+          "size": 4
+        },
+        {
+          "name": "local_34",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "local_30",
+          "type": "uint",
+          "size": 4
+        },
+        {
+          "name": "local_20",
+          "type": "char *[4]",
+          "size": 16
+        },
+        {
+          "name": "uStack_50",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "acStack_3c",
+          "type": "char[4]",
+          "size": 4
+        },
+        {
+          "name": "aiStack_4c",
+          "type": "int[4]",
+          "size": 16
+        }
+      ],
+      "called_functions": [
+        {
+          "name": "FUN_0804a8f9",
+          "address": "0x804a8f9"
+        },
+        {
+          "name": "FUN_0804b7c2",
+          "address": "0x804b7c2"
+        },
+        {
+          "name": "FUN_0804aae2",
+          "address": "0x804aae2"
+        },
+        {
+          "name": "_ZlsR7ostreamPKc",
+          "address": "0x804a410"
+        },
+        {
+          "name": "FUN_0804af32",
+          "address": "0x804af32"
+        },
+        {
+          "name": "_ZN7IPAddr67setIPv4Ej",
+          "address": "0x804a330"
+        },
+        {
+          "name": "strncpy",
+          "address": "0x804a300"
+        },
+        {
+          "name": "strtol",
+          "address": "0x804a6d0"
+        }
+      ],
+      "callers": [],
+      "dangerous_calls": [
+        {
+          "function": "strncpy",
+          "category": "strncpy"
+        }
+      ],
+      "stack_frame_size": 60,
+      "return_type": "void"
+    },
+    {
+      "address": "0x804bcf0",
+      "name": "FUN_0804bcf0",
+      "size": 2058,
+      "decompiled_c": "\nvoid FUN_0804bcf0(undefined4 param_1)\n\n{\n  uint uVar1;\n  uint **ppuVar2;\n  byte bVar3;\n  byte bVar4;\n  char cVar5;\n  int iVar6;\n  uint *puVar7;\n  undefined4 uVar8;\n  undefined4 *puVar9;\n  undefined4 uVar10;\n  int iVar11;\n  undefined4 in_ECX;\n  uint *extraout_ECX;\n  undefined4 extraout_ECX_00;\n  undefined4 extraout_ECX_01;\n  undefined4 extraout_ECX_02;\n  undefined4 extraout_ECX_03;\n  undefined4 extraout_ECX_04;\n  uint **in_EDX;\n  uint uVar12;\n  undefined4 extraout_EDX;\n  uint *puVar13;\n  int *piVar14;\n  undefined1 *puVar15;\n  uint ***pppuVar16;\n  uint **ppuVar17;\n  undefined4 **ppuVar18;\n  bool bVar19;\n  undefined8 uVar20;\n  uint **ppuStack_150;\n  uint **local_14c;\n  uint **ppuStack_148;\n  uint **ppuStack_144;\n  uint **ppuStack_140;\n  undefined1 auStack_13c [8];\n  int local_134;\n  char local_12e;\n  byte local_12d;\n  byte local_12c;\n  byte local_12b;\n  byte local_12a;\n  byte local_129;\n  undefined4 local_128;\n  int local_124;\n  undefined4 local_120;\n  int *local_118;\n  uint *local_114;\n  uint *local_110;\n  uint *local_10c;\n  uint *local_108;\n  undefined4 *local_104;\n  undefined4 *local_100;\n  undefined local_fc [16];\n  uint local_ec;\n  undefined4 local_e8;\n  undefined4 local_d0;\n  undefined4 local_cc;\n  int local_b4 [6];\n  uint *local_9c [35];\n  \n  local_120 = param_1;\n  uVar8 = local_120;\n  local_120._0_1_ = (byte)param_1;\n  local_12a = (byte)local_120;\n  local_14c = &local_108;\n  pppuVar16 = &local_14c;\n  ppuStack_150 = (uint **)0x804bd2b;\n  local_128 = in_ECX;\n  local_120 = uVar8;\n  _ZN6stringC1Ev();\n  local_14c = &local_10c;\n  ppuStack_150 = (uint **)0x804bd39;\n  _ZN6stringC1Ev();\n  ppuVar2 = ppuStack_148;\n  local_14c = &local_110;\n  ppuStack_150 = (uint **)0x804bd48;\n  ppuStack_148 = in_EDX;\n  _ZN6stringC1ERKS_();\n  ppuStack_150 = (uint **)0x804bd55;\n  bVar4 = FUN_0804b7c2();\n  puVar15 = auStack_13c;\n  if (bVar4 != 0) {\n    local_12c = (byte)local_128 ^ 1;\n    local_12d = 0;\n    uVar1 = *local_110;\n    if ((1 < uVar1) && ((char)local_110[1] == '-')) {\n      uVar12 = 1;\n      do {\n        cVar5 = *(char *)((int)local_110 + uVar12 + 4);\n        bVar3 = bVar4;\n        if ((cVar5 != 'a') && (bVar3 = local_12d, cVar5 == 'l')) {\n          local_12c = bVar4;\n        }\n        local_12d = bVar3;\n        uVar12 = uVar12 + 1;\n      } while (uVar12 != uVar1);\n      ppuStack_140 = (uint **)local_110;\n      local_14c = &local_110;\n      ppuStack_144 = (uint **)0xffffffff;\n      ppuStack_148 = (uint **)0x0;\n      ppuStack_150 = (uint **)0x804bdc0;\n      _ZN6string5eraseEjj();\n    }\n    ppuStack_150 = (uint **)0x804bdd2;\n    local_14c = &local_114;\n    _ZN6stringC1Ev();\n    ppuStack_150 = (uint **)0x804bde5;\n    local_12b = FUN_0804aa8e();\n    if (local_12b == 0) {\n      if ((byte)local_120 == '\\0') {\n        ppuStack_148 = (uint **)&DAT_0804f40f;\n        local_14c = (uint **)cout;\n        ppuStack_150 = (uint **)0x804be0c;\n        ppuStack_144 = (uint **)extraout_ECX;\n        _ZlsR7ostreamPKc();\n      }\n      ppuStack_140 = (uint **)0x804be1f;\n      uVar20 = FUN_0804af32();\n      ppuStack_148 = (uint **)0x804f414;\nLAB_0804be26:\n      ppuStack_140 = (uint **)((ulonglong)uVar20 >> 0x20);\n      pppuVar16 = &local_14c;\n      ppuStack_144 = ppuStack_140;\nLAB_0804be27:\n      ppuStack_140 = (uint **)((ulonglong)uVar20 >> 0x20);\n      local_14c = (uint **)uVar20;\n      *(undefined4 *)((int)pppuVar16 + -4) = 0x804be2c;\n      _ZlsR7ostreamPKc();\n      *(undefined4 *)((int)pppuVar16 + -4) = 0x804be37;\n      FUN_0804af32();\n      piVar14 = (int *)((int)pppuVar16 + 0x10);\n      puVar15 = (undefined1 *)((int)pppuVar16 + 0x10);\n      if ((byte)local_120 == '\\0') goto LAB_0804be47;\n    }\n    else {\n      ppuStack_140 = ppuVar2;\n      ppuStack_148 = (uint **)local_fc;\n      ppuStack_144 = ppuVar2;\n      local_14c = (uint **)(local_114 + 1);\n      ppuStack_150 = (uint **)0x804be71;\n      iVar6 = stat();\n      if (iVar6 == 0) {\n        if ((local_ec & 0xf000) == 0x4000) {\n          ppuStack_148 = (uint **)0x2f;\n          ppuStack_150 = (uint **)0x804be94;\n          local_14c = &local_114;\n          ppuStack_144 = (uint **)uVar1;\n          ppuStack_140 = (uint **)uVar1;\n          _ZN6string9push_backEc();\n        }\n      }\n      else {\n        local_14c = (uint **)0x2;\n        ppuStack_150 = (uint **)0x0;\n        iVar6 = _Z19__str_find_first_ofPKcjS0_jj(local_110 + 1,*local_110,&DAT_0804f428);\n        if ((iVar6 == -1) && ((byte)local_128 != '\\0')) {\n          if ((byte)local_120 == '\\0') {\n            ppuStack_148 = (uint **)&DAT_0804f42b;\n            local_14c = (uint **)cout;\n            ppuStack_150 = (uint **)0x804bee0;\n            ppuStack_144 = &local_114;\n            ppuStack_140 = &local_114;\n            _ZlsR7ostreamPKc();\n          }\n          ppuStack_140 = (uint **)0x804bef3;\n          uVar8 = FUN_0804af32();\n          uVar20 = CONCAT44(extraout_ECX_00,uVar8);\n          ppuStack_148 = (uint **)0x804f430;\n          goto LAB_0804be26;\n        }\n      }\n      ppuStack_140 = (uint **)0xffffffff;\n      ppuStack_144 = (uint **)0x2f;\n      local_14c = (uint **)(local_114 + 1);\n      ppuStack_148 = (uint **)*local_114;\n      ppuVar17 = &local_10c;\n      ppuStack_150 = (uint **)0x804bf1b;\n      puVar7 = (uint *)_Z11__str_rfindPKcjcj();\n      local_14c = ppuVar17;\n      if (puVar7 == (uint *)0xffffffff) {\n        ppuStack_144 = (uint **)0xffffffff;\n        ppuStack_148 = (uint **)0x0;\n        ppuStack_150 = (uint **)0x804bf30;\n        ppuStack_140 = (uint **)puVar7;\n        _ZN6string5eraseEjj();\n        ppuStack_148 = &local_114;\n        local_14c = &local_108;\n        ppuStack_150 = (uint **)0x804bf45;\n        _ZN6string6assignERKS_();\n        pppuVar16 = &local_14c;\n      }\n      else {\n        ppuStack_140 = ppuVar2;\n        ppuStack_144 = ppuVar2;\n        ppuStack_150 = (uint **)0x804bf56;\n        ppuStack_148 = &local_114;\n        _ZN6string6assignERKS_();\n        ppuStack_144 = (uint **)0xffffffff;\n        puVar13 = (uint *)((int)puVar7 + 1);\n        ppuStack_150 = (uint **)0x804bf63;\n        local_14c = ppuVar17;\n        ppuStack_148 = (uint **)puVar7;\n        _ZN6string5eraseEjj();\n        if (puVar13 < (uint *)*local_114) {\n          ppuStack_140 = (uint **)0xffffffff;\n          ppuVar17 = local_9c;\n          ppuStack_150 = (uint **)0x804bf80;\n          local_14c = ppuVar17;\n          ppuStack_148 = &local_114;\n          ppuStack_144 = (uint **)puVar13;\n          _ZNK6string6substrEjj();\n          _ZN6stringaSEOS_(&local_108,ppuVar17);\n          pppuVar16 = &ppuStack_150;\n          ppuStack_150 = ppuVar17;\n          _ZN6string7freeptrEv();\n        }\n        else {\n          local_14c = &local_108;\n          ppuStack_144 = (uint **)0xffffffff;\n          ppuStack_148 = (uint **)0x0;\n          ppuStack_150 = (uint **)0x804bfac;\n          ppuStack_140 = (uint **)puVar13;\n          _ZN6string5eraseEjj();\n        }\n      }\n      *pppuVar16 = (uint **)(local_10c + 1);\n      ((int *)pppuVar16)[-1] = 0x804bfc1;\n      iVar6 = opendir();\n      local_129 = iVar6 == 0 & (byte)local_128;\n      if (local_129 != 0) {\n        if ((byte)local_120 == '\\0') {\n          ((int *)pppuVar16)[3] = extraout_ECX_01;\n          ((int *)pppuVar16)[2] = extraout_ECX_01;\n          ((int *)pppuVar16)[1] = (int)&DAT_0804f42b;\n          *pppuVar16 = (uint **)cout;\n          ((int *)pppuVar16)[-1] = 0x804bff3;\n          _ZlsR7ostreamPKc();\n        }\n        ((int *)pppuVar16)[3] = 0x804c006;\n        uVar8 = FUN_0804af32();\n        ((int *)pppuVar16)[3] = iVar6;\n        ((int *)pppuVar16)[2] = iVar6;\n        ((int *)pppuVar16)[1] = (int)\": \";\n        *pppuVar16 = (uint **)uVar8;\n        ((int *)pppuVar16)[-1] = 0x804c013;\n        uVar8 = _ZlsR7ostreamPKc();\n        ((int *)pppuVar16)[-1] = 0x804c01a;\n        puVar9 = (undefined4 *)__errno_location();\n        *pppuVar16 = (uint **)*puVar9;\n        ((int *)pppuVar16)[-1] = 0x804c022;\n        uVar10 = strerror();\n        ((int *)pppuVar16)[1] = uVar10;\n        *pppuVar16 = (uint **)uVar8;\n        uVar20 = CONCAT44(ppuStack_140,local_14c);\n        goto LAB_0804be27;\n      }\n      if ((byte)local_120 != '\\0') {\nLAB_0804c0a4:\n        ((int *)pppuVar16)[3] = 0x804c0a9;\n        uVar8 = _ZN2nv9getLooperEv();\n        *pppuVar16 = (uint **)uVar8;\n        ((int *)pppuVar16)[-1] = 0x804c0b2;\n        local_134 = _ZN2nv6Looper11getTimezoneEv();\n        *pppuVar16 = (uint **)&local_118;\n        ((int *)pppuVar16)[-1] = 0x804c0c6;\n        _ZN6stringC1Ev();\n        if (iVar6 == 0) {\n          ((int *)pppuVar16)[3] = 0x804c37c;\n          puVar9 = (undefined4 *)__errno_location();\n          *pppuVar16 = (uint **)*puVar9;\n          ((int *)pppuVar16)[-1] = 0x804c386;\n          uVar8 = strerror();\n          ((int *)pppuVar16)[1] = uVar8;\n          *pppuVar16 = (uint **)&local_118;\nLAB_0804c38a:\n          ((int *)pppuVar16)[-1] = 0x804c38f;\n          _ZN6string6assignEPKc();\n        }\n        else {\n          while( true ) {\n            *pppuVar16 = (uint **)iVar6;\n            ((int *)pppuVar16)[-1] = 0x804c0da;\n            uVar20 = readdir();\n            uVar8 = (undefined4)((ulonglong)uVar20 >> 0x20);\n            if ((int)uVar20 == 0) break;\n            ((int *)pppuVar16)[3] = uVar8;\n            ((int *)pppuVar16)[2] = uVar8;\n            ppuVar18 = &local_104;\n            ((int *)pppuVar16)[1] = (int)uVar20 + 0x13;\n            *pppuVar16 = ppuVar18;\n            ((int *)pppuVar16)[-1] = 0x804c0f7;\n            _ZN6stringC1EPKc();\n            puVar7 = local_108;\n            if (*local_108 == 0) {\nLAB_0804c167:\n              if (local_12d == 0) {\n                ((int *)pppuVar16)[3] = 0x804c180;\n                cVar5 = FUN_0804a981();\n                if (cVar5 == '\\0') {\n                  ((int *)pppuVar16)[3] = 0x804c198;\n                  puVar7 = (uint *)FUN_0804a981();\n                  if ((char)puVar7 == '\\0') goto LAB_0804c1a0;\n                }\n              }\n              else {\nLAB_0804c1a0:\n                if (local_12c != 0) {\n                  ((int *)pppuVar16)[3] = (int)puVar7;\n                  ppuVar17 = local_9c;\n                  ((int *)pppuVar16)[2] = (int)puVar7;\n                  ((int *)pppuVar16)[1] = (int)&local_10c;\n                  *pppuVar16 = ppuVar17;\n                  ((int *)pppuVar16)[-1] = 0x804c1c2;\n                  _ZN6stringC1ERKS_();\n                  ((int *)pppuVar16)[1] = 0x2f;\n                  *pppuVar16 = ppuVar17;\n                  ((int *)pppuVar16)[-1] = 0x804c1cc;\n                  _ZN6string9push_backEc();\n                  ((int *)pppuVar16)[-1] = 0x804c1df;\n                  FUN_0804a95d();\n                  *pppuVar16 = ppuVar17;\n                  ((int *)pppuVar16)[-1] = 0x804c1e7;\n                  _ZN6string7freeptrEv();\n                  ppuVar18 = (undefined4 **)((int *)pppuVar16)[1];\n                  ((int *)pppuVar16)[1] = (int)local_fc;\n                  *pppuVar16 = (uint **)(local_100 + 1);\n                  ((int *)pppuVar16)[-1] = 0x804c1ff;\n                  stat();\n                  local_b4[0] = local_b4[0] + local_134;\n                  *pppuVar16 = (uint **)local_b4;\n                  ((int *)pppuVar16)[-1] = 0x804c219;\n                  iVar11 = gmtime();\n                  *pppuVar16 = (uint **)*(undefined4 *)(iVar11 + 4);\n                  ((int *)pppuVar16)[-1] = *(undefined4 *)(iVar11 + 8);\n                  ((int *)pppuVar16)[-2] = *(undefined4 *)(iVar11 + 0xc);\n                  bVar19 = (local_ec & 0xf000) == 0x4000;\n                  ((int *)pppuVar16)[-3] = *(int *)(&DAT_080514e0 + *(int *)(iVar11 + 0x10) * 4) + 4\n                  ;\n                  ((int *)pppuVar16)[-4] = local_cc;\n                  ((int *)pppuVar16)[-5] = local_d0;\n                  ((int *)pppuVar16)[-6] = local_e8;\n                  iVar11 = (bVar19 - 1 & 0xffffffb5) + 0x78;\n                  ((int *)pppuVar16)[-7] = iVar11;\n                  ((int *)pppuVar16)[-8] = iVar11;\n                  ((int *)pppuVar16)[-9] = (bVar19 - 1 & 0xffffffc9) + 100;\n                  ((int *)pppuVar16)[-10] =\n                       (int)\"%crw%crw%c--- %3d root     root     %8llu %s %2u %2.2u:%2.2u \";\n                  ((int *)pppuVar16)[-0xb] = 0x80;\n                  ((int *)pppuVar16)[-0xc] = (int)ppuVar17;\n                  ((int *)pppuVar16)[-0xd] = 0x804c282;\n                  uVar8 = snprintf();\n                  if (local_12a == 0) {\n                    *pppuVar16 = ppuVar17;\n                    ((int *)pppuVar16)[-1] = 0x804c297;\n                    uVar8 = strlen();\n                    ((int *)pppuVar16)[2] = uVar8;\n                    ((int *)pppuVar16)[1] = (int)ppuVar17;\n                    *pppuVar16 = (uint **)*(undefined4 *)(local_124 + 0x2c);\n                    ((int *)pppuVar16)[-1] = 0x804c2aa;\n                    write();\n                  }\n                  else {\n                    ((int *)pppuVar16)[3] = uVar8;\n                    ((int *)pppuVar16)[2] = uVar8;\n                    ((int *)pppuVar16)[1] = (int)ppuVar17;\n                    *pppuVar16 = (uint **)cout;\n                    ((int *)pppuVar16)[-1] = 0x804c2b9;\n                    _ZlsR7ostreamPKc();\n                  }\n                  *pppuVar16 = &local_100;\n                  ((int *)pppuVar16)[-1] = 0x804c2cb;\n                  _ZN6string7freeptrEv();\n                }\n                ((int *)pppuVar16)[3] = (int)ppuVar18;\n                ((int *)pppuVar16)[2] = (int)ppuVar18;\n                ((int *)pppuVar16)[1] = (int)&DAT_08051510;\n                *pppuVar16 = &local_104;\n                ((int *)pppuVar16)[-1] = 0x804c2e1;\n                _ZN6string6appendERKS_();\n                if (local_12a == 0) {\n                  ((int *)pppuVar16)[3] = (int)ppuVar17;\n                  ((int *)pppuVar16)[2] = *local_104;\n                  ((int *)pppuVar16)[1] = (int)(local_104 + 1);\n                  *pppuVar16 = (uint **)*(undefined4 *)(local_124 + 0x2c);\n                  ((int *)pppuVar16)[-1] = 0x804c309;\n                  write();\n                  local_129 = local_12b;\n                }\n                else {\n                  ((int *)pppuVar16)[3] = 0x804c324;\n                  FUN_0804af32();\n                  local_129 = local_12a;\n                }\n              }\n            }\n            else {\n              ((int *)pppuVar16)[3] = extraout_ECX_03;\n              ((int *)pppuVar16)[2] = extraout_ECX_03;\n              ((int *)pppuVar16)[1] = (int)ppuVar18;\n              ppuVar18 = &local_100;\n              *pppuVar16 = ppuVar18;\n              ((int *)pppuVar16)[-1] = 0x804c114;\n              _ZN6stringC1ERKS_();\n              ppuVar17 = local_9c;\n              ((int *)pppuVar16)[1] = (int)&local_108;\n              *pppuVar16 = ppuVar17;\n              ((int *)pppuVar16)[-1] = 0x804c129;\n              _ZN6stringC1ERKS_();\n              ((int *)pppuVar16)[-1] = 0x804c140;\n              local_12e = FUN_0804a88e();\n              *pppuVar16 = ppuVar17;\n              ((int *)pppuVar16)[-1] = 0x804c14e;\n              _ZN6string7freeptrEv();\n              *pppuVar16 = ppuVar18;\n              ((int *)pppuVar16)[-1] = 0x804c156;\n              uVar8 = _ZN6string7freeptrEv();\n              puVar7 = (uint *)CONCAT31((int3)((uint)uVar8 >> 8),local_12e);\n              if (local_12e != '\\0') goto LAB_0804c167;\n            }\n            *pppuVar16 = &local_104;\n            ((int *)pppuVar16)[-1] = 0x804c33f;\n            _ZN6string7freeptrEv();\n          }\n          *pppuVar16 = (uint **)iVar6;\n          ((int *)pppuVar16)[-1] = 0x804c350;\n          closedir();\n          if ((local_129 == 0) && (*local_108 != 0)) {\n            ((int *)pppuVar16)[3] = iVar6;\n            ((int *)pppuVar16)[2] = iVar6;\n            ((int *)pppuVar16)[1] = (int)\"No such file or directory\";\n            *pppuVar16 = (uint **)&local_118;\n            goto LAB_0804c38a;\n          }\n        }\n        if (((byte)local_128 == '\\0') && (*local_118 != 0)) {\n          ((int *)pppuVar16)[3] = iVar6;\n          ((int *)pppuVar16)[2] = iVar6;\n          ((int *)pppuVar16)[1] = (int)&local_110;\n          *pppuVar16 = local_9c;\n          ((int *)pppuVar16)[-1] = 0x804c3c3;\n          _ZN6stringC1ERKS_();\n          ((int *)pppuVar16)[1] = (int)\": \";\n          *pppuVar16 = local_9c;\n          ((int *)pppuVar16)[-1] = 0x804c3dc;\n          _ZN6string6appendEPKc();\n          ((int *)pppuVar16)[-1] = 0x804c3eb;\n          FUN_0804a95d();\n          ((int *)pppuVar16)[-1] = 0x804c3f9;\n          FUN_0804a95d();\n          *pppuVar16 = &local_100;\n          ((int *)pppuVar16)[-1] = 0x804c401;\n          _ZN6string7freeptrEv();\n          *pppuVar16 = local_9c;\n          ((int *)pppuVar16)[-1] = 0x804c409;\n          _ZN6string7freeptrEv();\n          if ((byte)local_120 == '\\0') {\n            ((int *)pppuVar16)[3] = extraout_ECX_04;\n            ((int *)pppuVar16)[2] = *local_104;\n            ((int *)pppuVar16)[1] = (int)(local_104 + 1);\n            *pppuVar16 = (uint **)*(undefined4 *)(local_124 + 0x2c);\n            ((int *)pppuVar16)[-1] = 0x804c431;\n            write();\n          }\n          else {\n            ((int *)pppuVar16)[3] = 0x804c446;\n            FUN_0804af32();\n          }\n          *pppuVar16 = &local_104;\n          ((int *)pppuVar16)[-1] = 0x804c44f;\n          _ZN6string7freeptrEv();\n        }\n        if ((byte)local_120 == '\\0') {\n          ((int *)pppuVar16)[3] = 0x804c46b;\n          FUN_0804aae2();\n          ((int *)pppuVar16)[3] = extraout_EDX;\n          ((int *)pppuVar16)[2] = extraout_EDX;\n          ((int *)pppuVar16)[1] = (int)\"226 Transfer complete\";\n          *pppuVar16 = (uint **)cout;\n          ((int *)pppuVar16)[-1] = 0x804c47c;\n          _ZlsR7ostreamPKc();\n          ((int *)pppuVar16)[-1] = 0x804c487;\n          FUN_0804af32();\n        }\n        *pppuVar16 = (uint **)&local_118;\n        ((int *)pppuVar16)[-1] = 0x804c499;\n        _ZN6string7freeptrEv();\n        *pppuVar16 = &local_114;\n        ((int *)pppuVar16)[-1] = 0x804c4a7;\n        _ZN6string7freeptrEv();\n        *pppuVar16 = &local_110;\n        goto LAB_0804c4ce;\n      }\n      ((int *)pppuVar16)[3] = 0x804c03f;\n      uVar8 = FUN_0804b334();\n      if ((char)uVar8 != '\\0') {\n        ((int *)pppuVar16)[3] = uVar8;\n        ((int *)pppuVar16)[2] = uVar8;\n        ((int *)pppuVar16)[1] = (int)\"150 Opening data connection\";\n        *pppuVar16 = (uint **)cout;\n        ((int *)pppuVar16)[-1] = 0x804c08c;\n        _ZlsR7ostreamPKc();\n        ((int *)pppuVar16)[-1] = 0x804c097;\n        FUN_0804af32();\n        ((int *)pppuVar16)[-1] = 0x804c0a1;\n        FUN_0804a8f9();\n        goto LAB_0804c0a4;\n      }\n      ((int *)pppuVar16)[3] = extraout_ECX_02;\n      ((int *)pppuVar16)[2] = extraout_ECX_02;\n      ((int *)pppuVar16)[1] = (int)\"425 Can\\'t build data connection\";\n      *pppuVar16 = (uint **)cout;\n      ((int *)pppuVar16)[-1] = 0x804c054;\n      _ZlsR7ostreamPKc();\n      ((int *)pppuVar16)[-1] = 0x804c05f;\n      FUN_0804af32();\n      piVar14 = (int *)pppuVar16 + 4;\n      if (iVar6 != 0) {\n        *pppuVar16 = (uint **)iVar6;\n        ((int *)pppuVar16)[-1] = 0x804c073;\n        closedir();\n        piVar14 = (int *)pppuVar16 + 4;\n      }\nLAB_0804be47:\n      *(undefined4 *)((int)piVar14 + -4) = 0x804be54;\n      FUN_0804aae2();\n      puVar15 = (undefined1 *)piVar14;\n    }\n    *(uint ***)(puVar15 + -0x10) = &local_114;\n    *(undefined4 *)(puVar15 + -0x14) = 0x804c4c1;\n    _ZN6string7freeptrEv();\n  }\n  pppuVar16 = (uint ***)(puVar15 + -0x10);\n  *(uint ***)(puVar15 + -0x10) = &local_110;\nLAB_0804c4ce:\n  ((int *)pppuVar16)[-1] = 0x804c4d3;\n  _ZN6string7freeptrEv();\n  *pppuVar16 = &local_10c;\n  ((int *)pppuVar16)[-1] = 0x804c4e1;\n  _ZN6string7freeptrEv();\n  *pppuVar16 = &local_108;\n  ((int *)pppuVar16)[-1] = 0x804c4ef;\n  _ZN6string7freeptrEv();\n  return;\n}\n\n",
+      "parameters": [
+        {
+          "name": "param_1",
+          "type": "undefined4",
+          "size": 4
+        }
+      ],
+      "local_variables": [
+        {
+          "name": "ppuStack_150",
+          "type": "uint * *",
+          "size": 4
+        },
+        {
+          "name": "ppuStack_144",
+          "type": "uint * *",
+          "size": 4
+        },
+        {
+          "name": "ppuStack_148",
+          "type": "uint * *",
+          "size": 4
+        },
+        {
+          "name": "auStack_13c",
+          "type": "undefined1[8]",
+          "size": 8
+        },
+        {
+          "name": "ppuStack_140",
+          "type": "uint * *",
+          "size": 4
+        },
+        {
+          "name": "local_14c",
+          "type": "uint * *",
+          "size": 4
+        },
+        {
+          "name": "local_134",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "local_12e",
+          "type": "char",
+          "size": 1
+        },
+        {
+          "name": "local_12d",
+          "type": "byte",
+          "size": 1
+        },
+        {
+          "name": "local_12c",
+          "type": "byte",
+          "size": 1
+        },
+        {
+          "name": "local_12b",
+          "type": "byte",
+          "size": 1
+        },
+        {
+          "name": "local_12a",
+          "type": "byte",
+          "size": 1
+        },
+        {
+          "name": "local_129",
+          "type": "byte",
+          "size": 1
+        },
+        {
+          "name": "local_128",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "local_124",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "local_120",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "local_118",
+          "type": "int *",
+          "size": 4
+        },
+        {
+          "name": "local_114",
+          "type": "uint *",
+          "size": 4
+        },
+        {
+          "name": "local_110",
+          "type": "uint *",
+          "size": 4
+        },
+        {
+          "name": "local_10c",
+          "type": "uint *",
+          "size": 4
+        },
+        {
+          "name": "local_108",
+          "type": "uint *",
+          "size": 4
+        },
+        {
+          "name": "param_1",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "local_104",
+          "type": "undefined4 *",
+          "size": 4
+        },
+        {
+          "name": "local_100",
+          "type": "undefined4 *",
+          "size": 4
+        },
+        {
+          "name": "ppuVar2",
+          "type": "uint * *",
+          "size": 4
+        },
+        {
+          "name": "local_fc",
+          "type": "undefined[16]",
+          "size": 16
+        },
+        {
+          "name": "uVar1",
+          "type": "uint",
+          "size": 4
+        },
+        {
+          "name": "bVar4",
+          "type": "byte",
+          "size": 1
+        },
+        {
+          "name": "local_ec",
+          "type": "uint",
+          "size": 4
+        },
+        {
+          "name": "bVar3",
+          "type": "byte",
+          "size": 1
+        },
+        {
+          "name": "local_e8",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "iVar6",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "local_d0",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "cVar5",
+          "type": "char",
+          "size": 1
+        },
+        {
+          "name": "uVar8",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "puVar7",
+          "type": "uint *",
+          "size": 4
+        },
+        {
+          "name": "uVar10",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "puVar9",
+          "type": "undefined4 *",
+          "size": 4
+        },
+        {
+          "name": "in_ECX",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "iVar11",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "extraout_ECX_00",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "extraout_ECX",
+          "type": "uint *",
+          "size": 4
+        },
+        {
+          "name": "extraout_ECX_02",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "extraout_ECX_01",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "extraout_ECX_04",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "extraout_ECX_03",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "uVar12",
+          "type": "uint",
+          "size": 4
+        },
+        {
+          "name": "in_EDX",
+          "type": "uint * *",
+          "size": 4
+        },
+        {
+          "name": "puVar13",
+          "type": "uint *",
+          "size": 4
+        },
+        {
+          "name": "extraout_EDX",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "puVar15",
+          "type": "undefined1 *",
+          "size": 4
+        },
+        {
+          "name": "piVar14",
+          "type": "int *",
+          "size": 4
+        },
+        {
+          "name": "ppuVar17",
+          "type": "uint * *",
+          "size": 4
+        },
+        {
+          "name": "pppuVar16",
+          "type": "uint * * *",
+          "size": 4
+        },
+        {
+          "name": "bVar19",
+          "type": "bool",
+          "size": 1
+        },
+        {
+          "name": "ppuVar18",
+          "type": "undefined4 * *",
+          "size": 4
+        },
+        {
+          "name": "local_cc",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "local_b4",
+          "type": "int[6]",
+          "size": 24
+        },
+        {
+          "name": "uVar20",
+          "type": "undefined8",
+          "size": 8
+        },
+        {
+          "name": "local_9c",
+          "type": "uint *[35]",
+          "size": 140
+        }
+      ],
+      "called_functions": [
+        {
+          "name": "_ZN6string9push_backEc",
+          "address": "0x804a5c0"
+        },
+        {
+          "name": "gmtime",
+          "address": "0x804a3e0"
+        },
+        {
+          "name": "_ZNK6string6substrEjj",
+          "address": "0x804a6e0"
+        },
+        {
+          "name": "FUN_0804a8f9",
+          "address": "0x804a8f9"
+        },
+        {
+          "name": "FUN_0804b7c2",
+          "address": "0x804b7c2"
+        },
+        {
+          "name": "FUN_0804a88e",
+          "address": "0x804a88e"
+        },
+        {
+          "name": "FUN_0804a95d",
+          "address": "0x804a95d"
+        },
+        {
+          "name": "_ZN6stringaSEOS_",
+          "address": "0x804a370"
+        },
+        {
+          "name": "_ZN6string5eraseEjj",
+          "address": "0x804a690"
+        },
+        {
+          "name": "_ZN6string6assignERKS_",
+          "address": "0x804a390"
+        },
+        {
+          "name": "strerror",
+          "address": "0x804a640"
+        },
+        {
+          "name": "FUN_0804b334",
+          "address": "0x804b334"
+        },
+        {
+          "name": "FUN_0804aae2",
+          "address": "0x804aae2"
+        },
+        {
+          "name": "_ZN6string6appendERKS_",
+          "address": "0x804a4e0"
+        },
+        {
+          "name": "_ZlsR7ostreamPKc",
+          "address": "0x804a410"
+        },
+        {
+          "name": "write",
+          "address": "0x804a090"
+        },
+        {
+          "name": "strlen",
+          "address": "0x804a6b0"
+        },
+        {
+          "name": "_ZN2nv6Looper11getTimezoneEv",
+          "address": "0x804a360"
+        },
+        {
+          "name": "_ZN2nv9getLooperEv",
+          "address": "0x804a3a0"
+        },
+        {
+          "name": "_ZN6string7freeptrEv",
+          "address": "0x804a320"
+        },
+        {
+          "name": "_ZN6stringC1EPKc",
+          "address": "0x804a3f0"
+        },
+        {
+          "name": "_ZN6stringC1ERKS_",
+          "address": "0x804a520"
+        },
+        {
+          "name": "_ZN6string6appendEPKc",
+          "address": "0x804a0d0"
+        },
+        {
+          "name": "snprintf",
+          "address": "0x804a100"
+        },
+        {
+          "name": "FUN_0804af32",
+          "address": "0x804af32"
+        },
+        {
+          "name": "FUN_0804aa8e",
+          "address": "0x804aa8e"
+        },
+        {
+          "name": "stat",
+          "address": "0x804a5e0"
+        },
+        {
+          "name": "readdir",
+          "address": "0x804a140"
+        },
+        {
+          "name": "_Z19__str_find_first_ofPKcjS0_jj",
+          "address": "0x804a160"
+        },
+        {
+          "name": "_ZN6string6assignEPKc",
+          "address": "0x804a060"
+        },
+        {
+          "name": "__errno_location",
+          "address": "0x804a4c0"
+        },
+        {
+          "name": "_Z11__str_rfindPKcjcj",
+          "address": "0x804a590"
+        },
+        {
+          "name": "opendir",
+          "address": "0x804a030"
+        },
+        {
+          "name": "closedir",
+          "address": "0x804a220"
+        },
+        {
+          "name": "_ZN6stringC1Ev",
+          "address": "0x804a400"
+        },
+        {
+          "name": "FUN_0804a981",
+          "address": "0x804a981"
+        }
+      ],
+      "callers": [
+        {
+          "name": "FUN_0804c52e",
+          "address": "0x804c52e"
+        }
+      ],
+      "dangerous_calls": [
+        {
+          "function": "snprintf",
+          "category": "snprintf"
+        }
+      ],
+      "stack_frame_size": 336,
+      "return_type": "void"
+    },
+    {
+      "address": "0x804dcf0",
+      "name": "FUN_0804dcf0",
+      "size": 360,
+      "decompiled_c": "\nvoid FUN_0804dcf0(undefined4 *param_1)\n\n{\n  char cVar1;\n  undefined4 uVar2;\n  int iVar3;\n  undefined4 *puVar4;\n  byte bVar5;\n  char *pcVar6;\n  undefined4 local_4c;\n  undefined4 local_48 [3];\n  uint local_3c;\n  undefined1 local_38 [2];\n  undefined2 local_36;\n  \n  bVar5 = 0;\n  uVar2 = FUN_0804b7c2();\n  if ((char)uVar2 == '\\0') {\n    return;\n  }\n  local_4c = 0x1c;\n  iVar3 = getsockname(0,local_38,&local_4c,uVar2);\n  if (iVar3 != -1) {\n    puVar4 = local_48;\n    for (iVar3 = 4; iVar3 != 0; iVar3 = iVar3 + -1) {\n      *puVar4 = 0;\n      puVar4 = puVar4 + (uint)bVar5 * -2 + 1;\n    }\n    _ZN7IPAddr6aSERK8sockaddr(local_48,local_38,0,0);\n    cVar1 = _ZNK7IPAddr66isIPv4Ev(local_48);\n    if (cVar1 == '\\0') {\n      pcVar6 = \"502 Command not implemented for IPv6\";\n      param_1 = local_48;\n      goto LAB_0804dd71;\n    }\n    local_36 = 0;\n    iVar3 = FUN_0804adc0();\n    if (iVar3 == 1) {\n      uVar2 = _ZlsR7ostreamPKc(cout,\"227 Entering Passive Mode (\",0,0);\n      uVar2 = _ZlsR7ostreami(uVar2,local_3c & 0xff);\n      uVar2 = _ZlsR7ostreamPKc(uVar2,&DAT_0804f843);\n      uVar2 = _ZlsR7ostreami(uVar2,local_3c >> 8 & 0xff);\n      uVar2 = _ZlsR7ostreamPKc(uVar2,&DAT_0804f843);\n      uVar2 = _ZlsR7ostreami(uVar2,local_3c >> 0x10 & 0xff);\n      uVar2 = _ZlsR7ostreamPKc(uVar2,&DAT_0804f843);\n      uVar2 = _ZlsR7ostreami(uVar2,local_3c >> 0x18);\n      uVar2 = _ZlsR7ostreamPKc(uVar2,&DAT_0804f843);\n      uVar2 = _ZlsR7ostreami(uVar2,(undefined1)local_36);\n      uVar2 = _ZlsR7ostreamPKc(uVar2,&DAT_0804f843);\n      uVar2 = _ZlsR7ostreami(uVar2,local_36._1_1_);\n      _ZlsR7ostreamPKc(uVar2,&DAT_0804f845);\n      FUN_0804af32();\n      *(undefined1 *)((int)param_1 + 0x3e) = 1;\n      return;\n    }\n  }\n  pcVar6 = \"502 Command not implemented\";\nLAB_0804dd71:\n  _ZlsR7ostreamPKc(cout,pcVar6,param_1,param_1);\n  FUN_0804af32();\n  return;\n}\n\n",
+      "parameters": [
+        {
+          "name": "param_1",
+          "type": "undefined4 *",
+          "size": 4
+        }
+      ],
+      "local_variables": [
+        {
+          "name": "param_1",
+          "type": "undefined4 *",
+          "size": 4
+        },
+        {
+          "name": "cVar1",
+          "type": "char",
+          "size": 1
+        },
+        {
+          "name": "puVar4",
+          "type": "undefined4 *",
+          "size": 4
+        },
+        {
+          "name": "bVar5",
+          "type": "byte",
+          "size": 1
+        },
+        {
+          "name": "local_4c",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "local_48",
+          "type": "undefined4[3]",
+          "size": 12
+        },
+        {
+          "name": "uVar2",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "iVar3",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "local_3c",
+          "type": "uint",
+          "size": 4
+        },
+        {
+          "name": "local_38",
+          "type": "undefined1[2]",
+          "size": 2
+        },
+        {
+          "name": "local_36",
+          "type": "undefined2",
+          "size": 2
+        },
+        {
+          "name": "pcVar6",
+          "type": "char *",
+          "size": 4
+        }
+      ],
+      "called_functions": [
+        {
+          "name": "_ZlsR7ostreami",
+          "address": "0x804a470"
+        },
+        {
+          "name": "getsockname",
+          "address": "0x804a2b0"
+        },
+        {
+          "name": "FUN_0804adc0",
+          "address": "0x804adc0"
+        },
+        {
+          "name": "FUN_0804b7c2",
+          "address": "0x804b7c2"
+        },
+        {
+          "name": "_ZN7IPAddr6aSERK8sockaddr",
+          "address": "0x804a2e0"
+        },
+        {
+          "name": "_ZNK7IPAddr66isIPv4Ev",
+          "address": "0x804a710"
+        },
+        {
+          "name": "_ZlsR7ostreamPKc",
+          "address": "0x804a410"
+        },
+        {
+          "name": "FUN_0804af32",
+          "address": "0x804af32"
+        }
+      ],
+      "callers": [],
+      "dangerous_calls": [
+        {
+          "function": "getsockname",
+          "category": "gets"
+        }
+      ],
+      "stack_frame_size": 96,
+      "return_type": "void"
+    },
+    {
+      "address": "0x804de58",
+      "name": "FUN_0804de58",
+      "size": 283,
+      "decompiled_c": "\nvoid FUN_0804de58(undefined4 param_1,int *param_2)\n\n{\n  char cVar1;\n  int iVar2;\n  undefined4 uVar3;\n  undefined4 extraout_ECX;\n  undefined4 *puVar4;\n  undefined4 *puVar5;\n  byte bVar6;\n  undefined8 uVar7;\n  undefined1 *puVar8;\n  char *pcVar9;\n  int iVar10;\n  undefined4 local_40;\n  char *local_3c;\n  short local_38 [4];\n  undefined4 local_30 [8];\n  \n  bVar6 = 0;\n  cVar1 = FUN_0804b7c2();\n  if (cVar1 == '\\0') {\n    return;\n  }\n  local_40 = 0x1c;\n  uVar7 = getsockname(0,local_38,&local_40,extraout_ECX);\n  iVar2 = 0;\n  if ((int)uVar7 == -1) {\nLAB_0804df1d:\n    pcVar9 = \"502 Command not implemented\";\n  }\n  else {\n    if (*(int *)*param_2 == 0) goto LAB_0804defe;\n    iVar2 = strtoul((int *)*param_2 + 1,&local_3c,10,(int)((ulonglong)uVar7 >> 0x20));\n    if (*local_3c == '\\0') {\n      if (iVar2 == 1) {\n        if (local_38[0] != 2) {\n          local_38[0] = 2;\n          local_38[2] = 0;\n          local_38[3] = 0;\n        }\nLAB_0804defe:\n        local_38[1] = 0;\n        iVar2 = FUN_0804adc0();\n        if (iVar2 != 0) {\n          if (-1 < iVar2) {\n            iVar10 = iVar2;\n            uVar3 = _ZlsR7ostreamPKc(cout,\"229 Entering Extended Passive Mode (|||\",iVar2,iVar2);\n            puVar8 = (undefined1 *)\n                     _ZlsR7ostreamj(uVar3,CONCAT11((char)local_38[1],\n                                                   (char)((ushort)local_38[1] >> 8)));\n            pcVar9 = \"|)\";\n            goto LAB_0804df58;\n          }\n          goto LAB_0804df1d;\n        }\n      }\n      else if (iVar2 == 2) {\n        if (local_38[0] != 10) {\n          local_38[0] = 10;\n          puVar4 = &in6addr_any;\n          puVar5 = local_30;\n          for (iVar2 = 4; iVar2 != 0; iVar2 = iVar2 + -1) {\n            *puVar5 = *puVar4;\n            puVar4 = puVar4 + (uint)bVar6 * -2 + 1;\n            puVar5 = puVar5 + (uint)bVar6 * -2 + 1;\n          }\n        }\n        goto LAB_0804defe;\n      }\n      pcVar9 = \"522 unknown network protocol\";\n    }\n    else {\n      pcVar9 = \"500 Bad EPSV command\";\n    }\n  }\n  puVar8 = cout;\n  iVar10 = iVar2;\nLAB_0804df58:\n  _ZlsR7ostreamPKc(puVar8,pcVar9,iVar2,iVar10);\n  FUN_0804af32();\n  return;\n}\n\n",
+      "parameters": [
+        {
+          "name": "param_1",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "param_2",
+          "type": "int *",
+          "size": 4
+        }
+      ],
+      "local_variables": [
+        {
+          "name": "puVar4",
+          "type": "undefined4 *",
+          "size": 4
+        },
+        {
+          "name": "puVar5",
+          "type": "undefined4 *",
+          "size": 4
+        },
+        {
+          "name": "uVar3",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "extraout_ECX",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "puVar8",
+          "type": "undefined1 *",
+          "size": 4
+        },
+        {
+          "name": "pcVar9",
+          "type": "char *",
+          "size": 4
+        },
+        {
+          "name": "bVar6",
+          "type": "byte",
+          "size": 1
+        },
+        {
+          "name": "uVar7",
+          "type": "undefined8",
+          "size": 8
+        },
+        {
+          "name": "iVar10",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "local_40",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "local_3c",
+          "type": "char *",
+          "size": 4
+        },
+        {
+          "name": "local_38",
+          "type": "short[4]",
+          "size": 8
+        },
+        {
+          "name": "cVar1",
+          "type": "char",
+          "size": 1
+        },
+        {
+          "name": "iVar2",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "local_30",
+          "type": "undefined4[8]",
+          "size": 32
+        },
+        {
+          "name": "param_1",
+          "type": "undefined4",
+          "size": 4
+        },
+        {
+          "name": "param_2",
+          "type": "int *",
+          "size": 4
+        }
+      ],
+      "called_functions": [
+        {
+          "name": "getsockname",
+          "address": "0x804a2b0"
+        },
+        {
+          "name": "FUN_0804adc0",
+          "address": "0x804adc0"
+        },
+        {
+          "name": "FUN_0804b7c2",
+          "address": "0x804b7c2"
+        },
+        {
+          "name": "_ZlsR7ostreamj",
+          "address": "0x804a480"
+        },
+        {
+          "name": "_ZlsR7ostreamPKc",
+          "address": "0x804a410"
+        },
+        {
+          "name": "FUN_0804af32",
+          "address": "0x804af32"
+        },
+        {
+          "name": "strtoul",
+          "address": "0x804a3b0"
+        }
+      ],
+      "callers": [],
+      "dangerous_calls": [
+        {
+          "function": "getsockname",
+          "category": "gets"
+        }
+      ],
+      "stack_frame_size": 68,
+      "return_type": "void"
+    },
+    {
+      "address": "0x804df74",
+      "name": "FUN_0804df74",
+      "size": 115,
+      "decompiled_c": "\nvoid FUN_0804df74(int param_1,int *param_2)\n\n{\n  undefined4 uVar1;\n  \n  uVar1 = FUN_0804b7c2();\n  if ((char)uVar1 != '\\0') {\n    sscanf(*param_2 + 4,&DAT_0804f8a5,param_1 + 0x34,uVar1);\n    uVar1 = _ZlsR7ostreamPKc(cout,\"350 Restarting at \");\n    uVar1 = _ZlsR7ostreamx(uVar1,*(undefined4 *)(param_1 + 0x34),*(undefined4 *)(param_1 + 0x38));\n    _ZlsR7ostreamPKc(uVar1,\". Send STORE or RETRIEVE to initiate transfer\");\n    FUN_0804af32();\n    return;\n  }\n  return;\n}\n\n",
+      "parameters": [
+        {
+          "name": "param_1",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "param_2",
+          "type": "int *",
+          "size": 4
+        }
+      ],
+      "local_variables": [
+        {
+          "name": "param_1",
+          "type": "int",
+          "size": 4
+        },
+        {
+          "name": "param_2",
+          "type": "int *",
+          "size": 4
+        },
+        {
+          "name": "uVar1",
+          "type": "undefined4",
+          "size": 4
+        }
+      ],
+      "called_functions": [
+        {
+          "name": "FUN_0804b7c2",
+          "address": "0x804b7c2"
+        },
+        {
+          "name": "sscanf",
+          "address": "0x804a0b0"
+        },
+        {
+          "name": "_ZlsR7ostreamPKc",
+          "address": "0x804a410"
+        },
+        {
+          "name": "FUN_0804af32",
+          "address": "0x804af32"
+        },
+        {
+          "name": "_ZlsR7ostreamx",
+          "address": "0x804a530"
+        }
+      ],
+      "callers": [],
+      "dangerous_calls": [
+        {
+          "function": "sscanf",
+          "category": "sscanf"
+        },
+        {
+          "function": "sscanf",
+          "category": "scanf"
+        }
+      ],
+      "stack_frame_size": 16,
+      "return_type": "void"
+    }
+  ],
+  "dangerous_call_map": {
+    "0x804a0b0": {
+      "function": "sscanf",
+      "address": "0x804a0b0",
+      "dangerous_calls": [
+        {
+          "target": "sscanf",
+          "category": "sscanf"
+        },
+        {
+          "target": "sscanf",
+          "category": "scanf"
+        }
+      ]
+    },
+    "0x804a100": {
+      "function": "snprintf",
+      "address": "0x804a100",
+      "dangerous_calls": [
+        {
+          "target": "snprintf",
+          "category": "snprintf"
+        }
+      ]
+    },
+    "0x804a2b0": {
+      "function": "getsockname",
+      "address": "0x804a2b0",
+      "dangerous_calls": [
+        {
+          "target": "getsockname",
+          "category": "gets"
+        }
+      ]
+    },
+    "0x804a300": {
+      "function": "strncpy",
+      "address": "0x804a300",
+      "dangerous_calls": [
+        {
+          "target": "strncpy",
+          "category": "strncpy"
+        }
+      ]
+    },
+    "0x804adc0": {
+      "function": "FUN_0804adc0",
+      "address": "0x804adc0",
+      "dangerous_calls": [
+        {
+          "target": "getsockname",
+          "category": "gets"
+        }
+      ]
+    },
+    "0x804ba10": {
+      "function": "FUN_0804ba10",
+      "address": "0x804ba10",
+      "dangerous_calls": [
+        {
+          "target": "strncpy",
+          "category": "strncpy"
+        }
+      ]
+    },
+    "0x804bcf0": {
+      "function": "FUN_0804bcf0",
+      "address": "0x804bcf0",
+      "dangerous_calls": [
+        {
+          "target": "snprintf",
+          "category": "snprintf"
+        }
+      ]
+    },
+    "0x804dcf0": {
+      "function": "FUN_0804dcf0",
+      "address": "0x804dcf0",
+      "dangerous_calls": [
+        {
+          "target": "getsockname",
+          "category": "gets"
+        }
+      ]
+    },
+    "0x804de58": {
+      "function": "FUN_0804de58",
+      "address": "0x804de58",
+      "dangerous_calls": [
+        {
+          "target": "getsockname",
+          "category": "gets"
+        }
+      ]
+    },
+    "0x804df74": {
+      "function": "FUN_0804df74",
+      "address": "0x804df74",
+      "dangerous_calls": [
+        {
+          "target": "sscanf",
+          "category": "sscanf"
+        },
+        {
+          "target": "sscanf",
+          "category": "scanf"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "mode": "dangerous",
+    "total_functions": 394,
+    "elapsed_seconds": 18.205012559890747,
+    "functions_decompiled": 10,
+    "dangerous_callers_found": 10
+  }
+}

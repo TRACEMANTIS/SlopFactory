@@ -1,0 +1,350 @@
+{
+  "script": "phase3_auth_testing",
+  "phase": "phase3",
+  "target": "Jellyfin 10.11.6",
+  "start_time": "2026-03-02T18:54:21.423947",
+  "end_time": "2026-03-02T18:54:26.134301",
+  "summary": {
+    "total_tests": 31,
+    "findings": 6,
+    "anomalies": 0
+  },
+  "tests": [
+    {
+      "id": "PRIVESC-System-Info",
+      "description": "Privesc: Full system info (admin)",
+      "request": "GET /System/Info (viewer token)",
+      "response": "HTTP 200",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:21.748109"
+    },
+    {
+      "id": "PRIVESC-System-Configuration",
+      "description": "Privesc: Server configuration",
+      "request": "GET /System/Configuration (viewer token)",
+      "response": "HTTP 200",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:21.848159"
+    },
+    {
+      "id": "PRIVESC-System-Logs",
+      "description": "Privesc: Server log files",
+      "request": "GET /System/Logs (viewer token)",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:21.956213"
+    },
+    {
+      "id": "PRIVESC-Users",
+      "description": "Privesc: List all users",
+      "request": "GET /Users (viewer token)",
+      "response": "HTTP 200",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:22.060265"
+    },
+    {
+      "id": "PRIVESC-Devices",
+      "description": "Privesc: Registered devices",
+      "request": "GET /Devices (viewer token)",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:22.160315"
+    },
+    {
+      "id": "PRIVESC-Auth-Keys",
+      "description": "Privesc: API keys",
+      "request": "GET /Auth/Keys (viewer token)",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:22.260365"
+    },
+    {
+      "id": "PRIVESC-ScheduledTasks",
+      "description": "Privesc: Scheduled tasks",
+      "request": "GET /ScheduledTasks (viewer token)",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:22.368419"
+    },
+    {
+      "id": "PRIVESC-System-ActivityLog-E",
+      "description": "Privesc: Activity log",
+      "request": "GET /System/ActivityLog/Entries (viewer token)",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:22.468469"
+    },
+    {
+      "id": "PRIVESC-Plugins",
+      "description": "Privesc: Installed plugins",
+      "request": "GET /Plugins (viewer token)",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:22.576523"
+    },
+    {
+      "id": "PRIVESC-Sessions",
+      "description": "Privesc: Active sessions",
+      "request": "GET /Sessions (viewer token)",
+      "response": "HTTP 200",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:22.688579"
+    },
+    {
+      "id": "PRIVESC-Users-New",
+      "description": "Privesc: Create new user",
+      "request": "POST /Users/New (viewer token)",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:22.816643"
+    },
+    {
+      "id": "PRIVESC-Auth-Keys",
+      "description": "Privesc: Create API key",
+      "request": "POST /Auth/Keys (viewer token)",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:22.916693"
+    },
+    {
+      "id": "PRIVESC-System-Configuration",
+      "description": "Privesc: Live TV config",
+      "request": "GET /System/Configuration/livetv (viewer token)",
+      "response": "HTTP 200",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:23.016743"
+    },
+    {
+      "id": "PRIVESC-LiveTv-TunerHosts",
+      "description": "Privesc: Add tuner host",
+      "request": "POST /LiveTv/TunerHosts (viewer token)",
+      "response": "HTTP 404",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:23.124797"
+    },
+    {
+      "id": "IDOR-Admin profile via vi",
+      "description": "IDOR: Admin profile via viewer",
+      "request": "GET /Users/ccaaa5afef33492a8472ad22ed2771d0 (viewer token)",
+      "response": "HTTP 200",
+      "result": "VULN",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:23.228849"
+    },
+    {
+      "id": "IDOR-Update admin user vi",
+      "description": "IDOR: Update admin user via viewer",
+      "request": "POST /Users/ccaaa5afef33492a8472ad22ed2771d0 (viewer token)",
+      "response": "HTTP 400",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:23.336903"
+    },
+    {
+      "id": "IDOR-Change admin passwor",
+      "description": "IDOR: Change admin password via viewer",
+      "request": "POST /Users/ccaaa5afef33492a8472ad22ed2771d0/Password (viewer token)",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:23.440955"
+    },
+    {
+      "id": "IDOR-Admin items via view",
+      "description": "IDOR: Admin items via viewer",
+      "request": "GET /Users/ccaaa5afef33492a8472ad22ed2771d0/Items (viewer token)",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:23.557013"
+    },
+    {
+      "id": "IDOR-Admin views via view",
+      "description": "IDOR: Admin views via viewer",
+      "request": "GET /Users/ccaaa5afef33492a8472ad22ed2771d0/Views (viewer token)",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:23.657063"
+    },
+    {
+      "id": "IDOR-Delete admin user vi",
+      "description": "IDOR: Delete admin user via viewer",
+      "request": "DELETE /Users/ccaaa5afef33492a8472ad22ed2771d0 (viewer token)",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:23.769119"
+    },
+    {
+      "id": "SESSION-TOKEN-REUSE",
+      "description": "Token reuse across logins",
+      "request": "Authenticate twice, compare tokens",
+      "response": "Old: ca671d9bb1454429990e..., New: 561628b3619347f8ac5b..., Same: False, OldValid: False",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:23.881175"
+    },
+    {
+      "id": "SESSION-LOGOUT",
+      "description": "Token invalidation on logout",
+      "request": "POST /Sessions/Logout then GET /System/Info",
+      "response": "Logout: 204, After: 401",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:24.393431"
+    },
+    {
+      "id": "AUTH-BYPASS-empty_token",
+      "description": "Auth bypass: Empty token in auth header",
+      "request": "GET /System/Info with empty_token",
+      "response": "HTTP 401",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:24.393431"
+    },
+    {
+      "id": "AUTH-BYPASS-null_token",
+      "description": "Auth bypass: Null string token",
+      "request": "GET /System/Info with null_token",
+      "response": "HTTP 401",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:24.493481"
+    },
+    {
+      "id": "AUTH-BYPASS-admin_header",
+      "description": "Auth bypass: Auth header without token",
+      "request": "GET /System/Info with admin_header",
+      "response": "HTTP 401",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:24.593531"
+    },
+    {
+      "id": "AUTH-BYPASS-api_key_param",
+      "description": "Auth bypass: api_key query parameter",
+      "request": "GET /System/Info?api_key=admin with api_key_param",
+      "response": "HTTP 401",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:24.693581"
+    },
+    {
+      "id": "AUTH-BYPASS-x_emby_token",
+      "description": "Auth bypass: Invalid X-Emby-Token header",
+      "request": "GET /System/Info with x_emby_token",
+      "response": "HTTP 401",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:24.801635"
+    },
+    {
+      "id": "USERENUM-root",
+      "description": "User enum: Valid admin (no password)",
+      "request": "POST /Users/AuthenticateByName user=root",
+      "response": "HTTP 200, 0.004s, SUCCESS",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:24.905687"
+    },
+    {
+      "id": "USERENUM-root",
+      "description": "User enum: Valid admin (wrong password)",
+      "request": "POST /Users/AuthenticateByName user=root",
+      "response": "HTTP 401, 0.012s, Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:25.217843"
+    },
+    {
+      "id": "USERENUM-nonexisten",
+      "description": "User enum: Non-existent user",
+      "request": "POST /Users/AuthenticateByName user=nonexistent",
+      "response": "HTTP 401, 0.000s, Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:25.521995"
+    },
+    {
+      "id": "USERENUM-admin",
+      "description": "User enum: Common admin username",
+      "request": "POST /Users/AuthenticateByName user=admin",
+      "response": "HTTP 401, 0.004s, Error processing request.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:54:25.826147"
+    }
+  ],
+  "findings": [
+    {
+      "id": "PRIVESC-System-Info",
+      "severity": "HIGH",
+      "title": "Privilege escalation: viewer can access /System/Info",
+      "details": "Non-admin user accessed admin endpoint GET /System/Info and received HTTP 200.",
+      "evidence": "",
+      "remediation": "",
+      "timestamp": "2026-03-02T18:54:21.748109"
+    },
+    {
+      "id": "PRIVESC-System-Configuration",
+      "severity": "HIGH",
+      "title": "Privilege escalation: viewer can access /System/Configuration",
+      "details": "Non-admin user accessed admin endpoint GET /System/Configuration and received HTTP 200.",
+      "evidence": "",
+      "remediation": "",
+      "timestamp": "2026-03-02T18:54:21.848159"
+    },
+    {
+      "id": "PRIVESC-Users",
+      "severity": "HIGH",
+      "title": "Privilege escalation: viewer can access /Users",
+      "details": "Non-admin user accessed admin endpoint GET /Users and received HTTP 200.",
+      "evidence": "",
+      "remediation": "",
+      "timestamp": "2026-03-02T18:54:22.060265"
+    },
+    {
+      "id": "PRIVESC-Sessions",
+      "severity": "HIGH",
+      "title": "Privilege escalation: viewer can access /Sessions",
+      "details": "Non-admin user accessed admin endpoint GET /Sessions and received HTTP 200.",
+      "evidence": "",
+      "remediation": "",
+      "timestamp": "2026-03-02T18:54:22.688579"
+    },
+    {
+      "id": "PRIVESC-System-Configuration-live",
+      "severity": "HIGH",
+      "title": "Privilege escalation: viewer can access /System/Configuration/livetv",
+      "details": "Non-admin user accessed admin endpoint GET /System/Configuration/livetv and received HTTP 200.",
+      "evidence": "",
+      "remediation": "",
+      "timestamp": "2026-03-02T18:54:23.016743"
+    },
+    {
+      "id": "IDOR-Admin profile via vi",
+      "severity": "HIGH",
+      "title": "IDOR: Admin profile via viewer",
+      "details": "Viewer user accessed GET /Users/ccaaa5afef33492a8472ad22ed2771d0 and got 200. Response: {\"Name\":\"root\",\"ServerId\":\"73f6fc4a3e4d48d28bfd39d5b24c743c\",\"Id\":\"ccaaa5afef33492a8472ad22ed2771d0\",\"PrimaryImageTag\":\"160c271e5d3cde0d97ddb05d8161824d\",\"HasPassword\":false,\"HasConfiguredPassword\":fa",
+      "evidence": "",
+      "remediation": "",
+      "timestamp": "2026-03-02T18:54:23.228849"
+    }
+  ],
+  "anomalies": []
+}

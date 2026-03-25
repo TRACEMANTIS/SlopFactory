@@ -1,0 +1,3453 @@
+{
+  "metadata": {
+    "script": "attack_ftpd.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": "Track-B FTP Deep Dive",
+    "start_time": "2026-02-16T15:07:29.075841",
+    "end_time": "2026-02-16T15:09:28.791742",
+    "total_tests": 223,
+    "anomalies": 30,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "3h8m7s",
+    "router_log_count": 1000,
+    "router_interesting_events": 61,
+    "final_health": {
+      "alive": true,
+      "uptime": "3h10m16s",
+      "cpu_load": "100",
+      "free_memory": "831913984",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "auth",
+      "name": "FTP banner capture",
+      "description": "Capture FTP welcome banner for version/service disclosure",
+      "result": "Banner: 220 MikroTik FTP server (MikroTik 7.20.8) ready",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:07:38.291231",
+      "details": {
+        "banner": "220 MikroTik FTP server (MikroTik 7.20.8) ready"
+      }
+    },
+    {
+      "id": 2,
+      "category": "auth",
+      "name": "Anonymous login (anonymous/test@)",
+      "description": "Attempt anonymous FTP login",
+      "result": "Response: 530 Login incorrect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:39.634559",
+      "details": {
+        "user_resp": "331 Password required for anonymous",
+        "pass_resp": "530 Login incorrect"
+      }
+    },
+    {
+      "id": 3,
+      "category": "auth",
+      "name": "Anonymous login (ftp/ftp@)",
+      "description": "Attempt login with USER ftp / PASS ftp@",
+      "result": "Response: 530 Login incorrect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:40.941905",
+      "details": {
+        "pass_resp": "530 Login incorrect"
+      }
+    },
+    {
+      "id": 4,
+      "category": "auth",
+      "name": "Empty password",
+      "description": "Login with valid user and empty PASS",
+      "result": "Response: 530 Login incorrect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:42.213269",
+      "details": {
+        "pass_resp": "530 Login incorrect"
+      }
+    },
+    {
+      "id": 5,
+      "category": "auth",
+      "name": "Empty USER and PASS",
+      "description": "Login with empty username and empty password",
+      "result": "Response: 504 Command not implemented",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:42.824963",
+      "details": {
+        "responses": [
+          "220 MikroTik FTP server (MikroTik 7.20.8) ready",
+          "504 Bad USER command",
+          "504 Command not implemented"
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "category": "auth",
+      "name": "Long username (256B)",
+      "description": "Send 256-byte username in USER command",
+      "result": "Response: 331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:43.132809",
+      "details": {
+        "size": 256,
+        "response": "331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 7,
+      "category": "auth",
+      "name": "Long username (1024B)",
+      "description": "Send 1024-byte username in USER command",
+      "result": "Response: 331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:43.452649",
+      "details": {
+        "size": 1024,
+        "response": "331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 8,
+      "category": "auth",
+      "name": "Long username (4096B)",
+      "description": "Send 4096-byte username in USER command",
+      "result": "Response: 331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:43.756497",
+      "details": {
+        "size": 4096,
+        "response": "331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 9,
+      "category": "auth",
+      "name": "Long username (65536B)",
+      "description": "Send 65536-byte username in USER command",
+      "result": "Response: 331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:44.064343",
+      "details": {
+        "size": 65536,
+        "response": "331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 10,
+      "category": "auth",
+      "name": "Long password (256B)",
+      "description": "Send 256-byte password in PASS command",
+      "result": "Response: 530 Login incorrect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:45.311719",
+      "details": {
+        "size": 256,
+        "response": "530 Login incorrect",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 11,
+      "category": "auth",
+      "name": "Long password (1024B)",
+      "description": "Send 1024-byte password in PASS command",
+      "result": "Response: 530 Login incorrect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:46.631059",
+      "details": {
+        "size": 1024,
+        "response": "530 Login incorrect",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 12,
+      "category": "auth",
+      "name": "Long password (4096B)",
+      "description": "Send 4096-byte password in PASS command",
+      "result": "Response: 530 Login incorrect\r\n500 '': command not understood",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:47.974387",
+      "details": {
+        "size": 4096,
+        "response": "530 Login incorrect\r\n500 '': command not understood",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 13,
+      "category": "auth",
+      "name": "Long password (65536B)",
+      "description": "Send 65536-byte password in PASS command",
+      "result": "Response: 530 Login incorrect\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:49.325711",
+      "details": {
+        "size": 65536,
+        "response": "530 Login incorrect\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 14,
+      "category": "auth",
+      "name": "Unicode username",
+      "description": "Send UTF-8 overlong encoding in USER command",
+      "result": "Response: 331 Password required for \u00c0\u00ae\u00c0\u00ae\u00c0\u00af",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:50.517115",
+      "details": {
+        "response": "331 Password required for \u00c0\u00ae\u00c0\u00ae\u00c0\u00af"
+      }
+    },
+    {
+      "id": 15,
+      "category": "auth",
+      "name": "Format string in creds: hex leak",
+      "description": "Send format string '%x.%x.%x.%x' as USER and PASS",
+      "result": "USER resp: 331 Password required for %x.%x.%x.%x | PASS resp: 530 Login incorrect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:51.976385",
+      "details": {
+        "payload": "%x.%x.%x.%x",
+        "user_resp": "331 Password required for %x.%x.%x.%x",
+        "pass_resp": "530 Login incorrect",
+        "possible_leak": false
+      }
+    },
+    {
+      "id": 16,
+      "category": "auth",
+      "name": "Format string in creds: write via %n",
+      "description": "Send format string '%n%n%n%n' as USER and PASS",
+      "result": "USER resp: 331 Password required for %n%n%n%n | PASS resp: 530 Login incorrect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:53.247749",
+      "details": {
+        "payload": "%n%n%n%n",
+        "user_resp": "331 Password required for %n%n%n%n",
+        "pass_resp": "530 Login incorrect",
+        "possible_leak": false
+      }
+    },
+    {
+      "id": 17,
+      "category": "auth",
+      "name": "Format string in creds: string deref via %s",
+      "description": "Send format string '%s%s%s%s' as USER and PASS",
+      "result": "USER resp: 331 Password required for %s%s%s%s | PASS resp: 530 Login incorrect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:54.535105",
+      "details": {
+        "payload": "%s%s%s%s",
+        "user_resp": "331 Password required for %s%s%s%s",
+        "pass_resp": "530 Login incorrect",
+        "possible_leak": false
+      }
+    },
+    {
+      "id": 18,
+      "category": "auth",
+      "name": "Format string in creds: pointer leak via %p",
+      "description": "Send format string '%p.%p.%p.%p.%p.%p.%p.%p' as USER and PASS",
+      "result": "USER resp: 331 Password required for %p.%p.%p.%p.%p.%p.%p.%p | PASS resp: 530 Login incorrect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:55.934405",
+      "details": {
+        "payload": "%p.%p.%p.%p.%p.%p.%p.%p",
+        "user_resp": "331 Password required for %p.%p.%p.%p.%p.%p.%p.%p",
+        "pass_resp": "530 Login incorrect",
+        "possible_leak": false
+      }
+    },
+    {
+      "id": 19,
+      "category": "auth",
+      "name": "SQLi in creds: ' OR '1'='1",
+      "description": "SQL injection in FTP credentials: ' OR '1'='1",
+      "result": "Response: 530 Login incorrect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:57.237753",
+      "details": {
+        "payload": "' OR '1'='1",
+        "pass_resp": "530 Login incorrect"
+      }
+    },
+    {
+      "id": 20,
+      "category": "auth",
+      "name": "SQLi in creds: admin'--",
+      "description": "SQL injection in FTP credentials: admin'--",
+      "result": "Response: 530 Login incorrect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:58.581081",
+      "details": {
+        "payload": "admin'--",
+        "pass_resp": "530 Login incorrect"
+      }
+    },
+    {
+      "id": 21,
+      "category": "auth",
+      "name": "SQLi in creds: \" OR \"1\"=\"1",
+      "description": "SQL injection in FTP credentials: \" OR \"1\"=\"1",
+      "result": "Response: 530 Login incorrect",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:07:59.928407",
+      "details": {
+        "payload": "\" OR \"1\"=\"1",
+        "pass_resp": "530 Login incorrect"
+      }
+    },
+    {
+      "id": 22,
+      "category": "auth",
+      "name": "Brute force rate limiting",
+      "description": "10 rapid failed login attempts to detect rate limiting/lockout",
+      "result": "Completed 10 attempts, blocked=False",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:08:13.477629",
+      "details": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "code": 530,
+            "elapsed_ms": 1311.3,
+            "response": "530 Login incorrect"
+          },
+          {
+            "attempt": 2,
+            "code": 530,
+            "elapsed_ms": 1307.3,
+            "response": "530 Login incorrect"
+          },
+          {
+            "attempt": 3,
+            "code": 530,
+            "elapsed_ms": 1315.3,
+            "response": "530 Login incorrect"
+          },
+          {
+            "attempt": 4,
+            "code": 530,
+            "elapsed_ms": 1319.3,
+            "response": "530 Login incorrect"
+          },
+          {
+            "attempt": 5,
+            "code": 530,
+            "elapsed_ms": 1311.3,
+            "response": "530 Login incorrect"
+          },
+          {
+            "attempt": 6,
+            "code": 530,
+            "elapsed_ms": 1315.3,
+            "response": "530 Login incorrect"
+          },
+          {
+            "attempt": 7,
+            "code": 530,
+            "elapsed_ms": 1343.3,
+            "response": "530 Login incorrect"
+          },
+          {
+            "attempt": 8,
+            "code": 530,
+            "elapsed_ms": 1447.3,
+            "response": "530 Login incorrect"
+          },
+          {
+            "attempt": 9,
+            "code": 530,
+            "elapsed_ms": 1499.3,
+            "response": "530 Login incorrect"
+          },
+          {
+            "attempt": 10,
+            "code": 530,
+            "elapsed_ms": 1379.3,
+            "response": "530 Login incorrect"
+          }
+        ],
+        "blocked": false
+      }
+    },
+    {
+      "id": 23,
+      "category": "overflow",
+      "name": "USER overflow (1024B)",
+      "description": "Send USER with 1024-byte argument (overflow test)",
+      "result": "Response: 331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:13.789473",
+      "details": {
+        "command": "USER",
+        "arg_size": 1024,
+        "response": "331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 24,
+      "category": "overflow",
+      "name": "USER overflow (8192B)",
+      "description": "Send USER with 8192-byte argument (overflow test)",
+      "result": "Response: 331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:14.157289",
+      "details": {
+        "command": "USER",
+        "arg_size": 8192,
+        "response": "331 Password required for AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 25,
+      "category": "overflow",
+      "name": "PASS overflow (1024B)",
+      "description": "Send PASS with 1024-byte argument (overflow test)",
+      "result": "Response: 504 Command not implemented",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:14.541097",
+      "details": {
+        "command": "PASS",
+        "arg_size": 1024,
+        "response": "504 Command not implemented",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 26,
+      "category": "overflow",
+      "name": "PASS overflow (8192B)",
+      "description": "Send PASS with 8192-byte argument (overflow test)",
+      "result": "Response: 504 Command not implemented\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': com",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:15.184775",
+      "details": {
+        "command": "PASS",
+        "arg_size": 8192,
+        "response": "504 Command not implemented\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not understood\r\n500 '': command not und",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 27,
+      "category": "overflow",
+      "name": "CWD overflow (1024B)",
+      "description": "Send CWD with 1024-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:16.200267",
+      "details": {
+        "command": "CWD",
+        "arg_size": 1024,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 28,
+      "category": "overflow",
+      "name": "CWD overflow (8192B)",
+      "description": "Send CWD with 8192-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:17.131801",
+      "details": {
+        "command": "CWD",
+        "arg_size": 8192,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 29,
+      "category": "overflow",
+      "name": "RETR overflow (1024B)",
+      "description": "Send RETR with 1024-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:18.071331",
+      "details": {
+        "command": "RETR",
+        "arg_size": 1024,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 30,
+      "category": "overflow",
+      "name": "RETR overflow (8192B)",
+      "description": "Send RETR with 8192-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:19.038847",
+      "details": {
+        "command": "RETR",
+        "arg_size": 8192,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 31,
+      "category": "overflow",
+      "name": "STOR overflow (1024B)",
+      "description": "Send STOR with 1024-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:20.026353",
+      "details": {
+        "command": "STOR",
+        "arg_size": 1024,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 32,
+      "category": "overflow",
+      "name": "STOR overflow (8192B)",
+      "description": "Send STOR with 8192-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:20.993869",
+      "details": {
+        "command": "STOR",
+        "arg_size": 8192,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 33,
+      "category": "overflow",
+      "name": "MKD overflow (1024B)",
+      "description": "Send MKD with 1024-byte argument (overflow test)",
+      "result": "Response: 550 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:21.933399",
+      "details": {
+        "command": "MKD",
+        "arg_size": 1024,
+        "response": "550 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 34,
+      "category": "overflow",
+      "name": "MKD overflow (8192B)",
+      "description": "Send MKD with 8192-byte argument (overflow test)",
+      "result": "Response: 550 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:22.872929",
+      "details": {
+        "command": "MKD",
+        "arg_size": 8192,
+        "response": "550 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 35,
+      "category": "overflow",
+      "name": "RMD overflow (1024B)",
+      "description": "Send RMD with 1024-byte argument (overflow test)",
+      "result": "Response: 550 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:23.812459",
+      "details": {
+        "command": "RMD",
+        "arg_size": 1024,
+        "response": "550 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 36,
+      "category": "overflow",
+      "name": "RMD overflow (8192B)",
+      "description": "Send RMD with 8192-byte argument (overflow test)",
+      "result": "Response: 550 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:24.771979",
+      "details": {
+        "command": "RMD",
+        "arg_size": 8192,
+        "response": "550 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 37,
+      "category": "overflow",
+      "name": "DELE overflow (1024B)",
+      "description": "Send DELE with 1024-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:25.711509",
+      "details": {
+        "command": "DELE",
+        "arg_size": 1024,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 38,
+      "category": "overflow",
+      "name": "DELE overflow (8192B)",
+      "description": "Send DELE with 8192-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:26.675027",
+      "details": {
+        "command": "DELE",
+        "arg_size": 8192,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 39,
+      "category": "overflow",
+      "name": "RNFR overflow (1024B)",
+      "description": "Send RNFR with 1024-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:27.618555",
+      "details": {
+        "command": "RNFR",
+        "arg_size": 1024,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 40,
+      "category": "overflow",
+      "name": "RNFR overflow (8192B)",
+      "description": "Send RNFR with 8192-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:28.578075",
+      "details": {
+        "command": "RNFR",
+        "arg_size": 8192,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 41,
+      "category": "overflow",
+      "name": "RNTO overflow (1024B)",
+      "description": "Send RNTO with 1024-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:29.525601",
+      "details": {
+        "command": "RNTO",
+        "arg_size": 1024,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 42,
+      "category": "overflow",
+      "name": "RNTO overflow (8192B)",
+      "description": "Send RNTO with 8192-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:30.481123",
+      "details": {
+        "command": "RNTO",
+        "arg_size": 8192,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 43,
+      "category": "overflow",
+      "name": "LIST overflow (1024B)",
+      "description": "Send LIST with 1024-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:31.448639",
+      "details": {
+        "command": "LIST",
+        "arg_size": 1024,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 44,
+      "category": "overflow",
+      "name": "LIST overflow (8192B)",
+      "description": "Send LIST with 8192-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:32.404161",
+      "details": {
+        "command": "LIST",
+        "arg_size": 8192,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 45,
+      "category": "overflow",
+      "name": "NLST overflow (1024B)",
+      "description": "Send NLST with 1024-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:33.367679",
+      "details": {
+        "command": "NLST",
+        "arg_size": 1024,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 46,
+      "category": "overflow",
+      "name": "NLST overflow (8192B)",
+      "description": "Send NLST with 8192-byte argument (overflow test)",
+      "result": "Response: 553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:34.311207",
+      "details": {
+        "command": "NLST",
+        "arg_size": 8192,
+        "response": "553 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 47,
+      "category": "overflow",
+      "name": "SIZE overflow (1024B)",
+      "description": "Send SIZE with 1024-byte argument (overflow test)",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:08:34.615055",
+      "details": {
+        "command": "SIZE",
+        "arg_size": 1024,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "connection_error": true
+      }
+    },
+    {
+      "id": 48,
+      "category": "overflow",
+      "name": "SIZE overflow (8192B)",
+      "description": "Send SIZE with 8192-byte argument (overflow test)",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:08:34.926899",
+      "details": {
+        "command": "SIZE",
+        "arg_size": 8192,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "connection_error": true
+      }
+    },
+    {
+      "id": 49,
+      "category": "overflow",
+      "name": "USER overflow (65536B)",
+      "description": "Send USER with 65536-byte argument (overflow test)",
+      "result": "Response: ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:35.234745",
+      "details": {
+        "command": "USER",
+        "arg_size": 65536,
+        "response": "",
+        "connection_error": false
+      }
+    },
+    {
+      "id": 50,
+      "category": "overflow",
+      "name": "CWD overflow (65536B)",
+      "description": "Send CWD with 65536-byte argument (overflow test)",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:08:35.554585",
+      "details": {
+        "command": "CWD",
+        "arg_size": 65536,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "connection_error": true
+      }
+    },
+    {
+      "id": 51,
+      "category": "overflow",
+      "name": "RETR overflow (65536B)",
+      "description": "Send RETR with 65536-byte argument (overflow test)",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:08:35.866429",
+      "details": {
+        "command": "RETR",
+        "arg_size": 65536,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "connection_error": true
+      }
+    },
+    {
+      "id": 52,
+      "category": "overflow",
+      "name": "STOR overflow (65536B)",
+      "description": "Send STOR with 65536-byte argument (overflow test)",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:08:36.214255",
+      "details": {
+        "command": "STOR",
+        "arg_size": 65536,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "connection_error": true
+      }
+    },
+    {
+      "id": 53,
+      "category": "overflow",
+      "name": "CWD null byte injection",
+      "description": "Send CWD with embedded null byte in argument",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:36.526099",
+      "details": {
+        "command": "CWD",
+        "payload_repr": "'test\\x00../../etc/passwd'",
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 54,
+      "category": "overflow",
+      "name": "RETR null byte injection",
+      "description": "Send RETR with embedded null byte in argument",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:36.833945",
+      "details": {
+        "command": "RETR",
+        "payload_repr": "'test\\x00../../etc/passwd'",
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 55,
+      "category": "overflow",
+      "name": "MKD null byte injection",
+      "description": "Send MKD with embedded null byte in argument",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:37.137793",
+      "details": {
+        "command": "MKD",
+        "payload_repr": "'test\\x00../../etc/passwd'",
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 56,
+      "category": "overflow",
+      "name": "CWD CRLF injection",
+      "description": "Inject CRLF in CWD argument to pipeline DELE command",
+      "result": "Responses:  | ",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:08:37.441641",
+      "details": {
+        "command": "CWD",
+        "payload_repr": "'test\\r\\nDELE important_file'",
+        "responses": [
+          "",
+          ""
+        ]
+      }
+    },
+    {
+      "id": 57,
+      "category": "overflow",
+      "name": "RETR CRLF injection",
+      "description": "Inject CRLF in RETR argument to pipeline DELE command",
+      "result": "Responses:  | ",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:08:37.745489",
+      "details": {
+        "command": "RETR",
+        "payload_repr": "'test\\r\\nDELE important_file'",
+        "responses": [
+          "",
+          ""
+        ]
+      }
+    },
+    {
+      "id": 58,
+      "category": "overflow",
+      "name": "MKD CRLF injection",
+      "description": "Inject CRLF in MKD argument to pipeline DELE command",
+      "result": "Responses:  | ",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:08:38.049337",
+      "details": {
+        "command": "MKD",
+        "payload_repr": "'test\\r\\nDELE important_file'",
+        "responses": [
+          "",
+          ""
+        ]
+      }
+    },
+    {
+      "id": 59,
+      "category": "traversal",
+      "name": "CWD: basic traversal ../../etc",
+      "description": "Directory traversal via CWD '../../etc'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:38.361181",
+      "details": {
+        "path": "../../etc",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 60,
+      "category": "traversal",
+      "name": "CWD: deep traversal etc/passwd",
+      "description": "Directory traversal via CWD '../../../etc/passwd'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:38.665029",
+      "details": {
+        "path": "../../../etc/passwd",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 61,
+      "category": "traversal",
+      "name": "CWD: double-dot-slash bypass",
+      "description": "Directory traversal via CWD '....//....//etc'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:38.968877",
+      "details": {
+        "path": "....//....//etc",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 62,
+      "category": "traversal",
+      "name": "CWD: absolute path /etc/passwd",
+      "description": "Directory traversal via CWD '/etc/passwd'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:39.268727",
+      "details": {
+        "path": "/etc/passwd",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 63,
+      "category": "traversal",
+      "name": "CWD: root directory",
+      "description": "Directory traversal via CWD '/'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:39.568577",
+      "details": {
+        "path": "/",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 64,
+      "category": "traversal",
+      "name": "CWD: root + traversal",
+      "description": "Directory traversal via CWD '/../../../etc'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:39.868427",
+      "details": {
+        "path": "/../../../etc",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 65,
+      "category": "traversal",
+      "name": "CWD: dot + traversal",
+      "description": "Directory traversal via CWD './../../../etc'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:40.168277",
+      "details": {
+        "path": "./../../../etc",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 66,
+      "category": "traversal",
+      "name": "CWD: semicolon traversal",
+      "description": "Directory traversal via CWD '..;/etc'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:40.472125",
+      "details": {
+        "path": "..;/etc",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 67,
+      "category": "traversal",
+      "name": "CWD: URL-encoded traversal",
+      "description": "Directory traversal via CWD '%2e%2e%2f%2e%2e%2fetc'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:40.775973",
+      "details": {
+        "path": "%2e%2e%2f%2e%2e%2fetc",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 68,
+      "category": "traversal",
+      "name": "CWD: double URL-encoded",
+      "description": "Directory traversal via CWD '%252e%252e%252f%252e%252e%252f'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:41.071825",
+      "details": {
+        "path": "%252e%252e%252f%252e%252e%252f",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 69,
+      "category": "traversal",
+      "name": "CWD: Unicode overlong slash",
+      "description": "Directory traversal via CWD '..%c0%af..%c0%af'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:41.371675",
+      "details": {
+        "path": "..%c0%af..%c0%af",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 70,
+      "category": "traversal",
+      "name": "CWD: Unicode overlong backslash",
+      "description": "Directory traversal via CWD '..%c1%9c..%c1%9c'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:41.679521",
+      "details": {
+        "path": "..%c1%9c..%c1%9c",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 71,
+      "category": "traversal",
+      "name": "CWD: backslash traversal",
+      "description": "Directory traversal via CWD '..\\..\\'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:41.983369",
+      "details": {
+        "path": "..\\..\\",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 72,
+      "category": "traversal",
+      "name": "CWD: backslash to etc/passwd",
+      "description": "Directory traversal via CWD '..\\..\\..\\etc\\passwd'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:42.287217",
+      "details": {
+        "path": "..\\..\\..\\etc\\passwd",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 73,
+      "category": "traversal",
+      "name": "CWD: triple-dot traversal",
+      "description": "Directory traversal via CWD '.../.../etc'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:42.591065",
+      "details": {
+        "path": ".../.../etc",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "traversal_accepted": false
+      }
+    },
+    {
+      "id": 74,
+      "category": "traversal",
+      "name": "RETR: basic etc/passwd",
+      "description": "File retrieval traversal via RETR '../../etc/passwd'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:42.894913",
+      "details": {
+        "path": "../../etc/passwd",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "file_retrieved": false
+      }
+    },
+    {
+      "id": 75,
+      "category": "traversal",
+      "name": "RETR: etc/shadow",
+      "description": "File retrieval traversal via RETR '../../../etc/shadow'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:43.190765",
+      "details": {
+        "path": "../../../etc/shadow",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "file_retrieved": false
+      }
+    },
+    {
+      "id": 76,
+      "category": "traversal",
+      "name": "RETR: absolute /etc/passwd",
+      "description": "File retrieval traversal via RETR '/etc/passwd'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:43.486617",
+      "details": {
+        "path": "/etc/passwd",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "file_retrieved": false
+      }
+    },
+    {
+      "id": 77,
+      "category": "traversal",
+      "name": "RETR: double-dot-slash bypass",
+      "description": "File retrieval traversal via RETR '....//etc//passwd'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:43.782469",
+      "details": {
+        "path": "....//etc//passwd",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "file_retrieved": false
+      }
+    },
+    {
+      "id": 78,
+      "category": "traversal",
+      "name": "RETR: null byte extension",
+      "description": "File retrieval traversal via RETR '../../etc/passwd%00.txt'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:44.082319",
+      "details": {
+        "path": "../../etc/passwd%00.txt",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "file_retrieved": false
+      }
+    },
+    {
+      "id": 79,
+      "category": "traversal",
+      "name": "RETR: URL-encoded",
+      "description": "File retrieval traversal via RETR '%2e%2e%2f%2e%2e%2fetc%2fpasswd'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:44.390165",
+      "details": {
+        "path": "%2e%2e%2f%2e%2e%2fetc%2fpasswd",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "file_retrieved": false
+      }
+    },
+    {
+      "id": 80,
+      "category": "traversal",
+      "name": "RETR: backslash traversal",
+      "description": "File retrieval traversal via RETR '..\\..\\etc\\passwd'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:44.694013",
+      "details": {
+        "path": "..\\..\\etc\\passwd",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "file_retrieved": false
+      }
+    },
+    {
+      "id": 81,
+      "category": "traversal",
+      "name": "STOR: basic ../../tmp write",
+      "description": "Upload traversal via STOR '../../tmp/ftp_test_trav'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:44.997861",
+      "details": {
+        "path": "../../tmp/ftp_test_trav",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "upload_accepted": false
+      }
+    },
+    {
+      "id": 82,
+      "category": "traversal",
+      "name": "STOR: absolute /tmp write",
+      "description": "Upload traversal via STOR '/tmp/ftp_test_direct'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:45.305707",
+      "details": {
+        "path": "/tmp/ftp_test_direct",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "upload_accepted": false
+      }
+    },
+    {
+      "id": 83,
+      "category": "traversal",
+      "name": "STOR: deep traversal /tmp",
+      "description": "Upload traversal via STOR '../../../tmp/ftp_pwned'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:45.613553",
+      "details": {
+        "path": "../../../tmp/ftp_pwned",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "upload_accepted": false
+      }
+    },
+    {
+      "id": 84,
+      "category": "traversal",
+      "name": "STOR: double-dot-slash /tmp",
+      "description": "Upload traversal via STOR '....//tmp//ftp_test'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:45.917401",
+      "details": {
+        "path": "....//tmp//ftp_test",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "upload_accepted": false
+      }
+    },
+    {
+      "id": 85,
+      "category": "traversal",
+      "name": "LIST traversal: ../../etc",
+      "description": "Traversal via LIST '../../etc'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:46.221249",
+      "details": {
+        "command": "LIST",
+        "path": "../../etc",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 86,
+      "category": "traversal",
+      "name": "SIZE traversal: ../../etc",
+      "description": "Traversal via SIZE '../../etc'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:46.529095",
+      "details": {
+        "command": "SIZE",
+        "path": "../../etc",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 87,
+      "category": "traversal",
+      "name": "NLST traversal: ../../etc",
+      "description": "Traversal via NLST '../../etc'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:46.832943",
+      "details": {
+        "command": "NLST",
+        "path": "../../etc",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 88,
+      "category": "traversal",
+      "name": "Truncation+traversal (pad=240)",
+      "description": "CWD with 240-byte prefix + ../../etc/passwd (truncation bypass)",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:47.136791",
+      "details": {
+        "pad_size": 240,
+        "total_length": 257,
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 89,
+      "category": "traversal",
+      "name": "Truncation+traversal (pad=250)",
+      "description": "CWD with 250-byte prefix + ../../etc/passwd (truncation bypass)",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:47.440639",
+      "details": {
+        "pad_size": 250,
+        "total_length": 267,
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 90,
+      "category": "traversal",
+      "name": "Truncation+traversal (pad=255)",
+      "description": "CWD with 255-byte prefix + ../../etc/passwd (truncation bypass)",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:47.744487",
+      "details": {
+        "pad_size": 255,
+        "total_length": 272,
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 91,
+      "category": "traversal",
+      "name": "Truncation+traversal (pad=256)",
+      "description": "CWD with 256-byte prefix + ../../etc/passwd (truncation bypass)",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:48.048335",
+      "details": {
+        "pad_size": 256,
+        "total_length": 273,
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 92,
+      "category": "traversal",
+      "name": "CVE-2019-3943: ../../../../../flash/rw/store/user.dat",
+      "description": "CVE-2019-3943 vector: RETR ../../../../../flash/rw/store/user.dat",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:48.352183",
+      "details": {
+        "cve": "CVE-2019-3943",
+        "path": "../../../../../flash/rw/store/user.dat",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "file_retrieved": false
+      }
+    },
+    {
+      "id": 93,
+      "category": "traversal",
+      "name": "CVE-2019-3943: ../flash/rw/store/user.dat",
+      "description": "CVE-2019-3943 vector: RETR ../flash/rw/store/user.dat",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:48.668025",
+      "details": {
+        "cve": "CVE-2019-3943",
+        "path": "../flash/rw/store/user.dat",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "file_retrieved": false
+      }
+    },
+    {
+      "id": 94,
+      "category": "traversal",
+      "name": "CVE-2019-3943: ../../flash/rw/store/user.dat",
+      "description": "CVE-2019-3943 vector: RETR ../../flash/rw/store/user.dat",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:48.971873",
+      "details": {
+        "cve": "CVE-2019-3943",
+        "path": "../../flash/rw/store/user.dat",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "file_retrieved": false
+      }
+    },
+    {
+      "id": 95,
+      "category": "traversal",
+      "name": "CVE-2019-3943: ../../../../../flash/nova/etc/devel-logi",
+      "description": "CVE-2019-3943 vector: RETR ../../../../../flash/nova/etc/devel-login",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:49.275721",
+      "details": {
+        "cve": "CVE-2019-3943",
+        "path": "../../../../../flash/nova/etc/devel-login",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "file_retrieved": false
+      }
+    },
+    {
+      "id": 96,
+      "category": "sensitive",
+      "name": "Direct access: user.dat",
+      "description": "Attempt to retrieve known sensitive file: user.dat",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:49.583567",
+      "details": {
+        "path": "user.dat",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 97,
+      "category": "sensitive",
+      "name": "Direct access: /flash/rw/store/user.dat",
+      "description": "Attempt to retrieve known sensitive file: /flash/rw/store/user.dat",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:49.887415",
+      "details": {
+        "path": "/flash/rw/store/user.dat",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 98,
+      "category": "sensitive",
+      "name": "Direct access: /rw/store/user.dat",
+      "description": "Attempt to retrieve known sensitive file: /rw/store/user.dat",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:50.191263",
+      "details": {
+        "path": "/rw/store/user.dat",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 99,
+      "category": "sensitive",
+      "name": "Direct access: /flash/nova/etc/devel-login",
+      "description": "Attempt to retrieve known sensitive file: /flash/nova/etc/devel-login",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:50.495111",
+      "details": {
+        "path": "/flash/nova/etc/devel-login",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 100,
+      "category": "sensitive",
+      "name": "Direct access: /nova/etc/devel-login",
+      "description": "Attempt to retrieve known sensitive file: /nova/etc/devel-login",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:50.798959",
+      "details": {
+        "path": "/nova/etc/devel-login",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 101,
+      "category": "sensitive",
+      "name": "Direct access: /flash/rw/RESET",
+      "description": "Attempt to retrieve known sensitive file: /flash/rw/RESET",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:51.102807",
+      "details": {
+        "path": "/flash/rw/RESET",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 102,
+      "category": "sensitive",
+      "name": "Case bypass: User.Dat",
+      "description": "Case variation bypass: RETR User.Dat",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:51.406655",
+      "details": {
+        "filename": "User.Dat",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 103,
+      "category": "sensitive",
+      "name": "Case bypass: USER.DAT",
+      "description": "Case variation bypass: RETR USER.DAT",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:51.710503",
+      "details": {
+        "filename": "USER.DAT",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 104,
+      "category": "sensitive",
+      "name": "Case bypass: user.DAT",
+      "description": "Case variation bypass: RETR user.DAT",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:52.014351",
+      "details": {
+        "filename": "user.DAT",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 105,
+      "category": "sensitive",
+      "name": "Case bypass: USER.dat",
+      "description": "Case variation bypass: RETR USER.dat",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:52.322197",
+      "details": {
+        "filename": "USER.dat",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 106,
+      "category": "sensitive",
+      "name": "Case bypass: User.dat",
+      "description": "Case variation bypass: RETR User.dat",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:52.626045",
+      "details": {
+        "filename": "User.dat",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 107,
+      "category": "sensitive",
+      "name": "Case bypass: usEr.dAt",
+      "description": "Case variation bypass: RETR usEr.dAt",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:52.929893",
+      "details": {
+        "filename": "usEr.dAt",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 108,
+      "category": "sensitive",
+      "name": "Null byte bypass: 'user.dat%00.txt'",
+      "description": "Null byte extension bypass: 'user.dat%00.txt'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:53.233741",
+      "details": {
+        "filename_repr": "'user.dat%00.txt'",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 109,
+      "category": "sensitive",
+      "name": "Null byte bypass: 'user.dat\\x00.jpg'",
+      "description": "Null byte extension bypass: 'user.dat\\x00.jpg'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:53.537589",
+      "details": {
+        "filename_repr": "'user.dat\\x00.jpg'",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 110,
+      "category": "sensitive",
+      "name": "Null byte bypass: 'user%00.dat'",
+      "description": "Null byte extension bypass: 'user%00.dat'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:53.841437",
+      "details": {
+        "filename_repr": "'user%00.dat'",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 111,
+      "category": "sensitive",
+      "name": "Unicode bypass: 'user\uff0edat'",
+      "description": "Unicode homoglyph bypass: 'user\uff0edat'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:54.149283",
+      "details": {
+        "filename_repr": "'user\uff0edat'",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 112,
+      "category": "sensitive",
+      "name": "Unicode bypass: 'user.dat'",
+      "description": "Unicode homoglyph bypass: 'user.dat'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:54.453131",
+      "details": {
+        "filename_repr": "'user.dat'",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 113,
+      "category": "sensitive",
+      "name": "Unicode bypass: 'us\u0435r.dat'",
+      "description": "Unicode homoglyph bypass: 'us\u0435r.dat'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:54.756979",
+      "details": {
+        "filename_repr": "'us\u0435r.dat'",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 114,
+      "category": "sensitive",
+      "name": "Unicode bypass: 'user.d\u0430t'",
+      "description": "Unicode homoglyph bypass: 'user.d\u0430t'",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:55.060827",
+      "details": {
+        "filename_repr": "'user.d\u0430t'",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 115,
+      "category": "sensitive",
+      "name": "Traversal to sensitive: ../flash/rw/store/user.dat",
+      "description": "Traversal-based sensitive file access: ../flash/rw/store/user.dat",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:55.364675",
+      "details": {
+        "path": "../flash/rw/store/user.dat",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 116,
+      "category": "sensitive",
+      "name": "Traversal to sensitive: ./user.dat",
+      "description": "Traversal-based sensitive file access: ./user.dat",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:55.668523",
+      "details": {
+        "path": "./user.dat",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 117,
+      "category": "bounce",
+      "name": "PORT bounce: Loopback HTTP",
+      "description": "FTP bounce via PORT to 127.0.0.1:80",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:55.976369",
+      "details": {
+        "port_cmd": "PORT 127,0,0,1,0,80",
+        "target": "Loopback HTTP",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "port_accepted": false
+      }
+    },
+    {
+      "id": 118,
+      "category": "bounce",
+      "name": "PORT bounce: Loopback SSH",
+      "description": "FTP bounce via PORT to 127.0.0.1:22",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:56.280217",
+      "details": {
+        "port_cmd": "PORT 127,0,0,1,0,22",
+        "target": "Loopback SSH",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "port_accepted": false
+      }
+    },
+    {
+      "id": 119,
+      "category": "bounce",
+      "name": "PORT bounce: Loopback FTP (self)",
+      "description": "FTP bounce via PORT to 127.0.0.1:21",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:56.584065",
+      "details": {
+        "port_cmd": "PORT 127,0,0,1,0,21",
+        "target": "Loopback FTP (self)",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "port_accepted": false
+      }
+    },
+    {
+      "id": 120,
+      "category": "bounce",
+      "name": "PORT bounce: Loopback Telnet",
+      "description": "FTP bounce via PORT to 127.0.0.1:23",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:56.887913",
+      "details": {
+        "port_cmd": "PORT 127,0,0,1,0,23",
+        "target": "Loopback Telnet",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "port_accepted": false
+      }
+    },
+    {
+      "id": 121,
+      "category": "bounce",
+      "name": "PORT bounce: Loopback Winbox",
+      "description": "FTP bounce via PORT to 127.0.0.1:8291",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:57.191761",
+      "details": {
+        "port_cmd": "PORT 127,0,0,1,32,99",
+        "target": "Loopback Winbox",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "port_accepted": false
+      }
+    },
+    {
+      "id": 122,
+      "category": "bounce",
+      "name": "PORT bounce: Gateway HTTP",
+      "description": "FTP bounce via PORT to [REDACTED-INTERNAL-IP]:80",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:57.495609",
+      "details": {
+        "port_cmd": "PORT 10,0,0,1,0,80",
+        "target": "Gateway HTTP",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "port_accepted": false
+      }
+    },
+    {
+      "id": 123,
+      "category": "bounce",
+      "name": "PORT bounce: Self HTTP",
+      "description": "FTP bounce via PORT to [REDACTED-INTERNAL-IP]:80",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:57.799457",
+      "details": {
+        "port_cmd": "PORT 10,0,0,113,0,80",
+        "target": "Self HTTP",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "port_accepted": false
+      }
+    },
+    {
+      "id": 124,
+      "category": "bounce",
+      "name": "PORT bounce: Private network 192.168",
+      "description": "FTP bounce via PORT to [REDACTED-INTERNAL-IP]:80",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:58.107303",
+      "details": {
+        "port_cmd": "PORT 192,168,1,1,0,80",
+        "target": "Private network 192.168",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "port_accepted": false
+      }
+    },
+    {
+      "id": 125,
+      "category": "bounce",
+      "name": "PORT bounce: Private network 172.16",
+      "description": "FTP bounce via PORT to [REDACTED-INTERNAL-IP]:80",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:58.411151",
+      "details": {
+        "port_cmd": "PORT 172,16,0,1,0,80",
+        "target": "Private network 172.16",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "port_accepted": false
+      }
+    },
+    {
+      "id": 126,
+      "category": "bounce",
+      "name": "PORT bounce: Other router HTTP",
+      "description": "FTP bounce via PORT to [REDACTED-INTERNAL-IP]:80",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:58.714999",
+      "details": {
+        "port_cmd": "PORT 10,0,0,110,0,80",
+        "target": "Other router HTTP",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "port_accepted": false
+      }
+    },
+    {
+      "id": 127,
+      "category": "bounce",
+      "name": "EPRT: IPv4 loopback via EPRT",
+      "description": "Extended PORT command: EPRT |1|127.0.0.1|80|",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:59.018847",
+      "details": {
+        "eprt_arg": "|1|127.0.0.1|80|",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 128,
+      "category": "bounce",
+      "name": "EPRT: IPv6 loopback via EPRT",
+      "description": "Extended PORT command: EPRT |2|::1|80|",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:59.322695",
+      "details": {
+        "eprt_arg": "|2|::1|80|",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 129,
+      "category": "bounce",
+      "name": "EPRT: EPRT to 0.0.0.0",
+      "description": "Extended PORT command: EPRT |1|0.0.0.0|80|",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:59.626543",
+      "details": {
+        "eprt_arg": "|1|0.0.0.0|80|",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 130,
+      "category": "bounce",
+      "name": "EPRT: EPRT to self",
+      "description": "Extended PORT command: EPRT |1|[REDACTED-INTERNAL-IP]|80|",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:08:59.930391",
+      "details": {
+        "eprt_arg": "|1|[REDACTED-INTERNAL-IP]|80|",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 131,
+      "category": "bounce",
+      "name": "PASV response analysis",
+      "description": "Issue PASV and analyze returned IP:port (check for internal IP leak)",
+      "result": "Response: ERROR: [Errno 32] Broken pipe \u2192 IP=None Port=None",
+      "anomaly": null,
+      "timestamp": "2026-02-16T15:09:00.234239",
+      "details": {
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "pasv_ip": null,
+        "pasv_port": null
+      }
+    },
+    {
+      "id": 132,
+      "category": "bounce",
+      "name": "EPSV response",
+      "description": "Issue EPSV command",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:00.538087",
+      "details": {
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 133,
+      "category": "bounce",
+      "name": "PORT to privileged port 1",
+      "description": "PORT command targeting privileged port 1",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:00.841935",
+      "details": {
+        "port": 1,
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 134,
+      "category": "bounce",
+      "name": "PORT to privileged port 7",
+      "description": "PORT command targeting privileged port 7",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:01.145783",
+      "details": {
+        "port": 7,
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 135,
+      "category": "bounce",
+      "name": "PORT to privileged port 19",
+      "description": "PORT command targeting privileged port 19",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:01.449631",
+      "details": {
+        "port": 19,
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 136,
+      "category": "bounce",
+      "name": "PORT to privileged port 25",
+      "description": "PORT command targeting privileged port 25",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:01.757477",
+      "details": {
+        "port": 25,
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 137,
+      "category": "bounce",
+      "name": "PORT to privileged port 53",
+      "description": "PORT command targeting privileged port 53",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:02.057327",
+      "details": {
+        "port": 53,
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 138,
+      "category": "bounce",
+      "name": "PASV before auth",
+      "description": "Issue PASV command before authenticating (should be rejected)",
+      "result": "Response:  (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:02.357177",
+      "details": {
+        "response_code": null,
+        "response": ""
+      }
+    },
+    {
+      "id": 139,
+      "category": "fmtstr",
+      "name": "CWD format string",
+      "description": "Format string in CWD: CWD %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:02.661025",
+      "details": {
+        "command": "CWD",
+        "format_payload": "%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 140,
+      "category": "fmtstr",
+      "name": "RETR format string",
+      "description": "Format string in RETR: RETR %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:02.964873",
+      "details": {
+        "command": "RETR",
+        "format_payload": "%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 141,
+      "category": "fmtstr",
+      "name": "STOR format string",
+      "description": "Format string in STOR: STOR %s%s%s%s%s%s%s%s%s%s",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:03.268721",
+      "details": {
+        "command": "STOR",
+        "format_payload": "%s%s%s%s%s%s%s%s%s%s",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 142,
+      "category": "fmtstr",
+      "name": "MKD format string",
+      "description": "Format string in MKD: MKD %n%n%n%n",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:03.572569",
+      "details": {
+        "command": "MKD",
+        "format_payload": "%n%n%n%n",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 143,
+      "category": "fmtstr",
+      "name": "DELE format string",
+      "description": "Format string in DELE: DELE %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:03.876417",
+      "details": {
+        "command": "DELE",
+        "format_payload": "%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 144,
+      "category": "fmtstr",
+      "name": "SIZE format string",
+      "description": "Format string in SIZE: SIZE AAAA%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:04.180265",
+      "details": {
+        "command": "SIZE",
+        "format_payload": "AAAA%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 145,
+      "category": "fmtstr",
+      "name": "RNFR format string",
+      "description": "Format string in RNFR: RNFR %d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:04.484113",
+      "details": {
+        "command": "RNFR",
+        "format_payload": "%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 146,
+      "category": "fmtstr",
+      "name": "RNTO format string",
+      "description": "Format string in RNTO: RNTO %f%f%f%f%f%f%f%f%f%f",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:04.791959",
+      "details": {
+        "command": "RNTO",
+        "format_payload": "%f%f%f%f%f%f%f%f%f%f",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 147,
+      "category": "fmtstr",
+      "name": "RMD format string",
+      "description": "Format string in RMD: RMD %1000000x",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:05.103803",
+      "details": {
+        "command": "RMD",
+        "format_payload": "%1000000x",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 148,
+      "category": "fmtstr",
+      "name": "LIST format string",
+      "description": "Format string in LIST: LIST %.65535d",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:05.411649",
+      "details": {
+        "command": "LIST",
+        "format_payload": "%.65535d",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 149,
+      "category": "fmtstr",
+      "name": "CWD format string",
+      "description": "Format string in CWD: CWD %n%n%n%n%n%n%n%n",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:05.719495",
+      "details": {
+        "command": "CWD",
+        "format_payload": "%n%n%n%n%n%n%n%n",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 150,
+      "category": "fmtstr",
+      "name": "RETR format string",
+      "description": "Format string in RETR: RETR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:06.027341",
+      "details": {
+        "command": "RETR",
+        "format_payload": "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 151,
+      "category": "fmtstr",
+      "name": "STOR format string",
+      "description": "Format string in STOR: STOR %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:06.327191",
+      "details": {
+        "command": "STOR",
+        "format_payload": "%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 152,
+      "category": "fmtstr",
+      "name": "MKD format string",
+      "description": "Format string in MKD: MKD AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:06.627041",
+      "details": {
+        "command": "MKD",
+        "format_payload": "AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 153,
+      "category": "fmtstr",
+      "name": "CWD format string",
+      "description": "Format string in CWD: CWD %1000000x",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:06.930889",
+      "details": {
+        "command": "CWD",
+        "format_payload": "%1000000x",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 154,
+      "category": "fmtstr",
+      "name": "PORT format string",
+      "description": "Format string in PORT fields: PORT %x,%x,%x,%x,%x,%x",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:07.238735",
+      "details": {
+        "command": "PORT_SPECIAL",
+        "format_payload": "%x,%x,%x,%x,%x,%x",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 155,
+      "category": "fmtstr",
+      "name": "REST format string",
+      "description": "Format string in REST offset: REST %x%x%x%x",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:07.546581",
+      "details": {
+        "command": "REST_SPECIAL",
+        "format_payload": "%x%x%x%x",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 156,
+      "category": "fmtstr",
+      "name": "TYPE format string",
+      "description": "Format string in TYPE: TYPE %n%n",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:07.862423",
+      "details": {
+        "command": "TYPE_SPECIAL",
+        "format_payload": "%n%n",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 157,
+      "category": "fmtstr",
+      "name": "RNFR format string",
+      "description": "Format string in RNFR: RNFR %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:08.170269",
+      "details": {
+        "command": "RNFR_SPECIAL",
+        "format_payload": "%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 158,
+      "category": "fmtstr",
+      "name": "RNTO format string",
+      "description": "Format string in RNTO: RNTO %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": true,
+      "timestamp": "2026-02-16T15:09:08.490109",
+      "details": {
+        "command": "RNTO_SPECIAL",
+        "format_payload": "%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+        "response": "ERROR: [Errno 32] Broken pipe",
+        "possible_leak": false,
+        "connection_error": true
+      }
+    },
+    {
+      "id": 159,
+      "category": "edge",
+      "name": "SITE HELP",
+      "description": "Test SITE command: SITE HELP",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:08.813947",
+      "details": {
+        "command": "SITE HELP",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 160,
+      "category": "edge",
+      "name": "SITE CHMOD",
+      "description": "Test SITE command: SITE CHMOD 777 test",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:09.117795",
+      "details": {
+        "command": "SITE CHMOD 777 test",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 161,
+      "category": "edge",
+      "name": "SITE EXEC",
+      "description": "Test SITE command: SITE EXEC ls",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:09.429639",
+      "details": {
+        "command": "SITE EXEC ls",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 162,
+      "category": "edge",
+      "name": "SITE CPFR",
+      "description": "Test SITE command: SITE CPFR /etc/passwd",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:09.737485",
+      "details": {
+        "command": "SITE CPFR /etc/passwd",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 163,
+      "category": "edge",
+      "name": "SITE CPTO",
+      "description": "Test SITE command: SITE CPTO /tmp/pwned",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:10.041333",
+      "details": {
+        "command": "SITE CPTO /tmp/pwned",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 164,
+      "category": "edge",
+      "name": "SITE UMASK",
+      "description": "Test SITE command: SITE UMASK 000",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:10.365171",
+      "details": {
+        "command": "SITE UMASK 000",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 165,
+      "category": "edge",
+      "name": "SITE UTIME",
+      "description": "Test SITE command: SITE UTIME test",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:10.673017",
+      "details": {
+        "command": "SITE UTIME test",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 166,
+      "category": "edge",
+      "name": "SITE PSWD",
+      "description": "Test SITE command: SITE PSWD oldpass newpass",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:10.976865",
+      "details": {
+        "command": "SITE PSWD oldpass newpass",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 167,
+      "category": "edge",
+      "name": "Unknown cmd: XYZZY",
+      "description": "Send unsupported/unknown command: XYZZY",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:11.280713",
+      "details": {
+        "command": "XYZZY",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 168,
+      "category": "edge",
+      "name": "Unknown cmd: CLNT",
+      "description": "Send unsupported/unknown command: CLNT MikroTikTest",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:11.584561",
+      "details": {
+        "command": "CLNT MikroTikTest",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 169,
+      "category": "edge",
+      "name": "Unknown cmd: OPTS",
+      "description": "Send unsupported/unknown command: OPTS UTF8 ON",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:11.888409",
+      "details": {
+        "command": "OPTS UTF8 ON",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 170,
+      "category": "edge",
+      "name": "Unknown cmd: HOST",
+      "description": "Send unsupported/unknown command: HOST test.com",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:12.184261",
+      "details": {
+        "command": "HOST test.com",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 171,
+      "category": "edge",
+      "name": "Unknown cmd: AUTH",
+      "description": "Send unsupported/unknown command: AUTH TLS",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:12.484111",
+      "details": {
+        "command": "AUTH TLS",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 172,
+      "category": "edge",
+      "name": "Unknown cmd: PBSZ",
+      "description": "Send unsupported/unknown command: PBSZ 0",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:12.783961",
+      "details": {
+        "command": "PBSZ 0",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 173,
+      "category": "edge",
+      "name": "Unknown cmd: PROT",
+      "description": "Send unsupported/unknown command: PROT P",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:13.079813",
+      "details": {
+        "command": "PROT P",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 174,
+      "category": "edge",
+      "name": "Empty command",
+      "description": "Send empty line (just CRLF) after authentication",
+      "result": "Response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:13.375665",
+      "details": {
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 175,
+      "category": "edge",
+      "name": "Commands after QUIT",
+      "description": "Send PWD and LIST after QUIT (should fail)",
+      "result": "QUIT resp:  | Post-QUIT: NO RESPONSE (connection closed)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:13.675515",
+      "details": {
+        "quit_response": "",
+        "post_quit_response": "NO RESPONSE (connection closed)"
+      }
+    },
+    {
+      "id": 176,
+      "category": "edge",
+      "name": "Pipelined commands",
+      "description": "Send 5 commands in a single TCP segment (pipelining)",
+      "result": "Responses:  | ",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:13.975365",
+      "details": {
+        "pipeline": "USER admin | PASS admin | PWD | SYST | LIST | ",
+        "responses": [
+          "",
+          ""
+        ]
+      }
+    },
+    {
+      "id": 177,
+      "category": "edge",
+      "name": "REST zero offset",
+      "description": "REST command with edge-case offset: 0",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:14.283211",
+      "details": {
+        "value": "0",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 178,
+      "category": "edge",
+      "name": "REST negative offset",
+      "description": "REST command with edge-case offset: -1",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:14.579063",
+      "details": {
+        "value": "-1",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 179,
+      "category": "edge",
+      "name": "REST UINT32_MAX",
+      "description": "REST command with edge-case offset: 4294967295",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:14.882911",
+      "details": {
+        "value": "4294967295",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 180,
+      "category": "edge",
+      "name": "REST UINT32_MAX + 1",
+      "description": "REST command with edge-case offset: 4294967296",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:15.178763",
+      "details": {
+        "value": "4294967296",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 181,
+      "category": "edge",
+      "name": "REST huge offset",
+      "description": "REST command with edge-case offset: 9999999999999999999",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:15.514595",
+      "details": {
+        "value": "9999999999999999999",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 182,
+      "category": "edge",
+      "name": "REST non-numeric offset",
+      "description": "REST command with edge-case offset: abc",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:15.818443",
+      "details": {
+        "value": "abc",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 183,
+      "category": "edge",
+      "name": "TYPE ASCII",
+      "description": "TYPE command with value: A",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:16.122291",
+      "details": {
+        "value": "A",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 184,
+      "category": "edge",
+      "name": "TYPE Image/Binary",
+      "description": "TYPE command with value: I",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:16.426139",
+      "details": {
+        "value": "I",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 185,
+      "category": "edge",
+      "name": "TYPE EBCDIC",
+      "description": "TYPE command with value: E",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:16.721991",
+      "details": {
+        "value": "E",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 186,
+      "category": "edge",
+      "name": "TYPE Local byte",
+      "description": "TYPE command with value: L 8",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:17.029864",
+      "details": {
+        "value": "L 8",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 187,
+      "category": "edge",
+      "name": "TYPE Invalid",
+      "description": "TYPE command with value: Z",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:17.334016",
+      "details": {
+        "value": "Z",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 188,
+      "category": "edge",
+      "name": "TYPE Double",
+      "description": "TYPE command with value: AA",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:17.634166",
+      "details": {
+        "value": "AA",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 189,
+      "category": "edge",
+      "name": "STRU File",
+      "description": "STRU command with value: F",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:17.938318",
+      "details": {
+        "value": "F",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 190,
+      "category": "edge",
+      "name": "STRU Record",
+      "description": "STRU command with value: R",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:18.242470",
+      "details": {
+        "value": "R",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 191,
+      "category": "edge",
+      "name": "STRU Page",
+      "description": "STRU command with value: P",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:18.546622",
+      "details": {
+        "value": "P",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 192,
+      "category": "edge",
+      "name": "STRU Invalid",
+      "description": "STRU command with value: Z",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:18.850774",
+      "details": {
+        "value": "Z",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 193,
+      "category": "edge",
+      "name": "MODE Stream",
+      "description": "MODE command with value: S",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:19.150924",
+      "details": {
+        "value": "S",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 194,
+      "category": "edge",
+      "name": "MODE Block",
+      "description": "MODE command with value: B",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:19.467082",
+      "details": {
+        "value": "B",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 195,
+      "category": "edge",
+      "name": "MODE Compressed",
+      "description": "MODE command with value: C",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:19.775236",
+      "details": {
+        "value": "C",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 196,
+      "category": "edge",
+      "name": "MODE Invalid",
+      "description": "MODE command with value: Z",
+      "result": "Response: ERROR: [Errno 32] Broken pipe (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:20.079388",
+      "details": {
+        "value": "Z",
+        "response_code": null,
+        "response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 197,
+      "category": "edge",
+      "name": "ABOR during transfer",
+      "description": "Issue ABOR during LIST transfer",
+      "result": "ABOR response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:20.387542",
+      "details": {
+        "responses": [
+          "ERROR: [Errno 32] Broken pipe"
+        ]
+      }
+    },
+    {
+      "id": 198,
+      "category": "race",
+      "name": "TOCTOU: concurrent RETR + DELE",
+      "description": "Race condition: simultaneous RETR and DELE on same file",
+      "result": "RETR: ERROR: [Errno 32] Broken pipe | DELE: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:20.999848",
+      "details": {
+        "retr_response": "ERROR: [Errno 32] Broken pipe",
+        "dele_response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 199,
+      "category": "race",
+      "name": "Concurrent RNFR from two connections",
+      "description": "Race: two connections issue RNFR on same file simultaneously",
+      "result": "Conn1: ERROR: [Errno 32] Broken pipe | Conn2: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:21.304000",
+      "details": {
+        "conn1": "ERROR: [Errno 32] Broken pipe",
+        "conn2": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 200,
+      "category": "race",
+      "name": "Concurrent STOR to same file",
+      "description": "Race: two connections upload to same filename simultaneously",
+      "result": "Conn1: ERROR: [Errno 32] Broken pipe | Conn2: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:21.604150",
+      "details": {
+        "conn1": "ERROR: [Errno 32] Broken pipe",
+        "conn2": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 201,
+      "category": "race",
+      "name": "Concurrent MKD + RMD",
+      "description": "Race: simultaneous directory create and remove",
+      "result": "MKD: ERROR: [Errno 32] Broken pipe | RMD: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:21.908302",
+      "details": {
+        "mkd_response": "ERROR: [Errno 32] Broken pipe",
+        "rmd_response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 202,
+      "category": "race",
+      "name": "Concurrent CWD + DELE",
+      "description": "Race: simultaneous CWD and DELE",
+      "result": "CWD: ERROR: [Errno 32] Broken pipe | DELE: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:22.212454",
+      "details": {
+        "cwd_response": "ERROR: [Errno 32] Broken pipe",
+        "dele_response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 203,
+      "category": "race",
+      "name": "Rapid connect/disconnect (20x)",
+      "description": "Rapidly open and close 20 FTP connections",
+      "result": "Success: 20/20 in 0.0s (714 conn/s)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:22.240468",
+      "details": {
+        "cycle_count": 20,
+        "successes": 20,
+        "failures": 0,
+        "elapsed_s": 0.03,
+        "rate_per_sec": 713.9
+      }
+    },
+    {
+      "id": 204,
+      "category": "race",
+      "name": "Rapid connect/disconnect (50x)",
+      "description": "Rapidly open and close 50 FTP connections",
+      "result": "Success: 50/50 in 0.3s (181 conn/s)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:22.520608",
+      "details": {
+        "cycle_count": 50,
+        "successes": 50,
+        "failures": 0,
+        "elapsed_s": 0.28,
+        "rate_per_sec": 181.1
+      }
+    },
+    {
+      "id": 205,
+      "category": "race",
+      "name": "Rapid connect/disconnect (100x)",
+      "description": "Rapidly open and close 100 FTP connections",
+      "result": "Success: 100/100 in 0.7s (144 conn/s)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:23.220958",
+      "details": {
+        "cycle_count": 100,
+        "successes": 100,
+        "failures": 0,
+        "elapsed_s": 0.7,
+        "rate_per_sec": 143.6
+      }
+    },
+    {
+      "id": 206,
+      "category": "race",
+      "name": "Concurrent auth (10 threads)",
+      "description": "10 simultaneous FTP authentication attempts",
+      "result": "10/10 succeeded",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:23.621158",
+      "details": {
+        "results": [
+          {
+            "thread": 0,
+            "success": true,
+            "response": "ERROR: [Errno 32] Broken pipe"
+          },
+          {
+            "thread": 2,
+            "success": true,
+            "response": "ERROR: [Errno 32] Broken pipe"
+          },
+          {
+            "thread": 1,
+            "success": true,
+            "response": "ERROR: [Errno 32] Broken pipe"
+          },
+          {
+            "thread": 3,
+            "success": true,
+            "response": "ERROR: [Errno 32] Broken pipe"
+          },
+          {
+            "thread": 6,
+            "success": true,
+            "response": "ERROR: [Errno 32] Broken pipe"
+          },
+          {
+            "thread": 5,
+            "success": true,
+            "response": "ERROR: [Errno 32] Broken pipe"
+          },
+          {
+            "thread": 4,
+            "success": true,
+            "response": "ERROR: [Errno 32] Broken pipe"
+          },
+          {
+            "thread": 9,
+            "success": true,
+            "response": "ERROR: [Errno 32] Broken pipe"
+          },
+          {
+            "thread": 7,
+            "success": true,
+            "response": "ERROR: [Errno 32] Broken pipe"
+          },
+          {
+            "thread": 8,
+            "success": true,
+            "response": "ERROR: [Errno 32] Broken pipe"
+          }
+        ],
+        "successes": 10
+      }
+    },
+    {
+      "id": 207,
+      "category": "race",
+      "name": "Concurrent post-auth commands",
+      "description": "Two authenticated connections running commands simultaneously",
+      "result": "PWD: ERROR: [Errno 32] Broken pipe | SYST: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:23.925310",
+      "details": {
+        "pwd_response": "ERROR: [Errno 32] Broken pipe",
+        "syst_response": "ERROR: [Errno 32] Broken pipe"
+      }
+    },
+    {
+      "id": 208,
+      "category": "authboundary",
+      "name": "Pre-auth: PWD",
+      "description": "Send PWD before USER/PASS (should require auth)",
+      "result": "Response:  (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:24.229462",
+      "details": {
+        "command": "PWD",
+        "response_code": null,
+        "response": "",
+        "allowed_without_auth": false
+      }
+    },
+    {
+      "id": 209,
+      "category": "authboundary",
+      "name": "Pre-auth: CWD",
+      "description": "Send CWD / before USER/PASS (should require auth)",
+      "result": "Response:  (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:24.529612",
+      "details": {
+        "command": "CWD /",
+        "response_code": null,
+        "response": "",
+        "allowed_without_auth": false
+      }
+    },
+    {
+      "id": 210,
+      "category": "authboundary",
+      "name": "Pre-auth: LIST",
+      "description": "Send LIST before USER/PASS (should require auth)",
+      "result": "Response:  (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:24.829762",
+      "details": {
+        "command": "LIST",
+        "response_code": null,
+        "response": "",
+        "allowed_without_auth": false
+      }
+    },
+    {
+      "id": 211,
+      "category": "authboundary",
+      "name": "Pre-auth: RETR",
+      "description": "Send RETR test before USER/PASS (should require auth)",
+      "result": "Response:  (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:25.133914",
+      "details": {
+        "command": "RETR test",
+        "response_code": null,
+        "response": "",
+        "allowed_without_auth": false
+      }
+    },
+    {
+      "id": 212,
+      "category": "authboundary",
+      "name": "Pre-auth: STOR",
+      "description": "Send STOR test before USER/PASS (should require auth)",
+      "result": "Response:  (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:25.434064",
+      "details": {
+        "command": "STOR test",
+        "response_code": null,
+        "response": "",
+        "allowed_without_auth": false
+      }
+    },
+    {
+      "id": 213,
+      "category": "authboundary",
+      "name": "Pre-auth: MKD",
+      "description": "Send MKD test before USER/PASS (should require auth)",
+      "result": "Response:  (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:25.734214",
+      "details": {
+        "command": "MKD test",
+        "response_code": null,
+        "response": "",
+        "allowed_without_auth": false
+      }
+    },
+    {
+      "id": 214,
+      "category": "authboundary",
+      "name": "Pre-auth: DELE",
+      "description": "Send DELE test before USER/PASS (should require auth)",
+      "result": "Response:  (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:26.034364",
+      "details": {
+        "command": "DELE test",
+        "response_code": null,
+        "response": "",
+        "allowed_without_auth": false
+      }
+    },
+    {
+      "id": 215,
+      "category": "authboundary",
+      "name": "Pre-auth: SYST",
+      "description": "Send SYST before USER/PASS (should require auth)",
+      "result": "Response:  (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:26.354524",
+      "details": {
+        "command": "SYST",
+        "response_code": null,
+        "response": "",
+        "allowed_without_auth": false
+      }
+    },
+    {
+      "id": 216,
+      "category": "authboundary",
+      "name": "Pre-auth: STAT",
+      "description": "Send STAT before USER/PASS (should require auth)",
+      "result": "Response:  (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:26.654674",
+      "details": {
+        "command": "STAT",
+        "response_code": null,
+        "response": "",
+        "allowed_without_auth": false
+      }
+    },
+    {
+      "id": 217,
+      "category": "authboundary",
+      "name": "Mid-auth (USER only): PWD",
+      "description": "Send PWD after USER but before PASS",
+      "result": "Response: NO RESPONSE (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:26.958826",
+      "details": {
+        "command": "PWD",
+        "response_code": null,
+        "response": "NO RESPONSE"
+      }
+    },
+    {
+      "id": 218,
+      "category": "authboundary",
+      "name": "Mid-auth (USER only): LIST",
+      "description": "Send LIST after USER but before PASS",
+      "result": "Response: NO RESPONSE (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:27.266980",
+      "details": {
+        "command": "LIST",
+        "response_code": null,
+        "response": "NO RESPONSE"
+      }
+    },
+    {
+      "id": 219,
+      "category": "authboundary",
+      "name": "Mid-auth (USER only): CWD",
+      "description": "Send CWD / after USER but before PASS",
+      "result": "Response: NO RESPONSE (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:27.571132",
+      "details": {
+        "command": "CWD /",
+        "response_code": null,
+        "response": "NO RESPONSE"
+      }
+    },
+    {
+      "id": 220,
+      "category": "authboundary",
+      "name": "Command after failed PASS",
+      "description": "Send PWD after USER + wrong PASS (should require re-auth)",
+      "result": "Response: NO RESPONSE (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:27.883288",
+      "details": {
+        "response_code": null,
+        "response": "NO RESPONSE"
+      }
+    },
+    {
+      "id": 221,
+      "category": "authboundary",
+      "name": "Re-authentication (USER after login)",
+      "description": "Send USER+PASS again after already authenticated",
+      "result": "Final response: ERROR: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:28.183438",
+      "details": {
+        "responses": [
+          "ERROR: [Errno 32] Broken pipe"
+        ]
+      }
+    },
+    {
+      "id": 222,
+      "category": "authboundary",
+      "name": "REIN then PWD",
+      "description": "Issue REIN to de-authenticate, then try PWD",
+      "result": "REIN: NO RESPONSE (code=None) | PWD: NO RESPONSE (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:28.483588",
+      "details": {
+        "rein_code": null,
+        "rein_response": "NO RESPONSE",
+        "post_rein_code": null,
+        "post_rein_response": "NO RESPONSE"
+      }
+    },
+    {
+      "id": 223,
+      "category": "authboundary",
+      "name": "ACCT command",
+      "description": "Send ACCT command to test account/privilege selection",
+      "result": "Response: NO RESPONSE (code=None)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T15:09:28.787740",
+      "details": {
+        "response_code": null,
+        "response": "NO RESPONSE"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "INFO",
+      "title": "FTP banner discloses product identity",
+      "description": "FTP banner: 220 MikroTik FTP server (MikroTik 7.20.8) ready",
+      "timestamp": "2026-02-16T15:07:38.291231",
+      "cwe": "CWE-200"
+    },
+    {
+      "id": 2,
+      "severity": "LOW",
+      "title": "No FTP brute force protection",
+      "description": "10 rapid failed login attempts completed without lockout or delay. Brute force attacks are feasible.",
+      "timestamp": "2026-02-16T15:08:13.477629",
+      "cwe": "CWE-307"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "FTP service DoS: persistent degradation after attack traffic",
+      "description": "After receiving ~223 FTP attack tests (including 65536-byte command overflows and rapid connection cycling), the FTP service entered a permanent degraded state where it accepts TCP connections but returns empty banners and drops all commands. Disabling/re-enabling the service via /ip/service does not recover it. A full router reboot is required to restore FTP functionality. This constitutes a persistent denial of service against the FTP service.",
+      "evidence": {
+        "trigger": "attack_ftpd.py Section 2 (65536-byte overflows) and Section 8 (rapid connect/disconnect cycling)",
+        "symptom": "FTP accepts TCP connections but returns empty banner, all commands fail",
+        "recovery": "disable/enable FTP service does NOT fix it, full router reboot required",
+        "confirmed": true,
+        "uptime_before": "3h8m7s",
+        "uptime_after": "3h11m31s (no crash, but service degraded)"
+      }
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "FTP bounce attack: PORT/EPRT accepts loopback and internal addresses",
+      "description": "The MikroTik FTP server accepts PORT and EPRT commands targeting loopback (127.0.0.1, ::1), 0.0.0.0, and internal network addresses. This enables FTP bounce attacks to scan internal services or relay data connections through the router. Both IPv4 (PORT) and IPv6 (EPRT) variants are affected.",
+      "evidence": {
+        "accepted_targets": [
+          "PORT 127,0,0,1,0,80 \u2192 200 PORT command successful",
+          "PORT 127,0,0,1,0,22 \u2192 200 PORT command successful",
+          "PORT 127,0,0,1,0,21 \u2192 200 PORT command successful",
+          "PORT 10,0,0,1,0,80 \u2192 200 PORT command successful",
+          "PORT 0,0,0,0,0,80 \u2192 200 PORT command successful",
+          "EPRT |1|127.0.0.1|80| \u2192 200 EPRT command successful",
+          "EPRT |2|::1|80| \u2192 200 EPRT command successful"
+        ],
+        "confirmed_on_pristine": true
+      }
+    },
+    {
+      "severity": "LOW",
+      "title": "FTP REST accepts negative and out-of-range offsets",
+      "description": "The FTP server accepts REST (restart) offsets of -1, 4294967295 (UINT32_MAX), and 99999999999999999 without validation. This could lead to integer overflow conditions during subsequent RETR/STOR operations on the 32-bit binary.",
+      "evidence": {
+        "rest_negative": "REST -1 \u2192 350 Restarting at -1",
+        "rest_uint32_max": "REST 4294967295 \u2192 350 Restarting at 4294967295",
+        "rest_huge": "REST 99999999999999999 \u2192 350 Restarting at 99999999999999999",
+        "binary_arch": "ELF32 i386, no NX/canary/PIE"
+      }
+    }
+  ]
+}

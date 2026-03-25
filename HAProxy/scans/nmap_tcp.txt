@@ -1,0 +1,14 @@
+# Nmap 7.95 scan initiated Wed Feb 18 17:50:22 2026 as: /usr/lib/nmap/nmap --privileged -sT -sV -p 8180,8443,8085,8888,8404 -oN /home/[REDACTED]/Desktop/[REDACTED-PATH]/HAProxy/scans/nmap_tcp.txt 127.0.0.1
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.042s latency).
+
+PORT     STATE SERVICE        VERSION
+8085/tcp open  http-proxy     HAProxy http proxy 2.0.0 or later
+8180/tcp open  http-proxy     HAProxy http proxy 2.0.0 or later
+8404/tcp open  http-proxy     HAProxy http proxy
+8443/tcp open  ssl/http-proxy HAProxy http proxy 2.0.0 or later
+8888/tcp open  http           BaseHTTPServer 0.6 (Python 3.13.7)
+Service Info: Device: load balancer
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Feb 18 17:50:40 2026 -- 1 IP address (1 host up) scanned in 18.55 seconds

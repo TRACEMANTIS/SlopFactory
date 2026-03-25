@@ -1,0 +1,342 @@
+{
+  "phase": "Phase 3: HTTP/2 & HPACK Attacks",
+  "target": "HAProxy v3.3.0",
+  "timestamp": 1771456074.8096635,
+  "summary": {
+    "total_tests": 39,
+    "anomalies": 3,
+    "findings": 2
+  },
+  "findings": [
+    {
+      "id": 37,
+      "category": "H2-H1",
+      "name": "crlf_in_value",
+      "result": "FINDING",
+      "details": "CRLF in H2 header value: ACCEPTED!",
+      "timestamp": 1771456069.7911553
+    },
+    {
+      "id": 39,
+      "category": "H2-H1",
+      "name": "null_in_value",
+      "result": "FINDING",
+      "details": "Null byte in H2 header: ACCEPTED!",
+      "timestamp": 1771456074.8096635
+    }
+  ],
+  "tests": [
+    {
+      "id": 1,
+      "category": "HPACK-Varint",
+      "name": "baseline_request",
+      "result": "SAFE",
+      "details": "Baseline H2 request: success",
+      "timestamp": 1771456028.4820342
+    },
+    {
+      "id": 2,
+      "category": "HPACK-Varint",
+      "name": "overlong_varint(5_extra)",
+      "result": "ERROR",
+      "details": "bytes must be in range(0, 256)",
+      "timestamp": 1771456028.6739383
+    },
+    {
+      "id": 3,
+      "category": "HPACK-Varint",
+      "name": "overlong_varint(8_extra)",
+      "result": "ERROR",
+      "details": "bytes must be in range(0, 256)",
+      "timestamp": 1771456029.1017241
+    },
+    {
+      "id": 4,
+      "category": "HPACK-Varint",
+      "name": "overlong_varint(10_extra)",
+      "result": "ERROR",
+      "details": "bytes must be in range(0, 256)",
+      "timestamp": 1771456029.5255122
+    },
+    {
+      "id": 5,
+      "category": "HPACK-Varint",
+      "name": "overlong_varint(15_extra)",
+      "result": "ERROR",
+      "details": "bytes must be in range(0, 256)",
+      "timestamp": 1771456029.7334082
+    },
+    {
+      "id": 6,
+      "category": "HPACK-Varint",
+      "name": "overlong_varint(20_extra)",
+      "result": "ERROR",
+      "details": "bytes must be in range(0, 256)",
+      "timestamp": 1771456029.953298
+    },
+    {
+      "id": 7,
+      "category": "HPACK-Varint",
+      "name": "overlong_varint(30_extra)",
+      "result": "ERROR",
+      "details": "bytes must be in range(0, 256)",
+      "timestamp": 1771456030.1611943
+    },
+    {
+      "id": 8,
+      "category": "HPACK-Varint",
+      "name": "oob_index(62)",
+      "result": "SAFE",
+      "details": "GOAWAY \u2014 invalid index rejected",
+      "timestamp": 1771456030.6729383
+    },
+    {
+      "id": 9,
+      "category": "HPACK-Varint",
+      "name": "oob_index(100)",
+      "result": "SAFE",
+      "details": "GOAWAY \u2014 invalid index rejected",
+      "timestamp": 1771456031.2006743
+    },
+    {
+      "id": 10,
+      "category": "HPACK-Varint",
+      "name": "oob_index(255)",
+      "result": "SAFE",
+      "details": "GOAWAY \u2014 invalid index rejected",
+      "timestamp": 1771456031.7164164
+    },
+    {
+      "id": 11,
+      "category": "HPACK-Varint",
+      "name": "oob_index(1000)",
+      "result": "SAFE",
+      "details": "GOAWAY \u2014 invalid index rejected",
+      "timestamp": 1771456032.4120684
+    },
+    {
+      "id": 12,
+      "category": "HPACK-Varint",
+      "name": "oob_index(4294967295)",
+      "result": "SAFE",
+      "details": "GOAWAY \u2014 invalid index rejected",
+      "timestamp": 1771456032.9158163
+    },
+    {
+      "id": 13,
+      "category": "CONT-Flood",
+      "name": "small_fragments(10)",
+      "result": "SAFE",
+      "details": "GOAWAY error=9 \u2014 flood detected",
+      "timestamp": 1771456033.6074703
+    },
+    {
+      "id": 14,
+      "category": "CONT-Flood",
+      "name": "small_fragments(50)",
+      "result": "SAFE",
+      "details": "GOAWAY error=9 \u2014 flood detected",
+      "timestamp": 1771456034.5190141
+    },
+    {
+      "id": 15,
+      "category": "CONT-Flood",
+      "name": "small_fragments(100)",
+      "result": "SAFE",
+      "details": "GOAWAY error=9 \u2014 flood detected",
+      "timestamp": 1771456035.2146661
+    },
+    {
+      "id": 16,
+      "category": "CONT-Flood",
+      "name": "small_fragments(500)",
+      "result": "SAFE",
+      "details": "GOAWAY error=9 \u2014 flood detected",
+      "timestamp": 1771456035.9423022
+    },
+    {
+      "id": 17,
+      "category": "CONT-Flood",
+      "name": "zero_length_cont",
+      "result": "ANOMALY",
+      "details": "Zero-length CONTINUATION frames: accepted",
+      "timestamp": 1771456038.6796076
+    },
+    {
+      "id": 18,
+      "category": "Settings",
+      "name": "rapid_settings(1000)",
+      "result": "ANOMALY",
+      "details": "1000 SETTINGS in 0.00s: 1000 ACKs, no GOAWAY",
+      "timestamp": 1771456041.8812075
+    },
+    {
+      "id": 19,
+      "category": "Settings",
+      "name": "invalid_enable_push=2",
+      "result": "SAFE",
+      "details": "GOAWAY",
+      "timestamp": 1771456042.5895615
+    },
+    {
+      "id": 20,
+      "category": "Settings",
+      "name": "invalid_max_frame=0",
+      "result": "SAFE",
+      "details": "GOAWAY",
+      "timestamp": 1771456043.2939134
+    },
+    {
+      "id": 21,
+      "category": "Settings",
+      "name": "invalid_max_frame=16MB+1",
+      "result": "SAFE",
+      "details": "GOAWAY",
+      "timestamp": 1771456043.9902616
+    },
+    {
+      "id": 22,
+      "category": "Settings",
+      "name": "invalid_window=2^31",
+      "result": "SAFE",
+      "details": "GOAWAY",
+      "timestamp": 1771456044.8947134
+    },
+    {
+      "id": 23,
+      "category": "Settings",
+      "name": "invalid_unknown_setting_0xFF",
+      "result": "ANOMALY",
+      "details": "Accepted",
+      "timestamp": 1771456047.7961636
+    },
+    {
+      "id": 24,
+      "category": "Settings",
+      "name": "window_update_zero",
+      "result": "SAFE",
+      "details": "WINDOW_UPDATE(0): GOAWAY",
+      "timestamp": 1771456048.4965136
+    },
+    {
+      "id": 25,
+      "category": "Settings",
+      "name": "window_update_overflow",
+      "result": "SAFE",
+      "details": "Double max WINDOW_UPDATE: GOAWAY (overflow detected)",
+      "timestamp": 1771456049.4930115
+    },
+    {
+      "id": 26,
+      "category": "Frame",
+      "name": "unknown_frame_type_0xFF",
+      "result": "SAFE",
+      "details": "Unknown frame type: Ignored (correct per RFC)",
+      "timestamp": 1771456052.0022655
+    },
+    {
+      "id": 27,
+      "category": "Frame",
+      "name": "priority_self_dependency",
+      "result": "SAFE",
+      "details": "Self-dependency handled",
+      "timestamp": 1771456052.5105195
+    },
+    {
+      "id": 28,
+      "category": "Frame",
+      "name": "data_on_stream_0",
+      "result": "SAFE",
+      "details": "DATA on stream 0: GOAWAY (correct)",
+      "timestamp": 1771456053.0467875
+    },
+    {
+      "id": 29,
+      "category": "Frame",
+      "name": "oversized_frame",
+      "result": "SAFE",
+      "details": "Frame > 16384: GOAWAY",
+      "timestamp": 1771456053.5550416
+    },
+    {
+      "id": 30,
+      "category": "Frame",
+      "name": "ping_wrong_length",
+      "result": "SAFE",
+      "details": "PING with 7 bytes: GOAWAY",
+      "timestamp": 1771456054.0632956
+    },
+    {
+      "id": 31,
+      "category": "Frame",
+      "name": "settings_wrong_length",
+      "result": "SAFE",
+      "details": "SETTINGS with 7 bytes: GOAWAY",
+      "timestamp": 1771456054.5675473
+    },
+    {
+      "id": 32,
+      "category": "H2-H1",
+      "name": "forbidden_header(TE_chunked)",
+      "result": "SAFE",
+      "details": "Forbidden header transfer-encoding rejected",
+      "timestamp": 1771456057.0768015
+    },
+    {
+      "id": 33,
+      "category": "H2-H1",
+      "name": "forbidden_header(Connection)",
+      "result": "SAFE",
+      "details": "Forbidden header connection rejected",
+      "timestamp": 1771456059.5780516
+    },
+    {
+      "id": 34,
+      "category": "H2-H1",
+      "name": "forbidden_header(Proxy-Connection)",
+      "result": "SAFE",
+      "details": "Forbidden header proxy-connection rejected",
+      "timestamp": 1771456062.0712976
+    },
+    {
+      "id": 35,
+      "category": "H2-H1",
+      "name": "forbidden_header(Up[REDACTED])",
+      "result": "SAFE",
+      "details": "Forbidden header up[REDACTED] rejected",
+      "timestamp": 1771456064.7766495
+    },
+    {
+      "id": 36,
+      "category": "H2-H1",
+      "name": "forbidden_header(Keep-Alive)",
+      "result": "SAFE",
+      "details": "Forbidden header keep-alive rejected",
+      "timestamp": 1771456067.2778995
+    },
+    {
+      "id": 37,
+      "category": "H2-H1",
+      "name": "crlf_in_value",
+      "result": "FINDING",
+      "details": "CRLF in H2 header value: ACCEPTED!",
+      "timestamp": 1771456069.7911553
+    },
+    {
+      "id": 38,
+      "category": "H2-H1",
+      "name": "uppercase_header_name",
+      "result": "SAFE",
+      "details": "Uppercase header: rejected",
+      "timestamp": 1771456072.3044114
+    },
+    {
+      "id": 39,
+      "category": "H2-H1",
+      "name": "null_in_value",
+      "result": "FINDING",
+      "details": "Null byte in H2 header: ACCEPTED!",
+      "timestamp": 1771456074.8096635
+    }
+  ]
+}

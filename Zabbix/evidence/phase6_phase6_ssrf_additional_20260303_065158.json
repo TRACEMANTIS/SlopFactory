@@ -1,0 +1,209 @@
+{
+  "metadata": {
+    "collector": "phase6_ssrf_additional",
+    "phase": "phase6",
+    "started": "2026-03-03T06:51:50.728563",
+    "target": "Zabbix 7.0.23 LTS",
+    "target_url": "http://localhost:9080",
+    "completed": "2026-03-03T06:51:58.164279",
+    "test_count": 24,
+    "finding_count": 0,
+    "anomaly_count": 0
+  },
+  "findings": [],
+  "anomalies": [],
+  "tests": [
+    {
+      "id": "SSRF-URL-SCRIPT-Zabbix_server_i",
+      "description": "URL script with Zabbix server internal",
+      "request": "script.create type=2 url=http://127.0.0.1:10051/",
+      "response": "Rejected: Invalid parameter \"/1\": the parameter \"c",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:51.048723"
+    },
+    {
+      "id": "SSRF-URL-SCRIPT-PostgreSQL",
+      "description": "URL script with PostgreSQL",
+      "request": "script.create type=2 url=http://localhost:5432/",
+      "response": "Rejected: Invalid parameter \"/1\": the parameter \"c",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:51.292845"
+    },
+    {
+      "id": "SSRF-URL-SCRIPT-Local_file_read",
+      "description": "URL script with Local file read",
+      "request": "script.create type=2 url=file:///etc/passwd",
+      "response": "Rejected: Invalid parameter \"/1\": the parameter \"c",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:51.540969"
+    },
+    {
+      "id": "SSRF-URL-SCRIPT-AWS_metadata",
+      "description": "URL script with AWS metadata",
+      "request": "script.create type=2 url=http://[REDACTED-IP]/latest/meta-data/",
+      "response": "Rejected: Invalid parameter \"/1\": the parameter \"c",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:51.785091"
+    },
+    {
+      "id": "SSRF-URL-SCRIPT-Gopher_to_Postg",
+      "description": "URL script with Gopher to PostgreSQL",
+      "request": "script.create type=2 url=gopher://127.0.0.1:5432/",
+      "response": "Rejected: Invalid parameter \"/1\": the parameter \"c",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:52.049223"
+    },
+    {
+      "id": "SSRF-HTTP-ITEM-Zabbix_server_p",
+      "description": "HTTP agent item to Zabbix server port",
+      "request": "item.create type=19 url=http://127.0.0.1:10051/",
+      "response": "Rejected",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:52.349373"
+    },
+    {
+      "id": "SSRF-HTTP-ITEM-PostgreSQL_port",
+      "description": "HTTP agent item to PostgreSQL port",
+      "request": "item.create type=19 url=http://127.0.0.1:5432/",
+      "response": "Rejected",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:52.597497"
+    },
+    {
+      "id": "SSRF-HTTP-ITEM-AWS_metadata",
+      "description": "HTTP agent item to AWS metadata",
+      "request": "item.create type=19 url=http://[REDACTED-IP]/latest/meta-data/",
+      "response": "Rejected",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:52.841619"
+    },
+    {
+      "id": "VIEWER-DISCLOSURE-settings.get",
+      "description": "Viewer access to Global settings",
+      "request": "settings.get as viewer",
+      "response": "Accessible: 1 records",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:53.089743"
+    },
+    {
+      "id": "VIEWER-DISCLOSURE-housekeeping.get",
+      "description": "Viewer access to Housekeeping config",
+      "request": "housekeeping.get as viewer",
+      "response": "Accessible: 1 records",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:53.337867"
+    },
+    {
+      "id": "VIEWER-DISCLOSURE-authentication.get",
+      "description": "Viewer access to Authentication settings",
+      "request": "authentication.get as viewer",
+      "response": "Denied",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:53.585991"
+    },
+    {
+      "id": "VIEWER-DISCLOSURE-autoregistration.get",
+      "description": "Viewer access to Auto-registration config",
+      "request": "autoregistration.get as viewer",
+      "response": "Denied",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:53.826111"
+    },
+    {
+      "id": "VIEWER-DISCLOSURE-proxy.get",
+      "description": "Viewer access to Proxy list",
+      "request": "proxy.get as viewer",
+      "response": "Accessible: 0 records",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:54.070233"
+    },
+    {
+      "id": "VIEWER-DISCLOSURE-mediatype.get",
+      "description": "Viewer access to Media types with templates",
+      "request": "mediatype.get as viewer",
+      "response": "Accessible: 39 records",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:54.314355"
+    },
+    {
+      "id": "VIEWER-DISCLOSURE-script.get",
+      "description": "Viewer access to All scripts",
+      "request": "script.get as viewer",
+      "response": "Accessible: 2 records",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:54.562479"
+    },
+    {
+      "id": "VIEWER-DISCLOSURE-user.get",
+      "description": "Viewer access to User list",
+      "request": "user.get as viewer",
+      "response": "Accessible: 2 records",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:54.842619"
+    },
+    {
+      "id": "VIEWER-DISCLOSURE-usergroup.get",
+      "description": "Viewer access to User groups",
+      "request": "usergroup.get as viewer",
+      "response": "Accessible: 1 records",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:55.094745"
+    },
+    {
+      "id": "VIEWER-DISCLOSURE-role.get",
+      "description": "Viewer access to Roles with rules",
+      "request": "role.get as viewer",
+      "response": "Accessible: 1 records",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:55.338867"
+    },
+    {
+      "id": "VIEWER-DISCLOSURE-token.get",
+      "description": "Viewer access to API tokens",
+      "request": "token.get as viewer",
+      "response": "Accessible: 0 records",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:55.582989"
+    },
+    {
+      "id": "VIEWER-DISCLOSURE-connector.get",
+      "description": "Viewer access to Connectors",
+      "request": "connector.get as viewer",
+      "response": "Denied",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:55.827111"
+    },
+    {
+      "id": "SESSION-TOKEN-ENTROPY",
+      "description": "Session token entropy and predictability check",
+      "request": "Collected 5 tokens",
+      "response": "Unique: True, Hex: True",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:57.259827"
+    },
+    {
+      "id": "SCIM-SCIM_Service_Provide",
+      "description": "SCIM: SCIM Service Provider Config (unauthenticated)",
+      "request": "GET /api_scim.php/ServiceProviderConfig",
+      "response": "HTTP 200",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:57.287841"
+    },
+    {
+      "id": "SCIM-SCIM_Users",
+      "description": "SCIM: SCIM Users (unauthenticated)",
+      "request": "GET /api_scim.php/Users",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:57.543969"
+    },
+    {
+      "id": "SCIM-SCIM_Groups",
+      "description": "SCIM: SCIM Groups (unauthenticated)",
+      "request": "GET /api_scim.php/Groups",
+      "response": "HTTP 403",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:51:57.824109"
+    }
+  ]
+}

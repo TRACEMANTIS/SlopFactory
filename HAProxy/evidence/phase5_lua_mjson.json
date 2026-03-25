@@ -1,0 +1,596 @@
+{
+  "phase": "Phase 5: Lua Scripting & mjson Attacks",
+  "target": "HAProxy v3.3.0",
+  "timestamp": 1771457960.9356704,
+  "summary": {
+    "total_tests": 56,
+    "anomalies": 5,
+    "findings": 13
+  },
+  "findings": [
+    {
+      "id": 15,
+      "category": "mjson",
+      "name": "deep_nest_10",
+      "result": "FINDING",
+      "details": "Depth 10: took 5.00s \u2014 possible DoS!",
+      "timestamp": 1771457840.5240848,
+      "severity": "HIGH"
+    },
+    {
+      "id": 16,
+      "category": "mjson",
+      "name": "deep_nest_15",
+      "result": "FINDING",
+      "details": "Depth 15: took 5.01s \u2014 possible DoS!",
+      "timestamp": 1771457845.5305867,
+      "severity": "HIGH"
+    },
+    {
+      "id": 17,
+      "category": "mjson",
+      "name": "deep_nest_19",
+      "result": "FINDING",
+      "details": "Depth 19: took 5.01s \u2014 possible DoS!",
+      "timestamp": 1771457850.5370889,
+      "severity": "HIGH"
+    },
+    {
+      "id": 18,
+      "category": "mjson",
+      "name": "deep_nest_20",
+      "result": "FINDING",
+      "details": "Depth 20: took 5.00s \u2014 possible DoS!",
+      "timestamp": 1771457855.5395887,
+      "severity": "HIGH"
+    },
+    {
+      "id": 19,
+      "category": "mjson",
+      "name": "deep_nest_21",
+      "result": "FINDING",
+      "details": "Depth 21: took 5.01s \u2014 possible DoS!",
+      "timestamp": 1771457860.5500927,
+      "severity": "HIGH"
+    },
+    {
+      "id": 20,
+      "category": "mjson",
+      "name": "deep_nest_25",
+      "result": "FINDING",
+      "details": "Depth 25: took 5.01s \u2014 possible DoS!",
+      "timestamp": 1771457865.5565946,
+      "severity": "HIGH"
+    },
+    {
+      "id": 21,
+      "category": "mjson",
+      "name": "deep_nest_50",
+      "result": "FINDING",
+      "details": "Depth 50: took 5.01s \u2014 possible DoS!",
+      "timestamp": 1771457870.5630968,
+      "severity": "HIGH"
+    },
+    {
+      "id": 22,
+      "category": "mjson",
+      "name": "deep_nest_100",
+      "result": "FINDING",
+      "details": "Depth 100: took 5.00s \u2014 possible DoS!",
+      "timestamp": 1771457875.5655966,
+      "severity": "HIGH"
+    },
+    {
+      "id": 23,
+      "category": "mjson",
+      "name": "deep_array_19",
+      "result": "FINDING",
+      "details": "Array depth 19: 5.01s",
+      "timestamp": 1771457880.5761008
+    },
+    {
+      "id": 24,
+      "category": "mjson",
+      "name": "deep_array_20",
+      "result": "FINDING",
+      "details": "Array depth 20: 5.01s",
+      "timestamp": 1771457885.590607
+    },
+    {
+      "id": 25,
+      "category": "mjson",
+      "name": "deep_array_21",
+      "result": "FINDING",
+      "details": "Array depth 21: 5.00s",
+      "timestamp": 1771457890.5931067
+    },
+    {
+      "id": 26,
+      "category": "mjson",
+      "name": "deep_array_50",
+      "result": "FINDING",
+      "details": "Array depth 50: 5.01s",
+      "timestamp": 1771457895.6076126
+    },
+    {
+      "id": 50,
+      "category": "Lua-Sandbox",
+      "name": "source_audit_no_sandbox",
+      "result": "FINDING",
+      "details": "hlua.c:14062 calls luaL_openlibs(L) \u2014 loads ALL standard libraries\nos.execute(), io.open(), debug.* are all available to Lua scripts\nAny user who can load Lua scripts has full system access",
+      "timestamp": 1771457951.9201803,
+      "severity": "HIGH",
+      "raw_data": {
+        "file": "hlua.c:14062",
+        "function": "luaL_openlibs(L)",
+        "impact": "RCE via Lua script loading",
+        "prereq": "Config write access"
+      }
+    }
+  ],
+  "tests": [
+    {
+      "id": 1,
+      "category": "Lua-Service",
+      "name": "baseline",
+      "result": "SAFE",
+      "details": "Response: HTTP/1.0 200 OK",
+      "timestamp": 1771457775.2554667
+    },
+    {
+      "id": 2,
+      "category": "Lua-Service",
+      "name": "echo_service",
+      "result": "SAFE",
+      "details": "Echo response: {\n  \"method\": \"GET\",\n  \"path\": \"/echo\",\n  \"http_version\": \"HTTP/1.1\",\n  \"headers\": {\n    \"host\": \"127.0.0.1:8085\",\n    \"x-lua-processed\": \"true\",\n    \"x-lua-method\": \"GET\",\n    \"x-lua-path\": \"/echo\",\n    \"x-lua-ua-echo\": \"\",\n    \"x-frontend\": \"lua\"\n  },\n  \"body\": \"\",\n  \"body_length\": 0,\n  \"client_ad",
+      "timestamp": 1771457780.466071
+    },
+    {
+      "id": 3,
+      "category": "Lua-Service",
+      "name": "json_service",
+      "result": "SAFE",
+      "details": "JSON response: {\n  \"method\": \"GET\",\n  \"path\": \"/json\",\n  \"http_version\": \"HTTP/1.1\",\n  \"headers\": {\n    \"host\": \"127.0.0.1:8085\",\n    \"x-lua-processed\": \"true\",\n    \"x-lua-method\": \"GET\",\n    \"x-lua-path\": \"/json\",\n    \"x-lua-ua-echo\": \"\",\n    \"x-frontend\": \"lua\"\n  },\n  \"body\": \"\",\n  \"body_length\": 0,\n  \"client_ad",
+      "timestamp": 1771457785.4725726
+    },
+    {
+      "id": 4,
+      "category": "Lua-Inject",
+      "name": "sql_inject",
+      "result": "SAFE",
+      "details": "Payload: b\"' OR 1=1 --\", Response safe",
+      "timestamp": 1771457790.4750729
+    },
+    {
+      "id": 5,
+      "category": "Lua-Inject",
+      "name": "cmd_inject",
+      "result": "SAFE",
+      "details": "Payload: b'$(id)', Response safe",
+      "timestamp": 1771457795.4775727
+    },
+    {
+      "id": 6,
+      "category": "Lua-Inject",
+      "name": "lua_inject",
+      "result": "SAFE",
+      "details": "Payload: b\"os.execute('id')\", Response safe",
+      "timestamp": 1771457800.4800727
+    },
+    {
+      "id": 7,
+      "category": "Lua-Inject",
+      "name": "template_inject",
+      "result": "SAFE",
+      "details": "Payload: b'{{7*7}}', Response safe",
+      "timestamp": 1771457805.4825728
+    },
+    {
+      "id": 8,
+      "category": "Lua-Inject",
+      "name": "null_byte",
+      "result": "SAFE",
+      "details": "Payload: b'test\\x00injected', Response safe",
+      "timestamp": 1771457805.4825728
+    },
+    {
+      "id": 9,
+      "category": "Lua-Inject",
+      "name": "crlf_inject",
+      "result": "SAFE",
+      "details": "Payload: b'test\\r\\nX-Injected: evil', Response safe",
+      "timestamp": 1771457810.4890747
+    },
+    {
+      "id": 10,
+      "category": "Lua-JSON",
+      "name": "json_deep_nest",
+      "result": "SAFE",
+      "details": "Response: {\n  \"method\": \"POST\",\n  \"path\": \"/json\",\n  \"http_version\": \"HTTP/1.1\",\n  \"headers\": {\n    \"host\": \"127.0.0.1:8085\",\n    \"content-length\": \"303\",\n    \"content-type\": \"application/json\",\n    \"x-lua-proc",
+      "timestamp": 1771457815.4915748
+    },
+    {
+      "id": 11,
+      "category": "Lua-JSON",
+      "name": "json_large_string",
+      "result": "SAFE",
+      "details": "Response: {\n  \"method\": \"POST\",\n  \"path\": \"/json\",\n  \"http_version\": \"HTTP/1.1\",\n  \"headers\": {\n    \"host\": \"127.0.0.1:8085\",\n    \"content-length\": \"10010\",\n    \"content-type\": \"application/json\",\n    \"x-lua-pr",
+      "timestamp": 1771457820.5020788
+    },
+    {
+      "id": 12,
+      "category": "Lua-JSON",
+      "name": "json_unicode",
+      "result": "SAFE",
+      "details": "Response: {\n  \"method\": \"POST\",\n  \"path\": \"/json\",\n  \"http_version\": \"HTTP/1.1\",\n  \"headers\": {\n    \"host\": \"127.0.0.1:8085\",\n    \"content-length\": \"28\",\n    \"content-type\": \"application/json\",\n    \"x-lua-proce",
+      "timestamp": 1771457825.5085807
+    },
+    {
+      "id": 13,
+      "category": "Lua-JSON",
+      "name": "json_dup_keys",
+      "result": "SAFE",
+      "details": "Response: {\n  \"method\": \"POST\",\n  \"path\": \"/json\",\n  \"http_version\": \"HTTP/1.1\",\n  \"headers\": {\n    \"host\": \"127.0.0.1:8085\",\n    \"content-length\": \"30\",\n    \"content-type\": \"application/json\",\n    \"x-lua-proce",
+      "timestamp": 1771457830.5110807
+    },
+    {
+      "id": 14,
+      "category": "Lua-JSON",
+      "name": "json_numbers",
+      "result": "SAFE",
+      "details": "Response: {\n  \"method\": \"POST\",\n  \"path\": \"/json\",\n  \"http_version\": \"HTTP/1.1\",\n  \"headers\": {\n    \"host\": \"127.0.0.1:8085\",\n    \"content-length\": \"36\",\n    \"content-type\": \"application/json\",\n    \"x-lua-proce",
+      "timestamp": 1771457835.5215847
+    },
+    {
+      "id": 15,
+      "category": "mjson",
+      "name": "deep_nest_10",
+      "result": "FINDING",
+      "details": "Depth 10: took 5.00s \u2014 possible DoS!",
+      "timestamp": 1771457840.5240848,
+      "severity": "HIGH"
+    },
+    {
+      "id": 16,
+      "category": "mjson",
+      "name": "deep_nest_15",
+      "result": "FINDING",
+      "details": "Depth 15: took 5.01s \u2014 possible DoS!",
+      "timestamp": 1771457845.5305867,
+      "severity": "HIGH"
+    },
+    {
+      "id": 17,
+      "category": "mjson",
+      "name": "deep_nest_19",
+      "result": "FINDING",
+      "details": "Depth 19: took 5.01s \u2014 possible DoS!",
+      "timestamp": 1771457850.5370889,
+      "severity": "HIGH"
+    },
+    {
+      "id": 18,
+      "category": "mjson",
+      "name": "deep_nest_20",
+      "result": "FINDING",
+      "details": "Depth 20: took 5.00s \u2014 possible DoS!",
+      "timestamp": 1771457855.5395887,
+      "severity": "HIGH"
+    },
+    {
+      "id": 19,
+      "category": "mjson",
+      "name": "deep_nest_21",
+      "result": "FINDING",
+      "details": "Depth 21: took 5.01s \u2014 possible DoS!",
+      "timestamp": 1771457860.5500927,
+      "severity": "HIGH"
+    },
+    {
+      "id": 20,
+      "category": "mjson",
+      "name": "deep_nest_25",
+      "result": "FINDING",
+      "details": "Depth 25: took 5.01s \u2014 possible DoS!",
+      "timestamp": 1771457865.5565946,
+      "severity": "HIGH"
+    },
+    {
+      "id": 21,
+      "category": "mjson",
+      "name": "deep_nest_50",
+      "result": "FINDING",
+      "details": "Depth 50: took 5.01s \u2014 possible DoS!",
+      "timestamp": 1771457870.5630968,
+      "severity": "HIGH"
+    },
+    {
+      "id": 22,
+      "category": "mjson",
+      "name": "deep_nest_100",
+      "result": "FINDING",
+      "details": "Depth 100: took 5.00s \u2014 possible DoS!",
+      "timestamp": 1771457875.5655966,
+      "severity": "HIGH"
+    },
+    {
+      "id": 23,
+      "category": "mjson",
+      "name": "deep_array_19",
+      "result": "FINDING",
+      "details": "Array depth 19: 5.01s",
+      "timestamp": 1771457880.5761008
+    },
+    {
+      "id": 24,
+      "category": "mjson",
+      "name": "deep_array_20",
+      "result": "FINDING",
+      "details": "Array depth 20: 5.01s",
+      "timestamp": 1771457885.590607
+    },
+    {
+      "id": 25,
+      "category": "mjson",
+      "name": "deep_array_21",
+      "result": "FINDING",
+      "details": "Array depth 21: 5.00s",
+      "timestamp": 1771457890.5931067
+    },
+    {
+      "id": 26,
+      "category": "mjson",
+      "name": "deep_array_50",
+      "result": "FINDING",
+      "details": "Array depth 50: 5.01s",
+      "timestamp": 1771457895.6076126
+    },
+    {
+      "id": 27,
+      "category": "mjson",
+      "name": "long_string_1000",
+      "result": "ANOMALY",
+      "details": "String len 1000: 5.00s",
+      "timestamp": 1771457900.6101127
+    },
+    {
+      "id": 28,
+      "category": "mjson",
+      "name": "long_string_10000",
+      "result": "ANOMALY",
+      "details": "String len 10000: 5.01s",
+      "timestamp": 1771457905.6166146
+    },
+    {
+      "id": 29,
+      "category": "mjson",
+      "name": "long_string_100000",
+      "result": "ANOMALY",
+      "details": "String len 100000: 5.01s",
+      "timestamp": 1771457910.6231167
+    },
+    {
+      "id": 30,
+      "category": "mjson",
+      "name": "long_string_1000000",
+      "result": "ANOMALY",
+      "details": "String len 1000000: 5.03s",
+      "timestamp": 1771457915.6576328
+    },
+    {
+      "id": 31,
+      "category": "mjson",
+      "name": "malformed_trailing_comma",
+      "result": "SAFE",
+      "details": "trailing_comma: HTTP/1.0 200 OK",
+      "timestamp": 1771457918.8672369
+    },
+    {
+      "id": 32,
+      "category": "mjson",
+      "name": "malformed_single_quotes",
+      "result": "SAFE",
+      "details": "single_quotes: HTTP/1.0 200 OK",
+      "timestamp": 1771457921.8681438
+    },
+    {
+      "id": 33,
+      "category": "mjson",
+      "name": "malformed_no_quotes",
+      "result": "SAFE",
+      "details": "no_quotes: HTTP/1.0 200 OK",
+      "timestamp": 1771457924.872144
+    },
+    {
+      "id": 34,
+      "category": "mjson",
+      "name": "malformed_trailing_data",
+      "result": "SAFE",
+      "details": "trailing_data: HTTP/1.0 200 OK",
+      "timestamp": 1771457927.880144
+    },
+    {
+      "id": 35,
+      "category": "mjson",
+      "name": "malformed_empty_string",
+      "result": "SAFE",
+      "details": "empty_string: HTTP/1.0 200 OK",
+      "timestamp": 1771457930.8841438
+    },
+    {
+      "id": 36,
+      "category": "mjson",
+      "name": "malformed_just_null",
+      "result": "SAFE",
+      "details": "just_null: HTTP/1.0 200 OK",
+      "timestamp": 1771457933.8841438
+    },
+    {
+      "id": 37,
+      "category": "mjson",
+      "name": "malformed_just_true",
+      "result": "SAFE",
+      "details": "just_true: HTTP/1.0 200 OK",
+      "timestamp": 1771457936.8877003
+    },
+    {
+      "id": 38,
+      "category": "mjson",
+      "name": "malformed_just_number",
+      "result": "SAFE",
+      "details": "just_number: HTTP/1.0 200 OK",
+      "timestamp": 1771457939.8941963
+    },
+    {
+      "id": 39,
+      "category": "mjson",
+      "name": "malformed_inf",
+      "result": "SAFE",
+      "details": "inf: HTTP/1.0 200 OK",
+      "timestamp": 1771457942.8966942
+    },
+    {
+      "id": 40,
+      "category": "mjson",
+      "name": "malformed_nan",
+      "result": "SAFE",
+      "details": "nan: HTTP/1.0 200 OK",
+      "timestamp": 1771457945.9031904
+    },
+    {
+      "id": 41,
+      "category": "mjson",
+      "name": "malformed_hex_number",
+      "result": "SAFE",
+      "details": "hex_number: HTTP/1.0 200 OK",
+      "timestamp": 1771457948.9056883
+    },
+    {
+      "id": 42,
+      "category": "mjson",
+      "name": "malformed_comment",
+      "result": "SAFE",
+      "details": "comment: HTTP/1.0 200 OK",
+      "timestamp": 1771457951.9081864
+    },
+    {
+      "id": 43,
+      "category": "Lua-Sandbox",
+      "name": "lua_enabled",
+      "result": "ANOMALY",
+      "details": "Lua detected in show info: False",
+      "timestamp": 1771457951.9121842
+    },
+    {
+      "id": 44,
+      "category": "Lua-Sandbox",
+      "name": "lua_memory",
+      "result": "SAFE",
+      "details": "Lua memory: Unknown command: 'show', but maybe one of the following ones is a better match:\n  show acl [@<ver>] <acl>]                : report available acls or dump an acl's contents\n  show env [var]            ",
+      "timestamp": 1771457951.9121842
+    },
+    {
+      "id": 45,
+      "category": "Lua-Sandbox",
+      "name": "exec_print",
+      "result": "SAFE",
+      "details": "Rejected: Unknown command: 'lua.eval', but maybe one of the following ones is a better match:\n  get var <name>                          : retrieve contents of a process-wide variable\n  set profiling <what> {aut",
+      "timestamp": 1771457951.9161823
+    },
+    {
+      "id": 46,
+      "category": "Lua-Sandbox",
+      "name": "exec_os",
+      "result": "SAFE",
+      "details": "Rejected: Unknown command: 'lua.eval', but maybe one of the following ones is a better match:\n  add acl [@<ver>] <acl> <pattern>        : add an acl entry\n  add ssl ca-file <cafile> <payload>      : add a certi",
+      "timestamp": 1771457951.9161823
+    },
+    {
+      "id": 47,
+      "category": "Lua-Sandbox",
+      "name": "exec_io",
+      "result": "SAFE",
+      "details": "Rejected: Unknown command: 'lua.eval', but maybe one of the following ones is a better match:\n  add ssl crt-list <list> <cert> [opts]*  : add to crt-list file <list> a line <cert> or a payload\n  echo <text>    ",
+      "timestamp": 1771457951.9161823
+    },
+    {
+      "id": 48,
+      "category": "Lua-Sandbox",
+      "name": "exec_debug",
+      "result": "SAFE",
+      "details": "Rejected: Unknown command: 'lua.eval', but maybe one of the following ones is a better match:\n  debug counters [?|all|bug|cnt|chk|glt]* : dump/reset rare event counters\n  debug dev hash   [msg]                 ",
+      "timestamp": 1771457951.9161823
+    },
+    {
+      "id": 49,
+      "category": "Lua-Sandbox",
+      "name": "exec_require",
+      "result": "SAFE",
+      "details": "Rejected: Unknown command: 'lua.eval', but maybe one of the following ones is a better match:\n  echo <text>                             : print text to the output\n  prepare acl <acl>                       : pre",
+      "timestamp": 1771457951.9201803
+    },
+    {
+      "id": 50,
+      "category": "Lua-Sandbox",
+      "name": "source_audit_no_sandbox",
+      "result": "FINDING",
+      "details": "hlua.c:14062 calls luaL_openlibs(L) \u2014 loads ALL standard libraries\nos.execute(), io.open(), debug.* are all available to Lua scripts\nAny user who can load Lua scripts has full system access",
+      "timestamp": 1771457951.9201803,
+      "severity": "HIGH",
+      "raw_data": {
+        "file": "hlua.c:14062",
+        "function": "luaL_openlibs(L)",
+        "impact": "RCE via Lua script loading",
+        "prereq": "Config write access"
+      }
+    },
+    {
+      "id": 51,
+      "category": "Lua-HTTP",
+      "name": "many_headers_100",
+      "result": "SAFE",
+      "details": "100 headers: HTTP/1.1 400 Bad request",
+      "timestamp": 1771457951.9201803
+    },
+    {
+      "id": 52,
+      "category": "Lua-HTTP",
+      "name": "huge_header_64k",
+      "result": "SAFE",
+      "details": "64KB header: HTTP/1.1 431 Request Header Fields Too Large",
+      "timestamp": 1771457951.9201803
+    },
+    {
+      "id": 53,
+      "category": "Lua-HTTP",
+      "name": "path_traversal",
+      "result": "SAFE",
+      "details": "Safe: b'{\\n  \"method\": \"GET\",\\n  \"path\": \"/echo/../../../etc/passwd\",\\n  \"http_version\": \"HTTP/1.1\",\\n  \"headers\": {\\n    \"host\": \"127.0.0.1:8085\",\\n    \"x-lua-processed\": \"true\",\\n    \"x-lua-method\": \"GET\",\\n    \"x-'",
+      "timestamp": 1771457954.9266763
+    },
+    {
+      "id": 54,
+      "category": "Lua-HTTP",
+      "name": "null_byte_path",
+      "result": "SAFE",
+      "details": "Safe: b'<html><body><h1>400 Bad request</h1>\\nYour browser sent an invalid request.\\n</body></html>\\n'",
+      "timestamp": 1771457954.9266763
+    },
+    {
+      "id": 55,
+      "category": "Lua-HTTP",
+      "name": "encoded_traversal",
+      "result": "SAFE",
+      "details": "Safe: b'{\\n  \"method\": \"GET\",\\n  \"path\": \"/echo/%2e%2e/%2e%2e/etc/passwd\",\\n  \"http_version\": \"HTTP/1.1\",\\n  \"headers\": {\\n    \"host\": \"127.0.0.1:8085\",\\n    \"x-lua-processed\": \"true\",\\n    \"x-lua-method\": \"GET\",\\n  '",
+      "timestamp": 1771457957.9291742
+    },
+    {
+      "id": 56,
+      "category": "Lua-HTTP",
+      "name": "double_encoded",
+      "result": "SAFE",
+      "details": "Safe: b'{\\n  \"method\": \"GET\",\\n  \"path\": \"/echo/%252e%252e/%252e%252e/etc/passwd\",\\n  \"http_version\": \"HTTP/1.1\",\\n  \"headers\": {\\n    \"host\": \"127.0.0.1:8085\",\\n    \"x-lua-processed\": \"true\",\\n    \"x-lua-method\": \"'",
+      "timestamp": 1771457960.9356704
+    }
+  ]
+}

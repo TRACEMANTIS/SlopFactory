@@ -1,0 +1,88 @@
+{
+  "phase": "Phase 6: Live Validation Campaign",
+  "date": "2026-03-04",
+  "description": "Live testing of authorized internet-facing Tenda devices from WAN position",
+  "oob_infrastructure": {
+    "host": "[REDACTED-IP]",
+    "port": 80,
+    "protocol": "HTTP",
+    "listener": "Python http.server (oob_listener.py)",
+    "log_file": "/tmp/oob_tenda_cf6.log",
+    "verified": true,
+    "test_callback": "[REDACTED-IP] GET /cf6-test-from-kali"
+  },
+  "targets": [
+    {
+      "ip": "[REDACTED-IP]",
+      "model": "Tenda AC10Uv2",
+      "firmware": "V16.03.16.11_multi",
+      "country": "Mexico",
+      "port_80": "open",
+      "port_23": "filtered",
+      "server_header": "Http Server",
+      "getRebootStatus": "({\"status\":\"success\"})",
+      "empty_password_auth": true,
+      "lan_mac": "58:d9:d5:ed:9b:20",
+      "connected_clients": 4,
+      "endpoints_found": ["SetFirewallCfg", "WifiExtraSet", "SetIpMacBind", "SetRemoteWebCfg", "SysToolChangePwd"],
+      "endpoints_missing": ["WriteFacMac", "SetSambaConf"],
+      "test_results": {
+        "SetFirewallCfg": "DESTRUCTIVE — iptables doSystemCmd calls flushed WAN access rules, port 80 became filtered, device locked out",
+        "telnet_trigger": "NOT TESTED (lockout occurred before telnet test)"
+      },
+      "outcome": "LOCKED OUT — requires partner power cycle",
+      "lesson": "SetFirewallCfg handler's 11 iptables doSystemCmd calls modify firewall rules; avoid for live WAN testing"
+    },
+    {
+      "ip": "[REDACTED-IP]",
+      "model": "Unknown",
+      "firmware": "Unknown",
+      "port_80": "filtered",
+      "port_23": "filtered",
+      "port_443": "filtered",
+      "outcome": "UNREACHABLE — all ports filtered from test position"
+    },
+    {
+      "ip": "[REDACTED-IP]",
+      "model": "Tenda AC10U",
+      "firmware": "V16.03.06.11_multi",
+      "country": "Mexico",
+      "port_80": "open",
+      "port_23": "filtered",
+      "server_header": "Http Server",
+      "getRebootStatus": "({\"status\":\"success\"})",
+      "empty_password_auth": true,
+      "lan_mac": "04:95:e6:32:6a:90",
+      "connected_clients": 3,
+      "default_ssid": "Tenda_326A90",
+      "endpoints_found": ["WifiExtraSet", "SetIpMacBind", "SetRemoteWebCfg", "SysToolChangePwd"],
+      "endpoints_missing": ["WriteFacMac", "SetSambaConf"],
+      "endpoints_timeout": ["telnet", "SetPPTPServer", "SetSchedLed", "SetVirtualSer", "NatStaticSetting", "SetMacFilterCfg", "SetCfm", "SetSysToolDDNS", "addWifiMacFilter"],
+      "test_results": {
+        "telnet_trigger": "POST /goform/telnet sent (no auth), HTTP timeout after 10s (consistent with emulation behavior), port 23 remained filtered from WAN",
+        "post_test_httpd": "httpd became unresponsive (HTTP 000) after telnet trigger"
+      },
+      "outcome": "HTTPD UNRESPONSIVE after telnet trigger; port 23 not reachable from WAN (telnetd binds LAN IP)"
+    },
+    {
+      "ip": "[REDACTED-IP]",
+      "model": "NOT TENDA",
+      "identification": "SafeBrowse web filter proxy",
+      "evidence": "HTTP 302 redirect to https://www.safebrowse.io/warn.html",
+      "outcome": "FALSE POSITIVE — not a Tenda device"
+    },
+    {
+      "ip": "[REDACTED-IP]",
+      "model": "NOT TENDA",
+      "identification": "Honeypot (TwistedWeb/19.7.0)",
+      "evidence": "Server: TwistedWeb/19.7.0, 134KB HTML page with GL.iNet/GitLab/GoAnywhere/VOS3000 fingerprints",
+      "outcome": "FALSE POSITIVE — honeypot responding 200 to all paths"
+    }
+  ],
+  "key_findings": {
+    "telnet_lan_binding": "telnetd binds to LAN IP via doSystemCmd('telnetd -b %s &', GetValue('lan.ip')) — not reachable from WAN. [REDACTED-ID]_002 CVSS corrected from 9.8 (AV:N) to 8.8 (AV:A)",
+    "setfirewallcfg_destructive": "SetFirewallCfg executes 11 iptables doSystemCmd calls that can flush WAN management access rules — avoid for live WAN testing",
+    "ac10u_missing_endpoints": "AC10U models lack WriteFacMac and SetSambaConf — novel findings [REDACTED-ID]_025/026 are AC15-specific",
+    "goform_confirmed_live": "Tenda goform framework confirmed active on internet-facing devices; empty password auth works on factory-default devices"
+  }
+}

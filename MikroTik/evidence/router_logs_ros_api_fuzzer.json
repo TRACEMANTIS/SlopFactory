@@ -1,0 +1,703 @@
+{
+  "phase": "ros_api_fuzzer",
+  "pulled_at": "2026-02-15T23:22:50.256753",
+  "log_entry_count": 59,
+  "log_entries": [
+    {
+      ".id": "*0",
+      "extra-info": "",
+      "message": "router rebooted by api:testread@[REDACTED-INTERNAL-IP]",
+      "time": "2026-02-19 05:06:38",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1",
+      "extra-info": "",
+      "message": "lo link up",
+      "time": "2026-02-19 05:06:39",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*2",
+      "extra-info": "",
+      "message": "ether1 link up (speed 1G, full duplex)",
+      "time": "2026-02-19 05:06:42",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*3",
+      "extra-info": "",
+      "message": "dhcp-client on ether1 got IP address [REDACTED-INTERNAL-IP]",
+      "time": "2026-02-19 05:06:43",
+      "topics": "dhcp,info"
+    },
+    {
+      ".id": "*4",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-19 05:06:44",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-19 05:06:44",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*6",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:08:08",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:08:23",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:08:23",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:08:24",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:08:24",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*B",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*C",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*D",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*E",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*F",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*10",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*11",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*12",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*13",
+      "extra-info": "app=api duser= outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user  from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*15",
+      "extra-info": "app=api duser= outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user  from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*16",
+      "extra-info": "app=api duser= outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user  from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*17",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*18",
+      "extra-info": "app=api duser=adm\u0000in outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user adm\u0000in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*19",
+      "extra-info": "app=api duser=admin\u0000 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\u0000 from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*1A",
+      "extra-info": "",
+      "message": "login failure for user admin",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*1B",
+      "extra-info": "app=api duser=admin",
+      "message": " from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*1C",
+      "extra-info": "",
+      "message": " outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*1D",
+      "extra-info": "app=api duser=admin\r outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\r from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*1E",
+      "extra-info": "app=api duser=admin\t outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\t from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*1F",
+      "extra-info": "app=api duser=admin\b outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\b from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*20",
+      "extra-info": "app=api duser=adm\u0456n outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user adm\u0456n from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*21",
+      "extra-info": "app=api duser=admin\u202e outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\u202e from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*22",
+      "extra-info": "app=api duser=admin' OR '1'\\='1 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin' OR '1'='1 from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*23",
+      "extra-info": "app=api duser=admin; cat /etc/passwd outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin; cat /etc/passwd from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*24",
+      "extra-info": "app=api duser=../../../etc/passwd outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user ../../../etc/passwd from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*25",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*26",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*27",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*28",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*29",
+      "extra-info": "app=api duser=nonexistent outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*2A",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*2B",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*2C",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*2D",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*2E",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*2F",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*30",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*31",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*32",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*33",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*34",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*35",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*36",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*37",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*38",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*39",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*3A",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:58",
+      "topics": "system,error,critical"
+    }
+  ],
+  "categories": {
+    "system,info": 1,
+    "interface,info": 2,
+    "dhcp,info": 1,
+    "system,info,account": 22,
+    "system,error,critical": 33
+  },
+  "interesting_entries": [
+    {
+      ".id": "*6",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:08:08",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*7",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:08:23",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:08:23",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*9",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:08:24",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*A",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:08:24",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*13",
+      "extra-info": "app=api duser= outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user  from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*14",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*15",
+      "extra-info": "app=api duser= outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user  from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*16",
+      "extra-info": "app=api duser= outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user  from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*17",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*18",
+      "extra-info": "app=api duser=adm\u0000in outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user adm\u0000in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*19",
+      "extra-info": "app=api duser=admin\u0000 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\u0000 from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*1A",
+      "extra-info": "",
+      "message": "login failure for user admin",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*1D",
+      "extra-info": "app=api duser=admin\r outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\r from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*1E",
+      "extra-info": "app=api duser=admin\t outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\t from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*1F",
+      "extra-info": "app=api duser=admin\b outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\b from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*20",
+      "extra-info": "app=api duser=adm\u0456n outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user adm\u0456n from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*21",
+      "extra-info": "app=api duser=admin\u202e outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin\u202e from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*22",
+      "extra-info": "app=api duser=admin' OR '1'\\='1 outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin' OR '1'='1 from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*23",
+      "extra-info": "app=api duser=admin; cat /etc/passwd outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin; cat /etc/passwd from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*24",
+      "extra-info": "app=api duser=../../../etc/passwd outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user ../../../etc/passwd from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:56",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*29",
+      "extra-info": "app=api duser=nonexistent outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user nonexistent from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*2C",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*2F",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*34",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*35",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*36",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:57",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*37",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*38",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*39",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:58",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*3A",
+      "extra-info": "app=api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-19 05:10:58",
+      "topics": "system,error,critical"
+    }
+  ],
+  "interesting_count": 31,
+  "system_resource": {
+    "architecture-name": "x86_64",
+    "board-name": "CHR innotek GmbH VirtualBox",
+    "build-time": "2026-01-30 09:17:54",
+    "cpu": "AMD",
+    "cpu-count": "1",
+    "cpu-frequency": "4391",
+    "cpu-load": "7",
+    "factory-software": "7.1",
+    "free-hdd-space": "73121792",
+    "free-memory": "842084352",
+    "platform": "MikroTik",
+    "total-hdd-space": "93564928",
+    "total-memory": "1073741824",
+    "uptime": "4m22s",
+    "version": "7.20.8 (long-term)",
+    "write-sect-since-reboot": "480",
+    "write-sect-total": "480"
+  },
+  "active_users": [
+    {
+      ".id": "*1",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-19 05:06:44"
+    },
+    {
+      ".id": "*2",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-19 05:06:44"
+    },
+    {
+      ".id": "*A",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-19 05:10:57"
+    },
+    {
+      ".id": "*B",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-19 05:10:57"
+    }
+  ]
+}

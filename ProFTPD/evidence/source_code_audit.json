@@ -1,0 +1,211 @@
+{
+  "audit_date": "2026-02-13",
+  "target": "ProFTPD 1.3.9 source (proftpd-dfsg-1.3.9~dfsg)",
+  "source_path": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/ProFTPD/source/proftpd-dfsg-1.3.9~dfsg/",
+  "findings": [
+    {
+      "id": "SCA-01",
+      "category": "Symlink Creation Without Target Validation",
+      "file": "contrib/mod_copy.c",
+      "line_range": "160-189",
+      "function": "copy_symlink()",
+      "description": "When copying a symlink via SITE CPFR/CPTO, copy_symlink() reads the symlink target with pr_fsio_readlink() and then recreates it at the destination with pr_fsio_symlink(). The symlink target path (link_path) is never validated or sanitized -- it is blindly passed to pr_fsio_symlink(). An attacker who can create a symlink pointing to e.g. /etc/shadow and then SITE COPY it to a location they can read, effectively copies the dangerous symlink to a new accessible location. The function also does not check whether the symlink target would point outside the allowed directory tree.",
+      "severity": "HIGH",
+      "code_snippet": "len = pr_fsio_readlink(src_path, link_path, PR_TUNABLE_BUFFER_SIZE-1);\n...\nlink_path[len] = '\\0';\nif (pr_fsio_symlink(link_path, dst_path) < 0) {"
+    },
+    {
+      "id": "SCA-02",
+      "category": "Raw opendir() Bypasses FSIO Access Controls",
+      "file": "contrib/mod_copy.c",
+      "line_range": "191-340",
+      "function": "copy_dir()",
+      "description": "copy_dir() uses the raw POSIX opendir()/readdir() system calls instead of the ProFTPD FSIO layer (pr_fsio_opendir/pr_fsio_readdir). This bypasses any access control hooks, virtual filesystem overlays, or security checks implemented in the FSIO abstraction layer. Other modules like mod_site_misc correctly use pr_fsio_opendir(). This means mod_copy's directory copy could access files that should be hidden or restricted by FSIO-layer modules (e.g., mod_vroot).",
+      "severity": "MEDIUM",
+      "code_snippet": "dh = opendir(src_dir);\nif (dh == NULL) {\n  ...\n}\nwhile ((dent = readdir(dh)) != NULL) {"
+    },
+    {
+      "id": "SCA-03",
+      "category": "Symlink Creation Without Proper Validation",
+      "file": "contrib/mod_site_misc.c",
+      "line_range": "776-937",
+      "function": "site_misc_symlink()",
+      "description": "The SITE SYMLINK command in mod_site_misc allows authenticated users to create arbitrary symlinks. While it checks dir_check_canon() permissions and verifies the source exists via pr_fsio_stat(), it does NOT validate that the symlink target (src) stays within the chroot or FTP root directory. An authenticated user could create a symlink pointing to /etc/passwd or other sensitive system files. The check uses pr_fsio_stat on the source (which follows symlinks), but does not validate the resulting path is within allowed boundaries. Combined with file retrieval, this enables reading arbitrary files outside the FTP root.",
+      "severity": "HIGH",
+      "code_snippet": "src = dir_canonical_path(cmd->tmp_pool, decoded_path);\n...\ndst = dir_canonical_path(cmd->tmp_pool, decoded_path);\n...\nif (pr_fsio_symlink(src, dst) < 0) {"
+    },
+    {
+      "id": "SCA-04",
+      "category": "Glob Expansion Resource Exhaustion",
+      "file": "modules/mod_ls.c",
+      "line_range": "1970-2244",
+      "function": "dolist() via genericlist()",
+      "description": "The LIST command processes user-supplied glob patterns via pr_fs_glob() which calls the bundled glibc-glob implementation. While the glob has MAX_RECURSION=8 and MAX_MATCHES=100000 limits, crafted glob patterns like '**/**/**/**/**/**/**/**/*' or '{a,b}{a,b}{a,b}...' (brace expansion) can still cause significant CPU and memory consumption before hitting those limits. The GLOB_NOSPACE error handling only logs a message but the server has already consumed significant resources. No per-connection glob throttling exists.",
+      "severity": "MEDIUM",
+      "code_snippet": "if (use_globbing == TRUE &&\n    pr_str_is_fnmatch(target)) {\n  a = pr_fs_glob(target, glob_flags, NULL, &g);\n  if (a == 0) {\n    globbed = TRUE;\n  }"
+    },
+    {
+      "id": "SCA-05",
+      "category": "mod_copy SITE COPY No Read Permission Check on Source",
+      "file": "contrib/mod_copy.c",
+      "line_range": "559-656",
+      "function": "copy_copy()",
+      "description": "The SITE COPY command (copy_copy function) checks G_WRITE permission on the destination via dir_check() but does NOT check G_READ permission on the source (from) path. While SITE CPFR does check G_READ, the single-command SITE COPY variant only checks write permissions. This allows an authenticated user to copy files they may not have explicit read permission on, to a location they can write to and then retrieve. This is a variant of the historical CVE-2015-3306 class of mod_copy issues.",
+      "severity": "HIGH",
+      "code_snippet": "from = dir_canonical_vpath(cmd->tmp_pool, decoded_path);\n...\nto = dir_canonical_vpath(cmd->tmp_pool, decoded_path);\n...\npr_cmd_set_name(cmd, \"SITE_COPY\");\nif (!dir_check(cmd->tmp_pool, cmd, G_WRITE, to, NULL)) {\n  /* Only checks write on destination, no read check on source */"
+    },
+    {
+      "id": "SCA-06",
+      "category": "strcpy Usage in mod_load",
+      "file": "contrib/mod_load/mod_load.c",
+      "line_range": "817-818",
+      "function": "getloadavg_nlist()",
+      "description": "Two instances of the unsafe strcpy() function remain in the codebase, both in mod_load. While these use fixed string constants (LDAV_SYMBOL and \"\") as the source, they write into a nlist structure whose buffer size depends on the platform. The rest of the codebase has been migrated to safe alternatives (sstrncpy, pstrdup, etc.), making these an anomaly. Risk is low since mod_load is rarely compiled/loaded.",
+      "severity": "LOW",
+      "code_snippet": "strcpy (nl[0].n_name, LDAV_SYMBOL);\nstrcpy (nl[1].n_name, \"\");"
+    },
+    {
+      "id": "SCA-07",
+      "category": "execv() Usage for Passphrase Providers",
+      "file": "contrib/mod_tls.c, contrib/mod_sftp/keys.c",
+      "line_range": "mod_tls.c:3231, keys.c:405",
+      "function": "tls_get_passphrase_cb(), sftp_keys_get_passphrase_cb()",
+      "description": "Both mod_tls and mod_sftp use execv() to run external passphrase provider programs. The path to the executable comes from configuration (TLSPassPhraseProvider / SFTPPassPhraseProvider). While only the server administrator can set this config value, if an attacker can modify proftpd.conf or inject configuration directives, they could execute arbitrary commands as root (since the passphrase provider runs in a forked child process that may retain root privileges).",
+      "severity": "LOW",
+      "code_snippet": "execv(tls_passphrase_provider, stdin_argv);"
+    },
+    {
+      "id": "SCA-08",
+      "category": "PORT Command sscanf with Unsigned Int",
+      "file": "modules/mod_core.c",
+      "line_range": "4028-4048",
+      "function": "core_port()",
+      "description": "The PORT command parser uses sscanf with %u format specifiers to parse the h1,h2,h3,h4,p1,p2 values. While the code does validate the parsed values against 255 bounds after parsing, the %u format reads unsigned integers which are 32-bit. If a value like 4294967295 (UINT_MAX) is provided, sscanf succeeds but the subsequent > 255 check correctly catches it. This is properly handled but worth noting as a defense-in-depth concern -- using %hhu or explicit width-limited parsing would be more robust.",
+      "severity": "INFO",
+      "code_snippet": "if (sscanf(port_info, \"%u,%u,%u,%u,%u,%u\", &h1, &h2, &h3, &h4, &p1,\n    &p2) != 6) {\n  ...\n}\nif (h1 > 255 || h2 > 255 || h3 > 255 || h4 > 255 || p1 > 255 || p2 > 255 ||\n    (h1|h2|h3|h4) == 0 || (p1|p2) == 0) {"
+    },
+    {
+      "id": "SCA-09",
+      "category": "Authentication Timing Side-Channel (Mitigated by mod_delay)",
+      "file": "modules/mod_auth.c, modules/mod_delay.c",
+      "line_range": "mod_auth.c:2660-2766",
+      "function": "auth_pass()",
+      "description": "The authentication path in auth_pass() -> setup_env() -> do_auth() -> pr_auth_authenticate() / pr_auth_check() returns immediately on success or failure without constant-time behavior. A valid username will follow a different code path than an invalid one, potentially leaking timing information. However, ProFTPD ships with mod_delay which is specifically designed to mitigate timing-based user enumeration attacks by adding calibrated delays. When mod_delay is loaded (default), this timing side-channel is effectively mitigated. Without mod_delay, the timing difference between valid and invalid usernames is observable.",
+      "severity": "LOW",
+      "code_snippet": "res = setup_env(cmd->tmp_pool, cmd, user, cmd->arg);\nif (res == 1) {\n  /* Success path - immediate return */\n  ...\n  return PR_HANDLED(cmd);\n}\n/* Failure path - different timing */"
+    },
+    {
+      "id": "SCA-10",
+      "category": "No sprintf/gets Usage (Positive Finding)",
+      "file": "Entire codebase",
+      "line_range": "N/A",
+      "function": "N/A",
+      "description": "Positive finding: The ProFTPD 1.3.9 codebase contains zero instances of sprintf() or gets(). All string formatting uses pr_snprintf()/snprintf() with explicit buffer size parameters. String copies use pstrdup(), sstrncpy(), or pstrcat() from the pool-based memory allocator. This represents good defensive coding practices throughout the codebase.",
+      "severity": "INFO",
+      "code_snippet": "N/A"
+    },
+    {
+      "id": "SCA-11",
+      "category": "mod_exec Command Execution with User-Influenced Arguments",
+      "file": "contrib/mod_exec.c",
+      "line_range": "461-600",
+      "function": "exec_ssystem()",
+      "description": "mod_exec uses fork()+execv() to execute external commands configured via ExecOnCommand directives. The exec_subst_var() function substitutes variables like %f (filename), %u (username), %a (client address) into command arguments. These substitutions include user-controlled data (filenames, usernames) that are passed directly as execv() arguments. While execv() does not invoke a shell (preventing shell injection), if the target program itself interprets arguments unsafely, user-controlled data could lead to command injection through the external program. The EXEC_FL_RUN_AS_ROOT flag is particularly dangerous as it executes commands with root privileges.",
+      "severity": "MEDIUM",
+      "code_snippet": "c->argv[i] = (void *) exec_subst_var(tmp_pool, cmd, c->argv[i], logfmt);\n...\nif (flags & EXEC_FL_RUN_AS_ROOT) {\n  PRIVS_ROOT\n}"
+    },
+    {
+      "id": "SCA-12",
+      "category": "Recursive Directory Operations Without Depth Limit",
+      "file": "contrib/mod_site_misc.c",
+      "line_range": "178-354",
+      "function": "site_misc_delete_dir()",
+      "description": "The SITE RMDIR command's recursive directory deletion (site_misc_delete_dir) and SITE MKDIR's recursive path creation (site_misc_create_path) have no depth limit on recursion. A deeply nested directory structure could cause stack exhaustion. Similarly, copy_dir() in mod_copy.c recurses without depth limits. While the filesystem itself limits path depth via PATH_MAX, if symlinks create cycles (though pr_fsio_lstat is used to detect symlinks in mod_copy, mod_site_misc's deletion uses pr_fsio_stat which follows symlinks), this could lead to infinite recursion.",
+      "severity": "LOW",
+      "code_snippet": "while ((dent = pr_fsio_readdir(dirh)) != NULL) {\n  ...\n  if (S_ISDIR(st.st_mode)) {\n    res = site_misc_delete_dir(p, file);  /* Recursive, no depth limit */"
+    },
+    {
+      "id": "SCA-13",
+      "category": "glob() Brace Expansion with Recursion Limit",
+      "file": "lib/glibc-glob.c",
+      "line_range": "437-449",
+      "function": "glob_limited()",
+      "description": "ProFTPD ships its own patched glibc-glob.c with a recursion limit (MAX_RECURSION = PR_TUNABLE_GLOBBING_MAX_RECURSION = 8) and a match limit (PR_TUNABLE_GLOBBING_MAX_MATCHES = 100000). These are security improvements over the stock glibc glob. However, the brace expansion feature (GLOB_BRACE) is still supported and allows pattern explosion. A pattern like '{a,b}{a,b}{a,b}{a,b}{a,b}{a,b}{a,b}{a,b}' generates 256 patterns within the recursion limit. Each pattern then requires filesystem operations, enabling authenticated DoS.",
+      "severity": "MEDIUM",
+      "code_snippet": "#define MAX_RECURSION PR_TUNABLE_GLOBBING_MAX_RECURSION\n...\nif (depth > MAX_RECURSION) {\n    return GLOB_NOSPACE;\n}"
+    },
+    {
+      "id": "SCA-14",
+      "category": "Path Traversal Handling in fsio.c",
+      "file": "src/fsio.c",
+      "line_range": "2970-3020",
+      "function": "dir_canonical_path() / dir_canonical_vpath()",
+      "description": "The canonical path resolution in fsio.c properly handles '..' components by stripping back to the previous '/' in the working path. The implementation correctly handles '.', './', '..', and '../' patterns. This is used consistently throughout the codebase (mod_core, mod_copy, mod_site_misc all call dir_canonical_path or dir_canonical_vpath). The path canonicalization appears sound and prevents basic path traversal attacks. Combined with chroot when configured, this provides defense-in-depth.",
+      "severity": "INFO",
+      "code_snippet": "if (strncmp(where, \"..\", 3) == 0) {\n  where += 2;\n  ptr = last = workpath;\n  while (*ptr) {\n    if (*ptr == '/') last = ptr;\n    ptr++;\n  }\n  *last = '\\0';\n}"
+    },
+    {
+      "id": "SCA-15",
+      "category": "Consistent Use of Format String Protection",
+      "file": "modules/mod_core.c, modules/mod_xfer.c, modules/mod_auth.c",
+      "line_range": "Throughout",
+      "function": "Multiple pr_response_add/pr_response_add_err calls",
+      "description": "All pr_response_add() and pr_response_add_err() calls in the codebase use format string parameters correctly with explicit format specifiers like \"%s\" or _(\"...\") with proper argument passing. No instances were found where user-controlled data (cmd->arg, cmd->argv[]) is passed as the format string parameter itself. The pattern 'pr_response_add_err(R_550, \"%s: %s\", cmd->arg, strerror(xerrno))' is used consistently, preventing format string vulnerabilities.",
+      "severity": "INFO",
+      "code_snippet": "pr_response_add_err(R_550, \"%s: %s\", cmd->arg, strerror(xerrno));\n/* User data always in argument position, never as format string */"
+    }
+  ],
+  "dangerous_function_counts": {
+    "sprintf": 0,
+    "gets": 0,
+    "strcpy": 2,
+    "strcat_raw": 1,
+    "snprintf": 360,
+    "pr_snprintf": 315,
+    "sstrncpy": 182,
+    "sstrcat": 51,
+    "pstrcat": 1100,
+    "pstrdup": 1110,
+    "sscanf": 19,
+    "execv": 2,
+    "popen": 0,
+    "system": 0,
+    "note": "sprintf/gets/system/popen are completely absent. strcpy has 2 instances (mod_load, fixed-length constants). strcat has 1 instance (definition of sstrcat itself in str.c). The codebase consistently uses safe pool-based string functions (pstrcat, pstrdup) and bounded alternatives (sstrncpy, sstrcat, pr_snprintf)."
+  },
+  "modules_reviewed": [
+    "contrib/mod_copy.c - Full review: symlink copy, access control, CPFR/CPTO/COPY commands",
+    "contrib/mod_site_misc.c - Full review: MKDIR, RMDIR, SYMLINK, UTIME commands",
+    "contrib/mod_exec.c - Partial review: command execution, variable substitution",
+    "modules/mod_auth.c - Full review: USER/PASS handlers, authentication flow",
+    "modules/mod_core.c - Partial review: CWD, MKD, DELE, RNFR, RNTO, PORT handlers",
+    "modules/mod_ls.c - Partial review: glob expansion, LIST command",
+    "modules/mod_xfer.c - Partial review: STOR/RETR/APPE command argument handling",
+    "modules/mod_auth_file.c - Cursory review",
+    "modules/mod_delay.c - Cursory review: timing attack mitigation",
+    "src/auth.c - Partial review: pr_auth_check, pr_auth_authenticate",
+    "src/fsio.c - Partial review: path canonicalization, chroot handling",
+    "src/cmd.c - Cursory review: command parsing",
+    "src/log.c - Cursory review: format string safety",
+    "src/display.c - Cursory review: display file format handling",
+    "lib/glibc-glob.c - Partial review: recursion limits, match limits"
+  ],
+  "cve_relevant_patterns": {
+    "CVE-2015-3306": {
+      "description": "mod_copy unauthenticated SITE CPFR/CPTO allowed arbitrary file read/write",
+      "status_in_1.3.9": "FIXED - authentication checks added at lines 576-584 (copy_copy), 681-689 (copy_cpfr), 799-807 (copy_cpto). All three entry points verify 'authenticated' parameter before proceeding.",
+      "residual_risk": "SITE COPY still lacks read permission check on source path (SCA-05)"
+    },
+    "CVE-2019-12815": {
+      "description": "mod_copy arbitrary file copy via SITE CPFR/CPTO for authenticated users",
+      "status_in_1.3.9": "PARTIALLY FIXED - dir_check() and dir_check_canon() access controls added, but SITE COPY variant still has incomplete source permission checking (SCA-05)"
+    },
+    "CVE-2020-9273": {
+      "description": "Use-after-free in response pool handling",
+      "status_in_1.3.9": "Appears fixed based on pool management patterns observed in response handling code"
+    },
+    "glob_dos": {
+      "description": "Glob expansion CPU/memory DoS",
+      "status_in_1.3.9": "MITIGATED - Custom glibc-glob.c with recursion limit (8) and match limit (100000), but brace expansion still enables pattern explosion (SCA-13)"
+    }
+  },
+  "summary": "The ProFTPD 1.3.9 source code audit identified 15 findings: 3 HIGH, 4 MEDIUM, 4 LOW, and 4 INFO. The codebase demonstrates strong defensive coding practices overall -- zero uses of sprintf/gets/system/popen, consistent use of pool-based safe string functions, and proper format string handling throughout. The most significant findings are in contrib/mod_copy.c (SCA-01: symlink target not validated during copy, SCA-02: raw opendir bypasses FSIO access controls, SCA-05: missing read permission check on SITE COPY source) and contrib/mod_site_misc.c (SCA-03: SITE SYMLINK allows symlinks to arbitrary paths). The glob expansion code has been hardened with recursion/match limits but remains susceptible to pattern-based DoS via brace expansion (SCA-13). Authentication timing side-channels exist but are mitigated by the default mod_delay module (SCA-09). The historical CVE-2015-3306 (unauthenticated mod_copy access) has been fixed with authentication checks, but residual access control gaps remain for authenticated users. Path traversal handling in fsio.c is sound with proper '..' canonicalization."
+}

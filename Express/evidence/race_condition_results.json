@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "phase": "4.4",
+    "name": "Race Condition Analysis",
+    "timestamp": "2026-02-15T12:41:51.570183"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "rate_limit_10",
+      "version": "v5",
+      "data": {
+        "concurrent": 10,
+        "success": 10,
+        "rate_limited": 0,
+        "errors": 0
+      }
+    },
+    {
+      "id": 2,
+      "test": "rate_limit_25",
+      "version": "v5",
+      "data": {
+        "concurrent": 25,
+        "success": 25,
+        "rate_limited": 0,
+        "errors": 0
+      }
+    },
+    {
+      "id": 3,
+      "test": "rate_limit_50",
+      "version": "v5",
+      "data": {
+        "concurrent": 50,
+        "success": 50,
+        "rate_limited": 0,
+        "errors": 0
+      }
+    },
+    {
+      "id": 4,
+      "test": "rate_limit_10",
+      "version": "v4",
+      "data": {
+        "concurrent": 10,
+        "success": 0,
+        "rate_limited": 0,
+        "errors": 10
+      }
+    },
+    {
+      "id": 5,
+      "test": "rate_limit_25",
+      "version": "v4",
+      "data": {
+        "concurrent": 25,
+        "success": 0,
+        "rate_limited": 0,
+        "errors": 25
+      }
+    },
+    {
+      "id": 6,
+      "test": "rate_limit_50",
+      "version": "v4",
+      "data": {
+        "concurrent": 50,
+        "success": 0,
+        "rate_limited": 0,
+        "errors": 50
+      }
+    },
+    {
+      "id": 7,
+      "test": "session_race",
+      "version": "v5",
+      "data": {
+        "concurrent_requests": 50,
+        "success": 50,
+        "errors": 0
+      }
+    },
+    {
+      "id": 8,
+      "test": "session_race",
+      "version": "v4",
+      "data": {
+        "concurrent_requests": 50,
+        "success": 0,
+        "errors": 50
+      }
+    },
+    {
+      "id": 9,
+      "test": "double_register",
+      "version": "v5",
+      "data": {
+        "success": 1,
+        "conflict": 9,
+        "error": 0
+      }
+    },
+    {
+      "id": 10,
+      "test": "double_register",
+      "version": "v4",
+      "data": {
+        "success": 0,
+        "conflict": 0,
+        "error": 10
+      }
+    },
+    {
+      "id": 11,
+      "test": "concurrent_upload",
+      "version": "v5",
+      "data": {
+        "success": 20,
+        "error": 0
+      }
+    },
+    {
+      "id": 12,
+      "test": "concurrent_upload",
+      "version": "v4",
+      "data": {
+        "success": 0,
+        "error": 20
+      }
+    },
+    {
+      "id": 13,
+      "test": "pipelining",
+      "version": "v5",
+      "data": {
+        "requests_sent": 5,
+        "responses_received": 5,
+        "total_response_size": 3368
+      }
+    },
+    {
+      "id": 14,
+      "test": "pipelining",
+      "version": "v4",
+      "data": {
+        "requests_sent": 5,
+        "responses_received": 0,
+        "total_response_size": 8235
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "title": "Session Race Condition: 50/50 Errors Under Concurrency",
+      "severity": "LOW",
+      "cwe": "CWE-362",
+      "description": "Concurrent session access caused 50 errors in MemoryStore",
+      "framework_behavior": true,
+      "version": "v4"
+    }
+  ],
+  "summary": {
+    "total_tests": 14,
+    "findings_count": 1
+  }
+}

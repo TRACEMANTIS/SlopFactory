@@ -1,0 +1,208 @@
+{
+  "test": "pop_chain_gadget_validation",
+  "timestamp": "2026-03-20T21:26:46.434066",
+  "wp_version": "6.8.1",
+  "gadgets": {
+    "WP_HTML_Token": {
+      "class": "WP_HTML_Token",
+      "file": "/var/www/html/wp-lab/wp-includes/html-api/class-wp-html-token.php",
+      "magic_methods": {
+        "__destruct": {
+          "present": true,
+          "snippet": "function __destruct() {\n\t\tif ( is_callable( $this->on_destroy ) ) {\n\t\t\tcall_user_func( $this->on_destroy, $this->bookmark_name );\n\t\t}\n\t}\n\n\t/**\n\t * Wakeup magic method.\n\t *\n\t * @since 6.4.2\n\t */\n\tpublic function __wakeup() {\n\t\tthrow new \\LogicException( __CLASS__ . ' should never be unserialized' );\n\t}\n}"
+        },
+        "__wakeup": {
+          "present": true,
+          "snippet": "function __wakeup() {\n\t\tthrow new \\LogicException( __CLASS__ . ' should never be unserialized' );\n\t}\n}\n"
+        }
+      },
+      "dangerous_calls": [
+        {
+          "function": "call_user_func",
+          "line": 114,
+          "code": "call_user_func( $this->on_destroy, $this->bookmark_name );"
+        }
+      ],
+      "wakeup_protection": true,
+      "gadget_rating": "PROTECTED - __destruct has dangerous call but __wakeup blocks deserialization"
+    },
+    "WP_HTML_Tag_Processor": {
+      "class": "WP_HTML_Tag_Processor",
+      "file": "/var/www/html/wp-lab/wp-includes/html-api/class-wp-html-tag-processor.php",
+      "magic_methods": {
+        "__toString": {
+          "present": true,
+          "snippet": "function __toString(): string {\n\t\treturn $this->get_updated_html();\n\t}\n\n\t/**\n\t * Returns the string representation of the HTML Tag Processor.\n\t *\n\t * @since 6.2.0\n\t * @since 6.2.1 Shifts the internal cursor corresponding to the applied updates.\n\t * @since 6.4.0 No longer calls subclass method `next_tag()` after updating HTML.\n\t *\n\t * @return string The processed HTML.\n\t */\n\tpublic function get_updated_html(): string {\n\t\t$requires_no_updating = 0 === count( $this->classname_updates ) && 0 === count( $this->lexical_updates );"
+        }
+      },
+      "dangerous_calls": [
+        {
+          "function": "eval",
+          "line": 3156,
+          "code": "case 'tablevalues':"
+        },
+        {
+          "function": "require",
+          "line": 3126,
+          "code": "case 'requiredextensions':"
+        },
+        {
+          "function": "require",
+          "line": 3127,
+          "code": "return 'requiredExtensions';"
+        },
+        {
+          "function": "require",
+          "line": 3129,
+          "code": "case 'requiredfeatures':"
+        },
+        {
+          "function": "require",
+          "line": 3130,
+          "code": "return 'requiredFeatures';"
+        },
+        {
+          "function": "require",
+          "line": 4139,
+          "code": "$requires_no_updating = 0 === count( $this->classname_updates ) && 0 === count( $this->lexical_updates );"
+        },
+        {
+          "function": "require",
+          "line": 4145,
+          "code": "if ( $requires_no_updating ) {"
+        },
+        {
+          "function": "system",
+          "line": 3153,
+          "code": "case 'systemlanguage':"
+        },
+        {
+          "function": "system",
+          "line": 3154,
+          "code": "return 'systemLanguage';"
+        }
+      ],
+      "wakeup_protection": false,
+      "gadget_rating": "USEFUL - __toString without __wakeup, can be chained"
+    },
+    "WP_Image_Editor_Imagick": {
+      "class": "WP_Image_Editor_Imagick",
+      "file": "/var/www/html/wp-lab/wp-includes/class-wp-image-editor-imagick.php",
+      "magic_methods": {
+        "__destruct": {
+          "present": true,
+          "snippet": "function __destruct() {\n\t\tif ( $this->image instanceof Imagick ) {\n\t\t\t// We don't need the original in memory anymore.\n\t\t\t$this->image->clear();\n\t\t\t$this->image->destroy();\n\t\t}\n\t}\n\n\t/**\n\t * Checks to see if current environment supports Imagick.\n\t *\n\t * We require Imagick 2.2.0 or greater, based on whether the queryFormats()\n\t * method can be called statically.\n\t *\n\t * @since 3.5.0"
+        }
+      },
+      "dangerous_calls": [
+        {
+          "function": "include",
+          "line": 498,
+          "code": "$this->image->setOption( 'png:include-chunk', 'tRNS' );"
+        },
+        {
+          "function": "include",
+          "line": 893,
+          "code": "/** This filter is documented in wp-includes/class-wp-image-editor-gd.php */"
+        },
+        {
+          "function": "include",
+          "line": 924,
+          "code": "/** This filter is documented in wp-includes/class-wp-image-editor-gd.php */"
+        },
+        {
+          "function": "require",
+          "line": 54,
+          "code": "$required_methods = array("
+        },
+        {
+          "function": "require",
+          "line": 83,
+          "code": "if ( array_diff( $required_methods, $class_methods ) ) {"
+        },
+        {
+          "function": "require",
+          "line": 1025,
+          "code": "__( '%s is required to strip image meta.' ),"
+        },
+        {
+          "function": "require",
+          "line": 1036,
+          "code": "__( '%s is required to strip image meta.' ),"
+        },
+        {
+          "function": "exec",
+          "line": 325,
+          "code": "$php_timeout = (int) ini_get( 'max_execution_time' );"
+        },
+        {
+          "function": "exec",
+          "line": 919,
+          "code": "$perms = $stat['mode'] & 0000666; // Same permissions as parent folder, strip off the executable bits."
+        }
+      ],
+      "wakeup_protection": false,
+      "gadget_rating": "CRITICAL - __destruct with dangerous call, no __wakeup"
+    },
+    "WP_Image_Editor_GD": {
+      "class": "WP_Image_Editor_GD",
+      "file": "/var/www/html/wp-lab/wp-includes/class-wp-image-editor-gd.php",
+      "magic_methods": {
+        "__destruct": {
+          "present": true,
+          "snippet": "function __destruct() {\n\t\tif ( $this->image ) {\n\t\t\t// We don't need the original in memory anymore.\n\t\t\timagedestroy( $this->image );\n\t\t}\n\t}\n\n\t/**\n\t * Checks to see if current environment supports GD.\n\t *\n\t * @since 3.5.0\n\t *\n\t * @param array $args\n\t * @return bool\n\t */"
+        }
+      },
+      "dangerous_calls": [
+        {
+          "function": "exec",
+          "line": 555,
+          "code": "$perms = $stat['mode'] & 0000666; // Same permissions as parent folder, strip off the executable bits."
+        }
+      ],
+      "wakeup_protection": false,
+      "gadget_rating": "CRITICAL - __destruct with dangerous call, no __wakeup"
+    },
+    "WP_Block_Patterns_Registry": {
+      "class": "WP_Block_Patterns_Registry",
+      "file": "/var/www/html/wp-lab/wp-includes/class-wp-block-patterns-registry.php",
+      "magic_methods": {
+        "__wakeup": {
+          "present": true,
+          "snippet": "function __wakeup() {\n\t\tif ( ! $this->registered_patterns ) {\n\t\t\treturn;\n\t\t}\n\t\tif ( ! is_array( $this->registered_patterns ) ) {\n\t\t\tthrow new UnexpectedValueException();\n\t\t}\n\t\tforeach ( $this->registered_patterns as $value ) {\n\t\t\tif ( ! is_array( $value ) ) {\n\t\t\t\tthrow new UnexpectedValueException();\n\t\t\t}\n\t\t}\n\t\t$this->registered_patterns_outside_init = array();\n\t}\n"
+        }
+      },
+      "dangerous_calls": [
+        {
+          "function": "include",
+          "line": 178,
+          "code": "include $patterns[ $pattern_name ]['filePath'];"
+        }
+      ],
+      "wakeup_protection": true,
+      "gadget_rating": "MINIMAL"
+    }
+  },
+  "realpath_trigger": {
+    "check": "block_patterns_realpath_trigger",
+    "file": "/var/www/html/wp-lab/wp-includes/class-wp-block-patterns-registry.php",
+    "filePath_usage": {
+      "line": 178,
+      "code": "include $patterns[ $pattern_name ]['filePath'];"
+    }
+  },
+  "summary": {
+    "critical_gadgets": [
+      "WP_Image_Editor_Imagick",
+      "WP_Image_Editor_GD"
+    ],
+    "useful_gadgets": [
+      "WP_HTML_Tag_Processor"
+    ],
+    "protected_gadgets": [
+      "WP_HTML_Token"
+    ],
+    "pop_chain_viable": true,
+    "detail": "Found 2 unprotected gadget(s) with dangerous calls, 1 useful chaining gadget(s), 1 protected gadget(s). POP chain is viable through unprotected classes or via __toString chaining."
+  }
+}

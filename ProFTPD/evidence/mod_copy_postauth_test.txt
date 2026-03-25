@@ -1,0 +1,10 @@
+220 ProFTPD Server (Debian) [::ffff:127.0.0.1]
+331 Password required for ftptest
+230 User ftptest logged in
+350 File or directory exists, ready for destination name
+250 Copy successful
+350 File or directory exists, ready for destination name
+550 CPTO: Permission denied
+350 File or directory exists, ready for destination name
+250 Copy successful
+221 Goodbye.

@@ -1,0 +1,95 @@
+{
+  "phase": "cve_regression",
+  "pulled_at": "2026-02-16T01:16:05.979237",
+  "log_entry_count": 6,
+  "log_entries": [
+    {
+      ".id": "*0",
+      "extra-info": "",
+      "message": "router rebooted by ssh-cmd:admin@[REDACTED-INTERNAL-IP]/down[REDACTED]",
+      "time": "2026-02-23 00:00:35",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1",
+      "extra-info": "",
+      "message": "lo link up",
+      "time": "2026-02-23 00:00:35",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*2",
+      "extra-info": "",
+      "message": "ether1 link up (speed 1G, full duplex)",
+      "time": "2026-02-23 00:00:39",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*3",
+      "extra-info": "",
+      "message": "dhcp-client on ether1 got IP address [REDACTED-INTERNAL-IP]",
+      "time": "2026-02-23 00:00:39",
+      "topics": "dhcp,info"
+    },
+    {
+      ".id": "*4",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-23 00:00:42",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-23 00:00:42",
+      "topics": "system,info,account"
+    }
+  ],
+  "categories": {
+    "system,info": 1,
+    "interface,info": 2,
+    "dhcp,info": 1,
+    "system,info,account": 2
+  },
+  "interesting_entries": [],
+  "interesting_count": 0,
+  "system_resource": {
+    "architecture-name": "x86_64",
+    "board-name": "CHR innotek GmbH VirtualBox",
+    "build-time": "2026-01-30 09:17:54",
+    "cpu": "AMD",
+    "cpu-count": "1",
+    "cpu-frequency": "4391",
+    "cpu-load": "4",
+    "factory-software": "7.1",
+    "free-hdd-space": "73031680",
+    "free-memory": "844214272",
+    "platform": "MikroTik",
+    "total-hdd-space": "93564928",
+    "total-memory": "1073741824",
+    "uptime": "12s",
+    "version": "7.20.8 (long-term)",
+    "write-sect-since-reboot": "336",
+    "write-sect-total": "336"
+  },
+  "active_users": [
+    {
+      ".id": "*1",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-23 00:00:42"
+    },
+    {
+      ".id": "*2",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-23 00:00:42"
+    }
+  ]
+}

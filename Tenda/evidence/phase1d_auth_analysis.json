@@ -1,0 +1,74 @@
+{
+  "project": "[REDACTED-ID]_Tenda",
+  "script": "phase1d_auth_analysis",
+  "start_time": "2026-03-03T23:55:13.690923",
+  "end_time": "2026-03-03T23:55:13.690923",
+  "test_count": 3,
+  "finding_count": 4,
+  "anomaly_count": 0,
+  "tests": [
+    {
+      "id": "CROSS-MODEL-DIFF",
+      "description": "Cross-model handler comparison: AC15 vs AC20",
+      "request": "r2 symbol table comparison",
+      "response": "{\n  \"ac15_total_handlers\": 120,\n  \"ac20_total_handlers\": 75,\n  \"ac15_only\": [\n    \"formAliScheduleStatus\",\n    \"formBulletinSet\",\n    \"formDLNAserver\",\n    \"formExpandDlnaFile\",\n    \"formGetAllWanInfo\",\n    \"formGetAutoQosInfo\",\n    \"formGetBandWidthSpeed\",\n    \"formGetDdosDefenceList\",\n    \"formGetDeviceDetail\",\n    \"formGetDhcpServer\",\n    \"formGetIPv6Info\",\n    \"formGetIPv6LanStatus\",\n    \"formGetIPv6WanStatus\",\n    \"formGetPortStatus\",\n    \"formGetSambaConf\",\n    \"formGetSysInfo\",\n    \"formGetSystemSet\",\n    \"formGetUSBStatus\",\n    \"formGetUsbCfg\",\n    \"formGetUsbPrint\",\n    \"formGetWanNum\",\n    \"formGetWanStatistic\",\n    \"formGetWanStatus\",\n    \"formMfgTest\",\n    \"formNatSet\",\n    \"formQuickIndex\",\n    \"formSetAutoQosInfo\",\n    \"formSetCfm\",\n    \"formSetClientState\",\n    \"formSetIPv6LanStatus\",\n    \"formSetIPv6WanStatus\",\n    \"formSetSambaConf\",\n    \"formSetSpeedWan\",\n    \"formSetUsbPrint\",\n    \"formTendaGetDhcpClients\",\n    \"formTendaGetGuestDhcpClients\",\n    \"formTendaModelStatus\",\n    \"formWifiClientList\",\n    \"formWifiClientListAll\",\n    \"formWifiConfigGet\",\n    \"formWifiDhcpGuestGet\",\n    \"formWifiDhcpGuestLists\",\n    \"formWifiDhcpGuestSet\",\n    \"formWifiMacFilterGet\",\n    \"formWifiMacFilterSet\",\n    \"formWifiMultiSsid\",\n    \"formWifiStatistic\",\n    \"formWifiStatisticClear\",\n    \"formWifiStatus\",\n    \"formWifiWpsOOB\",\n    \"formWifiWpsStart\",\n    \"formWriteFacMac\",\n    \"form_fast_setting_pppoe_set\",\n    \"formsetUsbUnload\"\n  ],\n  \"ac20_only\": [\n    \"formDefineTendDa\",\n    \"formDefineUcloudv2\",\n    \"formGetLoginInfo\",\n    \"formGetProduct\",\n    \"formSetIPv6status\",\n    \"formWifiAntijamGet\",\n    \"formWifiAntijamSet\",\n    \"formWifiRadioSet_send_msg\",\n    \"form_SyncAccount_get\"\n  ],\n  \"shared_count\": 66\n}",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:55:13.690923"
+    },
+    {
+      "id": "AC15-UNAUTH",
+      "description": "AC15 unauthenticated goform endpoints",
+      "request": "R7WebsSecurityHandler disassembly analysis",
+      "response": "{\n  \"goform_endpoints\": [\n    \"/goform/ate\",\n    \"/goform/getRebootStatus\",\n    \"/goform/GetRouterStatus\",\n    \"/goform/GetUSBStatus\",\n    \"/goform/getWanParameters\",\n    \"/goform/telnet\",\n    \"/goform/WifiApScan\"\n  ],\n  \"web_paths\": [\n    \"/error.asp\",\n    \"/favicon.ico\",\n    \"/index.html\",\n    \"/kns-query\",\n    \"/lang/\",\n    \"/login.asp\",\n    \"/login/Auth\",\n    \"/loginerr.html\",\n    \"/logout/Auth\",\n    \"/public/\",\n    \"/redirect.html\",\n    \"/wdinfo.php\",\n    \"/webroot/main.html\"\n  ],\n  \"handler_vaddr\": \"0x0002f500\",\n  \"handler_size\": 5500,\n  \"handler_name\": \"R7WebsSecurityHandler\"\n}",
+      "status": "VULN",
+      "timestamp": "2026-03-03T23:55:13.690923"
+    },
+    {
+      "id": "AC20-UNAUTH",
+      "description": "AC20 unauthenticated goform endpoints",
+      "request": "R7WebsSecurityHandler disassembly analysis",
+      "response": "{\n  \"goform_endpoints\": [\n    \"/goform/ate\",\n    \"/goform/getLoginInfo\",\n    \"/goform/getRebootStatus\",\n    \"/goform/GetRouterStatus\",\n    \"/goform/GetUSBStatus\",\n    \"/goform/getWanParameters\",\n    \"/goform/telnet\",\n    \"/goform/WifiApScan\"\n  ],\n  \"web_paths\": [\n    \"/error.asp\",\n    \"/favicon.ico\",\n    \"/index.html\",\n    \"/kns-query\",\n    \"/lang/\",\n    \"/login.asp\",\n    \"/login/Auth\",\n    \"/loginerr.html\",\n    \"/logout/Auth\",\n    \"/public/\",\n    \"/redirect.html\",\n    \"/wdinfo.php\",\n    \"/webroot/main.html\"\n  ],\n  \"handler_vaddr\": \"0x00435150\",\n  \"handler_size\": 8940,\n  \"handler_name\": \"R7WebsSecurityHandler\"\n}",
+      "status": "VULN",
+      "timestamp": "2026-03-03T23:55:13.690923"
+    }
+  ],
+  "findings": [
+    {
+      "id": "UNAUTH-ate",
+      "severity": "CRITICAL",
+      "title": "Unauthenticated access to /goform/ate",
+      "details": "{\n  \"risk\": \"CRITICAL\",\n  \"description\": \"Manufacturing ATE test endpoint. May allow arbitrary command execution or device reconfiguration without authentication.\",\n  \"handler\": \"ate handler (not named form*)\",\n  \"notes\": \"ATE = Advanced Test Equipment. Common backdoor in Tenda devices.\"\n}",
+      "timestamp": "2026-03-03T23:55:13.690923",
+      "cwe": "CWE-306",
+      "endpoint": "/goform/ate"
+    },
+    {
+      "id": "UNAUTH-telnet",
+      "severity": "CRITICAL",
+      "title": "Unauthenticated access to /goform/telnet",
+      "details": "{\n  \"risk\": \"CRITICAL\",\n  \"description\": \"Enables/disables telnet daemon without authentication. Direct RCE vector if telnet is enabled.\",\n  \"handler\": \"telnet handler\",\n  \"notes\": \"CVE-2025-9090 targets this endpoint in AC20. Check if AC15 is also vulnerable.\"\n}",
+      "timestamp": "2026-03-03T23:55:13.690923",
+      "cwe": "CWE-306",
+      "endpoint": "/goform/telnet"
+    },
+    {
+      "id": "UNAUTH-getLoginInfo",
+      "severity": "HIGH",
+      "title": "Unauthenticated access to /goform/getLoginInfo",
+      "details": "{\n  \"risk\": \"HIGH\",\n  \"description\": \"AC20-ONLY. Returns login-related information without authentication.\",\n  \"handler\": \"formGetLoginInfo\",\n  \"notes\": \"May leak session info, password hashes, or login state. HIGH priority for analysis.\"\n}",
+      "timestamp": "2026-03-03T23:55:13.690923",
+      "cwe": "CWE-306",
+      "endpoint": "/goform/getLoginInfo"
+    },
+    {
+      "id": "UNAUTH-PREFIX-MATCH",
+      "severity": "HIGH",
+      "title": "AC20 R7WebsSecurityHandler contains bare 'goform/' prefix match",
+      "details": "The AC20 security handler contains a strncmp against 'goform/' (without leading /). This may allow auth bypass by requesting 'goform/SetFirewallCfg' directly (without /goform/ prefix) or through URL path manipulation. Needs dynamic testing to confirm.",
+      "timestamp": "2026-03-03T23:55:13.690923",
+      "cwe": "CWE-287",
+      "endpoint": "goform/*"
+    }
+  ],
+  "anomalies": []
+}

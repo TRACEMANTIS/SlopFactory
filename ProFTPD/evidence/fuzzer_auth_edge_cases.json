@@ -1,0 +1,405 @@
+{
+  "fuzzer": "auth_edge_cases",
+  "target": "ProFTPD 1.3.9 at 127.0.0.1:21",
+  "start_time": "2026-02-14T12:33:34.256533",
+  "test_cases": [
+    {
+      "id": 1,
+      "category": "auth_double_user",
+      "command": "USER ftptest -> USER root -> PASS",
+      "response": "530 Login incorrect.\r\n",
+      "notes": "Test if second USER changes target account",
+      "status": "OK"
+    },
+    {
+      "id": 2,
+      "category": "auth_pass_first",
+      "command": "PASS before USER",
+      "response": "503 Login with USER first\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 3,
+      "category": "auth_empty",
+      "command": "USER '' / PASS ''",
+      "response": "500 USER: command requires a parameter\r\n | 503 Login with USER first\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 4,
+      "category": "auth_empty",
+      "command": "USER '' / PASS 'ftptest123'",
+      "response": "500 USER: command requires a parameter\r\n | 503 Login with USER first\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 5,
+      "category": "auth_empty",
+      "command": "USER 'ftptest' / PASS ''",
+      "response": "331 Password required for ftptest\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 6,
+      "category": "auth_empty",
+      "command": "USER ' ' / PASS ' '",
+      "response": "500 USER: command requires a parameter\r\n | 503 Login with USER first\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 7,
+      "category": "auth_empty",
+      "command": "USER '\t' / PASS '\t'",
+      "response": "500 USER: command requires a parameter\r\n | 503 Login with USER first\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 8,
+      "category": "auth_reauth",
+      "command": "Re-auth as root after login",
+      "response": "501 Reauthentication not supported\r\n | 503 You are already logged in\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 9,
+      "category": "auth_special_user",
+      "command": "USER 'root'",
+      "response": "331 Password required for root\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 10,
+      "category": "auth_special_user",
+      "command": "USER 'admin'",
+      "response": "331 Password required for admin\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 11,
+      "category": "auth_special_user",
+      "command": "USER 'ftp'",
+      "response": "331 Anonymous login ok, send your complete email address as your password\r\n | 230-Welcome, archive user ftp@localhost !\r\n \r\n The local time is: Sat Feb 14 12:33:37 2026\r\n \r\n This is an experimental FTP server.  If you have any unusual problems,\r\n please report them via e-mail to <root@ansible>.\r\n \r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 12,
+      "category": "auth_special_user",
+      "command": "USER 'anonymous'",
+      "response": "331 Anonymous login ok, send your complete email address as your password\r\n | 230-Welcome, archive user anonymous@localhost !\r\n \r\n The local time is: Sat Feb 14 12:33:37 2026\r\n \r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 13,
+      "category": "auth_special_user",
+      "command": "USER 'nobody'",
+      "response": "331 Password required for nobody\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 14,
+      "category": "auth_special_user",
+      "command": "USER 'proftpd'",
+      "response": "331 Password required for proftpd\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 15,
+      "category": "auth_special_user",
+      "command": "USER 'daemon'",
+      "response": "331 Password required for daemon\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 16,
+      "category": "auth_special_user",
+      "command": "USER 'bin'",
+      "response": "331 Password required for bin\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 17,
+      "category": "auth_special_user",
+      "command": "USER 'sys'",
+      "response": "331 Password required for sys\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 18,
+      "category": "auth_special_user",
+      "command": "USER 'root\\x00ftptest'",
+      "response": "331 Password required for root\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 19,
+      "category": "auth_special_user",
+      "command": "USER 'ftptest\\x00root'",
+      "response": "331 Password required for ftptest\r\n | 230 User ftptest logged in\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 20,
+      "category": "auth_special_user",
+      "command": "USER 'USER'",
+      "response": "331 Password required for USER\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 21,
+      "category": "auth_special_user",
+      "command": "USER 'PASS'",
+      "response": "331 Password required for PASS\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 22,
+      "category": "auth_special_user",
+      "command": "USER 'QUIT'",
+      "response": "331 Password required for QUIT\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 23,
+      "category": "auth_special_user",
+      "command": "USER '%x%x%x'",
+      "response": "331 Password required for %x%x%x\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 24,
+      "category": "auth_special_user",
+      "command": "USER '%n%n%n'",
+      "response": "331 Password required for %n%n%n\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 25,
+      "category": "auth_special_user",
+      "command": "USER '%s%s%s'",
+      "response": "331 Password required for %s%s%s\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 26,
+      "category": "auth_special_user",
+      "command": "USER 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'",
+      "response": "501 Login incorrect.\r\n | 503 Login with USER first\r\n",
+      "notes": "",
+      "status": "REJECTED"
+    },
+    {
+      "id": 27,
+      "category": "auth_special_user",
+      "command": "USER '../../../etc/passwd'",
+      "response": "331 Password required for ../../../etc/passwd\r\n | 530 Login incorrect.\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 28,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: LIST",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 29,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: NLST",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 30,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: RETR /etc/passwd",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 31,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: STOR /tmp/test",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 32,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: CWD /",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 33,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: PWD",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 34,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: SYST",
+      "response": "215 UNIX Type: L8\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 35,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: FEAT",
+      "response": "211-Features:\r\n AUTH TLS\r\n CCC\r\n CLNT\r\n CSID\r\n EPRT\r\n EPSV\r\n HOST\r\n LANG en-US.UTF-8*;en-US\r\n MDTM\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 36,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: HELP",
+      "response": "214-The following commands are recognized (* =>'s unimplemented):\r\n CWD     XCWD    CDUP    XCUP    SMNT*   QUIT    PORT    PASV    \r\n EPRT    EPSV    ALLO    RNFR    RNTO    DELE    MDTM    RMD     \r\n XRMD    MKD     XMKD    PWD     XPWD    SIZE    SYST    HELP    \r\n NOOP    FEAT    OPTS    HOST    CLNT    AUTH    CCC*    CONF*   \r\n ENC*    MIC*    PBSZ    PROT    USER    PASS    ACCT*   REIN*   \r\n SITE    MLSD    MLST    LIST    NLST    STAT    TYPE    STRU    \r\n MODE    RETR    STOR    STOU  ",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 37,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: SITE CPFR /etc/passwd",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 38,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: SITE CPTO /tmp/test",
+      "response": "503-Bad sequence of commands\r\n503 Bad sequence of commands\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 39,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: SITE CHMOD 777 /tmp",
+      "response": "530 Please login with USER and PASS\r\n530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 40,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: SITE SYMLINK /etc/passwd /tmp/link",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 41,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: MKD /tmp/test",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 42,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: RMD /tmp",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 43,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: DELE /etc/passwd",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 44,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: RNFR /etc/passwd",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 45,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: RNTO /tmp/test",
+      "response": "530 Please login with USER and PASS\r\n530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 46,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: STAT",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 47,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: SIZE /etc/passwd",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 48,
+      "category": "auth_preauth_cmd",
+      "command": "Pre-auth: MDTM /etc/passwd",
+      "response": "530 Please login with USER and PASS\r\n",
+      "notes": "",
+      "status": "OK"
+    },
+    {
+      "id": 49,
+      "category": "auth_crlf_bypass",
+      "command": "USER+PASS in single send",
+      "response": "331 Password required for ftptest\r\n | 230 User ftptest logged in\r\n | 257 \"/home/ftptest\" is the current directory\r\n",
+      "notes": "",
+      "status": "OK"
+    }
+  ],
+  "crashes": [],
+  "anomalies": [],
+  "total_tests": 49,
+  "total_crashes": 0,
+  "total_anomalies": 0,
+  "end_time": "2026-02-14T12:33:49.700806"
+}

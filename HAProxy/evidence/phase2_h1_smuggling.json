@@ -1,0 +1,761 @@
+{
+  "phase": "Phase 2: HTTP/1.1 Request Smuggling & Parser Attacks",
+  "target": "HAProxy v3.3.0",
+  "timestamp": 1771455463.4186993,
+  "summary": {
+    "total_tests": 92,
+    "anomalies": 34,
+    "findings": 1
+  },
+  "findings": [
+    {
+      "id": 49,
+      "category": "Header-Injection",
+      "name": "crlf_in_value",
+      "result": "VULNERABLE",
+      "details": "CRLF injection successful! b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:56:16 GMT\\r\\ncontent-type: application/json\\r\\ncontent-length: 467\\r\\nx-backend-server: echo-server\\r\\nconnection: keep-alive\\r\\n\\r\\n'",
+      "timestamp": 1771455379.9984236,
+      "severity": "HIGH"
+    }
+  ],
+  "tests": [
+    {
+      "id": 1,
+      "category": "CL-TE",
+      "name": "basic_cl_te_conflict",
+      "result": "ANOMALY",
+      "details": "Response accepted: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:55:32 GMT\\r\\ncontent-type: application/json\\r\\ncontent-length: 455\\r\\nx-backend-server: echo-server\\r\\n\\r\\n{\\n  \"method\": \"POST\",\\n  '",
+      "timestamp": 1771455332.2723055,
+      "severity": "HIGH"
+    },
+    {
+      "id": 2,
+      "category": "CL-TE",
+      "name": "smuggled_request",
+      "result": "SAFE",
+      "details": "Response: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:55:32 GMT\\r\\ncontent-type: application/json\\r\\ncontent-length: 456\\r\\nx-backend-server: echo-server\\r\\n\\r\\n{\\n  \"method\": \"POST\",\\n  '",
+      "timestamp": 1771455332.3762531
+    },
+    {
+      "id": 3,
+      "category": "CL-TE",
+      "name": "obfuscated_te(Transfer-Encoding: chunked)",
+      "result": "ANOMALY",
+      "details": "Request accepted with obfuscated TE: Transfer-Encoding: chunked",
+      "timestamp": 1771455332.4802012
+    },
+    {
+      "id": 4,
+      "category": "CL-TE",
+      "name": "obfuscated_te(Transfer-Encoding:chunked)",
+      "result": "ANOMALY",
+      "details": "Request accepted with obfuscated TE: Transfer-Encoding:chunked",
+      "timestamp": 1771455332.5841494
+    },
+    {
+      "id": 5,
+      "category": "CL-TE",
+      "name": "obfuscated_te(Transfer-Encoding : chunked)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455332.6880972
+    },
+    {
+      "id": 6,
+      "category": "CL-TE",
+      "name": "obfuscated_te(Transfer-Encoding: chunked\\r\\nTransfer-E)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455332.7840495
+    },
+    {
+      "id": 7,
+      "category": "CL-TE",
+      "name": "obfuscated_te(Transfer-Encoding:\\tchunked)",
+      "result": "ANOMALY",
+      "details": "Request accepted with obfuscated TE: Transfer-Encoding:\\tchunked",
+      "timestamp": 1771455332.8839993
+    },
+    {
+      "id": 8,
+      "category": "CL-TE",
+      "name": "obfuscated_te(Transfer-Encoding: Chunked)",
+      "result": "ANOMALY",
+      "details": "Request accepted with obfuscated TE: Transfer-Encoding: Chunked",
+      "timestamp": 1771455332.9799514
+    },
+    {
+      "id": 9,
+      "category": "CL-TE",
+      "name": "obfuscated_te(Transfer-Encoding: CHUNKED)",
+      "result": "ANOMALY",
+      "details": "Request accepted with obfuscated TE: Transfer-Encoding: CHUNKED",
+      "timestamp": 1771455333.0759032
+    },
+    {
+      "id": 10,
+      "category": "CL-TE",
+      "name": "obfuscated_te(Transfer-encoding: chunked)",
+      "result": "ANOMALY",
+      "details": "Request accepted with obfuscated TE: Transfer-encoding: chunked",
+      "timestamp": 1771455333.1718554
+    },
+    {
+      "id": 11,
+      "category": "CL-TE",
+      "name": "obfuscated_te(transfer-encoding: chunked)",
+      "result": "ANOMALY",
+      "details": "Request accepted with obfuscated TE: transfer-encoding: chunked",
+      "timestamp": 1771455333.2678072
+    },
+    {
+      "id": 12,
+      "category": "CL-TE",
+      "name": "obfuscated_te(Transfer-Encoding: chunked\\x00)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455333.483699
+    },
+    {
+      "id": 13,
+      "category": "CL-TE",
+      "name": "obfuscated_te( Transfer-Encoding: chunked)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455333.6076372
+    },
+    {
+      "id": 14,
+      "category": "CL-TE",
+      "name": "obfuscated_te(Transfer-Encoding: \\r\\n chunked)",
+      "result": "ANOMALY",
+      "details": "Request accepted with obfuscated TE: Transfer-Encoding: \\r\\n chunked",
+      "timestamp": 1771455333.7195811
+    },
+    {
+      "id": 15,
+      "category": "CL-TE",
+      "name": "obfuscated_te(X-Foo: bar\\r\\nTransfer-Encoding: chunked)",
+      "result": "ANOMALY",
+      "details": "Request accepted with obfuscated TE: X-Foo: bar\\r\\nTransfer-Encoding: chunked",
+      "timestamp": 1771455333.9354734
+    },
+    {
+      "id": 16,
+      "category": "TE-CL",
+      "name": "basic_te_cl_smuggle",
+      "result": "SAFE",
+      "details": "Response: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:55:33 GMT\\r\\ncontent-type: application/json\\r\\ncontent-length: 456\\r\\nx-backend-server: echo-server\\r\\n\\r\\n{\\n  \"method\": \"POST\",\\n  '",
+      "timestamp": 1771455334.039421
+    },
+    {
+      "id": 17,
+      "category": "TE-CL",
+      "name": "te_conflict(chunked+identity)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455334.1433692
+    },
+    {
+      "id": 18,
+      "category": "TE-CL",
+      "name": "te_conflict(chunked+compress)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455334.2473173
+    },
+    {
+      "id": 19,
+      "category": "TE-CL",
+      "name": "te_conflict(chunked,identity)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455334.3512652
+    },
+    {
+      "id": 20,
+      "category": "TE-CL",
+      "name": "te_conflict(identity,chunked)",
+      "result": "ANOMALY",
+      "details": "Accepted: b'HTTP/1.1 422 Unprocessable Content\\r\\nContent-length: 116\\r\\nCache-Control: no-cache\\r\\nContent-Type: text/html\\r\\n\\r\\n<html><body><h1>422 Unprocessable Content'",
+      "timestamp": 1771455334.4552133
+    },
+    {
+      "id": 21,
+      "category": "TE-CL",
+      "name": "te_conflict(mixed-case-dup)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455334.5591614
+    },
+    {
+      "id": 22,
+      "category": "Double-CL",
+      "name": "different_values",
+      "result": "SAFE",
+      "details": "Rejected (400)",
+      "timestamp": 1771455334.6631093
+    },
+    {
+      "id": 23,
+      "category": "Double-CL",
+      "name": "same_values",
+      "result": "ANOMALY",
+      "details": "Accepted duplicate CL (same value) - may cause backend confusion",
+      "timestamp": 1771455337.7735534
+    },
+    {
+      "id": 24,
+      "category": "Double-CL",
+      "name": "cl_format(005)",
+      "result": "ANOMALY",
+      "details": "Accepted CL='005'",
+      "timestamp": 1771455340.8799992
+    },
+    {
+      "id": 25,
+      "category": "Double-CL",
+      "name": "cl_format(0005)",
+      "result": "ANOMALY",
+      "details": "Accepted CL='0005'",
+      "timestamp": 1771455343.9904432
+    },
+    {
+      "id": 26,
+      "category": "Double-CL",
+      "name": "cl_format(00000000000000005)",
+      "result": "ANOMALY",
+      "details": "Accepted CL='00000000000000005'",
+      "timestamp": 1771455347.0968893
+    },
+    {
+      "id": 27,
+      "category": "Double-CL",
+      "name": "cl_format(5)",
+      "result": "ANOMALY",
+      "details": "Accepted CL='5 '",
+      "timestamp": 1771455350.2033353
+    },
+    {
+      "id": 28,
+      "category": "Double-CL",
+      "name": "cl_format(5)",
+      "result": "ANOMALY",
+      "details": "Accepted CL=' 5'",
+      "timestamp": 1771455353.3177774
+    },
+    {
+      "id": 29,
+      "category": "Double-CL",
+      "name": "cl_format(+5)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455353.4137292
+    },
+    {
+      "id": 30,
+      "category": "Double-CL",
+      "name": "cl_format(05)",
+      "result": "ANOMALY",
+      "details": "Accepted CL='05'",
+      "timestamp": 1771455356.5121791
+    },
+    {
+      "id": 31,
+      "category": "Double-CL",
+      "name": "empty_content_length_cve2023_40225",
+      "result": "SAFE",
+      "details": "Rejected - CVE-2023-40225 patched",
+      "timestamp": 1771455356.6081314
+    },
+    {
+      "id": 32,
+      "category": "Double-CL",
+      "name": "negative_cl",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455356.8240232
+    },
+    {
+      "id": 33,
+      "category": "Double-CL",
+      "name": "overflow_cl(99999999999999999999)",
+      "result": "SAFE",
+      "details": "Rejected - integer overflow handled",
+      "timestamp": 1771455356.9279714
+    },
+    {
+      "id": 34,
+      "category": "Double-CL",
+      "name": "overflow_cl(18446744073709551615)",
+      "result": "SAFE",
+      "details": "Response: b'HTTP/1.1 502 Bad Gateway\\r\\ncontent-length: 107\\r\\ncache-control: no-cache\\r\\ncontent-type: text/html\\r\\n\\r\\n<'",
+      "timestamp": 1771455360.0344174
+    },
+    {
+      "id": 35,
+      "category": "Double-CL",
+      "name": "overflow_cl(18446744073709551616)",
+      "result": "SAFE",
+      "details": "Rejected - integer overflow handled",
+      "timestamp": 1771455360.1383653
+    },
+    {
+      "id": 36,
+      "category": "Double-CL",
+      "name": "overflow_cl(99999999999999999999)",
+      "result": "SAFE",
+      "details": "Rejected - integer overflow handled",
+      "timestamp": 1771455360.2423131
+    },
+    {
+      "id": 37,
+      "category": "Chunked",
+      "name": "trailing_space_in_size",
+      "result": "ANOMALY",
+      "details": "Chunk size with trailing space accepted",
+      "timestamp": 1771455363.4567053
+    },
+    {
+      "id": 38,
+      "category": "Chunked",
+      "name": "chunk_extension",
+      "result": "SAFE",
+      "details": "Chunk extensions handled per RFC",
+      "timestamp": 1771455366.5597074
+    },
+    {
+      "id": 39,
+      "category": "Chunked",
+      "name": "invalid_hex(0x5)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455366.7718134
+    },
+    {
+      "id": 40,
+      "category": "Chunked",
+      "name": "invalid_hex(5g)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455366.9839194
+    },
+    {
+      "id": 41,
+      "category": "Chunked",
+      "name": "invalid_hex(5;)",
+      "result": "SAFE",
+      "details": "Response: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:56:06 GMT\\r\\ncontent-ty'",
+      "timestamp": 1771455370.1895213
+    },
+    {
+      "id": 42,
+      "category": "Chunked",
+      "name": "invalid_hex(hello)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455370.2895713
+    },
+    {
+      "id": 43,
+      "category": "Chunked",
+      "name": "invalid_hex(-5)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455370.3896215
+    },
+    {
+      "id": 44,
+      "category": "Chunked",
+      "name": "invalid_hex(FFFFFFFFFFFFFFFF)",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455370.4896715
+    },
+    {
+      "id": 45,
+      "category": "Chunked",
+      "name": "max_chunk_size",
+      "result": "SAFE",
+      "details": "Response: b'HTTP/1.1 400 Bad request\\r\\nContent-length: 90\\r\\nCache-Control: no-cache\\r\\nConnection: close\\r\\nContent-Ty'",
+      "timestamp": 1771455370.5897214
+    },
+    {
+      "id": 46,
+      "category": "Chunked",
+      "name": "missing_final_crlf",
+      "result": "ANOMALY",
+      "details": "Response: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:56:10 GMT\\r\\ncontent-ty'",
+      "timestamp": 1771455373.6912713
+    },
+    {
+      "id": 47,
+      "category": "Chunked",
+      "name": "leading_zeros",
+      "result": "SAFE",
+      "details": "Response: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:56:13 GMT\\r\\ncontent-ty'",
+      "timestamp": 1771455376.7968235
+    },
+    {
+      "id": 48,
+      "category": "Chunked",
+      "name": "double_chunked_te",
+      "result": "SAFE",
+      "details": "Rejected duplicate TE",
+      "timestamp": 1771455376.8968735
+    },
+    {
+      "id": 49,
+      "category": "Header-Injection",
+      "name": "crlf_in_value",
+      "result": "VULNERABLE",
+      "details": "CRLF injection successful! b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:56:16 GMT\\r\\ncontent-type: application/json\\r\\ncontent-length: 467\\r\\nx-backend-server: echo-server\\r\\nconnection: keep-alive\\r\\n\\r\\n'",
+      "timestamp": 1771455379.9984236,
+      "severity": "HIGH"
+    },
+    {
+      "id": 50,
+      "category": "Header-Injection",
+      "name": "null_in_value",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455380.0984735
+    },
+    {
+      "id": 51,
+      "category": "Header-Injection",
+      "name": "null_in_name",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455380.1985233
+    },
+    {
+      "id": 52,
+      "category": "Header-Injection",
+      "name": "empty_name_cve2023_25725",
+      "result": "SAFE",
+      "details": "Rejected - CVE-2023-25725 patched",
+      "timestamp": 1771455380.2945716
+    },
+    {
+      "id": 53,
+      "category": "Header-Injection",
+      "name": "obs_fold",
+      "result": "ANOMALY",
+      "details": "Header folding accepted (potential smuggling vector)",
+      "timestamp": 1771455383.4201334
+    },
+    {
+      "id": 54,
+      "category": "Header-Injection",
+      "name": "oversized_header",
+      "result": "SAFE",
+      "details": "Oversized header rejected",
+      "timestamp": 1771455383.5241854
+    },
+    {
+      "id": 55,
+      "category": "Header-Injection",
+      "name": "many_headers(200)",
+      "result": "SAFE",
+      "details": "Too many headers rejected",
+      "timestamp": 1771455383.6242356
+    },
+    {
+      "id": 56,
+      "category": "Header-Injection",
+      "name": "space_before_colon",
+      "result": "SAFE",
+      "details": "Rejected per RFC 7230",
+      "timestamp": 1771455383.7282875
+    },
+    {
+      "id": 57,
+      "category": "Header-Injection",
+      "name": "tab_in_name",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455383.8283374
+    },
+    {
+      "id": 58,
+      "category": "Header-Injection",
+      "name": "connection_te_smuggle",
+      "result": "ANOMALY",
+      "details": "TE in Connection header: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:56:23 GMT\\r\\ncontent-ty'",
+      "timestamp": 1771455386.9298875
+    },
+    {
+      "id": 59,
+      "category": "Method-URI",
+      "name": "http09_request",
+      "result": "SAFE",
+      "details": "HTTP/0.9 rejected",
+      "timestamp": 1771455387.0299375
+    },
+    {
+      "id": 60,
+      "category": "Method-URI",
+      "name": "absolute_uri_host_override",
+      "result": "SAFE",
+      "details": "Response: b'HTTP/1.1 400 Bad request\\r\\nContent-length: 90\\r\\nCache-Control: no-cache\\r\\nConnection: close\\r\\nContent-Ty'",
+      "timestamp": 1771455387.1299872
+    },
+    {
+      "id": 61,
+      "category": "Method-URI",
+      "name": "fragment_in_uri",
+      "result": "SAFE",
+      "details": "Fragment stripped or rejected",
+      "timestamp": 1771455387.2300375
+    },
+    {
+      "id": 62,
+      "category": "Method-URI",
+      "name": "path_traversal(/../etc/passwd)",
+      "result": "SAFE",
+      "details": "Forwarded but no file access: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:5'",
+      "timestamp": 1771455390.3355894
+    },
+    {
+      "id": 63,
+      "category": "Method-URI",
+      "name": "path_traversal(/..%2f..%2fetc/passwd)",
+      "result": "SAFE",
+      "details": "Forwarded but no file access: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:5'",
+      "timestamp": 1771455393.5011714
+    },
+    {
+      "id": 64,
+      "category": "Method-URI",
+      "name": "path_traversal(/%2e%2e/etc/passwd)",
+      "result": "SAFE",
+      "details": "Forwarded but no file access: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:5'",
+      "timestamp": 1771455396.606122
+    },
+    {
+      "id": 65,
+      "category": "Method-URI",
+      "name": "path_traversal(/static/../../etc/passwd)",
+      "result": "SAFE",
+      "details": "Forwarded but no file access: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:5'",
+      "timestamp": 1771455399.70857
+    },
+    {
+      "id": 66,
+      "category": "Method-URI",
+      "name": "path_traversal(/.%00./)",
+      "result": "SAFE",
+      "details": "Forwarded but no file access: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:5'",
+      "timestamp": 1771455402.8150163
+    },
+    {
+      "id": 67,
+      "category": "Method-URI",
+      "name": "method_CONNECT",
+      "result": "SAFE",
+      "details": "Method CONNECT: Rejected",
+      "timestamp": 1771455403.02691
+    },
+    {
+      "id": 68,
+      "category": "Method-URI",
+      "name": "method_TRACE",
+      "result": "SAFE",
+      "details": "Method TRACE: Rejected",
+      "timestamp": 1771455406.133356
+    },
+    {
+      "id": 69,
+      "category": "Method-URI",
+      "name": "method_TRACK",
+      "result": "SAFE",
+      "details": "Method TRACK: Rejected",
+      "timestamp": 1771455409.2438002
+    },
+    {
+      "id": 70,
+      "category": "Method-URI",
+      "name": "method_DEBUG",
+      "result": "SAFE",
+      "details": "Method DEBUG: Rejected",
+      "timestamp": 1771455412.3422499
+    },
+    {
+      "id": 71,
+      "category": "Method-URI",
+      "name": "method_PROPFIND",
+      "result": "SAFE",
+      "details": "Method PROPFIND: Rejected",
+      "timestamp": 1771455415.4486961
+    },
+    {
+      "id": 72,
+      "category": "Method-URI",
+      "name": "method_GPOST",
+      "result": "SAFE",
+      "details": "Method GPOST: Rejected",
+      "timestamp": 1771455418.547146
+    },
+    {
+      "id": 73,
+      "category": "Method-URI",
+      "name": "space_in_uri",
+      "result": "SAFE",
+      "details": "Rejected",
+      "timestamp": 1771455418.643098
+    },
+    {
+      "id": 74,
+      "category": "Method-URI",
+      "name": "http_version(HTTP/1.2)",
+      "result": "ANOMALY",
+      "details": "Version HTTP/1.2: Accepted",
+      "timestamp": 1771455421.741548
+    },
+    {
+      "id": 75,
+      "category": "Method-URI",
+      "name": "http_version(HTTP/2.0)",
+      "result": "ANOMALY",
+      "details": "Version HTTP/2.0: Accepted",
+      "timestamp": 1771455424.9519422
+    },
+    {
+      "id": 76,
+      "category": "Method-URI",
+      "name": "http_version(HTTP/0.9)",
+      "result": "SAFE",
+      "details": "Version HTTP/0.9: Rejected",
+      "timestamp": 1771455425.051892
+    },
+    {
+      "id": 77,
+      "category": "Method-URI",
+      "name": "http_version(HTTP/1.10)",
+      "result": "SAFE",
+      "details": "Version HTTP/1.10: Rejected",
+      "timestamp": 1771455425.147844
+    },
+    {
+      "id": 78,
+      "category": "Method-URI",
+      "name": "http_version(HTTP/9.9)",
+      "result": "ANOMALY",
+      "details": "Version HTTP/9.9: Accepted",
+      "timestamp": 1771455428.246294
+    },
+    {
+      "id": 79,
+      "category": "TCP-Pass",
+      "name": "cl_te_passthrough",
+      "result": "SAFE",
+      "details": "TCP passthrough CL-TE: b''",
+      "timestamp": 1771455431.3487422
+    },
+    {
+      "id": 80,
+      "category": "TCP-Pass",
+      "name": "pipeline_through_tcp",
+      "result": "SAFE",
+      "details": "Response: b'HTTP/1.0 200 OK\\r\\nServer: BaseHTTP/0.6 Python/3.13.7\\r\\nDate: Wed, 18 Feb 2026 22:57:11 GMT\\r\\nContent-Ty'",
+      "timestamp": 1771455431.448692
+    },
+    {
+      "id": 81,
+      "category": "Content-Type",
+      "name": "te_variant(trailing_space)",
+      "result": "ANOMALY",
+      "details": "TE variant accepted: 'chunked '",
+      "timestamp": 1771455434.547142
+    },
+    {
+      "id": 82,
+      "category": "Content-Type",
+      "name": "te_variant(leading_space)",
+      "result": "ANOMALY",
+      "details": "TE variant accepted: ' chunked'",
+      "timestamp": 1771455437.781524
+    },
+    {
+      "id": 83,
+      "category": "Content-Type",
+      "name": "te_variant(trailing_tab)",
+      "result": "ANOMALY",
+      "details": "TE variant accepted: 'chunked\\t'",
+      "timestamp": 1771455440.8839722
+    },
+    {
+      "id": 84,
+      "category": "Content-Type",
+      "name": "te_variant(quality)",
+      "result": "SAFE",
+      "details": "Rejected: b'HTTP/1.1 400 Bad request\\r\\nContent-length: 90\\r\\nCache-Control: no-cache\\r\\nConnectio'",
+      "timestamp": 1771455440.979924
+    },
+    {
+      "id": 85,
+      "category": "Content-Type",
+      "name": "te_variant(obs_fold)",
+      "result": "ANOMALY",
+      "details": "TE variant accepted: 'chunked\\r\\n '",
+      "timestamp": 1771455444.0783741
+    },
+    {
+      "id": 86,
+      "category": "Content-Type",
+      "name": "hop_by_hop(Connection)",
+      "result": "ANOMALY",
+      "details": "Hop-by-hop header Connection forwarded to backend",
+      "timestamp": 1771455447.2900527
+    },
+    {
+      "id": 87,
+      "category": "Content-Type",
+      "name": "hop_by_hop(Proxy-Connection)",
+      "result": "ANOMALY",
+      "details": "Hop-by-hop header Proxy-Connection forwarded to backend",
+      "timestamp": 1771455450.6917524
+    },
+    {
+      "id": 88,
+      "category": "Content-Type",
+      "name": "hop_by_hop(Keep-Alive)",
+      "result": "ANOMALY",
+      "details": "Hop-by-hop header Keep-Alive forwarded to backend",
+      "timestamp": 1771455453.7893004
+    },
+    {
+      "id": 89,
+      "category": "Content-Type",
+      "name": "hop_by_hop(Transfer-Encoding)",
+      "result": "SAFE",
+      "details": "Header Transfer-Encoding stripped or rejected",
+      "timestamp": 1771455454.0054085
+    },
+    {
+      "id": 90,
+      "category": "Content-Type",
+      "name": "hop_by_hop(Up[REDACTED])",
+      "result": "ANOMALY",
+      "details": "Hop-by-hop header Up[REDACTED] forwarded to backend",
+      "timestamp": 1771455457.2138033
+    },
+    {
+      "id": 91,
+      "category": "Content-Type",
+      "name": "hop_by_hop(Proxy-Authenticate)",
+      "result": "ANOMALY",
+      "details": "Hop-by-hop header Proxy-Authenticate forwarded to backend",
+      "timestamp": 1771455460.316251
+    },
+    {
+      "id": 92,
+      "category": "Content-Type",
+      "name": "websocket_up[REDACTED]",
+      "result": "SAFE",
+      "details": "WebSocket up[REDACTED]: b'HTTP/1.0 200 OK\\r\\nserver: BaseHTTP/0.6 Python/3.13.7\\r\\ndate: Wed, 18 Feb 2026 22:57:40 GMT\\r\\ncontent-ty'",
+      "timestamp": 1771455463.4186993
+    }
+  ]
+}

@@ -1,0 +1,445 @@
+{
+  "phase": "recon_network",
+  "pulled_at": "2026-02-15T22:03:49.098269",
+  "log_entry_count": 56,
+  "log_entries": [
+    {
+      ".id": "*0",
+      "extra-info": "",
+      "message": "router was rebooted without proper shutdown",
+      "time": "2026-02-16 02:45:13",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*1",
+      "extra-info": "",
+      "message": "lo link up",
+      "time": "2026-02-16 02:45:13",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*2",
+      "extra-info": "",
+      "message": "ether1 link up (speed 1G, full duplex)",
+      "time": "2026-02-16 02:45:16",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*3",
+      "extra-info": "",
+      "message": "dhcp-client on ether1 got IP address [REDACTED-INTERNAL-IP]",
+      "time": "2026-02-16 02:45:19",
+      "topics": "dhcp,info"
+    },
+    {
+      ".id": "*4",
+      "extra-info": "app=local duser=admin outcome=success ",
+      "message": "user admin logged in via local",
+      "time": "2026-02-16 02:45:30",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:46:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*6",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-16 02:46:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*7",
+      "extra-info": "app=rest-api duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:48:22",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*8",
+      "extra-info": "",
+      "message": "user admin changed by api:admin@::/action:0 (/user set admin)",
+      "time": "2026-02-16 02:48:26",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*9",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:48:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*A",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-16 02:48:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*B",
+      "extra-info": "",
+      "message": "user testfull added by api:admin@:: (*2 = /user add group=full name=testfull)",
+      "time": "2026-02-16 02:48:38",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*C",
+      "extra-info": "",
+      "message": "user testread added by api:admin@:: (*3 = /user add group=read name=testread)",
+      "time": "2026-02-16 02:48:38",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*D",
+      "extra-info": "",
+      "message": "user testwrite added by api:admin@:: (*4 = /user add group=write name=testwrite)",
+      "time": "2026-02-16 02:48:38",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*E",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:49:16",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*F",
+      "extra-info": "",
+      "message": "bandwidth-server changed by ssh-cmd:admin@[REDACTED-INTERNAL-IP] (/tool bandwidth-server set authenticate=no enabled=yes)",
+      "time": "2026-02-16 02:49:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*10",
+      "extra-info": "",
+      "message": "changed snmp settings by ssh-cmd:admin@[REDACTED-INTERNAL-IP] (/snmp set enabled=yes)",
+      "time": "2026-02-16 02:49:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*11",
+      "extra-info": "",
+      "message": "item changed by ssh-cmd:admin@[REDACTED-INTERNAL-IP]/action:1 (/snmp community set [ find ] read-access=yes write-access=no)",
+      "time": "2026-02-16 02:49:16",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*12",
+      "extra-info": "",
+      "message": "generated CA certificate: test-cert",
+      "time": "2026-02-16 02:49:16",
+      "topics": "certificate,info"
+    },
+    {
+      ".id": "*13",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:49:17",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*14",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:49:22",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*15",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:49:58",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*16",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:50:04",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*17",
+      "extra-info": "",
+      "message": "ip service changed by ssh-cmd:admin@[REDACTED-INTERNAL-IP]/action:2 (/ip service set www-ssl certificate=test-cert disabled=no)",
+      "time": "2026-02-16 02:50:04",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*18",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:50:04",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*19",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-16 02:50:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*1A",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-16 02:50:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*1B",
+      "extra-info": "app=rest-api duser=testfull outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testfull logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:50:18",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*1C",
+      "extra-info": "app=api duser=testfull outcome=success ",
+      "message": "user testfull logged in via api",
+      "time": "2026-02-16 02:50:18",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*1D",
+      "extra-info": "app=rest-api duser=testread outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testread logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:50:18",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*1E",
+      "extra-info": "app=api duser=testread outcome=success ",
+      "message": "user testread logged in via api",
+      "time": "2026-02-16 02:50:18",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*1F",
+      "extra-info": "app=rest-api duser=testwrite outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testwrite logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:50:18",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*20",
+      "extra-info": "app=api duser=testwrite outcome=success ",
+      "message": "user testwrite logged in via api",
+      "time": "2026-02-16 02:50:18",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*21",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:50:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*22",
+      "extra-info": "app=ssh duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 02:50:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*23",
+      "extra-info": "app=api duser=testwrite outcome=success ",
+      "message": "user testwrite logged out via api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*24",
+      "extra-info": "app=api duser=testread outcome=success ",
+      "message": "user testread logged out via api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*25",
+      "extra-info": "app=api duser=testfull outcome=success ",
+      "message": "user testfull logged out via api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*26",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged out via api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*27",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged out via api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*28",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*29",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*2A",
+      "extra-info": "app=rest-api duser=testfull outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testfull logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*2B",
+      "extra-info": "app=rest-api duser=testread outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testread logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*2C",
+      "extra-info": "app=rest-api duser=testwrite outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user testwrite logged out from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 02:56:08",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*2D",
+      "extra-info": "app=ftp duser=anonymous outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user anonymous from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 02:58:36",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*2E",
+      "extra-info": "app=ftp duser=anonymous outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user anonymous from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 02:58:36",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*2F",
+      "extra-info": "app=ftp duser=X:) outcome=failure ",
+      "message": "login failure for user X:) via ftp",
+      "time": "2026-02-16 03:01:33",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*30",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 03:05:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*31",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-16 03:05:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*32",
+      "extra-info": "app=ftp duser=anonymous outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user anonymous from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 03:05:42",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*33",
+      "extra-info": "app=ftp duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 03:05:43",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*34",
+      "extra-info": "app=ftp duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via ftp",
+      "time": "2026-02-16 03:05:43",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*35",
+      "extra-info": "app=ssh duser=admin outcome=failure src=[REDACTED-INTERNAL-IP] ",
+      "message": "login failure for user admin from [REDACTED-INTERNAL-IP] via ssh",
+      "time": "2026-02-16 03:06:26",
+      "topics": "system,error,critical"
+    },
+    {
+      ".id": "*36",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-16 03:06:26",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*37",
+      "extra-info": "app=api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged out from [REDACTED-INTERNAL-IP] via api",
+      "time": "2026-02-16 03:06:26",
+      "topics": "system,info,account"
+    }
+  ],
+  "system_resource": {
+    "architecture-name": "x86_64",
+    "board-name": "CHR innotek GmbH VirtualBox",
+    "build-time": "2026-01-30 09:17:54",
+    "cpu": "AMD",
+    "cpu-count": "1",
+    "cpu-frequency": "4391",
+    "cpu-load": "83",
+    "factory-software": "7.1",
+    "free-hdd-space": "73256960",
+    "free-memory": "838959104",
+    "platform": "MikroTik",
+    "total-hdd-space": "93564928",
+    "total-memory": "1073741824",
+    "uptime": "21m26s",
+    "version": "7.20.8 (long-term)",
+    "write-sect-since-reboot": "1480",
+    "write-sect-total": "1480"
+  },
+  "active_users": [
+    {
+      ".id": "*1",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "console",
+      "when": "2026-02-16 02:45:30"
+    },
+    {
+      ".id": "*11",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 03:05:26"
+    },
+    {
+      ".id": "*12",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 03:05:26"
+    }
+  ]
+}

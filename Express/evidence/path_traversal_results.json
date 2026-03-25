@@ -1,0 +1,601 @@
+{
+  "metadata": {
+    "phase": "3.4",
+    "name": "Path Traversal Attacks",
+    "timestamp": "2026-02-15T12:37:56.811612",
+    "scope": "express.static / send module path handling"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test": "traversal_basic_dotdot",
+      "version": "v5",
+      "data": {
+        "path": "/static/../app.js",
+        "status": 404,
+        "content_length": 145,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 2,
+      "test": "traversal_double_dotdot",
+      "version": "v5",
+      "data": {
+        "path": "/static/../../package.json",
+        "status": 404,
+        "content_length": 151,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 3,
+      "test": "traversal_triple_dotdot",
+      "version": "v5",
+      "data": {
+        "path": "/static/../../../etc/passwd",
+        "status": 404,
+        "content_length": 149,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 4,
+      "test": "traversal_encoded_dot",
+      "version": "v5",
+      "data": {
+        "path": "/static/%2e%2e/app.js",
+        "status": 404,
+        "content_length": 155,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 5,
+      "test": "traversal_encoded_slash",
+      "version": "v5",
+      "data": {
+        "path": "/static/..%2fapp.js",
+        "status": 404,
+        "content_length": 157,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 6,
+      "test": "traversal_double_encode",
+      "version": "v5",
+      "data": {
+        "path": "/static/%252e%252e/app.js",
+        "status": 404,
+        "content_length": 163,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 7,
+      "test": "traversal_backslash",
+      "version": "v5",
+      "data": {
+        "path": "/static/..\\app.js",
+        "status": 404,
+        "content_length": 157,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 8,
+      "test": "traversal_encoded_backslash",
+      "version": "v5",
+      "data": {
+        "path": "/static/..%5capp.js",
+        "status": 404,
+        "content_length": 157,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 9,
+      "test": "traversal_null_byte",
+      "version": "v5",
+      "data": {
+        "path": "/static/../app.js%00.txt",
+        "status": 404,
+        "content_length": 152,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 10,
+      "test": "traversal_overlong_utf8",
+      "version": "v5",
+      "data": {
+        "path": "/static/%c0%ae%c0%ae/app.js",
+        "status": 404,
+        "content_length": 165,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 11,
+      "test": "traversal_unicode_dot",
+      "version": "v5",
+      "data": {
+        "path": "/static/\u2025/app.js",
+        "status": 404,
+        "content_length": 162,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 12,
+      "test": "traversal_mixed_encoding",
+      "version": "v5",
+      "data": {
+        "path": "/static/..%252f..%252f/etc/passwd",
+        "status": 404,
+        "content_length": 171,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 13,
+      "test": "traversal_url_param",
+      "version": "v5",
+      "data": {
+        "path": "/static/..;/app.js",
+        "status": 404,
+        "content_length": 156,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 14,
+      "test": "traversal_triple_dot",
+      "version": "v5",
+      "data": {
+        "path": "/static/.../app.js",
+        "status": 404,
+        "content_length": 156,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 15,
+      "test": "traversal_dot_slash_loop",
+      "version": "v5",
+      "data": {
+        "path": "/static/./././../app.js",
+        "status": 404,
+        "content_length": 145,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 16,
+      "test": "traversal_long_traversal",
+      "version": "v5",
+      "data": {
+        "path": "/static/../../../../../../../../../../../../../../../../../../../../etc/passwd",
+        "status": 404,
+        "content_length": 149,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 17,
+      "test": "traversal_windows_style",
+      "version": "v5",
+      "data": {
+        "path": "/static/..\\..\\..\\etc\\passwd",
+        "status": 404,
+        "content_length": 173,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 18,
+      "test": "traversal_case_bypass",
+      "version": "v5",
+      "data": {
+        "path": "/STATIC/../app.js",
+        "status": 404,
+        "content_length": 145,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 19,
+      "test": "traversal_basic_dotdot",
+      "version": "v4",
+      "data": {
+        "path": "/static/../app.js",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 20,
+      "test": "traversal_double_dotdot",
+      "version": "v4",
+      "data": {
+        "path": "/static/../../package.json",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 21,
+      "test": "traversal_triple_dotdot",
+      "version": "v4",
+      "data": {
+        "path": "/static/../../../etc/passwd",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 22,
+      "test": "traversal_encoded_dot",
+      "version": "v4",
+      "data": {
+        "path": "/static/%2e%2e/app.js",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 23,
+      "test": "traversal_encoded_slash",
+      "version": "v4",
+      "data": {
+        "path": "/static/..%2fapp.js",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 24,
+      "test": "traversal_double_encode",
+      "version": "v4",
+      "data": {
+        "path": "/static/%252e%252e/app.js",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 25,
+      "test": "traversal_backslash",
+      "version": "v4",
+      "data": {
+        "path": "/static/..\\app.js",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 26,
+      "test": "traversal_encoded_backslash",
+      "version": "v4",
+      "data": {
+        "path": "/static/..%5capp.js",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 27,
+      "test": "traversal_null_byte",
+      "version": "v4",
+      "data": {
+        "path": "/static/../app.js%00.txt",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 28,
+      "test": "traversal_overlong_utf8",
+      "version": "v4",
+      "data": {
+        "path": "/static/%c0%ae%c0%ae/app.js",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 29,
+      "test": "traversal_unicode_dot",
+      "version": "v4",
+      "data": {
+        "path": "/static/\u2025/app.js",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 30,
+      "test": "traversal_mixed_encoding",
+      "version": "v4",
+      "data": {
+        "path": "/static/..%252f..%252f/etc/passwd",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 31,
+      "test": "traversal_url_param",
+      "version": "v4",
+      "data": {
+        "path": "/static/..;/app.js",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 32,
+      "test": "traversal_triple_dot",
+      "version": "v4",
+      "data": {
+        "path": "/static/.../app.js",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 33,
+      "test": "traversal_dot_slash_loop",
+      "version": "v4",
+      "data": {
+        "path": "/static/./././../app.js",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 34,
+      "test": "traversal_long_traversal",
+      "version": "v4",
+      "data": {
+        "path": "/static/../../../../../../../../../../../../../../../../../../../../etc/passwd",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 35,
+      "test": "traversal_windows_style",
+      "version": "v4",
+      "data": {
+        "path": "/static/..\\..\\..\\etc\\passwd",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 36,
+      "test": "traversal_case_bypass",
+      "version": "v4",
+      "data": {
+        "path": "/STATIC/../app.js",
+        "status": 500,
+        "content_length": 1385,
+        "body_snippet": ""
+      }
+    },
+    {
+      "id": 37,
+      "test": "dotfile_.env",
+      "version": "v5",
+      "data": {
+        "file": ".env",
+        "status": 200,
+        "content_length": 70,
+        "content": "DB_PASSWORD=s3cret_db_pass\nAPI_KEY=ak_live_12345\nSECRET=do_not_expose\n"
+      }
+    },
+    {
+      "id": 38,
+      "test": "dotfile_.git_config_sample",
+      "version": "v5",
+      "data": {
+        "file": ".git_config_sample",
+        "status": 200,
+        "content_length": 36,
+        "content": "[core]\n\trepositoryformatversion = 0\n"
+      }
+    },
+    {
+      "id": 39,
+      "test": "dotfile_.gitignore",
+      "version": "v5",
+      "data": {
+        "file": ".gitignore",
+        "status": 404,
+        "content_length": 156,
+        "content": ""
+      }
+    },
+    {
+      "id": 40,
+      "test": "dotfile_.npmrc",
+      "version": "v5",
+      "data": {
+        "file": ".npmrc",
+        "status": 404,
+        "content_length": 152,
+        "content": ""
+      }
+    },
+    {
+      "id": 41,
+      "test": "dotfile_.htaccess",
+      "version": "v5",
+      "data": {
+        "file": ".htaccess",
+        "status": 404,
+        "content_length": 155,
+        "content": ""
+      }
+    },
+    {
+      "id": 42,
+      "test": "dotfile_.DS_Store",
+      "version": "v5",
+      "data": {
+        "file": ".DS_Store",
+        "status": 404,
+        "content_length": 155,
+        "content": ""
+      }
+    },
+    {
+      "id": 43,
+      "test": "dotfile_.bash_history",
+      "version": "v5",
+      "data": {
+        "file": ".bash_history",
+        "status": 404,
+        "content_length": 159,
+        "content": ""
+      }
+    },
+    {
+      "id": 44,
+      "test": "dotfile_.env",
+      "version": "v4",
+      "data": {
+        "file": ".env",
+        "status": 500,
+        "content_length": 1385,
+        "content": ""
+      }
+    },
+    {
+      "id": 45,
+      "test": "dotfile_.git_config_sample",
+      "version": "v4",
+      "data": {
+        "file": ".git_config_sample",
+        "status": 500,
+        "content_length": 1385,
+        "content": ""
+      }
+    },
+    {
+      "id": 46,
+      "test": "dotfile_.gitignore",
+      "version": "v4",
+      "data": {
+        "file": ".gitignore",
+        "status": 500,
+        "content_length": 1385,
+        "content": ""
+      }
+    },
+    {
+      "id": 47,
+      "test": "dotfile_.npmrc",
+      "version": "v4",
+      "data": {
+        "file": ".npmrc",
+        "status": 500,
+        "content_length": 1385,
+        "content": ""
+      }
+    },
+    {
+      "id": 48,
+      "test": "dotfile_.htaccess",
+      "version": "v4",
+      "data": {
+        "file": ".htaccess",
+        "status": 500,
+        "content_length": 1385,
+        "content": ""
+      }
+    },
+    {
+      "id": 49,
+      "test": "dotfile_.DS_Store",
+      "version": "v4",
+      "data": {
+        "file": ".DS_Store",
+        "status": 500,
+        "content_length": 1385,
+        "content": ""
+      }
+    },
+    {
+      "id": 50,
+      "test": "dotfile_.bash_history",
+      "version": "v4",
+      "data": {
+        "file": ".bash_history",
+        "status": 500,
+        "content_length": 1385,
+        "content": ""
+      }
+    },
+    {
+      "id": 51,
+      "test": "static_headers",
+      "version": "v5",
+      "data": {
+        "content_type": "application/octet-stream",
+        "cache_control": "public, max-age=0",
+        "etag": "W/\"46-19c625388ea\"",
+        "last_modified": "Sun, 15 Feb 2026 17:22:47 GMT",
+        "x_powered_by": "Express",
+        "accept_ranges": "bytes"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "title": "Dotfile Accessible: .env (Environment file)",
+      "severity": "HIGH",
+      "cwe": "CWE-538",
+      "description": "express.static serves dotfile .env when dotfiles:\"allow\" is set. Default is \"ignore\" (returns 404).",
+      "framework_behavior": true,
+      "note": "Default dotfiles setting is safe (\"ignore\"), but \"allow\" is dangerous",
+      "version": "v5"
+    },
+    {
+      "id": 2,
+      "title": "Dotfile Accessible: .git_config_sample (Git config)",
+      "severity": "MEDIUM",
+      "cwe": "CWE-538",
+      "description": "express.static serves dotfile .git_config_sample when dotfiles:\"allow\" is set. Default is \"ignore\" (returns 404).",
+      "framework_behavior": true,
+      "note": "Default dotfiles setting is safe (\"ignore\"), but \"allow\" is dangerous",
+      "version": "v5"
+    }
+  ],
+  "anomalies": [],
+  "summary": {
+    "total_tests": 51,
+    "findings_count": 2,
+    "anomalies_count": 0
+  }
+}

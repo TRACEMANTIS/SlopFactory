@@ -1,0 +1,206 @@
+{
+  "project": "[REDACTED-ID]_Tenda",
+  "script": "phase0_inventory",
+  "start_time": "2026-03-03T23:49:54.308792",
+  "end_time": "2026-03-03T23:49:55.616138",
+  "test_count": 17,
+  "finding_count": 7,
+  "anomaly_count": 0,
+  "tests": [
+    {
+      "id": "httpd_ac15_file_info",
+      "description": "File type identification for httpd_ac15",
+      "request": "file /home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac15",
+      "response": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac15: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-uClibc.so.0, stripped",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.368262"
+    },
+    {
+      "id": "httpd_ac15_checksec",
+      "description": "Security mitigation check for httpd_ac15",
+      "request": "checksec --file=/home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac15",
+      "response": "{\"RELRO\": \"No RELRO\", \"Stack Canary\": \"No canary found\", \"NX\": \"NX enabled\", \"PIE\": \"No PIE\", \"RPATH\": \"No RPATH\", \"RUNPATH\": \"No RUNPATH\", \"Symbols\": \"No RELRO        No canary found   NX enabled    No PIE          No RPATH   No RUNPATH   No Symbols\", \"Fortified\": 0, \"Fortifiable\": 20}",
+      "status": "VULN",
+      "timestamp": "2026-03-03T23:49:55.372260"
+    },
+    {
+      "id": "httpd_ac15_dangerous_funcs",
+      "description": "Dangerous function string references in httpd_ac15",
+      "request": "strings + regex match",
+      "response": "{\"strcpy\": 0, \"strcat\": 1, \"sprintf\": 1, \"vsprintf\": 0, \"gets\": 0, \"system\": 4, \"popen\": 1, \"doSystemCmd\": 1, \"execve\": 1, \"twsystem\": 0}",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.372260"
+    },
+    {
+      "id": "httpd_ac15_safe_funcs",
+      "description": "Safe function string references in httpd_ac15",
+      "request": "strings + regex match",
+      "response": "{\"strncpy\": 1, \"strncat\": 1, \"snprintf\": 0, \"vsnprintf\": 1, \"fgets\": 1}",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.372260"
+    },
+    {
+      "id": "httpd_ac15_input_sources",
+      "description": "Input source references in httpd_ac15",
+      "request": "strings + regex match",
+      "response": "{\"websGetVar\": 0, \"getenv\": 0}",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.372260"
+    },
+    {
+      "id": "httpd_ac15_goform_endpoints",
+      "description": "Goform endpoints in httpd_ac15 (7 found)",
+      "request": "strings + goform pattern",
+      "response": "[\"GetRouterStatus\", \"GetUSBStatus\", \"WifiApScan\", \"ate\", \"getRebootStatus\", \"getWanParameters\", \"telnet\"]",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.372260"
+    },
+    {
+      "id": "httpd_ac15_handler_names",
+      "description": "Handler names in httpd_ac15 (253 found)",
+      "request": "strings + handler prefix patterns",
+      "response": "[\"DhcpListClient\", \"DhcpSetSer\", \"DownloadCfg\", \"DownloadFlash\", \"DownloadFlashImage\", \"DownloadFlashImage failed ...\", \"DownloadFlashImage ok ...\", \"DownloadLog\", \"DownloadWebsite\", \"GetAdvanceStatus\", \"GetAllWanInfo\", \"GetCfmValue\", \"GetDDNSCfg\", \"GetDMZCfg\", \"GetDdosDefenceList\", \"GetDeviceDetail\", \"GetDeviceMacValue\", \"GetDhcpServer\", \"GetDlnaCfg\", \"GetFirewallCfg\", \"GetIPTVCfg\", \"GetIniFileValue\", \"GetIpMacBind\", \"GetLEDCfg\", \"GetNetControlList\", \"GetParentControlInfo\", \"GetParentCtrlList\", \"GetPortShow\", \"GetPptpClientCfg\", \"GetPptpServerCfg\", \"GetPrinterCfg\", \"GetProduct\", \"GetRemoteWebCfg\", \"GetRouterStatus\", \"GetSambaCfg\", \"GetStaticRouteCfg\", \"GetSySLogCfg\", \"GetSysAutoRebbotCfg\", \"GetSysInfo\", \"GetSysStatus\", \"GetSysTimeCfg\", \"GetSystemSet\", \"GetSystemStatus\", \"GetUSBStatus\", \"GetUpnpCfg\", \"GetUrlValue\", \"GetUsbCfg\", \"GetValue\", \"GetVirtualServerCfg\", \"GetVpnStatus\", \"GetWanNum\", \"GetWanStatistic\", \"GetWanStatus\", \"GetWrlStatus\", \"LanWanInfo\", \"NatList\", \"NatSet\", \"NatStaticMapping\", \"NatStaticSetting\", \"PowerSaveGet\", \"PowerSaveSet\", \"ResetButton\", \"ResetButton_Success\", \"ResetOOB:index:%d,sec_mode:%s,len:%d\", \"SetClientState\", \"SetDDNSCfg\", \"SetDMZCfg\", \"SetDlnaCfg\", \"SetFirewallCfg\", \"SetIPTVCfg\", \"SetIpMacBind\", \"SetLEDCfg\", \"SetNetControlList\", \"SetOnlineDevName\", \"SetPptpClientCfg\", \"SetPptpServerCfg\", \"SetPrinterCfg\", \"SetRemoteWebCfg\", \"SetSambaCfg\", \"SetSpeedWan\", \"SetStaticRouteCfg\", \"SetSysAutoRebbotCfg\", \"SetSysTimeCfg\", \"SetUpnpCfg\", \"SetVirtualServerCfg\", \"SetWebIpAccess\", \"SysStatusHandle\", \"SysToolBaseUser\", \"SysToolChangePwd\", \"SysToolGetUp[REDACTED]\", \"SysToolReboot\", \"SysToolRestoreSet\", \"SysToolSetUp[REDACTED]\", \"SysToolSysLog\", \"SysToolTime\", \"SysToolpassword\", \"TimeIndex\", \"UploadCfg\", \"UploadWebsite\", \"WanNum=%d;LanNum=%d;%s%s\", \"WanParameterSetting\", \"WanPolicy\", \"WifiApScan\", \"WifiBasicGet\", \"WifiBasicSet\", \"WifiBeamformingGet\", \"WifiBeamformingSet\", \"WifiClientList\", \"WifiClientListAll\", \"WifiConfigGet\", \"WifiDhcpGuestGet\", \"WifiDhcpGuestLists\", \"WifiDhcpGuestSet\", \"WifiExtraGet\", \"WifiExtraSet\", \"WifiGuestGet\", \"WifiGuestSet\", \"WifiMacFilterGet\", \"WifiMacFilterSet\", \"WifiMultiSsid\", \"WifiPowerGet\", \"WifiPowerSet\", \"WifiRadioGet\", \"WifiRadioSet\", \"WifiStatistic\", \"WifiStatisticClear\", \"WifiStatus\", \"WifiWpsGet\", \"WifiWpsOOB\", \"WifiWpsSet\", \"WifiWpsStart\", \"addWifiMacFilter\", \"delBlackRule\", \"delParentControlOneInfo\", \"delParentalRule\", \"delWifiMacFilter\", \"formAddMacfilterRule\", \"formAdvGetLanIp\", \"formAliScheduleStatus\", \"formBulletinSet\", \"formDLNAserver\", \"formDelMacfilterRule\", \"formExit\", \"formExpandDlnaFile\", \"formGetAdvanceStatus\", \"formGetAllWanInfo\", \"formGetAutoQosInfo\", \"formGetBandWidthSpeed\", \"formGetDdosDefenceList\", \"formGetDeviceDetail\", \"formGetDhcpServer\", \"formGetFirewallCfg\", \"formGetHomeLink\", \"formGetIPv6Info\", \"formGetIPv6LanStatus\", \"formGetIPv6WanStatus\", \"formGetIPv6status\", \"formGetIptv\", \"formGetMacFilterCfg\", \"formGetMacfilterRuleList\", \"formGetOnlineList\", \"formGetPPTPClient\", \"formGetPPTPServer\", \"formGetParentCtrlList\", \"formGetPortStatus\", \"formGetQosBand\", \"formGetRebootTimer\", \"formGetRouteStatic\", \"formGetRouterStatus\", \"formGetSafeWanWebMan\", \"formGetSambaConf\", \"formGetSchedLed\", \"formGetSysInfo\", \"formGetSysLog\", \"formGetSysStatus\", \"formGetSysToolDDNS\", \"formGetSystemSet\", \"formGetSystemStatus\", \"formGetUSBStatus\", \"formGetUpnpLists\", \"formGetUsbCfg\", \"formGetUsbPrint\", \"formGetVirtualSer\", \"formGetVpnStatus\", \"formGetWanConnectStatus\", \"formGetWanNum\", \"formGetWanParameter\", \"formGetWanStatistic\", \"formGetWanStatus\", \"formGetWifiWps\", \"formMfgTest\", \"formNatSet\", \"formNotNowUp[REDACTED]\", \"formQuickIndex\", \"formSetAutoQosInfo\", \"formSetCfm\", \"formSetClientState\", \"formSetDeviceName\", \"formSetFirewallCfg\", \"formSetIPv6LanStatus\", \"formSetIPv6WanStatus\", \"formSetIptv\", \"formSetMacFilterCfg\", \"formSetPPTPClient\", \"formSetPPTPServer\", \"formSetPPTPUserList\", \"formSetParentControlEnable\", \"formSetQosBand\", \"formSetRebootTimer\", \"formSetSafeWanWebMan\", \"formSetSambaConf\", \"formSetSchedLed\", \"formSetSpeedWan\", \"formSetSysToolDDNS\", \"formSetUpnp\", \"formSetUsbPrint\", \"formSetVirtualSer\", \"formSetWifiWps\", \"formStartWifiWps\", \"formTendaGetDhcpClients\", \"formTendaGetGuestDhcpClients\", \"formTendaModelStatus\", \"formWanInfoGet\", \"formWanParameterSetting\", \"formWifiApScan\", \"formWifiBasicGet\", \"formWifiBasicSet\", \"formWifiBeamformingGet\", \"formWifiBeamformingSet\", \"formWifiClientList\", \"formWifiClientListAll\", \"formWifiConfigGet\", \"formWifiDhcpGuestGet\", \"formWifiDhcpGuestLists\", \"formWifiDhcpGuestSet\", \"formWifiMacFilterGet\", \"formWifiMacFilterSet\", \"formWifiMultiSsid\", \"formWifiPowerGet\", \"formWifiPowerSet\", \"formWifiRadioGet\", \"formWifiRadioSet\", \"formWifiStatistic\", \"formWifiStatisticClear\", \"formWifiStatus\", \"formWifiWpsGet\", \"formWifiWpsOOB\", \"formWifiWpsSet\", \"formWifiWpsStart\", \"formWriteFacMac\", \"saveAutoQos\", \"saveParentControlInfo\", \"saveWanIp\"]",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.372260"
+    },
+    {
+      "id": "httpd_ac15_linked_libs",
+      "description": "Linked shared libraries for httpd_ac15",
+      "request": "readelf -d /home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac15",
+      "response": "[\"libCfm.so\", \"libcommon.so\", \"libChipApi.so\", \"libvos_util.so\", \"libz.so\", \"libpthread.so.0\", \"libnvram.so\", \"libshared.so\", \"libtpi.so\", \"libm.so.0\", \"libucapi.so\", \"libgcc_s.so.1\", \"libc.so.0\"]",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.372260"
+    },
+    {
+      "id": "httpd_ac20_file_info",
+      "description": "File type identification for httpd_ac20",
+      "request": "file /home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac20",
+      "response": "/home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac20: ELF 32-bit LSB executable, MIPS, MIPS32 rel2 version 1 (SYSV), dynamically linked, interpreter /lib/ld-uClibc.so.0, stripped",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.616138"
+    },
+    {
+      "id": "httpd_ac20_checksec",
+      "description": "Security mitigation check for httpd_ac20",
+      "request": "checksec --file=/home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac20",
+      "response": "{\"RELRO\": \"No RELRO\", \"Stack Canary\": \"No canary found\", \"NX\": \"NX disabled\", \"PIE\": \"No PIE\", \"RPATH\": \"No RPATH\", \"RUNPATH\": \"No RUNPATH\", \"Symbols\": \"No RELRO        No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   No Symbols\", \"Fortified\": 0, \"Fortifiable\": 17}",
+      "status": "VULN",
+      "timestamp": "2026-03-03T23:49:55.616138"
+    },
+    {
+      "id": "httpd_ac20_dangerous_funcs",
+      "description": "Dangerous function string references in httpd_ac20",
+      "request": "strings + regex match",
+      "response": "{\"strcpy\": 2, \"strcat\": 1, \"sprintf\": 1, \"vsprintf\": 0, \"gets\": 0, \"system\": 5, \"popen\": 1, \"doSystemCmd\": 1, \"execve\": 1, \"twsystem\": 0}",
+      "status": "VULN",
+      "timestamp": "2026-03-03T23:49:55.616138"
+    },
+    {
+      "id": "httpd_ac20_safe_funcs",
+      "description": "Safe function string references in httpd_ac20",
+      "request": "strings + regex match",
+      "response": "{\"strncpy\": 1, \"strncat\": 0, \"snprintf\": 1, \"vsnprintf\": 0, \"fgets\": 1}",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.616138"
+    },
+    {
+      "id": "httpd_ac20_input_sources",
+      "description": "Input source references in httpd_ac20",
+      "request": "strings + regex match",
+      "response": "{\"websGetVar\": 2, \"getenv\": 0}",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.616138"
+    },
+    {
+      "id": "httpd_ac20_goform_endpoints",
+      "description": "Goform endpoints in httpd_ac20 (8 found)",
+      "request": "strings + goform pattern",
+      "response": "[\"GetRouterStatus\", \"GetUSBStatus\", \"WifiApScan\", \"ate\", \"getLoginInfo\", \"getRebootStatus\", \"getWanParameters\", \"telnet\"]",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.616138"
+    },
+    {
+      "id": "httpd_ac20_handler_names",
+      "description": "Handler names in httpd_ac20 (155 found)",
+      "request": "strings + handler prefix patterns",
+      "response": "[\"DownloadCfg\", \"DownloadFlash\", \"DownloadFlashImage failed ...\", \"DownloadFlashImage ok ...\", \"DownloadFlashImage size:%08x\", \"DownloadLog\", \"GetAdvanceStatus\", \"GetDDNSCfg\", \"GetDMZCfg\", \"GetDeviceMacValue\", \"GetFirewallCfg\", \"GetIPTVCfg\", \"GetIpMacBind\", \"GetLEDCfg\", \"GetNetControlList\", \"GetParentControlInfo\", \"GetParentCtrlList\", \"GetParentCtrlStatus\", \"GetPptpClientCfg\", \"GetPptpServerCfg\", \"GetRemoteWebCfg\", \"GetRouterStatus\", \"GetStaticRouteCfg\", \"GetSySLogCfg\", \"GetSysAutoRebbotCfg\", \"GetSysStatus\", \"GetSysTimeCfg\", \"GetSystemStatus\", \"GetUpnpCfg\", \"GetValue\", \"GetVirtualServerCfg\", \"GetVpnStatus\", \"GetWrlStatus\", \"PowerSaveGet\", \"PowerSaveSet\", \"SetDDNSCfg\", \"SetDMZCfg\", \"SetFirewallCfg\", \"SetIPTVCfg\", \"SetIPv6LanStatus\", \"SetIPv6Wanstatus\", \"SetIpMacBind\", \"SetLEDCfg\", \"SetNetControlList\", \"SetOnlineDevName\", \"SetPptpClientCfg\", \"SetPptpServerCfg\", \"SetRemoteWebCfg\", \"SetStaticRouteCfg\", \"SetSysAutoRebbotCfg\", \"SetSysTimeCfg\", \"SetUpnpCfg\", \"SetVirtualServerCfg\", \"SysToolChangePwd\", \"SysToolGetUp[REDACTED]\", \"SysToolReboot\", \"SysToolRestoreSet\", \"SysToolSetUp[REDACTED]\", \"SysToolpassword\", \"TimeIndex\", \"UploadCfg\", \"UploadMtd\", \"WanParameterSetting\", \"WifiAntijamEn\", \"WifiAntijamGet\", \"WifiAntijamSet\", \"WifiApScan\", \"WifiBasicGet\", \"WifiBasicSet\", \"WifiBeamformingGet\", \"WifiBeamformingSet\", \"WifiExtraGet\", \"WifiExtraSet\", \"WifiGuestGet\", \"WifiGuestSet\", \"WifiPowerGet\", \"WifiPowerSet\", \"WifiRadioGet\", \"WifiRadioSet\", \"WifiWpsGet\", \"WifiWpsSet\", \"WifiWpsStart\", \"delBlackRule\", \"delParentControlOneInfo\", \"delParentalRule\", \"formAddMacfilterRule\", \"formAdvGetLanIp\", \"formDefineTendDa\", \"formDefineUcloudv2\", \"formDelMacfilterRule\", \"formExit\", \"formGetAdvanceStatus\", \"formGetFirewallCfg\", \"formGetHomeLink\", \"formGetIPv6status\", \"formGetIptv\", \"formGetLoginInfo\", \"formGetMacFilterCfg\", \"formGetMacfilterRuleList\", \"formGetOnlineList\", \"formGetPPTPClient\", \"formGetPPTPServer\", \"formGetParentCtrlList\", \"formGetProduct\", \"formGetQosBand\", \"formGetRebootTimer\", \"formGetRouteStatic\", \"formGetRouterStatus\", \"formGetSafeWanWebMan\", \"formGetSchedLed\", \"formGetSysLog\", \"formGetSysStatus\", \"formGetSysToolDDNS\", \"formGetSystemStatus\", \"formGetUpnpLists\", \"formGetVirtualSer\", \"formGetVpnStatus\", \"formGetWanConnectStatus\", \"formGetWanParameter\", \"formGetWifiWps\", \"formNotNowUp[REDACTED]\", \"formSetDeviceName\", \"formSetFirewallCfg\", \"formSetIPv6status\", \"formSetIptv\", \"formSetMacFilterCfg\", \"formSetPPTPClient\", \"formSetPPTPServer\", \"formSetPPTPUserList\", \"formSetParentControlEnable\", \"formSetQosBand\", \"formSetRebootTimer\", \"formSetSafeWanWebMan\", \"formSetSchedLed\", \"formSetSysToolDDNS\", \"formSetUpnp\", \"formSetVirtualSer\", \"formSetWifiWps\", \"formStartWifiWps\", \"formWanArgumentSet error!\", \"formWanInfoGet\", \"formWanParameterSetting\", \"formWifiAntijamGet\", \"formWifiAntijamSet\", \"formWifiApScan\", \"formWifiBasicGet\", \"formWifiBasicSet\", \"formWifiBeamformingGet\", \"formWifiBeamformingSet\", \"formWifiPowerGet\", \"formWifiPowerSet\", \"formWifiRadioGet\", \"formWifiRadioSet\", \"formWifiRadioSet_send_msg\", \"saveParentControlInfo\"]",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.616138"
+    },
+    {
+      "id": "httpd_ac20_linked_libs",
+      "description": "Linked shared libraries for httpd_ac20",
+      "request": "readelf -d /home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac20",
+      "response": "[\"libiofdrv.so\", \"libcommon.so\", \"libm.so.0\", \"libz.so\", \"libpthread.so.0\", \"libapmib.so\", \"librtlWifiSrc.so\", \"libwshared.so\", \"libkm.so\", \"libcommonprod.so\", \"libucapi.so\", \"libgcc_s.so.1\", \"libc.so.0\"]",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.616138"
+    },
+    {
+      "id": "inventory_complete",
+      "description": "Full binary inventory completed",
+      "request": "Inventoried 2 binaries",
+      "response": "{\"inventory\": {\"httpd_ac15\": {\"file\": \"/home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac15: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-uClibc.so.0, stripped\", \"checksec_raw\": \"RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH\\tSymbols\\t\\tFORTIFY\\tFortified\\tFortifiable\\tFILE\\nNo RELRO        No canary found   NX enabled    No PIE          No RPATH   No RUNPATH   No Symbols\\t  No\\t0\\t\\t20\\t\\t/home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac15\\n\", \"checksec\": {\"RELRO\": \"No RELRO\", \"Stack Canary\": \"No canary found\", \"NX\": \"NX enabled\", \"PIE\": \"No PIE\", \"RPATH\": \"No RPATH\", \"RUNPATH\": \"No RUNPATH\", \"Symbols\": \"No RELRO        No canary found   NX enabled    No PIE          No RPATH   No RUNPATH   No Symbols\", \"Fortified\": 0, \"Fortifiable\": 20}, \"total_strings\": 5261, \"goform_endpoints\": [\"GetRouterStatus\", \"GetUSBStatus\", \"WifiApScan\", \"ate\", \"getRebootStatus\", \"getWanParameters\", \"telnet\"], \"goform_count\": 7, \"handler_names\": [\"DhcpListClient\", \"DhcpSetSer\", \"DownloadCfg\", \"DownloadFlash\", \"DownloadFlashImage\", \"DownloadFlashImage failed ...\", \"DownloadFlashImage ok ...\", \"DownloadLog\", \"DownloadWebsite\", \"GetAdvanceStatus\", \"GetAllWanInfo\", \"GetCfmValue\", \"GetDDNSCfg\", \"GetDMZCfg\", \"GetDdosDefenceList\", \"GetDeviceDetail\", \"GetDeviceMacValue\", \"GetDhcpServer\", \"GetDlnaCfg\", \"GetFirewallCfg\", \"GetIPTVCfg\", \"GetIniFileValue\", \"GetIpMacBind\", \"GetLEDCfg\", \"GetNetControlList\", \"GetParentControlInfo\", \"GetParentCtrlList\", \"GetPortShow\", \"GetPptpClientCfg\", \"GetPptpServerCfg\", \"GetPrinterCfg\", \"GetProduct\", \"GetRemoteWebCfg\", \"GetRouterStatus\", \"GetSambaCfg\", \"GetStaticRouteCfg\", \"GetSySLogCfg\", \"GetSysAutoRebbotCfg\", \"GetSysInfo\", \"GetSysStatus\", \"GetSysTimeCfg\", \"GetSystemSet\", \"GetSystemStatus\", \"GetUSBStatus\", \"GetUpnpCfg\", \"GetUrlValue\", \"GetUsbCfg\", \"GetValue\", \"GetVirtualServerCfg\", \"GetVpnStatus\", \"GetWanNum\", \"GetWanStatistic\", \"GetWanStatus\", \"GetWrlStatus\", \"LanWanInfo\", \"NatList\", \"NatSet\", \"NatStaticMapping\", \"NatStaticSetting\", \"PowerSaveGet\", \"PowerSaveSet\", \"ResetButton\", \"ResetButton_Success\", \"ResetOOB:index:%d,sec_mode:%s,len:%d\", \"SetClientState\", \"SetDDNSCfg\", \"SetDMZCfg\", \"SetDlnaCfg\", \"SetFirewallCfg\", \"SetIPTVCfg\", \"SetIpMacBind\", \"SetLEDCfg\", \"SetNetControlList\", \"SetOnlineDevName\", \"SetPptpClientCfg\", \"SetPptpServerCfg\", \"SetPrinterCfg\", \"SetRemoteWebCfg\", \"SetSambaCfg\", \"SetSpeedWan\", \"SetStaticRouteCfg\", \"SetSysAutoRebbotCfg\", \"SetSysTimeCfg\", \"SetUpnpCfg\", \"SetVirtualServerCfg\", \"SetWebIpAccess\", \"SysStatusHandle\", \"SysToolBaseUser\", \"SysToolChangePwd\", \"SysToolGetUp[REDACTED]\", \"SysToolReboot\", \"SysToolRestoreSet\", \"SysToolSetUp[REDACTED]\", \"SysToolSysLog\", \"SysToolTime\", \"SysToolpassword\", \"TimeIndex\", \"UploadCfg\", \"UploadWebsite\", \"WanNum=%d;LanNum=%d;%s%s\", \"WanParameterSetting\", \"WanPolicy\", \"WifiApScan\", \"WifiBasicGet\", \"WifiBasicSet\", \"WifiBeamformingGet\", \"WifiBeamformingSet\", \"WifiClientList\", \"WifiClientListAll\", \"WifiConfigGet\", \"WifiDhcpGuestGet\", \"WifiDhcpGuestLists\", \"WifiDhcpGuestSet\", \"WifiExtraGet\", \"WifiExtraSet\", \"WifiGuestGet\", \"WifiGuestSet\", \"WifiMacFilterGet\", \"WifiMacFilterSet\", \"WifiMultiSsid\", \"WifiPowerGet\", \"WifiPowerSet\", \"WifiRadioGet\", \"WifiRadioSet\", \"WifiStatistic\", \"WifiStatisticClear\", \"WifiStatus\", \"WifiWpsGet\", \"WifiWpsOOB\", \"WifiWpsSet\", \"WifiWpsStart\", \"addWifiMacFilter\", \"delBlackRule\", \"delParentControlOneInfo\", \"delParentalRule\", \"delWifiMacFilter\", \"formAddMacfilterRule\", \"formAdvGetLanIp\", \"formAliScheduleStatus\", \"formBulletinSet\", \"formDLNAserver\", \"formDelMacfilterRule\", \"formExit\", \"formExpandDlnaFile\", \"formGetAdvanceStatus\", \"formGetAllWanInfo\", \"formGetAutoQosInfo\", \"formGetBandWidthSpeed\", \"formGetDdosDefenceList\", \"formGetDeviceDetail\", \"formGetDhcpServer\", \"formGetFirewallCfg\", \"formGetHomeLink\", \"formGetIPv6Info\", \"formGetIPv6LanStatus\", \"formGetIPv6WanStatus\", \"formGetIPv6status\", \"formGetIptv\", \"formGetMacFilterCfg\", \"formGetMacfilterRuleList\", \"formGetOnlineList\", \"formGetPPTPClient\", \"formGetPPTPServer\", \"formGetParentCtrlList\", \"formGetPortStatus\", \"formGetQosBand\", \"formGetRebootTimer\", \"formGetRouteStatic\", \"formGetRouterStatus\", \"formGetSafeWanWebMan\", \"formGetSambaConf\", \"formGetSchedLed\", \"formGetSysInfo\", \"formGetSysLog\", \"formGetSysStatus\", \"formGetSysToolDDNS\", \"formGetSystemSet\", \"formGetSystemStatus\", \"formGetUSBStatus\", \"formGetUpnpLists\", \"formGetUsbCfg\", \"formGetUsbPrint\", \"formGetVirtualSer\", \"formGetVpnStatus\", \"formGetWanConnectStatus\", \"formGetWanNum\", \"formGetWanParameter\", \"formGetWanStatistic\", \"formGetWanStatus\", \"formGetWifiWps\", \"formMfgTest\", \"formNatSet\", \"formNotNowUp[REDACTED]\", \"formQuickIndex\", \"formSetAutoQosInfo\", \"formSetCfm\", \"formSetClientState\", \"formSetDeviceName\", \"formSetFirewallCfg\", \"formSetIPv6LanStatus\", \"formSetIPv6WanStatus\", \"formSetIptv\", \"formSetMacFilterCfg\", \"formSetPPTPClient\", \"formSetPPTPServer\", \"formSetPPTPUserList\", \"formSetParentControlEnable\", \"formSetQosBand\", \"formSetRebootTimer\", \"formSetSafeWanWebMan\", \"formSetSambaConf\", \"formSetSchedLed\", \"formSetSpeedWan\", \"formSetSysToolDDNS\", \"formSetUpnp\", \"formSetUsbPrint\", \"formSetVirtualSer\", \"formSetWifiWps\", \"formStartWifiWps\", \"formTendaGetDhcpClients\", \"formTendaGetGuestDhcpClients\", \"formTendaModelStatus\", \"formWanInfoGet\", \"formWanParameterSetting\", \"formWifiApScan\", \"formWifiBasicGet\", \"formWifiBasicSet\", \"formWifiBeamformingGet\", \"formWifiBeamformingSet\", \"formWifiClientList\", \"formWifiClientListAll\", \"formWifiConfigGet\", \"formWifiDhcpGuestGet\", \"formWifiDhcpGuestLists\", \"formWifiDhcpGuestSet\", \"formWifiMacFilterGet\", \"formWifiMacFilterSet\", \"formWifiMultiSsid\", \"formWifiPowerGet\", \"formWifiPowerSet\", \"formWifiRadioGet\", \"formWifiRadioSet\", \"formWifiStatistic\", \"formWifiStatisticClear\", \"formWifiStatus\", \"formWifiWpsGet\", \"formWifiWpsOOB\", \"formWifiWpsSet\", \"formWifiWpsStart\", \"formWriteFacMac\", \"saveAutoQos\", \"saveParentControlInfo\", \"saveWanIp\"], \"handler_count\": 253, \"dangerous_functions\": {\"strcpy\": 0, \"strcat\": 1, \"sprintf\": 1, \"vsprintf\": 0, \"gets\": 0, \"system\": 4, \"popen\": 1, \"doSystemCmd\": 1, \"execve\": 1, \"twsystem\": 0}, \"dangerous_total\": 9, \"safe_functions\": {\"strncpy\": 1, \"strncat\": 1, \"snprintf\": 0, \"vsnprintf\": 1, \"fgets\": 1}, \"safe_total\": 4, \"input_sources\": {\"websGetVar\": 0, \"getenv\": 0}, \"input_total\": 0, \"linked_libraries\": [\"libCfm.so\", \"libcommon.so\", \"libChipApi.so\", \"libvos_util.so\", \"libz.so\", \"libpthread.so.0\", \"libnvram.so\", \"libshared.so\", \"libtpi.so\", \"libm.so.0\", \"libucapi.so\", \"libgcc_s.so.1\", \"libc.so.0\"], \"unsafe_safe_ratio\": 2.25}, \"httpd_ac20\": {\"file\": \"/home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac20: ELF 32-bit LSB executable, MIPS, MIPS32 rel2 version 1 (SYSV), dynamically linked, interpreter /lib/ld-uClibc.so.0, stripped\", \"checksec_raw\": \"RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH\\tSymbols\\t\\tFORTIFY\\tFortified\\tFortifiable\\tFILE\\nNo RELRO        No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   No Symbols\\t  No\\t0\\t\\t17\\t\\t/home/[REDACTED]/Desktop/[REDACTED-PATH]/[REDACTED-PROJECT]/[REDACTED-ID]_Tenda/firmware/binaries/httpd_ac20\\n\", \"checksec\": {\"RELRO\": \"No RELRO\", \"Stack Canary\": \"No canary found\", \"NX\": \"NX disabled\", \"PIE\": \"No PIE\", \"RPATH\": \"No RPATH\", \"RUNPATH\": \"No RUNPATH\", \"Symbols\": \"No RELRO        No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   No Symbols\", \"Fortified\": 0, \"Fortifiable\": 17}, \"total_strings\": 11978, \"goform_endpoints\": [\"GetRouterStatus\", \"GetUSBStatus\", \"WifiApScan\", \"ate\", \"getLoginInfo\", \"getRebootStatus\", \"getWanParameters\", \"telnet\"], \"goform_count\": 8, \"handler_names\": [\"DownloadCfg\", \"DownloadFlash\", \"DownloadFlashImage failed ...\", \"DownloadFlashImage ok ...\", \"DownloadFlashImage size:%08x\", \"DownloadLog\", \"GetAdvanceStatus\", \"GetDDNSCfg\", \"GetDMZCfg\", \"GetDeviceMacValue\", \"GetFirewallCfg\", \"GetIPTVCfg\", \"GetIpMacBind\", \"GetLEDCfg\", \"GetNetControlList\", \"GetParentControlInfo\", \"GetParentCtrlList\", \"GetParentCtrlStatus\", \"GetPptpClientCfg\", \"GetPptpServerCfg\", \"GetRemoteWebCfg\", \"GetRouterStatus\", \"GetStaticRouteCfg\", \"GetSySLogCfg\", \"GetSysAutoRebbotCfg\", \"GetSysStatus\", \"GetSysTimeCfg\", \"GetSystemStatus\", \"GetUpnpCfg\", \"GetValue\", \"GetVirtualServerCfg\", \"GetVpnStatus\", \"GetWrlStatus\", \"PowerSaveGet\", \"PowerSaveSet\", \"SetDDNSCfg\", \"SetDMZCfg\", \"SetFirewallCfg\", \"SetIPTVCfg\", \"SetIPv6LanStatus\", \"SetIPv6Wanstatus\", \"SetIpMacBind\", \"SetLEDCfg\", \"SetNetControlList\", \"SetOnlineDevName\", \"SetPptpClientCfg\", \"SetPptpServerCfg\", \"SetRemoteWebCfg\", \"SetStaticRouteCfg\", \"SetSysAutoRebbotCfg\", \"SetSysTimeCfg\", \"SetUpnpCfg\", \"SetVirtualServerCfg\", \"SysToolChangePwd\", \"SysToolGetUp[REDACTED]\", \"SysToolReboot\", \"SysToolRestoreSet\", \"SysToolSetUp[REDACTED]\", \"SysToolpassword\", \"TimeIndex\", \"UploadCfg\", \"UploadMtd\", \"WanParameterSetting\", \"WifiAntijamEn\", \"WifiAntijamGet\", \"WifiAntijamSet\", \"WifiApScan\", \"WifiBasicGet\", \"WifiBasicSet\", \"WifiBeamformingGet\", \"WifiBeamformingSet\", \"WifiExtraGet\", \"WifiExtraSet\", \"WifiGuestGet\", \"WifiGuestSet\", \"WifiPowerGet\", \"WifiPowerSet\", \"WifiRadioGet\", \"WifiRadioSet\", \"WifiWpsGet\", \"WifiWpsSet\", \"WifiWpsStart\", \"delBlackRule\", \"delParentControlOneInfo\", \"delParentalRule\", \"formAddMacfilterRule\", \"formAdvGetLanIp\", \"formDefineTendDa\", \"formDefineUcloudv2\", \"formDelMacfilterRule\", \"formExit\", \"formGetAdvanceStatus\", \"formGetFirewallCfg\", \"formGetHomeLink\", \"formGetIPv6status\", \"formGetIptv\", \"formGetLoginInfo\", \"formGetMacFilterCfg\", \"formGetMacfilterRuleList\", \"formGetOnlineList\", \"formGetPPTPClient\", \"formGetPPTPServer\", \"formGetParentCtrlList\", \"formGetProduct\", \"formGetQosBand\", \"formGetRebootTimer\", \"formGetRouteStatic\", \"formGetRouterStatus\", \"formGetSafeWanWebMan\", \"formGetSchedLed\", \"formGetSysLog\", \"formGetSysStatus\", \"formGetSysToolDDNS\", \"formGetSystemStatus\", \"formGetUpnpLists\", \"formGetVirtualSer\", \"formGetVpnStatus\", \"formGetWanConnectStatus\", \"formGetWanParameter\", \"formGetWifiWps\", \"formNotNowUp[REDACTED]\", \"formSetDeviceName\", \"formSetFirewallCfg\", \"formSetIPv6status\", \"formSetIptv\", \"formSetMacFilterCfg\", \"formSetPPTPClient\", \"formSetPPTPServer\", \"formSetPPTPUserList\", \"formSetParentControlEnable\", \"formSetQosBand\", \"formSetRebootTimer\", \"formSetSafeWanWebMan\", \"formSetSchedLed\", \"formSetSysToolDDNS\", \"formSetUpnp\", \"formSetVirtualSer\", \"formSetWifiWps\", \"formStartWifiWps\", \"formWanArgumentSet error!\", \"formWanInfoGet\", \"formWanParameterSetting\", \"formWifiAntijamGet\", \"formWifiAntijamSet\", \"formWifiApScan\", \"formWifiBasicGet\", \"formWifiBasicSet\", \"formWifiBeamformingGet\", \"formWifiBeamformingSet\", \"formWifiPowerGet\", \"formWifiPowerSet\", \"formWifiRadioGet\", \"formWifiRadioSet\", \"formWifiRadioSet_send_msg\", \"saveParentControlInfo\"], \"handler_count\": 155, \"dangerous_functions\": {\"strcpy\": 2, \"strcat\": 1, \"sprintf\": 1, \"vsprintf\": 0, \"gets\": 0, \"system\": 5, \"popen\": 1, \"doSystemCmd\": 1, \"execve\": 1, \"twsystem\": 0}, \"dangerous_total\": 12, \"safe_functions\": {\"strncpy\": 1, \"strncat\": 0, \"snprintf\": 1, \"vsnprintf\": 0, \"fgets\": 1}, \"safe_total\": 3, \"input_sources\": {\"websGetVar\": 2, \"getenv\": 0}, \"input_total\": 2, \"linked_libraries\": [\"libiofdrv.so\", \"libcommon.so\", \"libm.so.0\", \"libz.so\", \"libpthread.so.0\", \"libapmib.so\", \"librtlWifiSrc.so\", \"libwshared.so\", \"libkm.so\", \"libcommonprod.so\", \"libucapi.so\", \"libgcc_s.so.1\", \"libc.so.0\"], \"unsafe_safe_ratio\": 4.0}}, \"binary_count\": 2}",
+      "status": "INFO",
+      "timestamp": "2026-03-03T23:49:55.616138"
+    }
+  ],
+  "findings": [
+    {
+      "id": "httpd_ac15_no_relro",
+      "severity": "MEDIUM",
+      "title": "httpd_ac15: No RELRO",
+      "details": "Binary compiled without RELRO. GOT entries are writable, enabling GOT overwrite attacks.",
+      "timestamp": "2026-03-03T23:49:55.372260",
+      "cwe": "CWE-693"
+    },
+    {
+      "id": "httpd_ac15_no_canary",
+      "severity": "HIGH",
+      "title": "httpd_ac15: No stack canary",
+      "details": "Binary compiled without stack canaries. Stack buffer overflows can directly overwrite return addresses.",
+      "timestamp": "2026-03-03T23:49:55.372260",
+      "cwe": "CWE-693"
+    },
+    {
+      "id": "httpd_ac15_no_pie",
+      "severity": "MEDIUM",
+      "title": "httpd_ac15: No PIE",
+      "details": "Binary is not position-independent. Base address is predictable, simplifying exploitation.",
+      "timestamp": "2026-03-03T23:49:55.372260",
+      "cwe": "CWE-693"
+    },
+    {
+      "id": "httpd_ac20_no_relro",
+      "severity": "MEDIUM",
+      "title": "httpd_ac20: No RELRO",
+      "details": "Binary compiled without RELRO. GOT entries are writable, enabling GOT overwrite attacks.",
+      "timestamp": "2026-03-03T23:49:55.616138",
+      "cwe": "CWE-693"
+    },
+    {
+      "id": "httpd_ac20_no_canary",
+      "severity": "HIGH",
+      "title": "httpd_ac20: No stack canary",
+      "details": "Binary compiled without stack canaries. Stack buffer overflows can directly overwrite return addresses.",
+      "timestamp": "2026-03-03T23:49:55.616138",
+      "cwe": "CWE-693"
+    },
+    {
+      "id": "httpd_ac20_no_pie",
+      "severity": "MEDIUM",
+      "title": "httpd_ac20: No PIE",
+      "details": "Binary is not position-independent. Base address is predictable, simplifying exploitation.",
+      "timestamp": "2026-03-03T23:49:55.616138",
+      "cwe": "CWE-693"
+    },
+    {
+      "id": "httpd_ac20_unsafe_ratio",
+      "severity": "MEDIUM",
+      "title": "httpd_ac20: High unsafe/safe function ratio (4.0)",
+      "details": "Dangerous functions outnumber safe alternatives 4.0:1. Dangerous=12, Safe=3.",
+      "timestamp": "2026-03-03T23:49:55.616138",
+      "cwe": "CWE-120"
+    }
+  ],
+  "anomalies": []
+}

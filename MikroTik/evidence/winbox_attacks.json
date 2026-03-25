@@ -1,0 +1,2592 @@
+{
+  "metadata": {
+    "script": "attack_winbox.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 5,
+    "start_time": "2026-02-15T23:28:03.631987",
+    "end_time": "2026-02-15T23:46:32.085482",
+    "total_tests": 166,
+    "anomalies": 3,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "9m36s",
+    "router_log_count": 67,
+    "router_interesting_events": 31,
+    "final_health": {
+      "alive": true,
+      "uptime": "28m5s",
+      "cpu_load": "0",
+      "free_memory": "841519104",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "m2_protocol",
+      "name": "TCP connect to Winbox",
+      "description": "Verify port 8291 accepts TCP connections",
+      "result": "Connected successfully",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:03.655975"
+    },
+    {
+      "id": 2,
+      "category": "m2_protocol",
+      "name": "Server-speaks-first check",
+      "description": "Check if Winbox sends data before client",
+      "result": "No data from server (client-speaks-first protocol)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:06.658473"
+    },
+    {
+      "id": 3,
+      "category": "m2_protocol",
+      "name": "Send empty M2 frame",
+      "description": "Send frame with size=0 body",
+      "result": "Response: 0 bytes in 3.006s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:09.664969",
+      "details": {
+        "sent_hex": "0000",
+        "resp_hex": "",
+        "elapsed": 3.006495952606201
+      }
+    },
+    {
+      "id": 4,
+      "category": "m2_protocol",
+      "name": "Minimal M2 to login handler",
+      "description": "Send SYS_TO=2 with no other fields",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:12.667467",
+      "details": {
+        "sent_hex": "00080800000102000000",
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 5,
+      "category": "m2_protocol",
+      "name": "M2 SYS_TO + COMMAND to login",
+      "description": "Send login handler with command=1",
+      "result": "Response: 0 bytes in 0.004s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:12.671465",
+      "details": {
+        "sent_hex": "001008000001020000000800000401000000",
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 6,
+      "category": "m2_protocol",
+      "name": "M2 full header fields",
+      "description": "SYS_TO=2, SYS_FROM=0, REQUEST_ID=1",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:15.673963",
+      "details": {
+        "sent_hex": "0018080000010200000008000002000000000800000301000000",
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 7,
+      "category": "m2_protocol",
+      "name": "Login msg username-only (admin)",
+      "description": "M2 login message with username=admin, no password",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:18.676461",
+      "details": {
+        "sent_hex": "00230800000102000000080000030100000008000004010000001000000a000561646d696e",
+        "resp_hex": "",
+        "decoded": "[]"
+      }
+    },
+    {
+      "id": 8,
+      "category": "m2_protocol",
+      "name": "Login msg with credentials",
+      "description": "M2 login message with admin/TestPass123",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:28:21.678959",
+      "details": {
+        "sent_hex": "00340800000102000000080000030100000008000004010000001000000a000561646d696e1000000b000b5465737450617373313233",
+        "resp_hex": "",
+        "decoded": "[]"
+      }
+    },
+    {
+      "id": 9,
+      "category": "m2_protocol",
+      "name": "M2 encoder/decoder round-trip",
+      "description": "Encode known KV pairs and decode; verify consistency",
+      "result": "Decoded 4 KV pairs",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:21.678959",
+      "details": {
+        "original_hex": "001e08000001020000001000000a0004746573740000000c2000000d0002dead",
+        "decoded": "[(8, 1, 2), (16, 10, b'test'), (0, 12, True), (32, 13, b'\\xde\\xad')]"
+      }
+    },
+    {
+      "id": 10,
+      "category": "m2_protocol",
+      "name": "Multiple M2 frames in one TCP send",
+      "description": "Send two M2 frames concatenated in single TCP write",
+      "result": "Response: 0 bytes in 4.006s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:25.684955",
+      "details": {
+        "sent_hex": "000808000001020000000008080000010d000000",
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 11,
+      "category": "m2_protocol",
+      "name": "Max request ID (0xFFFFFFFF)",
+      "description": "Send M2 with REQUEST_ID=4294967295",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:28.687453",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 12,
+      "category": "m2_protocol",
+      "name": "Signed-boundary request ID (0x80000000)",
+      "description": "Send REQUEST_ID at signed int32 boundary",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:31.693949",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 13,
+      "category": "m2_protocol",
+      "name": "SYS_TO=0 (null handler)",
+      "description": "Target handler ID 0",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:34.712439",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 14,
+      "category": "m2_protocol",
+      "name": "SYS_TO=0xFFFFFFFF (max handler)",
+      "description": "Target handler ID at u32 max",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:37.982803",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 15,
+      "category": "m2_protocol",
+      "name": "M2 without SYS_TO (SYS_FROM only)",
+      "description": "Send message with SYS_FROM but missing SYS_TO",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:40.985301",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 16,
+      "category": "m2_protocol",
+      "name": "u64 type for SYS_TO",
+      "description": "Send SYS_TO as u64 instead of u32 (type confusion)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:43.987799",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 17,
+      "category": "m2_protocol",
+      "name": "String type for SYS_TO",
+      "description": "Send SYS_TO as string '2' instead of u32 (type confusion)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:46.994295",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 18,
+      "category": "m2_protocol",
+      "name": "Fragmented M2 frame (split header/body)",
+      "description": "Send 2-byte frame header then body with 300ms gap",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:47.294145",
+      "details": {
+        "resp_hex": "None"
+      }
+    },
+    {
+      "id": 19,
+      "category": "m2_protocol",
+      "name": "Rapid reconnect (5x)",
+      "description": "Open and close TCP connections in quick succession",
+      "result": "5/5 connections succeeded",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:47.298143"
+    },
+    {
+      "id": 20,
+      "category": "m2_protocol",
+      "name": "Connect and immediate close",
+      "description": "Open TCP, close immediately without sending data",
+      "result": "Connection opened and closed cleanly",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:47.298143"
+    },
+    {
+      "id": 21,
+      "category": "preauth_probe",
+      "name": "Empty frame (size=0)",
+      "description": "Send 2-byte header with length=0",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:50.304639",
+      "details": {
+        "sent_hex": "0000",
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 22,
+      "category": "preauth_probe",
+      "name": "Frame size=1 (single null byte)",
+      "description": "Send frame header claiming 1 byte + 1 null byte body",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:53.307137",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 23,
+      "category": "preauth_probe",
+      "name": "Frame size=65535 with 10-byte body",
+      "description": "Size header claims 65535 but only send 10 bytes (length mismatch)",
+      "result": "Response: 0 bytes in 3.006s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:28:56.313633",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 24,
+      "category": "preauth_probe",
+      "name": "Frame size=65535 full body (64KB)",
+      "description": "Send maximum-size M2 frame with null body",
+      "result": "Response: 0 bytes in 5.001s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:01.315131",
+      "details": {
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 25,
+      "category": "preauth_probe",
+      "name": "Send HTTP GET to Winbox port",
+      "description": "Send HTTP/1.1 request to binary protocol port",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:04.321627",
+      "details": {
+        "resp_hex": "",
+        "resp_ascii": "None"
+      }
+    },
+    {
+      "id": 26,
+      "category": "preauth_probe",
+      "name": "Send SSH banner to Winbox port",
+      "description": "Send SSH protocol string to binary protocol port",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:07.328123",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 27,
+      "category": "preauth_probe",
+      "name": "Send 64 random bytes",
+      "description": "Send random binary data to Winbox",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:10.330621",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 28,
+      "category": "preauth_probe",
+      "name": "Send TLS ClientHello to Winbox",
+      "description": "Send TLS record to binary protocol port",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:13.337117",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 29,
+      "category": "preauth_probe",
+      "name": "Single byte 0x00",
+      "description": "Send single byte 0x00 to Winbox",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:15.344113",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 30,
+      "category": "preauth_probe",
+      "name": "Single byte 0x01",
+      "description": "Send single byte 0x01 to Winbox",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:17.343113",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 31,
+      "category": "preauth_probe",
+      "name": "Single byte 0x02",
+      "description": "Send single byte 0x02 to Winbox",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:19.350109",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 32,
+      "category": "preauth_probe",
+      "name": "Single byte 0x03",
+      "description": "Send single byte 0x03 to Winbox",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:21.361103",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 33,
+      "category": "preauth_probe",
+      "name": "Single byte 0x04",
+      "description": "Send single byte 0x04 to Winbox",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:23.360103",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 34,
+      "category": "preauth_probe",
+      "name": "Single byte 0x05",
+      "description": "Send single byte 0x05 to Winbox",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.363101",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 35,
+      "category": "preauth_probe",
+      "name": "Login handler no credentials",
+      "description": "SYS_TO=2 CMD=1 with no username/password",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.371097",
+      "details": {
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 36,
+      "category": "preauth_probe",
+      "name": "Pre-auth handler probe ID=1",
+      "description": "Send CMD=1 to handler 1 without authentication",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.371097",
+      "details": {
+        "handler_id": 1,
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 37,
+      "category": "preauth_probe",
+      "name": "Pre-auth handler probe ID=2",
+      "description": "Send CMD=1 to handler 2 without authentication",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.371097",
+      "details": {
+        "handler_id": 2,
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 38,
+      "category": "preauth_probe",
+      "name": "Pre-auth handler probe ID=3",
+      "description": "Send CMD=1 to handler 3 without authentication",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.375095",
+      "details": {
+        "handler_id": 3,
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 39,
+      "category": "preauth_probe",
+      "name": "Pre-auth handler probe ID=4",
+      "description": "Send CMD=1 to handler 4 without authentication",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.375095",
+      "details": {
+        "handler_id": 4,
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 40,
+      "category": "preauth_probe",
+      "name": "Pre-auth handler probe ID=5",
+      "description": "Send CMD=1 to handler 5 without authentication",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.375095",
+      "details": {
+        "handler_id": 5,
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 41,
+      "category": "preauth_probe",
+      "name": "Pre-auth handler probe ID=6",
+      "description": "Send CMD=1 to handler 6 without authentication",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.379093",
+      "details": {
+        "handler_id": 6,
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 42,
+      "category": "preauth_probe",
+      "name": "Pre-auth handler probe ID=7",
+      "description": "Send CMD=1 to handler 7 without authentication",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.379093",
+      "details": {
+        "handler_id": 7,
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 43,
+      "category": "preauth_probe",
+      "name": "Pre-auth handler probe ID=8",
+      "description": "Send CMD=1 to handler 8 without authentication",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.383091",
+      "details": {
+        "handler_id": 8,
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 44,
+      "category": "preauth_probe",
+      "name": "Pre-auth handler probe ID=9",
+      "description": "Send CMD=1 to handler 9 without authentication",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.383091",
+      "details": {
+        "handler_id": 9,
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 45,
+      "category": "preauth_probe",
+      "name": "Pre-auth handler probe ID=10",
+      "description": "Send CMD=1 to handler 10 without authentication",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.383091",
+      "details": {
+        "handler_id": 10,
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 46,
+      "category": "preauth_probe",
+      "name": "Pre-auth system handler (ID=13)",
+      "description": "Send CMD=7 (print) to system handler without auth",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.387089",
+      "details": {
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 47,
+      "category": "preauth_probe",
+      "name": "Pre-auth interface handler (ID=14)",
+      "description": "Send CMD=7 (print) to interface handler without auth",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.387089",
+      "details": {
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 48,
+      "category": "preauth_probe",
+      "name": "Pre-auth file handler (ID=24)",
+      "description": "Send CMD=7 (print) to file handler without auth",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:25.387089",
+      "details": {
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 49,
+      "category": "preauth_probe",
+      "name": "256 null bytes",
+      "description": "Send 256 null bytes to Winbox",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:27.394085",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 50,
+      "category": "preauth_probe",
+      "name": "256 x 0xFF bytes",
+      "description": "Send 256 bytes of 0xFF to Winbox",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:29:29.397083",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 51,
+      "category": "user_enum",
+      "name": "Valid user 'admin' response collection",
+      "description": "Collect 25 login responses for valid username",
+      "result": "Avg size=0.0, Avg time=5063.5ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:31:37.265117",
+      "details": {
+        "sizes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "times_ms": [
+          5001.5,
+          6480.76,
+          5005.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5009.49,
+          5001.5,
+          5005.5,
+          5005.5,
+          5005.5,
+          5005.5,
+          5005.5,
+          5005.5
+        ],
+        "sample_response": "None"
+      }
+    },
+    {
+      "id": 52,
+      "category": "user_enum",
+      "name": "Invalid user 'nonexistent_user_xyz' response collection",
+      "description": "Collect 25 login responses for invalid username",
+      "result": "Avg size=0.0, Avg time=5003.9ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:33:43.653891",
+      "details": {
+        "sizes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "times_ms": [
+          5001.5,
+          5001.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5005.5,
+          5001.5,
+          5001.5,
+          5005.5,
+          5005.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5001.5,
+          5001.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5005.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5001.5,
+          5009.49,
+          5005.5
+        ],
+        "sample_response": "None"
+      }
+    },
+    {
+      "id": 53,
+      "category": "user_enum",
+      "name": "Invalid user 'fakeuser99' response collection",
+      "description": "Collect 25 login responses for invalid username",
+      "result": "Avg size=0.0, Avg time=5005.2ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:35:50.046663",
+      "details": {
+        "sizes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "times_ms": [
+          5005.5,
+          5005.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5001.5,
+          5009.49,
+          5001.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5009.49,
+          5001.5,
+          5005.5,
+          5001.5,
+          5001.5,
+          5017.49,
+          5001.5,
+          5009.49,
+          5005.5,
+          5009.49,
+          5005.5,
+          5005.5
+        ],
+        "sample_response": "None"
+      }
+    },
+    {
+      "id": 54,
+      "category": "user_enum",
+      "name": "Invalid user 'nobody' response collection",
+      "description": "Collect 25 login responses for invalid username",
+      "result": "Avg size=0.0, Avg time=5005.7ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:37:56.523393",
+      "details": {
+        "sizes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "times_ms": [
+          5005.5,
+          5001.5,
+          5005.5,
+          5005.5,
+          5005.5,
+          5005.5,
+          5001.5,
+          5001.5,
+          5005.5,
+          5013.49,
+          5001.5,
+          5005.5,
+          5005.5,
+          5005.5,
+          5009.49,
+          5005.5,
+          5005.5,
+          5001.5,
+          5005.5,
+          5005.5,
+          5009.49,
+          5005.5,
+          5017.49,
+          5001.5,
+          5005.5
+        ],
+        "sample_response": "None"
+      }
+    },
+    {
+      "id": 55,
+      "category": "user_enum",
+      "name": "CVE-2024-54772 response size analysis",
+      "description": "Compare response sizes for valid vs invalid usernames",
+      "result": "NOT VULNERABLE",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:37:56.523393",
+      "details": {
+        "valid_size_mean": 0.0,
+        "valid_size_stddev": 0.0,
+        "invalid_size_mean": 0.0,
+        "invalid_size_stddev": 0.0,
+        "size_difference": 0.0,
+        "size_t_statistic": 0,
+        "valid_time_mean_ms": 5063.55,
+        "valid_time_stddev_ms": 295.26,
+        "invalid_time_mean_ms": 5004.91,
+        "invalid_time_stddev_ms": 3.4,
+        "time_difference_ms": 58.64,
+        "time_t_statistic": 0.993,
+        "total_valid_samples": 25,
+        "total_invalid_samples": 75
+      }
+    },
+    {
+      "id": 56,
+      "category": "user_enum",
+      "name": "Edge username: ''",
+      "description": "Login attempt with edge-case username",
+      "result": "Response: 0 bytes in 3006.5ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:37:59.529889",
+      "details": {
+        "username": "''",
+        "resp_size": 0,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 57,
+      "category": "user_enum",
+      "name": "Edge username: 'a'",
+      "description": "Login attempt with edge-case username",
+      "result": "Response: 0 bytes in 3002.5ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:02.536385",
+      "details": {
+        "username": "'a'",
+        "resp_size": 0,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 58,
+      "category": "user_enum",
+      "name": "Edge username: 'adminadminadminadminadminadminadminadmi",
+      "description": "Login attempt with edge-case username",
+      "result": "Response: 0 bytes in 0.0ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:02.536385",
+      "details": {
+        "username": "'adminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadminadmin'",
+        "resp_size": 0,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 59,
+      "category": "user_enum",
+      "name": "Edge username: 'admin\\x00extra'",
+      "description": "Login attempt with edge-case username",
+      "result": "Response: 0 bytes in 3002.5ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:05.538883",
+      "details": {
+        "username": "'admin\\x00extra'",
+        "resp_size": 0,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 60,
+      "category": "user_enum",
+      "name": "Edge username: 'Admin'",
+      "description": "Login attempt with edge-case username",
+      "result": "Response: 0 bytes in 3002.5ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:08.541381",
+      "details": {
+        "username": "'Admin'",
+        "resp_size": 0,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 61,
+      "category": "user_enum",
+      "name": "Edge username: 'ADMIN'",
+      "description": "Login attempt with edge-case username",
+      "result": "Response: 0 bytes in 3002.5ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:11.543879",
+      "details": {
+        "username": "'ADMIN'",
+        "resp_size": 0,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 62,
+      "category": "handler_enum",
+      "name": "Plain M2 login attempt",
+      "description": "Attempt plain username/password login via M2",
+      "result": "FAILED - plain login not accepted (EC-SRP5 required)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:16.549375",
+      "details": {
+        "session_id": null,
+        "plain_login_supported": false
+      }
+    },
+    {
+      "id": 63,
+      "category": "handler_enum",
+      "name": "Alt login CMD=0",
+      "description": "Try login with COMMAND=0",
+      "result": "Response: 0 bytes, session=NO",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:19.551873",
+      "details": {
+        "cmd": 0,
+        "resp_hex": "",
+        "decoded": "[]"
+      }
+    },
+    {
+      "id": 64,
+      "category": "handler_enum",
+      "name": "Alt login CMD=3",
+      "description": "Try login with COMMAND=3",
+      "result": "Response: 0 bytes, session=NO",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:22.558369",
+      "details": {
+        "cmd": 3,
+        "resp_hex": "",
+        "decoded": "[]"
+      }
+    },
+    {
+      "id": 65,
+      "category": "handler_enum",
+      "name": "Alt login CMD=4",
+      "description": "Try login with COMMAND=4",
+      "result": "Response: 0 bytes, session=NO",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:22.562367",
+      "details": {
+        "cmd": 4,
+        "resp_hex": "",
+        "decoded": "[]"
+      }
+    },
+    {
+      "id": 66,
+      "category": "handler_enum",
+      "name": "Alt login CMD=6",
+      "description": "Try login with COMMAND=6",
+      "result": "Response: 0 bytes, session=NO",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:22.566365",
+      "details": {
+        "cmd": 6,
+        "resp_hex": "",
+        "decoded": "[]"
+      }
+    },
+    {
+      "id": 67,
+      "category": "handler_enum",
+      "name": "Alt login CMD=7",
+      "description": "Try login with COMMAND=7",
+      "result": "Response: 0 bytes, session=NO",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:25.572861",
+      "details": {
+        "cmd": 7,
+        "resp_hex": "",
+        "decoded": "[]"
+      }
+    },
+    {
+      "id": 68,
+      "category": "handler_enum",
+      "name": "Handler probe ID=1",
+      "description": "Send CMD=7 to handler 1 (without session)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:27.579857",
+      "details": {
+        "handler_id": 1,
+        "resp_hex": "",
+        "authenticated": false
+      }
+    },
+    {
+      "id": 69,
+      "category": "handler_enum",
+      "name": "Handler probe ID=2",
+      "description": "Send CMD=7 to handler 2 (without session)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:29.582855",
+      "details": {
+        "handler_id": 2,
+        "resp_hex": "",
+        "authenticated": false
+      }
+    },
+    {
+      "id": 70,
+      "category": "handler_enum",
+      "name": "Handler probe ID=3",
+      "description": "Send CMD=7 to handler 3 (without session)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:31.585853",
+      "details": {
+        "handler_id": 3,
+        "resp_hex": "",
+        "authenticated": false
+      }
+    },
+    {
+      "id": 71,
+      "category": "handler_enum",
+      "name": "Handler probe ID=4",
+      "description": "Send CMD=7 to handler 4 (without session)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:31.585853",
+      "details": {
+        "handler_id": 4,
+        "resp_hex": "",
+        "authenticated": false
+      }
+    },
+    {
+      "id": 72,
+      "category": "handler_enum",
+      "name": "Handler probe ID=5",
+      "description": "Send CMD=7 to handler 5 (without session)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:33.612839",
+      "details": {
+        "handler_id": 5,
+        "resp_hex": "",
+        "authenticated": false
+      }
+    },
+    {
+      "id": 73,
+      "category": "handler_enum",
+      "name": "Handler probe ID=6",
+      "description": "Send CMD=7 to handler 6 (without session)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:35.619835",
+      "details": {
+        "handler_id": 6,
+        "resp_hex": "",
+        "authenticated": false
+      }
+    },
+    {
+      "id": 74,
+      "category": "handler_enum",
+      "name": "Handler probe ID=7",
+      "description": "Send CMD=7 to handler 7 (without session)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:37.626831",
+      "details": {
+        "handler_id": 7,
+        "resp_hex": "",
+        "authenticated": false
+      }
+    },
+    {
+      "id": 75,
+      "category": "handler_enum",
+      "name": "Handler probe ID=8",
+      "description": "Send CMD=7 to handler 8 (without session)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:39.633827",
+      "details": {
+        "handler_id": 8,
+        "resp_hex": "",
+        "authenticated": false
+      }
+    },
+    {
+      "id": 76,
+      "category": "handler_enum",
+      "name": "Handler probe ID=9",
+      "description": "Send CMD=7 to handler 9 (without session)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:41.636825",
+      "details": {
+        "handler_id": 9,
+        "resp_hex": "",
+        "authenticated": false
+      }
+    },
+    {
+      "id": 77,
+      "category": "handler_enum",
+      "name": "Handler probe ID=10",
+      "description": "Send CMD=7 to handler 10 (without session)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:38:43.639823",
+      "details": {
+        "handler_id": 10,
+        "resp_hex": "",
+        "authenticated": false
+      }
+    },
+    {
+      "id": 78,
+      "category": "handler_enum",
+      "name": "Handler probe ID=64",
+      "description": "Send CMD=7 to handler 64",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:05.770737",
+      "details": {
+        "handler_id": 64,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 79,
+      "category": "handler_enum",
+      "name": "Handler probe ID=72",
+      "description": "Send CMD=7 to handler 72",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:07.773735",
+      "details": {
+        "handler_id": 72,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 80,
+      "category": "handler_enum",
+      "name": "Handler probe ID=80",
+      "description": "Send CMD=7 to handler 80",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:09.776733",
+      "details": {
+        "handler_id": 80,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 81,
+      "category": "handler_enum",
+      "name": "Handler probe ID=100",
+      "description": "Send CMD=7 to handler 100",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:11.779731",
+      "details": {
+        "handler_id": 100,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 82,
+      "category": "handler_enum",
+      "name": "Handler probe ID=128",
+      "description": "Send CMD=7 to handler 128",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:13.782729",
+      "details": {
+        "handler_id": 128,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 83,
+      "category": "handler_enum",
+      "name": "Handler probe ID=200",
+      "description": "Send CMD=7 to handler 200",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:15.785727",
+      "details": {
+        "handler_id": 200,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 84,
+      "category": "handler_enum",
+      "name": "Handler probe ID=255",
+      "description": "Send CMD=7 to handler 255",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:17.788725",
+      "details": {
+        "handler_id": 255,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 85,
+      "category": "handler_enum",
+      "name": "Handler enumeration summary",
+      "description": "Summary of all handler probing results",
+      "result": "0 handlers responded out of 57 probed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:17.788725",
+      "details": {
+        "responding_handlers": [],
+        "total_probed": 57,
+        "authenticated": false
+      }
+    },
+    {
+      "id": 86,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x02",
+      "description": "M2 with unknown key type 0x02 for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:20.791223",
+      "details": {
+        "sent_hex": "00080200000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 87,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x03",
+      "description": "M2 with unknown key type 0x03 for SYS_TO",
+      "result": "Response: 0 bytes in 3.006s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:23.797719",
+      "details": {
+        "sent_hex": "00080300000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 88,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x04",
+      "description": "M2 with unknown key type 0x04 for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:26.800217",
+      "details": {
+        "sent_hex": "00080400000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 89,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x05",
+      "description": "M2 with unknown key type 0x05 for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:29.802715",
+      "details": {
+        "sent_hex": "00080500000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 90,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x06",
+      "description": "M2 with unknown key type 0x06 for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:32.805213",
+      "details": {
+        "sent_hex": "00080600000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 91,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x07",
+      "description": "M2 with unknown key type 0x07 for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:35.807711",
+      "details": {
+        "sent_hex": "00080700000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 92,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x0b",
+      "description": "M2 with unknown key type 0x0b for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:38.814207",
+      "details": {
+        "sent_hex": "00080b00000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 93,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x0c",
+      "description": "M2 with unknown key type 0x0c for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:41.816705",
+      "details": {
+        "sent_hex": "00080c00000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 94,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x0d",
+      "description": "M2 with unknown key type 0x0d for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:44.819203",
+      "details": {
+        "sent_hex": "00080d00000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 95,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x0e",
+      "description": "M2 with unknown key type 0x0e for SYS_TO",
+      "result": "Response: 0 bytes in 3.006s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:47.825699",
+      "details": {
+        "sent_hex": "00080e00000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 96,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x0f",
+      "description": "M2 with unknown key type 0x0f for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:50.828197",
+      "details": {
+        "sent_hex": "00080f00000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 97,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x11",
+      "description": "M2 with unknown key type 0x11 for SYS_TO",
+      "result": "Response: 0 bytes in 3.006s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:53.834693",
+      "details": {
+        "sent_hex": "00081100000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 98,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x12",
+      "description": "M2 with unknown key type 0x12 for SYS_TO",
+      "result": "Response: 0 bytes in 3.006s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:56.845187",
+      "details": {
+        "sent_hex": "00081200000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 99,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x13",
+      "description": "M2 with unknown key type 0x13 for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:40:59.847685",
+      "details": {
+        "sent_hex": "00081300000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 100,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x14",
+      "description": "M2 with unknown key type 0x14 for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:02.854181",
+      "details": {
+        "sent_hex": "00081400000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 101,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x15",
+      "description": "M2 with unknown key type 0x15 for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:05.856679",
+      "details": {
+        "sent_hex": "00081500000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 102,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x16",
+      "description": "M2 with unknown key type 0x16 for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:08.859177",
+      "details": {
+        "sent_hex": "00081600000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 103,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0x17",
+      "description": "M2 with unknown key type 0x17 for SYS_TO",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:11.861675",
+      "details": {
+        "sent_hex": "00081700000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 104,
+      "category": "m2_fuzz",
+      "name": "Invalid key type 0xff",
+      "description": "M2 with unknown key type 0xff for SYS_TO",
+      "result": "Response: 0 bytes in 3.006s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:14.868171",
+      "details": {
+        "sent_hex": "0008ff00000100000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 105,
+      "category": "m2_fuzz",
+      "name": "Null key ID (0x000000)",
+      "description": "M2 with key ID 0 as u32",
+      "result": "Response: 0 bytes in 2.999s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:17.870669",
+      "details": {
+        "sent_hex": "00080800000001000000",
+        "sent_size": 10,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 106,
+      "category": "m2_fuzz",
+      "name": "String length mismatch (65535 claimed, 10 actual)",
+      "description": "String KV with length prefix 65535 but only 10 data bytes",
+      "result": "Response: 0 bytes in 3.006s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:20.881163",
+      "details": {
+        "sent_hex": "001010000001ffff41414141414141414141",
+        "sent_size": 18,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 107,
+      "category": "m2_fuzz",
+      "name": "Triple-nested M2 message",
+      "description": "3 levels of nested M2 messages",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:23.887659",
+      "details": {
+        "sent_hex": "001a18000010001418000010000e1800001000080800000102000000",
+        "sent_size": 28,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 108,
+      "category": "m2_fuzz",
+      "name": "Deeply nested M2 (20 levels)",
+      "description": "20 levels of nested M2 message embedding",
+      "result": "Response: 0 bytes in 3.006s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:26.894155",
+      "details": {
+        "sent_hex": "008018000010007a18000010007418000010006e18000010006818000010006218000010005c18000010005618000010005018000010004a18000010004418000010003e18000010003818000010003218000010002c18000010002618000010002018000010001a18000010001418000010000e1800001000080800000102000000",
+        "sent_size": 130,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 109,
+      "category": "m2_fuzz",
+      "name": "M2 with 100 KV pairs",
+      "description": "Single M2 message containing 100+ u32 key-value pairs",
+      "result": "Response: 0 bytes in 0.000s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:26.898153",
+      "details": {
+        "sent_hex": "0328080000010200000008000100000000000800010101000000080001020200000008000103030000000800010404000000080001050500000008000106060000000800010707000000080001080800000008000109090000000800010a0a0000000800010b0b0000000800010c0c0000000800010d0d0000000800010e0e0000000800010f0f000000080001101000000008000111...(total 810 bytes)",
+        "sent_size": 810,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 110,
+      "category": "m2_fuzz",
+      "name": "Duplicate SYS_TO keys (3x)",
+      "description": "M2 with SYS_TO appearing 3 times with different values",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:29.904649",
+      "details": {
+        "sent_hex": "00180800000102000000080000010d0000000800000118000000",
+        "sent_size": 26,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 111,
+      "category": "m2_fuzz",
+      "name": "Zero-length username string",
+      "description": "Login with empty string username",
+      "result": "Response: 0 bytes in 2.998s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:32.911145",
+      "details": {
+        "sent_hex": "000e08000001020000001000000a0000",
+        "sent_size": 16,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 112,
+      "category": "m2_fuzz",
+      "name": "Username with null byte (admin\\x00root)",
+      "description": "Login with null byte in username for truncation attack",
+      "result": "Response: 0 bytes in 3.006s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:35.917641",
+      "details": {
+        "sent_hex": "001808000001020000001000000a000a61646d696e00726f6f74",
+        "sent_size": 26,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 113,
+      "category": "m2_fuzz",
+      "name": "Raw bytes length=0",
+      "description": "M2 with raw KV containing zero-length data",
+      "result": "Response: 0 bytes in 3.014s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:38.936131",
+      "details": {
+        "sent_hex": "000e0800000102000000200000200000",
+        "sent_size": 16,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 114,
+      "category": "m2_fuzz",
+      "name": "Truncated u32 (2 bytes instead of 4)",
+      "description": "u32 key type but only 2 bytes of value data",
+      "result": "Response: 0 bytes in 0.000s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:38.936131",
+      "details": {
+        "sent_hex": "0006080000010200",
+        "sent_size": 8,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 115,
+      "category": "m2_fuzz",
+      "name": "Frame size mismatch (header=100, body=200)",
+      "description": "Frame header claims 100 bytes but 200 bytes follow",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:41.946625",
+      "details": {
+        "sent_hex": "006441414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141...(total 202 bytes)",
+        "sent_size": 202,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 116,
+      "category": "m2_fuzz",
+      "name": "Frame size mismatch (header=200, body=50)",
+      "description": "Frame header claims 200 bytes but only 50 follow",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:44.949123",
+      "details": {
+        "sent_hex": "00c84242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242",
+        "sent_size": 52,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 117,
+      "category": "m2_fuzz",
+      "name": "8KB username string",
+      "description": "Login with 8192-character username",
+      "result": "Response: 0 bytes in 3.006s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:47.955619",
+      "details": {
+        "sent_hex": "200e08000001020000001000000a20004141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141...(total 8208 bytes)",
+        "sent_size": 8208,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 118,
+      "category": "m2_fuzz",
+      "name": "8KB password string",
+      "description": "Login with 8192-character password",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:50.958117",
+      "details": {
+        "sent_hex": "200e08000001020000001000000b20004242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242...(total 8208 bytes)",
+        "sent_size": 8208,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 119,
+      "category": "m2_fuzz",
+      "name": "Format string username: %s%s%s%s%s%n",
+      "description": "Login with format string in username field",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:53.964613",
+      "details": {
+        "sent_hex": "001a08000001020000001000000a000c25732573257325732573256e",
+        "sent_size": 28,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 120,
+      "category": "m2_fuzz",
+      "name": "Format string username: %x%x%x%x%x%x%x%x%x%x",
+      "description": "Login with format string in username field",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:56.967111",
+      "details": {
+        "sent_hex": "007208000001020000001000000a006425782578257825782578257825782578257825782578257825782578257825782578257825782578257825782578257825782578257825782578257825782578257825782578257825782578257825782578257825782578257825782578257825782578",
+        "sent_size": 116,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 121,
+      "category": "m2_fuzz",
+      "name": "Format string username: %.9999d",
+      "description": "Login with format string in username field",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:41:59.969609",
+      "details": {
+        "sent_hex": "001508000001020000001000000a0007252e3939393964",
+        "sent_size": 23,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 122,
+      "category": "m2_fuzz",
+      "name": "Format string username: %p%p%p%p",
+      "description": "Login with format string in username field",
+      "result": "Response: 0 bytes in 3.002s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:02.972107",
+      "details": {
+        "sent_hex": "001608000001020000001000000a00082570257025702570",
+        "sent_size": 24,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 123,
+      "category": "m2_fuzz",
+      "name": "Command value 0x00000000",
+      "description": "M2 with COMMAND=0 (boundary value)",
+      "result": "Response: 0 bytes in 0.004s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:02.976105",
+      "details": {
+        "sent_hex": "001008000001020000000800000400000000",
+        "sent_size": 18,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 124,
+      "category": "m2_fuzz",
+      "name": "Command value 0x7FFFFFFF",
+      "description": "M2 with COMMAND=2147483647 (boundary value)",
+      "result": "Response: 0 bytes in 0.000s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:02.976105",
+      "details": {
+        "sent_hex": "0010080000010200000008000004ffffff7f",
+        "sent_size": 18,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 125,
+      "category": "m2_fuzz",
+      "name": "Command value 0xFFFFFFFF",
+      "description": "M2 with COMMAND=4294967295 (boundary value)",
+      "result": "Response: 0 bytes in 0.000s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:02.980103",
+      "details": {
+        "sent_hex": "0010080000010200000008000004ffffffff",
+        "sent_size": 18,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 126,
+      "category": "m2_fuzz",
+      "name": "Command value 0x80000000",
+      "description": "M2 with COMMAND=2147483648 (boundary value)",
+      "result": "Response: 0 bytes in 0.000s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:02.980103",
+      "details": {
+        "sent_hex": "001008000001020000000800000400000080",
+        "sent_size": 18,
+        "resp_hex": "",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 127,
+      "category": "m2_fuzz",
+      "name": "10 rapid frames on single connection",
+      "description": "Send 10 M2 frames in quick succession on one TCP socket",
+      "result": "Got 0 response bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:06.994095",
+      "details": {
+        "rapid_results": [
+          0
+        ]
+      }
+    },
+    {
+      "id": 128,
+      "category": "m2_fuzz",
+      "name": "Oversized frame body (128KB, header=65535)",
+      "description": "Send 128KB body with max frame header",
+      "result": "Response: 0 bytes in 0.000s",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:42:06.994095",
+      "details": {
+        "sent_hex": "ffff36fa851258a0d7f105c0a57f7af41c2c7bae383cbd76d739d941152a1668c8ba5654c1d2a6c241dc7402bc6b275ac6f77d809a01b3f9cf3c88575c6eda2fe77d03c038bda834ac17c5ba4fde2da5e82f94c1caa00212de6d131f61687bc57d25ab4031c0d788d4fcc8bd24e0d72d23baeae1cbf7cf776e052817cfe5fdc7e5f919129f79ab415b6eaec354d84fb819f93ceee6d5...(total 131074 bytes)",
+        "sent_size": 131074,
+        "resp_hex": "None",
+        "resp_size": 0
+      }
+    },
+    {
+      "id": 129,
+      "category": "ecsrp5",
+      "name": "Observe login handshake response",
+      "description": "Send login with username, observe server EC-SRP5 parameters",
+      "result": "Response: 0 bytes, decoded 0 KV pairs",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:12.007587",
+      "details": {
+        "resp_hex": "",
+        "decoded": "[]",
+        "identified_params": {},
+        "has_salt_candidate": false,
+        "has_pubkey_candidate": false
+      }
+    },
+    {
+      "id": 130,
+      "category": "ecsrp5",
+      "name": "Zero public key (32 bytes)",
+      "description": "Send all-zero 32-byte value as client public key",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:15.014083",
+      "details": {
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 131,
+      "category": "ecsrp5",
+      "name": "Zero public key (48 bytes)",
+      "description": "Send all-zero 48-byte value as client public key",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:18.024577",
+      "details": {
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 132,
+      "category": "ecsrp5",
+      "name": "Zero public key (64 bytes)",
+      "description": "Send all-zero 64-byte value as client public key",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:21.027075",
+      "details": {
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 133,
+      "category": "ecsrp5",
+      "name": "Point-at-infinity encoding #1",
+      "description": "Send EC point-at-infinity candidate (1 bytes)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:24.029573",
+      "details": {
+        "encoding_hex": "00",
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 134,
+      "category": "ecsrp5",
+      "name": "Point-at-infinity encoding #2",
+      "description": "Send EC point-at-infinity candidate (33 bytes)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:27.032071",
+      "details": {
+        "encoding_hex": "000000000000000000000000000000000000000000000000000000000000000000",
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 135,
+      "category": "ecsrp5",
+      "name": "Point-at-infinity encoding #3",
+      "description": "Send EC point-at-infinity candidate (65 bytes)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:30.042565",
+      "details": {
+        "encoding_hex": "0400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 136,
+      "category": "ecsrp5",
+      "name": "Point-at-infinity encoding #4",
+      "description": "Send EC point-at-infinity candidate (97 bytes)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:33.045063",
+      "details": {
+        "encoding_hex": "04000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 137,
+      "category": "ecsrp5",
+      "name": "Oversized EC value (64 bytes of 0xFF)",
+      "description": "Send value larger than any standard EC curve order",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:33.045063",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 138,
+      "category": "ecsrp5",
+      "name": "Handshake replay on same connection",
+      "description": "Send login initiation twice on same TCP socket",
+      "result": "Results: [('first', 0), ('replay', 0)]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:39.054057",
+      "details": {
+        "replay_results": [
+          [
+            "first",
+            0,
+            "timeout"
+          ],
+          [
+            "replay",
+            0,
+            ""
+          ]
+        ]
+      }
+    },
+    {
+      "id": 139,
+      "category": "ecsrp5",
+      "name": "Handshake replay across connections",
+      "description": "Send identical login initiation on two separate connections",
+      "result": "Responses identical: None (A=0B, B=0B)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:45.071047",
+      "details": {
+        "same": null,
+        "resp_a_hex": "",
+        "resp_b_hex": ""
+      }
+    },
+    {
+      "id": 140,
+      "category": "ecsrp5",
+      "name": "Truncated handshake (close after 0s)",
+      "description": "Send login init then close after 0s delay",
+      "result": "Connection closed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:45.071047",
+      "details": {
+        "delay": 0
+      }
+    },
+    {
+      "id": 141,
+      "category": "ecsrp5",
+      "name": "Truncated handshake (close after 0.1s)",
+      "description": "Send login init then close after 0.1s delay",
+      "result": "Connection closed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:45.174995",
+      "details": {
+        "delay": 0.1
+      }
+    },
+    {
+      "id": 142,
+      "category": "ecsrp5",
+      "name": "Truncated handshake (close after 0.5s)",
+      "description": "Send login init then close after 0.5s delay",
+      "result": "Connection closed",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:45.678743",
+      "details": {
+        "delay": 0.5
+      }
+    },
+    {
+      "id": 143,
+      "category": "ecsrp5",
+      "name": "Garbage as second-phase response",
+      "description": "Complete first handshake exchange then send 128 random bytes",
+      "result": "No response after garbage (timeout)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:51.687737",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 144,
+      "category": "ecsrp5",
+      "name": "32KB random as public key",
+      "description": "Send 32KB of random data where public key is expected",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:42:51.687737",
+      "details": {
+        "resp_hex": "None"
+      }
+    },
+    {
+      "id": 145,
+      "category": "ecsrp5",
+      "name": "5 concurrent handshake initiations",
+      "description": "Open 5 connections and send login init simultaneously",
+      "result": "Responses: [0, 0, 0, 0, 0]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:43:02.230463",
+      "details": {
+        "concurrent_results": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": 146,
+      "category": "session",
+      "name": "Forged session ID (0xDEADBEEF)",
+      "description": "Send command with fabricated session ID",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:43:05.232961",
+      "details": {
+        "forged_id": "0xdeadbeef",
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 147,
+      "category": "session",
+      "name": "Session ID = 0",
+      "description": "Send command with session ID zero",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:43:08.235459",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 148,
+      "category": "session",
+      "name": "Session ID = 0xFFFFFFFF",
+      "description": "Send command with max u32 session ID",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:43:11.241955",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 149,
+      "category": "session",
+      "name": "Sequential session ID = 1",
+      "description": "Test if low sequential session IDs are valid",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:43:14.244453",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 150,
+      "category": "session",
+      "name": "Sequential session ID = 2",
+      "description": "Test if low sequential session IDs are valid",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:43:17.246951",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 151,
+      "category": "session",
+      "name": "Sequential session ID = 3",
+      "description": "Test if low sequential session IDs are valid",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:43:20.253447",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 152,
+      "category": "session",
+      "name": "Session ID as string type",
+      "description": "Send session ID field as string instead of u32 (type confusion)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:43:23.255945",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 153,
+      "category": "session",
+      "name": "Session ID as raw 8 bytes",
+      "description": "Send session ID as raw bytes (type confusion / overflow)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:43:26.262441",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 154,
+      "category": "session",
+      "name": "Duplicate session IDs in one message",
+      "description": "Send two SESSION_ID fields with different values",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:43:29.264939",
+      "details": {
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 155,
+      "category": "session",
+      "name": "Rapid session creation (20 connections)",
+      "description": "Create 20 login initiations in quick succession",
+      "result": "First-5 avg: 3002.5ms, Last-5 avg: 3002.5ms, Slowdown: 0.0ms, Rejected: 20",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:44:30.354379",
+      "details": {
+        "results": [
+          {
+            "attempt": 1,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 2,
+            "resp_size": 0,
+            "elapsed_ms": 3006.5
+          },
+          {
+            "attempt": 3,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 4,
+            "resp_size": 0,
+            "elapsed_ms": 2998.5
+          },
+          {
+            "attempt": 5,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 6,
+            "resp_size": 0,
+            "elapsed_ms": 3006.5
+          },
+          {
+            "attempt": 7,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 8,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 9,
+            "resp_size": 0,
+            "elapsed_ms": 3006.5
+          },
+          {
+            "attempt": 10,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 11,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 12,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 13,
+            "resp_size": 0,
+            "elapsed_ms": 3006.5
+          },
+          {
+            "attempt": 14,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 15,
+            "resp_size": 0,
+            "elapsed_ms": 3006.5
+          },
+          {
+            "attempt": 16,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 17,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 18,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 19,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          },
+          {
+            "attempt": 20,
+            "resp_size": 0,
+            "elapsed_ms": 3002.5
+          }
+        ],
+        "first_5_avg_ms": 3002.5,
+        "last_5_avg_ms": 3002.5,
+        "slowdown_ms": 0.0,
+        "rejected_count": 20
+      }
+    },
+    {
+      "id": 156,
+      "category": "session",
+      "name": "Connection rate limiting detected",
+      "description": "Server rejected >50% of rapid connections",
+      "result": "20/20 connections rejected",
+      "anomaly": true,
+      "timestamp": "2026-02-15T23:44:30.354379"
+    },
+    {
+      "id": 157,
+      "category": "session",
+      "name": "Forged session to login handler",
+      "description": "Send forged session ID 0xCAFEBABE to login (ID=2)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:44:33.356877",
+      "details": {
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 158,
+      "category": "session",
+      "name": "Forged session to system handler",
+      "description": "Send forged session ID 0xCAFEBABE to system (ID=13)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:44:36.359375",
+      "details": {
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 159,
+      "category": "session",
+      "name": "Forged session to file handler",
+      "description": "Send forged session ID 0xCAFEBABE to file (ID=24)",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:44:39.361873",
+      "details": {
+        "resp_hex": "",
+        "decoded": "None"
+      }
+    },
+    {
+      "id": 160,
+      "category": "session",
+      "name": "Session reuse after TCP disconnect",
+      "description": "Send identical login on two separate connections",
+      "result": "Resp1=0B, Resp2=0B, Same=N/A",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:44:55.501166",
+      "details": {
+        "resp1_hex": "",
+        "resp2_hex": "None"
+      }
+    },
+    {
+      "id": 161,
+      "category": "session",
+      "name": "Response entropy analysis (10 samples)",
+      "description": "Collect 10 login responses and check uniqueness",
+      "result": "0/10 unique responses",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:45:51.969549",
+      "details": {
+        "unique_count": 0,
+        "total_samples": 0
+      }
+    },
+    {
+      "id": 162,
+      "category": "session",
+      "name": "Session timeout after 1s idle",
+      "description": "Hold connection idle for 1s then send data",
+      "result": "No response after 1s idle",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:45:58.986039",
+      "details": {
+        "delay_seconds": 1,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 163,
+      "category": "session",
+      "name": "Session timeout after 5s idle",
+      "description": "Hold connection idle for 5s then send data",
+      "result": "No response after 5s idle",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:46:09.992533",
+      "details": {
+        "delay_seconds": 5,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 164,
+      "category": "session",
+      "name": "Session timeout after 10s idle",
+      "description": "Hold connection idle for 10s then send data",
+      "result": "No response after 10s idle",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:46:26.052500",
+      "details": {
+        "delay_seconds": 10,
+        "resp_hex": ""
+      }
+    },
+    {
+      "id": 165,
+      "category": "session",
+      "name": "TCP half-close (SHUT_WR)",
+      "description": "Shutdown write side of socket after login init",
+      "result": "Got 0 bytes after SHUT_WR",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:46:29.066992"
+    },
+    {
+      "id": 166,
+      "category": "session",
+      "name": "Out-of-order request ID (999999)",
+      "description": "Send login with very high request ID",
+      "result": "Response: 0 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-15T23:46:32.081484",
+      "details": {
+        "resp_hex": ""
+      }
+    }
+  ],
+  "findings": []
+}

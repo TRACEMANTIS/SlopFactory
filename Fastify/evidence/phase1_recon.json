@@ -1,0 +1,142 @@
+{
+  "phase": 1,
+  "title": "Reconnaissance & Static Analysis",
+  "target": "Fastify v5.7.4",
+  "timestamp": "2026-02-18T20:25:00Z",
+  "tests_conducted": 47,
+  "anomalies": 12,
+  "findings_summary": [
+    {
+      "id": "P1-F01",
+      "severity": "HIGH",
+      "title": "fast-json-stringify: JSON Injection via format:date-time String Passthrough",
+      "component": "fast-json-stringify v6.3.0",
+      "location": "lib/serializer.js:65-89",
+      "description": "When a string (not Date object) is passed to a format:date-time/date/time schema field, the value is wrapped in double quotes with ZERO escaping. An attacker controlling the string value can inject arbitrary JSON structure, including overwriting other properties (last-value-wins in JSON.parse).",
+      "impact": "Property injection, privilege escalation via role overwrite in downstream parsers",
+      "cvss_estimate": "7.5",
+      "requires_pristine_validation": true
+    },
+    {
+      "id": "P1-F02",
+      "severity": "HIGH",
+      "title": "Content-based body schema dispatch bypass",
+      "component": "fastify core v5.7.4",
+      "location": "lib/validation.js:161-171",
+      "description": "When a route uses per-content-type body schemas and a request arrives with a Content-Type that has a registered parser but no matching body schema, the body is parsed but NOT validated. The handler receives an unvalidated body.",
+      "impact": "Schema validation bypass for non-matching content types",
+      "cvss_estimate": "6.5",
+      "requires_pristine_validation": true
+    },
+    {
+      "id": "P1-F03",
+      "severity": "HIGH",
+      "title": "fast-json-stringify: largeArrayMechanism bypasses all schema filtering",
+      "component": "fast-json-stringify v6.3.0",
+      "location": "index.js:658-660, 743-744",
+      "description": "When largeArrayMechanism is set to json-stringify and array size exceeds largeArraySize (default 20000), the library falls back to JSON.stringify() for the entire array, completely bypassing all schema-based property filtering. Passwords, SSNs, API keys, etc. would be leaked.",
+      "impact": "Complete information disclosure for array items above threshold",
+      "cvss_estimate": "7.0",
+      "requires_pristine_validation": true
+    },
+    {
+      "id": "P1-F04",
+      "severity": "MEDIUM",
+      "title": "No timeout on request-lifecycle async hooks",
+      "component": "fastify core v5.7.4",
+      "location": "lib/hooks.js:230-266",
+      "description": "hookRunnerGenerator has no timeout mechanism. A never-resolving Promise in an async hook holds the connection open indefinitely (until OS socket timeout). Multiple such requests could exhaust server connection capacity.",
+      "impact": "Denial of service via connection exhaustion",
+      "cvss_estimate": "5.3",
+      "requires_pristine_validation": false
+    },
+    {
+      "id": "P1-F05",
+      "severity": "MEDIUM",
+      "title": "URL-encoded form data passes JSON schema validation (CSRF vector)",
+      "component": "fastify core + @fastify/formbody",
+      "description": "When @fastify/formbody is registered, application/x-www-form-urlencoded bodies are parsed into flat objects that pass JSON schema validation. Since form-urlencoded is a CORS 'simple' content-type, cross-origin form submissions can invoke JSON-schema-validated routes without CORS preflight.",
+      "impact": "CSRF on JSON-schema routes when @fastify/formbody is registered",
+      "cvss_estimate": "5.0",
+      "requires_pristine_validation": true
+    },
+    {
+      "id": "P1-F06",
+      "severity": "MEDIUM",
+      "title": "fast-json-stringify: Empty schema {} leaks all nested data",
+      "component": "fast-json-stringify v6.3.0",
+      "location": "index.js:972-973",
+      "description": "Properties defined with empty schema {} (no type field) fall through to JSON.stringify(), serializing the entire value with all nested properties. Developers using {} as catch-all for flexible APIs inadvertently disable schema filtering for that subtree.",
+      "impact": "Information disclosure for properties with empty schemas",
+      "cvss_estimate": "5.0",
+      "requires_pristine_validation": false
+    },
+    {
+      "id": "P1-F07",
+      "severity": "LOW",
+      "title": "Missing security response headers",
+      "component": "fastify core v5.7.4",
+      "description": "Default configuration lacks CSP, HSTS, X-Content-Type-Options, X-Frame-Options, X-XSS-Protection headers. No Server header (good for OPSEC).",
+      "impact": "Reduced defense-in-depth against XSS, clickjacking",
+      "requires_pristine_validation": false
+    },
+    {
+      "id": "P1-F08",
+      "severity": "LOW",
+      "title": "Error messages can leak internal paths",
+      "component": "fastify core v5.7.4",
+      "location": "lib/errors.js:329-332",
+      "description": "FST_ERR_SCH_VALIDATION_BUILD includes method, URL, and internal error message. Stack traces are correctly stripped, but error messages may reveal server-side paths and configuration.",
+      "impact": "Information disclosure via error messages",
+      "requires_pristine_validation": false
+    },
+    {
+      "id": "P1-F09",
+      "severity": "INFO",
+      "title": "Prototype poisoning defaults to 'error' (safe default)",
+      "component": "fastify core v5.7.4",
+      "description": "Default onProtoPoisoning='error' and onConstructorPoisoning='error'. Requests with __proto__ in JSON body are rejected with 400 error. This is the safest configuration.",
+      "impact": "None - positive finding",
+      "requires_pristine_validation": false
+    },
+    {
+      "id": "P1-F10",
+      "severity": "INFO",
+      "title": "CORS wildcard origin with credentials",
+      "component": "Test harness configuration",
+      "description": "CORS configured with origin:true + credentials:true reflects any Origin header. Common real-world misconfiguration but not a framework default.",
+      "impact": "Config-dependent",
+      "requires_pristine_validation": false
+    }
+  ],
+  "nmap_results": {
+    "port_3000": "open",
+    "service": "HTTP (Fastify)",
+    "no_server_header": true,
+    "json_error_responses": true
+  },
+  "dependency_audit": {
+    "npm_audit_vulns": 0,
+    "total_packages": 170,
+    "key_versions": {
+      "fastify": "5.7.4",
+      "ajv": "8.18.0",
+      "fast-json-stringify": "6.3.0",
+      "secure-json-parse": "4.1.0",
+      "ejs": "4.0.1"
+    }
+  },
+  "content_type_parser_observations": {
+    "null_byte_in_ct": "400 Bad Request (Node.js HTTP parser rejects)",
+    "cl_te_smuggling": "400 Bad Request (Node.js rejects CL+TE)",
+    "tab_in_ct": "Sanitized (CVE-2024-58027 PATCHED)",
+    "mixed_case_ct": "Accepted (RFC-compliant case insensitive)",
+    "trailing_whitespace_ct": "Accepted (stripped)",
+    "charset_utf16_with_utf8_body": "Accepted (charset param ignored for parsing)",
+    "form_urlencoded_to_json_schema": "ACCEPTED (key finding - CSRF vector)",
+    "path_traversal_static": "403 Forbidden (blocked correctly)",
+    "dotfile_serving": "Served with dotfiles:allow config"
+  },
+  "source_repos_cloned": 14,
+  "source_audit_agents": 4
+}

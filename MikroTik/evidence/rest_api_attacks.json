@@ -1,0 +1,4487 @@
+{
+  "metadata": {
+    "script": "attack_rest_api.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 3,
+    "start_time": "2026-02-15T22:08:29.198149",
+    "end_time": "2026-02-15T22:09:09.753861",
+    "total_tests": 260,
+    "anomalies": 14,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "47s",
+    "router_log_count": 150,
+    "router_interesting_events": 36,
+    "final_health": {
+      "alive": true,
+      "uptime": "1m28s",
+      "cpu_load": "0",
+      "free_memory": "841842688",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "endpoint_acl",
+      "name": "ACL: /system/resource",
+      "description": "Test access control on /system/resource with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.254121",
+      "details": {
+        "endpoint": "/system/resource",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 2,
+      "category": "endpoint_acl",
+      "name": "ACL: /system/identity",
+      "description": "Test access control on /system/identity with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {'admin_POST': 400, 'full_POST': 400, 'read_POST': 400, 'write_POST': 400, 'unauth_POST': 401}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.318089",
+      "details": {
+        "endpoint": "/system/identity",
+        "acl_results": {
+          "admin_GET": 200,
+          "admin_POST": 400,
+          "full_GET": 200,
+          "full_POST": 400,
+          "read_GET": 200,
+          "read_POST": 400,
+          "write_GET": 200,
+          "write_POST": 400,
+          "unauth_GET": 401,
+          "unauth_POST": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 3,
+      "category": "endpoint_acl",
+      "name": "ACL: /user",
+      "description": "Test access control on /user with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {'admin_POST': 400, 'full_POST': 400, 'read_POST': 400, 'write_POST': 400, 'unauth_POST': 401}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.326085",
+      "details": {
+        "endpoint": "/user",
+        "acl_results": {
+          "admin_GET": 200,
+          "admin_POST": 400,
+          "full_GET": 200,
+          "full_POST": 400,
+          "read_GET": 200,
+          "read_POST": 400,
+          "write_GET": 200,
+          "write_POST": 400,
+          "unauth_GET": 401,
+          "unauth_POST": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 4,
+      "category": "endpoint_acl",
+      "name": "ACL: /user/group",
+      "description": "Test access control on /user/group with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.326085",
+      "details": {
+        "endpoint": "/user/group",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 5,
+      "category": "endpoint_acl",
+      "name": "ACL: /file",
+      "description": "Test access control on /file with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.378059",
+      "details": {
+        "endpoint": "/file",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 6,
+      "category": "endpoint_acl",
+      "name": "ACL: /system/script",
+      "description": "Test access control on /system/script with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {'admin_POST': 400, 'full_POST': 400, 'read_POST': 400, 'write_POST': 400, 'unauth_POST': 401}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.414041",
+      "details": {
+        "endpoint": "/system/script",
+        "acl_results": {
+          "admin_GET": 200,
+          "admin_POST": 400,
+          "full_GET": 200,
+          "full_POST": 400,
+          "read_GET": 200,
+          "read_POST": 400,
+          "write_GET": 200,
+          "write_POST": 400,
+          "unauth_GET": 401,
+          "unauth_POST": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 7,
+      "category": "endpoint_acl",
+      "name": "ACL: /system/scheduler",
+      "description": "Test access control on /system/scheduler with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.414041",
+      "details": {
+        "endpoint": "/system/scheduler",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 8,
+      "category": "endpoint_acl",
+      "name": "ACL: /tool/fetch",
+      "description": "Test access control on /tool/fetch with all permission levels",
+      "result": "GET: {'admin_GET': 400, 'full_GET': 400, 'read_GET': 400, 'write_GET': 400, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.474011",
+      "details": {
+        "endpoint": "/tool/fetch",
+        "acl_results": {
+          "admin_GET": 400,
+          "full_GET": 400,
+          "read_GET": 400,
+          "write_GET": 400,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 9,
+      "category": "endpoint_acl",
+      "name": "ACL: /ip/firewall/filter",
+      "description": "Test access control on /ip/firewall/filter with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {'admin_POST': 400, 'full_POST': 400, 'read_POST': 400, 'write_POST': 400, 'unauth_POST': 401}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.490003",
+      "details": {
+        "endpoint": "/ip/firewall/filter",
+        "acl_results": {
+          "admin_GET": 200,
+          "admin_POST": 400,
+          "full_GET": 200,
+          "full_POST": 400,
+          "read_GET": 200,
+          "read_POST": 400,
+          "write_GET": 200,
+          "write_POST": 400,
+          "unauth_GET": 401,
+          "unauth_POST": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 10,
+      "category": "endpoint_acl",
+      "name": "ACL: /ip/address",
+      "description": "Test access control on /ip/address with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {'admin_POST': 400, 'full_POST': 400, 'read_POST': 400, 'write_POST': 400, 'unauth_POST': 401}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.490003",
+      "details": {
+        "endpoint": "/ip/address",
+        "acl_results": {
+          "admin_GET": 200,
+          "admin_POST": 400,
+          "full_GET": 200,
+          "full_POST": 400,
+          "read_GET": 200,
+          "read_POST": 400,
+          "write_GET": 200,
+          "write_POST": 400,
+          "unauth_GET": 401,
+          "unauth_POST": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 11,
+      "category": "endpoint_acl",
+      "name": "ACL: /ip/service",
+      "description": "Test access control on /ip/service with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.569963",
+      "details": {
+        "endpoint": "/ip/service",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 12,
+      "category": "endpoint_acl",
+      "name": "ACL: /log",
+      "description": "Test access control on /log with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.593951",
+      "details": {
+        "endpoint": "/log",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 13,
+      "category": "endpoint_acl",
+      "name": "ACL: /certificate",
+      "description": "Test access control on /certificate with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.613941",
+      "details": {
+        "endpoint": "/certificate",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 14,
+      "category": "endpoint_acl",
+      "name": "ACL: /interface",
+      "description": "Test access control on /interface with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.637929",
+      "details": {
+        "endpoint": "/interface",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 15,
+      "category": "endpoint_acl",
+      "name": "ACL: /ip/route",
+      "description": "Test access control on /ip/route with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.637929",
+      "details": {
+        "endpoint": "/ip/route",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 16,
+      "category": "endpoint_acl",
+      "name": "ACL: /snmp",
+      "description": "Test access control on /snmp with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.677909",
+      "details": {
+        "endpoint": "/snmp",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 17,
+      "category": "endpoint_acl",
+      "name": "ACL: /system/package",
+      "description": "Test access control on /system/package with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.685905",
+      "details": {
+        "endpoint": "/system/package",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 18,
+      "category": "endpoint_acl",
+      "name": "ACL: /ip/dns",
+      "description": "Test access control on /ip/dns with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.713891",
+      "details": {
+        "endpoint": "/ip/dns",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 19,
+      "category": "endpoint_acl",
+      "name": "ACL: /ppp/secret",
+      "description": "Test access control on /ppp/secret with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.745875",
+      "details": {
+        "endpoint": "/ppp/secret",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 20,
+      "category": "endpoint_acl",
+      "name": "ACL: /system/logging",
+      "description": "Test access control on /system/logging with all permission levels",
+      "result": "GET: {'admin_GET': 200, 'full_GET': 200, 'read_GET': 200, 'write_GET': 200, 'unauth_GET': 401}, POST: {}",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.769863",
+      "details": {
+        "endpoint": "/system/logging",
+        "acl_results": {
+          "admin_GET": 200,
+          "full_GET": 200,
+          "read_GET": 200,
+          "write_GET": 200,
+          "unauth_GET": 401
+        },
+        "anomaly_details": []
+      }
+    },
+    {
+      "id": 21,
+      "category": "endpoint_acl",
+      "name": "ACL matrix summary",
+      "description": "Summary of endpoint access control across all user levels",
+      "result": "Tested 20 endpoints x 5 user levels. Unauthenticated 200s: 0",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.769863",
+      "details": {
+        "matrix": {
+          "/system/resource": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/system/identity": {
+            "admin_GET": 200,
+            "admin_POST": 400,
+            "full_GET": 200,
+            "full_POST": 400,
+            "read_GET": 200,
+            "read_POST": 400,
+            "write_GET": 200,
+            "write_POST": 400,
+            "unauth_GET": 401,
+            "unauth_POST": 401
+          },
+          "/user": {
+            "admin_GET": 200,
+            "admin_POST": 400,
+            "full_GET": 200,
+            "full_POST": 400,
+            "read_GET": 200,
+            "read_POST": 400,
+            "write_GET": 200,
+            "write_POST": 400,
+            "unauth_GET": 401,
+            "unauth_POST": 401
+          },
+          "/user/group": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/file": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/system/script": {
+            "admin_GET": 200,
+            "admin_POST": 400,
+            "full_GET": 200,
+            "full_POST": 400,
+            "read_GET": 200,
+            "read_POST": 400,
+            "write_GET": 200,
+            "write_POST": 400,
+            "unauth_GET": 401,
+            "unauth_POST": 401
+          },
+          "/system/scheduler": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/tool/fetch": {
+            "admin_GET": 400,
+            "full_GET": 400,
+            "read_GET": 400,
+            "write_GET": 400,
+            "unauth_GET": 401
+          },
+          "/ip/firewall/filter": {
+            "admin_GET": 200,
+            "admin_POST": 400,
+            "full_GET": 200,
+            "full_POST": 400,
+            "read_GET": 200,
+            "read_POST": 400,
+            "write_GET": 200,
+            "write_POST": 400,
+            "unauth_GET": 401,
+            "unauth_POST": 401
+          },
+          "/ip/address": {
+            "admin_GET": 200,
+            "admin_POST": 400,
+            "full_GET": 200,
+            "full_POST": 400,
+            "read_GET": 200,
+            "read_POST": 400,
+            "write_GET": 200,
+            "write_POST": 400,
+            "unauth_GET": 401,
+            "unauth_POST": 401
+          },
+          "/ip/service": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/log": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/certificate": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/interface": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/ip/route": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/snmp": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/system/package": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/ip/dns": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/ppp/secret": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          },
+          "/system/logging": {
+            "admin_GET": 200,
+            "full_GET": 200,
+            "read_GET": 200,
+            "write_GET": 200,
+            "unauth_GET": 401
+          }
+        },
+        "unauth_accessible_count": 0
+      }
+    },
+    {
+      "id": 22,
+      "category": "json_parsing",
+      "name": "Deep nesting 10 levels on /system/identity/set",
+      "description": "Send 10-level nested JSON to /system/identity/set \u2014 tests parse_json_element recursion",
+      "result": "HTTP 200, response_len=2",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.773861",
+      "details": {
+        "depth": 10,
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 23,
+      "category": "json_parsing",
+      "name": "Deep nesting 10 levels on /ip/address/add",
+      "description": "Send 10-level nested JSON to /ip/address/add \u2014 tests parse_json_element recursion",
+      "result": "HTTP 400, response_len=71",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.781857",
+      "details": {
+        "depth": 10,
+        "endpoint": "/ip/address/add",
+        "status": 400,
+        "response": "{'detail': 'missing =address=', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 24,
+      "category": "json_parsing",
+      "name": "Deep nesting 50 levels on /system/identity/set",
+      "description": "Send 50-level nested JSON to /system/identity/set \u2014 tests parse_json_element recursion",
+      "result": "HTTP 200, response_len=2",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.789853",
+      "details": {
+        "depth": 50,
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 25,
+      "category": "json_parsing",
+      "name": "Deep nesting 50 levels on /ip/address/add",
+      "description": "Send 50-level nested JSON to /ip/address/add \u2014 tests parse_json_element recursion",
+      "result": "HTTP 400, response_len=71",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.793851",
+      "details": {
+        "depth": 50,
+        "endpoint": "/ip/address/add",
+        "status": 400,
+        "response": "{'detail': 'missing =address=', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 26,
+      "category": "json_parsing",
+      "name": "Deep nesting 100 levels on /system/identity/set",
+      "description": "Send 100-level nested JSON to /system/identity/set \u2014 tests parse_json_element recursion",
+      "result": "HTTP 400, response_len=66",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.797849",
+      "details": {
+        "depth": 100,
+        "endpoint": "/system/identity/set",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 27,
+      "category": "json_parsing",
+      "name": "Deep nesting 100 levels on /ip/address/add",
+      "description": "Send 100-level nested JSON to /ip/address/add \u2014 tests parse_json_element recursion",
+      "result": "HTTP 400, response_len=66",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.801847",
+      "details": {
+        "depth": 100,
+        "endpoint": "/ip/address/add",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 28,
+      "category": "json_parsing",
+      "name": "Deep nesting 500 levels on /system/identity/set",
+      "description": "Send 500-level nested JSON to /system/identity/set \u2014 tests parse_json_element recursion",
+      "result": "HTTP 400, response_len=66",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.805845",
+      "details": {
+        "depth": 500,
+        "endpoint": "/system/identity/set",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 29,
+      "category": "json_parsing",
+      "name": "Deep nesting 500 levels on /ip/address/add",
+      "description": "Send 500-level nested JSON to /ip/address/add \u2014 tests parse_json_element recursion",
+      "result": "HTTP 400, response_len=66",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.809843",
+      "details": {
+        "depth": 500,
+        "endpoint": "/ip/address/add",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 30,
+      "category": "json_parsing",
+      "name": "Deep nesting 1000 levels on /system/identity/set",
+      "description": "Send 1000-level nested JSON to /system/identity/set \u2014 tests parse_json_element recursion",
+      "result": "HTTP 400, response_len=66",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.813841",
+      "details": {
+        "depth": 1000,
+        "endpoint": "/system/identity/set",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 31,
+      "category": "json_parsing",
+      "name": "Deep nesting 1000 levels on /ip/address/add",
+      "description": "Send 1000-level nested JSON to /ip/address/add \u2014 tests parse_json_element recursion",
+      "result": "HTTP 400, response_len=66",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.821837",
+      "details": {
+        "depth": 1000,
+        "endpoint": "/ip/address/add",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 32,
+      "category": "json_parsing",
+      "name": "Long string value (1KB)",
+      "description": "Send 1KB string value in JSON body to /system/identity/set",
+      "result": "HTTP 400, response_len=98",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.825835",
+      "details": {
+        "size": 1024,
+        "status": 400,
+        "response": "{'detail': 'failure: could not change identity: too long', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 33,
+      "category": "json_parsing",
+      "name": "Long string value (10KB)",
+      "description": "Send 10KB string value in JSON body to /system/identity/set",
+      "result": "HTTP 400, response_len=98",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.829833",
+      "details": {
+        "size": 10240,
+        "status": 400,
+        "response": "{'detail': 'failure: could not change identity: too long', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 34,
+      "category": "json_parsing",
+      "name": "Long string value (100KB)",
+      "description": "Send 100KB string value in JSON body to /system/identity/set",
+      "result": "HTTP 400, response_len=68",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.837829",
+      "details": {
+        "size": 102400,
+        "status": 400,
+        "response": "{'detail': 'Session closed', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 35,
+      "category": "json_parsing",
+      "name": "Long string value (1MB)",
+      "description": "Send 1MB string value in JSON body to /system/identity/set",
+      "result": "HTTP 413, response_len=46",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.845825",
+      "details": {
+        "size": 1048576,
+        "status": 413,
+        "response": "{'error': 413, 'message': 'Payload Too Large'}"
+      }
+    },
+    {
+      "id": 36,
+      "category": "json_parsing",
+      "name": "Unicode: null_byte on /system/identity/set",
+      "description": "Send JSON with null_byte unicode edge case to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.853821",
+      "details": {
+        "payload_name": "null_byte",
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 37,
+      "category": "json_parsing",
+      "name": "Unicode: null_byte on /system/script/add",
+      "description": "Send JSON with null_byte unicode edge case to /system/script/add",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.857819",
+      "details": {
+        "payload_name": "null_byte",
+        "endpoint": "/system/script/add",
+        "status": 200,
+        "response": "{'ret': '*2'}"
+      }
+    },
+    {
+      "id": 38,
+      "category": "json_parsing",
+      "name": "Unicode: surrogate_pair on /system/identity/set",
+      "description": "Send JSON with surrogate_pair unicode edge case to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.857819",
+      "details": {
+        "payload_name": "surrogate_pair",
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 39,
+      "category": "json_parsing",
+      "name": "Unicode: surrogate_pair on /system/script/add",
+      "description": "Send JSON with surrogate_pair unicode edge case to /system/script/add",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.857819",
+      "details": {
+        "payload_name": "surrogate_pair",
+        "endpoint": "/system/script/add",
+        "status": 200,
+        "response": "{'ret': '*3'}"
+      }
+    },
+    {
+      "id": 40,
+      "category": "json_parsing",
+      "name": "Unicode: overlong_2byte on /system/identity/set",
+      "description": "Send JSON with overlong_2byte unicode edge case to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.869813",
+      "details": {
+        "payload_name": "overlong_2byte",
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 41,
+      "category": "json_parsing",
+      "name": "Unicode: overlong_2byte on /system/script/add",
+      "description": "Send JSON with overlong_2byte unicode edge case to /system/script/add",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.869813",
+      "details": {
+        "payload_name": "overlong_2byte",
+        "endpoint": "/system/script/add",
+        "status": 200,
+        "response": "{'ret': '*4'}"
+      }
+    },
+    {
+      "id": 42,
+      "category": "json_parsing",
+      "name": "Unicode: rtl_marker on /system/identity/set",
+      "description": "Send JSON with rtl_marker unicode edge case to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.877809",
+      "details": {
+        "payload_name": "rtl_marker",
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 43,
+      "category": "json_parsing",
+      "name": "Unicode: rtl_marker on /system/script/add",
+      "description": "Send JSON with rtl_marker unicode edge case to /system/script/add",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.881807",
+      "details": {
+        "payload_name": "rtl_marker",
+        "endpoint": "/system/script/add",
+        "status": 200,
+        "response": "{'ret': '*5'}"
+      }
+    },
+    {
+      "id": 44,
+      "category": "json_parsing",
+      "name": "Unicode: zero_width_space on /system/identity/set",
+      "description": "Send JSON with zero_width_space unicode edge case to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.885805",
+      "details": {
+        "payload_name": "zero_width_space",
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 45,
+      "category": "json_parsing",
+      "name": "Unicode: zero_width_space on /system/script/add",
+      "description": "Send JSON with zero_width_space unicode edge case to /system/script/add",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.889803",
+      "details": {
+        "payload_name": "zero_width_space",
+        "endpoint": "/system/script/add",
+        "status": 200,
+        "response": "{'ret': '*6'}"
+      }
+    },
+    {
+      "id": 46,
+      "category": "json_parsing",
+      "name": "Unicode: replacement_char on /system/identity/set",
+      "description": "Send JSON with replacement_char unicode edge case to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.893801",
+      "details": {
+        "payload_name": "replacement_char",
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 47,
+      "category": "json_parsing",
+      "name": "Unicode: replacement_char on /system/script/add",
+      "description": "Send JSON with replacement_char unicode edge case to /system/script/add",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.901797",
+      "details": {
+        "payload_name": "replacement_char",
+        "endpoint": "/system/script/add",
+        "status": 200,
+        "response": "{'ret': '*7'}"
+      }
+    },
+    {
+      "id": 48,
+      "category": "json_parsing",
+      "name": "Unicode: bom_in_value on /system/identity/set",
+      "description": "Send JSON with bom_in_value unicode edge case to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.905795",
+      "details": {
+        "payload_name": "bom_in_value",
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 49,
+      "category": "json_parsing",
+      "name": "Unicode: bom_in_value on /system/script/add",
+      "description": "Send JSON with bom_in_value unicode edge case to /system/script/add",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.909793",
+      "details": {
+        "payload_name": "bom_in_value",
+        "endpoint": "/system/script/add",
+        "status": 200,
+        "response": "{'ret': '*8'}"
+      }
+    },
+    {
+      "id": 50,
+      "category": "json_parsing",
+      "name": "Unicode: null_in_key on /system/identity/set",
+      "description": "Send JSON with null_in_key unicode edge case to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.913791",
+      "details": {
+        "payload_name": "null_in_key",
+        "endpoint": "/system/identity/set",
+        "status": 400,
+        "response": "{'detail': 'unknown parameter te\\\\u0000st', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 51,
+      "category": "json_parsing",
+      "name": "Unicode: null_in_key on /system/script/add",
+      "description": "Send JSON with null_in_key unicode edge case to /system/script/add",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.921787",
+      "details": {
+        "payload_name": "null_in_key",
+        "endpoint": "/system/script/add",
+        "status": 400,
+        "response": "{'detail': 'unknown parameter te\\\\u0000st', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 52,
+      "category": "json_parsing",
+      "name": "Unicode: high_unicode on /system/identity/set",
+      "description": "Send JSON with high_unicode unicode edge case to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.925785",
+      "details": {
+        "payload_name": "high_unicode",
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 53,
+      "category": "json_parsing",
+      "name": "Unicode: high_unicode on /system/script/add",
+      "description": "Send JSON with high_unicode unicode edge case to /system/script/add",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.929783",
+      "details": {
+        "payload_name": "high_unicode",
+        "endpoint": "/system/script/add",
+        "status": 400,
+        "response": "{'detail': 'failure: item with such name already exists', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 54,
+      "category": "json_parsing",
+      "name": "Unicode: mixed_escapes on /system/identity/set",
+      "description": "Send JSON with mixed_escapes unicode edge case to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.933781",
+      "details": {
+        "payload_name": "mixed_escapes",
+        "endpoint": "/system/identity/set",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 55,
+      "category": "json_parsing",
+      "name": "Unicode: mixed_escapes on /system/script/add",
+      "description": "Send JSON with mixed_escapes unicode edge case to /system/script/add",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.941777",
+      "details": {
+        "payload_name": "mixed_escapes",
+        "endpoint": "/system/script/add",
+        "status": 200,
+        "response": "{'ret': '*A'}"
+      }
+    },
+    {
+      "id": 56,
+      "category": "json_parsing",
+      "name": "Type confusion: string_for_number",
+      "description": "Send JSON with type confusion (string_for_number) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.945775",
+      "details": {
+        "payload_name": "string_for_number",
+        "status": 400,
+        "response": "{'detail': 'unknown parameter mtu', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 57,
+      "category": "json_parsing",
+      "name": "Type confusion: array_for_object",
+      "description": "Send JSON with type confusion (array_for_object) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.949773",
+      "details": {
+        "payload_name": "array_for_object",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 58,
+      "category": "json_parsing",
+      "name": "Type confusion: null_for_string",
+      "description": "Send JSON with type confusion (null_for_string) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.953771",
+      "details": {
+        "payload_name": "null_for_string",
+        "status": 400,
+        "response": "{'detail': 'failure: empty identity string', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 59,
+      "category": "json_parsing",
+      "name": "Type confusion: number_for_string",
+      "description": "Send JSON with type confusion (number_for_string) to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.957769",
+      "details": {
+        "payload_name": "number_for_string",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 60,
+      "category": "json_parsing",
+      "name": "Type confusion: bool_for_string",
+      "description": "Send JSON with type confusion (bool_for_string) to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.961767",
+      "details": {
+        "payload_name": "bool_for_string",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 61,
+      "category": "json_parsing",
+      "name": "Type confusion: nested_array",
+      "description": "Send JSON with type confusion (nested_array) to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.965765",
+      "details": {
+        "payload_name": "nested_array",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 62,
+      "category": "json_parsing",
+      "name": "Type confusion: object_for_string",
+      "description": "Send JSON with type confusion (object_for_string) to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.969763",
+      "details": {
+        "payload_name": "object_for_string",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 63,
+      "category": "json_parsing",
+      "name": "Malformed JSON: no_closing_brace",
+      "description": "Send malformed JSON (no_closing_brace) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.977759",
+      "details": {
+        "payload_name": "no_closing_brace",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 64,
+      "category": "json_parsing",
+      "name": "Malformed JSON: no_closing_quote",
+      "description": "Send malformed JSON (no_closing_quote) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.981757",
+      "details": {
+        "payload_name": "no_closing_quote",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 65,
+      "category": "json_parsing",
+      "name": "Malformed JSON: trailing_comma",
+      "description": "Send malformed JSON (trailing_comma) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.989753",
+      "details": {
+        "payload_name": "trailing_comma",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 66,
+      "category": "json_parsing",
+      "name": "Malformed JSON: double_comma",
+      "description": "Send malformed JSON (double_comma) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.993751",
+      "details": {
+        "payload_name": "double_comma",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 67,
+      "category": "json_parsing",
+      "name": "Malformed JSON: no_colon",
+      "description": "Send malformed JSON (no_colon) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:29.997749",
+      "details": {
+        "payload_name": "no_colon",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 68,
+      "category": "json_parsing",
+      "name": "Malformed JSON: single_quotes",
+      "description": "Send malformed JSON (single_quotes) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.001747",
+      "details": {
+        "payload_name": "single_quotes",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 69,
+      "category": "json_parsing",
+      "name": "Malformed JSON: unquoted_key",
+      "description": "Send malformed JSON (unquoted_key) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.005745",
+      "details": {
+        "payload_name": "unquoted_key",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 70,
+      "category": "json_parsing",
+      "name": "Malformed JSON: extra_closing",
+      "description": "Send malformed JSON (extra_closing) to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.013741",
+      "details": {
+        "payload_name": "extra_closing",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 71,
+      "category": "json_parsing",
+      "name": "Malformed JSON: empty_body",
+      "description": "Send malformed JSON (empty_body) to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.017739",
+      "details": {
+        "payload_name": "empty_body",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 72,
+      "category": "json_parsing",
+      "name": "Malformed JSON: just_null",
+      "description": "Send malformed JSON (just_null) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.021737",
+      "details": {
+        "payload_name": "just_null",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 73,
+      "category": "json_parsing",
+      "name": "Malformed JSON: just_true",
+      "description": "Send malformed JSON (just_true) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.025735",
+      "details": {
+        "payload_name": "just_true",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 74,
+      "category": "json_parsing",
+      "name": "Malformed JSON: just_string",
+      "description": "Send malformed JSON (just_string) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.029733",
+      "details": {
+        "payload_name": "just_string",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 75,
+      "category": "json_parsing",
+      "name": "Malformed JSON: just_number",
+      "description": "Send malformed JSON (just_number) to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.033731",
+      "details": {
+        "payload_name": "just_number",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 76,
+      "category": "json_parsing",
+      "name": "Duplicate keys: dup_name",
+      "description": "Send JSON with duplicate keys (dup_name)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.037729",
+      "details": {
+        "payload_name": "dup_name",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 77,
+      "category": "json_parsing",
+      "name": "Duplicate keys: dup_with_types",
+      "description": "Send JSON with duplicate keys (dup_with_types)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.041727",
+      "details": {
+        "payload_name": "dup_with_types",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 78,
+      "category": "json_parsing",
+      "name": "Duplicate keys: triple_dup",
+      "description": "Send JSON with duplicate keys (triple_dup)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.045725",
+      "details": {
+        "payload_name": "triple_dup",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 79,
+      "category": "json_parsing",
+      "name": "Special numeric: infinity",
+      "description": "Send JSON with special numeric value (infinity)",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.049723",
+      "details": {
+        "payload_name": "infinity",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 80,
+      "category": "json_parsing",
+      "name": "Special numeric: neg_infinity",
+      "description": "Send JSON with special numeric value (neg_infinity)",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.049723",
+      "details": {
+        "payload_name": "neg_infinity",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 81,
+      "category": "json_parsing",
+      "name": "Special numeric: nan",
+      "description": "Send JSON with special numeric value (nan)",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.057719",
+      "details": {
+        "payload_name": "nan",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 82,
+      "category": "json_parsing",
+      "name": "Special numeric: huge_number",
+      "description": "Send JSON with special numeric value (huge_number)",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.057719",
+      "details": {
+        "payload_name": "huge_number",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 83,
+      "category": "json_parsing",
+      "name": "Special numeric: neg_zero",
+      "description": "Send JSON with special numeric value (neg_zero)",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "neg_zero",
+        "status": 400,
+        "response": "{'detail': 'unknown parameter value', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 84,
+      "category": "json_parsing",
+      "name": "Special numeric: very_precise",
+      "description": "Send JSON with special numeric value (very_precise)",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "very_precise",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 85,
+      "category": "json_parsing",
+      "name": "Special numeric: tiny_number",
+      "description": "Send JSON with special numeric value (tiny_number)",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "tiny_number",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 86,
+      "category": "json_parsing",
+      "name": "Special numeric: int_overflow",
+      "description": "Send JSON with special numeric value (int_overflow)",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "int_overflow",
+        "status": 400,
+        "response": "{'detail': 'unknown parameter value', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 87,
+      "category": "json_parsing",
+      "name": "Container/BOM: empty_object",
+      "description": "Send empty_object JSON to /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "empty_object",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 88,
+      "category": "json_parsing",
+      "name": "Container/BOM: empty_array",
+      "description": "Send empty_array JSON to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "empty_array",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 89,
+      "category": "json_parsing",
+      "name": "Container/BOM: empty_string_val",
+      "description": "Send empty_string_val JSON to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "empty_string_val",
+        "status": 400,
+        "response": "{'detail': 'failure: empty identity string', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 90,
+      "category": "json_parsing",
+      "name": "Container/BOM: bom_prefix",
+      "description": "Send bom_prefix JSON to /system/identity/set",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "bom_prefix",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 91,
+      "category": "json_parsing",
+      "name": "Escape: double_backslash",
+      "description": "Send JSON with double_backslash backslash escaping",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "double_backslash",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 92,
+      "category": "json_parsing",
+      "name": "Escape: backslash_n",
+      "description": "Send JSON with backslash_n backslash escaping",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "backslash_n",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 93,
+      "category": "json_parsing",
+      "name": "Escape: backslash_unicode",
+      "description": "Send JSON with backslash_unicode backslash escaping",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "backslash_unicode",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 94,
+      "category": "json_parsing",
+      "name": "Escape: invalid_escape",
+      "description": "Send JSON with invalid_escape backslash escaping",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "invalid_escape",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 95,
+      "category": "json_parsing",
+      "name": "Escape: lone_backslash",
+      "description": "Send JSON with lone_backslash backslash escaping",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "payload_name": "lone_backslash",
+        "status": 400,
+        "response": "{'detail': 'Invalid JSON', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 96,
+      "category": "http_methods",
+      "name": "Method: TRACE on /system/resource",
+      "description": "Send TRACE request to /system/resource",
+      "result": "HTTP 503, body_len=109",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "method": "TRACE",
+        "status": 503,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 97,
+      "category": "http_methods",
+      "name": "Method: OPTIONS on /system/resource",
+      "description": "Send OPTIONS request to /system/resource",
+      "result": "HTTP 503, body_len=109",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "method": "OPTIONS",
+        "status": 503,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 98,
+      "category": "http_methods",
+      "name": "Method: PUT on /system/resource",
+      "description": "Send PUT request to /system/resource",
+      "result": "HTTP 400, body_len=67",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "method": "PUT",
+        "status": 400,
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "67",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "Tue, 16 Feb 2027 22:20:48 GMT",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "{\"detail\":\"Resource not found\",\"error\":400,\"message\":\"Bad Request\"}",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 99,
+      "category": "http_methods",
+      "name": "Method: DELETE on /system/resource",
+      "description": "Send DELETE request to /system/resource",
+      "result": "HTTP 400, body_len=87",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.065715",
+      "details": {
+        "method": "DELETE",
+        "status": 400,
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "87",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "Tue, 16 Feb 2027 22:20:48 GMT",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "{\"detail\":\"missing or invalid resource identifier\",\"error\":400,\"message\":\"Bad Request\"}",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 100,
+      "category": "http_methods",
+      "name": "Method: CONNECT on /system/resource",
+      "description": "Send CONNECT request to /system/resource",
+      "result": "HTTP 503, body_len=109",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.125685",
+      "details": {
+        "method": "CONNECT",
+        "status": 503,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 101,
+      "category": "http_methods",
+      "name": "Method: PROPFIND on /system/resource",
+      "description": "Send PROPFIND request to /system/resource",
+      "result": "HTTP 503, body_len=109",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.125685",
+      "details": {
+        "method": "PROPFIND",
+        "status": 503,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 102,
+      "category": "http_methods",
+      "name": "Method: MKCOL on /system/resource",
+      "description": "Send MKCOL request to /system/resource",
+      "result": "HTTP 503, body_len=109",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.133681",
+      "details": {
+        "method": "MKCOL",
+        "status": 503,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 103,
+      "category": "http_methods",
+      "name": "Method: COPY on /system/resource",
+      "description": "Send COPY request to /system/resource",
+      "result": "HTTP 503, body_len=109",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.137679",
+      "details": {
+        "method": "COPY",
+        "status": 503,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 104,
+      "category": "http_methods",
+      "name": "Method: MOVE on /system/resource",
+      "description": "Send MOVE request to /system/resource",
+      "result": "HTTP 503, body_len=109",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.141677",
+      "details": {
+        "method": "MOVE",
+        "status": 503,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 105,
+      "category": "http_methods",
+      "name": "Method: LOCK on /system/resource",
+      "description": "Send LOCK request to /system/resource",
+      "result": "HTTP 503, body_len=109",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.145675",
+      "details": {
+        "method": "LOCK",
+        "status": 503,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 106,
+      "category": "http_methods",
+      "name": "Method: UNLOCK on /system/resource",
+      "description": "Send UNLOCK request to /system/resource",
+      "result": "HTTP 503, body_len=109",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.145675",
+      "details": {
+        "method": "UNLOCK",
+        "status": 503,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 107,
+      "category": "http_methods",
+      "name": "Method: PROPPATCH on /system/resource",
+      "description": "Send PROPPATCH request to /system/resource",
+      "result": "HTTP 503, body_len=109",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.149673",
+      "details": {
+        "method": "PROPPATCH",
+        "status": 503,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 108,
+      "category": "http_methods",
+      "name": "Method: SEARCH on /system/resource",
+      "description": "Send SEARCH request to /system/resource",
+      "result": "HTTP 503, body_len=109",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.153671",
+      "details": {
+        "method": "SEARCH",
+        "status": 503,
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "close",
+          "Content-Length": "109",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:20:48 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n",
+        "anomaly_reason": ""
+      }
+    },
+    {
+      "id": 109,
+      "category": "http_methods",
+      "name": "Method override: X-HTTP-Method-Override=DELETE",
+      "description": "POST with X-HTTP-Method-Override: DELETE header",
+      "result": "HTTP 400 (actual DELETE returns 400)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:08:30.161667",
+      "details": {
+        "header": "X-HTTP-Method-Override",
+        "override_to": "DELETE",
+        "overridden_status": 400,
+        "real_method_status": 400,
+        "body_preview": "{\"detail\":\"no such command\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 110,
+      "category": "http_methods",
+      "name": "Method override: X-HTTP-Method-Override=PUT",
+      "description": "POST with X-HTTP-Method-Override: PUT header",
+      "result": "HTTP 400 (actual PUT returns 400)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:08:30.169663",
+      "details": {
+        "header": "X-HTTP-Method-Override",
+        "override_to": "PUT",
+        "overridden_status": 400,
+        "real_method_status": 400,
+        "body_preview": "{\"detail\":\"no such command\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 111,
+      "category": "http_methods",
+      "name": "Method override: X-Method-Override=DELETE",
+      "description": "POST with X-Method-Override: DELETE header",
+      "result": "HTTP 400 (actual DELETE returns 400)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:08:30.177659",
+      "details": {
+        "header": "X-Method-Override",
+        "override_to": "DELETE",
+        "overridden_status": 400,
+        "real_method_status": 400,
+        "body_preview": "{\"detail\":\"no such command\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 112,
+      "category": "http_methods",
+      "name": "Method override: X-HTTP-Method=DELETE",
+      "description": "POST with X-HTTP-Method: DELETE header",
+      "result": "HTTP 400 (actual DELETE returns 400)",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:08:30.189653",
+      "details": {
+        "header": "X-HTTP-Method",
+        "override_to": "DELETE",
+        "overridden_status": 400,
+        "real_method_status": 400,
+        "body_preview": "{\"detail\":\"no such command\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 113,
+      "category": "http_methods",
+      "name": "Query param method override: ?_method=DELETE",
+      "description": "POST with ?_method=DELETE query parameter",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.193651",
+      "details": {
+        "status": 400,
+        "body_preview": "{\"detail\":\"no such command\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 114,
+      "category": "http_methods",
+      "name": "HEAD vs GET consistency",
+      "description": "Compare HEAD and GET responses for /system/resource",
+      "result": "GET=200 HEAD=200, headers_match=True, HEAD body_len=0",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.201647",
+      "details": {
+        "get_status": 200,
+        "head_status": 200,
+        "headers_match": true,
+        "head_body_len": 0
+      }
+    },
+    {
+      "id": 115,
+      "category": "http_methods",
+      "name": "TRACE on /system/identity",
+      "description": "Send TRACE to /system/identity to test for XST",
+      "result": "HTTP 503, body contains TRACE: False",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.205645",
+      "details": {
+        "path": "/system/identity",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n"
+      }
+    },
+    {
+      "id": 116,
+      "category": "http_methods",
+      "name": "TRACE on /user",
+      "description": "Send TRACE to /user to test for XST",
+      "result": "HTTP 503, body contains TRACE: False",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.213641",
+      "details": {
+        "path": "/user",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n"
+      }
+    },
+    {
+      "id": 117,
+      "category": "http_methods",
+      "name": "TRACE on /ip/address",
+      "description": "Send TRACE to /ip/address to test for XST",
+      "result": "HTTP 503, body contains TRACE: False",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.217639",
+      "details": {
+        "path": "/ip/address",
+        "status": 503,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 503 : unknown method</title>\n<h1>Error 503 : unknown method</h1>\n"
+      }
+    },
+    {
+      "id": 118,
+      "category": "query_injection",
+      "name": "Operator: proplist_name",
+      "description": "Filter to show only name field",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.217639",
+      "details": {
+        "path": "/user?.proplist=name",
+        "status": 200,
+        "response": "[{'.id': '*1', 'name': 'admin'}, {'.id': '*2', 'name': 'testfull'}, {'.id': '*3', 'name': 'testread'}, {'.id': '*4', 'name': 'testwrite'}, {'.id': '*5', 'name': 'csrftest'}]"
+      }
+    },
+    {
+      "id": 119,
+      "category": "query_injection",
+      "name": "Operator: proplist_password",
+      "description": "Attempt to extract password via proplist",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.221637",
+      "details": {
+        "path": "/user?.proplist=name,password",
+        "status": 200,
+        "response": "[{'.id': '*1', 'name': 'admin'}, {'.id': '*2', 'name': 'testfull'}, {'.id': '*3', 'name': 'testread'}, {'.id': '*4', 'name': 'testwrite'}, {'.id': '*5', 'name': 'csrftest'}]"
+      }
+    },
+    {
+      "id": 120,
+      "category": "query_injection",
+      "name": "Operator: proplist_group",
+      "description": "Filter to name and group",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.229633",
+      "details": {
+        "path": "/user?.proplist=name,group",
+        "status": 200,
+        "response": "[{'.id': '*1', 'group': 'full', 'name': 'admin'}, {'.id': '*2', 'group': 'full', 'name': 'testfull'}, {'.id': '*3', 'group': 'read', 'name': 'testread'}, {'.id': '*4', 'group': 'write', 'name': 'testwrite'}, {'.id': '*5', 'group': 'read', 'name': 'csrftest'}]"
+      }
+    },
+    {
+      "id": 121,
+      "category": "query_injection",
+      "name": "Operator: query_admin",
+      "description": "Query filter for admin user",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.233631",
+      "details": {
+        "path": "/user?.query=name=admin",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 122,
+      "category": "query_injection",
+      "name": "Operator: query_regex",
+      "description": "Regex query for admin-like users",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.233631",
+      "details": {
+        "path": "/user?.query=name~admin",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 123,
+      "category": "query_injection",
+      "name": "Operator: query_lt",
+      "description": "Less-than query operator",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.241627",
+      "details": {
+        "path": "/user?.query=name<z",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 124,
+      "category": "query_injection",
+      "name": "Operator: query_gt",
+      "description": "Greater-than query operator",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.245625",
+      "details": {
+        "path": "/user?.query=name>a",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 125,
+      "category": "query_injection",
+      "name": "Operator: query_negate",
+      "description": "Negated query filter",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.249623",
+      "details": {
+        "path": "/user?.query=!name=admin",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 126,
+      "category": "query_injection",
+      "name": "Operator: method_delete",
+      "description": "Attempt method override via query param",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.249623",
+      "details": {
+        "path": "/user?_method=DELETE",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 127,
+      "category": "query_injection",
+      "name": "Operator: proplist_star",
+      "description": "Wildcard proplist",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.253621",
+      "details": {
+        "path": "/user?.proplist=*",
+        "status": 200,
+        "response": "[{'.id': '*1'}, {'.id': '*2'}, {'.id': '*3'}, {'.id': '*4'}, {'.id': '*5'}]"
+      }
+    },
+    {
+      "id": 128,
+      "category": "query_injection",
+      "name": "Path traversal: /system/../user",
+      "description": "Test directory traversal via REST path: /system/../user",
+      "result": "HTTP 200, body_len=938",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.253621",
+      "details": {
+        "path": "/system/../user",
+        "status": 200,
+        "body_preview": "[{\".id\":\"*1\",\"address\":\"\",\"comment\":\"system default user\",\"disabled\":\"false\",\"expired\":\"false\",\"group\":\"full\",\"inactivity-policy\":\"none\",\"inactivity-timeout\":\"10m\",\"last-logged-in\":\"2026-02-16 22:20:11\",\"name\":\"admin\"},{\".id\":\"*2\",\"address\":\"\",\"disabled\":\"false\",\"expired\":\"false\",\"group\":\"full\",\"inactivity-policy\":\"none\",\"inactivity-timeout\":\"10m\",\"last-logged-in\":\"2026-02-16 03:08:58\",\"name\":\"testfull\"},{\".id\":\"*3\",\"address\":\"\",\"disabled\":\"false\",\"expired\":\"false\",\"group\":\"read\",\"inactivity-pol"
+      }
+    },
+    {
+      "id": 129,
+      "category": "query_injection",
+      "name": "Path traversal: /system/../../etc/passwd",
+      "description": "Test directory traversal via REST path: /system/../../etc/passwd",
+      "result": "HTTP 404, body_len=99",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.261617",
+      "details": {
+        "path": "/system/../../etc/passwd",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n"
+      }
+    },
+    {
+      "id": 130,
+      "category": "query_injection",
+      "name": "Path traversal: /..%2f..%2fetc/passwd",
+      "description": "Test directory traversal via REST path: /..%2f..%2fetc/passwd",
+      "result": "HTTP 400, body_len=93",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.265615",
+      "details": {
+        "path": "/..%2f..%2fetc/passwd",
+        "status": 400,
+        "body_preview": "{\"detail\":\"no such command or directory (..%2F..%2Fetc)\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 131,
+      "category": "query_injection",
+      "name": "Path traversal: /system/..%2fuser",
+      "description": "Test directory traversal via REST path: /system/..%2fuser",
+      "result": "HTTP 400, body_len=89",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.269613",
+      "details": {
+        "path": "/system/..%2fuser",
+        "status": 400,
+        "body_preview": "{\"detail\":\"no such command or directory (..%2Fuser)\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 132,
+      "category": "query_injection",
+      "name": "Path traversal: /%2e%2e/%2e%2e/etc/passwd",
+      "description": "Test directory traversal via REST path: /%2e%2e/%2e%2e/etc/passwd",
+      "result": "HTTP 400, body_len=82",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.273611",
+      "details": {
+        "path": "/%2e%2e/%2e%2e/etc/passwd",
+        "status": 400,
+        "body_preview": "{\"detail\":\"no such command or directory (..)\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 133,
+      "category": "query_injection",
+      "name": "Path traversal: /system/resource/..%00/user",
+      "description": "Test directory traversal via REST path: /system/resource/..%00/user",
+      "result": "HTTP 400, body_len=71",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.277609",
+      "details": {
+        "path": "/system/resource/..%00/user",
+        "status": 400,
+        "body_preview": "{\"detail\":\"no such command prefix\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 134,
+      "category": "query_injection",
+      "name": "Path traversal: /system/./resource",
+      "description": "Test directory traversal via REST path: /system/./resource",
+      "result": "HTTP 200, body_len=436",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.281607",
+      "details": {
+        "path": "/system/./resource",
+        "status": 200,
+        "body_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"55\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73175040\",\"free-memory\":\"842960896\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"93564928\",\"total-memory\":\"1073741824\",\"uptime\":\"49s\",\"version\":\"7.20.8 (long-term)\",\"write-sect-since-reboot\":\"464\",\"write-sect-total\":\"464\"}"
+      }
+    },
+    {
+      "id": 135,
+      "category": "query_injection",
+      "name": "Path traversal: /system//resource",
+      "description": "Test directory traversal via REST path: /system//resource",
+      "result": "HTTP 400, body_len=67",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.285605",
+      "details": {
+        "path": "/system//resource",
+        "status": 400,
+        "body_preview": "{\"detail\":\"ambiguous input ()\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 136,
+      "category": "query_injection",
+      "name": "Path traversal: /system/resource%00",
+      "description": "Test directory traversal via REST path: /system/resource%00",
+      "result": "HTTP 400, body_len=91",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.289603",
+      "details": {
+        "path": "/system/resource%00",
+        "status": 400,
+        "body_preview": "{\"detail\":\"no such command or directory (resource%00)\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 137,
+      "category": "query_injection",
+      "name": "Path traversal: /./system/resource",
+      "description": "Test directory traversal via REST path: /./system/resource",
+      "result": "HTTP 200, body_len=436",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.293601",
+      "details": {
+        "path": "/./system/resource",
+        "status": 200,
+        "body_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"55\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73175040\",\"free-memory\":\"842960896\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"93564928\",\"total-memory\":\"1073741824\",\"uptime\":\"49s\",\"version\":\"7.20.8 (long-term)\",\"write-sect-since-reboot\":\"464\",\"write-sect-total\":\"464\"}"
+      }
+    },
+    {
+      "id": 138,
+      "category": "query_injection",
+      "name": "Param pollution: double_proplist",
+      "description": "Test HTTP parameter pollution: /user?.proplist=name&.proplist=password",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.297599",
+      "details": {
+        "path": "/user?.proplist=name&.proplist=password",
+        "status": 200,
+        "response": "[{\".id\":\"*1\",\"name\":\"admin\"},{\".id\":\"*2\",\"name\":\"testfull\"},{\".id\":\"*3\",\"name\":\"testread\"},{\".id\":\"*4\",\"name\":\"testwrite\"},{\".id\":\"*5\",\"name\":\"csrftest\"}]"
+      }
+    },
+    {
+      "id": 139,
+      "category": "query_injection",
+      "name": "Param pollution: double_query",
+      "description": "Test HTTP parameter pollution: /user?.query=name=admin&.query=name=testfull",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.301597",
+      "details": {
+        "path": "/user?.query=name=admin&.query=name=testfull",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 140,
+      "category": "query_injection",
+      "name": "Param pollution: conflicting_values",
+      "description": "Test HTTP parameter pollution: /system/identity/set?name=hacked1&name=hacked2",
+      "result": "HTTP 500",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.305595",
+      "details": {
+        "path": "/system/identity/set?name=hacked1&name=hacked2",
+        "status": 500,
+        "response": "{\"error\":500,\"message\":\"Internal Server Error\"}"
+      }
+    },
+    {
+      "id": 141,
+      "category": "query_injection",
+      "name": "Long query string (1KB)",
+      "description": "Send GET with 1KB query parameter",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.305595",
+      "details": {
+        "size": 1024,
+        "status": 200,
+        "response_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"55\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73175040\",\"free-memory\":\"842960896\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"93564"
+      }
+    },
+    {
+      "id": 142,
+      "category": "query_injection",
+      "name": "Long query string (10KB)",
+      "description": "Send GET with 10KB query parameter",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.317589",
+      "details": {
+        "size": 10240,
+        "status": 400,
+        "response_preview": "<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n"
+      }
+    },
+    {
+      "id": 143,
+      "category": "query_injection",
+      "name": "Long query string (100KB)",
+      "description": "Send GET with 100KB query parameter",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.365565",
+      "details": {
+        "size": 102400,
+        "status": 400,
+        "response_preview": "<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n"
+      }
+    },
+    {
+      "id": 144,
+      "category": "cmd_injection",
+      "name": "Script injection: subshell",
+      "description": "Add script with source containing 'subshell' command injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.369563",
+      "details": {
+        "payload_name": "subshell",
+        "payload": "$(id)",
+        "status": 200,
+        "response": "{'ret': '*B'}"
+      }
+    },
+    {
+      "id": 145,
+      "category": "cmd_injection",
+      "name": "Script injection: backtick",
+      "description": "Add script with source containing 'backtick' command injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.369563",
+      "details": {
+        "payload_name": "backtick",
+        "payload": "`id`",
+        "status": 200,
+        "response": "{'ret': '*C'}"
+      }
+    },
+    {
+      "id": 146,
+      "category": "cmd_injection",
+      "name": "Script injection: semicolon",
+      "description": "Add script with source containing 'semicolon' command injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.377559",
+      "details": {
+        "payload_name": "semicolon",
+        "payload": ";id",
+        "status": 200,
+        "response": "{'ret': '*D'}"
+      }
+    },
+    {
+      "id": 147,
+      "category": "cmd_injection",
+      "name": "Script injection: pipe",
+      "description": "Add script with source containing 'pipe' command injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.381557",
+      "details": {
+        "payload_name": "pipe",
+        "payload": "|id",
+        "status": 200,
+        "response": "{'ret': '*E'}"
+      }
+    },
+    {
+      "id": 148,
+      "category": "cmd_injection",
+      "name": "Script injection: newline",
+      "description": "Add script with source containing 'newline' command injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.385555",
+      "details": {
+        "payload_name": "newline",
+        "payload": "echo test\nid",
+        "status": 200,
+        "response": "{'ret': '*F'}"
+      }
+    },
+    {
+      "id": 149,
+      "category": "cmd_injection",
+      "name": "Script injection: ampersand",
+      "description": "Add script with source containing 'ampersand' command injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.389553",
+      "details": {
+        "payload_name": "ampersand",
+        "payload": "echo test && id",
+        "status": 200,
+        "response": "{'ret': '*10'}"
+      }
+    },
+    {
+      "id": 150,
+      "category": "cmd_injection",
+      "name": "Script injection: dollar_brace",
+      "description": "Add script with source containing 'dollar_brace' command injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.393551",
+      "details": {
+        "payload_name": "dollar_brace",
+        "payload": "${IFS}id",
+        "status": 200,
+        "response": "{'ret': '*11'}"
+      }
+    },
+    {
+      "id": 151,
+      "category": "cmd_injection",
+      "name": "Script injection: null_byte",
+      "description": "Add script with source containing 'null_byte' command injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.397549",
+      "details": {
+        "payload_name": "null_byte",
+        "payload": "echo test\u0000id",
+        "status": 200,
+        "response": "{'ret': '*12'}"
+      }
+    },
+    {
+      "id": 152,
+      "category": "cmd_injection",
+      "name": "Script injection: comment_inject",
+      "description": "Add script with source containing 'comment_inject' command injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.401547",
+      "details": {
+        "payload_name": "comment_inject",
+        "payload": "echo test # comment\nid",
+        "status": 200,
+        "response": "{'ret': '*13'}"
+      }
+    },
+    {
+      "id": 153,
+      "category": "cmd_injection",
+      "name": "Script injection: redirect",
+      "description": "Add script with source containing 'redirect' command injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.405545",
+      "details": {
+        "payload_name": "redirect",
+        "payload": "echo test > /tmp/rce_test",
+        "status": 200,
+        "response": "{'ret': '*14'}"
+      }
+    },
+    {
+      "id": 154,
+      "category": "cmd_injection",
+      "name": "Scheduler injection: subshell_sched",
+      "description": "Add scheduler with on-event containing 'subshell_sched' injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.409543",
+      "details": {
+        "payload_name": "subshell_sched",
+        "payload": "$(id)",
+        "status": 200,
+        "response": "{'ret': '*1'}"
+      }
+    },
+    {
+      "id": 155,
+      "category": "cmd_injection",
+      "name": "Scheduler injection: backtick_sched",
+      "description": "Add scheduler with on-event containing 'backtick_sched' injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.413541",
+      "details": {
+        "payload_name": "backtick_sched",
+        "payload": "`id`",
+        "status": 200,
+        "response": "{'ret': '*2'}"
+      }
+    },
+    {
+      "id": 156,
+      "category": "cmd_injection",
+      "name": "Scheduler injection: semicolon_sched",
+      "description": "Add scheduler with on-event containing 'semicolon_sched' injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.417539",
+      "details": {
+        "payload_name": "semicolon_sched",
+        "payload": ";/system/reboot",
+        "status": 200,
+        "response": "{'ret': '*3'}"
+      }
+    },
+    {
+      "id": 157,
+      "category": "cmd_injection",
+      "name": "Scheduler injection: pipe_sched",
+      "description": "Add scheduler with on-event containing 'pipe_sched' injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.421537",
+      "details": {
+        "payload_name": "pipe_sched",
+        "payload": "|/system/reboot",
+        "status": 200,
+        "response": "{'ret': '*4'}"
+      }
+    },
+    {
+      "id": 158,
+      "category": "cmd_injection",
+      "name": "Scheduler injection: newline_sched",
+      "description": "Add scheduler with on-event containing 'newline_sched' injection pattern",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:30.425535",
+      "details": {
+        "payload_name": "newline_sched",
+        "payload": "/log info \"safe\"\n/system/reboot",
+        "status": 200,
+        "response": "{'ret': '*5'}"
+      }
+    },
+    {
+      "id": 159,
+      "category": "cmd_injection",
+      "name": "SSRF: loopback",
+      "description": "Test SSRF via /tool/fetch with URL: http://127.0.0.1/",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:31.425035",
+      "details": {
+        "ssrf_name": "loopback",
+        "url": "http://127.0.0.1/",
+        "status": 200,
+        "response": "[{'.section': '0', 'status': 'connecting'}, {'.section': '1', 'downloaded': '1', 'duration': '1s', 'status': 'finished', 'total': '1'}]"
+      }
+    },
+    {
+      "id": 160,
+      "category": "cmd_injection",
+      "name": "SSRF: self_ip",
+      "description": "Test SSRF via /tool/fetch with URL: http://[REDACTED-INTERNAL-IP]/",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:32.400547",
+      "details": {
+        "ssrf_name": "self_ip",
+        "url": "http://[REDACTED-INTERNAL-IP]/",
+        "status": 200,
+        "response": "[{'.section': '0', 'status': 'requesting'}, {'.section': '1', 'downloaded': '1', 'duration': '1s', 'status': 'finished', 'total': '1'}]"
+      }
+    },
+    {
+      "id": 161,
+      "category": "cmd_injection",
+      "name": "SSRF: file_proto",
+      "description": "Test SSRF via /tool/fetch with URL: file:///etc/passwd",
+      "result": "HTTP 400 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:32.400547",
+      "details": {
+        "ssrf_name": "file_proto",
+        "url": "file:///etc/passwd",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 162,
+      "category": "cmd_injection",
+      "name": "SSRF: gopher_proto",
+      "description": "Test SSRF via /tool/fetch with URL: gopher://127.0.0.1:8728/",
+      "result": "HTTP 400 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:32.436529",
+      "details": {
+        "ssrf_name": "gopher_proto",
+        "url": "gopher://127.0.0.1:8728/",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 163,
+      "category": "cmd_injection",
+      "name": "SSRF: hex_ip",
+      "description": "Test SSRF via /tool/fetch with URL: http://0x7f000001/",
+      "result": "HTTP 400 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:33.448023",
+      "details": {
+        "ssrf_name": "hex_ip",
+        "url": "http://0x7f000001/",
+        "status": 400,
+        "response": "{'detail': 'failure: resolving error', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 164,
+      "category": "cmd_injection",
+      "name": "SSRF: decimal_ip",
+      "description": "Test SSRF via /tool/fetch with URL: http://2130706433/",
+      "result": "HTTP 400 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:34.451521",
+      "details": {
+        "ssrf_name": "decimal_ip",
+        "url": "http://2130706433/",
+        "status": 400,
+        "response": "{'detail': 'failure: resolving error', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 165,
+      "category": "cmd_injection",
+      "name": "SSRF: ipv6_loopback",
+      "description": "Test SSRF via /tool/fetch with URL: http://[::1]/",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:35.451021",
+      "details": {
+        "ssrf_name": "ipv6_loopback",
+        "url": "http://[::1]/",
+        "status": 200,
+        "response": "[{'.section': '0', 'status': 'requesting'}, {'.section': '1', 'downloaded': '1', 'duration': '1s', 'status': 'finished', 'total': '1'}]"
+      }
+    },
+    {
+      "id": 166,
+      "category": "cmd_injection",
+      "name": "SSRF: internal_api",
+      "description": "Test SSRF via /tool/fetch with URL: http://127.0.0.1:8728/",
+      "result": "HTTP 0 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:45.458015",
+      "details": {
+        "ssrf_name": "internal_api",
+        "url": "http://127.0.0.1:8728/",
+        "status": 0,
+        "response": "HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Read timed out. (read timeout=10)"
+      }
+    },
+    {
+      "id": 167,
+      "category": "cmd_injection",
+      "name": "SSRF: metadata_aws",
+      "description": "Test SSRF via /tool/fetch with URL: http://[REDACTED-IP]/latest/meta-data/",
+      "result": "HTTP 0 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.469007",
+      "details": {
+        "ssrf_name": "metadata_aws",
+        "url": "http://[REDACTED-IP]/latest/meta-data/",
+        "status": 0,
+        "response": "HTTPConnectionPool(host='[REDACTED-INTERNAL-IP]', port=80): Read timed out. (read timeout=10)"
+      }
+    },
+    {
+      "id": 168,
+      "category": "cmd_injection",
+      "name": "SSRF: ftp_proto",
+      "description": "Test SSRF via /tool/fetch with URL: ftp://admin:TestPass123@127.0.0.1/",
+      "result": "HTTP 400 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.481001",
+      "details": {
+        "ssrf_name": "ftp_proto",
+        "url": "ftp://admin:TestPass123@127.0.0.1/",
+        "status": 400,
+        "response": "{'detail': 'failure: Conflicting modes provided in URI and parameter', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 169,
+      "category": "cmd_injection",
+      "name": "Ping injection: normal",
+      "description": "Test command injection via /tool/ping address parameter",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.488997",
+      "details": {
+        "payload_name": "normal",
+        "address": "127.0.0.1",
+        "status": 200,
+        "response": "[{'avg-rtt': '95us', 'host': '127.0.0.1', 'max-rtt': '95us', 'min-rtt': '95us', 'packet-loss': '0', 'received': '1', 'sent': '1', 'seq': '0', 'size': '56', 'time': '95us', 'ttl': '64'}]"
+      }
+    },
+    {
+      "id": 170,
+      "category": "cmd_injection",
+      "name": "Ping injection: semicolon",
+      "description": "Test command injection via /tool/ping address parameter",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.516983",
+      "details": {
+        "payload_name": "semicolon",
+        "address": "127.0.0.1;id",
+        "status": 400,
+        "response": "{'detail': 'invalid value for argument address:\\r\\n    invalid value of mac-address, mac address required\\r\\n    invalid value for argument ipv6-address\\r\\n    while resolving ip-address: name does not exist', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 171,
+      "category": "cmd_injection",
+      "name": "Ping injection: pipe",
+      "description": "Test command injection via /tool/ping address parameter",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.548967",
+      "details": {
+        "payload_name": "pipe",
+        "address": "127.0.0.1|id",
+        "status": 400,
+        "response": "{'detail': 'invalid value for argument address:\\r\\n    invalid value of mac-address, mac address required\\r\\n    invalid value for argument ipv6-address\\r\\n    while resolving ip-address: name does not exist', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 172,
+      "category": "cmd_injection",
+      "name": "Ping injection: backtick",
+      "description": "Test command injection via /tool/ping address parameter",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.580951",
+      "details": {
+        "payload_name": "backtick",
+        "address": "127.0.0.1`id`",
+        "status": 400,
+        "response": "{'detail': 'invalid value for argument address:\\r\\n    invalid value of mac-address, mac address required\\r\\n    invalid value for argument ipv6-address\\r\\n    while resolving ip-address: name does not exist', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 173,
+      "category": "cmd_injection",
+      "name": "Ping injection: newline",
+      "description": "Test command injection via /tool/ping address parameter",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.612935",
+      "details": {
+        "payload_name": "newline",
+        "address": "127.0.0.1\nid",
+        "status": 400,
+        "response": "{'detail': 'invalid value for argument address:\\r\\n    invalid value of mac-address, mac address required\\r\\n    invalid value for argument ipv6-address\\r\\n    while resolving ip-address: name does not exist', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 174,
+      "category": "cmd_injection",
+      "name": "Ping injection: long_host",
+      "description": "Test command injection via /tool/ping address parameter",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.616933",
+      "details": {
+        "payload_name": "long_host",
+        "address": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "status": 400,
+        "response": "{'detail': 'invalid value for argument address:\\r\\n    invalid value of mac-address, mac address required\\r\\n    invalid value for argument ipv6-address\\r\\n    failure: bad name', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 175,
+      "category": "cmd_injection",
+      "name": "DNS injection: semicolon",
+      "description": "Test command injection via /ip/dns/set servers parameter",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.620931",
+      "details": {
+        "payload_name": "semicolon",
+        "servers": "[REDACTED-IP];id",
+        "status": 400,
+        "response": "{'detail': 'invalid value for argument server:\\r\\n    invalid value for argument ip\\r\\n    invalid value for argument ipv6', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 176,
+      "category": "cmd_injection",
+      "name": "DNS injection: pipe",
+      "description": "Test command injection via /ip/dns/set servers parameter",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.624929",
+      "details": {
+        "payload_name": "pipe",
+        "servers": "[REDACTED-IP]|id",
+        "status": 400,
+        "response": "{'detail': 'invalid value for argument server:\\r\\n    invalid value for argument ip\\r\\n    invalid value for argument ipv6', 'error': 400, 'message': 'Bad Request'}"
+      }
+    },
+    {
+      "id": 177,
+      "category": "cmd_injection",
+      "name": "DNS injection: null_byte",
+      "description": "Test command injection via /ip/dns/set servers parameter",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:08:55.628927",
+      "details": {
+        "payload_name": "null_byte",
+        "servers": "[REDACTED-IP]\u0000evil.com",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 178,
+      "category": "cmd_injection",
+      "name": "Null byte: /system/identity/set",
+      "description": "Test null byte injection in string fields on /system/identity/set",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:08:55.632925",
+      "details": {
+        "path": "/system/identity/set",
+        "status": 200,
+        "response": "[]"
+      }
+    },
+    {
+      "id": 179,
+      "category": "cmd_injection",
+      "name": "Null byte: /system/script/add",
+      "description": "Test null byte injection in string fields on /system/script/add",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:08:55.640921",
+      "details": {
+        "path": "/system/script/add",
+        "status": 200,
+        "response": "{'ret': '*15'}"
+      }
+    },
+    {
+      "id": 180,
+      "category": "cmd_injection",
+      "name": "Null byte: /ip/address/add",
+      "description": "Test null byte injection in string fields on /ip/address/add",
+      "result": "HTTP 200",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:08:55.640921",
+      "details": {
+        "path": "/ip/address/add",
+        "status": 200,
+        "response": "{'ret': '*4'}"
+      }
+    },
+    {
+      "id": 181,
+      "category": "error_handling",
+      "name": "Error path: /rest/",
+      "description": "REST root with no path",
+      "result": "HTTP 400, disclosures=[]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.656913",
+      "details": {
+        "path": "/rest/",
+        "status": 400,
+        "body_preview": "{\"detail\":\"ambiguous input ()\",\"error\":400,\"message\":\"Bad Request\"}",
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "67",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 22:21:14 GMT",
+          "Expires": "Tue, 16 Feb 2027 22:21:14 GMT",
+          "X-Frame-Options": "sameorigin"
+        },
+        "disclosures_found": []
+      }
+    },
+    {
+      "id": 182,
+      "category": "error_handling",
+      "name": "Error path: /rest/nonexistent",
+      "description": "Non-existent top-level endpoint",
+      "result": "HTTP 400, disclosures=[]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.660911",
+      "details": {
+        "path": "/rest/nonexistent",
+        "status": 400,
+        "body_preview": "{\"detail\":\"no such command or directory (nonexistent)\",\"error\":400,\"message\":\"Bad Request\"}",
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "91",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 22:21:14 GMT",
+          "Expires": "Tue, 16 Feb 2027 22:21:14 GMT",
+          "X-Frame-Options": "sameorigin"
+        },
+        "disclosures_found": []
+      }
+    },
+    {
+      "id": 183,
+      "category": "error_handling",
+      "name": "Error path: /rest/system/nonexistent",
+      "description": "Non-existent system sub-endpoint",
+      "result": "HTTP 400, disclosures=[]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.668907",
+      "details": {
+        "path": "/rest/system/nonexistent",
+        "status": 400,
+        "body_preview": "{\"detail\":\"no such command or directory (nonexistent)\",\"error\":400,\"message\":\"Bad Request\"}",
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "91",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 22:21:14 GMT",
+          "Expires": "Tue, 16 Feb 2027 22:21:14 GMT",
+          "X-Frame-Options": "sameorigin"
+        },
+        "disclosures_found": []
+      }
+    },
+    {
+      "id": 184,
+      "category": "error_handling",
+      "name": "Error path: /rest/system/resource/nonexistent",
+      "description": "Non-existent nested path",
+      "result": "HTTP 500, disclosures=['internal server error']",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:08:55.676903",
+      "details": {
+        "path": "/rest/system/resource/nonexistent",
+        "status": 500,
+        "body_preview": "{\"error\":500,\"message\":\"Internal Server Error\"}",
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "47",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 22:21:14 GMT",
+          "Expires": "Tue, 16 Feb 2027 22:21:14 GMT",
+          "X-Frame-Options": "sameorigin"
+        },
+        "disclosures_found": [
+          "internal server error"
+        ]
+      }
+    },
+    {
+      "id": 185,
+      "category": "error_handling",
+      "name": "Error path: /rest/system/resource/999999",
+      "description": "Non-existent resource ID",
+      "result": "HTTP 500, disclosures=['internal server error']",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:08:55.680901",
+      "details": {
+        "path": "/rest/system/resource/999999",
+        "status": 500,
+        "body_preview": "{\"error\":500,\"message\":\"Internal Server Error\"}",
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "47",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 22:21:14 GMT",
+          "Expires": "Tue, 16 Feb 2027 22:21:14 GMT",
+          "X-Frame-Options": "sameorigin"
+        },
+        "disclosures_found": [
+          "internal server error"
+        ]
+      }
+    },
+    {
+      "id": 186,
+      "category": "error_handling",
+      "name": "Error path: /nonexistent",
+      "description": "Non-existent path outside /rest/",
+      "result": "HTTP 404, disclosures=[]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.688897",
+      "details": {
+        "path": "/nonexistent",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "Keep-Alive",
+          "Content-Length": "99",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:21:14 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "disclosures_found": []
+      }
+    },
+    {
+      "id": 187,
+      "category": "error_handling",
+      "name": "Error path: /rest//",
+      "description": "Double slash in path",
+      "result": "HTTP 400, disclosures=[]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.696893",
+      "details": {
+        "path": "/rest//",
+        "status": 400,
+        "body_preview": "{\"detail\":\"ambiguous input ()\",\"error\":400,\"message\":\"Bad Request\"}",
+        "headers": {
+          "Cache-Control": "max-age=31536000",
+          "Connection": "Keep-Alive",
+          "Content-Length": "67",
+          "Content-Type": "application/json",
+          "Date": "Mon, 16 Feb 2026 22:21:14 GMT",
+          "Expires": "Tue, 16 Feb 2027 22:21:14 GMT",
+          "X-Frame-Options": "sameorigin"
+        },
+        "disclosures_found": []
+      }
+    },
+    {
+      "id": 188,
+      "category": "error_handling",
+      "name": "Error path: /rest/system/resource/../../../etc/passwd",
+      "description": "Path traversal in error path",
+      "result": "HTTP 404, disclosures=[]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.704889",
+      "details": {
+        "path": "/rest/system/resource/../../../etc/passwd",
+        "status": 404,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 404 : Not Found</title>\n<h1>Error 404 : Not Found</h1>\n",
+        "headers": {
+          "Cache-Control": "no-store",
+          "Connection": "Keep-Alive",
+          "Content-Length": "99",
+          "Content-Type": "text/html",
+          "Date": "Mon, 16 Feb 2026 22:21:14 GMT",
+          "Expires": "0",
+          "Pragma": "no-cache",
+          "X-Frame-Options": "sameorigin"
+        },
+        "disclosures_found": []
+      }
+    },
+    {
+      "id": 189,
+      "category": "error_handling",
+      "name": "Malformed request: empty_post",
+      "description": "Send malformed POST request (empty_post) to /system/identity/set",
+      "result": "HTTP 200, disclosures=[]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.712885",
+      "details": {
+        "name": "empty_post",
+        "status": 200,
+        "body_preview": "[]",
+        "disclosures": []
+      }
+    },
+    {
+      "id": 190,
+      "category": "error_handling",
+      "name": "Malformed request: binary_garbage",
+      "description": "Send malformed POST request (binary_garbage) to /system/identity/set",
+      "result": "HTTP 400, disclosures=[]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.712885",
+      "details": {
+        "name": "binary_garbage",
+        "status": 400,
+        "body_preview": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "disclosures": []
+      }
+    },
+    {
+      "id": 191,
+      "category": "error_handling",
+      "name": "Malformed request: xml_body",
+      "description": "Send malformed POST request (xml_body) to /system/identity/set",
+      "result": "HTTP 400, disclosures=[]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.720881",
+      "details": {
+        "name": "xml_body",
+        "status": 400,
+        "body_preview": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}",
+        "disclosures": []
+      }
+    },
+    {
+      "id": 192,
+      "category": "error_handling",
+      "name": "Malformed request: very_long_header",
+      "description": "Send malformed GET request (very_long_header) to /system/resource",
+      "result": "HTTP 400, disclosures=[]",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.720881",
+      "details": {
+        "name": "very_long_header",
+        "status": 400,
+        "body_preview": "<!doctype html>\n<html lang=en>\n<title>Error 400 : Bad Request</title>\n<h1>Error 400 : Bad Request</h1>\n",
+        "disclosures": []
+      }
+    },
+    {
+      "id": 193,
+      "category": "error_handling",
+      "name": "Malformed request: many_headers",
+      "description": "Send malformed GET request (many_headers) to /system/resource",
+      "result": "HTTP 200, disclosures=['memory']",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:08:55.724879",
+      "details": {
+        "name": "many_headers",
+        "status": 200,
+        "body_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"1\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73162752\",\"free-memory\":\"842383360\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"93564928\",\"total-memory\":\"1073741824\",\"uptime\":\"1m14s\",\"version\":\"7.20.8 (long-term)\",\"write-sect-since-reboot\":\"648\",\"write-sect-total\":\"648\"}",
+        "disclosures": [
+          "memory"
+        ]
+      }
+    },
+    {
+      "id": 194,
+      "category": "error_handling",
+      "name": "Accept: application/json",
+      "description": "GET /system/resource with Accept: application/json",
+      "result": "HTTP 200, Content-Type: application/json",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.728877",
+      "details": {
+        "accept": "application/json",
+        "status": 200,
+        "response_content_type": "application/json",
+        "body_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"1\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73162752\",\"free-memory\":\"842383360\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"935649"
+      }
+    },
+    {
+      "id": 195,
+      "category": "error_handling",
+      "name": "Accept: text/html",
+      "description": "GET /system/resource with Accept: text/html",
+      "result": "HTTP 406, Content-Type: application/json",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.736873",
+      "details": {
+        "accept": "text/html",
+        "status": 406,
+        "response_content_type": "application/json",
+        "body_preview": "{\"error\":406,\"message\":\"Not Acceptable\"}"
+      }
+    },
+    {
+      "id": 196,
+      "category": "error_handling",
+      "name": "Accept: text/xml",
+      "description": "GET /system/resource with Accept: text/xml",
+      "result": "HTTP 406, Content-Type: application/json",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.736873",
+      "details": {
+        "accept": "text/xml",
+        "status": 406,
+        "response_content_type": "application/json",
+        "body_preview": "{\"error\":406,\"message\":\"Not Acceptable\"}"
+      }
+    },
+    {
+      "id": 197,
+      "category": "error_handling",
+      "name": "Accept: application/xml",
+      "description": "GET /system/resource with Accept: application/xml",
+      "result": "HTTP 406, Content-Type: application/json",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.736873",
+      "details": {
+        "accept": "application/xml",
+        "status": 406,
+        "response_content_type": "application/json",
+        "body_preview": "{\"error\":406,\"message\":\"Not Acceptable\"}"
+      }
+    },
+    {
+      "id": 198,
+      "category": "error_handling",
+      "name": "Accept: text/plain",
+      "description": "GET /system/resource with Accept: text/plain",
+      "result": "HTTP 406, Content-Type: application/json",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.736873",
+      "details": {
+        "accept": "text/plain",
+        "status": 406,
+        "response_content_type": "application/json",
+        "body_preview": "{\"error\":406,\"message\":\"Not Acceptable\"}"
+      }
+    },
+    {
+      "id": 199,
+      "category": "error_handling",
+      "name": "Accept: */*",
+      "description": "GET /system/resource with Accept: */*",
+      "result": "HTTP 200, Content-Type: application/json",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.736873",
+      "details": {
+        "accept": "*/*",
+        "status": 200,
+        "response_content_type": "application/json",
+        "body_preview": "{\"architecture-name\":\"x86_64\",\"board-name\":\"CHR innotek GmbH VirtualBox\",\"build-time\":\"2026-01-30 09:17:54\",\"cpu\":\"AMD\",\"cpu-count\":\"1\",\"cpu-frequency\":\"4391\",\"cpu-load\":\"1\",\"factory-software\":\"7.1\",\"free-hdd-space\":\"73162752\",\"free-memory\":\"842383360\",\"platform\":\"MikroTik\",\"total-hdd-space\":\"935649"
+      }
+    },
+    {
+      "id": 200,
+      "category": "error_handling",
+      "name": "Accept: application/octet-stream",
+      "description": "GET /system/resource with Accept: application/octet-stream",
+      "result": "HTTP 406, Content-Type: application/json",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.748867",
+      "details": {
+        "accept": "application/octet-stream",
+        "status": 406,
+        "response_content_type": "application/json",
+        "body_preview": "{\"error\":406,\"message\":\"Not Acceptable\"}"
+      }
+    },
+    {
+      "id": 201,
+      "category": "error_handling",
+      "name": "Accept: invalid/type",
+      "description": "GET /system/resource with Accept: invalid/type",
+      "result": "HTTP 406, Content-Type: application/json",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.748867",
+      "details": {
+        "accept": "invalid/type",
+        "status": 406,
+        "response_content_type": "application/json",
+        "body_preview": "{\"error\":406,\"message\":\"Not Acceptable\"}"
+      }
+    },
+    {
+      "id": 202,
+      "category": "error_handling",
+      "name": "Error format: 404",
+      "description": "Analyze error response format for 404 scenario",
+      "result": "HTTP 400, CT=application/json",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.752865",
+      "details": {
+        "status": 400,
+        "content_type": "application/json",
+        "body_preview": "{\"detail\":\"no such command or directory (nonexistent_endpoint_xyz)\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 203,
+      "category": "error_handling",
+      "name": "Error format: 401_noauth",
+      "description": "Analyze error response format for 401_noauth scenario",
+      "result": "HTTP 401, CT=application/json",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.752865",
+      "details": {
+        "status": 401,
+        "content_type": "application/json",
+        "body_preview": "{\"error\":401,\"message\":\"Unauthorized\"}"
+      }
+    },
+    {
+      "id": 204,
+      "category": "error_handling",
+      "name": "Error format: 400_bad_json",
+      "description": "Analyze error response format for 400_bad_json scenario",
+      "result": "HTTP 400, CT=application/json",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.752865",
+      "details": {
+        "status": 400,
+        "content_type": "application/json",
+        "body_preview": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 205,
+      "category": "error_handling",
+      "name": "Error format: 405_wrong_method",
+      "description": "Analyze error response format for 405_wrong_method scenario",
+      "result": "HTTP 400, CT=application/json",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.752865",
+      "details": {
+        "status": 400,
+        "content_type": "application/json",
+        "body_preview": "{\"detail\":\"missing or invalid resource identifier\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 206,
+      "category": "rate_limiting",
+      "name": "Pre-test baseline health",
+      "description": "Record router health before rate limiting tests",
+      "result": "CPU=1, Mem=842383360",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:55.752865",
+      "details": {
+        "health": {
+          "alive": true,
+          "uptime": "1m14s",
+          "cpu_load": "1",
+          "free_memory": "842383360",
+          "version": "7.20.8 (long-term)"
+        }
+      }
+    },
+    {
+      "id": 207,
+      "category": "rate_limiting",
+      "name": "Rapid 100 sequential requests",
+      "description": "Send 100 rapid GET requests to /system/resource",
+      "result": "avg=0.004s, p95=0.012s, errors=0, throttled=0, slowdown=0.98x",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:08:56.124679",
+      "details": {
+        "count": 100,
+        "avg_ms": 3.7,
+        "min_ms": 0.0,
+        "max_ms": 20.0,
+        "p95_ms": 12.0,
+        "errors": 0,
+        "throttled_429": 0,
+        "slowdown_ratio": 0.98,
+        "first_half_avg_ms": 3.8,
+        "second_half_avg_ms": 3.7
+      }
+    },
+    {
+      "id": 208,
+      "category": "rate_limiting",
+      "name": "Concurrent connections: 10",
+      "description": "Send 10 simultaneous requests to /system/resource",
+      "result": "successes=10, errors=0, avg=0.010s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:56.152665",
+      "details": {
+        "concurrency": 10,
+        "successes": 10,
+        "errors": 0,
+        "avg_time_ms": 10.4,
+        "sample_results": [
+          {
+            "idx": 1,
+            "status": 200,
+            "time": 0.0039980411529541016
+          },
+          {
+            "idx": 0,
+            "status": 200,
+            "time": 0.0039980411529541016
+          },
+          {
+            "idx": 2,
+            "status": 200,
+            "time": 0.0039980411529541016
+          },
+          {
+            "idx": 3,
+            "status": 200,
+            "time": 0.0
+          },
+          {
+            "idx": 6,
+            "status": 200,
+            "time": 0.011994123458862305
+          }
+        ]
+      }
+    },
+    {
+      "id": 209,
+      "category": "rate_limiting",
+      "name": "Concurrent connections: 50",
+      "description": "Send 50 simultaneous requests to /system/resource",
+      "result": "successes=50, errors=0, avg=0.059s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:08:57.256113",
+      "details": {
+        "concurrency": 50,
+        "successes": 50,
+        "errors": 0,
+        "avg_time_ms": 59.3,
+        "sample_results": [
+          {
+            "idx": 7,
+            "status": 200,
+            "time": 0.03198385238647461
+          },
+          {
+            "idx": 19,
+            "status": 200,
+            "time": 0.03997993469238281
+          },
+          {
+            "idx": 14,
+            "status": 200,
+            "time": 0.015992164611816406
+          },
+          {
+            "idx": 10,
+            "status": 200,
+            "time": 0.023988008499145508
+          },
+          {
+            "idx": 5,
+            "status": 200,
+            "time": 0.019989967346191406
+          }
+        ]
+      }
+    },
+    {
+      "id": 210,
+      "category": "rate_limiting",
+      "name": "Concurrent connections: 100",
+      "description": "Send 100 simultaneous requests to /system/resource",
+      "result": "successes=98, errors=2, avg=0.632s",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:07.307085",
+      "details": {
+        "concurrency": 100,
+        "successes": 98,
+        "errors": 2,
+        "avg_time_ms": 631.8,
+        "sample_results": [
+          {
+            "idx": 23,
+            "status": 200,
+            "time": 0.07596182823181152
+          },
+          {
+            "idx": 5,
+            "status": 200,
+            "time": 0.019989967346191406
+          },
+          {
+            "idx": 21,
+            "status": 200,
+            "time": 0.06796622276306152
+          },
+          {
+            "idx": 6,
+            "status": 200,
+            "time": 0.023988008499145508
+          },
+          {
+            "idx": 22,
+            "status": 200,
+            "time": 0.07196426391601562
+          }
+        ]
+      }
+    },
+    {
+      "id": 211,
+      "category": "rate_limiting",
+      "name": "Post-test health check",
+      "description": "Record router health after rate limiting tests",
+      "result": "CPU=0, Mem=841646080",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.306085",
+      "details": {
+        "health": {
+          "alive": true,
+          "uptime": "1m28s",
+          "cpu_load": "0",
+          "free_memory": "841646080",
+          "version": "7.20.8 (long-term)"
+        },
+        "baseline": {
+          "alive": true,
+          "uptime": "1m14s",
+          "cpu_load": "1",
+          "free_memory": "842383360",
+          "version": "7.20.8 (long-term)"
+        }
+      }
+    },
+    {
+      "id": 212,
+      "category": "rate_limiting",
+      "name": "Memory impact assessment",
+      "description": "Compare memory before and after rate limiting tests",
+      "result": "Memory change: 0.1% (842383360 -> 841646080)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.310083",
+      "details": {
+        "baseline_mem": 842383360,
+        "post_mem": 841646080,
+        "change_pct": 0.1
+      }
+    },
+    {
+      "id": 213,
+      "category": "content_type",
+      "name": "Content-Type: no_content_type",
+      "description": "POST valid JSON with Content-Type: None",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.314081",
+      "details": {
+        "content_type": null,
+        "status": 200,
+        "response": "[]",
+        "accepted": true
+      }
+    },
+    {
+      "id": 214,
+      "category": "content_type",
+      "name": "Content-Type: application_json",
+      "description": "POST valid JSON with Content-Type: application/json",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.318079",
+      "details": {
+        "content_type": "application/json",
+        "status": 200,
+        "response": "[]",
+        "accepted": true
+      }
+    },
+    {
+      "id": 215,
+      "category": "content_type",
+      "name": "Content-Type: text_plain",
+      "description": "POST valid JSON with Content-Type: text/plain",
+      "result": "HTTP 415 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.326075",
+      "details": {
+        "content_type": "text/plain",
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "accepted": false
+      }
+    },
+    {
+      "id": 216,
+      "category": "content_type",
+      "name": "Content-Type: text_xml",
+      "description": "POST valid JSON with Content-Type: text/xml",
+      "result": "HTTP 415 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.330073",
+      "details": {
+        "content_type": "text/xml",
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "accepted": false
+      }
+    },
+    {
+      "id": 217,
+      "category": "content_type",
+      "name": "Content-Type: application_xml",
+      "description": "POST valid JSON with Content-Type: application/xml",
+      "result": "HTTP 415 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.330073",
+      "details": {
+        "content_type": "application/xml",
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "accepted": false
+      }
+    },
+    {
+      "id": 218,
+      "category": "content_type",
+      "name": "Content-Type: form_urlencoded",
+      "description": "POST valid JSON with Content-Type: application/x-www-form-urlencoded",
+      "result": "HTTP 415 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.330073",
+      "details": {
+        "content_type": "application/x-www-form-urlencoded",
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "accepted": false
+      }
+    },
+    {
+      "id": 219,
+      "category": "content_type",
+      "name": "Content-Type: multipart",
+      "description": "POST valid JSON with Content-Type: multipart/form-data",
+      "result": "HTTP 415 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.330073",
+      "details": {
+        "content_type": "multipart/form-data",
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "accepted": false
+      }
+    },
+    {
+      "id": 220,
+      "category": "content_type",
+      "name": "Content-Type: octet_stream",
+      "description": "POST valid JSON with Content-Type: application/octet-stream",
+      "result": "HTTP 415 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.330073",
+      "details": {
+        "content_type": "application/octet-stream",
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "accepted": false
+      }
+    },
+    {
+      "id": 221,
+      "category": "content_type",
+      "name": "Content-Type: json_utf8",
+      "description": "POST valid JSON with Content-Type: application/json; charset=utf-8",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.330073",
+      "details": {
+        "content_type": "application/json; charset=utf-8",
+        "status": 200,
+        "response": "[]",
+        "accepted": true
+      }
+    },
+    {
+      "id": 222,
+      "category": "content_type",
+      "name": "Content-Type: json_utf16",
+      "description": "POST valid JSON with Content-Type: application/json; charset=utf-16",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:09:09.330073",
+      "details": {
+        "content_type": "application/json; charset=utf-16",
+        "status": 200,
+        "response": "[]",
+        "accepted": true
+      }
+    },
+    {
+      "id": 223,
+      "category": "content_type",
+      "name": "Content-Type: json_iso",
+      "description": "POST valid JSON with Content-Type: application/json; charset=iso-8859-1",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": true,
+      "timestamp": "2026-02-15T22:09:09.330073",
+      "details": {
+        "content_type": "application/json; charset=iso-8859-1",
+        "status": 200,
+        "response": "[]",
+        "accepted": true
+      }
+    },
+    {
+      "id": 224,
+      "category": "content_type",
+      "name": "Content-Type: empty_string",
+      "description": "POST valid JSON with Content-Type: ",
+      "result": "HTTP 415 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.330073",
+      "details": {
+        "content_type": "",
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "accepted": false
+      }
+    },
+    {
+      "id": 225,
+      "category": "content_type",
+      "name": "Content-Type: invalid_type",
+      "description": "POST valid JSON with Content-Type: invalid/completely-wrong",
+      "result": "HTTP 415 \u2014 REJECTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.358059",
+      "details": {
+        "content_type": "invalid/completely-wrong",
+        "status": 415,
+        "response": "{\"error\":415,\"message\":\"Unsupported Media Type\"}",
+        "accepted": false
+      }
+    },
+    {
+      "id": 226,
+      "category": "content_type",
+      "name": "Wrong body: xml_as_json",
+      "description": "POST non-JSON body (xml_as_json) with Content-Type: application/json",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.362057",
+      "details": {
+        "name": "xml_as_json",
+        "content_type": "application/json",
+        "status": 400,
+        "body_sent": "<identity><name>test</name></identity>",
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 227,
+      "category": "content_type",
+      "name": "Wrong body: form_as_json",
+      "description": "POST non-JSON body (form_as_json) with Content-Type: application/json",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.366055",
+      "details": {
+        "name": "form_as_json",
+        "content_type": "application/json",
+        "status": 400,
+        "body_sent": "name=test&value=123",
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 228,
+      "category": "content_type",
+      "name": "Wrong body: csv_as_json",
+      "description": "POST non-JSON body (csv_as_json) with Content-Type: application/json",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.366055",
+      "details": {
+        "name": "csv_as_json",
+        "content_type": "application/json",
+        "status": 400,
+        "body_sent": "name,value\ntest,123",
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 229,
+      "category": "content_type",
+      "name": "Wrong body: yaml_as_json",
+      "description": "POST non-JSON body (yaml_as_json) with Content-Type: application/json",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.370053",
+      "details": {
+        "name": "yaml_as_json",
+        "content_type": "application/json",
+        "status": 400,
+        "body_sent": "name: test\nvalue: 123",
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 230,
+      "category": "content_type",
+      "name": "Wrong body: raw_text",
+      "description": "POST non-JSON body (raw_text) with Content-Type: application/json",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.378049",
+      "details": {
+        "name": "raw_text",
+        "content_type": "application/json",
+        "status": 400,
+        "body_sent": "just plain text",
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 231,
+      "category": "content_type",
+      "name": "Wrong body: html_as_json",
+      "description": "POST non-JSON body (html_as_json) with Content-Type: application/json",
+      "result": "HTTP 400",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.382047",
+      "details": {
+        "name": "html_as_json",
+        "content_type": "application/json",
+        "status": 400,
+        "body_sent": "<html><body>test</body></html>",
+        "response": "{\"detail\":\"Invalid JSON\",\"error\":400,\"message\":\"Bad Request\"}"
+      }
+    },
+    {
+      "id": 232,
+      "category": "auth_bypass",
+      "name": "Creds: empty_user",
+      "description": "Test auth with empty_user credentials",
+      "result": "HTTP 400 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.390043",
+      "details": {
+        "test_name": "empty_user",
+        "status": 400,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 233,
+      "category": "auth_bypass",
+      "name": "Creds: empty_pass",
+      "description": "Test auth with empty_pass credentials",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.394041",
+      "details": {
+        "test_name": "empty_pass",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 234,
+      "category": "auth_bypass",
+      "name": "Creds: both_empty",
+      "description": "Test auth with both_empty credentials",
+      "result": "HTTP 400 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.398039",
+      "details": {
+        "test_name": "both_empty",
+        "status": 400,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 235,
+      "category": "auth_bypass",
+      "name": "Creds: space_user",
+      "description": "Test auth with space_user credentials",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.398039",
+      "details": {
+        "test_name": "space_user",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 236,
+      "category": "auth_bypass",
+      "name": "Creds: space_pass",
+      "description": "Test auth with space_pass credentials",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.402037",
+      "details": {
+        "test_name": "space_pass",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 237,
+      "category": "auth_bypass",
+      "name": "Creds: null_user",
+      "description": "Test auth with null_user credentials",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.406035",
+      "details": {
+        "test_name": "null_user",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 238,
+      "category": "auth_bypass",
+      "name": "Creds: null_pass",
+      "description": "Test auth with null_pass credentials",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.414031",
+      "details": {
+        "test_name": "null_pass",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 239,
+      "category": "auth_bypass",
+      "name": "Creds: null_in_user",
+      "description": "Test auth with null_in_user credentials",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.422027",
+      "details": {
+        "test_name": "null_in_user",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 240,
+      "category": "auth_bypass",
+      "name": "Creds: null_in_pass",
+      "description": "Test auth with null_in_pass credentials",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.422027",
+      "details": {
+        "test_name": "null_in_pass",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 241,
+      "category": "auth_bypass",
+      "name": "Creds: case_upper_user",
+      "description": "Test auth with case_upper_user credentials",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.430023",
+      "details": {
+        "test_name": "case_upper_user",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 242,
+      "category": "auth_bypass",
+      "name": "Creds: case_mixed_pass",
+      "description": "Test auth with case_mixed_pass credentials",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.430023",
+      "details": {
+        "test_name": "case_mixed_pass",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 243,
+      "category": "auth_bypass",
+      "name": "Creds: trailing_space_user",
+      "description": "Test auth with trailing_space_user credentials",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.430023",
+      "details": {
+        "test_name": "trailing_space_user",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 244,
+      "category": "auth_bypass",
+      "name": "Creds: trailing_space_pass",
+      "description": "Test auth with trailing_space_pass credentials",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.446015",
+      "details": {
+        "test_name": "trailing_space_pass",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 245,
+      "category": "auth_bypass",
+      "name": "Creds: unicode_user",
+      "description": "Test auth with unicode_user",
+      "result": "Error: 'latin-1' codec can't encode character '\\u200b' in position 5: ordinal not in range(256)",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.446015"
+    },
+    {
+      "id": 246,
+      "category": "auth_bypass",
+      "name": "Creds: very_long_user",
+      "description": "Test auth with very_long_user credentials",
+      "result": "HTTP 400 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.446015",
+      "details": {
+        "test_name": "very_long_user",
+        "status": 400,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 247,
+      "category": "auth_bypass",
+      "name": "Creds: very_long_pass",
+      "description": "Test auth with very_long_pass credentials",
+      "result": "HTTP 400 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.446015",
+      "details": {
+        "test_name": "very_long_pass",
+        "status": 400,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 248,
+      "category": "auth_bypass",
+      "name": "Auth header: bearer_token",
+      "description": "Test authentication with bearer_token header format",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.446015",
+      "details": {
+        "test_name": "bearer_token",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 249,
+      "category": "auth_bypass",
+      "name": "Auth header: digest_fake",
+      "description": "Test authentication with digest_fake header format",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.458009",
+      "details": {
+        "test_name": "digest_fake",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 250,
+      "category": "auth_bypass",
+      "name": "Auth header: api_key",
+      "description": "Test authentication with api_key header format",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.458009",
+      "details": {
+        "test_name": "api_key",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 251,
+      "category": "auth_bypass",
+      "name": "Auth header: token_header",
+      "description": "Test authentication with token_header header format",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.458009",
+      "details": {
+        "test_name": "token_header",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 252,
+      "category": "auth_bypass",
+      "name": "Auth header: basic_no_pass",
+      "description": "Test authentication with basic_no_pass header format",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.458009",
+      "details": {
+        "test_name": "basic_no_pass",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 253,
+      "category": "auth_bypass",
+      "name": "Auth header: basic_no_user",
+      "description": "Test authentication with basic_no_user header format",
+      "result": "HTTP 400 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.458009",
+      "details": {
+        "test_name": "basic_no_user",
+        "status": 400,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 254,
+      "category": "auth_bypass",
+      "name": "Auth header: basic_extra_colon",
+      "description": "Test authentication with basic_extra_colon header format",
+      "result": "HTTP 401 \u2014 rejected",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.458009",
+      "details": {
+        "test_name": "basic_extra_colon",
+        "status": 401,
+        "bypassed": false
+      }
+    },
+    {
+      "id": 255,
+      "category": "auth_bypass",
+      "name": "Auth header: double_basic",
+      "description": "Test authentication with double_basic header format",
+      "result": "HTTP 200 \u2014 ACCEPTED",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.458009",
+      "details": {
+        "test_name": "double_basic",
+        "status": 200,
+        "bypassed": true
+      }
+    },
+    {
+      "id": 256,
+      "category": "auth_bypass",
+      "name": "Cookie-only auth",
+      "description": "Test if session cookies are set after auth",
+      "result": "No cookies set by server \u2014 stateless auth",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.458009",
+      "details": {
+        "cookies": {}
+      }
+    },
+    {
+      "id": 257,
+      "category": "auth_bypass",
+      "name": "Auth over HTTP",
+      "description": "Test authentication over HTTP",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.458009",
+      "details": {
+        "scheme": "http",
+        "status": 200
+      }
+    },
+    {
+      "id": 258,
+      "category": "auth_bypass",
+      "name": "Auth over HTTPS",
+      "description": "Test authentication over HTTPS",
+      "result": "HTTP 200",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.458009",
+      "details": {
+        "scheme": "https",
+        "status": 200
+      }
+    },
+    {
+      "id": 259,
+      "category": "auth_bypass",
+      "name": "Brute force timing analysis",
+      "description": "Send 10 rapid failed auth attempts and measure response times",
+      "result": "avg=11.6ms, first5_avg=0.0ms, last5_avg=23.2ms, backoff=YES",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.573951",
+      "details": {
+        "attempts": [
+          {
+            "user": "admin",
+            "status": 401,
+            "time_ms": 0.0
+          },
+          {
+            "user": "admin",
+            "status": 401,
+            "time_ms": 0.0
+          },
+          {
+            "user": "admin",
+            "status": 401,
+            "time_ms": 0.0
+          },
+          {
+            "user": "admin",
+            "status": 401,
+            "time_ms": 0.0
+          },
+          {
+            "user": "admin",
+            "status": 401,
+            "time_ms": 0.0
+          },
+          {
+            "user": "admin",
+            "status": 401,
+            "time_ms": 0.0
+          },
+          {
+            "user": "admin",
+            "status": 401,
+            "time_ms": 0.0
+          },
+          {
+            "user": "admin",
+            "status": 401,
+            "time_ms": 107.9
+          },
+          {
+            "user": "admin",
+            "status": 401,
+            "time_ms": 8.0
+          },
+          {
+            "user": "admin",
+            "status": 401,
+            "time_ms": 0.0
+          }
+        ],
+        "avg_ms": 11.59,
+        "first_half_avg_ms": 0.0,
+        "second_half_avg_ms": 23.18,
+        "has_backoff": true
+      }
+    },
+    {
+      "id": 260,
+      "category": "auth_bypass",
+      "name": "User enumeration timing oracle",
+      "description": "Compare auth response times for valid vs invalid usernames",
+      "result": "valid_user_avg=7.2ms, invalid_user_avg=0.0ms, diff=7.2ms",
+      "anomaly": false,
+      "timestamp": "2026-02-15T22:09:09.609933",
+      "details": {
+        "valid_user_avg_ms": 7.2,
+        "invalid_user_avg_ms": 0.0,
+        "timing_diff_ms": 7.2,
+        "valid_user_times": [
+          8.0,
+          0.0,
+          0.0,
+          0.0,
+          28.0
+        ],
+        "invalid_user_times": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "severity": "LOW",
+      "title": "No REST API rate limiting detected",
+      "description": "Sent 100 rapid requests with no 429 responses and no observable throttling. Slowdown ratio: 0.98x",
+      "timestamp": "2026-02-15T22:08:56.124679",
+      "cwe": "CWE-770"
+    }
+  ]
+}

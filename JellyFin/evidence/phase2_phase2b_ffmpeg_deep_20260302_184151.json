@@ -1,0 +1,332 @@
+{
+  "script": "phase2b_ffmpeg_deep",
+  "phase": "phase2",
+  "target": "Jellyfin 10.11.6",
+  "start_time": "2026-03-02T18:41:33.298085",
+  "end_time": "2026-03-02T18:41:51.995429",
+  "summary": {
+    "total_tests": 34,
+    "findings": 1,
+    "anomalies": 0
+  },
+  "tests": [
+    {
+      "id": "TRANSCODE-VideoCodec-Normal h264 (ba",
+      "description": "Transcoding validation: Normal h264 (baseline)",
+      "request": "GET /Videos/.../master.m3u8?VideoCodec=h264",
+      "response": "HTTP 200: #EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=128000,AVERAGE-BANDWIDTH=128000,VIDEO-RANGE=SDR,CODECS=\"avc1.42400D,mp4a.40.2\",RESOLUTION=320x240,FRAME-RATE=24\nmain.m3u8?static=false&MediaSourceId=6aa1c5306853247",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:33.446159"
+    },
+    {
+      "id": "TRANSCODE-VideoCodec-Pipe-delimited ",
+      "description": "Transcoding validation: Pipe-delimited codec",
+      "request": "GET /Videos/.../master.m3u8?VideoCodec=h264|h265",
+      "response": "HTTP 200: #EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=128000,AVERAGE-BANDWIDTH=128000,VIDEO-RANGE=SDR,CODECS=\"mp4a.40.2\",RESOLUTION=320x240,FRAME-RATE=24\nmain.m3u8?static=false&MediaSourceId=6aa1c530685324775a62c31a448",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:33.750311"
+    },
+    {
+      "id": "TRANSCODE-Container-Pipe-delimited ",
+      "description": "Transcoding validation: Pipe-delimited container",
+      "request": "GET /Videos/.../master.m3u8?Container=ts|mp4",
+      "response": "HTTP 200: #EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=128000,AVERAGE-BANDWIDTH=128000,VIDEO-RANGE=SDR,CODECS=\"avc1.42400D,mp4a.40.2\",RESOLUTION=320x240,FRAME-RATE=24\nmain.m3u8?static=false&MediaSourceId=6aa1c5306853247",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:34.050461"
+    },
+    {
+      "id": "TRANSCODE-VideoCodec-Shell subst in ",
+      "description": "Transcoding validation: Shell subst in codec",
+      "request": "GET /Videos/.../master.m3u8?VideoCodec=h264$(pwd)",
+      "response": "HTTP 400: {\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"videoCodec\":[\"The field videoCodec must match the regular express",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:34.354613"
+    },
+    {
+      "id": "TRANSCODE-Container-Shell subst in ",
+      "description": "Transcoding validation: Shell subst in container",
+      "request": "GET /Videos/.../master.m3u8?Container=ts$(pwd)",
+      "response": "HTTP 200: #EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=128000,AVERAGE-BANDWIDTH=128000,VIDEO-RANGE=SDR,CODECS=\"avc1.42400D,mp4a.40.2\",RESOLUTION=320x240,FRAME-RATE=24\nmain.m3u8?static=false&MediaSourceId=6aa1c5306853247",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:34.658765"
+    },
+    {
+      "id": "TRANSCODE-VideoCodec-Backtick in cod",
+      "description": "Transcoding validation: Backtick in codec",
+      "request": "GET /Videos/.../master.m3u8?VideoCodec=h264`pwd`",
+      "response": "HTTP 400: {\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"videoCodec\":[\"The field videoCodec must match the regular express",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:34.962917"
+    },
+    {
+      "id": "TRANSCODE-Container-Backtick in con",
+      "description": "Transcoding validation: Backtick in container",
+      "request": "GET /Videos/.../master.m3u8?Container=ts`pwd`",
+      "response": "HTTP 200: #EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=128000,AVERAGE-BANDWIDTH=128000,VIDEO-RANGE=SDR,CODECS=\"avc1.42400D,mp4a.40.2\",RESOLUTION=320x240,FRAME-RATE=24\nmain.m3u8?static=false&MediaSourceId=6aa1c5306853247",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:35.271071"
+    },
+    {
+      "id": "TRANSCODE-VideoCodec-Space + FFmpeg ",
+      "description": "Transcoding validation: Space + FFmpeg args in codec",
+      "request": "GET /Videos/.../master.m3u8?VideoCodec=h264 -f null",
+      "response": "HTTP 400: {\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"videoCodec\":[\"The field videoCodec must match the regular express",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:35.575223"
+    },
+    {
+      "id": "TRANSCODE-Container-Space + FFmpeg ",
+      "description": "Transcoding validation: Space + FFmpeg args in container",
+      "request": "GET /Videos/.../master.m3u8?Container=ts -f null",
+      "response": "HTTP 200: #EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=128000,AVERAGE-BANDWIDTH=128000,VIDEO-RANGE=SDR,CODECS=\"avc1.42400D,mp4a.40.2\",RESOLUTION=320x240,FRAME-RATE=24\nmain.m3u8?static=false&MediaSourceId=6aa1c5306853247",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:35.875373"
+    },
+    {
+      "id": "TRANSCODE-VideoCodec-Newline in code",
+      "description": "Transcoding validation: Newline in codec",
+      "request": "GET /Videos/.../master.m3u8?VideoCodec=h264\n-v",
+      "response": "HTTP 400: {\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"videoCodec\":[\"The field videoCodec must match the regular express",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:36.179525"
+    },
+    {
+      "id": "TRANSCODE-VideoCodec-Quote in codec",
+      "description": "Transcoding validation: Quote in codec",
+      "request": "GET /Videos/.../master.m3u8?VideoCodec=h264\"",
+      "response": "HTTP 400: {\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"videoCodec\":[\"The field videoCodec must match the regular express",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:36.479675"
+    },
+    {
+      "id": "TRANSCODE-Container-Quote in contai",
+      "description": "Transcoding validation: Quote in container",
+      "request": "GET /Videos/.../master.m3u8?Container=ts\"",
+      "response": "HTTP 200: #EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=128000,AVERAGE-BANDWIDTH=128000,VIDEO-RANGE=SDR,CODECS=\"avc1.42400D,mp4a.40.2\",RESOLUTION=320x240,FRAME-RATE=24\nmain.m3u8?static=false&MediaSourceId=6aa1c5306853247",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:36.783827"
+    },
+    {
+      "id": "TRANSCODE-SubtitleCo-Shell subst in ",
+      "description": "Transcoding validation: Shell subst in subtitle codec",
+      "request": "GET /Videos/.../master.m3u8?SubtitleCodec=srt$(pwd)",
+      "response": "HTTP 400: {\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"subtitleCodec\":[\"The field subtitleCodec must match the regular e",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:37.087979"
+    },
+    {
+      "id": "TRANSCODE-SubtitleCo-FFmpeg args in ",
+      "description": "Transcoding validation: FFmpeg args in subtitle codec",
+      "request": "GET /Videos/.../master.m3u8?SubtitleCodec=srt -f null",
+      "response": "HTTP 400: {\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"errors\":{\"subtitleCodec\":[\"The field subtitleCodec must match the regular e",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:37.388129"
+    },
+    {
+      "id": "PLAYBACK-DEEP-Normal baseline",
+      "description": "PlaybackInfo deep: Normal baseline",
+      "request": "POST /Items/6aa1c530685324775a62c31a44853a81/PlaybackInfo",
+      "response": "HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:37.696283"
+    },
+    {
+      "id": "PLAYBACK-DEEP-Container with quote",
+      "description": "PlaybackInfo deep: Container with quote injection",
+      "request": "POST /Items/6aa1c530685324775a62c31a44853a81/PlaybackInfo",
+      "response": "HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:38.008439"
+    },
+    {
+      "id": "PLAYBACK-DEEP-Video codec with nul",
+      "description": "PlaybackInfo deep: Video codec with null output",
+      "request": "POST /Items/6aa1c530685324775a62c31a44853a81/PlaybackInfo",
+      "response": "HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:38.324597"
+    },
+    {
+      "id": "PLAYBACK-DEEP-Audio codec with com",
+      "description": "PlaybackInfo deep: Audio codec with command injection",
+      "request": "POST /Items/6aa1c530685324775a62c31a44853a81/PlaybackInfo",
+      "response": "HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:38.636753"
+    },
+    {
+      "id": "PLAYBACK-DEEP-All fields injected",
+      "description": "PlaybackInfo deep: All fields injected",
+      "request": "POST /Items/6aa1c530685324775a62c31a44853a81/PlaybackInfo",
+      "response": "HTTP 200",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:38.936903"
+    },
+    {
+      "id": "SUBTPATH-/etc/passwd",
+      "description": "Subtitle path: /etc/passwd",
+      "request": "GET /Videos/.../Subtitles//etc/passwd/Stream.srt",
+      "response": "HLS:200, Sub:404, Traversal:404",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:41.906387"
+    },
+    {
+      "id": "SUBTPATH-../../../../../",
+      "description": "Subtitle path: ../../../../../../etc/passwd",
+      "request": "GET /Videos/.../Subtitles/../../../../../../etc/passwd/Stream.srt",
+      "response": "HLS:200, Sub:404, Traversal:404",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:42.118493"
+    },
+    {
+      "id": "SUBTPATH-/config/data/je",
+      "description": "Subtitle path: /config/data/jellyfin.db",
+      "request": "GET /Videos/.../Subtitles//config/data/jellyfin.db/Stream.srt",
+      "response": "HLS:200, Sub:404, Traversal:404",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:42.342605"
+    },
+    {
+      "id": "SUBTPATH-/proc/self/envi",
+      "description": "Subtitle path: /proc/self/environ",
+      "request": "GET /Videos/.../Subtitles//proc/self/environ/Stream.srt",
+      "response": "HLS:200, Sub:404, Traversal:404",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:42.558713"
+    },
+    {
+      "id": "CVE-2023-48702",
+      "description": "CVE-2023-48702: RCE via custom FFmpeg binary path",
+      "request": "Source code review: ConfigurationController.cs line 160",
+      "response": "Endpoint is NOOP -- UpdateEncoderPath call is commented out. Returns 204 but path is never changed. PATCHED.",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:42.758813"
+    },
+    {
+      "id": "CVE-2025-31499-original_cve",
+      "description": "CVE-2025-31499 bypass: original_cve",
+      "request": "GET /Videos/.../master.m3u8?VideoCodec=-c:v libx264 -vf drawtext",
+      "response": "HTTP 400",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:42.762815"
+    },
+    {
+      "id": "CVE-2025-31499-bypass_pipes",
+      "description": "CVE-2025-31499 bypass: bypass_pipes",
+      "request": "GET /Videos/.../master.m3u8?VideoCodec=h264|libx264",
+      "response": "HTTP 200",
+      "result": "ANOMALOUS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:43.066967"
+    },
+    {
+      "id": "CVE-2025-31499-double_encode",
+      "description": "CVE-2025-31499 bypass: double_encode",
+      "request": "GET /Videos/.../master.m3u8?VideoCodec=h264%20-f%20null",
+      "response": "HTTP 400",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:43.367117"
+    },
+    {
+      "id": "CVE-2025-31499-url_encode",
+      "description": "CVE-2025-31499 bypass: url_encode",
+      "request": "GET /Videos/.../master.m3u8?VideoCodec=h264%22%20-f%20null",
+      "response": "HTTP 400",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:43.675271"
+    },
+    {
+      "id": "CVE-2025-31499-unicode_space",
+      "description": "CVE-2025-31499 bypass: unicode_space",
+      "request": "GET /Videos/.../master.m3u8?VideoCodec=h264\u00a0-f\u00a0null",
+      "response": "HTTP 400",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:43.979423"
+    },
+    {
+      "id": "XFF-127.0.0.1",
+      "description": "X-Forwarded-For spoofing: 127.0.0.1",
+      "request": "GET /System/Info with X-Forwarded-For: 127.0.0.1",
+      "response": "HTTP 401",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:44.279573"
+    },
+    {
+      "id": "XFF-[REDACTED-IP]",
+      "description": "X-Forwarded-For spoofing: [REDACTED-IP]",
+      "request": "GET /System/Info with X-Forwarded-For: [REDACTED-IP]",
+      "response": "HTTP 401",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:44.479673"
+    },
+    {
+      "id": "XFF-[REDACTED-INTERNAL-IP]",
+      "description": "X-Forwarded-For spoofing: [REDACTED-INTERNAL-IP]",
+      "request": "GET /System/Info with X-Forwarded-For: [REDACTED-INTERNAL-IP]",
+      "response": "HTTP 401",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:44.683775"
+    },
+    {
+      "id": "XFF-[REDACTED-IP]",
+      "description": "X-Forwarded-For spoofing: [REDACTED-IP]",
+      "request": "GET /System/Info with X-Real-IP: [REDACTED-IP]",
+      "response": "HTTP 401",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:51.591227"
+    },
+    {
+      "id": "XFF-[REDACTED-INTERNAL-IP], 8.",
+      "description": "X-Forwarded-For spoofing: [REDACTED-INTERNAL-IP], [REDACTED-IP]",
+      "request": "GET /System/Info with X-Forwarded-For: [REDACTED-INTERNAL-IP], [REDACTED-IP]",
+      "response": "HTTP 401",
+      "result": "PASS",
+      "severity": "INFO",
+      "timestamp": "2026-03-02T18:41:51.791327"
+    }
+  ],
+  "findings": [
+    {
+      "id": "UNAUTH-MEDIA",
+      "severity": "MEDIUM",
+      "title": "Unauthenticated access to 2 media items",
+      "details": "Media files (video/audio streams and images) are accessible without authentication if the item ID is known. Tested 4 items: 2 accessible, 2 blocked. Item IDs are GUIDs but may be leaked through other endpoints.",
+      "evidence": "",
+      "remediation": "Require authentication for all media streaming endpoints. Consider the `RequireAuthentication` middleware for static streams.",
+      "timestamp": "2026-03-02T18:41:41.894381"
+    }
+  ],
+  "anomalies": []
+}

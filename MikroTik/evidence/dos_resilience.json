@@ -1,0 +1,2998 @@
+{
+  "metadata": {
+    "script": "attack_dos_resilience.py",
+    "target": "[REDACTED-INTERNAL-IP]",
+    "phase": 6,
+    "start_time": "2026-02-16T00:39:12.844312",
+    "end_time": "2026-02-16T00:48:09.206043",
+    "total_tests": 91,
+    "anomalies": 0,
+    "router_version": "7.20.8 (long-term)",
+    "initial_uptime": "38m12s",
+    "router_log_count": 22,
+    "router_interesting_events": 0,
+    "final_health": {
+      "alive": true,
+      "uptime": "47m9s",
+      "cpu_load": "0",
+      "free_memory": "836857856",
+      "version": "7.20.8 (long-term)"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "category": "baseline",
+      "name": "System resource baseline",
+      "description": "Record baseline CPU load, memory, uptime via REST API",
+      "result": "CPU=0%, free_mem=835014656, uptime=38m12s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:12.848310",
+      "details": {
+        "cpu_load": "0",
+        "free_memory": "835014656",
+        "total_memory": "1073741824",
+        "uptime": "38m12s",
+        "version": "7.20.8 (long-term)",
+        "timestamp": 1771220352.8483107
+      }
+    },
+    {
+      "id": 2,
+      "category": "baseline",
+      "name": "Active sessions baseline",
+      "description": "Record number of active user sessions before testing",
+      "result": "2 active sessions",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:12.852308",
+      "details": {
+        "sessions": [
+          {
+            ".id": "*7",
+            "address": "[REDACTED-INTERNAL-IP]",
+            "group": "full",
+            "name": "admin",
+            "radius": "false",
+            "via": "rest-api",
+            "when": "2026-02-20 14:33:19"
+          },
+          {
+            ".id": "*8",
+            "group": "full",
+            "name": "admin",
+            "radius": "false",
+            "via": "api",
+            "when": "2026-02-20 14:33:19"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "category": "baseline",
+      "name": "Baseline response: WebFig/REST (:80)",
+      "description": "Measure baseline TCP connect time to WebFig/REST",
+      "result": "OK in 0.0000s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:12.852308",
+      "details": {
+        "port": 80,
+        "reachable": true,
+        "connect_time": 0.0,
+        "error": null
+      }
+    },
+    {
+      "id": 4,
+      "category": "baseline",
+      "name": "Baseline response: API (:8728)",
+      "description": "Measure baseline TCP connect time to API",
+      "result": "OK in 0.0000s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:12.852308",
+      "details": {
+        "port": 8728,
+        "reachable": true,
+        "connect_time": 0.0,
+        "error": null
+      }
+    },
+    {
+      "id": 5,
+      "category": "baseline",
+      "name": "Baseline response: Winbox (:8291)",
+      "description": "Measure baseline TCP connect time to Winbox",
+      "result": "OK in 0.0000s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:12.852308",
+      "details": {
+        "port": 8291,
+        "reachable": true,
+        "connect_time": 0.0,
+        "error": null
+      }
+    },
+    {
+      "id": 6,
+      "category": "baseline",
+      "name": "Baseline response: SSH (:22)",
+      "description": "Measure baseline TCP connect time to SSH",
+      "result": "OK in 0.0040s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:12.856306",
+      "details": {
+        "port": 22,
+        "reachable": true,
+        "connect_time": 0.004,
+        "error": null
+      }
+    },
+    {
+      "id": 7,
+      "category": "baseline",
+      "name": "Baseline response: FTP (:21)",
+      "description": "Measure baseline TCP connect time to FTP",
+      "result": "OK in 0.0000s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:12.856306",
+      "details": {
+        "port": 21,
+        "reachable": true,
+        "connect_time": 0.0,
+        "error": null
+      }
+    },
+    {
+      "id": 8,
+      "category": "baseline",
+      "name": "Baseline response: Telnet (:23)",
+      "description": "Measure baseline TCP connect time to Telnet",
+      "result": "OK in 0.0000s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:12.856306",
+      "details": {
+        "port": 23,
+        "reachable": true,
+        "connect_time": 0.0,
+        "error": null
+      }
+    },
+    {
+      "id": 9,
+      "category": "baseline",
+      "name": "Baseline response: BTest (:2000)",
+      "description": "Measure baseline TCP connect time to BTest",
+      "result": "OK in 0.0000s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:12.856306",
+      "details": {
+        "port": 2000,
+        "reachable": true,
+        "connect_time": 0.0,
+        "error": null
+      }
+    },
+    {
+      "id": 10,
+      "category": "baseline",
+      "name": "REST API response time",
+      "description": "Measure authenticated REST API GET response time",
+      "result": "HTTP 200 in 0.0040s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:12.860304",
+      "details": {
+        "status_code": 200,
+        "elapsed": 0.004
+      }
+    },
+    {
+      "id": 11,
+      "category": "flood",
+      "name": "Flood WebFig/REST x10",
+      "description": "Open 10 concurrent TCP connections to WebFig/REST (:80)",
+      "result": "10/10 connected, 0 refused, avg=0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:16.162652",
+      "details": {
+        "service": "WebFig/REST",
+        "port": 80,
+        "level": 10,
+        "connected": 10,
+        "refused": 0,
+        "avg_connect_time": 0.0,
+        "max_connect_time": 0.0,
+        "degradation_factor": null,
+        "wall_time": 3.3
+      }
+    },
+    {
+      "id": 12,
+      "category": "flood",
+      "name": "Flood WebFig/REST x25",
+      "description": "Open 25 concurrent TCP connections to WebFig/REST (:80)",
+      "result": "25/25 connected, 0 refused, avg=0.0002s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:20.724370",
+      "details": {
+        "service": "WebFig/REST",
+        "port": 80,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "avg_connect_time": 0.0002,
+        "max_connect_time": 0.004,
+        "degradation_factor": null,
+        "wall_time": 3.55
+      }
+    },
+    {
+      "id": 13,
+      "category": "flood",
+      "name": "Flood WebFig/REST x50",
+      "description": "Open 50 concurrent TCP connections to WebFig/REST (:80)",
+      "result": "50/50 connected, 0 refused, avg=0.0001s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:25.921770",
+      "details": {
+        "service": "WebFig/REST",
+        "port": 80,
+        "level": 50,
+        "connected": 50,
+        "refused": 0,
+        "avg_connect_time": 0.0001,
+        "max_connect_time": 0.004,
+        "degradation_factor": null,
+        "wall_time": 4.19
+      }
+    },
+    {
+      "id": 14,
+      "category": "flood",
+      "name": "Flood WebFig/REST over-limit (25)",
+      "description": "Open 25 connections (default max + 5) to WebFig/REST",
+      "result": "25/25 connected, 0 refused (0%)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:30.399530",
+      "details": {
+        "service": "WebFig/REST",
+        "port": 80,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "refused_pct": 0.0,
+        "avg_connect_time": 0.001
+      }
+    },
+    {
+      "id": 15,
+      "category": "flood",
+      "name": "Post-flood resource: WebFig/REST",
+      "description": "Check CPU/memory after flooding WebFig/REST",
+      "result": "CPU=0%, free_mem=835014656",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:31.407026",
+      "details": {
+        "cpu_load": "0",
+        "free_memory": "835014656",
+        "total_memory": "1073741824",
+        "uptime": "38m31s",
+        "version": "7.20.8 (long-term)",
+        "timestamp": 1771220371.4070268
+      }
+    },
+    {
+      "id": 16,
+      "category": "flood",
+      "name": "Post-flood alive: WebFig/REST",
+      "description": "Verify WebFig/REST still responds after flood",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:31.407026"
+    },
+    {
+      "id": 17,
+      "category": "flood",
+      "name": "Flood API x10",
+      "description": "Open 10 concurrent TCP connections to API (:8728)",
+      "result": "10/10 connected, 0 refused, avg=0.0024s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:36.596430",
+      "details": {
+        "service": "API",
+        "port": 8728,
+        "level": 10,
+        "connected": 10,
+        "refused": 0,
+        "avg_connect_time": 0.0024,
+        "max_connect_time": 0.004,
+        "degradation_factor": null,
+        "wall_time": 3.19
+      }
+    },
+    {
+      "id": 18,
+      "category": "flood",
+      "name": "Flood API x25",
+      "description": "Open 25 concurrent TCP connections to API (:8728)",
+      "result": "25/25 connected, 0 refused, avg=0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:41.086184",
+      "details": {
+        "service": "API",
+        "port": 8728,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "avg_connect_time": 0.0,
+        "max_connect_time": 0.0,
+        "degradation_factor": null,
+        "wall_time": 3.49
+      }
+    },
+    {
+      "id": 19,
+      "category": "flood",
+      "name": "Flood API x50",
+      "description": "Open 50 concurrent TCP connections to API (:8728)",
+      "result": "50/50 connected, 0 refused, avg=0.0002s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:46.255598",
+      "details": {
+        "service": "API",
+        "port": 8728,
+        "level": 50,
+        "connected": 50,
+        "refused": 0,
+        "avg_connect_time": 0.0002,
+        "max_connect_time": 0.004,
+        "degradation_factor": null,
+        "wall_time": 4.17
+      }
+    },
+    {
+      "id": 20,
+      "category": "flood",
+      "name": "Flood API over-limit (25)",
+      "description": "Open 25 connections (default max + 5) to API",
+      "result": "25/25 connected, 0 refused (0%)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:50.817316",
+      "details": {
+        "service": "API",
+        "port": 8728,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "refused_pct": 0.0,
+        "avg_connect_time": 0.0
+      }
+    },
+    {
+      "id": 21,
+      "category": "flood",
+      "name": "Post-flood resource: API",
+      "description": "Check CPU/memory after flooding API",
+      "result": "CPU=0%, free_mem=834854912",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:51.824812",
+      "details": {
+        "cpu_load": "0",
+        "free_memory": "834854912",
+        "total_memory": "1073741824",
+        "uptime": "38m51s",
+        "version": "7.20.8 (long-term)",
+        "timestamp": 1771220391.8248127
+      }
+    },
+    {
+      "id": 22,
+      "category": "flood",
+      "name": "Post-flood alive: API",
+      "description": "Verify API still responds after flood",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:51.824812"
+    },
+    {
+      "id": 23,
+      "category": "flood",
+      "name": "Flood Winbox x10",
+      "description": "Open 10 concurrent TCP connections to Winbox (:8291)",
+      "result": "10/10 connected, 0 refused, avg=0.0004s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:39:57.046200",
+      "details": {
+        "service": "Winbox",
+        "port": 8291,
+        "level": 10,
+        "connected": 10,
+        "refused": 0,
+        "avg_connect_time": 0.0004,
+        "max_connect_time": 0.004,
+        "degradation_factor": null,
+        "wall_time": 3.22
+      }
+    },
+    {
+      "id": 24,
+      "category": "flood",
+      "name": "Flood Winbox x25",
+      "description": "Open 25 concurrent TCP connections to Winbox (:8291)",
+      "result": "25/25 connected, 0 refused, avg=0.0016s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:01.635904",
+      "details": {
+        "service": "Winbox",
+        "port": 8291,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "avg_connect_time": 0.0016,
+        "max_connect_time": 0.004,
+        "degradation_factor": null,
+        "wall_time": 3.59
+      }
+    },
+    {
+      "id": 25,
+      "category": "flood",
+      "name": "Flood Winbox x50",
+      "description": "Open 50 concurrent TCP connections to Winbox (:8291)",
+      "result": "50/50 connected, 0 refused, avg=0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:06.757342",
+      "details": {
+        "service": "Winbox",
+        "port": 8291,
+        "level": 50,
+        "connected": 50,
+        "refused": 0,
+        "avg_connect_time": 0.0,
+        "max_connect_time": 0.0,
+        "degradation_factor": null,
+        "wall_time": 4.12
+      }
+    },
+    {
+      "id": 26,
+      "category": "flood",
+      "name": "Flood Winbox over-limit (25)",
+      "description": "Open 25 connections (default max + 5) to Winbox",
+      "result": "25/25 connected, 0 refused (0%)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:11.231104",
+      "details": {
+        "service": "Winbox",
+        "port": 8291,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "refused_pct": 0.0,
+        "avg_connect_time": 0.0
+      }
+    },
+    {
+      "id": 27,
+      "category": "flood",
+      "name": "Post-flood resource: Winbox",
+      "description": "Check CPU/memory after flooding Winbox",
+      "result": "CPU=0%, free_mem=835211264",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:12.226606",
+      "details": {
+        "cpu_load": "0",
+        "free_memory": "835211264",
+        "total_memory": "1073741824",
+        "uptime": "39m12s",
+        "version": "7.20.8 (long-term)",
+        "timestamp": 1771220412.2266066
+      }
+    },
+    {
+      "id": 28,
+      "category": "flood",
+      "name": "Post-flood alive: Winbox",
+      "description": "Verify Winbox still responds after flood",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:12.230604"
+    },
+    {
+      "id": 29,
+      "category": "flood",
+      "name": "Flood SSH x10",
+      "description": "Open 10 concurrent TCP connections to SSH (:22)",
+      "result": "10/10 connected, 0 refused, avg=0.0004s, degradation=0.1x",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:17.443996",
+      "details": {
+        "service": "SSH",
+        "port": 22,
+        "level": 10,
+        "connected": 10,
+        "refused": 0,
+        "avg_connect_time": 0.0004,
+        "max_connect_time": 0.004,
+        "degradation_factor": 0.1,
+        "wall_time": 3.21
+      }
+    },
+    {
+      "id": 30,
+      "category": "flood",
+      "name": "Flood SSH x25",
+      "description": "Open 25 concurrent TCP connections to SSH (:22)",
+      "result": "25/25 connected, 0 refused, avg=0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:21.897768",
+      "details": {
+        "service": "SSH",
+        "port": 22,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "avg_connect_time": 0.0,
+        "max_connect_time": 0.0,
+        "degradation_factor": null,
+        "wall_time": 3.45
+      }
+    },
+    {
+      "id": 31,
+      "category": "flood",
+      "name": "Flood SSH x50",
+      "description": "Open 50 concurrent TCP connections to SSH (:22)",
+      "result": "50/50 connected, 0 refused, avg=0.0003s, degradation=0.07x",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:26.955238",
+      "details": {
+        "service": "SSH",
+        "port": 22,
+        "level": 50,
+        "connected": 50,
+        "refused": 0,
+        "avg_connect_time": 0.0003,
+        "max_connect_time": 0.004,
+        "degradation_factor": 0.07,
+        "wall_time": 4.06
+      }
+    },
+    {
+      "id": 32,
+      "category": "flood",
+      "name": "Flood SSH over-limit (25)",
+      "description": "Open 25 connections (default max + 5) to SSH",
+      "result": "25/25 connected, 0 refused (0%)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:31.421004",
+      "details": {
+        "service": "SSH",
+        "port": 22,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "refused_pct": 0.0,
+        "avg_connect_time": 0.0
+      }
+    },
+    {
+      "id": 33,
+      "category": "flood",
+      "name": "Post-flood resource: SSH",
+      "description": "Check CPU/memory after flooding SSH",
+      "result": "CPU=0%, free_mem=835145728",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:32.420504",
+      "details": {
+        "cpu_load": "0",
+        "free_memory": "835145728",
+        "total_memory": "1073741824",
+        "uptime": "39m32s",
+        "version": "7.20.8 (long-term)",
+        "timestamp": 1771220432.4205046
+      }
+    },
+    {
+      "id": 34,
+      "category": "flood",
+      "name": "Post-flood alive: SSH",
+      "description": "Verify SSH still responds after flood",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:32.424502"
+    },
+    {
+      "id": 35,
+      "category": "flood",
+      "name": "Flood FTP x10",
+      "description": "Open 10 concurrent TCP connections to FTP (:21)",
+      "result": "10/10 connected, 0 refused, avg=0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:37.969728",
+      "details": {
+        "service": "FTP",
+        "port": 21,
+        "level": 10,
+        "connected": 10,
+        "refused": 0,
+        "avg_connect_time": 0.0,
+        "max_connect_time": 0.0,
+        "degradation_factor": null,
+        "wall_time": 3.54
+      }
+    },
+    {
+      "id": 36,
+      "category": "flood",
+      "name": "Flood FTP x25",
+      "description": "Open 25 concurrent TCP connections to FTP (:21)",
+      "result": "25/25 connected, 0 refused, avg=0.0003s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:42.471476",
+      "details": {
+        "service": "FTP",
+        "port": 21,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "avg_connect_time": 0.0003,
+        "max_connect_time": 0.004,
+        "degradation_factor": null,
+        "wall_time": 3.5
+      }
+    },
+    {
+      "id": 37,
+      "category": "flood",
+      "name": "Flood FTP x50",
+      "description": "Open 50 concurrent TCP connections to FTP (:21)",
+      "result": "50/50 connected, 0 refused, avg=0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:47.480970",
+      "details": {
+        "service": "FTP",
+        "port": 21,
+        "level": 50,
+        "connected": 50,
+        "refused": 0,
+        "avg_connect_time": 0.0,
+        "max_connect_time": 0.0,
+        "degradation_factor": null,
+        "wall_time": 4.01
+      }
+    },
+    {
+      "id": 38,
+      "category": "flood",
+      "name": "Flood FTP over-limit (25)",
+      "description": "Open 25 connections (default max + 5) to FTP",
+      "result": "25/25 connected, 0 refused (0%)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:52.118650",
+      "details": {
+        "service": "FTP",
+        "port": 21,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "refused_pct": 0.0,
+        "avg_connect_time": 0.0
+      }
+    },
+    {
+      "id": 39,
+      "category": "flood",
+      "name": "Post-flood resource: FTP",
+      "description": "Check CPU/memory after flooding FTP",
+      "result": "CPU=0%, free_mem=834846720",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:53.126146",
+      "details": {
+        "cpu_load": "0",
+        "free_memory": "834846720",
+        "total_memory": "1073741824",
+        "uptime": "39m53s",
+        "version": "7.20.8 (long-term)",
+        "timestamp": 1771220453.1261466
+      }
+    },
+    {
+      "id": 40,
+      "category": "flood",
+      "name": "Post-flood alive: FTP",
+      "description": "Verify FTP still responds after flood",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:53.126146"
+    },
+    {
+      "id": 41,
+      "category": "flood",
+      "name": "Flood Telnet x10",
+      "description": "Open 10 concurrent TCP connections to Telnet (:23)",
+      "result": "10/10 connected, 0 refused, avg=0.0008s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:40:58.303556",
+      "details": {
+        "service": "Telnet",
+        "port": 23,
+        "level": 10,
+        "connected": 10,
+        "refused": 0,
+        "avg_connect_time": 0.0008,
+        "max_connect_time": 0.004,
+        "degradation_factor": null,
+        "wall_time": 3.17
+      }
+    },
+    {
+      "id": 42,
+      "category": "flood",
+      "name": "Flood Telnet x25",
+      "description": "Open 25 concurrent TCP connections to Telnet (:23)",
+      "result": "25/25 connected, 0 refused, avg=0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:02.893260",
+      "details": {
+        "service": "Telnet",
+        "port": 23,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "avg_connect_time": 0.0,
+        "max_connect_time": 0.0,
+        "degradation_factor": null,
+        "wall_time": 3.59
+      }
+    },
+    {
+      "id": 43,
+      "category": "flood",
+      "name": "Flood Telnet x50",
+      "description": "Open 50 concurrent TCP connections to Telnet (:23)",
+      "result": "50/50 connected, 0 refused, avg=0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:08.078666",
+      "details": {
+        "service": "Telnet",
+        "port": 23,
+        "level": 50,
+        "connected": 50,
+        "refused": 0,
+        "avg_connect_time": 0.0,
+        "max_connect_time": 0.0,
+        "degradation_factor": null,
+        "wall_time": 4.18
+      }
+    },
+    {
+      "id": 44,
+      "category": "flood",
+      "name": "Flood Telnet over-limit (25)",
+      "description": "Open 25 connections (default max + 5) to Telnet",
+      "result": "25/25 connected, 0 refused (0%)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:12.672368",
+      "details": {
+        "service": "Telnet",
+        "port": 23,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "refused_pct": 0.0,
+        "avg_connect_time": 0.0
+      }
+    },
+    {
+      "id": 45,
+      "category": "flood",
+      "name": "Post-flood resource: Telnet",
+      "description": "Check CPU/memory after flooding Telnet",
+      "result": "CPU=0%, free_mem=834998272",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:13.671868",
+      "details": {
+        "cpu_load": "0",
+        "free_memory": "834998272",
+        "total_memory": "1073741824",
+        "uptime": "40m13s",
+        "version": "7.20.8 (long-term)",
+        "timestamp": 1771220473.6718686
+      }
+    },
+    {
+      "id": 46,
+      "category": "flood",
+      "name": "Post-flood alive: Telnet",
+      "description": "Verify Telnet still responds after flood",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:13.671868"
+    },
+    {
+      "id": 47,
+      "category": "flood",
+      "name": "Flood BTest x10",
+      "description": "Open 10 concurrent TCP connections to BTest (:2000)",
+      "result": "10/10 connected, 0 refused, avg=0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:18.869268",
+      "details": {
+        "service": "BTest",
+        "port": 2000,
+        "level": 10,
+        "connected": 10,
+        "refused": 0,
+        "avg_connect_time": 0.0,
+        "max_connect_time": 0.0,
+        "degradation_factor": null,
+        "wall_time": 3.2
+      }
+    },
+    {
+      "id": 48,
+      "category": "flood",
+      "name": "Flood BTest x25",
+      "description": "Open 25 concurrent TCP connections to BTest (:2000)",
+      "result": "25/25 connected, 0 refused, avg=0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:23.454974",
+      "details": {
+        "service": "BTest",
+        "port": 2000,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "avg_connect_time": 0.0,
+        "max_connect_time": 0.0,
+        "degradation_factor": null,
+        "wall_time": 3.58
+      }
+    },
+    {
+      "id": 49,
+      "category": "flood",
+      "name": "Flood BTest x50",
+      "description": "Open 50 concurrent TCP connections to BTest (:2000)",
+      "result": "50/50 connected, 0 refused, avg=0.0003s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:28.692354",
+      "details": {
+        "service": "BTest",
+        "port": 2000,
+        "level": 50,
+        "connected": 50,
+        "refused": 0,
+        "avg_connect_time": 0.0003,
+        "max_connect_time": 0.004,
+        "degradation_factor": null,
+        "wall_time": 4.23
+      }
+    },
+    {
+      "id": 50,
+      "category": "flood",
+      "name": "Flood BTest over-limit (25)",
+      "description": "Open 25 connections (default max + 5) to BTest",
+      "result": "25/25 connected, 0 refused (0%)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:33.098150",
+      "details": {
+        "service": "BTest",
+        "port": 2000,
+        "level": 25,
+        "connected": 25,
+        "refused": 0,
+        "refused_pct": 0.0,
+        "avg_connect_time": 0.0
+      }
+    },
+    {
+      "id": 51,
+      "category": "flood",
+      "name": "Post-flood resource: BTest",
+      "description": "Check CPU/memory after flooding BTest",
+      "result": "CPU=0%, free_mem=834998272",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:34.101648",
+      "details": {
+        "cpu_load": "0",
+        "free_memory": "834998272",
+        "total_memory": "1073741824",
+        "uptime": "40m34s",
+        "version": "7.20.8 (long-term)",
+        "timestamp": 1771220494.1016486
+      }
+    },
+    {
+      "id": 52,
+      "category": "flood",
+      "name": "Post-flood alive: BTest",
+      "description": "Verify BTest still responds after flood",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:34.105646"
+    },
+    {
+      "id": 53,
+      "category": "slowloris",
+      "name": "HTTP legit during slowloris (connect)",
+      "description": "Attempt legitimate TCP connect to port 80 during slowloris attack",
+      "result": "OK in 0.0000s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:43.197098",
+      "details": {
+        "success": true,
+        "time": 0.0,
+        "error": null
+      }
+    },
+    {
+      "id": 54,
+      "category": "slowloris",
+      "name": "REST API during slowloris",
+      "description": "Attempt authenticated REST API call during HTTP slowloris attack",
+      "result": "HTTP 200 in 0.0040s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:43.201096",
+      "details": {
+        "status_code": 200,
+        "elapsed": 0.004,
+        "success": true
+      }
+    },
+    {
+      "id": 55,
+      "category": "slowloris",
+      "name": "SSH during HTTP slowloris",
+      "description": "Verify SSH is unaffected by HTTP slowloris attack",
+      "result": "OK in 0.0000s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:41:43.201096",
+      "details": {
+        "success": true,
+        "time": 0.0
+      }
+    },
+    {
+      "id": 56,
+      "category": "slowloris",
+      "name": "HTTP slowloris summary",
+      "description": "Summary of 20-connection HTTP slowloris attack",
+      "result": "20/20 connected, 20 held for full 30s duration",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:42:12.962208",
+      "details": {
+        "total": 20,
+        "connected": 20,
+        "completed": 20,
+        "per_connection": {
+          "0": {
+            "connected": true,
+            "headers_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "2": {
+            "connected": true,
+            "headers_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "4": {
+            "connected": true,
+            "headers_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "5": {
+            "connected": true,
+            "headers_sent": 6,
+            "duration": 30.02,
+            "completed": true
+          },
+          "6": {
+            "connected": true,
+            "headers_sent": 6,
+            "duration": 30.06,
+            "completed": true
+          },
+          "9": {
+            "connected": true,
+            "headers_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "10": {
+            "connected": true,
+            "headers_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "12": {
+            "connected": true,
+            "headers_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "15": {
+            "connected": true,
+            "headers_sent": 6,
+            "duration": 30.05,
+            "completed": true
+          },
+          "16": {
+            "connected": true,
+            "headers_sent": 6,
+            "duration": 30.03,
+            "completed": true
+          },
+          "19": {
+            "connected": true,
+            "headers_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "1": {
+            "connected": true,
+            "headers_sent": 7,
+            "duration": 34.99,
+            "completed": true
+          },
+          "3": {
+            "connected": true,
+            "headers_sent": 7,
+            "duration": 34.98,
+            "completed": true
+          },
+          "7": {
+            "connected": true,
+            "headers_sent": 7,
+            "duration": 34.98,
+            "completed": true
+          },
+          "8": {
+            "connected": true,
+            "headers_sent": 7,
+            "duration": 35.0,
+            "completed": true
+          },
+          "11": {
+            "connected": true,
+            "headers_sent": 7,
+            "duration": 34.99,
+            "completed": true
+          },
+          "13": {
+            "connected": true,
+            "headers_sent": 7,
+            "duration": 34.97,
+            "completed": true
+          },
+          "14": {
+            "connected": true,
+            "headers_sent": 7,
+            "duration": 34.97,
+            "completed": true
+          },
+          "17": {
+            "connected": true,
+            "headers_sent": 7,
+            "duration": 34.99,
+            "completed": true
+          },
+          "18": {
+            "connected": true,
+            "headers_sent": 7,
+            "duration": 34.97,
+            "completed": true
+          }
+        }
+      }
+    },
+    {
+      "id": 57,
+      "category": "slowloris",
+      "name": "Resource after HTTP slowloris",
+      "description": "Check CPU/memory after HTTP slowloris attack",
+      "result": "CPU=0%, free_mem=835096576",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:42:14.965206",
+      "details": {
+        "cpu_load": "0",
+        "free_memory": "835096576",
+        "total_memory": "1073741824",
+        "uptime": "41m15s",
+        "version": "7.20.8 (long-term)",
+        "timestamp": 1771220534.9652066
+      }
+    },
+    {
+      "id": 58,
+      "category": "slowloris",
+      "name": "API legit during API slowloris (connect)",
+      "description": "Attempt legitimate TCP connect to API port during slowloris",
+      "result": "OK in 0.0000s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:42:22.053660",
+      "details": {
+        "success": true,
+        "time": 0.0,
+        "error": null
+      }
+    },
+    {
+      "id": 59,
+      "category": "slowloris",
+      "name": "HTTP during API slowloris",
+      "description": "Verify HTTP is unaffected by API slowloris attack",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:42:22.057658"
+    },
+    {
+      "id": 60,
+      "category": "slowloris",
+      "name": "API slowloris summary",
+      "description": "Summary of 20-connection API slowloris attack",
+      "result": "20/20 connected, 20 held full duration",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:42:51.942708",
+      "details": {
+        "total": 20,
+        "connected": 20,
+        "completed": 20,
+        "per_connection": {
+          "2": {
+            "connected": true,
+            "bytes_sent": 6,
+            "duration": 30.0,
+            "completed": true
+          },
+          "3": {
+            "connected": true,
+            "bytes_sent": 6,
+            "duration": 30.02,
+            "completed": true
+          },
+          "4": {
+            "connected": true,
+            "bytes_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "5": {
+            "connected": true,
+            "bytes_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "9": {
+            "connected": true,
+            "bytes_sent": 6,
+            "duration": 30.02,
+            "completed": true
+          },
+          "10": {
+            "connected": true,
+            "bytes_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "11": {
+            "connected": true,
+            "bytes_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "13": {
+            "connected": true,
+            "bytes_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "15": {
+            "connected": true,
+            "bytes_sent": 6,
+            "duration": 30.0,
+            "completed": true
+          },
+          "16": {
+            "connected": true,
+            "bytes_sent": 6,
+            "duration": 30.01,
+            "completed": true
+          },
+          "18": {
+            "connected": true,
+            "bytes_sent": 6,
+            "duration": 30.07,
+            "completed": true
+          },
+          "0": {
+            "connected": true,
+            "bytes_sent": 7,
+            "duration": 34.99,
+            "completed": true
+          },
+          "1": {
+            "connected": true,
+            "bytes_sent": 7,
+            "duration": 34.99,
+            "completed": true
+          },
+          "6": {
+            "connected": true,
+            "bytes_sent": 7,
+            "duration": 34.99,
+            "completed": true
+          },
+          "7": {
+            "connected": true,
+            "bytes_sent": 7,
+            "duration": 34.99,
+            "completed": true
+          },
+          "8": {
+            "connected": true,
+            "bytes_sent": 7,
+            "duration": 34.99,
+            "completed": true
+          },
+          "12": {
+            "connected": true,
+            "bytes_sent": 7,
+            "duration": 34.98,
+            "completed": true
+          },
+          "14": {
+            "connected": true,
+            "bytes_sent": 7,
+            "duration": 34.98,
+            "completed": true
+          },
+          "17": {
+            "connected": true,
+            "bytes_sent": 7,
+            "duration": 34.99,
+            "completed": true
+          },
+          "19": {
+            "connected": true,
+            "bytes_sent": 7,
+            "duration": 34.99,
+            "completed": true
+          }
+        }
+      }
+    },
+    {
+      "id": 61,
+      "category": "slowloris",
+      "name": "Resource after API slowloris",
+      "description": "Check CPU/memory after API slowloris attack",
+      "result": "CPU=0%, free_mem=835096576",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:42:53.949704",
+      "details": {
+        "cpu_load": "0",
+        "free_memory": "835096576",
+        "total_memory": "1073741824",
+        "uptime": "41m54s",
+        "version": "7.20.8 (long-term)",
+        "timestamp": 1771220573.9497046
+      }
+    },
+    {
+      "id": 62,
+      "category": "slowloris",
+      "name": "HTTP slowloris saturation point",
+      "description": "Determine how many slowloris connections needed to block HTTP",
+      "result": "Opened 100 slowloris connections, legit after: OK",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:42:55.089134",
+      "details": {
+        "connections_opened": 100,
+        "legitimate_after": true,
+        "max_tested": 100
+      }
+    },
+    {
+      "id": 63,
+      "category": "resource_monitor",
+      "name": "Post-test resource snapshot",
+      "description": "Capture system resource state after all DoS tests",
+      "result": "CPU=0%, free_mem=837828608, uptime=44m29s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:45:28.960170",
+      "details": {
+        "cpu_load": "0",
+        "free_memory": "837828608",
+        "total_memory": "1073741824",
+        "uptime": "44m29s",
+        "version": "7.20.8 (long-term)",
+        "timestamp": 1771220728.96017
+      }
+    },
+    {
+      "id": 64,
+      "category": "resource_monitor",
+      "name": "Resource comparison vs baseline",
+      "description": "Compare current CPU/memory to pre-test baseline",
+      "result": "CPU delta=0% (base=0%, now=0%), memory delta=2813952 bytes",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:45:28.960170",
+      "details": {
+        "baseline_cpu": 0,
+        "current_cpu": 0,
+        "cpu_delta": 0,
+        "baseline_memory": "835014656",
+        "current_memory": "837828608",
+        "memory_delta": 2813952
+      }
+    },
+    {
+      "id": 65,
+      "category": "resource_monitor",
+      "name": "Memory utilization check",
+      "description": "Verify free memory is above 10% threshold",
+      "result": "Free: 78.0% (837828608/1073741824)",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:45:28.960170",
+      "details": {
+        "free_pct": 78.0,
+        "free_memory": "837828608",
+        "total_memory": "1073741824"
+      }
+    },
+    {
+      "id": 66,
+      "category": "resource_monitor",
+      "name": "Reboot detection",
+      "description": "Compare uptime to detect any reboots during testing",
+      "result": "Baseline uptime=38m12s, current=44m29s, reboot=none",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:45:28.960170",
+      "details": {
+        "baseline_uptime": "38m12s",
+        "current_uptime": "44m29s",
+        "reboot_detected": false
+      }
+    },
+    {
+      "id": 67,
+      "category": "resource_monitor",
+      "name": "Error log entries during testing",
+      "description": "Scan router logs for error/critical entries from DoS testing",
+      "result": "0 error entries found in 22 total",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:45:28.960170",
+      "details": {
+        "error_count": 0,
+        "total_log_entries": 22,
+        "errors": []
+      }
+    },
+    {
+      "id": 68,
+      "category": "resource_monitor",
+      "name": "Session count comparison",
+      "description": "Compare active session count to baseline (detect orphans)",
+      "result": "Baseline=2, now=2, delta=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:45:28.960170",
+      "details": {
+        "baseline_sessions": 2,
+        "current_sessions": 2,
+        "delta": 0,
+        "current_session_list": [
+          {
+            ".id": "*9",
+            "address": "[REDACTED-INTERNAL-IP]",
+            "group": "full",
+            "name": "admin",
+            "radius": "false",
+            "via": "rest-api",
+            "when": "2026-02-20 14:43:22"
+          },
+          {
+            ".id": "*A",
+            "group": "full",
+            "name": "admin",
+            "radius": "false",
+            "via": "api",
+            "when": "2026-02-20 14:43:22"
+          }
+        ]
+      }
+    },
+    {
+      "id": 69,
+      "category": "recovery",
+      "name": "Recovery flood: WebFig/REST",
+      "description": "Flood WebFig/REST with 50 connections before measuring recovery",
+      "result": "50/50 connected",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:45:35.003189",
+      "details": {
+        "service": "WebFig/REST",
+        "connected": 50,
+        "refused": 0
+      }
+    },
+    {
+      "id": 70,
+      "category": "recovery",
+      "name": "Recovery time: WebFig/REST",
+      "description": "Measure time for WebFig/REST to accept connections after 50-conn flood",
+      "result": "Recovery in 0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:45:49.939716",
+      "details": {
+        "service": "WebFig/REST",
+        "port": 80,
+        "recovered": true,
+        "recovery_time_seconds": 0.0,
+        "checks": [
+          {
+            "check_num": 0,
+            "elapsed": 0.0,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 1,
+            "elapsed": 0.5,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 2,
+            "elapsed": 1.0,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 3,
+            "elapsed": 1.49,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 4,
+            "elapsed": 1.99,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 5,
+            "elapsed": 2.49,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 6,
+            "elapsed": 2.98,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 7,
+            "elapsed": 3.48,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 8,
+            "elapsed": 3.97,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 9,
+            "elapsed": 4.47,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 10,
+            "elapsed": 4.97,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 11,
+            "elapsed": 5.47,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 12,
+            "elapsed": 5.97,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 13,
+            "elapsed": 6.46,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 14,
+            "elapsed": 6.96,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 15,
+            "elapsed": 7.46,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 16,
+            "elapsed": 7.96,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 17,
+            "elapsed": 8.45,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 18,
+            "elapsed": 8.95,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 19,
+            "elapsed": 9.45,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 20,
+            "elapsed": 9.95,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 21,
+            "elapsed": 10.45,
+            "success": true,
+            "connect_time": 0.004
+          },
+          {
+            "check_num": 22,
+            "elapsed": 10.95,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 23,
+            "elapsed": 11.45,
+            "success": true,
+            "connect_time": 0.004
+          },
+          {
+            "check_num": 24,
+            "elapsed": 11.95,
+            "success": true,
+            "connect_time": 0.004
+          },
+          {
+            "check_num": 25,
+            "elapsed": 12.45,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 26,
+            "elapsed": 12.95,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 27,
+            "elapsed": 13.44,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 28,
+            "elapsed": 13.95,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 29,
+            "elapsed": 14.44,
+            "success": true,
+            "connect_time": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "id": 71,
+      "category": "recovery",
+      "name": "Recovery flood: API",
+      "description": "Flood API with 50 connections before measuring recovery",
+      "result": "50/50 connected",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:45:57.120123",
+      "details": {
+        "service": "API",
+        "connected": 50,
+        "refused": 0
+      }
+    },
+    {
+      "id": 72,
+      "category": "recovery",
+      "name": "Recovery time: API",
+      "description": "Measure time for API to accept connections after 50-conn flood",
+      "result": "Recovery in 0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:46:12.324516",
+      "details": {
+        "service": "API",
+        "port": 8728,
+        "recovered": true,
+        "recovery_time_seconds": 0.0,
+        "checks": [
+          {
+            "check_num": 0,
+            "elapsed": 0.0,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 1,
+            "elapsed": 0.5,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 2,
+            "elapsed": 1.08,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 3,
+            "elapsed": 1.58,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 4,
+            "elapsed": 2.11,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 5,
+            "elapsed": 2.61,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 6,
+            "elapsed": 3.15,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 7,
+            "elapsed": 3.65,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 8,
+            "elapsed": 4.15,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 9,
+            "elapsed": 4.66,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 10,
+            "elapsed": 5.16,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 11,
+            "elapsed": 5.67,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 12,
+            "elapsed": 6.19,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 13,
+            "elapsed": 6.69,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 14,
+            "elapsed": 7.2,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 15,
+            "elapsed": 7.7,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 16,
+            "elapsed": 8.2,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 17,
+            "elapsed": 8.71,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 18,
+            "elapsed": 9.21,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 19,
+            "elapsed": 9.72,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 20,
+            "elapsed": 10.22,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 21,
+            "elapsed": 10.72,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 22,
+            "elapsed": 11.22,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 23,
+            "elapsed": 11.72,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 24,
+            "elapsed": 12.22,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 25,
+            "elapsed": 12.72,
+            "success": true,
+            "connect_time": 0.004
+          },
+          {
+            "check_num": 26,
+            "elapsed": 13.22,
+            "success": true,
+            "connect_time": 0.004
+          },
+          {
+            "check_num": 27,
+            "elapsed": 13.72,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 28,
+            "elapsed": 14.21,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 29,
+            "elapsed": 14.71,
+            "success": true,
+            "connect_time": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "id": 73,
+      "category": "recovery",
+      "name": "Recovery flood: Winbox",
+      "description": "Flood Winbox with 50 connections before measuring recovery",
+      "result": "50/50 connected",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:46:19.237057",
+      "details": {
+        "service": "Winbox",
+        "connected": 50,
+        "refused": 0
+      }
+    },
+    {
+      "id": 74,
+      "category": "recovery",
+      "name": "Recovery time: Winbox",
+      "description": "Measure time for Winbox to accept connections after 50-conn flood",
+      "result": "Recovery in 0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:46:34.385478",
+      "details": {
+        "service": "Winbox",
+        "port": 8291,
+        "recovered": true,
+        "recovery_time_seconds": 0.0,
+        "checks": [
+          {
+            "check_num": 0,
+            "elapsed": 0.0,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 1,
+            "elapsed": 0.5,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 2,
+            "elapsed": 0.99,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 3,
+            "elapsed": 1.5,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 4,
+            "elapsed": 2.0,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 5,
+            "elapsed": 2.5,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 6,
+            "elapsed": 3.01,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 7,
+            "elapsed": 3.51,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 8,
+            "elapsed": 4.01,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 9,
+            "elapsed": 4.52,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 10,
+            "elapsed": 5.02,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 11,
+            "elapsed": 5.52,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 12,
+            "elapsed": 6.03,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 13,
+            "elapsed": 6.53,
+            "success": true,
+            "connect_time": 0.004
+          },
+          {
+            "check_num": 14,
+            "elapsed": 7.03,
+            "success": true,
+            "connect_time": 0.004
+          },
+          {
+            "check_num": 15,
+            "elapsed": 7.53,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 16,
+            "elapsed": 8.05,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 17,
+            "elapsed": 8.56,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 18,
+            "elapsed": 9.06,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 19,
+            "elapsed": 9.56,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 20,
+            "elapsed": 10.07,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 21,
+            "elapsed": 10.57,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 22,
+            "elapsed": 11.06,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 23,
+            "elapsed": 11.56,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 24,
+            "elapsed": 12.13,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 25,
+            "elapsed": 12.63,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 26,
+            "elapsed": 13.15,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 27,
+            "elapsed": 13.65,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 28,
+            "elapsed": 14.15,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 29,
+            "elapsed": 14.65,
+            "success": true,
+            "connect_time": 0.004
+          }
+        ]
+      }
+    },
+    {
+      "id": 75,
+      "category": "recovery",
+      "name": "Recovery flood: SSH",
+      "description": "Flood SSH with 50 connections before measuring recovery",
+      "result": "50/50 connected",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:46:41.521907",
+      "details": {
+        "service": "SSH",
+        "connected": 50,
+        "refused": 0
+      }
+    },
+    {
+      "id": 76,
+      "category": "recovery",
+      "name": "Recovery time: SSH",
+      "description": "Measure time for SSH to accept connections after 50-conn flood",
+      "result": "Recovery in 0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:46:56.570379",
+      "details": {
+        "service": "SSH",
+        "port": 22,
+        "recovered": true,
+        "recovery_time_seconds": 0.0,
+        "checks": [
+          {
+            "check_num": 0,
+            "elapsed": 0.0,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 1,
+            "elapsed": 0.5,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 2,
+            "elapsed": 1.01,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 3,
+            "elapsed": 1.51,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 4,
+            "elapsed": 2.01,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 5,
+            "elapsed": 2.51,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 6,
+            "elapsed": 3.0,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 7,
+            "elapsed": 3.5,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 8,
+            "elapsed": 4.0,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 9,
+            "elapsed": 4.51,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 10,
+            "elapsed": 5.01,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 11,
+            "elapsed": 5.51,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 12,
+            "elapsed": 6.02,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 13,
+            "elapsed": 6.52,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 14,
+            "elapsed": 7.02,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 15,
+            "elapsed": 7.53,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 16,
+            "elapsed": 8.03,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 17,
+            "elapsed": 8.54,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 18,
+            "elapsed": 9.04,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 19,
+            "elapsed": 9.54,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 20,
+            "elapsed": 10.04,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 21,
+            "elapsed": 10.54,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 22,
+            "elapsed": 11.05,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 23,
+            "elapsed": 11.55,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 24,
+            "elapsed": 12.05,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 25,
+            "elapsed": 12.56,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 26,
+            "elapsed": 13.06,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 27,
+            "elapsed": 13.56,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 28,
+            "elapsed": 14.05,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 29,
+            "elapsed": 14.55,
+            "success": true,
+            "connect_time": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "id": 77,
+      "category": "recovery",
+      "name": "Recovery flood: FTP",
+      "description": "Flood FTP with 50 connections before measuring recovery",
+      "result": "50/50 connected",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:47:03.650837",
+      "details": {
+        "service": "FTP",
+        "connected": 50,
+        "refused": 0
+      }
+    },
+    {
+      "id": 78,
+      "category": "recovery",
+      "name": "Recovery time: FTP",
+      "description": "Measure time for FTP to accept connections after 50-conn flood",
+      "result": "Recovery in 0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:47:18.735291",
+      "details": {
+        "service": "FTP",
+        "port": 21,
+        "recovered": true,
+        "recovery_time_seconds": 0.0,
+        "checks": [
+          {
+            "check_num": 0,
+            "elapsed": 0.0,
+            "success": true,
+            "connect_time": 0.004
+          },
+          {
+            "check_num": 1,
+            "elapsed": 0.51,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 2,
+            "elapsed": 1.01,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 3,
+            "elapsed": 1.52,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 4,
+            "elapsed": 2.02,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 5,
+            "elapsed": 2.52,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 6,
+            "elapsed": 3.03,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 7,
+            "elapsed": 3.53,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 8,
+            "elapsed": 4.03,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 9,
+            "elapsed": 4.52,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 10,
+            "elapsed": 5.02,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 11,
+            "elapsed": 5.53,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 12,
+            "elapsed": 6.03,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 13,
+            "elapsed": 6.53,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 14,
+            "elapsed": 7.03,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 15,
+            "elapsed": 7.53,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 16,
+            "elapsed": 8.04,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 17,
+            "elapsed": 8.54,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 18,
+            "elapsed": 9.04,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 19,
+            "elapsed": 9.54,
+            "success": true,
+            "connect_time": 0.004
+          },
+          {
+            "check_num": 20,
+            "elapsed": 10.04,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 21,
+            "elapsed": 10.55,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 22,
+            "elapsed": 11.05,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 23,
+            "elapsed": 11.55,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 24,
+            "elapsed": 12.06,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 25,
+            "elapsed": 12.56,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 26,
+            "elapsed": 13.07,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 27,
+            "elapsed": 13.57,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 28,
+            "elapsed": 14.08,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 29,
+            "elapsed": 14.58,
+            "success": true,
+            "connect_time": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "id": 79,
+      "category": "recovery",
+      "name": "Recovery flood: Telnet",
+      "description": "Flood Telnet with 50 connections before measuring recovery",
+      "result": "50/50 connected",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:47:25.931691",
+      "details": {
+        "service": "Telnet",
+        "connected": 50,
+        "refused": 0
+      }
+    },
+    {
+      "id": 80,
+      "category": "recovery",
+      "name": "Recovery time: Telnet",
+      "description": "Measure time for Telnet to accept connections after 50-conn flood",
+      "result": "Recovery in 0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:47:41.156075",
+      "details": {
+        "service": "Telnet",
+        "port": 23,
+        "recovered": true,
+        "recovery_time_seconds": 0.0,
+        "checks": [
+          {
+            "check_num": 0,
+            "elapsed": 0.0,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 1,
+            "elapsed": 0.5,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 2,
+            "elapsed": 1.01,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 3,
+            "elapsed": 1.51,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 4,
+            "elapsed": 2.01,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 5,
+            "elapsed": 2.52,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 6,
+            "elapsed": 3.02,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 7,
+            "elapsed": 3.53,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 8,
+            "elapsed": 4.03,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 9,
+            "elapsed": 4.53,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 10,
+            "elapsed": 5.03,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 11,
+            "elapsed": 5.53,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 12,
+            "elapsed": 6.03,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 13,
+            "elapsed": 6.53,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 14,
+            "elapsed": 7.04,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 15,
+            "elapsed": 7.54,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 16,
+            "elapsed": 8.17,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 17,
+            "elapsed": 8.67,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 18,
+            "elapsed": 9.16,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 19,
+            "elapsed": 9.66,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 20,
+            "elapsed": 10.19,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 21,
+            "elapsed": 10.7,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 22,
+            "elapsed": 11.2,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 23,
+            "elapsed": 11.71,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 24,
+            "elapsed": 12.21,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 25,
+            "elapsed": 12.71,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 26,
+            "elapsed": 13.22,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 27,
+            "elapsed": 13.72,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 28,
+            "elapsed": 14.22,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 29,
+            "elapsed": 14.73,
+            "success": true,
+            "connect_time": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "id": 81,
+      "category": "recovery",
+      "name": "Recovery flood: BTest",
+      "description": "Flood BTest with 50 connections before measuring recovery",
+      "result": "50/50 connected",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:47:48.136583",
+      "details": {
+        "service": "BTest",
+        "connected": 50,
+        "refused": 0
+      }
+    },
+    {
+      "id": 82,
+      "category": "recovery",
+      "name": "Recovery time: BTest",
+      "description": "Measure time for BTest to accept connections after 50-conn flood",
+      "result": "Recovery in 0.0s",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:48:03.197049",
+      "details": {
+        "service": "BTest",
+        "port": 2000,
+        "recovered": true,
+        "recovery_time_seconds": 0.0,
+        "checks": [
+          {
+            "check_num": 0,
+            "elapsed": 0.0,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 1,
+            "elapsed": 0.5,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 2,
+            "elapsed": 1.01,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 3,
+            "elapsed": 1.51,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 4,
+            "elapsed": 2.02,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 5,
+            "elapsed": 2.52,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 6,
+            "elapsed": 3.03,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 7,
+            "elapsed": 3.53,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 8,
+            "elapsed": 4.04,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 9,
+            "elapsed": 4.54,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 10,
+            "elapsed": 5.04,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 11,
+            "elapsed": 5.54,
+            "success": true,
+            "connect_time": 0.004
+          },
+          {
+            "check_num": 12,
+            "elapsed": 6.04,
+            "success": true,
+            "connect_time": 0.004
+          },
+          {
+            "check_num": 13,
+            "elapsed": 6.54,
+            "success": true,
+            "connect_time": 0.004
+          },
+          {
+            "check_num": 14,
+            "elapsed": 7.04,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 15,
+            "elapsed": 7.54,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 16,
+            "elapsed": 8.04,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 17,
+            "elapsed": 8.54,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 18,
+            "elapsed": 9.05,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 19,
+            "elapsed": 9.55,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 20,
+            "elapsed": 10.05,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 21,
+            "elapsed": 10.56,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 22,
+            "elapsed": 11.06,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 23,
+            "elapsed": 11.56,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 24,
+            "elapsed": 12.05,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 25,
+            "elapsed": 12.55,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 26,
+            "elapsed": 13.05,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 27,
+            "elapsed": 13.56,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 28,
+            "elapsed": 14.06,
+            "success": true,
+            "connect_time": 0.0
+          },
+          {
+            "check_num": 29,
+            "elapsed": 14.56,
+            "success": true,
+            "connect_time": 0.004
+          }
+        ]
+      }
+    },
+    {
+      "id": 83,
+      "category": "recovery",
+      "name": "CPU recovery after all floods",
+      "description": "Check if CPU has returned near baseline after all recovery floods",
+      "result": "CPU now=0% (baseline=0%), recovered",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:48:09.194049",
+      "details": {
+        "baseline_cpu": 0,
+        "current_cpu": 0,
+        "recovered": true
+      }
+    },
+    {
+      "id": 84,
+      "category": "recovery",
+      "name": "Final service check: WebFig/REST",
+      "description": "Verify WebFig/REST is responsive after all DoS testing",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:48:09.194049"
+    },
+    {
+      "id": 85,
+      "category": "recovery",
+      "name": "Final service check: API",
+      "description": "Verify API is responsive after all DoS testing",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:48:09.194049"
+    },
+    {
+      "id": 86,
+      "category": "recovery",
+      "name": "Final service check: Winbox",
+      "description": "Verify Winbox is responsive after all DoS testing",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:48:09.194049"
+    },
+    {
+      "id": 87,
+      "category": "recovery",
+      "name": "Final service check: SSH",
+      "description": "Verify SSH is responsive after all DoS testing",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:48:09.194049"
+    },
+    {
+      "id": 88,
+      "category": "recovery",
+      "name": "Final service check: FTP",
+      "description": "Verify FTP is responsive after all DoS testing",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:48:09.194049"
+    },
+    {
+      "id": 89,
+      "category": "recovery",
+      "name": "Final service check: Telnet",
+      "description": "Verify Telnet is responsive after all DoS testing",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:48:09.202045"
+    },
+    {
+      "id": 90,
+      "category": "recovery",
+      "name": "Final service check: BTest",
+      "description": "Verify BTest is responsive after all DoS testing",
+      "result": "Responsive",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:48:09.206043"
+    },
+    {
+      "id": 91,
+      "category": "recovery",
+      "name": "Orphaned sessions after recovery",
+      "description": "Check for sessions left behind after all connections closed",
+      "result": "2 active (baseline was 2), delta=0",
+      "anomaly": false,
+      "timestamp": "2026-02-16T00:48:09.206043",
+      "details": {
+        "current": 2,
+        "baseline": 2,
+        "delta": 0,
+        "sessions": [
+          {
+            ".id": "*9",
+            "address": "[REDACTED-INTERNAL-IP]",
+            "group": "full",
+            "name": "admin",
+            "radius": "false",
+            "via": "rest-api",
+            "when": "2026-02-20 14:43:22"
+          },
+          {
+            ".id": "*A",
+            "group": "full",
+            "name": "admin",
+            "radius": "false",
+            "via": "api",
+            "when": "2026-02-20 14:43:22"
+          }
+        ]
+      }
+    }
+  ],
+  "findings": []
+}

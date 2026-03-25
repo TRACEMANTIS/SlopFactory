@@ -1,0 +1,126 @@
+{
+  "phase": "webfig_session",
+  "pulled_at": "2026-02-15T22:08:01.563973",
+  "log_entry_count": 8,
+  "log_entries": [
+    {
+      ".id": "*0",
+      "extra-info": "",
+      "message": "router rebooted by api:admin@::",
+      "time": "2026-02-16 22:20:05",
+      "topics": "system,info"
+    },
+    {
+      ".id": "*1",
+      "extra-info": "",
+      "message": "lo link up",
+      "time": "2026-02-16 22:20:05",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*2",
+      "extra-info": "",
+      "message": "ether1 link up (speed 1G, full duplex)",
+      "time": "2026-02-16 22:20:09",
+      "topics": "interface,info"
+    },
+    {
+      ".id": "*3",
+      "extra-info": "",
+      "message": "dhcp-client on ether1 got IP address [REDACTED-INTERNAL-IP]",
+      "time": "2026-02-16 22:20:09",
+      "topics": "dhcp,info"
+    },
+    {
+      ".id": "*4",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:20:11",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*5",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-16 22:20:11",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*6",
+      "extra-info": "app=rest-api duser=admin outcome=success src=[REDACTED-INTERNAL-IP] ",
+      "message": "user admin logged in from [REDACTED-INTERNAL-IP] via rest-api",
+      "time": "2026-02-16 22:20:11",
+      "topics": "system,info,account"
+    },
+    {
+      ".id": "*7",
+      "extra-info": "app=api duser=admin outcome=success ",
+      "message": "user admin logged in via api",
+      "time": "2026-02-16 22:20:11",
+      "topics": "system,info,account"
+    }
+  ],
+  "categories": {
+    "system,info": 1,
+    "interface,info": 2,
+    "dhcp,info": 1,
+    "system,info,account": 4
+  },
+  "interesting_entries": [],
+  "interesting_count": 0,
+  "system_resource": {
+    "architecture-name": "x86_64",
+    "board-name": "CHR innotek GmbH VirtualBox",
+    "build-time": "2026-01-30 09:17:54",
+    "cpu": "AMD",
+    "cpu-count": "1",
+    "cpu-frequency": "4391",
+    "cpu-load": "1",
+    "factory-software": "7.1",
+    "free-hdd-space": "73175040",
+    "free-memory": "845287424",
+    "platform": "MikroTik",
+    "total-hdd-space": "93564928",
+    "total-memory": "1073741824",
+    "uptime": "20s",
+    "version": "7.20.8 (long-term)",
+    "write-sect-since-reboot": "336",
+    "write-sect-total": "336"
+  },
+  "active_users": [
+    {
+      ".id": "*1",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 22:20:11"
+    },
+    {
+      ".id": "*2",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 22:20:11"
+    },
+    {
+      ".id": "*3",
+      "address": "[REDACTED-INTERNAL-IP]",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "rest-api",
+      "when": "2026-02-16 22:20:11"
+    },
+    {
+      ".id": "*4",
+      "group": "full",
+      "name": "admin",
+      "radius": "false",
+      "via": "api",
+      "when": "2026-02-16 22:20:11"
+    }
+  ]
+}

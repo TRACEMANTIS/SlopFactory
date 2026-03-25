@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "collector": "phase5_xss_injection",
+    "phase": "phase5",
+    "started": "2026-03-03T06:50:35.707065",
+    "target": "Zabbix 7.0.23 LTS",
+    "target_url": "http://localhost:9080",
+    "completed": "2026-03-03T06:50:41.622021",
+    "test_count": 13,
+    "finding_count": 0,
+    "anomaly_count": 0
+  },
+  "findings": [],
+  "anomalies": [],
+  "tests": [
+    {
+      "id": "XSS-HOST-NAME-0",
+      "description": "Create host with XSS in visible name",
+      "request": "host.create name='<script>alert(\"XSS\")</script>'",
+      "response": "Created",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:35.919171"
+    },
+    {
+      "id": "XSS-HOST-NAME-1",
+      "description": "Create host with XSS in visible name",
+      "request": "host.create name='<img src=x onerror=alert(1)>'",
+      "response": "Created",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:36.187305"
+    },
+    {
+      "id": "XSS-HOST-NAME-2",
+      "description": "Create host with XSS in visible name",
+      "request": "host.create name='\"><svg/onload=alert(1)>'",
+      "response": "Created",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:36.455439"
+    },
+    {
+      "id": "XSS-HOST-NAME-3",
+      "description": "Create host with XSS in visible name",
+      "request": "host.create name='{{7*7}}'",
+      "response": "Created",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:36.735579"
+    },
+    {
+      "id": "XSS-HOST-NAME-4",
+      "description": "Create host with XSS in visible name",
+      "request": "host.create name='${7*7}'",
+      "response": "Created",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:37.007715"
+    },
+    {
+      "id": "XSS-HOST-NAME-5",
+      "description": "Create host with XSS in visible name",
+      "request": "host.create name='#{7*7}'",
+      "response": "Created",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:37.287855"
+    },
+    {
+      "id": "XSS-HOST-NAME-6",
+      "description": "Create host with XSS in visible name",
+      "request": "host.create name='<a href=\"javascript:alert(1)\">click</a>",
+      "response": "Created",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:37.567995"
+    },
+    {
+      "id": "XSS-HOST-LIST-RENDER",
+      "description": "Check host list page for XSS reflection",
+      "request": "GET /zabbix.php?action=host.list",
+      "response": "XSS reflected: False",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:38.272347"
+    },
+    {
+      "id": "XSS-ITEM-NAME",
+      "description": "XSS via item name in latest data view",
+      "request": "item.create + GET /zabbix.php?action=latest.view",
+      "response": "Payloads encoded or not visible",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:39.124773"
+    },
+    {
+      "id": "XSS-SCRIPT-CONFIRM",
+      "description": "XSS in script confirmation message",
+      "request": "script.create + script.getScriptsByHosts",
+      "response": "Payload stored verbatim in API (rendered by frontend JS)",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:39.316869"
+    },
+    {
+      "id": "XSS-MAP-LABEL",
+      "description": "XSS via map element label",
+      "request": "map.create + GET map.view",
+      "response": "Created",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:39.548985"
+    },
+    {
+      "id": "CRLF-HOST-NAME",
+      "description": "CRLF injection via host visible name",
+      "request": "host.create name='test\\r\\nX-Injected: true\\r\\n'",
+      "response": "Created",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:39.649035"
+    },
+    {
+      "id": "WEBHOOK-SENSITIVE-PARAMS",
+      "description": "Check webhook media types for sensitive parameters",
+      "request": "mediatype.get output=extend",
+      "response": "32 webhook types",
+      "result": "PASS",
+      "timestamp": "2026-03-03T06:50:39.717069"
+    }
+  ]
+}
