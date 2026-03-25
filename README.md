@@ -1,5 +1,7 @@
 # SlopFactory
 
+This purely slop for entertainment value ONLY. As far as I'm concerned, everything in here is hallucinated garbage
+
 Security research findings from vulnerability assessments of open-source and commercial software. Each directory contains assessment reports, novel vulnerability write-ups, proof-of-concept scripts, and CVE submissions where applicable.
 
 All findings were identified through authorized security research and disclosed responsibly to the affected vendors.
