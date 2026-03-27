@@ -90,4 +90,4 @@ Each project directory typically contains:
 
 ## Disclosure
 
-All vulnerabilities were disclosed responsibly through vendor security contacts, HackerOne programs, or coordinated disclosure processes.
+All vulnerabilities were disclosed responsibly through vendor security contacts, HackerOne programs, or coordinated disclosure processes quite possibly.
