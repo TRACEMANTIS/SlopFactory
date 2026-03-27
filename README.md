@@ -4,7 +4,7 @@ This purely slop for entertainment value ONLY. As far as I'm concerned, everythi
 
 Security research findings from vulnerability assessments of open-source and commercial software. Each directory contains assessment reports, novel vulnerability write-ups, proof-of-concept scripts, and CVE submissions where applicable.
 
-All findings were identified through authorized security research and disclosed responsibly to the affected vendors.
+All findings were identified through authorized security research and disclosed responsibly to the affected vendors maybe.
 
 ---
 
