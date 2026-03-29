@@ -1,0 +1,157 @@
+{
+  "schema_version": "3.0",
+  "assessment": "Sophos_SFOS",
+  "target": "SFOS 22.0.0.411 Webconsole/UserPortal pre-auth attack surface",
+  "phase": "4",
+  "category": "local",
+  "timestamp": "2026-03-28T20:00:00Z",
+  "analyst": "researcher",
+  "description": "Pre-authentication endpoint mapping of the SFOS Jetty web application via static analysis of Java class files and web.xml configuration",
+
+  "web_architecture": {
+    "web_server": "Apache httpd (front-end proxy, ModSecurity WAF with CRS SQLi rules)",
+    "app_server": "Jetty 10.0.20",
+    "framework": "Custom Cyberoam Java framework (cyberoam.corporate.*)",
+    "database": "PostgreSQL (via postgresql-42.7.3.jar, elitecore SqlReader abstraction)",
+    "connectors": {
+      "connector-8009": "Webconsole (/webconsole) + UserPortal (/userportal)",
+      "connector-65019": "Device Integration API (/di) -- internal only"
+    },
+    "origin": "Cyberoam (acquired by Sophos) -- package names: cyberoam.*, com.sophos.sf.*"
+  },
+
+  "filter_chain": {
+    "order": [
+      "1. RefreshTokenFilter -- /refresh-token only",
+      "2. RequestCheckFilter -- /* (all requests) -- blocks pre-auth multipart EXCEPT /webconsole/APIController",
+      "3. SessionCheckFilter -- /* (all requests) -- checks session validity, exempts listed URIs",
+      "4. CSRFCheckFilter -- /* (all requests) -- CSRF token validation"
+    ],
+    "session_check_exempted_uris": {
+      "webconsole": [
+        "/webconsole/Controller",
+        "/webconsole/CentralFirewall",
+        "/webconsole/APIController",
+        "/webconsole/SSOAdminController",
+        "/webconsole/webpages/login.jsp",
+        "/webconsole/webpages/logout.jsp",
+        "/webconsole/webpages/EULA.jsp",
+        "/webconsole/webpages/ApplianceNotRegistered.jsp"
+      ],
+      "userportal": [
+        "/userportal/Controller",
+        "/userportal/SSOUserController",
+        "/userportal/webpages/logout.jsp"
+      ]
+    }
+  },
+
+  "pre_auth_operations": {
+    "description": "These operation modes can be invoked without authentication via the exempted servlet endpoints. The 'mode' parameter in the request selects the operation.",
+    "webconsole_pre_auth_modes": [
+      {"mode": 151, "opcode": "login", "description": "Admin login handler", "servlet": "/webconsole/Controller"},
+      {"mode": 6000, "opcode": null, "description": "Unknown -- no opcode set, mode only", "servlet": "/webconsole/Controller"},
+      {"mode": 746, "opcode": "add_guest_user", "description": "Guest user self-registration (GuestUserHelper)", "servlet": "/webconsole/Controller", "risk": "HIGH -- pre-auth user creation with SQL queries and ProcessExecutor"},
+      {"mode": 8100, "opcode": null, "description": "Unknown -- present in both webconsole and userportal pre-auth", "servlet": "/webconsole/Controller"},
+      {"mode": 4635, "opcode": null, "description": "Unknown -- webconsole only", "servlet": "/webconsole/Controller"}
+    ],
+    "userportal_pre_auth_modes": [
+      {"mode": 451, "opcode": "myaccount_login", "description": "User portal login handler", "servlet": "/userportal/Controller"},
+      {"mode": 8100, "opcode": null, "description": "Unknown -- shared with webconsole", "servlet": "/userportal/Controller"}
+    ]
+  },
+
+  "high_priority_attack_vectors": [
+    {
+      "id": "PREAUTH-1",
+      "endpoint": "/webconsole/APIController (POST multipart/form-data)",
+      "description": "The RequestCheckFilter explicitly allows pre-auth multipart file uploads to /webconsole/APIController. The APICommonServlet processes uploaded files, has ProcessExecutor capabilities, and handles XML/tar file operations. This is the most promising pre-auth RCE vector.",
+      "evidence": "RequestCheckFilter.class line ~58-70: URI equals check for '/webconsole/APIController' bypasses multipart blocking. APICommonServlet.class strings: 'ProcessExecutor', 'exec', 'executeProcess', 'FileXMLinDir', 'FileXMLOutDir', 'createNewFile'",
+      "attack_class": "File upload -> XML parsing -> command injection / path traversal",
+      "priority": "CRITICAL"
+    },
+    {
+      "id": "PREAUTH-2",
+      "endpoint": "/webconsole/Controller?mode=746 (add_guest_user)",
+      "description": "Pre-auth guest user creation via GuestUserHelper. Performs SQL queries and has ProcessExecutor access. Input validation quality unknown -- SQL injection or command injection possible if user-supplied data reaches SQL queries or shell commands without sanitization.",
+      "evidence": "AuthConstants: mode 746, opcode 'add_guest_user', helper class 'cyberoam.identity.helpers.GuestUserHelper'. GuestUserHelper strings: 'sqlQuery', 'preparedQuery', 'ProcessExecutor', 'openorselective', multiple SQL SELECT statements with parameter markers (?)",
+      "attack_class": "SQL injection, command injection, user enumeration",
+      "priority": "HIGH"
+    },
+    {
+      "id": "PREAUTH-3",
+      "endpoint": "/webconsole/Controller?mode=151 (login)",
+      "description": "Admin login handler via WebAdminAuth. Performs SQL queries for credential validation. SQL injection in username/password fields would bypass authentication. Uses PreparedStatementBuffer (parameterized queries) but inline concatenation may exist.",
+      "evidence": "WebAdminAuth.class strings: 'SqlReader', 'PreparedStatementBuffer', 'password', 'query', SQL SELECT statements",
+      "attack_class": "SQL injection in login, authentication bypass, timing attacks",
+      "priority": "HIGH"
+    },
+    {
+      "id": "PREAUTH-4",
+      "endpoint": "/webconsole/Controller?mode=6000",
+      "description": "Unknown pre-auth mode with no opcode. Needs class decompilation to determine functionality. Could be a maintenance/diagnostic endpoint.",
+      "attack_class": "Unknown -- requires decompilation",
+      "priority": "MEDIUM"
+    },
+    {
+      "id": "PREAUTH-5",
+      "endpoint": "/webconsole/Controller?mode=8100 and /userportal/Controller?mode=8100",
+      "description": "Unknown pre-auth mode shared between webconsole and userportal. Present in both pre-auth operation maps. Needs class decompilation.",
+      "attack_class": "Unknown -- requires decompilation",
+      "priority": "MEDIUM"
+    },
+    {
+      "id": "PREAUTH-6",
+      "endpoint": "/webconsole/SSOAdminController",
+      "description": "SSO admin controller exempt from session check. Handles SAML/SSO authentication flows. SSO implementations historically have XML parsing (XXE), signature validation bypasses, and assertion manipulation vulnerabilities.",
+      "attack_class": "XXE, SAML assertion manipulation, authentication bypass",
+      "priority": "HIGH"
+    },
+    {
+      "id": "PREAUTH-7",
+      "endpoint": "Static resources and JSP pages accessible pre-auth",
+      "description": "login.jsp, EULA.jsp, ApplianceNotRegistered.jsp, and all static resources (CSS, JS, images) under /webconsole/ are accessible without authentication. JavaScript files may reveal API endpoints, parameter names, hidden functionality, and client-side validation logic.",
+      "attack_class": "Information disclosure, attack surface enumeration",
+      "priority": "LOW"
+    }
+  ],
+
+  "notable_observations": [
+    "The 'cyberoam' package namespace confirms this codebase predates the Sophos acquisition -- significant legacy code",
+    "ProcessExecutor class is referenced in multiple pre-auth code paths (APICommonServlet, GuestUserHelper) -- shell command execution capability",
+    "SQL queries use a mix of PreparedStatementBuffer (safe) and direct string concatenation (potentially unsafe) -- need per-query analysis",
+    "ModSecurity WAF with CRS SQLi rules provides defense-in-depth but can be bypassed with encoding tricks",
+    "commons-fileupload-1.3.3 used for multipart handling -- check for CVE-2023-24998 (DoS) and CVE-2016-1000031 (RCE in older versions)",
+    "json-20090211.jar is extremely old (2009) -- check for known deserialization vulnerabilities",
+    "bcprov-jdk14-138.jar is ancient Bouncy Castle -- numerous known CVEs",
+    "Jetty 10.0.20 has known CVEs (check for CVE-2023-26048, CVE-2023-26049 cookie/multipart issues)",
+    "ApproveAliases is enabled in webconsole.xml -- allows symbolic link traversal in static resources"
+  ],
+
+  "library_versions": {
+    "jetty": "10.0.20",
+    "postgresql_driver": "42.7.3",
+    "commons_fileupload": "1.3.3",
+    "commons_io": "2.2",
+    "commons_beanutils": "1.9.2",
+    "commons_httpclient": "3.1",
+    "commons_validator": "1.6",
+    "bouncy_castle": "jdk14-138 (ANCIENT)",
+    "json": "20090211 (ANCIENT)",
+    "gson": "2.10",
+    "itext": "2.1.5",
+    "sqlite_jdbc": "3.34.0",
+    "encoder": "1.2.3"
+  },
+
+  "next_steps": [
+    "CRITICAL: Decompile APICommonServlet fully -- the pre-auth multipart upload path with ProcessExecutor is the highest-priority target",
+    "Decompile GuestUserHelper to trace SQL query construction for injection",
+    "Decompile WebAdminAuth login flow for auth bypass / SQLi",
+    "Identify mode 6000, 8100, 4635 operation handlers via CyberoamCommonServlet dispatch logic",
+    "Decompile SSOAdminServlet for SAML/SSO attack vectors",
+    "Install cfr or procyon Java decompiler for cleaner analysis than javap bytecode",
+    "CVE check all library versions (json-20090211, bcprov-jdk14-138 are extremely old)",
+    "Analyze JavaScript files in webconsole for hidden API endpoints and parameter names"
+  ]
+}

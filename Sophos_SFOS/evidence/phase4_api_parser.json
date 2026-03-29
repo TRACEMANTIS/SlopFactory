@@ -1,0 +1,134 @@
+{
+  "schema_version": "3.0",
+  "assessment": "Sophos_SFOS",
+  "target": "SFOS 22.0.0.411 api_parser binary",
+  "phase": "4",
+  "category": "local",
+  "timestamp": "2026-03-28T23:30:00Z",
+  "analyst": "researcher",
+  "description": "Reverse engineering of api_parser -- the XML API processing binary invoked by APICommonServlet",
+
+  "binary_profile": {
+    "path": "bin/api_parser",
+    "size": 120416,
+    "type": "ELF 32-bit LSB executable, i386, dynamically linked, stripped",
+    "protections": {
+      "PIE": false,
+      "NX": true,
+      "stack_canary": false,
+      "full_RELRO": false
+    },
+    "dependencies": [
+      "libxml2.so.2 (XML parsing)",
+      "libpq.so.5 (PostgreSQL client)",
+      "libcurl.so.4 (HTTP client)",
+      "libcsc.so (CSC custom protocol)",
+      "libdi.so (Device Integration)",
+      "libssl.so.1.1 / libcrypto.so.1.1",
+      "libjson-c.so.4",
+      "libnsgencode.so",
+      "libnats.so.3.10 (NATS messaging)"
+    ],
+    "multi_call": "Invoked as api_parser (normal), crexport (config export), or crimport (config import)"
+  },
+
+  "execution_context": {
+    "caller": "APICommonServlet.getParseResponse() via Runtime.exec()",
+    "arguments": "api_parser -A -a <version> -i <xml_input> -v <mapping_dir> -l <logfile> -o <xml_output> [-I <client_ip>] [-H <server_ip>] [-p <protocol>] [-P <port>] [-C <ips_ver>] [-k <secure_master_key>]",
+    "input_file": "User-supplied XML written to /sdisk/APIXMLInput/<timestamp>.xml",
+    "output_file": "/sdisk/APIXMLOutput/<timestamp>.xml",
+    "mapping_files": "/_conf/csc/IOMappingFiles/ (XML-to-opcode mapping definitions)",
+    "pre_auth_access": "Only when XML API is enabled AND requester IP is in allowlist (NOT default)"
+  },
+
+  "dangerous_functions": {
+    "system_calls": [
+      {
+        "address": "0x8058b4a",
+        "function": "fcn.08058a24 (tar generation / crexport path)",
+        "command_format": "/scripts/apiparser_generate_tar.sh %s %s %s%s%s %s %s%s%s.tar %s%s%s.log %d",
+        "user_control": "LOW -- paths are internally generated timestamps (/sdisk/api-YYYY-MM-DD-HH-MM-SS). The text file listing (first arg) contains file paths extracted from XML processing which could be influenced by user XML."
+      },
+      {
+        "address": "0x805b2a9",
+        "function": "fcn.0805b18f (tar extraction / crimport path)",
+        "command_format": "/scripts/apiparser_extract_tar.sh %s %s %s.log",
+        "user_control": "LOW -- first arg is the uploaded tar file path (/sdisk/upload/<file>), second is timestamp-based. The tar file itself is user-supplied and extracted with 'tar -xvf' which could overwrite arbitrary files (path traversal in tar entries)."
+      }
+    ],
+    "popen_calls": [
+      {
+        "address": "0x804dda7",
+        "callers": ["0x804f667 (json2xml conversion)", "0x805235b (handleObject)"],
+        "command_format": "/bin/perl /bin/json2xml.pl /tmp/api_parser_tmp.xml <input_file>",
+        "user_control": "MEDIUM -- the input file path is from the XML processing pipeline. The Perl script processes user-supplied XML/JSON data."
+      }
+    ]
+  },
+
+  "findings": [
+    {
+      "id": "SFOS-024",
+      "title": "api_parser: Tar Extraction Path Traversal via crimport",
+      "severity": "HIGH",
+      "status": "NEEDS_VALIDATION",
+      "category": "CWE-22: Improper Limitation of a Pathname to a Restricted Directory",
+      "description": "The crimport code path (config import via API) calls system() to execute apiparser_extract_tar.sh, which runs 'tar -xvf $TARFILE' on a user-uploaded tar file. The tar command does not use --no-absolute-names or any path sanitization. A malicious tar file containing entries with '../' paths or absolute paths can overwrite arbitrary files on the filesystem. Since api_parser runs as the web server user (or root, depending on configuration), this could lead to arbitrary file write and code execution.",
+      "evidence": "apiparser_extract_tar.sh line 14: 'tar -xvf $TARFILE >> $LOGFILE 2>&1' -- no --no-absolute-names, no path sanitization. The tar file is uploaded via /webconsole/APIController multipart POST.",
+      "impact": "Arbitrary file write on the filesystem. Can overwrite cron jobs, init scripts, SSH authorized_keys, or web application files for code execution. Requires XML API to be enabled and IP allowlisted (non-default configuration).",
+      "cvss_v3_vector": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "cvss_v3_score": 8.1,
+      "notes": "The attack chain: (1) XML API enabled by admin, (2) attacker IP in allowlist, (3) upload malicious tar via APIController, (4) crimport extracts tar with path traversal, (5) overwritten file grants code execution. The HA sync path is even more dangerous: synccmd passes the paths to the auxiliary device shell."
+    },
+    {
+      "id": "SFOS-025",
+      "title": "api_parser: Command Injection via HA synccmd in Tar Extraction",
+      "severity": "HIGH",
+      "status": "NEEDS_VALIDATION",
+      "category": "CWE-78: Improper Neutralization of Special Elements in OS Command",
+      "description": "In apiparser_extract_tar.sh, when HA (High Availability) is enabled and the device is primary, the script calls: synccmd \"mkdir ${FOLDER};cd ${FOLDER};tar -xvf $TARFILE >> ${LOGFILE} 2>&1\". The $FOLDER and $TARFILE variables are interpolated into a double-quoted string passed to synccmd, which executes the string as a shell command on the auxiliary HA device. While the paths are timestamp-generated by api_parser (not directly user-controlled), if any component of the path can be influenced (e.g., via a race condition or symlink attack), command injection on the auxiliary device is possible.",
+      "evidence": "apiparser_extract_tar.sh line 22: synccmd \"mkdir ${FOLDER};cd ${FOLDER};tar -xvf $TARFILE >> ${LOGFILE} 2>&1\"",
+      "impact": "Command execution on the HA auxiliary Sophos device. Requires HA to be configured + XML API enabled. The synccmd mechanism passes the entire string to a remote shell.",
+      "cvss_v3_vector": "AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+      "cvss_v3_score": 9.0,
+      "notes": "Severity is high due to scope change (affects auxiliary device). Exploitability depends on whether the tar file path or extraction directory can be influenced by the attacker."
+    },
+    {
+      "id": "SFOS-026",
+      "title": "api_parser: Perl Script Processing of User XML/JSON via popen()",
+      "severity": "MEDIUM",
+      "status": "NEEDS_VALIDATION",
+      "category": "CWE-78: Improper Neutralization of Special Elements in OS Command",
+      "description": "api_parser uses popen() to execute '/bin/perl /bin/json2xml.pl /tmp/api_parser_tmp.xml <user_file>' and '/bin/perl /bin/xml2json.pl <args>'. The user-supplied XML/JSON file path is passed as a command-line argument to popen(), which uses /bin/sh -c for execution. If the file path contains shell metacharacters, command injection is possible. The file path is typically an internally-generated timestamp-based name, but the API allows multipart uploads where the filename could potentially be controlled.",
+      "evidence": "popen() at 0x804dda7 with format '/bin/perl %s %s %s %s' built via snprintf. Called from json2xml handler (0x804f667) and handleObject (0x805235b).",
+      "impact": "If the input file path can be controlled by the attacker, shell command injection via popen(). Requires XML API to be enabled.",
+      "cvss_v3_vector": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "cvss_v3_score": 8.1
+    },
+    {
+      "id": "SFOS-027",
+      "title": "api_parser: No Stack Canary, No PIE on XML Processing Binary",
+      "severity": "LOW",
+      "status": "CONFIRMED",
+      "category": "CWE-693: Protection Mechanism Failure",
+      "description": "api_parser is compiled without stack canary protection and without PIE (position-independent executable). Combined with the use of libxml2 for XML parsing of user-supplied input, any buffer overflow in the XML processing logic would be directly exploitable without needing to bypass ASLR or stack canaries.",
+      "evidence": "readelf: Type EXEC (no PIE), no __stack_chk_fail symbol (no canary), GNU_STACK RW (NX enabled).",
+      "impact": "Exploitation of any memory corruption vulnerability in api_parser would be simplified. NX prevents shellcode on stack but ROP is feasible with fixed addresses.",
+      "cvss_v3_vector": "N/A",
+      "cvss_v3_score": 0.0,
+      "notes": "Defense-in-depth gap. Not a vulnerability on its own but significantly increases impact of any memory corruption finding."
+    }
+  ],
+
+  "sql_assessment": "SQL queries in api_parser use parameterized placeholders ($1, $2, etc.) via libpq prepared statements. No string concatenation for SQL detected. SQL injection appears mitigated.",
+
+  "xml_assessment": "api_parser uses libxml2 for XML parsing. The XXE risk depends on whether external entity processing is disabled. Need to check xmlCtxtReadFile/xmlParseFile calls for XML_PARSE_NOENT, XML_PARSE_NONET flags. The IOMappingFiles define how XML elements map to opcodes -- a malicious XML input could trigger unintended opcodes if the mapping is not strictly validated.",
+
+  "next_steps": [
+    "CRITICAL: Check libxml2 parsing flags for XXE -- search for xmlCtxtReadFile/xmlParseFile call sites and their option flags",
+    "Analyze /bin/json2xml.pl and /bin/xml2json.pl Perl scripts for injection",
+    "Analyze IOMappingFiles to understand which opcodes can be triggered via XML API",
+    "Test tar path traversal with a crafted tar file (requires running instance with API enabled)",
+    "Check SecureStorageMasterKey parameter handling in api_parser -- passed via -k flag from APICommonServlet"
+  ]
+}

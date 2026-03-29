@@ -1,0 +1,99 @@
+{
+  "schema_version": "3.0",
+  "assessment": "Sophos_SFOS",
+  "target": "SFOS 22.0.0.411 cish (Cyberoam Interactive Shell) -- shell escape analysis",
+  "phase": "4",
+  "category": "local",
+  "timestamp": "2026-03-28T23:00:00Z",
+  "analyst": "researcher",
+  "description": "Complete reverse engineering of the cish restricted shell for command injection and shell escape vulnerabilities",
+
+  "architecture": {
+    "binary": "bin/cish -- 32-bit ELF, 84KB, stripped, dynamically linked",
+    "config_driven": true,
+    "config_location": "/etc/cish/*.conf",
+    "grammar_format": "Custom: #define macros for command templates, %section% blocks for grammar rules, <type> tokens for user input",
+    "execution_model": "fork() + execve() -- NOT system() or /bin/sh -c",
+    "input_filter": "strpbrk() blocks ; & | in <string> and <text> types",
+    "pipeline_support": "safe_system splits on | to create pipelines of up to 32 commands"
+  },
+
+  "type_system": {
+    "<ipaddress>": "inet_pton AF_INET -- strict IPv4 validation",
+    "<ipaddress6>": "inet_pton AF_INET6 -- strict IPv6 validation",
+    "<number>": "Integer parsing, optional range check",
+    "<N-M>": "Range-checked integer",
+    "<netmask>": "IP validation",
+    "<string>": "Blocks ; & | via strpbrk. Allows $ ` ( ) > < \\ { } * ? # !",
+    "<text>": "Same as <string>",
+    "<buffer>": "Quote matching only -- NO ; & | filter",
+    "<interface>": "Validated against opcode query results"
+  },
+
+  "findings": [
+    {
+      "id": "SFOS-020",
+      "title": "cish Restricted Shell -- Well-Defended Against Direct Shell Escape",
+      "severity": "INFORMATIONAL",
+      "status": "CONFIRMED",
+      "category": "Positive Security Finding",
+      "description": "The cish restricted shell uses a defense-in-depth architecture that effectively prevents direct command injection: (1) Grammar-constrained input -- users can only fill typed parameter slots, not arbitrary commands; (2) Input filtering -- ; & | blocked in <string>/<text> types; (3) execve()-based execution -- shell metacharacters are not interpreted because commands are NOT passed through /bin/sh -c. The combination makes direct shell escape from cish effectively impossible via the CLI interface alone.",
+      "evidence": "Binary analysis: safeforkexec() at fcn.08055562 uses fork()+execve() with constructed argv[], not system(). Input filter: strpbrk(input, ';&|') in type validation at fcn.080510b3.",
+      "impact": "Positive finding. The cish design is sound for a restricted shell.",
+      "notes": "However, several defense-in-depth gaps exist (see SFOS-021, SFOS-022)."
+    },
+    {
+      "id": "SFOS-021",
+      "title": "cish <buffer> Type Bypasses Metacharacter Filter",
+      "severity": "LOW",
+      "status": "CONFIRMED",
+      "category": "CWE-20: Improper Input Validation",
+      "description": "The <buffer> input type in cish performs quote matching only, without the strpbrk() check that blocks ; & | in <string> and <text> types. The <buffer> type is used in ip_addr.conf and ip6_addr.conf for PATTERN parameters in 'ip addr show' commands. While the execve() execution model prevents shell interpretation, this inconsistency in input validation is a defense-in-depth gap.",
+      "evidence": "cish binary: <buffer> type handler at does not call strpbrk(). Used in: ip_addr.conf (ip addr show PATTERN), ip6_addr.conf.",
+      "impact": "Minimal in current code -- execve() prevents shell interpretation regardless. But if the execution model ever changes (e.g., to system()), this becomes exploitable.",
+      "cvss_v3_vector": "AV:L/AC:H/PR:H/UI:N/S:U/C:N/I:L/A:N",
+      "cvss_v3_score": 2.0
+    },
+    {
+      "id": "SFOS-022",
+      "title": "Shell Scripts Invoked by cish Use Unquoted Variable Expansion",
+      "severity": "LOW",
+      "status": "CONFIRMED",
+      "category": "CWE-78: Improper Neutralization of Special Elements in OS Command (defense-in-depth gap)",
+      "description": "Several shell scripts invoked by cish use unquoted variable expansion ($*, $1, $arg) which, in a /bin/sh context, undergoes word splitting and globbing. While cish's execve() model delivers arguments safely to the script, and the scripts receive them as individual argv elements, the unquoted $* in constructs like 'conntrack $*' creates a theoretical second-order injection risk if an argument contains IFS characters or glob patterns.",
+      "evidence": "dgutils.sh line 6: 'conntrack $* 2>/dev/null' (unquoted $*). rlookup.sh line 9: '/bin/ip ro get $arg' (unquoted $arg). telnet.sh line 15: 'exec /bin/telnet $IP $PORT' (unquoted vars, but IP is inet_pton validated by cish).",
+      "impact": "Minimal in practice. Arguments from cish are already sanitized (no ; & |) and individually tokenized. Glob expansion (* ? [ ]) of argument values is the only remaining risk, and is extremely unlikely to produce useful exploitation. However, these scripts should use quoted \"$@\" instead of $* for robustness.",
+      "cvss_v3_vector": "AV:L/AC:H/PR:H/UI:N/S:U/C:N/I:L/A:N",
+      "cvss_v3_score": 2.0
+    },
+    {
+      "id": "SFOS-023",
+      "title": "cish AT Command Injection via WWAN Modem Interface",
+      "severity": "MEDIUM",
+      "status": "NEEDS_VALIDATION",
+      "category": "CWE-78: Improper Neutralization of Special Elements",
+      "description": "The cish command 'system wwan query ATcommand <string>' passes a user-supplied string as an AT command to a cellular modem via /bin/opcode apiInterface. While the <string> type blocks ; & |, AT command syntax uses different control characters. An attacker with admin CLI access could potentially: (1) reconfigure modem APN settings to route traffic through attacker-controlled infrastructure, (2) read SIM card data (ICCID, IMSI), (3) send SMS messages, (4) disable modem security features. Requires a Sophos appliance with cellular/WWAN module.",
+      "evidence": "set.conf: 'system wwan query ATcommand <string>' maps to '/bin/opcode apiInterface -s sync -t json -b JSON mode 1265 ATcommand <string>'",
+      "impact": "Modem-level compromise on appliances with WWAN. Not a shell escape, but a lateral vector from admin CLI to cellular modem control plane. Only applicable to appliances with cellular connectivity (XGS models with SIM slots).",
+      "cvss_v3_vector": "AV:L/AC:L/PR:H/UI:N/S:C/C:L/I:L/A:L",
+      "cvss_v3_score": 5.7
+    }
+  ],
+
+  "negative_findings": [
+    "No 'console', 'advanced-shell', or 'debug shell' command accessible from cish grammar",
+    "No file path parameters (<filename> or <path> types) -- all paths are hardcoded in #define macros",
+    "No output redirection (> or >>) available to users -- safe_system splits on | for pipelines but does not support redirection",
+    "enableremote command in failsafe.conf uses type-validated <ipaddress> and <number> -- no injection possible",
+    "All SQL-touching operations go through /bin/opcode apiInterface which uses the CSC client protocol, not direct SQL"
+  ],
+
+  "privesc_assessment": "cish itself does not provide a path to shell escape or privilege escalation. The restricted shell is the privilege boundary, and it holds. Privesc from an admin cish session would require: (1) exploiting a vulnerability in one of the target binaries cish invokes (conntrack, ip, tcpdump, nslookup, opcode), (2) exploiting the web console's TelnetServlet which provides a cish-like interface but may have different restrictions, or (3) exploiting the Jetty 'Advanced Shell' referenced in documentation but not accessible from cish.",
+
+  "next_steps": [
+    "Analyze /bin/opcode and the apiInterface protocol for command injection in user-controlled trailing arguments",
+    "Check if the web console's TelnetServlet maps to unrestricted cish or a different shell binary",
+    "Search for 'Advanced Shell' mechanism in SFOS (web UI path, not cish CLI)",
+    "Analyze conntrack, tcpdump, ip binaries for argument-based exploits"
+  ]
+}

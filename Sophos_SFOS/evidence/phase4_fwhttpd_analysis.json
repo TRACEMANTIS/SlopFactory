@@ -1,0 +1,116 @@
+{
+  "schema_version": "3.0",
+  "assessment": "Sophos_SFOS",
+  "target": "fwhttpd binary (SFLoader firmware upload HTTP server)",
+  "phase": "4",
+  "category": "local",
+  "timestamp": "2026-03-28T19:00:00Z",
+  "analyst": "researcher",
+  "description": "Full reverse engineering of fwhttpd, the unauthenticated HTTP firmware upload server in the SFLoader pre-boot environment",
+
+  "binary_profile": {
+    "path": "firmware_extract/sfloader_rootfs/bin/fwhttpd",
+    "size": 14504,
+    "type": "ELF 64-bit LSB executable, x86-64, dynamically linked, stripped",
+    "compiler": "GCC (glibc 2.7+)",
+    "protections": {
+      "PIE": false,
+      "NX": true,
+      "stack_canary": false,
+      "full_RELRO": false,
+      "ASLR": "N/A (no PIE)"
+    },
+    "functions": {
+      "main": {"addr": "0x401140", "size": 723, "desc": "Argument parsing, socket setup, accept loop"},
+      "fcn.004014e0": {"addr": "0x4014e0", "size": 244, "desc": "Printf-like logging wrapper (vsnprintf + write to stdout)"},
+      "fcn.00401610": {"addr": "0x401610", "size": 125, "desc": "File open/create -- opens output file (unlinks if exists, O_WRONLY|O_CREAT, mode 0700)"},
+      "fcn.00401690": {"addr": "0x401690", "size": 207, "desc": "Multipart boundary detection -- searches for boundary marker at end of data chunk"},
+      "fcn.00401770": {"addr": "0x401770", "size": 209, "desc": "POST header parser -- reads headers, extracts Content-Length via sscanf(%ld)"},
+      "fcn.00401850": {"addr": "0x401850", "size": 1350, "desc": "Main connection handler -- GET/POST dispatch, multipart body read loop, file write"}
+    },
+    "dependencies": ["libgcc_s.so.1", "libc.so.6"]
+  },
+
+  "architecture": {
+    "description": "Single-threaded HTTP server. Binds to configurable port (default 80). Accepts one connection at a time. On GET: serves HTML upload form. On POST: reads multipart body in 0x100007-byte (1048583) chunks, strips boundary markers, writes firmware data to output file.",
+    "data_flow": [
+      "1. main() parses -f (filepath), -p (port), -d (debug) via getopt",
+      "2. main() creates TCP socket, binds to port, listens (backlog=5)",
+      "3. main() accepts connection, dup2(client_fd, 0) to redirect stdin",
+      "4. fcn.00401850 (handler) reads from stdin via fgets/fread",
+      "5. On GET request: writes HTML upload form to fd 0 (client), returns",
+      "6. On POST request: calls fcn.00401770 to parse headers (extracts Content-Length)",
+      "7. fcn.00401610 opens output file (unlinks existing, creates new with O_WRONLY|O_CREAT mode 0700)",
+      "8. Main read loop: fread() up to 0x100007 bytes, calls fcn.00401690 to check for boundary end marker",
+      "9. write() data to output file, display progress percentage",
+      "10. On boundary end or connection close: close file, send '<H1>Image Is uploaded!</H1>'"
+    ],
+    "buffer_sizes": {
+      "read_buffer": "0x100007 bytes (1,048,583 = 1MB + 7) allocated on stack at [rsp+0x340]",
+      "boundary_buffer": "0x200 bytes (512) allocated on stack at [rsp+0x140] (r14)",
+      "header_read_buffer": "0x100007 bytes (1,048,583) allocated on stack in fcn.00401770",
+      "total_stack_frame": "0x100358 bytes (~1MB) in fcn.00401850"
+    }
+  },
+
+  "findings": [
+    {
+      "id": "SFOS-006",
+      "title": "fwhttpd: No Authentication on Firmware Upload Endpoint",
+      "severity": "MEDIUM",
+      "status": "CONFIRMED",
+      "category": "CWE-306: Missing Authentication for Critical Function",
+      "description": "fwhttpd serves an HTML form on GET requests and accepts multipart POST uploads with zero authentication. Any client on the same network can upload arbitrary data to the firmware file path. While the uploaded firmware is subsequently validated by nsgsig-verify/GPG in geturl.sh, the upload itself is unrestricted. The server binds to INADDR_ANY (0.0.0.0) on the configured port.",
+      "evidence": "GET handler at 0x401aa0 writes upload form directly. POST handler at 0x401a58 processes upload. No authentication check anywhere in the binary. No cookie, token, Basic Auth, or IP filtering.",
+      "impact": "Adjacent network attacker can upload arbitrary data to /tmp/currentfw.img (or configured path). If combined with a firmware signature bypass, this enables malicious firmware injection. Even without signature bypass, it enables DoS (fill /tmp) and information disclosure (error messages reveal internal paths).",
+      "cvss_v3_vector": "AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L",
+      "cvss_v3_score": 5.4
+    },
+    {
+      "id": "SFOS-007",
+      "title": "fwhttpd: Stack-Based Buffer with No Canary Protection",
+      "severity": "MEDIUM",
+      "status": "CONFIRMED",
+      "category": "CWE-121: Stack-based Buffer Overflow (Potential)",
+      "description": "fwhttpd allocates a ~1MB buffer on the stack (0x100007 bytes at rsp+0x340) for reading HTTP data. The binary has no stack canary, no PIE, and only partial RELRO. While the fgets() calls use size limits matching the buffer size (0x100007), the fread() call at 0x401be4 computes available space as (0x100007 - nbytes) where nbytes tracks accumulated data. If nbytes is manipulated or an integer issue occurs in the subtraction at 0x401bdf (sub edx, eax), a heap or stack corruption could result. The lack of stack canary means any stack buffer overflow would be directly exploitable.",
+      "evidence": "Binary protections: No PIE (EXEC type), no stack canary (__stack_chk_fail absent), partial RELRO, NX enabled. Stack frame: sub rsp, 0x100358 at 0x401863. Read buffer at rsp+0x340. fread size computation: 0x100007 - nbytes at 0x401bdf.",
+      "impact": "If exploitable, arbitrary code execution as root in the SFLoader environment (which runs as PID 1 root). No ASLR bypass needed (no PIE). NX means ROP would be required. The static binary addresses and lack of canary simplify exploitation.",
+      "cvss_v3_vector": "AV:A/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "cvss_v3_score": 7.5,
+      "notes": "NEEDS DYNAMIC VALIDATION. The size limit on fgets/fread appears to prevent straightforward overflow, but the multi-iteration accumulation logic in the POST body read loop needs careful analysis for off-by-one or integer wrapping conditions."
+    },
+    {
+      "id": "SFOS-008",
+      "title": "fwhttpd: Content-Length Parsed via sscanf Without Validation",
+      "severity": "LOW",
+      "status": "CONFIRMED",
+      "category": "CWE-20: Improper Input Validation",
+      "description": "The Content-Length header value is extracted using sscanf(ptr, '%ld', &content_length) at 0x401841 in fcn.00401770. The parsed value is stored as a signed long and used to compute upload progress percentage (progress = bytes_read * 100.0 / content_length). A negative or zero Content-Length causes division by zero or floating point exception. An extremely large Content-Length causes incorrect progress display but does not directly cause memory corruption since the read loop uses a separate size-bounded fread.",
+      "evidence": "sscanf at 0x401841 with format '%ld'. Content-Length stored at [rbx] (passed as arg1 to fcn.00401770). Used at 0x401cb7 as divisor in divsd xmm0, xmm1 for progress calculation.",
+      "impact": "DoS via division by zero if Content-Length is 0 or negative. No memory corruption -- Content-Length is only used for progress display, not for controlling read buffer sizes.",
+      "cvss_v3_vector": "AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+      "cvss_v3_score": 4.3
+    },
+    {
+      "id": "SFOS-009",
+      "title": "fwhttpd: Boundary Marker Parsing Integer Underflow Potential",
+      "severity": "MEDIUM",
+      "status": "NEEDS_VALIDATION",
+      "category": "CWE-191: Integer Underflow",
+      "description": "In fcn.00401690 (boundary detection), the code computes r14 = rbp + (ebx - (r15d + 2)) at 0x4016d1-0x4016e3, where ebx is the data chunk size and r15d is the boundary string length. If ebx (data size) is smaller than r15d + 2 (boundary length + 2), the subtraction underflows, causing r14 to point before the buffer. The subsequent strncmp at 0x4016e9 would then read from an out-of-bounds location. However, there is a guard at 0x4016cb (jle 0x401750) that jumps to the 'boundry end is broken' error if ebx <= r15d, which partially mitigates this. The gap between r15d and r15d+2 could still cause a 1-2 byte underread.",
+      "evidence": "fcn.00401690: lea eax, [rax+2] at 0x4016d1; sub r14d, eax at 0x4016dd; add r14, rbp at 0x4016e3; strncmp(r14, boundary, boundary_len) at 0x4016e9. Guard: cmp ebx, eax / jle 0x401750 at 0x4016c6-0x4016cb. The comparison uses 'jle' against r15 (boundary_len without +2), not against r15+2.",
+      "impact": "Potential out-of-bounds read of 1-2 bytes before the data buffer during boundary detection. Unlikely to be exploitable for code execution but could cause information leak or crash.",
+      "cvss_v3_vector": "AV:A/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:L",
+      "cvss_v3_score": 4.2,
+      "notes": "NEEDS DYNAMIC VALIDATION. The exact trigger condition requires ebx to be exactly boundary_len+1, which would pass the jle guard but cause r14 to point 1 byte before the buffer."
+    }
+  ],
+
+  "summary": "fwhttpd is a minimal, insecure HTTP server with 6 custom functions totaling ~2900 bytes of code. It has no authentication, weak binary protections (no PIE, no canary, partial RELRO), and processes untrusted multipart POST data in a ~1MB stack buffer. The most promising exploitation path is the boundary parsing logic (SFOS-009) combined with the lack of stack canary (SFOS-007). However, the primary security impact is the unauthenticated firmware upload capability (SFOS-006) which, if combined with a firmware signature validation bypass, would enable full device compromise.",
+
+  "next_steps": [
+    "Dynamic validation of SFOS-007 and SFOS-009 requires a running SFLoader environment",
+    "Fuzz fwhttpd with malformed multipart boundaries and edge-case Content-Length values",
+    "Proceed to Jetty/webconsole pre-auth endpoint mapping (main SFOS attack surface)"
+  ]
+}

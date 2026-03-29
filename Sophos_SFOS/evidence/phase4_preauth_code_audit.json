@@ -1,0 +1,120 @@
+{
+  "schema_version": "3.0",
+  "assessment": "Sophos_SFOS",
+  "target": "SFOS 22.0.0.411 pre-auth Java code audit",
+  "phase": "4",
+  "category": "local",
+  "timestamp": "2026-03-28T21:00:00Z",
+  "analyst": "researcher",
+  "description": "Decompilation and code audit of pre-auth Java servlet handlers via CFR decompiler",
+
+  "decompiled_classes": [
+    "cyberoam.corporate.servlets.APICommonServlet",
+    "cyberoam.corporate.servlets.CyberoamCommonServlet",
+    "cyberoam.sessionmanagement.SessionCheckHelper",
+    "cyberoam.sessionmanagement.RequestCheckFilter",
+    "com.sophos.sf.auth.AuthConstants",
+    "com.sophos.sf.auth.WebAdminAuth",
+    "cyberoam.identity.helpers.GuestUserHelper",
+    "cyberoam.system.utilities.XmlApiConfigUtils",
+    "cyberoam.corporate.csc.utilities.HFHelper"
+  ],
+
+  "pre_auth_mode_bypass": {
+    "description": "CyberoamCommonServlet._doPost() at the session check (line 154 equivalent) exempts these modes from session validation. This is the definitive pre-auth bypass list -- broader than what AuthConstants defines.",
+    "modes_bypassing_session_check": [
+      {"mode": 151, "opcode": "login", "handler": "WebAdminAuth.process()"},
+      {"mode": 451, "opcode": "myaccount_login", "handler": "UserPortalAuth (similar to WebAdminAuth)"},
+      {"mode": 6000, "opcode": "validate_hammer_token", "handler": "Sophos Central / Hammer integration"},
+      {"mode": 746, "opcode": "add_guest_user", "handler": "GuestUserHelper.addGuestUser()"},
+      {"mode": 605, "opcode": "ccc_opcode_pull_request", "handler": "CCC (Cyberoam Central Console) pull"},
+      {"mode": 2524, "opcode": "get_releasenotes_details_wz", "handler": "Release notes for setup wizard"}
+    ]
+  },
+
+  "findings": [
+    {
+      "id": "SFOS-010",
+      "title": "APICommonServlet Pre-Auth File Upload Gated by Configuration (Not Default-Exploitable)",
+      "severity": "MEDIUM",
+      "status": "CONFIRMED",
+      "category": "CWE-306: Missing Authentication for Critical Function (conditional)",
+      "description": "The /webconsole/APIController endpoint accepts pre-auth multipart POST uploads (explicitly exempted by RequestCheckFilter). The APICommonServlet writes user-supplied XML to /sdisk/APIXMLInput/ and executes api_parser via Runtime.getRuntime().exec(). However, sanitizeRequest() checks XmlApiConfigUtils.xmlApiConfigStatus() and validateXmlApiRequest(IP). The XML API is DISABLED by default (tblapiconfig.isenable=false) and requires admin-configured IP allowlisting. This means the endpoint is not exploitable in default configuration.",
+      "evidence": "DB default: INSERT INTO tblapiconfig (isenable, ipaddresses) VALUES (false, NULL). sanitizeRequest() returns -2 when API disabled. Runtime.exec() of api_parser occurs only after these checks pass.",
+      "impact": "If an admin enables the XML API and allows the attacker's IP, the attacker can supply arbitrary XML to api_parser without authentication. This could lead to RCE via XML injection into api_parser. NOT exploitable in default deployment.",
+      "cvss_v3_vector": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "cvss_v3_score": 8.1,
+      "notes": "Score reflects non-default configuration requirement. In practice, many admins enable the XML API for automation. The api_parser binary itself needs further analysis for XML injection / command injection."
+    },
+    {
+      "id": "SFOS-011",
+      "title": "Pre-Auth Guest User Registration Exposes User Enumeration",
+      "severity": "LOW",
+      "status": "CONFIRMED",
+      "category": "CWE-203: Observable Discrepancy",
+      "description": "The pre-auth guest user registration (mode 746) via GuestUserHelper.addGuestUser() checks for duplicate users via checkDuplicateGuestUser(mobileno, ...) and returns status 501 if a user with that mobile number already exists. This allows unauthenticated enumeration of registered guest users by mobile number.",
+      "evidence": "GuestUserHelper.java: if ((duplicateUserName = GuestUserHelper.checkDuplicateGuestUser(mobileno, ..., sqlReader)) != null) { guestUserName.append(duplicateUserName); status = 501; return status; }",
+      "impact": "Attacker can enumerate guest user mobile numbers via the pre-auth /webconsole/Controller?mode=746 endpoint. The response differs between existing and non-existing users.",
+      "cvss_v3_vector": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "cvss_v3_score": 5.3
+    },
+    {
+      "id": "SFOS-012",
+      "title": "X-Forwarded-For Header Unsanitized in Guest User Event Logging",
+      "severity": "LOW",
+      "status": "CONFIRMED",
+      "category": "CWE-117: Improper Output Neutralization for Logs",
+      "description": "HFHelper.getClientIP() reads the X-Forwarded-For header with only comma-trimming (no validation). In GuestUserHelper.addGuestUser(), this unsanitized value is concatenated into a ProcessExecutor command argument as 'network.src_ip=<value>'. While the array-based exec prevents direct shell injection, the attacker-controlled value reaches /bin/eventlog as a command-line argument. If eventlog processes this value in a log-injectable way (e.g., writing to syslog, database, or file without sanitization), log injection or log forging is possible.",
+      "evidence": "HFHelper.getClientIP(): reads X-FORWARDED-FOR, trims at comma, no IP validation. GuestUserHelper line 181: cmdArr.add('network.src_ip=' + HFHelper.getClientIP(request)). ProcessExecutor uses String[] array form (not shell).",
+      "impact": "Log injection/forging via crafted X-Forwarded-For header. The array-based exec mitigates command injection. Impact depends on how /bin/eventlog processes the src_ip field.",
+      "cvss_v3_vector": "AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+      "cvss_v3_score": 5.3
+    },
+    {
+      "id": "SFOS-013",
+      "title": "Pre-Auth Mode 6000 (validate_hammer_token) -- Sophos Central Auth Bypass Potential",
+      "severity": "MEDIUM",
+      "status": "NEEDS_VALIDATION",
+      "category": "CWE-287: Improper Authentication",
+      "description": "Mode 6000 (validate_hammer_token) is accessible pre-auth and appears to handle Sophos Central integration authentication. In CyberoamCommonServlet.doGet(), mode 6000 is handled specially: a new EventBean is created with opcode 'validate_hammer_token' and requestType 2 (CyberoamCustomHelper). This bypasses the normal EventBean.getEventByMode() lookup. If the hammer token validation has weaknesses (predictable tokens, timing attacks, replay), it could allow authentication bypass via Sophos Central SSO.",
+      "evidence": "CyberoamCommonServlet.doGet(): if (mode == 6000) { eventObject = new EventBean(); eventObject.setMode(mode); eventObject.setOpcode('validate_hammer_token'); eventObject.setRequestType(2); }",
+      "impact": "Potential authentication bypass via Sophos Central token validation. Requires live testing to determine token validation strength.",
+      "cvss_v3_vector": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+      "cvss_v3_score": 7.4,
+      "notes": "NEEDS LIVE TESTING. The validate_hammer_token handler class needs to be identified and decompiled. This is a promising target because SSO/token validation is historically a rich source of auth bypass vulnerabilities."
+    },
+    {
+      "id": "SFOS-014",
+      "title": "Ancient Java Libraries with Known CVEs",
+      "severity": "MEDIUM",
+      "status": "CONFIRMED",
+      "category": "CWE-1395: Dependency on Vulnerable Third-Party Component",
+      "description": "The webconsole webapp includes extremely outdated Java libraries with known CVEs: json-20090211.jar (2009, 17 years old), bcprov-jdk14-138.jar (ancient Bouncy Castle), commons-io-2.2, commons-beanutils-1.9.2, itext-2.1.5. These libraries have known deserialization, path traversal, and cryptographic vulnerabilities.",
+      "evidence": "WEB-INF/lib/ contains: json-20090211.jar, bcprov-jdk14-138.jar, bcmail-jdk14-138.jar, commons-io-2.2.jar, commons-beanutils-1.9.2.jar, itext-2.1.5.jar, commons-fileupload-1.3.3.jar",
+      "impact": "Depends on how these libraries are used. commons-beanutils-1.9.2 is exploitable via BeanComparator deserialization gadget (CVE-2019-10086). commons-fileupload has DoS (CVE-2023-24998). json-20090211 may have parsing DoS. Bouncy Castle 138 has numerous cryptographic weaknesses.",
+      "cvss_v3_vector": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+      "cvss_v3_score": 7.4,
+      "notes": "The commons-beanutils gadget is only exploitable if Java deserialization of untrusted data occurs somewhere in the application. Need to search for ObjectInputStream usage."
+    }
+  ],
+
+  "key_observations": [
+    "The login handler (mode 151) delegates to an internal REST API (access-manager) rather than doing direct SQL auth -- modern architecture",
+    "SQL queries in GuestUserHelper use PreparedStatementBuffer consistently -- parameterized queries, no obvious SQLi",
+    "ProcessExecutor uses String[] array form -- mitigates command injection via shell metacharacters",
+    "The check_bf.sh brute-force protection script uses unquoted shell variables with attacker IP, but the Java-side validIPv4() check prevents exploitation",
+    "The ApproveAliases setting in webconsole.xml allows symlink traversal -- potential path traversal if attacker can create symlinks",
+    "Mode 6000 (validate_hammer_token) is the most promising unexplored pre-auth vector"
+  ],
+
+  "next_steps": [
+    "Decompile the validate_hammer_token handler (CyberoamCustomHelper dispatch for mode 6000)",
+    "Search for ObjectInputStream / deserialization usage across all Java classes (commons-beanutils gadget chain)",
+    "Analyze /bin/eventlog binary for log injection via the src_ip field",
+    "Decompile SSOAdminServlet for SAML/SSO authentication bypass vectors",
+    "Analyze api_parser binary for XML injection / command injection",
+    "Check Apache httpd ModSecurity ruleset for bypass opportunities",
+    "Map the /userportal pre-auth surface (mode 451 login + mode 8100)",
+    "Live testing required for validate_hammer_token, guest user registration, and login brute-force protection"
+  ]
+}

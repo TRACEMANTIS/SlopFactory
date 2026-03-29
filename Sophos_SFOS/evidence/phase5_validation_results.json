@@ -1,0 +1,67 @@
+{
+  "schema_version": "3.0",
+  "assessment": "Sophos_SFOS",
+  "target": "SFOS 22.0.0.411 -- Validation of SFOS-016, SFOS-024, SFOS-025",
+  "phase": "5",
+  "category": "local",
+  "timestamp": "2026-03-29T00:00:00Z",
+  "analyst": "researcher",
+  "description": "Validation of three high-severity findings: tar path traversal, HA synccmd injection, and SSO missing-return auth bypass",
+
+  "validations": [
+    {
+      "finding_id": "SFOS-024",
+      "title": "Tar Extraction Path Traversal via crimport",
+      "previous_severity": "HIGH",
+      "validated_severity": "HIGH",
+      "status": "CONFIRMED",
+      "validation_method": "Dynamic -- crafted tar file with absolute path entries extracted via simulated apiparser_extract_tar.sh",
+      "result": "A tar file containing an entry with absolute path '/tmp/sfos_024_validated.txt' was successfully extracted to that absolute path, escaping the intended /sdisk/api-<timestamp>/ extraction directory. BusyBox tar (used on SFOS at /bin/tar) does NOT have GNU tar's '--absolute-names' protection or '..' member rejection. The script calls 'tar -xvf' with no safety flags.",
+      "proof": "File /tmp/sfos_024_validated.txt created with content 'SFOS-024 VALIDATED: Arbitrary file write via tar path traversal in apiparser_extract_tar.sh'. Attempt to write to /etc/cron.d/ was blocked only by test environment user permissions -- would succeed on SFOS running as root.",
+      "exploitability": "Requires XML API to be enabled (non-default) and attacker IP in the allowlist. On SFOS, api_parser runs with root privileges, so extracted files are owned by root. Writing to /etc/cron.d/, /etc/init.d/, or SSH authorized_keys achieves code execution.",
+      "cvss_v3_vector": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "cvss_v3_score": 8.1
+    },
+    {
+      "finding_id": "SFOS-025",
+      "title": "Command Injection via HA synccmd in Tar Extraction",
+      "previous_severity": "HIGH (9.0)",
+      "validated_severity": "LOW",
+      "status": "DOWNGRADED -- Not exploitable with current input sanitization",
+      "validation_method": "Code review of isSafeFileName() + shell expansion testing of synccmd string construction",
+      "result": "The synccmd string construction ('mkdir ${FOLDER};cd ${FOLDER};tar -xvf $TARFILE') IS inherently unsafe (string-based shell execution with variable interpolation). However, isSafeFileName() blocks all useful shell metacharacters: $ ` ; & | > < *. The FOLDER and LOGFILE variables are internally generated timestamps. TARFILE path is sanitized by isSafeFileName before reaching the script. No exploitable injection path exists with current sanitization.",
+      "exploitability": "Not exploitable in current code. Would become exploitable if: (1) isSafeFileName is bypassed, (2) a new code path sets TARFILE without sanitization, or (3) the regex is weakened.",
+      "cvss_v3_vector": "AV:N/AC:H/PR:H/UI:N/S:U/C:N/I:L/A:N",
+      "cvss_v3_score": 2.0,
+      "notes": "Reclassified as defense-in-depth weakness. The synccmd design pattern should use array-based execution instead of string interpolation."
+    },
+    {
+      "finding_id": "SFOS-015",
+      "title": "SSOAdminServlet Missing Return After Auth Failure",
+      "previous_severity": "MEDIUM",
+      "validated_severity": "MEDIUM",
+      "status": "CONFIRMED via bytecode analysis",
+      "validation_method": "javap bytecode disassembly of SSOAdminServlet.class",
+      "result": "Bytecode-level analysis confirms two missing-return bugs: (1) After schedule restriction sendRedirect at bytecode offset 794, execution falls through to prepareSSOSessionBean at 806 with no goto/return. (2) After getUserID()==-1 sendRedirect at bytecode offset 839, execution falls through to getSession(true) at 846 and setAccessToken at 869. Both paths result in a valid HTTP session being created on the server despite the client receiving a redirect response.",
+      "proof": "javap output shows: bytecode 794: sendRedirect -> 806: prepareSSOSessionBean (no intervening goto/return). bytecode 839: sendRedirect -> 846: getSession(true) (no intervening goto/return). In Java, sendRedirect does NOT halt method execution -- it only sets the response header. Without an explicit return, all subsequent code executes.",
+      "exploitability": "An attacker who ignores the HTTP redirect retains a JSESSIONID cookie tied to a server-side session with: (a) sessionBean containing the access token, (b) sessionBean stored in the session attributes. The session's userID may be -1 (for non-existent user) or valid (for schedule-restricted user). Subsequent requests with this JSESSIONID would be processed as authenticated. The practical impact depends on whether userID=-1 passes downstream ACL checks.",
+      "cvss_v3_vector": "AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N",
+      "cvss_v3_score": 5.4
+    },
+    {
+      "finding_id": "SFOS-016",
+      "title": "X-Forwarded-Email Header Trust -- Privilege Escalation",
+      "previous_severity": "MEDIUM (8.1)",
+      "validated_severity": "MEDIUM",
+      "status": "CONFIRMED via source code and bytecode analysis -- live validation still needed for full exploitability assessment",
+      "validation_method": "Source code review (decompiled via jadx and CFR) + bytecode verification",
+      "result": "SSOAdminServlet line 51 reads X-Forwarded-Email directly from request.getHeader() and passes it to UserHelper.getRecordByEmail() for user lookup. The only guard is validateSSOCookie() at line 41 which checks the oauth2-proxy cookie against 127.0.0.1:65020/oauth2/auth. The X-Forwarded-Email header is NOT cross-validated against the authenticated SSO session. Code-level confirmation is definitive. The remaining unknown is whether oauth2-proxy overwrites the X-Forwarded-Email header for all proxied requests (which would prevent client injection).",
+      "exploitability": "If the webconsole Jetty port (4444 via Apache proxy) accepts direct connections without going through oauth2-proxy, an attacker with a valid SSO session can set X-Forwarded-Email to any admin's email. The standard Sophos deployment routes /webconsole/SSOAdminController through oauth2-proxy, but the architecture allows direct access to port 8009 (Jetty) from localhost. The exploitability depends on network architecture: (a) If only oauth2-proxy can reach Jetty on port 8009, exploitation requires oauth2-proxy to not overwrite client-injected headers. (b) If Apache on port 4444 also proxies to Jetty 8009 without stripping X-Forwarded-Email, direct exploitation is possible.",
+      "cvss_v3_vector": "AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
+      "cvss_v3_score": 8.1,
+      "notes": "Live validation with a running SFOS + SSO configuration would definitively confirm whether the header can be injected by the client. The code-level evidence is unambiguous that the header is trusted without cross-validation."
+    }
+  ],
+
+  "summary": "Three findings validated: SFOS-024 (tar path traversal) CONFIRMED at HIGH, SFOS-025 (synccmd injection) DOWNGRADED to LOW due to effective input sanitization, SFOS-015/016 (SSO missing-return and X-Forwarded-Email) CONFIRMED via bytecode analysis."
+}

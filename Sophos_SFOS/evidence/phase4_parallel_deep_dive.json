@@ -1,0 +1,97 @@
+{
+  "schema_version": "3.0",
+  "assessment": "Sophos_SFOS",
+  "target": "SFOS 22.0.0.411 deep code audit (mode 6000 + deserialization + SSO)",
+  "phase": "4",
+  "category": "local",
+  "timestamp": "2026-03-28T22:00:00Z",
+  "analyst": "researcher",
+  "description": "Parallel deep-dive analysis: (1) Mode 6000 validate_hammer_token, (2) Java deserialization surface, (3) SSO/SAML authentication flow",
+
+  "findings": [
+    {
+      "id": "SFOS-015",
+      "title": "SSOAdminServlet Missing Return After Auth Failure -- Session Created Despite User Not Found",
+      "severity": "MEDIUM",
+      "status": "CONFIRMED",
+      "category": "CWE-841: Improper Enforcement of Behavioral Workflow",
+      "description": "In SSOAdminServlet, when sessionBean.getUserID() == -1 (SSO user not found in local DB), the code sends a redirect to login.jsp but does NOT return. Execution falls through to create an HTTP session with the sessionBean (containing userID=-1), store the access token, and set session attributes. A client that ignores the redirect retains a server-side session with a valid JSESSIONID. The same pattern exists for schedule restriction failure (returnedStatus == 201 with failed schedule check).",
+      "evidence": "SSOAdminServlet.java lines 132-136: if (sessionBean.getUserID() == -1) { sendRedirect(...); } // NO RETURN -- falls through to session creation at lines 137-151",
+      "impact": "Session created for non-existent user (userID=-1). Likely fails downstream ACL checks, but the session itself is valid. Combined with schedule restriction bypass, a time-restricted SSO admin can still get a session created. Needs live testing to determine if the userID=-1 session grants any access.",
+      "cvss_v3_vector": "AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N",
+      "cvss_v3_score": 5.4
+    },
+    {
+      "id": "SFOS-016",
+      "title": "SSOAdminServlet X-Forwarded-Email Header Trust -- Privilege Escalation",
+      "severity": "MEDIUM",
+      "status": "NEEDS_VALIDATION",
+      "category": "CWE-290: Authentication Bypass by Spoofing",
+      "description": "SSOAdminServlet reads X-Forwarded-Email directly from the client HTTP request to perform user lookup. The only guard is validateSSOCookie() which checks the oauth2-proxy session cookie against 127.0.0.1:65020/oauth2/auth. If a low-privilege SSO user authenticates legitimately, they can then set X-Forwarded-Email to a super-admin's email address. If oauth2-proxy does not overwrite this header when proxying to the upstream Jetty, the attacker gets a session as the targeted admin.",
+      "evidence": "SSOAdminServlet line 51: UserBean userBean = new UserHelper().getRecordByEmail(request.getHeader('X-Forwarded-Email'), sqlReader). No validation that X-Forwarded-Email matches the authenticated SSO session.",
+      "impact": "Privilege escalation from any SSO-authenticated user to any admin whose email exists in the system. Requires SSO to be configured (not default). Needs live testing to verify oauth2-proxy header behavior.",
+      "cvss_v3_vector": "AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
+      "cvss_v3_score": 8.1,
+      "notes": "NEEDS LIVE VALIDATION. The exploitability depends on whether oauth2-proxy overwrites X-Forwarded-Email for all proxied requests. Standard oauth2-proxy sets this header from the authenticated token, but if the upstream (Jetty) is also directly accessible on port 4444, the client controls this header."
+    },
+    {
+      "id": "SFOS-017",
+      "title": "SSOAdminServlet Schedule Restriction Bypass -- Missing Return",
+      "severity": "MEDIUM",
+      "status": "CONFIRMED",
+      "category": "CWE-841: Improper Enforcement of Behavioral Workflow",
+      "description": "When the access-manager returns code 201 (success with restrictions) and the schedule check fails, the code sets a 503 status in the response JSON and sends a redirect, but does NOT return. Execution continues to prepareSSOSessionBean() and full session creation. A schedule-restricted admin user can still get a valid admin session.",
+      "evidence": "SSOAdminServlet lines 118-131: schedule check failure sends redirect but falls through to session creation",
+      "impact": "Time-based access controls on SSO admin accounts are ineffective. An admin blocked by schedule restriction can still authenticate and get full access.",
+      "cvss_v3_vector": "AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N",
+      "cvss_v3_score": 5.4
+    },
+    {
+      "id": "SFOS-018",
+      "title": "Mode 6000 (validate_hammer_token) -- Dead Mock Validator with Substring Matching",
+      "severity": "INFORMATIONAL",
+      "status": "CONFIRMED",
+      "category": "CWE-798: Use of Hard-coded Credentials (dead code)",
+      "description": "CentralHelper contains a mockCentralTokenValidation() method that reads /var/central_token and uses String.contains() for token validation (substring match, not equality). This method is NEVER CALLED in the production code path -- token validation is always delegated to Sophos Central's cloud API. However, if this method were ever activated for debugging, any substring of the stored token would be accepted.",
+      "evidence": "CentralHelper.mockCentralTokenValidation(): reads /var/central_token, checks fileToken.contains(token). Dead code -- not referenced in production flow.",
+      "impact": "None in current code. If activated for debugging, trivially bypassable -- empty string or single character would match. Design note only.",
+      "cvss_v3_vector": "N/A",
+      "cvss_v3_score": 0.0
+    },
+    {
+      "id": "SFOS-019",
+      "title": "X-Forwarded-For IP Spoofing Bypasses SSO IP Restrictions",
+      "severity": "MEDIUM",
+      "status": "CONFIRMED",
+      "category": "CWE-290: Authentication Bypass by Spoofing",
+      "description": "SSOAdminServlet and the broader authentication framework use HFHelper.getClientIP() which trusts the X-Forwarded-For header. IP-based access restrictions on admin SSO login can be bypassed by setting a spoofed X-Forwarded-For header. RequestCheckFilter.isValidRequest() validates the header format (valid IPs) but does not prevent spoofing.",
+      "evidence": "HFHelper.getClientIP() reads X-FORWARDED-FOR directly. SSOAdminServlet line 77 passes this to access-manager. IP restriction checks at lines 125, 155 use this spoofable value.",
+      "impact": "IP-based admin access restrictions are ineffective against attackers who can send requests directly to port 4444.",
+      "cvss_v3_vector": "AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+      "cvss_v3_score": 5.3
+    }
+  ],
+
+  "negative_findings": [
+    {
+      "id": "NEG-001",
+      "title": "No Java Deserialization Surface",
+      "description": "Exhaustive search found ZERO instances of ObjectInputStream, readObject, readUnshared, XMLDecoder, XStream, or SnakeYAML in the application code. While commons-beanutils-1.9.2 provides an unprotected BeanComparator gadget, and commons-collections-3.2.2 gadgets are present (but hardened with serialization checks), there is no reachable deserialization sink. CSCClient socket communication uses raw byte protocol, not Java serialization. The deserialization attack vector is CLOSED.",
+      "impact": "None. Gadget libraries are inert without a sink."
+    },
+    {
+      "id": "NEG-002",
+      "title": "No XXE in XML Parsers",
+      "description": "Both XML-parsing classes (DLPPolicy, ControlCenterHelper) use SAXParserFactory/DocumentBuilderFactory with FEATURE_SECURE_PROCESSING=true and accessExternalDTD/accessExternalSchema disabled. Neither is in the SSO/SAML path. SAML/OIDC protocol handling is entirely in Go binaries (oauth2-proxy, access-manager), not Java.",
+      "impact": "None. XXE is properly mitigated."
+    },
+    {
+      "id": "NEG-003",
+      "title": "Mode 6000 Token Validation Is Server-Side (Cloud)",
+      "description": "Hammer token validation is delegated to Sophos Central cloud API at {pic_uri}/sophos/api/v2/firewalls/token. The firewall has no local token secret -- brute-forcing must beat Sophos Central's rate limiting, not just the local firewall. The attack surface is limited to the token transport and session creation logic, not the validation itself.",
+      "impact": "Token brute-force is infeasible against cloud validation."
+    }
+  ],
+
+  "summary": "The parallel deep-dive yielded 5 new findings (SFOS-015 through SFOS-019) and 3 important negative results. The most significant finding is SFOS-016 (X-Forwarded-Email privilege escalation via SSO) which could allow any SSO user to escalate to super-admin. The missing-return bugs in SSOAdminServlet (SFOS-015, SFOS-017) are classic Java logic errors. The deserialization surface is definitively closed (no sinks despite gadget availability). XXE is properly mitigated."
+}

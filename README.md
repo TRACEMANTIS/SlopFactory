@@ -42,6 +42,15 @@ All findings were identified through authorized security research and disclosed 
 - 1 novel HIGH-severity finding (CVE submitted)
 - Manual input RCE validated through 3 pristine rounds
 
+### Network Security / Firewalls
+
+**Sophos_SFOS** -- Sophos Firewall OS 22.0.0 (Build 411)
+- 7 confirmed findings (2 HIGH, 5 MEDIUM) from static firmware analysis
+- Hardcoded SFLoader shell password, arbitrary file write via tar path traversal
+- SSO authentication bypass (missing return after sendRedirect), X-Forwarded-Email privilege escalation
+- Pre-auth XML API command execution (configuration-gated), X-Forwarded-For IP restriction bypass
+- dm-crypt root filesystem key derivation reversed (deterministic, device-path-based)
+
 ### Infrastructure
 
 **HAProxy** -- HAProxy load balancer
