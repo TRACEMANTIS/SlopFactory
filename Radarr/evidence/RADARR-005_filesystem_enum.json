@@ -1,0 +1,41 @@
+{
+  "id": "RADARR-005",
+  "title": "Arbitrary Filesystem Enumeration via API",
+  "target": "Radarr 6.1.1.10360",
+  "severity": "MEDIUM",
+  "cvss_v3_1": {
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+    "score": 4.3,
+    "notes": "C:L because only directory/file names are disclosed, not file contents. Scored independently; chained with RADARR-001 the impact is higher."
+  },
+  "category": "Information Disclosure",
+  "cwe": "CWE-548: Exposure of Information Through Directory Listing",
+  "phase": 4,
+  "validation": {
+    "method": "live_instance",
+    "target_version": "6.1.1.10360",
+    "reproductions": 3,
+    "validated_at": "2026-03-31T21:32:00Z"
+  },
+  "description": "The /api/v3/filesystem endpoint accepts an arbitrary path parameter and returns the directory contents (subdirectories and files) for any location on the filesystem. There is no restriction to Radarr's data or media directories. An authenticated attacker can enumerate the entire filesystem structure including sensitive paths like /etc, /home, /root, /var, etc.\n\nWhen combined with RADARR-001 (CORS), this is exploitable from any website that knows the API key, using the ?apikey= query parameter (no preflight required).",
+  "root_cause": {
+    "file": "src/Radarr.Api.V3/FileSystem/FileSystemController.cs",
+    "line": 29,
+    "code": "return Ok(_fileSystemLookupService.LookupContents(path, includeFiles, allowFoldersWithoutTrailingSlashes));",
+    "detail": "No path restriction or allowlist. Any filesystem path accepted."
+  },
+  "evidence": {
+    "request": "GET /api/v3/filesystem?path=/etc&includeFiles=true&apikey=<key>",
+    "directories_returned": 21,
+    "files_returned": 5,
+    "sample_files": [
+      "/initrd.img",
+      "/initrd.img.old",
+      "/vmlinuz"
+    ]
+  },
+  "remediation": [
+    "Restrict the filesystem endpoint to paths within configured root folders and the Radarr data directory",
+    "Alternatively, implement an allowlist of browseable parent directories"
+  ]
+}

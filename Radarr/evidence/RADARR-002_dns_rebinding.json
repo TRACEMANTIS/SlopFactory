@@ -1,0 +1,32 @@
+{
+  "id": "RADARR-002",
+  "title": "DNS Rebinding to API Key Disclosure and Full Instance Control",
+  "target": "Radarr 6.1.1.10360",
+  "severity": "HIGH",
+  "cvss_v3_1": {
+    "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "score": 7.5,
+    "notes": "AC:H due to DNS rebinding complexity. A:H because attacker can create ReDoS profiles or modify critical settings."
+  },
+  "category": "Missing Host Header Validation",
+  "cwe": "CWE-350: Reliance on Reverse DNS Resolution for a Security-Critical Action",
+  "phase": 4,
+  "validation": {
+    "method": "source_analysis + live_instance",
+    "target_version": "6.1.1.10360",
+    "target_config": "default (AuthenticationMethod=None)",
+    "notes": "Validated that no HostFiltering middleware exists and /initialize.json returns API key unauthenticated. DNS rebinding itself not executed in lab -- chain validated component by component."
+  },
+  "description": "Radarr has no Host header validation middleware (UseHostFiltering or AllowedHosts configuration). When AuthenticationMethod is None (default on fresh install) or External (reverse proxy auth), the /initialize.json endpoint is accessible without credentials and returns the API key in plaintext.\n\nA DNS rebinding attack from a malicious website can exploit this by first resolving to the attacker's server (to serve the exploit JavaScript), then re-resolving to the victim's Radarr instance IP. Since the browser considers this same-origin, /initialize.json is readable and the API key is extracted. Subsequent API calls use the stolen key.\n\nThe External auth mode is equally affected because it uses NoAuthenticationHandler internally -- if the raw Radarr port is reachable on the LAN (bypassing the reverse proxy), all requests are auto-authenticated.",
+  "root_cause": {
+    "file": "src/NzbDrone.Host/Startup.cs",
+    "detail": "No UseHostFiltering() or AllowedHosts configuration in the request pipeline",
+    "secondary_file": "src/Radarr.Http/Frontend/InitializeJsonController.cs",
+    "secondary_detail": "Line 49: apiKey included in unauthenticated JSON response when auth=None"
+  },
+  "remediation": [
+    "Add UseHostFiltering() middleware with AllowedHosts configured to the expected hostname",
+    "Require API key authentication for /initialize.json regardless of auth mode",
+    "Force authentication setup on first run (do not default to AuthenticationMethod=None)"
+  ]
+}

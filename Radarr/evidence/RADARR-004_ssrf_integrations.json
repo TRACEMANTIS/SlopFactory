@@ -1,0 +1,42 @@
+{
+  "id": "RADARR-004",
+  "title": "Server-Side Request Forgery via Notification and Integration URLs",
+  "target": "Radarr 6.1.1.10360",
+  "severity": "MEDIUM",
+  "cvss_v3_1": {
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:L/I:N/A:N",
+    "score": 5.0,
+    "notes": "PR:L because API key required. S:C because Radarr makes requests to internal services on behalf of the attacker. C:L for information disclosure from internal service responses."
+  },
+  "category": "Server-Side Request Forgery",
+  "cwe": "CWE-918: Server-Side Request Forgery (SSRF)",
+  "phase": 4,
+  "validation": {
+    "method": "live_instance",
+    "target_version": "6.1.1.10360",
+    "reproductions": 3,
+    "validated_at": "2026-03-31T21:42:00Z"
+  },
+  "description": "Radarr accepts arbitrary URLs in notification webhook settings, download client base URLs, indexer URLs, and media cover download URLs without validating the URL scheme or host. An authenticated attacker can configure integrations pointing to internal network addresses (e.g., cloud metadata endpoints at 169.254.169.254, internal APIs, localhost services).\n\nWhen combined with RADARR-001 (CORS), this becomes exploitable from any website that knows the API key. The attacker creates a webhook notification via cross-origin POST, then triggers it to make Radarr send HTTP requests to internal targets.",
+  "root_cause": {
+    "files": [
+      "src/NzbDrone.Core/Notifications/Discord/DiscordProxy.cs",
+      "src/NzbDrone.Core/Notifications/Webhook/Webhook.cs",
+      "src/NzbDrone.Core/Notifications/Slack/SlackProxy.cs",
+      "20+ additional notification proxy files"
+    ],
+    "detail": "No URL scheme or host validation. User-supplied URLs passed directly to HttpRequestBuilder without filtering private/internal addresses."
+  },
+  "evidence": {
+    "webhook_created": true,
+    "ssrf_target_url": "http://169.254.169.254/latest/meta-data/",
+    "api_endpoint": "POST /api/v3/notification?forceSave=true",
+    "response_code": 201,
+    "notification_id": "created and cleaned up"
+  },
+  "remediation": [
+    "Validate webhook and integration URLs against an allowlist of schemes (http, https only)",
+    "Block requests to private/internal IP ranges (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 127.0.0.0/8, ::1)",
+    "Consider implementing URL validation as a shared service used by all integration providers"
+  ]
+}

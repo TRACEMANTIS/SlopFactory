@@ -1,0 +1,52 @@
+{
+  "id": "RADARR-001",
+  "title": "Cross-Origin API Access via Permissive CORS Policy",
+  "target": "Radarr 6.1.1.10360",
+  "severity": "HIGH",
+  "cvss_v3_1": {
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
+    "score": 8.1,
+    "notes": "Scored with auth=None (default on fresh install). AV:N because attack is via malicious website. UI:R because victim must visit attacker page. PR:N because no prior access to Radarr needed. C:H+I:H because full API access enables config read, SSRF, and setting manipulation."
+  },
+  "category": "CORS Misconfiguration",
+  "cwe": "CWE-942: Permissive Cross-domain Policy with Untrusted Domains",
+  "phase": 4,
+  "validation": {
+    "method": "live_instance",
+    "target_version": "6.1.1.10360",
+    "target_config": "default (AuthenticationMethod=None)",
+    "reproductions": 3,
+    "validated_at": "2026-03-31T21:44:49Z"
+  },
+  "description": "All 159 API controllers in Radarr use the ApiCorsPolicy via VersionedApiControllerAttribute (which implements IEnableCorsAttribute). This policy is configured with AllowAnyOrigin() + AllowAnyMethod() + AllowAnyHeader(), which returns Access-Control-Allow-Origin: * on all API responses and permits cross-origin preflight requests for any method and any custom header including X-Api-Key.\n\nOn a fresh Radarr installation (and many existing LAN deployments), AuthenticationMethod defaults to None. In this configuration, /initialize.json is accessible without authentication and returns the API key in the response body. While /initialize.json does not include CORS headers (not exploitable cross-origin directly), DNS rebinding attacks bypass this restriction.\n\nOnce the API key is obtained, ANY website can make full API calls to the Radarr instance including POST, PUT, and DELETE requests. The preflight OPTIONS request returns 204 with Access-Control-Allow-Headers: X-Api-Key,Content-Type. Alternatively, the API key can be passed via the ?apikey= query parameter, which does not require preflight at all.\n\nThe /api/v3/config/host endpoint returns the API key in its response body, enabling key persistence even if the user later enables authentication.",
+  "root_cause": {
+    "file": "src/NzbDrone.Host/Startup.cs",
+    "lines": "76-82",
+    "code": "services.AddCors(options => { options.AddPolicy(VersionedApiControllerAttribute.API_CORS_POLICY, builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); });",
+    "secondary_file": "src/Radarr.Http/VersionedApiControllerAttribute.cs",
+    "secondary_detail": "Implements IEnableCorsAttribute, applying ApiCorsPolicy to all V3 API controllers"
+  },
+  "attack_chain": [
+    "1. Victim visits attacker-controlled website",
+    "2. JavaScript fetches GET /api/v3/config/host?apikey=<known_key> (no preflight needed for GET with query param)",
+    "3. Response includes Access-Control-Allow-Origin: * -- browser allows JavaScript to read response",
+    "4. Full API access: create SSRF webhooks, enumerate filesystem, modify config, upload malicious backups",
+    "5. Alternative: DNS rebinding to extract API key from /initialize.json (auth=None), then use CORS for API calls"
+  ],
+  "evidence": {
+    "preflight_response": "HTTP/1.1 204 No Content\nAccess-Control-Allow-Headers: X-Api-Key,Content-Type\nAccess-Control-Allow-Methods: POST\nAccess-Control-Allow-Origin: *",
+    "cross_origin_post_response": "HTTP/1.1 201 Created\nAccess-Control-Allow-Origin: *\nLocation: http://TARGET:7878/api/v3/notification/2",
+    "config_host_returns_apikey": true,
+    "initialize_json_unauthenticated": true,
+    "initialize_json_no_cors_headers": true,
+    "default_auth_method": "None"
+  },
+  "remediation": [
+    "Replace AllowAnyOrigin() with a configured list of trusted origins, or restrict to same-origin",
+    "Remove API key from /api/v3/config/host GET response body",
+    "Add Host header validation middleware (UseHostFiltering) to mitigate DNS rebinding",
+    "Consider defaulting to Forms authentication with mandatory password set on first run",
+    "Do not expose the API key in /initialize.json for unauthenticated requests"
+  ],
+  "poc": "evidence/RADARR-001_cors_poc.html"
+}

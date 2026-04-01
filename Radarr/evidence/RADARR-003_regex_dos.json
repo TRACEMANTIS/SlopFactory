@@ -1,0 +1,39 @@
+{
+  "id": "RADARR-003",
+  "title": "Regular Expression Denial of Service (ReDoS) via Release Profiles",
+  "target": "Radarr 6.1.1.10360",
+  "severity": "MEDIUM",
+  "cvss_v3_1": {
+    "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+    "score": 6.5,
+    "notes": "PR:L because API key required. A:H because the regex runs during RSS sync, hanging the application indefinitely."
+  },
+  "category": "Denial of Service",
+  "cwe": "CWE-1333: Inefficient Regular Expression Complexity",
+  "phase": 4,
+  "validation": {
+    "method": "live_instance",
+    "target_version": "6.1.1.10360",
+    "reproductions": 3,
+    "validated_at": "2026-03-31T21:43:00Z"
+  },
+  "description": "The PerlRegexFactory.CreateRegex() method creates .NET Regex objects from user-supplied patterns without setting a MatchTimeout. Patterns are stored in release profiles via the /api/v3/releaseprofile API endpoint. When RSS sync evaluates releases against these profiles, the TermMatcherService passes each release title through the regex. A catastrophic backtracking pattern like /(a+)+$/ causes exponential processing time on non-matching input, hanging the Radarr process.\n\nThe compiled regex is cached for 24 hours (TermMatcherService.GetMatcher), so a single malicious profile persists through the cache lifetime. The DoS is triggered automatically on every RSS sync cycle.",
+  "root_cause": {
+    "file": "src/NzbDrone.Core/Profiles/Releases/PerlRegexFactory.cs",
+    "line": 29,
+    "code": "return new Regex(pattern, options | RegexOptions.Compiled);",
+    "detail": "No MatchTimeout parameter. Should use: new Regex(pattern, options | RegexOptions.Compiled, TimeSpan.FromSeconds(1))"
+  },
+  "evidence": {
+    "profile_created": true,
+    "payload": "/(a+)+$/",
+    "api_endpoint": "POST /api/v3/releaseprofile",
+    "response_code": 201,
+    "profile_id": 1
+  },
+  "remediation": [
+    "Add MatchTimeout to all Regex constructors that accept user input: new Regex(pattern, options, TimeSpan.FromSeconds(1))",
+    "Validate regex patterns for known catastrophic backtracking indicators before compilation",
+    "Consider using a regex complexity analyzer or limiting pattern length"
+  ]
+}
